@@ -32,7 +32,7 @@ class ClassFragment : Fragment() {
         datas.apply{
             add(
                 ClassData(
-                    ClassImage = "",
+                    ClassImage="https://img1.daumcdn.net/thumb/R720x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fliveboard%2Fholapet%2F0e5f90af436e4c218343073164a5f657.JPG",
                     ClassName = "전자기학1",
                     now = 17,
                     total = 20,
@@ -41,7 +41,7 @@ class ClassFragment : Fragment() {
             )
             add(
                 ClassData(
-                    ClassImage = "",
+                    ClassImage="https://img1.daumcdn.net/thumb/R720x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fliveboard%2Fholapet%2F0e5f90af436e4c218343073164a5f657.JPG",
                     ClassName = "전자기학1",
                     now = 17,
                     total = 20,
@@ -50,7 +50,7 @@ class ClassFragment : Fragment() {
             )
             add(
                 ClassData(
-                    ClassImage = "",
+                    ClassImage="https://img1.daumcdn.net/thumb/R720x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fliveboard%2Fholapet%2F0e5f90af436e4c218343073164a5f657.JPG",
                     ClassName = "전자기학1",
                     now = 17,
                     total = 20,
@@ -59,7 +59,7 @@ class ClassFragment : Fragment() {
             )
             add(
                 ClassData(
-                    ClassImage = "",
+                    ClassImage="https://img1.daumcdn.net/thumb/R720x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fliveboard%2Fholapet%2F0e5f90af436e4c218343073164a5f657.JPG",
                     ClassName = "전자기학1",
                     now = 17,
                     total = 20,
@@ -68,13 +68,59 @@ class ClassFragment : Fragment() {
             )
             add(
                 ClassData(
-                    ClassImage = "",
+                    ClassImage="https://img1.daumcdn.net/thumb/R720x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fliveboard%2Fholapet%2F0e5f90af436e4c218343073164a5f657.JPG",
                     ClassName = "전자기학1",
                     now = 17,
                     total = 20,
                     count = 6
                 )
             )
+            add(
+                ClassData(
+                    ClassImage="https://img1.daumcdn.net/thumb/R720x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fliveboard%2Fholapet%2F0e5f90af436e4c218343073164a5f657.JPG",
+                    ClassName = "전자기학1",
+                    now = 17,
+                    total = 20,
+                    count = 6
+                )
+            )
+            add(
+                ClassData(
+                    ClassImage="https://img1.daumcdn.net/thumb/R720x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fliveboard%2Fholapet%2F0e5f90af436e4c218343073164a5f657.JPG",
+                    ClassName = "전자기학1",
+                    now = 17,
+                    total = 20,
+                    count = 6
+                )
+            )
+            add(
+                ClassData(
+                    ClassImage="https://img1.daumcdn.net/thumb/R720x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fliveboard%2Fholapet%2F0e5f90af436e4c218343073164a5f657.JPG",
+                    ClassName = "전자기학1",
+                    now = 17,
+                    total = 20,
+                    count = 6
+                )
+            )
+            add(
+                ClassData(
+                    ClassImage="https://img1.daumcdn.net/thumb/R720x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fliveboard%2Fholapet%2F0e5f90af436e4c218343073164a5f657.JPG",
+                    ClassName = "전자기학1",
+                    now = 17,
+                    total = 20,
+                    count = 6
+                )
+            )
+            add(
+                ClassData(
+                    ClassImage="https://img1.daumcdn.net/thumb/R720x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fliveboard%2Fholapet%2F0e5f90af436e4c218343073164a5f657.JPG",
+                    ClassName = "전자기학1",
+                    now = 17,
+                    total = 20,
+                    count = 6
+                )
+            )
+
         }
         ClassAdapter.datas = datas
         ClassAdapter.notifyDataSetChanged()
