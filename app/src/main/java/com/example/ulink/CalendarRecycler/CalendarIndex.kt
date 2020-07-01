@@ -1,4 +1,4 @@
-package com.example.ulink
+package com.example.ulink.CalendarRecycler
 
 
 val endDates = mutableListOf<Int>(31,28,31,30,31,30,31,31,30,31,30,31)
@@ -17,7 +17,7 @@ fun getDay(year : Int, month : Int) : Int{
     return daysum % 7
 }
 
-fun First_Index (year : Int, month : Int) : Int
+fun first_Index (year : Int, month : Int) : Int
 {
     var year : Int = year
     var month : Int = month

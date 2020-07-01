@@ -1,4 +1,4 @@
-package com.example.ulink
+package com.example.ulink.CalendarRecycler
 
 class CalendarDayData (
     val day : String
