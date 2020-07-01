@@ -44,8 +44,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="전자기학"
-        app:layout_constraintEnd_toStartOf="@+id/img_search"
-        app:layout_constraintStart_toEndOf="@+id/tv_chttingroom_count"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
