@@ -18,8 +18,8 @@ class ClassViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
     fun bind(ClassData : ClassData){
         Glide.with(itemView).load(ClassData.ClassImage).into(img_class)
         tv_class.text = ClassData.ClassName
-        tv_partition.setText("참여 ${ClassData.now}/${ClassData.total}")
-        count.setText(ClassData.count)
+        tv_partition.setText("참여 (${ClassData.now}/${ClassData.total})")
+        count.setText("${ClassData.count}")
     }
 
 
