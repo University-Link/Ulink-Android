@@ -1,5 +1,6 @@
 package com.example.ulink.fragment
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,7 +9,6 @@ import android.view.ViewGroup
 import com.example.myapplication.CalendarAdapter
 import com.example.myapplication.CalendarData
 import com.example.ulink.R
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import java.util.*
 
@@ -28,14 +28,13 @@ class CalendarFragment : Fragment() {
         var now_year = cal.get(Calendar.YEAR)
         var now_month = cal.get(Calendar.MONTH) + 1
 
-        tv_month.setText(now_month.toString()+"월")
-
         var now_CalendarData = CalendarData(now_year, now_month, 20)
         var CalendarAdapter = CalendarAdapter(view.context, now_CalendarData)
 
         calendar_viewPager.setUserInputEnabled(false)
-
         calendar_viewPager.adapter = CalendarAdapter
+
+        tv_month.setText(now_month.toString()+"월")
 
         btn_left_month.setOnClickListener(){
             now_month -= 1
@@ -53,10 +52,10 @@ class CalendarFragment : Fragment() {
             tv_month.setText(now_month.toString()+"월")
         }
 
-        btn_right_month.setOnClickListener(){
+        btn_right_month.setOnClickListener() {
             now_month += 1
 
-            if(now_month==13) {
+            if (now_month == 13) {
                 now_month = 1
                 now_year += 1
             }
@@ -70,4 +69,5 @@ class CalendarFragment : Fragment() {
         }
 
     }
+
 }

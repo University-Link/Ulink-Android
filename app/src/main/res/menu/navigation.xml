@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/nv_timetable"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/img_btn_timetable"
         android:title="시간표" />
     <item android:id="@+id/nv_class"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/img_btn_class"
         android:title="수업"/>
     <item android:id="@+id/nv_ulink"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/img_btn_ulink"
         android:title="유링크"/>
     <item android:id="@+id/nv_calendar"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/img_btn_calender"
         android:title="캘린더"/>
     <item android:id="@+id/nv_my"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/img_btn_mypage"
         android:title="내정보"/>
 </menu>

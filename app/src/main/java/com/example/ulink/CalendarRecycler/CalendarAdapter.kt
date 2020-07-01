@@ -45,6 +45,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                 data.year,
                 data.month
             )
+
             var lastindex = endDay[data.month.toInt()-1]
 
             //previous_month
@@ -59,25 +60,39 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
             var last_empty_index = 1
 
             rvAdapter.datas.apply {
+
                 //previous_month
+                var dateindex = 0
                 for(i in 0 until index) {
-                    add(CalendarDayData(day = prev_empty_index.toString()))
+                    add(CalendarDayData(
+                        day = prev_empty_index.toString(),
+                        check = false,
+                        date = dateindex
+                    ))
+                    dateindex += 1
                     prev_empty_index += 1
                 }
                 //month
                 for(i in 1..lastindex) {
-                    add(CalendarDayData(day = i.toString()))
+                    add(CalendarDayData(
+                        day = i.toString(),
+                        check = true,
+                        date = dateindex
+                    ))
+                    dateindex += 1
                 }
                 //next_month
                 while(true) {
                     if (last_empty % 7 != 0) {
                         add(
                             CalendarDayData(
-                                day = last_empty_index.toString()
-                            )
-                        )
+                                day = last_empty_index.toString(),
+                                check = false,
+                                date = dateindex
+                            ))
                         last_empty_index += 1
                         last_empty += 1
+                        dateindex += 1
                     }
                     else break;
                 }

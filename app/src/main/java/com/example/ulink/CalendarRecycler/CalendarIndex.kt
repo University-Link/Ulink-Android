@@ -1,6 +1,5 @@
 package com.example.ulink.CalendarRecycler
 
-
 val endDates = mutableListOf<Int>(31,28,31,30,31,30,31,31,30,31,30,31)
 
 fun getDay(year : Int, month : Int) : Int{
