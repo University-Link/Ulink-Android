@@ -17,7 +17,7 @@ fun getDay(year : Int, month : Int) : Int{
     return daysum % 7
 }
 
-fun first_Index (year : Int, month : Int) : Int
+fun firstIndex (year : Int, month : Int) : Int
 {
     var year : Int = year
     var month : Int = month

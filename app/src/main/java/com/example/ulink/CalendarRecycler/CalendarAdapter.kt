@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.*
 import com.example.ulink.CalendarRecycler.CalendarDayAdapter
 import com.example.ulink.CalendarRecycler.CalendarDayData
-import com.example.ulink.CalendarRecycler.first_Index
+import com.example.ulink.CalendarRecycler.firstIndex
 
 class CalendarAdapter(private val context : Context, data : CalendarData) : RecyclerView.Adapter<CalendarAdapter.Vholder>(){
     var data : CalendarData = data
@@ -41,7 +41,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
             else endDay[1] = 28
 
             //month
-            var index = first_Index(
+            var index = firstIndex(
                 data.year,
                 data.month
             )
