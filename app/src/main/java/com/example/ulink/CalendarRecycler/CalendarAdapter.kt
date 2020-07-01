@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ulink.CalendarDayAdapter
-import com.example.ulink.CalendarDayData
-import com.example.ulink.First_Index
-import com.example.ulink.R
+import com.example.ulink.*
+import com.example.ulink.CalendarRecycler.CalendarDayAdapter
+import com.example.ulink.CalendarRecycler.CalendarDayData
+import com.example.ulink.CalendarRecycler.first_Index
 
 class CalendarAdapter(private val context : Context, data : CalendarData) : RecyclerView.Adapter<CalendarAdapter.Vholder>(){
     var data : CalendarData = data
@@ -32,7 +32,8 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
 
         fun bind(data : CalendarData){
             val rv_calendar = itemView as RecyclerView
-            val rvAdapter = CalendarDayAdapter(context)
+            val rvAdapter =
+                CalendarDayAdapter(context)
             rv_calendar.adapter = rvAdapter
 
             //윤년
@@ -40,12 +41,15 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
             else endDay[1] = 28
 
             //month
-            var index = First_Index(data.year, data.month)
+            var index = first_Index(
+                data.year,
+                data.month
+            )
             var lastindex = endDay[data.month.toInt()-1]
 
             //previous_month
             var prev_empty_index : Int
-            if(data.month.equals("1"))
+            if(data.month==1)
                 prev_empty_index = endDay[11] - index + 1
             else
                 prev_empty_index = endDay[data.month.toInt()-2] - index + 1
@@ -57,7 +61,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
             rvAdapter.datas.apply {
                 //previous_month
                 for(i in 0 until index) {
-                    add(CalendarDayData(day= prev_empty_index.toString()))
+                    add(CalendarDayData(day = prev_empty_index.toString()))
                     prev_empty_index += 1
                 }
                 //month
@@ -67,7 +71,11 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                 //next_month
                 while(true) {
                     if (last_empty % 7 != 0) {
-                        add(CalendarDayData(day = last_empty_index.toString()))
+                        add(
+                            CalendarDayData(
+                                day = last_empty_index.toString()
+                            )
+                        )
                         last_empty_index += 1
                         last_empty += 1
                     }

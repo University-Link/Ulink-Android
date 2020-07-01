@@ -1,13 +1,14 @@
-package com.example.ulink
+package com.example.ulink.CalendarRecycler
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ulink.R
 
 class CalendarDayAdapter(private val context : Context) : RecyclerView.Adapter<CalendarViewHolder>(){
     var datas = mutableListOf<CalendarDayData>()
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder{
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.calendar_item,parent,false)
         return CalendarViewHolder(view)
     }
