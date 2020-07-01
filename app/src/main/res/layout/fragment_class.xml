@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_일"
+        android:id="@+id/btn_일정"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="일정"
@@ -39,6 +39,7 @@
         app:layout_constraintVertical_bias="0.164" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_class"
         android:layout_width="match_parent"
         android:layout_height="600dp"
         app:layout_constraintBottom_toBottomOf="parent"

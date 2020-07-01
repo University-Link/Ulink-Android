@@ -49,13 +49,15 @@ dependencies {
     //Recyclerview 다루기 위한 라이브러리
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     //material 디자인 라이브러리 BottomNavigation 등 구글에서 제공하는 디자인 라이브러리
-    implementation "com.google.android.material:material:1.2.0-alpha05"
+    //implementation "com.google.android.material:material:1.2.0-alpha05"
     //이미지 로딩 라이브러리:glide 이미지 url을 로딩시켜 뷰에 연결해주는 라이브러리
     implementation "com.github.bumptech.glide:glide:4.10.0"
     kapt "com.github.bumptech.glide:compiler:4.10.0"
     //동그란 이미지 커스텀 뷰 : https://github.com/hdodenhof/CircleImageView
     //배경이 동그란 이미지뷰를 사용할 수 있도록 해주는 라이브러리
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.google.android.material:material:1.2.0-alpha02'
+
 
     //viewpager2
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
