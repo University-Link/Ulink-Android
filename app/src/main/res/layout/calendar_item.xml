@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@drawable/calendar_item_background"
+    android:paddingHorizontal="5dp"
     android:paddingBottom="30dp">
 
     <TextView
@@ -13,33 +14,49 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_gravity="center"
+        android:textColor="@color/black"
         android:textSize="16sp"/>
 
     <TextView
         android:id="@+id/schedule1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="전자기학"
-        android:layout_weight="1"
-        android:layout_marginTop="5dp"
-        android:textColor="#888888"
-        android:textSize="10sp"/>
+        android:background="@color/main"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="3dp"
+        android:textSize="10sp"
+        android:paddingHorizontal="3dp"
+        android:singleLine="true"/>
 
     <TextView
         android:id="@+id/schedule2"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="유링크"
-        android:layout_weight="1"
-        android:layout_marginTop="5dp"
-        android:textSize="10sp"/>
+        android:text="캡스톤디자인"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="3dp"
+        android:textSize="10sp"
+        android:paddingHorizontal="3dp"
+        android:singleLine="true"/>
 
     <TextView
         android:id="@+id/schedule3"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="소설과영화"
-        android:layout_weight="1"
-        android:layout_marginTop="5dp"
-        android:textSize="10sp"/>
+        android:background="@color/colorAccent"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="3dp"
+        android:textSize="10sp"
+        android:paddingHorizontal="3dp"
+        android:singleLine="true"/>
+
 </LinearLayout>

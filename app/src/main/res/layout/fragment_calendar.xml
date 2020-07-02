@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".fragment.CalendarFragment">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -24,7 +23,8 @@
             <Button
                 android:id="@+id/btn_left_month"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="←"/>
 
             <TextView
                 android:id="@+id/tv_month"
@@ -36,8 +36,27 @@
             <Button
                 android:id="@+id/btn_right_month"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="→"/>
+
         </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btn_plus"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:text="+"
+            app:layout_constraintEnd_toStartOf="@+id/btn_setting"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_setting"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:text="s"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <LinearLayout
             android:id="@+id/day_header"
@@ -132,4 +151,5 @@
         </androidx.viewpager2.widget.ViewPager2>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </FrameLayout>

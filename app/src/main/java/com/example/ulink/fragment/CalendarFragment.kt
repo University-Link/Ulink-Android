@@ -1,16 +1,17 @@
 package com.example.ulink.fragment
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.myapplication.CalendarAdapter
-import com.example.myapplication.CalendarData
+import com.example.ulink.CalendarRecycler.CalendarDataInit
+import com.example.ulink.CalendarRecycler.CalendarNextMonth
+import com.example.ulink.CalendarRecycler.CalendarPrevMonth
 import com.example.ulink.R
+import kotlinx.android.synthetic.main.calendar_layout.*
 import kotlinx.android.synthetic.main.fragment_calendar.*
-import java.util.*
 
 class CalendarFragment : Fragment() {
     override fun onCreateView(
@@ -24,50 +25,19 @@ class CalendarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var cal: Calendar = Calendar.getInstance()
-        var now_year = cal.get(Calendar.YEAR)
-        var now_month = cal.get(Calendar.MONTH) + 1
-
-        var now_CalendarData = CalendarData(now_year, now_month, 20)
-        var CalendarAdapter = CalendarAdapter(view.context, now_CalendarData)
+        var now_CalendarData = CalendarDataInit(tv_month) // now_month
 
         calendar_viewPager.setUserInputEnabled(false)
-        calendar_viewPager.adapter = CalendarAdapter
-
-        tv_month.setText(now_month.toString()+"월")
+        calendar_viewPager.adapter = CalendarAdapter(view.context, now_CalendarData)
 
         btn_left_month.setOnClickListener(){
-            now_month -= 1
-
-            if(now_month == 0){
-                now_month = 12
-                now_year -= 1
-            }
-
-            now_CalendarData = CalendarData(now_year, now_month,20)
-            CalendarAdapter = CalendarAdapter(view.context, now_CalendarData)
-
-            calendar_viewPager.adapter = CalendarAdapter
-
-            tv_month.setText(now_month.toString()+"월")
+            now_CalendarData = CalendarPrevMonth(tv_month, now_CalendarData.month, now_CalendarData.year) // prev_month
+            calendar_viewPager.adapter = CalendarAdapter(view.context, now_CalendarData)
         }
 
         btn_right_month.setOnClickListener() {
-            now_month += 1
-
-            if (now_month == 13) {
-                now_month = 1
-                now_year += 1
-            }
-
-            now_CalendarData = CalendarData(now_year,now_month,20)
-            CalendarAdapter = CalendarAdapter(view.context, now_CalendarData)
-
-            calendar_viewPager.adapter = CalendarAdapter
-
-            tv_month.setText(now_month.toString()+"월")
+            now_CalendarData = CalendarNextMonth(tv_month, now_CalendarData.month, now_CalendarData.year) // next_month
+            calendar_viewPager.adapter = CalendarAdapter(view.context, now_CalendarData)
         }
-
     }
-
 }

@@ -1,7 +1,8 @@
 package com.example.ulink.CalendarRecycler
 
 class CalendarDayData (
-    val day : String,
-    val check : Boolean,
-    val date : Int
+    val day : String, // day
+    val check : Boolean, // now_month
+    val date : Int, // sunday_check
+    val today : Boolean // today_check
 )
