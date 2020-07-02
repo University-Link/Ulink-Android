@@ -15,13 +15,10 @@ class CalendarViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         var sundayColor: String = "#5F5DE9"
         var monthColor : String = "#000000"
         var otherColor : String = "#888888"
+        var todayColor : String = "#000000"
 
-        if(dayData.check)
-            day.setTextColor(Color.parseColor(monthColor))
-        else
-            day.setTextColor(Color.parseColor(otherColor))
-        if(dayData.date % 7 == 0 && dayData.check)
-            day.setTextColor(Color.parseColor(sundayColor))
-
+        if(dayData.check) day.setTextColor(Color.parseColor(monthColor)) // now_month
+        else day.setTextColor(Color.parseColor(otherColor)) // prev, next month
+        if(dayData.date % 7 == 0 && dayData.check) day.setTextColor(Color.parseColor(sundayColor)) //sunday
     }
 }
