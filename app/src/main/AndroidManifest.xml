@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ChattingActivity"/>
+        <activity android:name=".NoticeActivity"/>
     </application>
 
 </manifest>
