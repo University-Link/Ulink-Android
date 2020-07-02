@@ -8,9 +8,10 @@
 
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
 
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -43,6 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:textSize="18sp"
         android:text="전자기학"
         app:layout_constraintEnd_toStartOf="@+id/img_search"
         app:layout_constraintStart_toEndOf="@+id/tv_chttingroom_count"
@@ -68,15 +70,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
 
-
             />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintTop_toBottomOf="@+id/tv_classname"
+        tools:layout_editor_absoluteX="0dp" />
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" >
+        app:layout_constraintStart_toStartOf="parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -97,10 +107,10 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@null"
-                android:layout_marginTop="16dp"
                 android:layout_marginLeft="60dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginRight="20dp"
+                android:background="@null"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView3"
                 app:layout_constraintTop_toTopOf="parent">
@@ -110,11 +120,11 @@
             <ImageButton
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/upward"
-                android:background="#ffffff"
                 android:layout_marginTop="18dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
+                android:background="#ffffff"
+                android:src="@drawable/upward"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
