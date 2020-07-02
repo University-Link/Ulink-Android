@@ -31,6 +31,7 @@ fun CalendarLeapYearCheck(data: CalendarData) : Int {
 
 fun CalendarDayColorCheck(dayData: CalendarDayData, itemView : View) {
     val day : TextView = itemView.findViewById(R.id.day)
+    val layout : LinearLayout = itemView.findViewById(R.id.rv_item_layout)
     day.text = dayData.day
 
     var sundayColor = "#5F5DE9"
