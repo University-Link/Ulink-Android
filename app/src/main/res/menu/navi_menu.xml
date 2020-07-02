@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+
+
+        <item
+            android:id="@+id/notice"
+            android:icon="@drawable/ic_launcher_foreground"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:title="수업공지"
+
+            />
+
+    <item
+            android:id="@+id/QnA"
+            android:icon="@drawable/ic_launcher_foreground"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:title="Q\u0026A공간"
+            />
+        <item
+            android:id="@+id/picture"
+            android:icon="@drawable/ic_launcher_foreground"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:title="사진, 동영상"
+            />
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/ic_launcher_foreground"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:title="파일"
+            />
+    </group>
+
+</menu>
