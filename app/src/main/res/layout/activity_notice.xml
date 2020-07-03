@@ -1,110 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
-
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    andorid:layout_constraintStart_toStartOf="parent"
-    andorid:layout_constraintTop_toBottomOf="parent"
-    xmlns:andorid="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
-
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="12dp"
-        android:text="전자기학"
-        android:textSize="20sp"
-        andorid:layout_constraintStart_toStartOf="parent"
-        andorid:layout_constraintTop_toBottomOf="@+id/include" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="안효섭 교수님"
-        andorid:layout_constraintStart_toEndOf="@+id/textView"
-        andorid:layout_constraintTop_toBottomOf="@+id/include" />
-
-    <ImageButton
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp"
-        android:src="@drawable/add"
-        andorid:layout_constraintEnd_toEndOf="parent"
-        andorid:layout_constraintTop_toBottomOf="@+id/include" />
-
-    <View
-        android:id="@+id/view"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="52dp"
-        android:background="#4682B4"
-        andorid:layout_constraintEnd_toEndOf="parent"
-        andorid:layout_constraintStart_toStartOf="parent"
-        andorid:layout_constraintTop_toBottomOf="@+id/include" />
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent">
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/toolbar_notice" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/test_notice"
-        android:layout_width="match_parent"
-        andorid:cardCornerRadius="20dp"
-        android:layout_height="200dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="16dp"
-        andorid:layout_constraintEnd_toEndOf="parent"
-        andorid:layout_constraintStart_toStartOf="parent"
-        andorid:layout_constraintTop_toBottomOf="@+id/view" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="12dp"
+            android:text="전자기학"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/task_notice"
-        android:layout_width="match_parent"
-        andorid:cardCornerRadius="20dp"
-        android:layout_height="200dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="16dp"
-        andorid:layout_constraintEnd_toEndOf="parent"
-        andorid:layout_constraintStart_toStartOf="parent"
-        andorid:layout_constraintTop_toBottomOf="@+id/test_notice" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="안효섭 교수님"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/include" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/class_notice"
-        android:layout_width="match_parent"
-        andorid:cardCornerRadius="20dp"
-        android:layout_height="200dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="16dp"
-        andorid:layout_constraintEnd_toEndOf="parent"
-        andorid:layout_constraintStart_toStartOf="parent"
-        andorid:layout_constraintTop_toBottomOf="@+id/task_notice" />
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginRight="28dp"
+            android:src="@drawable/add"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/experiment_notice"
-        android:layout_width="match_parent"
-        andorid:cardCornerRadius="20dp"
-        android:layout_height="200dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="16dp"
-        andorid:layout_constraintEnd_toEndOf="parent"
-        andorid:layout_constraintStart_toStartOf="parent"
-        andorid:layout_constraintTop_toBottomOf="@+id/class_notice" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="52dp"
+            android:background="#4682B4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include" />
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/toolbar_notice" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/test_notice"
+            android:layout_width="match_parent"
+            app:cardCornerRadius="20dp"
+            android:layout_height="200dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/시험공지"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="시험공지"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_class_notice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_class_notice"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/시험공지"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/task_notice"
+            android:layout_width="match_parent"
+            app:cardCornerRadius="20dp"
+            android:layout_height="200dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/test_notice" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/class_notice"
+            android:layout_width="match_parent"
+            app:cardCornerRadius="20dp"
+            android:layout_height="200dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/task_notice" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/experiment_notice"
+            android:layout_width="match_parent"
+            app:cardCornerRadius="20dp"
+            android:layout_height="200dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/class_notice" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
+
 
