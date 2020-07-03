@@ -82,3 +82,25 @@ fun CalendarNextMonth(tv_month : TextView, data_month : Int, data_year : Int) : 
     tv_month.setText(month.toString()+"월")
     return CalendarData(year, month)
 }
+
+fun getDay(year : Int, month : Int) : Int{
+    val preyear = year-1
+    var daysum = preyear*365 + preyear/4 - preyear/100 + preyear/400
+
+    if (month>=3 && (year%4==0 && year%100!=0 || year%400 ==0)) daysum += 1
+
+    var premonth = month - 1
+
+    for (i in 0 until premonth) daysum += endDay[i]
+    daysum += 1
+
+    return daysum % 7
+}
+
+fun firstIndex (year : Int, month : Int) : Int
+{
+    var year : Int = year
+    var month : Int = month
+    var index = getDay(year, month);
+    return index;
+}
