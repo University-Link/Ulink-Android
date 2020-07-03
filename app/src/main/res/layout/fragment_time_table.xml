@@ -1,14 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_img_bg_under"
     tools:context=".fragment.TimeTableFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <Button
+        android:id="@+id/btn_alarm"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginRight="23dp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_logo"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_logo" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/btn_plus"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginRight="6dp"
+        android:background="@drawable/ad_main_btn_plus"
+        app:layout_constraintRight_toLeftOf="@id/btn_list"
+        app:layout_constraintTop_toTopOf="@id/btn_setting" />
+
+    <Button
+        android:id="@+id/btn_list"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginRight="6dp"
+        android:background="@drawable/ad_main_btn_list"
+        app:layout_constraintRight_toLeftOf="@id/btn_setting"
+        app:layout_constraintTop_toTopOf="@id/btn_setting" />
+
+    <Button
+        android:id="@+id/btn_setting"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/ad_main_btn_setting"
+        app:layout_constraintRight_toRightOf="@id/btn_alarm"
+        app:layout_constraintTop_toTopOf="@id/tv_semister"
+        app:layout_constraintBottom_toBottomOf="@id/tv_semister"/>
+
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="82dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="48dp"
+        android:src="@drawable/main_img_logo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tv_semister"
+        android:text="2020년 2학기"
+        android:textColor="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textSize="18sp"
+        android:lineHeight="27sp"
+        app:layout_constraintLeft_toLeftOf="@id/iv_logo"
+        app:layout_constraintTop_toBottomOf="@id/iv_logo" />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/sv_timetable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_semister">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="30dp"
+            android:descendantFocusability="blocksDescendants">
+
+            <LinearLayout
+                android:id="@+id/timetable_grid_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" />
+
+            <LinearLayout
+                android:id="@+id/timetable_root"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" />
+
+            <RelativeLayout
+                android:id="@+id/timetable_round_border"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_round_border_line" />
+
+            <RelativeLayout
+                android:id="@+id/timetable_round_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_round_border" />
+
+        </FrameLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
