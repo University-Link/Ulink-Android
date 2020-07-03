@@ -1,0 +1,45 @@
+[33mcommit bf9adf4853199b32ef474404f13b082cda5ba0a5[m[33m ([m[1;36mHEAD -> [m[1;32mGH[m[33m, [m[1;32mmaster[m[33m)[m
+Author: kym1924 <kym1924@naver.com>
+Date:   Wed Jul 1 23:58:24 2020 +0900
+
+    calendar
+
+[33mcommit 0e9691821c773ac4eb2a96c3e5fa29218185391d[m
+Merge: 3df08ec 8b5ced2
+Author: kym1924 <kym1924@naver.com>
+Date:   Wed Jul 1 22:33:28 2020 +0900
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       build.gradle
+
+[33mcommit 3df08ec5a87514c20bbfd6908e6786be1b41651c[m
+Author: kym1924 <kym1924@naver.com>
+Date:   Wed Jul 1 22:32:50 2020 +0900
+
+    calendar
+
+[33mcommit 8b5ced2cb8a209aa9f23fb8e82177f9e7c8f6478[m
+Author: leejieun1121 <lje4648@naver.com>
+Date:   Wed Jul 1 20:44:31 2020 +0900
+
+    create JE branch
+
+[33mcommit 7fbaa3575ba55ca27207dc83acc4105012a75057[m
+Author: kym1924 <63637706+kym1924@users.noreply.github.com>
+Date:   Wed Jul 1 18:31:51 2020 +0900
+
+    Update .gitignore
+
+[33mcommit 60675478fc1f9581bf306985f8835d1355a256aa[m
+Author: kym1924 <kym1924@naver.com>
+Date:   Wed Jul 1 18:25:22 2020 +0900
+
+    ignore
+
+[33mcommit 7a4a937ea7a066441f5016b8e959f7a836a07ee3[m
+Author: kym1924 <kym1924@naver.com>
+Date:   Wed Jul 1 18:24:24 2020 +0900
+
+    .
