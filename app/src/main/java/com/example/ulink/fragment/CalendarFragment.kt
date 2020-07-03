@@ -5,12 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.myapplication.CalendarAdapter
+import com.example.ulink.CalendarRecycler.CalendarAdapter
 import com.example.ulink.CalendarRecycler.CalendarDataInit
 import com.example.ulink.CalendarRecycler.CalendarNextMonth
 import com.example.ulink.CalendarRecycler.CalendarPrevMonth
 import com.example.ulink.R
-import kotlinx.android.synthetic.main.calendar_layout.*
 import kotlinx.android.synthetic.main.fragment_calendar.*
 
 class CalendarFragment : Fragment() {

@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@drawable/calendar_item_background"
     android:paddingHorizontal="5dp"
-    android:paddingBottom="30dp">
+    android:paddingVertical="4dp">
 
     <TextView
         android:id="@+id/day"
@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_gravity="center"
+        android:gravity="center"
         android:textColor="@color/black"
         android:textSize="16sp"/>
 
@@ -51,6 +52,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="소설과영화"
+        android:background="@color/colorAccent"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="3dp"
+        android:textSize="10sp"
+        android:paddingHorizontal="3dp"
+        android:singleLine="true"/>
+
+
+    <TextView
+        android:id="@+id/schedule4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="소설과영화"
+        android:background="@color/colorAccent"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="3dp"
+        android:textSize="10sp"
+        android:paddingHorizontal="3dp"
+        android:singleLine="true"/>
+
+
+    <TextView
+        android:id="@+id/schedule5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="전쟁사"
         android:background="@color/colorAccent"
         android:textColor="@color/white"
         android:layout_gravity="center"

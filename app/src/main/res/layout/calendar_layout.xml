@@ -6,5 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+    android:paddingHorizontal="11dp"
     app:spanCount="7">
 </androidx.recyclerview.widget.RecyclerView>

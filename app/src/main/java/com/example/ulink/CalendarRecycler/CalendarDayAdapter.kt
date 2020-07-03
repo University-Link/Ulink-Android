@@ -1,7 +1,6 @@
 package com.example.ulink.CalendarRecycler
 
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
