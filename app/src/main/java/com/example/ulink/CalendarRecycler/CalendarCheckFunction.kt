@@ -4,8 +4,8 @@ import android.graphics.Color
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.example.myapplication.CalendarData
 import com.example.ulink.R
+import com.example.ulink.data.CalendarData
 import java.util.*
 
 var endDay = arrayOf(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)

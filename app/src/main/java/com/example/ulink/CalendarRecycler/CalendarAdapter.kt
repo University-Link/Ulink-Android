@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.*
 import com.example.ulink.CalendarRecycler.*
+import com.example.ulink.data.CalendarData
 import java.util.*
 
 class CalendarAdapter(private val context : Context, data : CalendarData) : RecyclerView.Adapter<CalendarAdapter.Vholder>(){
@@ -101,8 +102,3 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
         }
     }
 }
-
-data class CalendarData(
-    val year : Int,
-    val month : Int
-)
