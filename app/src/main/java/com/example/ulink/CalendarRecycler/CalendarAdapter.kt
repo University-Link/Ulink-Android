@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.ulink.CalendarRecycler
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.*
-import com.example.ulink.CalendarRecycler.*
 import com.example.ulink.data.CalendarData
-import java.util.*
+
 
 class CalendarAdapter(private val context : Context, data : CalendarData) : RecyclerView.Adapter<CalendarAdapter.Vholder>(){
     var data : CalendarData = data
@@ -16,7 +15,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Vholder {
 
-        val view =  LayoutInflater.from(context).inflate(R.layout.calendar_layout,parent,false)
+        val view =  LayoutInflater.from(context).inflate(R.layout.calendar_item,parent,false)
         return Vholder(view)
     }
 
@@ -54,12 +53,14 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                 //previous_month
                 var dateindex = 0
                 for(i in 0 until index) {
-                    add(CalendarDayData(
+                    add(
+                        CalendarDayData(
                         day = prev_empty_index.toString(),
                         check = false,
                         date = dateindex,
                         today = false
-                    ))
+                    )
+                    )
                     dateindex += 1
                     prev_empty_index += 1
                 }
