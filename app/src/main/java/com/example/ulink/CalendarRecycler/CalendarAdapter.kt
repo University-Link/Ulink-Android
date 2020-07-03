@@ -15,7 +15,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Vholder {
 
-        val view =  LayoutInflater.from(context).inflate(R.layout.calendar_item,parent,false)
+        val view =  LayoutInflater.from(context).inflate(R.layout.calendar_layout,parent,false)
         return Vholder(view)
     }
 
