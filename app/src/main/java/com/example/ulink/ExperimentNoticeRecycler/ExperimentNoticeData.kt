@@ -1,6 +1,6 @@
-package com.example.ulink.ClassNoticeRecycler
+package com.example.ulink.ExperimentNoticeRecycler
 
-data class ClassNoticeData (
+data class ExperimentNoticeData (
     val StartDate : Int,
     val EndDate : Int,
     val ClassName : String,
