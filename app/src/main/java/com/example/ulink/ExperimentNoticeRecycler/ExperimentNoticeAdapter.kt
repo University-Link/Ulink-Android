@@ -11,7 +11,7 @@ import com.example.ulink.R
 class ExperimentNoticeAdapter (private val context: Context) : RecyclerView.Adapter<ExperimentNoticeViewHolder>(){
     var datas : MutableList<ExperimentNoticeData> = mutableListOf<ExperimentNoticeData>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExperimentNoticeViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_class_notice,parent,false)
+        val view = LayoutInflater.from(context).inflate(R.layout.item_experiment_notice,parent,false)
         return ExperimentNoticeViewHolder(view)
     }
 
