@@ -3,4 +3,4 @@
     android:id="@+id/layout_line_vertical"
     android:layout_width="1dp"
     android:layout_height="match_parent"
-    android:background="#ededed" />
+    android:background="@color/white" />

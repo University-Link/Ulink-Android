@@ -1,16 +1,19 @@
 package com.example.ulink.fragment
 
+import android.app.ActionBar
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
 import android.util.TypedValue
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.FrameLayout
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.core.widget.NestedScrollView
+import com.example.ulink.MainActivity
 import com.example.ulink.R
+import com.example.ulink.timetable.TimeTableDrag
+import kotlinx.android.synthetic.main.fragment_time_table.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -19,17 +22,17 @@ const val MIN_CELL_HEIGHT = 60.0f
 class TimeTableFragment : Fragment() {
 
 
-    val endhour = 18
+    val endhour = 19
     val starthour = 9
 
-    var timecolumnwidth : Float = 0.0f
+    var timecolumnwidth = 0.0f
     var dayheight = 0.0f
     var columnwidth = 0.0f
     var rowheight = 0.0f
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
 
@@ -40,26 +43,25 @@ class TimeTableFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val timetableview = view.findViewById<NestedScrollView>(R.id.sv_timetable)
-
+        val timetableview = view.findViewById<FrameLayout>(R.id.layout_timetable)
         val root = timetableview.findViewById<LinearLayout>(R.id.timetable_root)
-
         root.removeAllViews()
+
         drawBackground(root)
         drawHorizontalLine(root)
         drawTimeColumn(root)
         drawColums(root)
+
+        btn_plus.setOnClickListener {
+            (activity as MainActivity).openEditor()
+        }
     }
 
-    fun getData() : ArrayList<Float> {
-        return arrayListOf(timecolumnwidth, dayheight,  columnwidth, rowheight)
+    fun getData(): ArrayList<Float> {
+        return arrayListOf(timecolumnwidth, dayheight, columnwidth, rowheight)
     }
-
-
 
     fun drawBackground(linearLayout: LinearLayout) {
-        ((linearLayout.parent as View).parent as View).findViewById<RelativeLayout>(R.id.timetable_round_border)
-                .setBackgroundResource(R.drawable.bg_round_border_line)
 //        view1.setBackgroundColor()
     }
 
@@ -70,11 +72,14 @@ class TimeTableFragment : Fragment() {
 //      밑에서 whole에다가 row추가해줄거니까 미리 지워야함
         linearLayoutWhole.removeAllViews()
 
+        linearLayoutWhole.setBackgroundResource(R.drawable.bg_round_border)
+
         val linearLayoutRow = layoutInflater.inflate(
                 R.layout.day_column_for_horizontal_grid,
                 linearLayout,
                 false
         ) as LinearLayout
+
         linearLayoutRow.weightSum = 4 * (endhour - starthour).toFloat()
 
 //        until 안쓰는 이유 = 밑에 한칸 추가해주기
@@ -93,13 +98,12 @@ class TimeTableFragment : Fragment() {
 
 
             val mGlobalListner = ViewTreeObserver.OnGlobalLayoutListener {
-                if(row.measuredHeight>0.0){
+                if (row.measuredHeight > 0.0) {
                     rowheight = row.measuredHeight.toFloat()
-                    Log.d("tag","rowheight = $i  ==  "+rowheight.toString())
+                    Log.d("tag", "rowheight = $i  ==  " + rowheight.toString())
                 }
             }
             row.viewTreeObserver.addOnGlobalLayoutListener(mGlobalListner)
-
 
 
         }
@@ -109,39 +113,45 @@ class TimeTableFragment : Fragment() {
     }
 
 
-
     fun drawTimeColumn(linearLayout: LinearLayout) {
         val timecolumn = layoutInflater.inflate(
                 R.layout.day_column_for_time,
                 linearLayout,
                 false
         ) as LinearLayout
+
         timecolumn.weightSum = 4 * (endhour - starthour).toFloat()
         val simpleDateFormat = SimpleDateFormat("h")
         val instance = Calendar.getInstance()
+
         timecolumn.findViewById<TextView>(R.id.tv_header)
-                .setBackgroundResource(R.drawable.text_line_bottom_default)
+                .setBackgroundResource(R.drawable.text_line_bottom_timecolumn)
+
+//      TODO 여기 바꾸기!!!!
 
         for (i in starthour..endhour) {
             val timeColumnEa =
                     layoutInflater.inflate(R.layout.cell_timeindex, timecolumn, false) as TextView
+
             timeColumnEa.minHeight =
                     TypedValue.applyDimension(1, MIN_CELL_HEIGHT, requireContext().resources.displayMetrics)
                             .toInt()
             instance.set(Calendar.HOUR_OF_DAY, i)
+
             timeColumnEa.gravity = Gravity.RIGHT
-            timeColumnEa.setPadding(0,1,1,0)
+            timeColumnEa.setPadding(0, 1, 1, 0)
             timeColumnEa.text = simpleDateFormat.format(instance.time)
             timeColumnEa.setTextSize(1, 11.0f)
             timecolumn.addView(timeColumnEa)
+
+
         }
         linearLayout.addView(timecolumn)
-        drawVerticalLine(linearLayout)
 
         val mGlobalListner = ViewTreeObserver.OnGlobalLayoutListener {
-            if(timecolumn.measuredWidth>0.0){
+            if (timecolumn.measuredWidth > 0.0) {
                 timecolumnwidth = timecolumn.measuredWidth.toFloat()
-                Log.d("tag","timecolumnwidth =  "+ timecolumnwidth.toString())
+                Log.d("tag", "timecolumnwidth =  " + timecolumnwidth.toString())
             }
         }
         timecolumn.viewTreeObserver.addOnGlobalLayoutListener(mGlobalListner)
@@ -152,6 +162,9 @@ class TimeTableFragment : Fragment() {
         val dayOfWeek = 5
 
         val instance = Calendar.getInstance()
+
+        drawVerticalLine(linearLayout)
+
         for (i in 0 until dayOfWeek) {
 
 //          맨위에 월화수목금
@@ -163,9 +176,9 @@ class TimeTableFragment : Fragment() {
             linearlayoutfor.weightSum = 4 * (endhour - starthour).toFloat()
 
             val mGlobalListner = ViewTreeObserver.OnGlobalLayoutListener {
-                if(linearlayoutfor.measuredWidth>0.0){
+                if (linearlayoutfor.measuredWidth > 0.0) {
                     columnwidth = linearlayoutfor.width.toFloat()
-                    Log.d("tag","columnwidth $i =  "+ columnwidth.toString())
+                    Log.d("tag", "columnwidth $i =  " + columnwidth.toString())
                 }
             }
             linearlayoutfor.viewTreeObserver.addOnGlobalLayoutListener(mGlobalListner)
@@ -175,22 +188,19 @@ class TimeTableFragment : Fragment() {
 //                dayRow.findViewById<LinearLayout>(R.id.day_column_root_preview)
 //
 
+            val daylist = arrayListOf("월","화","수","목","금","토","일")
             val day = linearlayoutfor.findViewById<TextView>(R.id.tv_header)
             instance.set(Calendar.DAY_OF_WEEK, (i + 2) % 7)
-            day.text = "금"
-            day.setTextSize(1, 11.0f)
+            day.text = daylist[i]
             day.setBackgroundResource(R.drawable.text_line_bottom_default)
-            day.setTextSize(1, 11.0f)
 
             val mGlobalListner2 = ViewTreeObserver.OnGlobalLayoutListener {
-                if(day.measuredHeight>0.0){
+                if (day.measuredHeight > 0.0) {
                     dayheight = day.measuredHeight.toFloat()
-                    Log.d("tag","dayheight =  "+ day.measuredHeight.toString())
+                    Log.d("tag", "dayheight =  " + day.measuredHeight.toString())
                 }
             }
             day.viewTreeObserver.addOnGlobalLayoutListener(mGlobalListner2)
-
-
 
             drawColumn1(linearlayoutfor, i)
 //            drawColumn2(linearlayoutpreviewfor, i)
@@ -227,10 +237,10 @@ class TimeTableFragment : Fragment() {
     }
 
     //    drawdummy로 과목 사이사이에 빈칸 그려줘야하는데 그 크기는 다음과목시작시간과 전과목 끝시간 사이
-    fun DrawDummy(linearLayout: LinearLayout, i :Int) {
+    fun DrawDummy(linearLayout: LinearLayout, i: Int) {
         if (i > 0) {
             val dummycell = R.layout.cell_time_24
-            val view = layoutInflater.inflate(dummycell,linearLayout, false) as LinearLayout
+            val view = layoutInflater.inflate(dummycell, linearLayout, false) as LinearLayout
             view.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, i.toFloat())
             linearLayout.addView(view)
         }
@@ -238,7 +248,7 @@ class TimeTableFragment : Fragment() {
 
     fun DrawDummybtw(linearLayout: LinearLayout) {
         val dummycell = R.layout.cell_time_24
-        val view = layoutInflater.inflate(dummycell,linearLayout, false) as LinearLayout
+        val view = layoutInflater.inflate(dummycell, linearLayout, false) as LinearLayout
         view.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 0.25.toFloat())
         linearLayout.addView(view)
     }
@@ -251,9 +261,9 @@ class TimeTableFragment : Fragment() {
 //        cell = 0일때 오류
         val celllayout = layoutInflater.inflate(subjectcell, linearLayout, false) as LinearLayout
 
-        celllayout.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0,7.5F)
+        celllayout.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 7.5F)
 
-        celllayout.setBackgroundResource(R.drawable.bg_round_border2)
+        celllayout.setBackgroundResource(R.drawable.bg_round_border_subject)
 
         val celltvsubject = celllayout.findViewById<TextView>(R.id.tv_cell_subject)
         val celltvcustom = celllayout.findViewById<TextView>(R.id.tv_cell_custom)
@@ -274,8 +284,27 @@ class TimeTableFragment : Fragment() {
     }
 
     fun drawVerticalLine(linearLayout: LinearLayout) {
-        layoutInflater.inflate(R.layout.timetable_verticalline, linearLayout, true)
+
+//        layoutInflater.inflate(R.layout.timetable_verticalline, linearLayout, true)
+        val verticallines = layoutInflater.inflate(R.layout.timetable_verticallayout, linearLayout, false) as LinearLayout
+        verticallines.weightSum = 4 * (endhour - starthour).toFloat()
+
+//      가로줄 투명하게 끊어서!
+//      위에만 따로 없애주기!! 지금 vertical로 그대로 쌓는데 지금 matchparent에서 dayheight만큼 짤라서 적용!
+        layoutInflater.inflate(R.layout.timetable_verticalline_index, verticallines, true)
+
+        for (i in starthour..endhour) {
+            val verticalline = layoutInflater.inflate(R.layout.cell_timeindex, verticallines, false) as TextView
+            verticalline.setBackgroundResource(R.drawable.bg_vertical_bottom_line)
+            verticallines.addView(verticalline)
+        }
+        linearLayout.addView(verticallines)
     }
 
+
+    fun dptopx(dp : Int): Float {
+        val metrics = resources.displayMetrics
+        return dp*((metrics.densityDpi.toFloat())/DisplayMetrics.DENSITY_DEFAULT)
+    }
 
 }

@@ -4,13 +4,14 @@
     android:layout_width="16dp"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="108">
+    android:weightSum="108"
+    android:background="@color/white">
 
 <!--    월화수목금 header로부터 띄워줘야함-->
     <TextView
         android:id="@+id/tv_header"
         android:layout_width="match_parent"
-        android:layout_height="16dp"
+        android:layout_height="29dp"
         android:gravity="center" />
 
 </LinearLayout>
