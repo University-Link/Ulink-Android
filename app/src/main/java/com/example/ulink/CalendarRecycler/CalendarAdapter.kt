@@ -20,7 +20,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
     }
 
     override fun getItemCount(): Int {
-        return 1
+        return 3
     }
 
     override fun onBindViewHolder(holder:Vholder, position: Int) {
