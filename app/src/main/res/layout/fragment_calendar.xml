@@ -89,7 +89,8 @@
                 android:text="일"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:layout_marginBottom="5dp" />
+                android:paddingBottom="5dp"
+                android:background="@drawable/calendar_item_background_under"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -98,7 +99,8 @@
                 android:text="월"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:layout_marginBottom="5dp"/>
+                android:paddingBottom="5dp"
+                android:background="@drawable/calendar_item_background_under"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -107,7 +109,8 @@
                 android:text="화"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:paddingBottom="5dp"/>
+                android:paddingBottom="5dp"
+                android:background="@drawable/calendar_item_background_under"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -116,7 +119,8 @@
                 android:text="수"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:paddingBottom="5dp"/>
+                android:paddingBottom="5dp"
+                android:background="@drawable/calendar_item_background_under"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -125,7 +129,8 @@
                 android:text="목"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:paddingBottom="5dp" />
+                android:paddingBottom="5dp"
+                android:background="@drawable/calendar_item_background_under"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -134,7 +139,8 @@
                 android:text="금"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:paddingBottom="5dp"/>
+                android:paddingBottom="5dp"
+                android:background="@drawable/calendar_item_background_under"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -143,7 +149,8 @@
                 android:text="토"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:paddingBottom="5dp"/>
+                android:paddingBottom="5dp"
+                android:background="@drawable/calendar_item_background_under"/>
         </LinearLayout>
 
         <androidx.viewpager2.widget.ViewPager2

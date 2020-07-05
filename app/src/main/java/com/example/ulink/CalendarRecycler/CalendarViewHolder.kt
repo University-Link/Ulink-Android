@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 class CalendarViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(dayData : CalendarDayData){
-        CalendarDayColorCheck(dayData, itemView)
-        CalendarAlpha(dayData, itemView)
+        calendarDayColorCheck(dayData, itemView)
+        calendarAlpha(dayData, itemView)
+        calendarBordar(dayData, itemView)
     }
 }
