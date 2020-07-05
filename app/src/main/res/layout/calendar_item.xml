@@ -6,8 +6,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@drawable/calendar_item_background"
-    android:paddingHorizontal="5dp"
-    android:paddingVertical="4dp">
+    android:paddingHorizontal="2dp"
+    android:paddingVertical="5dp">
 
     <TextView
         android:id="@+id/day"

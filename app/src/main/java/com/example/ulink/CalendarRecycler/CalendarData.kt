@@ -1,4 +1,4 @@
-package com.example.ulink.data
+package com.example.ulink.CalendarRecycler
 
 data class CalendarData(
         val year : Int,

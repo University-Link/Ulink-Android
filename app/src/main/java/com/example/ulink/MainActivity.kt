@@ -1,8 +1,10 @@
 package com.example.ulink
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager.widget.ViewPager
+import com.example.ulink.timetable.TimeTableEdit
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -36,5 +38,10 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+    }
+
+    fun openEditor(){
+        val intent = Intent(this, TimeTableEdit::class.java)
+        startActivity(intent)
     }
 }
