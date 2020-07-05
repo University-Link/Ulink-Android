@@ -2,7 +2,6 @@ package com.example.ulink.CalendarRecycler
 
 import android.graphics.Color
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.ulink.R
 import com.example.ulink.data.CalendarData
@@ -31,27 +30,41 @@ fun CalendarLeapYearCheck(data: CalendarData) : Int {
 
 fun CalendarDayColorCheck(dayData: CalendarDayData, itemView : View) {
     val day : TextView = itemView.findViewById(R.id.day)
-    val layout : LinearLayout = itemView.findViewById(R.id.rv_item_layout)
+
     day.text = dayData.day
 
     var sundayColor = "#5F5DE9"
     var monthColor = "#000000"
-    var otherColor = "#888888"
+    //var otherColor = "#888888"
     var todayColor = "#ffffff"
 
     if(dayData.check) day.setTextColor(Color.parseColor(monthColor)) // now_month
-    else {
-        day.setTextColor(Color.parseColor(otherColor))
-        layout.alpha=0.3f
-    } // prev, next month
+    //else day.setTextColor(Color.parseColor(otherColor)) // prev, next month
     if(dayData.date % 7 == 0 && dayData.check) day.setTextColor(Color.parseColor(sundayColor)) //sunday
     if(dayData.today)
     {
-        day.setBackgroundResource(R.drawable.img_btn_class)
+        day.setBackgroundResource(R.drawable.calendar_img_bg_today)
         day.setTextColor(Color.parseColor(todayColor))
     }
 }
 
+fun CalendarAlpha(dayData: CalendarDayData, itemView : View){
+    val day : TextView = itemView.findViewById(R.id.day)
+    val schedule1 : TextView = itemView.findViewById(R.id.schedule1)
+    val schedule2 : TextView = itemView.findViewById(R.id.schedule2)
+    val schedule3 : TextView = itemView.findViewById(R.id.schedule3)
+    val schedule4 : TextView = itemView.findViewById(R.id.schedule4)
+    val schedule5 : TextView = itemView.findViewById(R.id.schedule5)
+
+    if(!dayData.check){
+        day.alpha=0.3f
+        schedule1.alpha=0.3f
+        schedule2.alpha=0.3f
+        schedule3.alpha=0.3f
+        schedule4.alpha=0.3f
+        schedule5.alpha=0.3f
+    } // prev, next month
+}
 fun CalendarDataInit(tv_month : TextView) : CalendarData {
     tv_month.setText(now_month.toString()+"월")
     return CalendarData(now_year, now_month)
@@ -81,4 +94,26 @@ fun CalendarNextMonth(tv_month : TextView, data_month : Int, data_year : Int) : 
 
     tv_month.setText(month.toString()+"월")
     return CalendarData(year, month)
+}
+
+fun getDay(year : Int, month : Int) : Int{
+    val preyear = year-1
+    var daysum = preyear*365 + preyear/4 - preyear/100 + preyear/400
+
+    if (month>=3 && (year%4==0 && year%100!=0 || year%400 ==0)) daysum += 1
+
+    var premonth = month - 1
+
+    for (i in 0 until premonth) daysum += endDay[i]
+    daysum += 1
+
+    return daysum % 7
+}
+
+fun firstIndex (year : Int, month : Int) : Int
+{
+    var year : Int = year
+    var month : Int = month
+    var index = getDay(year, month);
+    return index;
 }

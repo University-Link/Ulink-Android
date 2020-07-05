@@ -7,5 +7,6 @@ class CalendarViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(dayData : CalendarDayData){
         CalendarDayColorCheck(dayData, itemView)
+        CalendarAlpha(dayData, itemView)
     }
 }
