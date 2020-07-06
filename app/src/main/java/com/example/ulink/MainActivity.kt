@@ -40,8 +40,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun openEditor(){
-        val intent = Intent(this, TimeTableEdit::class.java)
-        startActivity(intent)
-    }
 }

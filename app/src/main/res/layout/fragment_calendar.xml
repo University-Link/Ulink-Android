@@ -9,6 +9,7 @@
     tools:context=".fragment.CalendarFragment">
 
 
+<!--    여기다가 패딩주면 뷰 이상해짐!!-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:paddingTop="11dp"
         android:paddingHorizontal="12dp"
