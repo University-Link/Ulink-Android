@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="9dp"
+    android:paddingHorizontal="14dp"
+    android:background="@drawable/schedule_img_day">
+
+    <TextView
+        android:id="@+id/tv_schedule_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="시험"
+        android:background="@color/main"
+        android:paddingHorizontal="8dp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_schedule_class"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="전자기학 "
+        app:layout_constraintStart_toEndOf="@id/tv_schedule_category"
+        app:layout_constraintTop_toTopOf="@id/tv_schedule_category"/>
+
+    <TextView
+        android:id="@+id/tv_schedule_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="중간고사"
+        app:layout_constraintStart_toEndOf="@id/tv_schedule_class"
+        app:layout_constraintTop_toTopOf="@id/tv_schedule_category"/>
+
+    <TextView
+        android:id="@+id/tv_schedule_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="11:00"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_schedule_category"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

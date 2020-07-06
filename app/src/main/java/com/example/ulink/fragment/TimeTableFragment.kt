@@ -306,5 +306,4 @@ class TimeTableFragment : Fragment() {
         val metrics = resources.displayMetrics
         return dp*((metrics.densityDpi.toFloat())/DisplayMetrics.DENSITY_DEFAULT)
     }
-
 }
