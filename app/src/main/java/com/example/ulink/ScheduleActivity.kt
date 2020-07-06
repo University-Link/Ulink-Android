@@ -2,8 +2,12 @@ package com.example.ulink
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.LinearLayout
 import com.example.ulink.ScheduleRecycler.*
 import kotlinx.android.synthetic.main.activity_schedule.*
+import kotlinx.android.synthetic.main.schedule_day_item.*
+import kotlinx.android.synthetic.main.schedule_item.*
 import java.util.*
 
 
@@ -18,6 +22,7 @@ class ScheduleActivity : AppCompatActivity() {
 
         scheduleDateAdapter = ScheduleDateAdapter(this)
         rv_schedule_date.adapter = scheduleDateAdapter
+
         loadDateDatas()
     }
 
@@ -34,7 +39,7 @@ class ScheduleActivity : AppCompatActivity() {
                 )
             }
         }
-        scheduleDateAdapter.datas = dateDatas
+        scheduleDateAdapter.dateDatas = dateDatas
         scheduleDateAdapter.notifyDataSetChanged()
     }
 }

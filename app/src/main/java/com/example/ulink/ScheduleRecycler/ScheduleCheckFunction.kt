@@ -1,11 +1,13 @@
 package com.example.ulink.ScheduleRecycler
 
+import android.util.Log
+import android.view.View
+import android.widget.TextView
+import com.example.ulink.R
 import java.util.*
 
 var cal: Calendar = Calendar.getInstance()
 var nowDay = cal.get(Calendar.DATE)
-var nowMonth = cal.get(Calendar.MONTH)+1
-var nowYear = cal.get(Calendar.YEAR)
 
 fun nowDay() : Int {
     return nowDay
@@ -33,4 +35,10 @@ fun nowDateCheck(i : Int) : String {
 fun ddayCheck(i : Int) : String {
     return if(i==0) "day"
     else i.toString()
+}
+
+fun categoryBackground(category : String, tv_category : TextView) {
+    if(category=="시험") tv_category.setBackgroundResource(R.drawable.chatting_schedule_img_label_test)
+    else if(category=="수업") tv_category.setBackgroundResource(R.drawable.chatting_schedule_img_label_hw)
+    else if(category=="과제") tv_category.setBackgroundResource(R.drawable.chatting_schedule_img_label_class)
 }
