@@ -7,11 +7,10 @@
     android:layout_height="?attr/actionBarSize"
     android:background="#fff"
     android:elevation="4dp">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
 
         <ImageView
             android:id="@+id/btn_back"

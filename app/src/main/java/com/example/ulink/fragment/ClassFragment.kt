@@ -11,6 +11,7 @@ import com.example.ulink.ChattingActivity
 import com.example.ulink.ClassRecycler.ClassAdapter
 import com.example.ulink.ClassRecycler.ClassData
 import com.example.ulink.R
+import com.example.ulink.ScheduleActivity
 import kotlinx.android.synthetic.main.fragment_class.*
 
 class ClassFragment : Fragment() {
@@ -34,6 +35,7 @@ class ClassFragment : Fragment() {
                 startActivity(intent)
             }
         })
+
         rv_class.adapter = ClassAdapter
         loadDatas()
     }
