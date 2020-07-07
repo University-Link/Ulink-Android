@@ -23,6 +23,7 @@ import com.example.ulink.timetable.TimeTableListActivity
 import kotlinx.android.synthetic.main.fragment_time_table.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class TimeTableFragment : Fragment() {
@@ -61,15 +62,14 @@ class TimeTableFragment : Fragment() {
 
                 layout.findViewById<TextView>(R.id.tv_class_name).text = subject.name
 //                TODO 이거 table받아와서 classname으로 일주일에 몇번 수업인지 알아서 표시하기 vs 어뜨카지
+
                 layout.findViewById<TextView>(R.id.tv_time).text = subject.starttime +"  "+  subject.endtime
                 layout.findViewById<TextView>(R.id.tv_place).text = subject.place
                 layout.findViewById<TextView>(R.id.tv_professor).text = "교수"
                 layout.findViewById<TextView>(R.id.tv_class_name).text = subject.name
 
-
                 builder.setView(layout)
                 val dialog = builder.create()
-
 
 //          기타 클릭 이벤트
                 layout.setOnClickListener {
@@ -82,52 +82,16 @@ class TimeTableFragment : Fragment() {
         }
 
         val timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, timeTable)
+
         timetableDrawer.draw(view.findViewById<FrameLayout>(R.id.layout_timetable))
 
         btn_plus.setOnClickListener {
 
-            val builder = AlertDialog.Builder(context)
-            val layout = LayoutInflater.from(context).inflate(R.layout.dialog_timetable_checkgrade, null)
-
-
-
-            builder.setView(layout)
-
-            val dialog = builder.create()
-
             val intent = Intent(context, TimeTableEdit::class.java)
-            layout.findViewById<Button>(R.id.btn_grade1).setOnClickListener {
-                intent.putExtra("grade", 1)
-                startActivity(intent)
-                dialog.dismiss()
-            }
-            layout.findViewById<Button>(R.id.btn_grade2).setOnClickListener {
-                intent.putExtra("grade", 2)
-                startActivity(intent)
-                dialog.dismiss()
-
-            }
-            layout.findViewById<Button>(R.id.btn_grade3).setOnClickListener {
-                intent.putExtra("grade", 3)
-                startActivity(intent)
-                dialog.dismiss()
-
-            }
-            layout.findViewById<Button>(R.id.btn_grade4).setOnClickListener {
-                intent.putExtra("grade", 4)
-                startActivity(intent)
-                dialog.dismiss()
-
-            }
-            layout.findViewById<Button>(R.id.btn_grade5).setOnClickListener {
-                intent.putExtra("grade", 5)
-                startActivity(intent)
-                dialog.dismiss()
-            }
-
-
-            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.show()
+            val list: ArrayList<TimeTable> = arrayListOf()
+            list.add(timeTable)
+            intent.putParcelableArrayListExtra("timeTableList",list)
+            startActivity(intent)
 
         }
 
@@ -138,10 +102,10 @@ class TimeTableFragment : Fragment() {
         btn_list.setOnClickListener {
             startActivity(Intent(context, TimeTableListActivity::class.java))
         }
+
         btn_setting.setOnClickListener {
             val bottomsheet = BottomSheetFragment()
             fragmentManager?.let { it -> bottomsheet.show(it,bottomsheet.tag) }
         }
-
     }
 }

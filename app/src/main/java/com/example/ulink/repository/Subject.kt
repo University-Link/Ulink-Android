@@ -1,5 +1,9 @@
 package com.example.ulink.repository
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 class Subject (
         var id : Long,
         var name : String,
@@ -9,4 +13,4 @@ class Subject (
         var place : String?,
         var color : Int,
         var subject : Boolean
-)
+) : Parcelable
