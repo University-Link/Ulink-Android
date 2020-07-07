@@ -38,6 +38,7 @@
     2. day_header (일, 월, 화, 수, 목, 금, 토, 일)
     3. calendar_viewPager (달력)
 
+
     ~~~
     <LinearLayout
                 android:id="@+id/day_header"
@@ -61,8 +62,10 @@
     </androidx.viewpager2.widget.ViewPager2>
     ~~~
     
+    
 
 <img width="308" alt="스크린샷 2020-07-07 오후 11 20 51" src="https://user-images.githubusercontent.com/53978090/86795452-8b294d80-c0a8-11ea-8f91-cfcf7989d36c.png">
+
 
 3. **width, height 속성에 dp단위 적용은 필요한 경우 아니면 macrh_parent, wrap_content, match_constraint 위주로 사용할 것**
 
