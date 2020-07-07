@@ -38,7 +38,7 @@ class TimeTableFragment : Fragment() {
     }
 
     interface subjectOnClick{
-        fun onClick()
+        fun onClick(subject: Subject)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,18 +48,29 @@ class TimeTableFragment : Fragment() {
 
         val subjectList : MutableList<Subject> = arrayListOf()
         subjectList.add(Subject(1,"과목이름","09:00","12:00","mon","과목장소",1,true))
-        subjectList.add(Subject(2,"과목이름","11:00","13:00","tue","과목장소",1,true))
-        subjectList.add(Subject(3,"과목이름","14:00","16:00","wed","과목장소",1,true))
+        subjectList.add(Subject(2,"과목이름","14:00","16:00","mon","과목장소",1,true))
+        subjectList.add(Subject(3,"과목이름","11:00","13:00","tue","과목장소",1,true))
+        subjectList.add(Subject(4,"과목이름","14:00","16:00","wed","과목장소",1,true))
         val timeTable = TimeTable(1,"2020-1","시간표이름",subjectList,true,"09:00","16:00")
 
 
-
         val onClick = object : subjectOnClick {
-            override fun onClick() {
+            override fun onClick(subject: Subject) {
                 val builder = AlertDialog.Builder(context)
                 val layout = LayoutInflater.from(context).inflate(R.layout.dialog_timetable_subject, null)
+
+                layout.findViewById<TextView>(R.id.tv_class_name).text = subject.name
+//                TODO 이거 table받아와서 classname으로 일주일에 몇번 수업인지 알아서 표시하기 vs 어뜨카지
+                layout.findViewById<TextView>(R.id.tv_time).text = subject.starttime +"  "+  subject.endtime
+                layout.findViewById<TextView>(R.id.tv_place).text = subject.place
+                layout.findViewById<TextView>(R.id.tv_professor).text = "교수"
+                layout.findViewById<TextView>(R.id.tv_class_name).text = subject.name
+
+
                 builder.setView(layout)
                 val dialog = builder.create()
+
+
 //          기타 클릭 이벤트
                 layout.setOnClickListener {
                     Toast.makeText(context,"dfasdf", Toast.LENGTH_SHORT).show()
@@ -70,8 +81,7 @@ class TimeTableFragment : Fragment() {
             }
         }
 
-        val timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick)
-        timetableDrawer.timeTable = timeTable
+        val timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, timeTable)
         timetableDrawer.draw(view.findViewById<FrameLayout>(R.id.layout_timetable))
 
         btn_plus.setOnClickListener {

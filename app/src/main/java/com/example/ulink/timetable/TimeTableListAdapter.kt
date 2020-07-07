@@ -15,20 +15,21 @@ class TimeTableListAdapter() : RecyclerView.Adapter<TimeTableListAdapter.VHolder
 //    데이터 받은거 보고 가공해서 semester별로 뿌리기
 
     init {
+        val subjectList : MutableList<Subject> = arrayListOf()
 
         val list: MutableList<TimeTable> = arrayListOf()
-        val tt = TimeTable(1, "2020-1", "시간표시간표", null, true)
-        val tt2 = TimeTable(1, "2020-1", "시간표시간표2", null, false)
-        val tt3 = TimeTable(1, "2020-1", "시간표시간표3", null, false)
+        val tt =TimeTable(1,"2020-1","시간표이름1",subjectList,true,"09:00","16:00")
+        val tt2 =TimeTable(1,"2020-1","시간표이름2",subjectList,true,"09:00","16:00")
+        val tt3 = TimeTable(1,"2020-1","시간표이름3",subjectList,true,"09:00","16:00")
         list.apply {
             add(tt)
             add(tt2)
             add(tt3)
         }
         val list2: MutableList<TimeTable> = arrayListOf()
-        val tt4 = TimeTable(1, "2020-2", "시간표시간표1", null, true)
-        val tt5 = TimeTable(1, "2020-2", "시간표시간표2", null, false)
-        val tt6 = TimeTable(1, "2020-2", "시간표시간표3", null, false)
+        val tt4 = TimeTable(1,"2020-1","시간표이름1",subjectList,true,"09:00","16:00")
+        val tt5 = TimeTable(1,"2020-1","시간표이름2",subjectList,true,"09:00","16:00")
+        val tt6 =TimeTable(1,"2020-1","시간표이름3",subjectList,true,"09:00","16:00")
         list2.apply {
             add(tt4)
             add(tt5)

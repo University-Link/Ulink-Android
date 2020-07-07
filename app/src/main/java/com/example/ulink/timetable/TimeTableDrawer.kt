@@ -28,15 +28,20 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 
     constructor(context: Context, layoutInflater: LayoutInflater, timeTable: TimeTable) : this(context, layoutInflater) {
         this.timeTable = timeTable
+
     }
 
+    constructor(context: Context, layoutInflater: LayoutInflater, onClick: TimeTableFragment.subjectOnClick, timeTable: TimeTable) : this(context, layoutInflater, onClick) {
+        this.timeTable = timeTable
+    }
 
     lateinit var onClick: TimeTableFragment.subjectOnClick
 
-    lateinit var timeTable: TimeTable
+    val subjectList: MutableList<Subject> = mutableListOf()
+    var timeTable = TimeTable(0, "", "", subjectList, false, "", "")
 
-    val endhour = 18
-    val starthour = 9
+    var endhour = 18
+    var starthour = 9
 
     var timecolumnwidth = 0.0f
     var dayheight = 0.0f
@@ -81,11 +86,9 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 //          이걸로 최소 줄 크기 조절!
             linearLayoutRow.addView(row)
 
-
             val mGlobalListner = ViewTreeObserver.OnGlobalLayoutListener {
                 if (row.measuredHeight > 0.0) {
                     rowheight = row.measuredHeight.toFloat()
-                    Log.d("tag", "rowheight = $i  ==  " + rowheight.toString())
                 }
             }
             row.viewTreeObserver.addOnGlobalLayoutListener(mGlobalListner)
@@ -135,7 +138,6 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
         val mGlobalListner = ViewTreeObserver.OnGlobalLayoutListener {
             if (timecolumn.measuredWidth > 0.0) {
                 timecolumnwidth = timecolumn.measuredWidth.toFloat()
-                Log.d("tag", "timecolumnwidth =  " + timecolumnwidth.toString())
             }
         }
         timecolumn.viewTreeObserver.addOnGlobalLayoutListener(mGlobalListner)
@@ -160,15 +162,9 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
             val mGlobalListner = ViewTreeObserver.OnGlobalLayoutListener {
                 if (linearlayoutfor.measuredWidth > 0.0) {
                     columnwidth = linearlayoutfor.width.toFloat()
-                    Log.d("tag", "columnwidth $i =  " + columnwidth.toString())
                 }
             }
             linearlayoutfor.viewTreeObserver.addOnGlobalLayoutListener(mGlobalListner)
-
-
-//            val linearlayoutpreviewfor =
-//                dayRow.findViewById<LinearLayout>(R.id.day_column_root_preview)
-//
 
             val daylist = arrayListOf("월", "화", "수", "목", "금", "토", "일")
             val day = linearlayoutfor.findViewById<TextView>(R.id.tv_header)
@@ -178,7 +174,6 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
             val mGlobalListner2 = ViewTreeObserver.OnGlobalLayoutListener {
                 if (day.measuredHeight > 0.0) {
                     dayheight = day.measuredHeight.toFloat()
-                    Log.d("tag", "dayheight =  " + day.measuredHeight.toString())
                 }
             }
             day.viewTreeObserver.addOnGlobalLayoutListener(mGlobalListner2)
@@ -200,27 +195,108 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 
 //        i가 월화수목금
 //        subjectsize가 20이라 치면 a는 20번돔, i는 5번 day가 같은애들만 그 날 그림
+//         subjectsize = 4 0 1 2 3 이렇게 도는데 subject[0],1,2,3 이렇게 있음, 0,1은 같은요일
+//
+//
+//        subjectList.add(Subject(1,"과목이름","09:00","12:00","mon","과목장소",1,true))
+//        subjectList.add(Subject(2,"과목이름","14:00","16:00","mon","과목장소",1,true))
+//        subjectList.add(Subject(3,"과목이름","11:00","13:00","tue","과목장소",1,true))
+//        subjectList.add(Subject(4,"과목이름","14:00","16:00","wed","과목장소",1,true))
+
+//        subject sort한번 해줘야함
 
         subjectsize.let {
+            val daylist = arrayListOf("mon", "tue", "wed", "thu", "fri", "sat", "sun")
+            val list0: MutableList<Subject> = arrayListOf()
+            val list1: MutableList<Subject> = arrayListOf()
+            val list2: MutableList<Subject> = arrayListOf()
+            val list3: MutableList<Subject> = arrayListOf()
+            val list4: MutableList<Subject> = arrayListOf()
+
             for (a in 0 until it) {
-//            a에 따라 그날 subject list에서 subjectlist[a]
-                val daylist = arrayListOf("mon", "tue", "wed", "thu", "fri", "sat", "sun")
-                if (timeTable.subjectList[a].day == daylist[i]) {
+                when (timeTable.subjectList[a].day) {
+                    daylist[0] -> list0.add(timeTable.subjectList[a])
+                    daylist[1] -> list1.add(timeTable.subjectList[a])
+                    daylist[2] -> list2.add(timeTable.subjectList[a])
+                    daylist[3] -> list3.add(timeTable.subjectList[a])
+                    daylist[4] -> list4.add(timeTable.subjectList[a])
+                }
+            }
 
-                    if (a == 0) {
-                        subjectstarttime = formatToFloat(timeTable.subjectList[a].starttime) * 4
-                        presubjectendtimeortablestarttime = formatToFloat(timeTable.startTime) * 4
-                    } else {
-                        subjectstarttime = formatToFloat(timeTable.subjectList[a].starttime) * 4
-                        presubjectendtimeortablestarttime = formatToFloat((timeTable.subjectList[a - 1].endtime)) * 4
+            var list: MutableList<Subject> = arrayListOf()
+            when(i){
+                0 -> {
+                    list = list0
+                    for (a in 0 until list.size){
+                        if (a == 0) {
+                            subjectstarttime = formatToFloat(list[a].starttime) * 4
+                            presubjectendtimeortablestarttime = formatToFloat(timeTable.startTime) * 4
+                        } else {
+                            subjectstarttime = formatToFloat(list[a].starttime) * 4
+                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endtime)) * 4
+                        }
+                        DrawDummy(linearLayout, subjectstarttime - presubjectendtimeortablestarttime)
+                        DrawSubject(linearLayout, list[a])
                     }
-
-                    DrawDummy(linearLayout, subjectstarttime - presubjectendtimeortablestarttime)
-                    DrawSubject(linearLayout, timeTable.subjectList[a])
+                }
+                1 ->  {
+                    list = list1
+                    for (a in 0 until list.size){
+                        if (a == 0) {
+                            subjectstarttime = formatToFloat(list[a].starttime) * 4
+                            presubjectendtimeortablestarttime = formatToFloat(timeTable.startTime) * 4
+                        } else {
+                            subjectstarttime = formatToFloat(list[a].starttime) * 4
+                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endtime)) * 4
+                        }
+                        DrawDummy(linearLayout, subjectstarttime - presubjectendtimeortablestarttime)
+                        DrawSubject(linearLayout, list[a])
+                    }
+                }
+                2 ->  {
+                    list = list2
+                    for (a in 0 until list.size){
+                        if (a == 0) {
+                            subjectstarttime = formatToFloat(list[a].starttime) * 4
+                            presubjectendtimeortablestarttime = formatToFloat(timeTable.startTime) * 4
+                        } else {
+                            subjectstarttime = formatToFloat(list[a].starttime) * 4
+                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endtime)) * 4
+                        }
+                        DrawDummy(linearLayout, subjectstarttime - presubjectendtimeortablestarttime)
+                        DrawSubject(linearLayout, list[a])
+                    }
+                }
+                3 ->  {
+                    list = list3
+                    for (a in 0 until list.size){
+                        if (a == 0) {
+                            subjectstarttime = formatToFloat(list[a].starttime) * 4
+                            presubjectendtimeortablestarttime = formatToFloat(timeTable.startTime) * 4
+                        } else {
+                            subjectstarttime = formatToFloat(list[a].starttime) * 4
+                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endtime)) * 4
+                        }
+                        DrawDummy(linearLayout, subjectstarttime - presubjectendtimeortablestarttime)
+                        DrawSubject(linearLayout, list[a])
+                    }
+                }
+                4 ->  {
+                    list = list4
+                    for (a in 0 until list.size){
+                        if (a == 0) {
+                            subjectstarttime = formatToFloat(list[a].starttime) * 4
+                            presubjectendtimeortablestarttime = formatToFloat(timeTable.startTime) * 4
+                        } else {
+                            subjectstarttime = formatToFloat(list[a].starttime) * 4
+                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endtime)) * 4
+                        }
+                        DrawDummy(linearLayout, subjectstarttime - presubjectendtimeortablestarttime)
+                        DrawSubject(linearLayout, list[a])
+                    }
                 }
             }
         }
-
 
 
     }
@@ -243,8 +319,9 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 
         devideSubjects(linearLayout)
 //        cell = 0일때 오류
-        val celllayout = layoutInflater.inflate( R.layout.cell_subject, linearLayout, false) as LinearLayout
-        celllayout.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 7.5F)
+        val celllayout = layoutInflater.inflate(R.layout.cell_subject, linearLayout, false) as LinearLayout
+        celllayout.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
+                4*(formatToFloat(subject.endtime) - formatToFloat(subject.starttime)) - 0.5f)
 
 //        TODO 여기서 color를 int값에 따라 골라서 넣어주기!!
         celllayout.setBackgroundResource(R.drawable.bg_round_border_subject)
@@ -255,7 +332,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 
 //        TODO 여기 온클릭
         celllayout.setOnClickListener {
-            onClick.onClick()
+            onClick.onClick(subject)
         }
         linearLayout.addView(celllayout)
         devideSubjects(linearLayout)
