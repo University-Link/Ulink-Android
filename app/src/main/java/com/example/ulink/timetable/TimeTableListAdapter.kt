@@ -15,6 +15,7 @@ class TimeTableListAdapter() : RecyclerView.Adapter<TimeTableListAdapter.VHolder
 //    데이터 받은거 보고 가공해서 semester별로 뿌리기
 
     init {
+
         val list: MutableList<TimeTable> = arrayListOf()
         val tt = TimeTable(1, "2020-1", "시간표시간표", null, true)
         val tt2 = TimeTable(1, "2020-1", "시간표시간표2", null, false)

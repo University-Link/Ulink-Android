@@ -21,7 +21,6 @@ class ScheduleDateAdapter(private val context : Context) : RecyclerView.Adapter<
         holder.bind(dateDatas[position])
 
         val scheduleItemDataList : MutableList<ScheduleItemData> = arrayListOf()
-        var nowDay = nowDay()
 
             scheduleItemDataList.add(
                 ScheduleItemData(
