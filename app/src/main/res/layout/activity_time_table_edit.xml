@@ -4,56 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".timetable.TimeTableEdit">
+    tools:context=".timetable.TimeTableEdit"
+    android:background="@drawable/main_img_bg_under">
+
+    <ImageView
+        android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@+id/btn_direct"
+        app:layout_constraintBottom_toBottomOf="@id/btn_direct"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+    
+    <Button
+        android:id="@+id/btn_tableplus"
+        app:layout_constraintTop_toTopOf="@id/btn_direct"
+        app:layout_constraintBottom_toBottomOf="@id/btn_direct"
+        app:layout_constraintRight_toLeftOf="@+id/btn_direct"
+        android:text="시간표추가"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 
-    <ScrollView
+    <Button
+        android:id="@+id/btn_direct"
+        android:text="직접추가"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        app:layout_constraintTop_toBottomOf="@id/btn_direct"
+        android:id="@+id/vp_timetableadd"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:id="@+id/layout_scrolltimetable"
-        android:paddingLeft="7dp"
-        android:paddingRight="11dp"
-        android:paddingTop="12dp"
-        android:layout_margin="15dp">
+        android:layout_height="324dp"
+        android:layout_margin="16dp"
+        android:paddingRight="12dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="11dp"
+        android:paddingBottom="10dp"
+        android:background="@drawable/bg_round_border"/>
 
-        <FrameLayout
-            android:id="@+id/layout_timetable"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_round_border"
-            android:descendantFocusability="blocksDescendants">
-
-            <LinearLayout
-                android:id="@+id/timetable_grid"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical" />
-
-            <LinearLayout
-                android:id="@+id/timetable_root"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal" />
-
-        </FrameLayout>
-
-    </ScrollView>
-
+    <com.google.android.material.tabs.TabLayout
+        app:layout_constraintLeft_toLeftOf="@id/vp_timetableadd"
+        app:layout_constraintRight_toRightOf="@id/vp_timetableadd"
+        android:id="@+id/tl_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:layout_marginBottom="11dp"
+        app:layout_constraintBottom_toBottomOf="@id/vp_timetableadd"
+        app:tabBackground="@drawable/selector_timetable"
+        app:tabGravity="center"
+        app:tabIndicatorHeight="0dp" />
 
     <LinearLayout
         android:id="@+id/layout_editor"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/layout_scrolltimetable"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/bg_round_border"
+        app:layout_constraintTop_toBottomOf="@+id/vp_timetableadd"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_timetableeditor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_timetableeditor"

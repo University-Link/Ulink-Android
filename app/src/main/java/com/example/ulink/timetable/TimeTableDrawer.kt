@@ -18,7 +18,6 @@ import com.example.ulink.repository.TimeTable
 import java.text.SimpleDateFormat
 import java.util.*
 
-const val MIN_CELL_HEIGHT = 60.0f
 
 class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) {
 
@@ -28,34 +27,65 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 
     constructor(context: Context, layoutInflater: LayoutInflater, timeTable: TimeTable) : this(context, layoutInflater) {
         this.timeTable = timeTable
-
     }
 
     constructor(context: Context, layoutInflater: LayoutInflater, onClick: TimeTableFragment.subjectOnClick, timeTable: TimeTable) : this(context, layoutInflater, onClick) {
         this.timeTable = timeTable
     }
 
-    lateinit var onClick: TimeTableFragment.subjectOnClick
+    var onClick: TimeTableFragment.subjectOnClick? = null
 
     val subjectList: MutableList<Subject> = mutableListOf()
     var timeTable = TimeTable(0, "", "", subjectList, false, "", "")
 
-    var endhour = 18
+    var endhour = 21
     var starthour = 9
 
     var timecolumnwidth = 0.0f
     var dayheight = 0.0f
     var columnwidth = 0.0f
     var rowheight = 0.0f
+    var minHeight = 60.0f
 
 
     fun draw(frameLayout: FrameLayout) {
         val root = frameLayout.findViewById<LinearLayout>(R.id.timetable_root)
 
+        val rowroot = (frameLayout.parent.parent as LinearLayout).findViewById<LinearLayout>(R.id.layout_dayrow)
+
         root.removeAllViews()
+        rowroot.removeAllViews()
+
+        drawDayRow(rowroot)
         drawHorizontalLine(root)
         drawTimeColumn(root)
         drawColums(root)
+    }
+
+    fun drawDayRow(linearLayout: LinearLayout){
+        val dayOfWeek = 5
+        val daylist = arrayListOf("월", "화", "수", "목", "금", "토", "일")
+
+        val index = layoutInflater.inflate(R.layout.cell_top_left_index,linearLayout,false)
+        linearLayout.addView(index)
+
+        for (i in 0 until dayOfWeek) {
+            val day = layoutInflater.inflate(R.layout.cell_day, linearLayout,false) as TextView
+            day.text = daylist[i]
+            day.setBackgroundResource(R.drawable.bottom_line)
+
+            linearLayout.addView(day)
+
+            val mGlobalListner2 = ViewTreeObserver.OnGlobalLayoutListener {
+                if (day.measuredHeight > 0.0) {
+                    dayheight = day.measuredHeight.toFloat()
+                }
+            }
+            day.viewTreeObserver.addOnGlobalLayoutListener(mGlobalListner2)
+        }
+
+
+
     }
 
     fun drawHorizontalLine(linearLayout: LinearLayout) {
@@ -112,9 +142,6 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
         val simpleDateFormat = SimpleDateFormat("h")
         val instance = Calendar.getInstance()
 
-        timecolumn.findViewById<TextView>(R.id.tv_header)
-                .setBackgroundResource(R.drawable.text_line_bottom_timecolumn)
-
 //      TODO 여기 바꾸기!!!!
 
         for (i in starthour..endhour) {
@@ -122,7 +149,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
                     layoutInflater.inflate(R.layout.cell_timeindex, timecolumn, false) as TextView
 
             timeColumnEa.minHeight =
-                    TypedValue.applyDimension(1, MIN_CELL_HEIGHT, context.resources.displayMetrics)
+                    TypedValue.applyDimension(1, minHeight, context.resources.displayMetrics)
                             .toInt()
             instance.set(Calendar.HOUR_OF_DAY, i)
 
@@ -150,7 +177,6 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
         drawVerticalLine(linearLayout)
 
         for (i in 0 until dayOfWeek) {
-
 //          맨위에 월화수목금
             val dayRow =
                     layoutInflater.inflate(R.layout.day_column, linearLayout, false) as FrameLayout
@@ -165,18 +191,6 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
                 }
             }
             linearlayoutfor.viewTreeObserver.addOnGlobalLayoutListener(mGlobalListner)
-
-            val daylist = arrayListOf("월", "화", "수", "목", "금", "토", "일")
-            val day = linearlayoutfor.findViewById<TextView>(R.id.tv_header)
-            day.text = daylist[i]
-            day.setBackgroundResource(R.drawable.bottom_line)
-
-            val mGlobalListner2 = ViewTreeObserver.OnGlobalLayoutListener {
-                if (day.measuredHeight > 0.0) {
-                    dayheight = day.measuredHeight.toFloat()
-                }
-            }
-            day.viewTreeObserver.addOnGlobalLayoutListener(mGlobalListner2)
 
             drawColumn(linearlayoutfor, i)
 
@@ -332,11 +346,37 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 
 //        TODO 여기 온클릭
         celllayout.setOnClickListener {
-            onClick.onClick(subject)
+            onClick?.onClick(subject)
         }
+
         linearLayout.addView(celllayout)
         devideSubjects(linearLayout)
     }
+
+//    fun DrawPreviewSubject(subject: Subject){
+//        devideSubjects(linearLayout)
+////        cell = 0일때 오류
+//        val celllayout = layoutInflater.inflate(R.layout.cell_subject, linearLayout, false) as LinearLayout
+//        celllayout.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
+//                4*(formatToFloat(subject.endtime) - formatToFloat(subject.starttime)) - 0.5f)
+//
+////        TODO 여기서 color를 int값에 따라 골라서 넣어주기!!
+//        celllayout.setBackgroundResource(R.drawable.bg_round_border_subject)
+//        celllayout.findViewById<TextView>(R.id.tv_cell_subject).text = subject.name
+//        celllayout.findViewById<TextView>(R.id.tv_cell_custom).apply {
+//            text = subject.place
+//        }
+//
+////        TODO 여기 온클릭
+//        celllayout.setOnClickListener {
+//            onClick?.onClick(subject)
+//        }
+//
+//        linearLayout.addView(celllayout)
+//        devideSubjects(linearLayout)
+//
+//
+//    }
 
     fun drawVerticalLine(linearLayout: LinearLayout) {
 
