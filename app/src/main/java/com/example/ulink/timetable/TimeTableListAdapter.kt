@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.R
 import com.example.ulink.repository.TimeTable
+import com.example.ulink.repository.Subject
 
 class TimeTableListAdapter() : RecyclerView.Adapter<TimeTableListAdapter.VHolder>() {
 

@@ -1,16 +1,21 @@
 package com.example.ulink.fragment
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.ulink.CalendarRecycler.*
+import com.example.ulink.ChattingActivity
+import com.example.ulink.ClassRecycler.ClassAdapter
 import com.example.ulink.R
 import com.example.ulink.ScheduleActivity
+import kotlinx.android.synthetic.main.calendar_popup_layout.*
 import kotlinx.android.synthetic.main.fragment_calendar.*
-import kotlinx.android.synthetic.main.fragment_class.*
 
 class CalendarFragment : Fragment() {
     override fun onCreateView(
@@ -26,24 +31,24 @@ class CalendarFragment : Fragment() {
 
         btn_today.text = nowDay().toString()
 
-        var now_CalendarData = calendarDataInit(tv_month) // now_month
+        var nowCalendarData = calendarDataInit(tv_month) // now_month
 
         calendar_viewPager.setUserInputEnabled(false)
-        calendar_viewPager.adapter = CalendarAdapter(view.context, now_CalendarData)
+        calendar_viewPager.adapter = CalendarAdapter(view.context, nowCalendarData)
 
         btn_left_month.setOnClickListener(){
-            now_CalendarData = calendarPrevMonth(tv_month, now_CalendarData.month, now_CalendarData.year) // prev_month
-            calendar_viewPager.adapter = CalendarAdapter(view.context, now_CalendarData)
+            nowCalendarData = calendarPrevMonth(tv_month, nowCalendarData.month, nowCalendarData.year) // prev_month
+            calendar_viewPager.adapter = CalendarAdapter(view.context, nowCalendarData)
         }
 
         btn_right_month.setOnClickListener() {
-            now_CalendarData = calendarNextMonth(tv_month, now_CalendarData.month, now_CalendarData.year) // next_month
-            calendar_viewPager.adapter = CalendarAdapter(view.context, now_CalendarData)
+            nowCalendarData = calendarNextMonth(tv_month, nowCalendarData.month, nowCalendarData.year) // next_month
+            calendar_viewPager.adapter = CalendarAdapter(view.context, nowCalendarData)
         }
 
         btn_today.setOnClickListener() {
-            now_CalendarData = calendarDataInit(tv_month) // today
-            calendar_viewPager.adapter = CalendarAdapter(view.context, now_CalendarData)
+            nowCalendarData = calendarDataInit(tv_month) // today
+            calendar_viewPager.adapter = CalendarAdapter(view.context, nowCalendarData)
         }
 
         btn_schedule.setOnClickListener(){

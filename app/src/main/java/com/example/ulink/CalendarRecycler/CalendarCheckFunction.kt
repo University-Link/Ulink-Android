@@ -1,9 +1,13 @@
 package com.example.ulink.CalendarRecycler
 
+import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat.getSystemService
 import com.example.ulink.R
 import java.util.*
 
@@ -37,18 +41,18 @@ fun calendarDayColorCheck(dayData: CalendarDayData, itemView : View) {
 
     day.text = dayData.day
 
-    val sundayColor = R.color.mainButton
-    val monthColor = R.color.text1
+    val sundayColor = "#674FEE"
+    val monthColor = "#363636"
     //var otherColor = "#888888"
-    val todayColor = R.color.white
+    val todayColor = "#ffffff"
 
-    if(dayData.check) day.setTextColor(Color.parseColor(monthColor.toString())) // now_month
+    if(dayData.check) day.setTextColor(Color.parseColor(monthColor)) // now_month
     //else day.setTextColor(Color.parseColor(otherColor)) // prev, next month
-    if(dayData.date % 7 == 0 && dayData.check) day.setTextColor(Color.parseColor(sundayColor.toString())) //sunday
+    if(dayData.date % 7 == 0 && dayData.check) day.setTextColor(Color.parseColor(sundayColor)) //sunday
     if(dayData.today)
     {
         day.setBackgroundResource(R.drawable.calendar_img_bg_today)
-        day.setTextColor(Color.parseColor(todayColor.toString()))
+        day.setTextColor(Color.parseColor(todayColor))
     }
 }
 
