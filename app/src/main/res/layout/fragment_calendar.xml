@@ -9,6 +9,7 @@
     tools:context=".fragment.CalendarFragment">
 
 
+<!--    여기다가 패딩주면 뷰 이상해짐!!-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:paddingTop="11dp"
         android:paddingHorizontal="12dp"
@@ -50,22 +51,25 @@
 
 
         <Button
-            android:id="@+id/btn_plus"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:id="@+id/btn_schedule"
+            android:layout_width="57dp"
+            android:layout_height="32dp"
             android:layout_marginTop="11dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/calendar_btn_plus"
-            app:layout_constraintEnd_toStartOf="@+id/btn_setting"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginLeft="23dp"
+            android:background="@drawable/calendar_btn_todo"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <Button
-            android:id="@+id/btn_setting"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:id="@+id/btn_today"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginTop="11dp"
+            android:paddingTop="4dp"
             android:layout_marginRight="27dp"
-            android:background="@drawable/calendar_btn_setting"
+            android:textSize="8sp"
+            android:textColor="@color/main"
+            android:background="@drawable/calendar_ic_today"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -76,6 +80,7 @@
             android:paddingHorizontal="10dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
+            android:weightSum="7"
             app:layout_constraintTop_toBottomOf="@id/calendar_header"
             app:layout_constraintStart_toStartOf="@id/calendar_header"
             app:layout_constraintEnd_toEndOf="@id/calendar_header"
@@ -89,8 +94,7 @@
                 android:text="일"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:paddingBottom="5dp"
-                android:background="@drawable/calendar_item_background_under"/>
+                android:paddingBottom="5dp"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -99,8 +103,7 @@
                 android:text="월"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:paddingBottom="5dp"
-                android:background="@drawable/calendar_item_background_under"/>
+                android:paddingBottom="5dp" />
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -109,8 +112,7 @@
                 android:text="화"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:paddingBottom="5dp"
-                android:background="@drawable/calendar_item_background_under"/>
+                android:paddingBottom="5dp"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -119,8 +121,7 @@
                 android:text="수"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:paddingBottom="5dp"
-                android:background="@drawable/calendar_item_background_under"/>
+                android:paddingBottom="5dp"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -129,8 +130,7 @@
                 android:text="목"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:paddingBottom="5dp"
-                android:background="@drawable/calendar_item_background_under"/>
+                android:paddingBottom="5dp"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -139,8 +139,7 @@
                 android:text="금"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:paddingBottom="5dp"
-                android:background="@drawable/calendar_item_background_under"/>
+                android:paddingBottom="5dp"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -149,8 +148,7 @@
                 android:text="토"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:paddingBottom="5dp"
-                android:background="@drawable/calendar_item_background_under"/>
+                android:paddingBottom="5dp"/>
         </LinearLayout>
 
         <androidx.viewpager2.widget.ViewPager2

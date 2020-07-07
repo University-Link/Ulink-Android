@@ -66,15 +66,16 @@
         android:id="@+id/schedule4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="소설과영화"
         android:background="@color/colorAccent"
         android:textColor="@color/white"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_marginTop="3dp"
+        android:text="유링크"
         android:textSize="10sp"
         android:paddingHorizontal="3dp"
-        android:singleLine="true"/>
+        android:singleLine="true"
+        android:visibility="invisible"/>
 
 
     <TextView

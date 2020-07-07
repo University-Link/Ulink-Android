@@ -14,6 +14,10 @@ var now_day = cal.get(Calendar.DATE)
 var now_month = cal.get(Calendar.MONTH)+1
 var now_year = cal.get(Calendar.YEAR)
 
+fun nowDay() : Int {
+    return now_day
+}
+
 fun calendarTodayCheck(i : Int, data : CalendarData) : Boolean { //today
     return (i == now_day && data.month == now_month && data.year == now_year)
 }
@@ -66,14 +70,8 @@ fun calendarAlpha(dayData: CalendarDayData, itemView : View){
     } // prev, next month
 }
 
-fun calendarBordar(dayData : CalendarDayData, itemView : View) {
-    val rvitemlayout : LinearLayout = itemView.findViewById(R.id.rv_item_layout)
-    if(dayData.date in 0..6)
-        rvitemlayout.setBackgroundResource(0)
-
-}
 fun calendarDataInit(tv_month : TextView) : CalendarData {
-    tv_month.setText(now_month.toString()+"월")
+    tv_month.setText(now_year.toString()+"년 "+now_month.toString()+"월")
     return CalendarData(now_year, now_month)
 }
 
@@ -86,7 +84,7 @@ fun calendarPrevMonth(tv_month : TextView, data_month : Int, data_year : Int) : 
         year -= 1
     }
 
-    tv_month.setText(month.toString()+"월")
+    tv_month.setText(year.toString()+"년 "+month.toString()+"월")
     return CalendarData(year, month)
 }
 
@@ -99,7 +97,7 @@ fun calendarNextMonth(tv_month : TextView, data_month : Int, data_year : Int) : 
         year += 1
     }
 
-    tv_month.setText(month.toString()+"월")
+    tv_month.setText(year.toString()+"년 "+month.toString()+"월")
     return CalendarData(year, month)
 }
 

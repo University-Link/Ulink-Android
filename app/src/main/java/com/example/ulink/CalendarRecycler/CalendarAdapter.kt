@@ -47,9 +47,6 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
             var last_empty = index + lastindex
             var last_empty_index = 1
 
-            //firstLine
-            var firstLine = 0
-
             rvAdapter.datas.apply {
 
                 //previous_month

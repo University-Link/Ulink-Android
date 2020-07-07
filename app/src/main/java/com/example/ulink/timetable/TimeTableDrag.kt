@@ -134,6 +134,7 @@ class TimeTableDrag(context: Context, root: View, val timecolumnWidth: Float?, v
 //        TODO 여기 버전에 따라서 다르게 구성!! 이게 오레오 이상
         (context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator).vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE))
 
+
         realstartx = e?.x!!
         realstarty = e.y
         pointx = e.x
