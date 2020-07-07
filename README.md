@@ -60,6 +60,7 @@
                 app:layout_constraintEnd_toEndOf="@id/day_header">
     </androidx.viewpager2.widget.ViewPager2>
     ~~~
+    
 
 <img width="308" alt="스크린샷 2020-07-07 오후 11 20 51" src="https://user-images.githubusercontent.com/53978090/86795452-8b294d80-c0a8-11ea-8f91-cfcf7989d36c.png">
 
