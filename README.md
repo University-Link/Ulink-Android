@@ -1,6 +1,6 @@
 # Ulink-Andorid
 
-## :computer: :information_desk_person: ULink Android 개발자들 :fire:
+## :computer: :information_desk_person: Ulink Android 개발자들 :fire:
 
 - [김영민](https://github.com/kym1924)
 - [박규희](https://github.com/gch0925)
