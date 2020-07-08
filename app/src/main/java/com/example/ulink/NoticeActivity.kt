@@ -16,7 +16,7 @@ import com.example.ulink.TaskNoticeRecycler.TaskNoticeData
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_chatting.*
 import kotlinx.android.synthetic.main.activity_notice.*
-import kotlinx.android.synthetic.main.toolbar_notice.*
+import kotlinx.android.synthetic.main.toolbar_classnotice.*
 
 class NoticeActivity : AppCompatActivity(){
     lateinit var TestNoticeAdapter : TestNoticeAdapter
