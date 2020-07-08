@@ -5,8 +5,6 @@ data class TestNoticeData (
     val EndDate : Int,
     val NoticeName : String,
     val StartTime : String,
-    val EndTime : String,
-    val StartTask : String,
-    val EndTask : String
+    val EndTime : String
 
 )

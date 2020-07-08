@@ -1,5 +1,6 @@
 package com.example.ulink
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,7 +13,10 @@ import com.example.ulink.TestNoticeRecycler.TestNoticeAdapter
 import com.example.ulink.TestNoticeRecycler.TestNoticeData
 import com.example.ulink.TaskNoticeRecycler.TaskNoticeAdapter
 import com.example.ulink.TaskNoticeRecycler.TaskNoticeData
+import com.google.android.material.navigation.NavigationView
+import kotlinx.android.synthetic.main.activity_chatting.*
 import kotlinx.android.synthetic.main.activity_notice.*
+import kotlinx.android.synthetic.main.toolbar_notice.*
 
 class NoticeActivity : AppCompatActivity(){
     lateinit var TestNoticeAdapter : TestNoticeAdapter
@@ -36,12 +40,15 @@ class NoticeActivity : AppCompatActivity(){
         rv_test_notice.adapter = TestNoticeAdapter
         rv_task_notice.adapter = TaskNoticeAdapter
         rv_class_notice.adapter = ClassNoticeAdapter
-        rv_experiment_notice.adapter = ExperimentNoticeAdapter
+
+        btn_home.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
 
         loadDatas()
         loadDatas1()
         loadDatas2()
-        loadDatas3()
 
         if(datas.isEmpty()){
             Log.d("datas상태",datas.isEmpty().toString())
@@ -68,14 +75,7 @@ class NoticeActivity : AppCompatActivity(){
             class_notice_nothing.visibility = View.INVISIBLE
             rv_class_notice.visibility=View.VISIBLE
         }
-        if(datas3.isEmpty()){
-            Log.d("datas3상태",datas3.isEmpty().toString())
-            experiment_notice_nothing.visibility = View.VISIBLE
-            rv_experiment_notice.visibility=View.INVISIBLE
-        }else{
-            experiment_notice_nothing.visibility = View.INVISIBLE
-            rv_experiment_notice.visibility=View.VISIBLE
-        }
+
     }
 
     private fun loadDatas() {
@@ -86,9 +86,8 @@ class NoticeActivity : AppCompatActivity(){
                     EndDate = 13,
                     NoticeName = "중간고사",
                     StartTime = "13:00",
-                    EndTime = "14:00",
-                    StartTask = "1장",
-                    EndTask = "7장"
+                    EndTime = "14:00"
+
 
                 )
             )
@@ -98,9 +97,8 @@ class NoticeActivity : AppCompatActivity(){
                     EndDate = 13,
                     NoticeName = "중간고사",
                     StartTime = "13:00",
-                    EndTime = "14:00",
-                    StartTask = "1장",
-                    EndTask = "7장"
+                    EndTime = "14:00"
+
 
                 )
             )
@@ -110,9 +108,8 @@ class NoticeActivity : AppCompatActivity(){
                     EndDate = 13,
                     NoticeName = "중간고사",
                     StartTime = "13:00",
-                    EndTime = "14:00",
-                    StartTask = "1장",
-                    EndTask = "7장"
+                    EndTime = "14:00"
+
 
                 )
             )
@@ -122,9 +119,7 @@ class NoticeActivity : AppCompatActivity(){
                     EndDate = 13,
                     NoticeName = "중간고사",
                     StartTime = "13:00",
-                    EndTime = "14:00",
-                    StartTask = "1장",
-                    EndTask = "7장"
+                    EndTime = "14:00"
 
                 )
             )
@@ -134,9 +129,7 @@ class NoticeActivity : AppCompatActivity(){
                     EndDate = 13,
                     NoticeName = "중간고사",
                     StartTime = "13:00",
-                    EndTime = "14:00",
-                    StartTask = "1장",
-                    EndTask = "7장"
+                    EndTime = "14:00"
 
                 )
             )
@@ -201,19 +194,6 @@ class NoticeActivity : AppCompatActivity(){
         ClassNoticeAdapter.datas = datas2
         ClassNoticeAdapter.notifyDataSetChanged()
     }
-    private fun loadDatas3() {
-        datas3.apply {
-//            add(
-//                ClassNoticeData(
-//                    StartDate = 5,
-//                    EndDate = 4,
-//                    ClassName = "휴강",
-//                    Class="교수님의 개인사정으로 휴강합니다."
-//                )
-//            )
 
-        }
-        ExperimentNoticeAdapter.datas = datas3
-        ExperimentNoticeAdapter.notifyDataSetChanged()
-    }
+
 }

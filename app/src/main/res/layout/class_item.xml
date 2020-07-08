@@ -8,12 +8,11 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_class"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
+        android:layout_width="39dp"
+        android:layout_height="38dp"
+        android:layout_marginLeft="17dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/ic_launcher_foreground"
+        android:src="@drawable/class_img_subject"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,31 +20,38 @@
         android:id="@+id/tv_classname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginLeft="26dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="68dp"
         android:text="전자기학"
-        app:layout_constraintStart_toEndOf="@+id/img_class"
+        android:textColor="#363636"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_partition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginLeft="36dp"
         android:text="참여 (17/20)"
-        app:layout_constraintStart_toEndOf="@+id/img_class"
-        app:layout_constraintTop_toBottomOf="@+id/tv_classname" />
+        android:textColor="#9b9b9b"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="6"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="40dp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:paddingHorizontal="5dp"
+        android:text="99+"
+        android:background="@drawable/red_circle_for_chatting_count"
+        android:layout_marginTop="27dp"
+        android:layout_marginRight="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="2px"
         android:layout_marginHorizontal="10dp"
-        android:background="#4682B4"
+        android:background="#c1e6e6e6"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
