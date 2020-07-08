@@ -19,9 +19,11 @@ class TimeTableInnerListAdapter(mutableList: MutableList<TimeTable>) : RecyclerV
 
     fun arrangeList(list : MutableList<TimeTable>) : MutableList<TimeTable>{
         for (i in 0 until list.size){
-            if (list[i].isMain){
-                list.add(0,list[i])
-                list.removeAt(i+1)
+            list[i].isMain?.let {
+                if (it){
+                    list.add(0,list[i])
+                    list.removeAt(i+1)
+                }
             }
         }
         return list
@@ -32,11 +34,14 @@ class TimeTableInnerListAdapter(mutableList: MutableList<TimeTable>) : RecyclerV
 
         fun setHolder(timeTable: TimeTable) {
             itemView.findViewById<TextView>(R.id.tv_timetablename).text = timeTable.name
-            if (timeTable.isMain){
-                itemView.findViewById<TextView>(R.id.tv_main).visibility = View.VISIBLE
-            }
-        }
 
+            timeTable.isMain?.let {
+                if (it){
+                    itemView.findViewById<TextView>(R.id.tv_main).visibility = View.VISIBLE
+                }
+            }
+
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VHolder {

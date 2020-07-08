@@ -16,7 +16,7 @@
             android:name=".ui.login.NotificationActivity"
             android:label="@string/title_activity_notification" />
         <activity android:name=".ScheduleActivity" />
-        <activity android:name=".timetable.TimeTableEdit" />
+        <activity android:name=".timetable.TimeTableEditActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

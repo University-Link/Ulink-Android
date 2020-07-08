@@ -5,24 +5,18 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.util.Log
-import android.util.TypedValue
 import android.view.*
 import android.widget.*
 import androidx.fragment.app.Fragment
-import com.example.ulink.MainActivity
 import com.example.ulink.NotificationActivity
 import com.example.ulink.R
 import com.example.ulink.repository.Subject
 import com.example.ulink.repository.TimeTable
 import com.example.ulink.timetable.BottomSheetFragment
 import com.example.ulink.timetable.TimeTableDrawer
-import com.example.ulink.timetable.TimeTableEdit
+import com.example.ulink.timetable.TimeTableEditActivity
 import com.example.ulink.timetable.TimeTableListActivity
 import kotlinx.android.synthetic.main.fragment_time_table.*
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -52,7 +46,9 @@ class TimeTableFragment : Fragment() {
         subjectList.add(Subject(2,"과목이름","14:00","16:00","mon","과목장소",1,true))
         subjectList.add(Subject(3,"과목이름","11:00","13:00","tue","과목장소",1,true))
         subjectList.add(Subject(4,"과목이름","14:00","16:00","wed","과목장소",1,true))
+
         val timeTable = TimeTable(1,"2020-1","시간표이름",subjectList,true,"09:00","16:00")
+        val timeTable2 = TimeTable(2,"2020-2","시간표이름2",subjectList,true,"09:00","16:00")
 
 
         val onClick = object : subjectOnClick {
@@ -87,9 +83,10 @@ class TimeTableFragment : Fragment() {
 
         btn_plus.setOnClickListener {
 
-            val intent = Intent(context, TimeTableEdit::class.java)
+            val intent = Intent(context, TimeTableEditActivity::class.java)
             val list: ArrayList<TimeTable> = arrayListOf()
             list.add(timeTable)
+            list.add(timeTable2)
             intent.putParcelableArrayListExtra("timeTableList",list)
             startActivity(intent)
 
@@ -100,6 +97,10 @@ class TimeTableFragment : Fragment() {
         }
 
         btn_list.setOnClickListener {
+//          TODO
+//           intent로 받아올 필요있나? 걍 서버에서 계속 받아오자
+//           clean architecture이용 local도 파야겠네
+//            시간표 작성시 -> local, remote저장, cache invalidate'
             startActivity(Intent(context, TimeTableListActivity::class.java))
         }
 
