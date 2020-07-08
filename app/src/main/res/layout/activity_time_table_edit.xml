@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".timetable.TimeTableEdit"
+    tools:context=".timetable.TimeTableEditActivity"
     android:background="@drawable/main_img_bg_under">
 
     <ImageView
@@ -72,7 +72,8 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_timetableeditor"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            app:tabIndicatorColor="#674FEE"/>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_timetableeditor"

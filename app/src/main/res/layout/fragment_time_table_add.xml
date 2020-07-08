@@ -4,19 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".timetable.TimeTableAddFragment">
-
-    <ImageView
-        android:id="@+id/ic_plus"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimaryDark"/>
-
 <!--    여기는 matchparent해줘야함-->
+
     <LinearLayout
         android:id="@+id/layout_timetablewhole"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_tablename"
+            android:layout_marginBottom="5dp"
+            android:layout_gravity="center_horizontal"/>
 
         <LinearLayout
             android:id="@+id/layout_dayrow"
