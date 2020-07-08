@@ -7,22 +7,25 @@
     android:gravity="bottom"
     android:orientation="vertical"
     android:background="#fff">
+
     <TextView
         android:id="@+id/classname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="전자기학"
-        android:textSize="24sp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="13dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginLeft="20dp"
-        />
+        android:text="전자기학"
+        android:textSize="17sp" />
     <View
         android:id="@+id/view"
         android:layout_below="@+id/classname"
         android:layout_width="match_parent"
         android:layout_height="2px"
         android:layout_marginHorizontal="10dp"
-        android:background="#4682B4"
+        android:background="#e6e6e6"
         android:layout_marginBottom="20dp"
      />
 
