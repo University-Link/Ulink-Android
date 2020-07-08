@@ -11,21 +11,23 @@
 
     <TextView
         android:id="@+id/tv_date"
-        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="5/13"
-        android:layout_marginLeft="20dp"
+        android:textSize="15sp"
+        android:textColor="#363636"
+        android:layout_marginLeft="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_test_name"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
+        android:layout_width="57dp"
+        android:layout_height="27dp"
+        android:layout_marginLeft="2dp"
         android:text="중간고사"
+        android:textColor="#363636"
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/tv_date"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,44 +35,23 @@
         android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:textSize="12sp"
+        android:textColor="#5c5c5c"
         android:text="13:00 ~ 14:00"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_date" />
 
-    <TextView
-        android:id="@+id/범위"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="30dp"
-        android:text="시험범위"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/tv_time"
-        app:layout_constraintTop_toTopOf="@+id/tv_date" />
-
-    <TextView
-        android:id="@+id/tv_test_range"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="10dp"
-        android:text="1장~7장"
-        app:layout_constraintStart_toEndOf="@+id/범위"
-        app:layout_constraintTop_toBottomOf="@+id/tv_test_name" />
 
     <ImageButton
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:src="@drawable/right"
-        android:background="#ffffff"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="304dp"
+        android:layout_marginRight="18dp"
+        android:background="#fff5fd"
+        android:src="@drawable/chatnotice_btn_more"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

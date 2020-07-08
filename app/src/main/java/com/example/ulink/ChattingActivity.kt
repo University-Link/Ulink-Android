@@ -22,10 +22,26 @@ class ChattingActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
         }
         nav_view.setNavigationItemSelectedListener(this) //navigation 리스너
 
+        tv_back.setOnClickListener{
+            CloseDrawerLayout(drawer_layout_main,nav_view as NavigationView)
+        }
 
+        btn_back.setOnClickListener {
+            finish()
+        }
     }
     private fun setDrawerLayout(drawerLayout: DrawerLayout, navigationView: NavigationView){
         drawerLayout.openDrawer(Gravity.RIGHT)
+        drawerLayout.let {
+            //왼쪽
+            if (it.isDrawerOpen(GravityCompat.END)) {
+                it.closeDrawer(GravityCompat.END)
+            }
+        }
+    }
+
+    private fun CloseDrawerLayout(drawerLayout: DrawerLayout, navigationView: NavigationView){
+        drawerLayout.closeDrawer(Gravity.RIGHT)
         drawerLayout.let {
             //왼쪽
             if (it.isDrawerOpen(GravityCompat.END)) {

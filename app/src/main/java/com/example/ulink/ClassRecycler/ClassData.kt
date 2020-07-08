@@ -5,5 +5,5 @@ data class ClassData(
     val ClassName : String,
     val now : Int,
     val total : Int,
-    val count : Int
+    val count : String
 )

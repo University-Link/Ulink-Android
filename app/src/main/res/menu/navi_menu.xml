@@ -5,28 +5,28 @@
 
         <item
             android:id="@+id/notice"
-            android:icon="@drawable/ic_launcher_foreground"
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:icon="@drawable/chatting_ic_notification"
+            android:textSize="13sp"
             android:title="수업공지"
 
             />
 
     <item
             android:id="@+id/QnA"
-            android:icon="@drawable/ic_launcher_foreground"
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:textSize="13sp"
+            android:icon="@drawable/chatting_ic_qna"
             android:title="Q\u0026A공간"
             />
         <item
             android:id="@+id/picture"
-            android:icon="@drawable/ic_launcher_foreground"
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:textSize="13sp"
+            android:icon="@drawable/chatting_ic_gallery"
             android:title="사진, 동영상"
             />
         <item
             android:id="@+id/logout"
-            android:icon="@drawable/ic_launcher_foreground"
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:textSize="13sp"
+            android:icon="@drawable/chatting_btn_file"
             android:title="파일"
             />
     </group>

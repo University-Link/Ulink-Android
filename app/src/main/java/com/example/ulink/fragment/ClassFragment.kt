@@ -48,7 +48,7 @@ class ClassFragment : Fragment() {
                     ClassName = "전자기학1",
                     now = 17,
                     total = 20,
-                    count = 6
+                    count = "6"
                 )
             )
             add(
@@ -57,7 +57,7 @@ class ClassFragment : Fragment() {
                     ClassName = "전자기학1",
                     now = 17,
                     total = 20,
-                    count = 6
+                    count = "66"
                 )
             )
             add(
@@ -66,7 +66,7 @@ class ClassFragment : Fragment() {
                     ClassName = "전자기학1",
                     now = 17,
                     total = 20,
-                    count = 6
+                    count = "99+"
                 )
             )
             add(
@@ -75,7 +75,7 @@ class ClassFragment : Fragment() {
                     ClassName = "전자기학1",
                     now = 17,
                     total = 20,
-                    count = 6
+                    count = "6"
                 )
             )
             add(
@@ -84,7 +84,7 @@ class ClassFragment : Fragment() {
                     ClassName = "전자기학1",
                     now = 17,
                     total = 20,
-                    count = 6
+                    count = "6"
                 )
             )
             add(
@@ -93,7 +93,7 @@ class ClassFragment : Fragment() {
                     ClassName = "전자기학1",
                     now = 17,
                     total = 20,
-                    count = 6
+                    count = "6"
                 )
             )
             add(
@@ -102,7 +102,7 @@ class ClassFragment : Fragment() {
                     ClassName = "전자기학1",
                     now = 17,
                     total = 20,
-                    count = 6
+                    count = "6"
                 )
             )
             add(
@@ -111,7 +111,7 @@ class ClassFragment : Fragment() {
                     ClassName = "전자기학1",
                     now = 17,
                     total = 20,
-                    count = 6
+                    count = "6"
                 )
             )
             add(
@@ -120,7 +120,7 @@ class ClassFragment : Fragment() {
                     ClassName = "전자기학1",
                     now = 17,
                     total = 20,
-                    count = 6
+                    count = "6"
                 )
             )
             add(
@@ -129,7 +129,7 @@ class ClassFragment : Fragment() {
                     ClassName = "전자기학1",
                     now = 17,
                     total = 20,
-                    count = 6
+                    count = "6"
                 )
             )
 
