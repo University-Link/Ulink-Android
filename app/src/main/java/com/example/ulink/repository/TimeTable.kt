@@ -1,10 +1,13 @@
 package com.example.ulink.repository
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "TimeTable")
+@Parcelize
 class TimeTable (
     @PrimaryKey
     var id : Long,
@@ -21,4 +24,4 @@ class TimeTable (
     var startTime : String,
     @ColumnInfo(name = "endTime")
     var endTime : String
-)
+) : Parcelable

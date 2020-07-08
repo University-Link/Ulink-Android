@@ -1,9 +1,13 @@
 package com.example.ulink.CalendarRecycler
 
+import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat.getSystemService
 import com.example.ulink.R
 import java.util.*
 
@@ -37,8 +41,8 @@ fun calendarDayColorCheck(dayData: CalendarDayData, itemView : View) {
 
     day.text = dayData.day
 
-    val sundayColor = "#5F5DE9"
-    val monthColor = "#000000"
+    val sundayColor = "#674FEE"
+    val monthColor = "#363636"
     //var otherColor = "#888888"
     val todayColor = "#ffffff"
 

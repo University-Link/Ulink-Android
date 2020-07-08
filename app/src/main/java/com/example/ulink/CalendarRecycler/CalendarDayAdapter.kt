@@ -2,12 +2,25 @@ package com.example.ulink.CalendarRecycler
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.R
 
-class CalendarDayAdapter(private val context : Context) : RecyclerView.Adapter<CalendarViewHolder>(){
+class CalendarDayAdapter(private val context : Context) : RecyclerView.Adapter<CalendarViewHolder>() {
     var datas = mutableListOf<CalendarDayData>()
+
+
+    private lateinit var dayClickListener : DayClickListener
+
+    interface DayClickListener {
+        fun onClick(view: View, position:Int)
+    }
+
+    fun setDayClickListener(dayClickListener : DayClickListener){
+        this.dayClickListener = dayClickListener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.calendar_item,parent,false)
         return CalendarViewHolder(view)
@@ -19,5 +32,6 @@ class CalendarDayAdapter(private val context : Context) : RecyclerView.Adapter<C
 
     override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) {
         holder.bind(datas[position])
+        holder.itemView.setOnClickListener{ dayClickListener.onClick(it,position)}
     }
 }

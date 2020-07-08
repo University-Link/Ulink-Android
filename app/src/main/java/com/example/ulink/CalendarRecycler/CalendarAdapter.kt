@@ -1,6 +1,8 @@
 package com.example.ulink.CalendarRecycler
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.*
 
 
-class CalendarAdapter(private val context : Context, data : CalendarData) : RecyclerView.Adapter<CalendarAdapter.Vholder>() {
+class CalendarAdapter(private val context : Context, data : CalendarData) : RecyclerView.Adapter<CalendarAdapter.Vholder>(){
     var data: CalendarData = data
     var endDay = arrayOf(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
 
@@ -19,7 +21,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
     }
 
     override fun getItemCount(): Int {
-        return 3
+        return 1
     }
 
     override fun onBindViewHolder(holder: Vholder, position: Int) {
@@ -29,9 +31,27 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
     inner class Vholder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(data: CalendarData) {
+
             val rv_calendar = itemView as RecyclerView
             val rvAdapter = CalendarDayAdapter(context)
+
+            rvAdapter.setDayClickListener(object: CalendarDayAdapter.DayClickListener{
+                override fun onClick(view:View, position:Int){
+
+                    val builder = android.app.AlertDialog.Builder(context)
+                    val layout = LayoutInflater.from(context).inflate(R.layout.calendar_popup_layout, null)
+
+                    builder.setView(layout)
+
+                    val dialog = builder.create()
+
+                    dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                    dialog.show()
+                }
+            })
+
             rv_calendar.adapter = rvAdapter
+
 
             //LeapYear
             endDay[1] = calendarLeapYearCheck(data)
