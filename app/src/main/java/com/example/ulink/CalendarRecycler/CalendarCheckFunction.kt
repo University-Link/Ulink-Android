@@ -1,13 +1,8 @@
 package com.example.ulink.CalendarRecycler
 
-import android.content.Context
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat.getSystemService
 import com.example.ulink.R
 import java.util.*
 
@@ -125,4 +120,43 @@ fun firstIndex (data_year : Int, data_month : Int) : Int
     val month : Int = data_month
     val index = getDay(year, month);
     return index;
+}
+
+fun popupDateCheck(position : Int) : String {
+
+    var tempDate = position % 7
+
+    var nowDate : String = ""
+
+    when (tempDate) {
+        0 -> nowDate = "일"
+        1 -> nowDate = "월"
+        2 -> nowDate = "화"
+        3 -> nowDate = "수"
+        4 -> nowDate = "목"
+        5 -> nowDate = "금"
+        6 -> nowDate = "토"
+    }
+
+    return nowDate
+}
+
+fun popupDayCheck(position : Int, index : Int, last_empty : Int, data_month : Int, prev_empty_index : Int) : String {
+    var popupDay = 0
+    var popupMonth = data_month
+
+    if(position < index){
+        popupDay = prev_empty_index + position
+        popupMonth -= 1
+    }
+
+    else if (position >= index && position < last_empty)
+        popupDay = (position - index) + 1
+    else if (position >= last_empty) {
+        popupDay = (position - last_empty + 1)
+        popupMonth +=1
+    }
+    var popupDayString = popupMonth.toString()+"월 "+popupDay+"일 "
+
+    return popupDayString
 }

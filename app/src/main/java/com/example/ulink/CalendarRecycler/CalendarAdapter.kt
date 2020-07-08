@@ -3,9 +3,11 @@ package com.example.ulink.CalendarRecycler
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.*
 
@@ -35,30 +37,14 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
             val rv_calendar = itemView as RecyclerView
             val rvAdapter = CalendarDayAdapter(context)
 
-            rvAdapter.setDayClickListener(object: CalendarDayAdapter.DayClickListener{
-                override fun onClick(view:View, position:Int){
-
-                    val builder = android.app.AlertDialog.Builder(context)
-                    val layout = LayoutInflater.from(context).inflate(R.layout.calendar_popup_layout, null)
-
-                    builder.setView(layout)
-
-                    val dialog = builder.create()
-
-                    dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                    dialog.show()
-                }
-            })
-
-            rv_calendar.adapter = rvAdapter
-
-
             //LeapYear
             endDay[1] = calendarLeapYearCheck(data)
 
             //month
             var index = firstIndex(data.year, data.month)
             var lastindex = endDay[data.month - 1]
+
+            Log.d("idx","$index")
 
             //previous_month
             var prev_empty_index = calendarPreviousIndexCheck(data, index)
@@ -67,8 +53,31 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
             var last_empty = index + lastindex
             var last_empty_index = 1
 
-            rvAdapter.datas.apply {
+            var popup_last_empty = index + lastindex
+            var popup_empty_index = prev_empty_index
 
+            rvAdapter.setDayClickListener(object: CalendarDayAdapter.DayClickListener{
+                override fun onClick(view:View, position:Int) {
+
+                        val builder = android.app.AlertDialog.Builder(context)
+                        val layout = LayoutInflater.from(context)
+                            .inflate(R.layout.calendar_popup_layout, null)
+
+                        layout.findViewById<TextView>(R.id.tv_calendar_popup_date).text =
+                            popupDayCheck(position, index, popup_last_empty, data.month, popup_empty_index) + popupDateCheck(position)
+
+                        builder.setView(layout)
+
+                        val dialog = builder.create()
+
+                        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                        dialog.show()
+                }
+            })
+
+            rv_calendar.adapter = rvAdapter
+
+            rvAdapter.datas.apply {
                 //previous_month
                 var dateindex = 0
                 for (i in 0 until index) {
