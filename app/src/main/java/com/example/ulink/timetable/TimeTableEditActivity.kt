@@ -91,7 +91,7 @@ class TimeTableEditActivity : AppCompatActivity() {
 //        TODO TimeTableFragment에서 받아와서 여기서 사용!
         mAdapter.setList(timeTableList)
 
-        mAdapter.timeTableAddListener = object : timeTableAddListener {
+        mAdapter.timeTableAddListener = object : TimeTableAddListener {
             override fun onAdded(timeTable: TimeTable) {
                 moveToLastItem()
             }

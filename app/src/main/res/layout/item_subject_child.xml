@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary">
 
 
     <TextView
@@ -51,6 +52,42 @@
         android:layout_width="wrap_content"
         android:text="3학점"
         android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn_assess"
+        android:text="강의평"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/tv_place"
+        app:layout_constraintTop_toBottomOf="@id/tv_place"
+        android:visibility="gone"/>
+    <Button
+        android:id="@+id/btn_cart"
+        android:text="카트에 담기"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/btn_assess"
+        app:layout_constraintBottom_toBottomOf="@id/btn_assess"
+        app:layout_constraintLeft_toRightOf="@id/btn_assess"
+        android:visibility="gone"/>
+    <Button
+        android:id="@+id/btn_totable"
+        android:text="시간표등록"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/btn_assess"
+        app:layout_constraintBottom_toBottomOf="@id/btn_assess"
+        app:layout_constraintRight_toRightOf="parent"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/btn_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:visibility="gone"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

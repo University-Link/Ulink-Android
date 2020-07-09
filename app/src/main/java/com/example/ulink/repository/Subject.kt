@@ -15,5 +15,5 @@ data class Subject (
         var subject : Boolean,
         var credit : Float? = 0f,
         var professor : String = "",
-        var category : String = ""
+        var course : String = ""
 ) : Parcelable

@@ -11,7 +11,7 @@ import com.example.ulink.repository.Subject
 
 class SubjectExpandableAdapter(val context : Context) : BaseExpandableListAdapter() {
 
-//    TODO 여기서 !!때문에 에러날수 있는곳 fail 테스트 만들어보기
+//    TODO 여기서 !!때문에 에러날수 있는곳 fail 테스트 만들기
 
 //    group에서 필요한 데이터 과목명, 대표교수및 교수몇명인지
 //    child에서 필요한 데이터 group의 과목명에 맞는 subject
@@ -72,7 +72,7 @@ class SubjectExpandableAdapter(val context : Context) : BaseExpandableListAdapte
         view.findViewById<TextView>(R.id.tv_professor_name).text = subject.professor
         view.findViewById<TextView>(R.id.tv_time).text = subject.starttime + subject.endtime
         view.findViewById<TextView>(R.id.tv_place).text = subject.place
-        view.findViewById<TextView>(R.id.tv_category).text = subject.category
+        view.findViewById<TextView>(R.id.tv_category).text = subject.course
         view.findViewById<TextView>(R.id.tv_credit).text = subject.credit.toString()
 
         return view
