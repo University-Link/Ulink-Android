@@ -2,15 +2,10 @@ package com.example.ulink.timetable
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.adapter.FragmentViewHolder
-import com.example.ulink.R
 import com.example.ulink.repository.TimeTable
 
 class TimeTableAddAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
@@ -18,7 +13,7 @@ class TimeTableAddAdapter(fragmentActivity: FragmentActivity) : FragmentStateAda
     //  TODO 이 리스트는 어떻게 관리할까?
     val timetableList: MutableList<TimeTable> = arrayListOf()
 
-    var timeTableAddListener: timeTableAddListener? = null
+    var timeTableAddListener: TimeTableAddListener? = null
 
     fun setList(list: MutableList<TimeTable>) {
         timetableList.clear()
@@ -48,7 +43,7 @@ class TimeTableAddAdapter(fragmentActivity: FragmentActivity) : FragmentStateAda
 
         if (position == timetableList.size){
             val fragment =  TimeTableAddBlankFragment()
-            fragment.setTimeTableAddListner(object : timeTableAddListener{
+            fragment.setTimeTableAddListner(object : TimeTableAddListener{
                 override fun onAdded(timeTable: TimeTable) {
 //              왜 추가가 안되는거지?
 //                FIXME 1. +눌렀을때 추가 안되는거 2. 시간표추가 눌렀을때 두번째부터 Visibility Gone인거

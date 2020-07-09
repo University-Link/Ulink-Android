@@ -67,7 +67,7 @@
         />
 
     <TextView
-        android:id="@+id/tv_professor"
+        android:id="@+id/tv_professor_name"
         android:text="캡스톤 디자인"
 
         android:layout_width="wrap_content"
