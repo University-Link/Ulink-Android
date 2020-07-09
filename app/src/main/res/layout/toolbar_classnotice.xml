@@ -8,7 +8,7 @@
 
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_schedule"
+        android:id="@+id/toolbar_classnotice"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,5 +42,15 @@
             android:src="@drawable/chatnotice_btn_plus" />
 
     </androidx.appcompat.widget.Toolbar>
+
+
+    <View
+        android:id="@+id/underLine"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_classnotice"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
