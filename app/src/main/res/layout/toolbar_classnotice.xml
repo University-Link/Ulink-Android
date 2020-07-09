@@ -24,7 +24,7 @@
             android:textColor="@color/text1"
             android:textSize="18sp" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/btn_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
             android:layout_marginRight="14dp"
             android:src="@drawable/chatnotice_btn_home" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/btn_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
