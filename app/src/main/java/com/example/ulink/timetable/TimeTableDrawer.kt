@@ -203,7 +203,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 
     fun drawColumn(linearLayout: LinearLayout, i: Int) {
 
-        val subjectsize = timeTable.subjectList.size
+        val subjectsize = timeTable.subjectList?.size
         var subjectstarttime = 0f
         var presubjectendtimeortablestarttime = 0f
 
@@ -219,7 +219,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 
 //        subject sort한번 해줘야함
 
-        subjectsize.let {
+        subjectsize?.let {
             val daylist = arrayListOf("mon", "tue", "wed", "thu", "fri", "sat", "sun")
             val list0: MutableList<Subject> = arrayListOf()
             val list1: MutableList<Subject> = arrayListOf()
@@ -228,15 +228,17 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
             val list4: MutableList<Subject> = arrayListOf()
 
             for (a in 0 until it) {
-                when (timeTable.subjectList[a].day) {
-                    daylist[0] -> list0.add(timeTable.subjectList[a])
-                    daylist[1] -> list1.add(timeTable.subjectList[a])
-                    daylist[2] -> list2.add(timeTable.subjectList[a])
-                    daylist[3] -> list3.add(timeTable.subjectList[a])
-                    daylist[4] -> list4.add(timeTable.subjectList[a])
+                when (timeTable.subjectList?.get(a)?.day) {
+                    daylist[0] -> list0.add(timeTable.subjectList!![a])
+                    daylist[1] -> list1.add(timeTable.subjectList!![a])
+                    daylist[2] -> list2.add(timeTable.subjectList!![a])
+                    daylist[3] -> list3.add(timeTable.subjectList!![a])
+                    daylist[4] -> list4.add(timeTable.subjectList!![a])
                 }
             }
 
+
+//            TODO 여기 정리하기! daylist를 list로 묶어서 i 사용하기!
             var list: MutableList<Subject> = arrayListOf()
             when(i){
                 0 -> {

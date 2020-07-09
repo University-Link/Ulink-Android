@@ -3,8 +3,9 @@ package com.example.ulink.timetable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.ulink.repository.Subject
 
-class TimeTableEdiotrAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity){
+class TimeTableEditorAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity){
 
 
     override fun getItemCount(): Int {
@@ -12,9 +13,12 @@ class TimeTableEdiotrAdapter(fragmentActivity: FragmentActivity) : FragmentState
     }
 
     override fun createFragment(position: Int): Fragment {
+
+        val timeTableCandidateFragment = TimeTableCandidateFragment()
+
         return when(position){
-            0 -> TimeTableFilterSearchFragment()
-            else -> TimeTableCandidateFragment()
+            0 -> TimeTableFilterSearchFragment(timeTableCandidateFragment)
+            else -> timeTableCandidateFragment
         }
     }
 

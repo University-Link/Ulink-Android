@@ -8,6 +8,7 @@ import com.example.ulink.ScheduleRecycler.*
 import kotlinx.android.synthetic.main.activity_schedule.*
 import kotlinx.android.synthetic.main.schedule_day_item.*
 import kotlinx.android.synthetic.main.schedule_item.*
+import kotlinx.android.synthetic.main.toolbar_schedulenotice.*
 import java.util.*
 
 
@@ -22,6 +23,10 @@ class ScheduleActivity : AppCompatActivity() {
 
         scheduleDateAdapter = ScheduleDateAdapter(this)
         rv_schedule_date.adapter = scheduleDateAdapter
+
+        btn_back.setOnClickListener() {
+            finish()
+        }
 
         loadDateDatas()
     }

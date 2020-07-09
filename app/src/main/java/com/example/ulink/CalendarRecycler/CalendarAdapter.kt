@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.*
+import com.example.ulink.ScheduleRecycler.ScheduleItemAdapter
 
 
 class CalendarAdapter(private val context : Context, data : CalendarData) : RecyclerView.Adapter<CalendarAdapter.Vholder>(){
@@ -44,7 +45,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
             var index = firstIndex(data.year, data.month)
             var lastindex = endDay[data.month - 1]
 
-            Log.d("idx","$index")
+            //Log.d("idx","$index")
 
             //previous_month
             var prev_empty_index = calendarPreviousIndexCheck(data, index)
@@ -60,8 +61,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                 override fun onClick(view:View, position:Int) {
 
                         val builder = android.app.AlertDialog.Builder(context)
-                        val layout = LayoutInflater.from(context)
-                            .inflate(R.layout.calendar_popup_layout, null)
+                        val layout = LayoutInflater.from(context).inflate(R.layout.calendar_popup_layout, null)
 
                         layout.findViewById<TextView>(R.id.tv_calendar_popup_date).text =
                             popupDayCheck(position, index, popup_last_empty, data.month, popup_empty_index) + popupDateCheck(position)

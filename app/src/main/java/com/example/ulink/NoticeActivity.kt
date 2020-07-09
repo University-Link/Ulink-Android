@@ -1,6 +1,5 @@
 package com.example.ulink
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.Insets.add
 import android.os.Bundle
@@ -86,8 +85,6 @@ class NoticeActivity : AppCompatActivity(){
         loadDatas1()
         loadDatas2()
 
-        Log.d("전 datas크기",datas1.size.toString())
-
         if(datas.isEmpty()){
             Log.d("datas상태",datas.isEmpty().toString())
             test_notice_nothing.visibility = View.VISIBLE
@@ -125,6 +122,8 @@ class NoticeActivity : AppCompatActivity(){
                     TestName = "중간고사",
                     StartTime = "13:00",
                     EndTime = "14:00"
+
+
                 )
             )
             add(

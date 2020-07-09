@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ulink">
+    package="com.example.ulink" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -9,15 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".timetable.TimeTableListActivity"></activity>
+        android:usesCleartextTraffic="true" >
+        <activity android:name=".ScheduleNoticeActivity" >
+        </activity>
+        <activity android:name=".timetable.TimeTableListActivity" />
         <activity android:name=".NotificationActivity" />
-        <activity
-            android:name=".ui.login.NotificationActivity"
-            android:label="@string/title_activity_notification" />
         <activity android:name=".ScheduleActivity" />
-        <activity android:name=".timetable.TimeTableEdit" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".timetable.TimeTableEditActivity" />
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,8 +34,5 @@
         <activity android:name=".NoticeClassMoreActivity"/>
 
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-permission android:name="android.permission.VIBRATE" />
 
 </manifest>

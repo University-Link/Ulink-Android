@@ -8,6 +8,7 @@ import com.example.ulink.R
 
 class ScheduleDateAdapter(private val context : Context) : RecyclerView.Adapter<ScheduleDateViewHolder>(){
     var dateDatas = mutableListOf<ScheduleDateData>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScheduleDateViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.schedule_day_item,parent,false)
         return ScheduleDateViewHolder(view)
@@ -36,18 +37,18 @@ class ScheduleDateAdapter(private val context : Context) : RecyclerView.Adapter<
         val scheduleItemDataList10 : MutableList<ScheduleItemData> = arrayListOf()
 
         scheduleItemDataList1.add(
-                ScheduleItemData(
-                    date = "2020-07-08",
-                    category = "시험",
-                    classname = "유링크",
-                    content = "앱잼",
-                    time = "11:00"
-                )
+            ScheduleItemData(
+                date = "2020-07-09",
+                category = "시험",
+                classname = "유링크",
+                content = "앱잼",
+                time = "11:00"
             )
+        )
 
         scheduleItemDataList1.add(
             ScheduleItemData(
-                date = "2020-07-08",
+                date = "2020-07-09",
                 category = "시험",
                 classname = "안드로이드",
                 content = "개발힘드네",
@@ -56,29 +57,29 @@ class ScheduleDateAdapter(private val context : Context) : RecyclerView.Adapter<
         )
 
         scheduleItemDataList2.add(
-                ScheduleItemData(
-                    date = "2020-07-09",
-                    category = "과제",
-                    classname = "유링크",
-                    content = "캘린더뷰",
-                    time = "11:00"
-                )
+            ScheduleItemData(
+                date = "2020-07-27",
+                category = "과제",
+                classname = "유링크",
+                content = "캘린더뷰",
+                time = "11:00"
             )
+        )
 
         scheduleItemDataList3.add(
-                ScheduleItemData(
-                    date = "2020-07-09",
-                    category = "수업",
-                    classname = "유링크",
-                    content = "안드개발",
-                    time = "11:00"
-                )
+            ScheduleItemData(
+                date = "2020-07-27",
+                category = "수업",
+                classname = "유링크",
+                content = "안드개발",
+                time = "11:00"
             )
+        )
 
 
         scheduleItemDataList4.add(
             ScheduleItemData(
-                date = "2020-07-09",
+                date = "2020-07-27",
                 category = "과제",
                 classname = "유링크",
                 content = "캘린더뷰",
@@ -88,7 +89,7 @@ class ScheduleDateAdapter(private val context : Context) : RecyclerView.Adapter<
 
         scheduleItemDataList5.add(
             ScheduleItemData(
-                date = "2020-07-09",
+                date = "2020-07-27",
                 category = "과제",
                 classname = "유링크",
                 content = "캘린더뷰",
@@ -98,7 +99,7 @@ class ScheduleDateAdapter(private val context : Context) : RecyclerView.Adapter<
 
         scheduleItemDataList6.add(
             ScheduleItemData(
-                date = "2020-07-09",
+                date = "2020-07-27",
                 category = "시험",
                 classname = "유링크",
                 content = "캘린더뷰",
@@ -108,7 +109,7 @@ class ScheduleDateAdapter(private val context : Context) : RecyclerView.Adapter<
 
         scheduleItemDataList7.add(
             ScheduleItemData(
-                date = "2020-07-09",
+                date = "2020-07-27",
                 category = "수업",
                 classname = "유링크",
                 content = "캘린더뷰",
@@ -118,7 +119,7 @@ class ScheduleDateAdapter(private val context : Context) : RecyclerView.Adapter<
 
         scheduleItemDataList8.add(
             ScheduleItemData(
-                date = "2020-07-09",
+                date = "2020-07-27",
                 category = "시험",
                 classname = "유링크",
                 content = "캘린더뷰",
@@ -128,7 +129,7 @@ class ScheduleDateAdapter(private val context : Context) : RecyclerView.Adapter<
 
         scheduleItemDataList9.add(
             ScheduleItemData(
-                date = "2020-07-09",
+                date = "2020-07-27",
                 category = "시험",
                 classname = "유링크",
                 content = "캘린더뷰",
@@ -139,7 +140,7 @@ class ScheduleDateAdapter(private val context : Context) : RecyclerView.Adapter<
 
         scheduleItemDataList10.add(
             ScheduleItemData(
-                date = "2020-07-09",
+                date = "2020-07-27",
                 category = "수업",
                 classname = "유링크",
                 content = "캘린더뷰",

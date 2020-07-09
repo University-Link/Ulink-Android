@@ -8,7 +8,7 @@
     <!--Custom Toolbar-->
     <include
         android:id="@+id/include"
-        layout="@layout/toolbar" />
+        layout="@layout/toolbar_chatting" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_chatting"

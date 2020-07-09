@@ -15,7 +15,7 @@
 
         <include
             android:id="@+id/include"
-            layout="@layout/toolbar_notice" />
+            layout="@layout/toolbar_classnotice" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/test_notice"
