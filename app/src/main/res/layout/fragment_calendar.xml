@@ -55,6 +55,7 @@
             android:layout_height="27dp"
             android:layout_marginTop="11dp"
             android:layout_marginLeft="23dp"
+            android:background="@drawable/calendar_question"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
