@@ -61,7 +61,7 @@ class TimeTableFragment : Fragment() {
 
                 layout.findViewById<TextView>(R.id.tv_time).text = subject.starttime +"  "+  subject.endtime
                 layout.findViewById<TextView>(R.id.tv_place).text = subject.place
-                layout.findViewById<TextView>(R.id.tv_professor).text = "교수"
+                layout.findViewById<TextView>(R.id.tv_professor_name).text = "교수"
                 layout.findViewById<TextView>(R.id.tv_class_name).text = subject.name
 
                 builder.setView(layout)

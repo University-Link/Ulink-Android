@@ -13,5 +13,7 @@ data class Subject (
         var place : String?,
         var color : Int,
         var subject : Boolean,
-        var credit : Float? = 0f
+        var credit : Float? = 0f,
+        var professor : String = "",
+        var category : String = ""
 ) : Parcelable
