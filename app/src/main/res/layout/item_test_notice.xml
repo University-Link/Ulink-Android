@@ -48,7 +48,7 @@
         android:layout_height="35dp"
         android:layout_marginLeft="304dp"
         android:layout_marginRight="18dp"
-        android:background="#fff5fd"
+        android:background="#00000000"
         android:src="@drawable/chatnotice_btn_more"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

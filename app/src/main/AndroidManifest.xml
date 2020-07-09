@@ -28,6 +28,11 @@
         </activity>
         <activity android:name=".ChattingActivity" />
         <activity android:name=".NoticeActivity" />
+        <activity android:name=".NoticeAddActivity"/>
+        <activity android:name=".NoticeTaskMoreActivity"/>
+        <activity android:name=".NoticeTestMoreActivity"/>
+        <activity android:name=".NoticeClassMoreActivity"/>
+
     </application>
 
 </manifest>

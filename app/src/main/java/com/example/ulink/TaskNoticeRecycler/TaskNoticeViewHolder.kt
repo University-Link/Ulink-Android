@@ -13,8 +13,7 @@ class TaskNoticeViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView) 
     fun bind(TaskNoticeData : TaskNoticeData){
         tv_date.setText("${TaskNoticeData.StartDate}/${TaskNoticeData.EndDate}")
         tv_task_name.text = TaskNoticeData.TaskName
-        tv_task.text = TaskNoticeData.Task
-
+        tv_task.setText("${TaskNoticeData.StartTime} ~ ${TaskNoticeData.EndTime}")
     }
 
 }
