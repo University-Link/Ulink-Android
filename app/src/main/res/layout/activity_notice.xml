@@ -48,6 +48,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
                 <TextView
+                    android:id="@+id/tv_task_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="더보기"
@@ -96,6 +97,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/tv_task_more1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="더보기"
@@ -161,6 +163,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
         <TextView
+            android:id="@+id/tv_test_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="더보기"
@@ -209,6 +212,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
             <TextView
+                android:id="@+id/tv_test_more1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="더보기"
@@ -275,14 +279,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
         <TextView
+            android:id="@+id/tv_class_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="더보기"
-            android:textSize="12sp"
-            android:textColor="#363636"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="279dp"
             android:layout_marginRight="18dp"
+            android:textSize="12sp"
+            android:textColor="#363636"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -322,6 +327,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
                 <TextView
+                    android:id="@+id/tv_class_more1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="더보기"

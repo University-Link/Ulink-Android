@@ -1,12 +1,16 @@
 package com.example.ulink
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.Insets.add
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.ClassNoticeRecycler.ClassNoticeAdapter
 import com.example.ulink.ClassNoticeRecycler.ClassNoticeData
+import com.example.ulink.ClassRecycler.ClassAdapter
 import com.example.ulink.ExperimentNoticeRecycler.ExperimentNoticeAdapter
 import com.example.ulink.ExperimentNoticeRecycler.ExperimentNoticeData
 import com.example.ulink.TestNoticeRecycler.TestNoticeAdapter
@@ -16,26 +20,33 @@ import com.example.ulink.TaskNoticeRecycler.TaskNoticeData
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_chatting.*
 import kotlinx.android.synthetic.main.activity_notice.*
+import kotlinx.android.synthetic.main.item_class_notice.*
 import kotlinx.android.synthetic.main.toolbar_notice.*
 
 class NoticeActivity : AppCompatActivity(){
     lateinit var TestNoticeAdapter : TestNoticeAdapter
     lateinit var TaskNoticeAdapter : TaskNoticeAdapter
     lateinit var ClassNoticeAdapter : ClassNoticeAdapter
-    lateinit var ExperimentNoticeAdapter : ExperimentNoticeAdapter
+
+    lateinit var rv_test_notice :RecyclerView
+    lateinit var rv_task_notice :RecyclerView
+    lateinit var rv_class_notice :RecyclerView
+
     val datas : MutableList<TestNoticeData> = mutableListOf<TestNoticeData>()
     val datas1: MutableList<TaskNoticeData> = mutableListOf<TaskNoticeData>()
     val datas2: MutableList<ClassNoticeData> = mutableListOf<ClassNoticeData>()
-    val datas3: MutableList<ExperimentNoticeData> = mutableListOf<ExperimentNoticeData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notice)
 
+        rv_test_notice = findViewById(R.id.rv_test_notice)
+        rv_task_notice = findViewById(R.id.rv_task_notice)
+        rv_class_notice = findViewById(R.id.rv_class_notice)
+
         TestNoticeAdapter = TestNoticeAdapter(this)
         TaskNoticeAdapter = TaskNoticeAdapter(this)
         ClassNoticeAdapter = ClassNoticeAdapter(this)
-        ExperimentNoticeAdapter = ExperimentNoticeAdapter(this)
 
         rv_test_notice.adapter = TestNoticeAdapter
         rv_task_notice.adapter = TaskNoticeAdapter
@@ -45,10 +56,37 @@ class NoticeActivity : AppCompatActivity(){
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+        btn_plus.setOnClickListener {
+            val intent = Intent(this, NoticeAddActivity::class.java)
+            startActivityForResult(intent,100)
+        }
 
+        tv_task_more.setOnClickListener {
+            val intent = Intent(this, NoticeTaskMoreActivity::class.java)
+            startActivity(intent)
+        }
+        tv_task_more1.setOnClickListener {
+            val intent = Intent(this, NoticeTaskMoreActivity::class.java)
+            startActivity(intent)
+        }
+
+        tv_test_more.setOnClickListener {
+            val intent = Intent(this, NoticeTestMoreActivity::class.java)
+            startActivity(intent)
+        }
+        tv_class_more.setOnClickListener {
+            val intent = Intent(this, NoticeClassMoreActivity::class.java)
+            startActivity(intent)
+        }
+        tv_class_more1.setOnClickListener {
+            val intent = Intent(this, NoticeClassMoreActivity::class.java)
+            startActivity(intent)
+        }
         loadDatas()
         loadDatas1()
         loadDatas2()
+
+        Log.d("전 datas크기",datas1.size.toString())
 
         if(datas.isEmpty()){
             Log.d("datas상태",datas.isEmpty().toString())
@@ -84,7 +122,16 @@ class NoticeActivity : AppCompatActivity(){
                 TestNoticeData(
                     StartDate = 5,
                     EndDate = 13,
-                    NoticeName = "중간고사",
+                    TestName = "중간고사",
+                    StartTime = "13:00",
+                    EndTime = "14:00"
+                )
+            )
+            add(
+                TestNoticeData(
+                    StartDate = 5,
+                    EndDate = 13,
+                    TestName = "중간고사",
                     StartTime = "13:00",
                     EndTime = "14:00"
 
@@ -95,7 +142,7 @@ class NoticeActivity : AppCompatActivity(){
                 TestNoticeData(
                     StartDate = 5,
                     EndDate = 13,
-                    NoticeName = "중간고사",
+                    TestName = "중간고사",
                     StartTime = "13:00",
                     EndTime = "14:00"
 
@@ -106,18 +153,7 @@ class NoticeActivity : AppCompatActivity(){
                 TestNoticeData(
                     StartDate = 5,
                     EndDate = 13,
-                    NoticeName = "중간고사",
-                    StartTime = "13:00",
-                    EndTime = "14:00"
-
-
-                )
-            )
-            add(
-                TestNoticeData(
-                    StartDate = 5,
-                    EndDate = 13,
-                    NoticeName = "중간고사",
+                    TestName = "중간고사",
                     StartTime = "13:00",
                     EndTime = "14:00"
 
@@ -127,7 +163,7 @@ class NoticeActivity : AppCompatActivity(){
                 TestNoticeData(
                     StartDate = 5,
                     EndDate = 13,
-                    NoticeName = "중간고사",
+                    TestName = "중간고사",
                     StartTime = "13:00",
                     EndTime = "14:00"
 
@@ -144,8 +180,8 @@ class NoticeActivity : AppCompatActivity(){
                     StartDate = 5,
                     EndDate = 13,
                     TaskName = "연습문제 풀기",
-                    Task = "범위 143쪽 10문제"
-
+                    StartTime = "13:00",
+                    EndTime = "14:00"
                     )
             )
             add(
@@ -153,8 +189,8 @@ class NoticeActivity : AppCompatActivity(){
                     StartDate = 5,
                     EndDate = 13,
                     TaskName = "연습문제 풀기",
-                    Task = "범위 143쪽 10문제"
-
+                    StartTime = "13:00",
+                    EndTime = "14:00"
                 )
             )
             add(
@@ -162,8 +198,8 @@ class NoticeActivity : AppCompatActivity(){
                     StartDate = 5,
                     EndDate = 13,
                     TaskName = "연습문제 풀기",
-                    Task = "범위 143쪽 10문제"
-
+                    StartTime = "13:00",
+                    EndTime = "14:00"
                 )
             )
             add(
@@ -171,8 +207,8 @@ class NoticeActivity : AppCompatActivity(){
                     StartDate = 5,
                     EndDate = 13,
                     TaskName = "연습문제 풀기",
-                    Task = "범위 143쪽 10문제"
-
+                    StartTime = "13:00",
+                    EndTime = "14:00"
                 )
             )
         }
@@ -181,19 +217,54 @@ class NoticeActivity : AppCompatActivity(){
     }
     private fun loadDatas2() {
         datas2.apply {
-//            add(
-//                ClassNoticeData(
-//                    StartDate = 5,
-//                    EndDate = 4,
-//                    ClassName = "휴강",
-//                    Class="교수님의 개인사정으로 휴강합니다."
-//                )
-//            )
+            add(
+                ClassNoticeData(
+                    StartDate = 5,
+                    EndDate = 4,
+                    ClassName = "휴강",
+                    StartTime= "시간정보없음",
+                    EndTime = ""
+                )
+            )
+            add(
+                ClassNoticeData(
+                    StartDate = 6,
+                    EndDate = 10,
+                    ClassName = "수업시간변경",
+                    StartTime= "16:00",
+                    EndTime = "17:00"
+                )
+            )
 
         }
         ClassNoticeAdapter.datas = datas2
         ClassNoticeAdapter.notifyDataSetChanged()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 100) {
+            if (resultCode == 200) {
+                if (data != null) {
+                    datas1.add(data.getParcelableExtra("task_data"))
+                    TaskNoticeAdapter.notifyDataSetChanged()
 
+                }
+            }
+            if (data != null) {
+
+                if (resultCode == 300) {
+                    datas.add(data.getParcelableExtra("test_data"))
+                    TestNoticeAdapter.notifyDataSetChanged()
+                }
+            }
+            if (data != null) {
+
+                if (resultCode == 400) {
+                    datas2.add(data.getParcelableExtra("class_data"))
+                    ClassNoticeAdapter.notifyDataSetChanged()
+                }
+            }
+        }
+    }
 }

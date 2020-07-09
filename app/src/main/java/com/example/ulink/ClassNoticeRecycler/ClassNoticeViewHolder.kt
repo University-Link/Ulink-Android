@@ -13,7 +13,7 @@ class ClassNoticeViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView)
     fun bind(ClassNoticeData : ClassNoticeData){
         tv_date.setText("${ClassNoticeData.StartDate}/${ClassNoticeData.EndDate}")
         tv_class_name.text = ClassNoticeData.ClassName
-        tv_class.text = ClassNoticeData.Class
+        tv_class.setText("${ClassNoticeData.StartTime} ~ ${ClassNoticeData.EndTime}")
 
     }
 

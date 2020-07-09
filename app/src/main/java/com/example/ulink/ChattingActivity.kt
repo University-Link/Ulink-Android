@@ -56,9 +56,9 @@ class ChattingActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
                 val intent = Intent(this, NoticeActivity::class.java)
                 startActivity(intent)
             }
-            R.id.QnA-> Toast.makeText(this,"qna공간",Toast.LENGTH_SHORT).show()
-            R.id.picture-> Toast.makeText(this,"사진,동영상",Toast.LENGTH_SHORT).show()
-            R.id.logout-> Toast.makeText(this,"파",Toast.LENGTH_SHORT).show()
+//            R.id.QnA-> Toast.makeText(this,"qna공간",Toast.LENGTH_SHORT).show()
+//            R.id.picture-> Toast.makeText(this,"사진,동영상",Toast.LENGTH_SHORT).show()
+//            R.id.logout-> Toast.makeText(this,"파",Toast.LENGTH_SHORT).show()
 
         }
         return false
