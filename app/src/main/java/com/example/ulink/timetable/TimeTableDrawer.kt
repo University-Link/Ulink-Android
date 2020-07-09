@@ -36,7 +36,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
     var onClick: TimeTableFragment.subjectOnClick? = null
 
     val subjectList: MutableList<Subject> = mutableListOf()
-    var timeTable = TimeTable(0, "", "", subjectList, false, "", "")
+    var timeTable = TimeTable(0, "", "", false, "", "", subjectList)
 
     var endhour = 21
     var starthour = 9
@@ -219,7 +219,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 
 //        subject sort한번 해줘야함
 
-        subjectsize?.let {
+        subjectsize?.let { itit ->
             val daylist = arrayListOf("mon", "tue", "wed", "thu", "fri", "sat", "sun")
             val list0: MutableList<Subject> = arrayListOf()
             val list1: MutableList<Subject> = arrayListOf()
@@ -227,7 +227,8 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
             val list3: MutableList<Subject> = arrayListOf()
             val list4: MutableList<Subject> = arrayListOf()
 
-            for (a in 0 until it) {
+            for (a in 0 until itit) {
+
                 when (timeTable.subjectList?.get(a)?.day) {
                     daylist[0] -> list0.add(timeTable.subjectList!![a])
                     daylist[1] -> list1.add(timeTable.subjectList!![a])
@@ -236,6 +237,8 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
                     daylist[4] -> list4.add(timeTable.subjectList!![a])
                 }
             }
+            
+//            list들 정렬하기 시간순으로
 
 
 //            TODO 여기 정리하기! daylist를 list로 묶어서 i 사용하기!
@@ -243,6 +246,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
             when(i){
                 0 -> {
                     list = list0
+                    list.sortBy { formatToFloat(it.starttime) }
                     for (a in 0 until list.size){
                         if (a == 0) {
                             subjectstarttime = formatToFloat(list[a].starttime) * 4
@@ -257,6 +261,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
                 }
                 1 ->  {
                     list = list1
+                    list.sortBy { formatToFloat(it.starttime) }
                     for (a in 0 until list.size){
                         if (a == 0) {
                             subjectstarttime = formatToFloat(list[a].starttime) * 4
@@ -271,6 +276,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
                 }
                 2 ->  {
                     list = list2
+                    list.sortBy { formatToFloat(it.starttime) }
                     for (a in 0 until list.size){
                         if (a == 0) {
                             subjectstarttime = formatToFloat(list[a].starttime) * 4
@@ -285,6 +291,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
                 }
                 3 ->  {
                     list = list3
+                    list.sortBy { formatToFloat(it.starttime) }
                     for (a in 0 until list.size){
                         if (a == 0) {
                             subjectstarttime = formatToFloat(list[a].starttime) * 4
@@ -299,6 +306,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
                 }
                 4 ->  {
                     list = list4
+                    list.sortBy { formatToFloat(it.starttime) }
                     for (a in 0 until list.size){
                         if (a == 0) {
                             subjectstarttime = formatToFloat(list[a].starttime) * 4

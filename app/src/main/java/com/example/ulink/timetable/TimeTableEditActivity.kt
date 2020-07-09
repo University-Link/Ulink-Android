@@ -6,13 +6,12 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ulink.R
+import com.example.ulink.repository.Subject
 import com.example.ulink.repository.TimeTable
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -27,6 +26,11 @@ class TimeTableEditActivity : AppCompatActivity() {
 
 
 //    TODO Edit된 timetable 어떡할건지와 어떻게 edit할건지?
+//    TimeTableFilterSearchFragment랑 TimeTableCandidatorFragment의 onclick을 얘가 받아서
+//    timeTableList의 currentitem에 draw해줘야함
+
+//    TODO
+//     클릭했을때 깜빡이는거 해결
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +55,51 @@ class TimeTableEditActivity : AppCompatActivity() {
         }
     }
 
+    fun formatToFloat(time: String): Float {
+        val timesplit = time.split(":")
+        return timesplit[0].toFloat() + (timesplit[1].toFloat() - timesplit[1].toFloat() % 15) / 60
+    }
+
+    fun checkIsOver(subject: Subject, timeTable: TimeTable): Boolean {
+
+        var check = false
+        if (timeTable.subjectList != null) {
+            for (s in timeTable.subjectList!!) {
+                if (subject.day == s.day){
+                    check = !(formatToFloat(subject.endtime) <= formatToFloat(s.starttime) || formatToFloat(subject.starttime) >= formatToFloat(s.endtime))
+                    if (check) return check
+                }
+            }
+            return check
+        }
+        return false
+    }
+
+
+    fun addToTable(subject: Subject) {
+        val position =vp_timetableadd.currentItem
+
+        val timeTable = mAdapter.timeTableList[position]
+        if (!checkIsOver(subject, timeTable)){
+            Log.d("tag",subject.toString())
+
+            timeTable.subjectList?.add(subject)
+            if (timeTable.subjectList == null){
+                Log.d("tag","dsfasdas")
+            }
+
+            mAdapter.replaceAtList(position, timeTable)
+            mAdapter.reDrawFragment(position)
+            vp_timetableadd.setCurrentItem(position, false)
+
+
+        } else {
+            Toast.makeText(this,"중복입니다",Toast.LENGTH_SHORT).show()
+        }
+
+//
+    }
+
 
     fun showDialog() {
 
@@ -62,10 +111,11 @@ class TimeTableEditActivity : AppCompatActivity() {
         val et = layout.findViewById<EditText>(R.id.et_name)
 
         layout.findViewById<Button>(R.id.btn_ok).setOnClickListener {
-            val timeTable = TimeTable(1, "2020-2", et.text.toString(), null, false, "09:00", "18:00")
+            val timeTable = TimeTable(1, "2020-2", et.text.toString(), false, "09:00", "18:00")
 
 //          EditActivity에 넣어줄 필요가 있나? 이걸
-//            timeTableList.add(timeTable)
+
+            timeTableList.add(timeTable)
             mAdapter.addToList(timeTable)
             moveToLastItem()
             dialog.dismiss()
@@ -80,10 +130,9 @@ class TimeTableEditActivity : AppCompatActivity() {
         dialog.show()
     }
 
-
     fun moveToLastItem() {
         vp_timetableadd.adapter = mAdapter
-        vp_timetableadd.setCurrentItem(mAdapter.timetableList.size - 1, false)
+        vp_timetableadd.setCurrentItem(mAdapter.timeTableList.size - 1, false)
     }
 
     fun setTimeTableAdd() {
@@ -96,7 +145,6 @@ class TimeTableEditActivity : AppCompatActivity() {
                 moveToLastItem()
             }
         }
-
         vp_timetableadd.adapter = mAdapter
 
         TabLayoutMediator(tl_indicator, vp_timetableadd) { v, p ->
@@ -106,7 +154,8 @@ class TimeTableEditActivity : AppCompatActivity() {
 
 
     fun setClassSearch() {
-        vp_timetableeditor.adapter = TimeTableEditorAdapter(this)
+        val mEditorAdapter = TimeTableEditorAdapter(this)
+        vp_timetableeditor.adapter = mEditorAdapter
         TabLayoutMediator(tl_timetableeditor, vp_timetableeditor, object : TabLayoutMediator.TabConfigurationStrategy {
             override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
 
@@ -126,8 +175,8 @@ class TimeTableEditActivity : AppCompatActivity() {
             }
         }).attach()
 
-
     }
+
 
     @SuppressLint("ResourceType")
     fun showCheckGrade() {
@@ -137,8 +186,6 @@ class TimeTableEditActivity : AppCompatActivity() {
 
         val dialog = builder.create()
 
-
-
         layout.findViewById<Button>(R.id.btn_grade1).setOnClickListener {
             it.setBackgroundColor(resources.getColor(R.color.black))
             Handler().postDelayed({
@@ -147,22 +194,18 @@ class TimeTableEditActivity : AppCompatActivity() {
 
         }
         layout.findViewById<Button>(R.id.btn_grade2).setOnClickListener {
-            it.setBackgroundColor(resources.getColor(Color.parseColor("#674FEE")))
             dialog.dismiss()
 
         }
         layout.findViewById<Button>(R.id.btn_grade3).setOnClickListener {
-            it.setBackgroundColor(resources.getColor(Color.parseColor("#674FEE")))
             dialog.dismiss()
 
         }
         layout.findViewById<Button>(R.id.btn_grade4).setOnClickListener {
-            it.setBackgroundColor(resources.getColor(Color.parseColor("#674FEE")))
             dialog.dismiss()
 
         }
         layout.findViewById<Button>(R.id.btn_grade5).setOnClickListener {
-            it.setBackgroundColor(resources.getColor(Color.parseColor("#674FEE")))
             dialog.dismiss()
         }
 

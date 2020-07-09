@@ -1,5 +1,6 @@
 package com.example.ulink.timetable
 
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,11 +14,10 @@ import com.example.ulink.repository.TimeTable
 
 class TimeTableCandidateAdapter : RecyclerView.Adapter<TimeTableCandidateAdapter.VHolder>() {
 
-    private val candidateList : MutableList<Subject> = arrayListOf()
+    val candidateList : MutableList<Subject> = arrayListOf()
 
     fun addToList(subject : Subject){
         candidateList.add(subject)
-        notifyDataSetChanged()
     }
 
     class VHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
@@ -32,6 +32,7 @@ class TimeTableCandidateAdapter : RecyclerView.Adapter<TimeTableCandidateAdapter
 
             itemView.findViewById<Button>(R.id.btn_delete).visibility = View.VISIBLE
 
+
         }
     }
 
@@ -45,5 +46,8 @@ class TimeTableCandidateAdapter : RecyclerView.Adapter<TimeTableCandidateAdapter
 
     override fun onBindViewHolder(holder: VHolder, position: Int) {
         holder.setHolder(candidateList[position])
+        Log.d("tag", "bindholder")
+
     }
+
 }

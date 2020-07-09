@@ -16,7 +16,7 @@ import com.example.ulink.R
 import com.example.ulink.repository.Subject
 import kotlinx.android.synthetic.main.fragment_timetablefiltersearch.*
 
-class TimeTableFilterSearchFragment(val timeTableSubjectClickListener: TimeTableSubjectClickListener) : Fragment() {
+class TimeTableFilterSearchFragment() : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_timetablefiltersearch, container, false)
@@ -38,9 +38,9 @@ class TimeTableFilterSearchFragment(val timeTableSubjectClickListener: TimeTable
 
         val subjectList: MutableList<Subject> = arrayListOf()
         subjectList.add(Subject(1, "전자회로I", "09:00", "12:00", "mon", "과목장소", 1, true))
-        subjectList.add(Subject(2, "전자회로I", "14:00", "16:00", "mon", "과목장소", 1, true))
-        subjectList.add(Subject(3, "전자회로I", "11:00", "13:00", "tue", "과목장소", 1, true))
-        subjectList.add(Subject(4, "전자회로I", "14:00", "16:00", "wed", "과목장소", 1, true))
+        subjectList.add(Subject(2, "전자회로I", "12:30", "13:00", "mon", "과목장소", 1, true))
+        subjectList.add(Subject(3, "전자회로I", "11:00", "13:00", "fri", "과목장소", 1, true))
+        subjectList.add(Subject(4, "전자회로I", "10:00", "12:00", "wed", "과목장소", 1, true))
 
         val subjectList2: MutableList<Subject> = arrayListOf()
         subjectList2.add(Subject(1, "전자회로II", "09:00", "12:00", "mon", "과목장소", 1, true))
@@ -71,6 +71,8 @@ class TimeTableFilterSearchFragment(val timeTableSubjectClickListener: TimeTable
 
 
         ev_filterandsearch.setOnChildClickListener { parent, v, groupPosition, childPosition, id ->
+
+            (activity as TimeTableEditActivity).addToTable(dataList[subjectRepList[groupPosition].subjectName]!![childPosition])
 
             if (!firstClick && !cleared) {
                 val presassess = previewList.get(0)
@@ -111,8 +113,8 @@ class TimeTableFilterSearchFragment(val timeTableSubjectClickListener: TimeTable
                 dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
 
-                timeTableSubjectClickListener.onClick(dataList[subjectRepList[groupPosition].subjectName]!![childPosition]
-                )
+//                db에 저장
+//                dataList[subjectRepList[groupPosition].subjectName]!![childPosition]
             }
 
 

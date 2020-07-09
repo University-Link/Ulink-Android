@@ -12,9 +12,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".timetable.TimeTableListActivity"></activity>
         <activity android:name=".NotificationActivity" />
-        <activity
-            android:name=".ui.login.NotificationActivity"
-            android:label="@string/title_activity_notification" />
+
         <activity android:name=".ScheduleActivity" />
         <activity android:name=".timetable.TimeTableEditActivity" />
         <activity android:name=".MainActivity">

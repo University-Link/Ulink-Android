@@ -47,8 +47,8 @@ class TimeTableFragment : Fragment() {
         subjectList.add(Subject(3,"과목이름","11:00","13:00","tue","과목장소",1,true))
         subjectList.add(Subject(4,"과목이름","14:00","16:00","wed","과목장소",1,true))
 
-        val timeTable = TimeTable(1,"2020-1","시간표이름",subjectList,true,"09:00","16:00")
-        val timeTable2 = TimeTable(2,"2020-2","시간표이름2",subjectList,true,"09:00","16:00")
+        val timeTable = TimeTable(1,"2020-1","시간표이름",true,"09:00","16:00",subjectList)
+        val timeTable2 = TimeTable(2,"2020-2","시간표이름2",true,"09:00","16:00",subjectList)
 
 
         val onClick = object : subjectOnClick {

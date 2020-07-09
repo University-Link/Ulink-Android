@@ -50,7 +50,7 @@ class TimeTableAddBlankFragment : Fragment() {
         val et = layout.findViewById<EditText>(R.id.et_name)
 
         layout.findViewById<Button>(R.id.btn_ok).setOnClickListener {
-            val timeTable = TimeTable(1,"2020-2",et.text.toString(),null,false,"09:00","18:00")
+            val timeTable = TimeTable(1,"2020-2",et.text.toString(),false,"09:00","18:00")
             timeTableAddListener.onAdded(timeTable)
             dialog.dismiss()
         }
