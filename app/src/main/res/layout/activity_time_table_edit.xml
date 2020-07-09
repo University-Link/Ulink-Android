@@ -65,7 +65,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:background="@drawable/bg_round_border"
+        android:background="@drawable/bg_round_border_up"
         app:layout_constraintTop_toBottomOf="@+id/vp_timetableadd"
         app:layout_constraintBottom_toBottomOf="parent">
 

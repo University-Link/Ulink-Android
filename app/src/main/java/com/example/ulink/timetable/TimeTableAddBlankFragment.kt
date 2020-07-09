@@ -17,9 +17,9 @@ import com.example.ulink.repository.TimeTable
 class TimeTableAddBlankFragment : Fragment() {
 
 
-    lateinit var timeTableAddListener: timeTableAddListener
+    lateinit var timeTableAddListener: TimeTableAddListener
 
-    fun setTimeTableAddListner(timeTableAddListener: timeTableAddListener) {
+    fun setTimeTableAddListner(timeTableAddListener: TimeTableAddListener) {
         this.timeTableAddListener = timeTableAddListener
     }
 

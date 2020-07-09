@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_class_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="전자회로 I"/>
+    <TextView
+        app:layout_constraintTop_toTopOf="@id/tv_class_name"
+        app:layout_constraintBottom_toBottomOf="@id/tv_class_name"
+        app:layout_constraintLeft_toRightOf="@id/tv_class_name"
+        android:id="@+id/tv_professor_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="박상규"/>
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="월 10:00 ~~~"
+        app:layout_constraintTop_toBottomOf="@id/tv_class_name"
+        app:layout_constraintLeft_toLeftOf="@id/tv_class_name"/>
+    <TextView
+        android:id="@+id/tv_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_time"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="명신관"
+        />
+    <TextView
+        android:id="@+id/tv_category"
+        app:layout_constraintLeft_toRightOf="@id/tv_place"
+        app:layout_constraintTop_toTopOf="@id/tv_place"
+        app:layout_constraintBottom_toBottomOf="@id/tv_place"
+        android:layout_width="wrap_content"
+        android:text="전공선택"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/tv_credit"
+        app:layout_constraintLeft_toRightOf="@id/tv_category"
+        app:layout_constraintTop_toTopOf="@id/tv_place"
+        app:layout_constraintBottom_toBottomOf="@id/tv_place"
+        android:layout_width="wrap_content"
+        android:text="3학점"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn_assess"
+        android:text="강의평"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/tv_place"
+        app:layout_constraintTop_toBottomOf="@id/tv_place"
+        android:visibility="gone"/>
+    <Button
+        android:id="@+id/btn_cart"
+        android:text="카트에 담기"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/btn_assess"
+        app:layout_constraintBottom_toBottomOf="@id/btn_assess"
+        app:layout_constraintLeft_toRightOf="@id/btn_assess"
+        android:visibility="gone"/>
+    <Button
+        android:id="@+id/btn_totable"
+        android:text="시간표등록"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/btn_assess"
+        app:layout_constraintBottom_toBottomOf="@id/btn_assess"
+        app:layout_constraintRight_toRightOf="parent"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/btn_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:visibility="gone"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
