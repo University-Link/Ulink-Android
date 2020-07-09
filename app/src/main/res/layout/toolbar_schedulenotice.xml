@@ -29,13 +29,12 @@
             android:text="시험공지"/>
 
         <Button
-            android:id="@+id/btn_update"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/btn_edit"
+            android:layout_width="46dp"
+            android:layout_height="24dp"
             android:layout_gravity="right"
             android:layout_marginRight="14dp"
-            android:text="수정"
-            android:src="@drawable/chatting_btn_hambar" />
+            android:background="@drawable/btn_notice_edit" />
 
     </androidx.appcompat.widget.Toolbar>
 

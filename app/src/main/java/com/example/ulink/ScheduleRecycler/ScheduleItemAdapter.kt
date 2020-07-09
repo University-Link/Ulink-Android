@@ -16,16 +16,6 @@ import com.example.ulink.R
 class ScheduleItemAdapter(private val context : Context, mutableList:MutableList<ScheduleItemData>) : RecyclerView.Adapter<ScheduleItemViewHolder>() {
     private var scheduleItemDataList = mutableList
 
-    private lateinit var scheduleItemClickListener : ScheduleItemClickListener
-
-    interface ScheduleItemClickListener {
-        fun onClick(view: View, position:Int)
-    }
-
-    fun setScheduleItemClickListener(scheduleItemClickListener : ScheduleItemClickListener){
-        this.scheduleItemClickListener = scheduleItemClickListener
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScheduleItemViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.schedule_item, parent, false)
         return ScheduleItemViewHolder(view)
@@ -37,7 +27,5 @@ class ScheduleItemAdapter(private val context : Context, mutableList:MutableList
 
     override fun onBindViewHolder(holder:ScheduleItemViewHolder, position: Int) {
         holder.bind(scheduleItemDataList[position])
-        holder.itemView.setOnClickListener{scheduleItemClickListener.onClick(it,position)}
     }
-
 }

@@ -18,7 +18,7 @@ class ScheduleItemViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView
         category.text = scheduleItemData.category
         className.text = scheduleItemData.classname+" "
         content.text = scheduleItemData.content
-        time.text = scheduleItemData.time
+        time.text = scheduleItemData.startTime
         categoryBackground(scheduleItemData.category, category)
         todayBackground(scheduleItemData.date, background)
     }

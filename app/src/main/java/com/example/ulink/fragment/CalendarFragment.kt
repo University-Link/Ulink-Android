@@ -51,10 +51,5 @@ class CalendarFragment : Fragment() {
             val intent = Intent(activity, ScheduleActivity::class.java)
             startActivity(intent)
         }
-
-        tv_month.setOnClickListener(){
-            val intent = Intent(activity, ScheduleNoticeActivity::class.java)
-            startActivity(intent)
-        }
     }
 }

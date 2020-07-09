@@ -59,3 +59,9 @@ fun todayBackground(todayCheck : String, background : ConstraintLayout) {
     else background.setBackgroundResource(R.drawable.chatting_schedule_img_bg)
 
 }
+
+fun zeroPlus(check : String) : String {
+    var zeroCheck = check
+    if(zeroCheck.length==1) zeroCheck = "0"+check
+    return zeroCheck
+}

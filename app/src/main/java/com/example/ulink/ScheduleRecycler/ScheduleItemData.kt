@@ -1,9 +1,14 @@
 package com.example.ulink.ScheduleRecycler
 
-data class ScheduleItemData(
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class ScheduleItemData (
     var date : String,
     var category : String,
     var classname : String,
     var content : String,
-    var time : String
-)
+    var startTime : String,
+    var endTime : String
+) : Parcelable

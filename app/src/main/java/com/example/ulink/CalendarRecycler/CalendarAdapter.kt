@@ -1,6 +1,7 @@
 package com.example.ulink.CalendarRecycler
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.util.Log
@@ -8,9 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.*
-import com.example.ulink.ScheduleRecycler.ScheduleItemAdapter
+import com.example.ulink.ScheduleRecycler.*
 
 
 class CalendarAdapter(private val context : Context, data : CalendarData) : RecyclerView.Adapter<CalendarAdapter.Vholder>(){
@@ -56,24 +58,6 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
 
             var popup_last_empty = index + lastindex
             var popup_empty_index = prev_empty_index
-
-            rvAdapter.setDayClickListener(object: CalendarDayAdapter.DayClickListener{
-                override fun onClick(view:View, position:Int) {
-
-                        val builder = android.app.AlertDialog.Builder(context)
-                        val layout = LayoutInflater.from(context).inflate(R.layout.calendar_popup_layout, null)
-
-                        layout.findViewById<TextView>(R.id.tv_calendar_popup_date).text =
-                            popupDayCheck(position, index, popup_last_empty, data.month, popup_empty_index) + popupDateCheck(position)
-
-                        builder.setView(layout)
-
-                        val dialog = builder.create()
-
-                        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                        dialog.show()
-                }
-            })
 
             rv_calendar.adapter = rvAdapter
 
@@ -132,6 +116,73 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                 }
                 rvAdapter.notifyDataSetChanged()
             }
+
+
+            rvAdapter.setDayClickListener(object: CalendarDayAdapter.DayClickListener{
+                override fun onClick(view:View, position:Int) {
+
+                    val builder = android.app.AlertDialog.Builder(context)
+                    val layout = LayoutInflater.from(context).inflate(R.layout.calendar_popup_layout, null)
+
+                    layout.findViewById<TextView>(R.id.tv_calendar_popup_date).text =
+                        popupDayCheck(position, index, popup_last_empty, data.month, popup_empty_index) + popupDateCheck(position)
+
+                    val rvPopupAdapter = SchedulePopupAdapter(context)
+                    layout.findViewById<RecyclerView>(R.id.rv_popup_schedule_item).adapter = rvPopupAdapter
+
+                    var itemMonth : String = zeroPlus(data.month.toString())
+                    var itemday : String = zeroPlus(rvAdapter.datas[position].day)
+
+                    rvPopupAdapter.datas.apply {
+                        add(
+                            ScheduleItemData(
+                                date = data.year.toString()+"-"+itemMonth+"-"+itemday,
+                                category = "시험",
+                                classname = "유링",
+                                content = "유링",
+                                startTime = "11:00",
+                                endTime = "13:00"
+                            )
+                        )
+                        add(
+                            ScheduleItemData(
+                                date = data.year.toString()+"-"+itemMonth+"-"+itemday,
+                                category = "과제",
+                                classname = "안드",
+                                content = "유링크",
+                                startTime = "11:00",
+                                endTime = "13:00"
+                            )
+                        )
+                        add(
+                            ScheduleItemData(
+                                date = data.year.toString()+"-"+itemMonth+"-"+itemday,
+                                category = "수업",
+                                classname = "바보",
+                                content = "멍청이",
+                                startTime = "11:00",
+                                endTime = "13:00"
+                            )
+                        )
+                        rvPopupAdapter.notifyDataSetChanged()
+                    }
+
+                    rvPopupAdapter.setScheduleItemClickListener(object: SchedulePopupAdapter.ScheduleItemClickListener{
+                        override fun onClick(view:View, position:Int){
+                            val intent = Intent(view.context, ScheduleNoticeActivity::class.java)
+                            intent.putExtra("scheduleItemData", rvPopupAdapter.datas[position])
+                            view.context.startActivity(intent)
+                        }
+                    })
+
+                    builder.setView(layout)
+
+                    val dialog = builder.create()
+
+                    dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                    dialog.show()
+                }
+            })
         }
     }
 }

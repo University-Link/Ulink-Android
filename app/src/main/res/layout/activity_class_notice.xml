@@ -17,8 +17,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        android:layout_marginTop="15dp"
-        android:paddingHorizontal="15dp"
+        android:paddingHorizontal="17dp"
         app:layout_constraintTop_toBottomOf="@id/include"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,42 +27,95 @@
             android:id="@+id/tv_schedule_notice_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="18dp"
             android:text="1차 쪽지시험"
             android:textColor="@color/text1"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <View
+            android:id="@+id/underLine1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="5dp">
-
+            android:orientation="vertical"
+            android:layout_marginVertical="18dp">
             <TextView
                 android:id="@+id/tv_schedule_notice_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2020년 5월 3일"/>
+                android:textSize="14sp"
+                android:textColor="@color/text1"
+                android:layout_marginBottom="6dp"
+                android:text="날짜"/>
+
+            <TextView
+                android:id="@+id/tv_schedule_notice_date_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2020년 07월 10일"/>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/underLine2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"/>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginVertical="18dp">
+            <TextView
+                android:id="@+id/tv_schedule_notice_memo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/text1"
+                android:layout_marginBottom="6dp"
+                android:text="메모"/>
+
+            <TextView
+                android:id="@+id/tv_schedule_notice_memo_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="쪽지시험 시험범위는 1장, 2장, 3장, 2장에서는 pg 45~50"/>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/underLine3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginVertical="18dp">
 
             <TextView
                 android:id="@+id/tv_schedule_notice_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" 13:00~14:00"/>
+                android:textSize="14sp"
+                android:textColor="@color/text1"
+                android:layout_marginBottom="6dp"
+                android:text="시간"/>
+
+
+            <TextView
+                android:id="@+id/tv_schedule_notice_time_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="13:00 ~ 14:00"/>
         </LinearLayout>
-
-        <View
-            android:id="@+id/underLine"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/line"
-            android:layout_marginVertical="8dp"/>
-
-        <TextView
-            android:id="@+id/tv_schedule_notice_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="쪽지시험 시험범위는 1장, 2장, 3장, 2장에서는 pg 45~50"/>
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

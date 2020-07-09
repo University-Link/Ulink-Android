@@ -147,15 +147,23 @@ fun popupDayCheck(position : Int, index : Int, last_empty : Int, data_month : In
 
     if(position < index){
         popupDay = prev_empty_index + position
-        popupMonth -= 1
+        if(popupMonth != 1)
+            popupMonth -= 1
+        else
+            popupMonth = 12
     }
 
-    else if (position >= index && position < last_empty)
+    else if (position in index until last_empty)
         popupDay = (position - index) + 1
     else if (position >= last_empty) {
         popupDay = (position - last_empty + 1)
-        popupMonth +=1
+
+        if(popupMonth <12)
+            popupMonth +=1
+        else
+            popupMonth = 1
     }
+
     var popupDayString = popupMonth.toString()+"월 "+popupDay+"일 "
 
     return popupDayString

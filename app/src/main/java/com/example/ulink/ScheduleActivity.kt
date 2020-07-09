@@ -2,9 +2,11 @@ package com.example.ulink
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import com.example.ulink.ScheduleRecycler.*
+import kotlinx.android.synthetic.main.activity_class_notice.*
 import kotlinx.android.synthetic.main.activity_schedule.*
 import kotlinx.android.synthetic.main.schedule_day_item.*
 import kotlinx.android.synthetic.main.schedule_item.*
