@@ -17,7 +17,7 @@ class ScheduleNoticeActivity : AppCompatActivity() {
         var scheduleItemData = intent.getParcelableExtra<ScheduleItemData>("scheduleItemData")
         tv_schedulenotice_toolbar.text = scheduleItemData.category+"공지"
 
-        if(scheduleItemData.startTime!="" || scheduleItemData.endTime!="")
+        if(scheduleItemData.startTime!="" && scheduleItemData.endTime!="")
             tv_schedule_notice_time_content.text = scheduleItemData.startTime + " ~ " + scheduleItemData.endTime
         else
             tv_schedule_notice_time_content.text = "시간 정보 없음"
@@ -32,20 +32,8 @@ class ScheduleNoticeActivity : AppCompatActivity() {
         }
 
         btn_edit.setOnClickListener() {
-            val intent = Intent(this, ScheduleActivity::class.java)
-            intent.putExtra("category", tv_schedulenotice_toolbar.text.toString())
-            intent.putExtra("title", tv_schedule_notice_title.text.toString())
-            intent.putExtra("date", tv_schedule_notice_date_content.text.toString())
-            intent.putExtra("memo", tv_schedule_notice_memo_content.text.toString())
-            intent.putExtra("time", tv_schedule_notice_time.text.toString())
-
-//            val intent = intent
-//            val category = intent.getStringExtra("category")
-//            val title = intent.getStringExtra("title")
-//            val date = intent.getStringExtra("date")
-//            val memo = intent.getStringExtra("memo")
-//            val startTime = intent.getStringExtra("startTime")
-//            val endTime = intent.getStringExtra("endTime")
+            val intent = Intent(this, NoticeAddActivity::class.java)
+            intent.putExtra("scheduleItemData", scheduleItemData)
             startActivity(intent)
         }
     }

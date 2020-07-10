@@ -141,30 +141,47 @@ fun popupDateCheck(position : Int) : String {
     return nowDate
 }
 
-fun popupDayCheck(position : Int, index : Int, last_empty : Int, data_month : Int, prev_empty_index : Int) : String {
+fun popupDayCheck(position : Int, index : Int, last_empty : Int, prev_empty_index : Int) : Int {
     var popupDay = 0
+
+    if(position < index)
+        popupDay = prev_empty_index + position
+
+    else if (position in index until last_empty)
+        popupDay = (position - index) + 1
+
+    else if (position >= last_empty)
+        popupDay = (position - last_empty + 1)
+
+    return popupDay
+}
+
+fun popupMonthCheck(position : Int, index : Int, last_empty : Int, data_month : Int) : Int {
     var popupMonth = data_month
 
     if(position < index){
-        popupDay = prev_empty_index + position
         if(popupMonth != 1)
             popupMonth -= 1
         else
             popupMonth = 12
     }
 
-    else if (position in index until last_empty)
-        popupDay = (position - index) + 1
     else if (position >= last_empty) {
-        popupDay = (position - last_empty + 1)
-
         if(popupMonth <12)
             popupMonth +=1
         else
             popupMonth = 1
     }
 
-    var popupDayString = popupMonth.toString()+"월 "+popupDay+"일 "
+    return popupMonth
+}
 
-    return popupDayString
+fun popupYearCheck(data_year : Int, data_month : Int, position : Int, index : Int, last_empty : Int) : Int{
+    var year = data_year
+
+    if(data_month == 1 && position < index) year-=1
+
+    if(data_month == 12 && position >= last_empty) year +=1
+
+    return year
 }

@@ -21,6 +21,8 @@ import kotlinx.android.synthetic.main.activity_chatting.*
 import kotlinx.android.synthetic.main.activity_notice.*
 import kotlinx.android.synthetic.main.item_class_notice.*
 import kotlinx.android.synthetic.main.toolbar_notice.*
+import kotlinx.android.synthetic.main.toolbar_notice.btn_back
+import kotlinx.android.synthetic.main.toolbar_notice_add.*
 
 class NoticeActivity : AppCompatActivity(){
     lateinit var TestNoticeAdapter : TestNoticeAdapter
@@ -50,6 +52,10 @@ class NoticeActivity : AppCompatActivity(){
         rv_test_notice.adapter = TestNoticeAdapter
         rv_task_notice.adapter = TaskNoticeAdapter
         rv_class_notice.adapter = ClassNoticeAdapter
+
+        btn_back.setOnClickListener {
+            finish()
+        }
 
         btn_home.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)

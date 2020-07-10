@@ -41,9 +41,11 @@ fun ddayCheck(i : Int) : String {
 }
 
 fun categoryBackground(category : String, tv_category : TextView) {
-    if(category=="시험") tv_category.setBackgroundResource(R.drawable.chatting_schedule_img_label_test)
-    else if(category=="수업") tv_category.setBackgroundResource(R.drawable.chatting_schedule_img_label_hw)
-    else if(category=="과제") tv_category.setBackgroundResource(R.drawable.chatting_schedule_img_label_class)
+    when (category) {
+        "시험" -> tv_category.setBackgroundResource(R.drawable.chatting_schedule_img_label_test)
+        "수업" -> tv_category.setBackgroundResource(R.drawable.chatting_schedule_img_label_class)
+        "과제" -> tv_category.setBackgroundResource(R.drawable.chatting_schedule_img_label_hw)
+    }
 }
 
 fun todayBackground(todayCheck : String, background : ConstraintLayout) {

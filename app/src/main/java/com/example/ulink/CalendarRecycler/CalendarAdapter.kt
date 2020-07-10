@@ -37,7 +37,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
 
         fun bind(data: CalendarData) {
 
-            val rv_calendar = itemView as RecyclerView
+            val rvCalendar = itemView as RecyclerView
             val rvAdapter = CalendarDayAdapter(context)
 
             //LeapYear
@@ -50,16 +50,16 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
             //Log.d("idx","$index")
 
             //previous_month
-            var prev_empty_index = calendarPreviousIndexCheck(data, index)
+            var prevEmptyIndex = calendarPreviousIndexCheck(data, index)
 
             //next_month
-            var last_empty = index + lastindex
-            var last_empty_index = 1
+            var lastEmpty = index + lastindex
+            var lastEmptyIndex = 1
 
-            var popup_last_empty = index + lastindex
-            var popup_empty_index = prev_empty_index
+            var popupLastEmpty = index + lastindex
+            var popupEmptyIndex = prevEmptyIndex
 
-            rv_calendar.adapter = rvAdapter
+            rvCalendar.adapter = rvAdapter
 
             rvAdapter.datas.apply {
                 //previous_month
@@ -67,14 +67,14 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                 for (i in 0 until index) {
                     add(
                         CalendarDayData(
-                            day = prev_empty_index.toString(),
+                            day = prevEmptyIndex.toString(),
                             check = false,
                             date = dateindex,
                             today = false
                         )
                     )
                     dateindex += 1
-                    prev_empty_index += 1
+                    prevEmptyIndex += 1
                 }
                 //month
                 for (i in 1..lastindex) {
@@ -100,17 +100,17 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                 }
                 //next_month
                 while (true) {
-                    if (last_empty % 7 != 0) {
+                    if (lastEmpty % 7 != 0) {
                         add(
                             CalendarDayData(
-                                day = last_empty_index.toString(),
+                                day = lastEmptyIndex.toString(),
                                 check = false,
                                 date = dateindex,
                                 today = false
                             )
                         )
-                        last_empty_index += 1
-                        last_empty += 1
+                        lastEmptyIndex += 1
+                        lastEmpty += 1
                         dateindex += 1
                     } else break;
                 }
@@ -124,19 +124,25 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                     val builder = android.app.AlertDialog.Builder(context)
                     val layout = LayoutInflater.from(context).inflate(R.layout.calendar_popup_layout, null)
 
+                    //Popup
+                    var popupMonth = popupMonthCheck(position, index, popupLastEmpty, data.month)
+                    var popupDay = popupDayCheck(position, index, popupLastEmpty, popupEmptyIndex)
+
                     layout.findViewById<TextView>(R.id.tv_calendar_popup_date).text =
-                        popupDayCheck(position, index, popup_last_empty, data.month, popup_empty_index) + popupDateCheck(position)
+                        popupMonth.toString()+"월 "+popupDay.toString()+"일 "+popupDateCheck(position)
 
                     val rvPopupAdapter = SchedulePopupAdapter(context)
                     layout.findViewById<RecyclerView>(R.id.rv_popup_schedule_item).adapter = rvPopupAdapter
 
-                    var itemMonth : String = zeroPlus(data.month.toString())
-                    var itemday : String = zeroPlus(rvAdapter.datas[position].day)
+                    //ScheduleNotice
+                    var itemMonth : String = zeroPlus(popupMonth.toString())
+                    var itemDay : String = zeroPlus(rvAdapter.datas[position].day)
+                    var itemYear : String = popupYearCheck(data.year, data.month, position, index, popupLastEmpty).toString()
 
                     rvPopupAdapter.datas.apply {
                         add(
                             ScheduleItemData(
-                                date = data.year.toString()+"-"+itemMonth+"-"+itemday,
+                                date = "$itemYear-$itemMonth-$itemDay",
                                 category = "시험",
                                 classname = "유링",
                                 content = "유링",
@@ -146,7 +152,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                         )
                         add(
                             ScheduleItemData(
-                                date = data.year.toString()+"-"+itemMonth+"-"+itemday,
+                                date = "$itemYear-$itemMonth-$itemDay",
                                 category = "과제",
                                 classname = "안드",
                                 content = "유링크",
@@ -156,7 +162,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                         )
                         add(
                             ScheduleItemData(
-                                date = data.year.toString()+"-"+itemMonth+"-"+itemday,
+                                date = "$itemYear-$itemMonth-$itemDay",
                                 category = "수업",
                                 classname = "바보",
                                 content = "멍청이",
