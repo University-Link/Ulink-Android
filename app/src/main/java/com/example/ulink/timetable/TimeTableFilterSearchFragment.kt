@@ -4,13 +4,12 @@ import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.ulink.R
 import com.example.ulink.repository.Subject
@@ -37,10 +36,10 @@ class TimeTableFilterSearchFragment() : Fragment() {
         )
 
         val subjectList: MutableList<Subject> = arrayListOf()
-        subjectList.add(Subject(1, "전자회로I", "09:00", "12:00", "mon", "과목장소", 1, true))
-        subjectList.add(Subject(2, "전자회로I", "12:30", "13:00", "mon", "과목장소", 1, true))
-        subjectList.add(Subject(3, "전자회로I", "11:00", "13:00", "fri", "과목장소", 1, true))
-        subjectList.add(Subject(4, "전자회로I", "10:00", "12:00", "wed", "과목장소", 1, true))
+        subjectList.add(Subject(1, "전자회로I", "09:00", "12:00", "mon", "과목장소", 1, true, isSample = true))
+        subjectList.add(Subject(2, "전자회로I", "12:30", "13:00", "mon", "과목장소", 1, true, isSample = true))
+        subjectList.add(Subject(3, "전자회로I", "11:00", "13:00", "fri", "과목장소", 1, true, isSample = true))
+        subjectList.add(Subject(4, "전자회로I", "10:00", "12:00", "wed", "과목장소", 1, true, isSample = true))
 
         val subjectList2: MutableList<Subject> = arrayListOf()
         subjectList2.add(Subject(1, "전자회로II", "09:00", "12:00", "mon", "과목장소", 1, true))
@@ -66,15 +65,31 @@ class TimeTableFilterSearchFragment() : Fragment() {
 
         val previewList: MutableList<View> = arrayListOf()
         var firstClick = true
-        var onClick = false
-        var cleared = false
+
+
+        ev_filterandsearch.setOnGroupClickListener { parent, v, groupPosition, id ->
+            ev_filterandsearch.collapseGroup(groupPosition)
+            previewList.clear()
+            firstClick = true
+            false
+        }
 
 
         ev_filterandsearch.setOnChildClickListener { parent, v, groupPosition, childPosition, id ->
 
-            (activity as TimeTableEditActivity).addToTable(dataList[subjectRepList[groupPosition].subjectName]!![childPosition])
+            (activity as TimeTableEditActivity).addToSampleTable(dataList[subjectRepList[groupPosition].subjectName]!![childPosition])
+            Log.d("tag", " other clicked")
+            Log.d("tag", "add to table1")
 
-            if (!firstClick && !cleared) {
+            val assess = v.findViewById<Button>(R.id.btn_assess)
+            val cart = v.findViewById<Button>(R.id.btn_cart)
+            val totable = v.findViewById<Button>(R.id.btn_totable)
+
+            assess.visibility = View.VISIBLE
+            cart.visibility = View.VISIBLE
+            totable.visibility = View.VISIBLE
+
+            if (!firstClick) {
                 val presassess = previewList.get(0)
                 val precart = previewList.get(1)
                 val pretotable = previewList.get(2)
@@ -83,25 +98,80 @@ class TimeTableFilterSearchFragment() : Fragment() {
                 pretotable.visibility = View.GONE
 
                 previewList.clear()
-                cleared = true
+
+//               리스트에 추가
+
+
             }
-
-            val assess = v.findViewById<Button>(R.id.btn_assess)
-            val cart = v.findViewById<Button>(R.id.btn_cart)
-            val totable = v.findViewById<Button>(R.id.btn_totable)
-
-
-            assess.visibility = View.VISIBLE
-            cart.visibility = View.VISIBLE
-            totable.visibility = View.VISIBLE
+            firstClick = false
             previewList.add(assess)
             previewList.add(cart)
             previewList.add(totable)
+            
+            v.setOnClickListener {
 
-            onClick = true
-            firstClick = false
-            cleared = false
-            dataList[subjectRepList[groupPosition].subjectName]!![childPosition]
+                //                한번씩 돌고 같은뷰 접었다 폈다
+                if (previewList[0] == v.findViewById(R.id.btn_assess)) {
+                    previewList.clear()
+                    if (assess.visibility == View.VISIBLE) {
+                        assess.visibility = View.GONE
+                    } else {
+                        assess.visibility = View.VISIBLE
+                    }
+                    if (cart.visibility == View.VISIBLE) {
+                        cart.visibility = View.GONE
+                    } else {
+                        cart.visibility = View.VISIBLE
+                    }
+                    if (totable.visibility == View.VISIBLE) {
+                        totable.visibility = View.GONE
+                    } else {
+                        totable.visibility = View.VISIBLE
+                    }
+                    previewList.add(assess)
+                    previewList.add(cart)
+                    previewList.add(totable)
+
+                    if (assess.visibility == View.GONE ){
+//                    rollback()
+                        (activity as TimeTableEditActivity).rollBack()
+                        Log.d("tag", "rollback")
+                    } else {
+                        (activity as TimeTableEditActivity).addToSampleTable(dataList[subjectRepList[groupPosition].subjectName]!![childPosition])
+                        Log.d("tag", "add to table2")
+
+                    }
+
+
+//                한번씩 돌고 다른 뷰를 펼쳤을때
+                } else {
+                    val preassess = previewList.get(0)
+                    val precart = previewList.get(1)
+                    val pretotable = previewList.get(2)
+
+                    preassess.visibility = View.GONE
+                    precart.visibility = View.GONE
+                    pretotable.visibility = View.GONE
+
+                    previewList.clear()
+
+
+                    assess.visibility = View.VISIBLE
+                    cart.visibility = View.VISIBLE
+                    totable.visibility = View.VISIBLE
+
+                    (activity as TimeTableEditActivity).rollBack()
+                    (activity as TimeTableEditActivity).addToSampleTable(dataList[subjectRepList[groupPosition].subjectName]!![childPosition])
+
+                    Log.d("tag", "rollback")
+                    Log.d("tag", "add to table3")
+
+                    previewList.add(assess)
+                    previewList.add(cart)
+                    previewList.add(totable)
+                }
+
+            }
 
 
             v.findViewById<Button>(R.id.btn_cart).setOnClickListener {
@@ -118,24 +188,11 @@ class TimeTableFilterSearchFragment() : Fragment() {
             }
 
 
-
-            true
-        }
-
-        ev_filterandsearch.setOnGroupClickListener { parent, v, groupPosition, id ->
-            if (onClick) {
-                val presassess = previewList.get(0)
-                val precart = previewList.get(1)
-                val pretotable = previewList.get(2)
-                presassess.visibility = View.GONE
-                precart.visibility = View.GONE
-                pretotable.visibility = View.GONE
-
-                previewList.clear()
-                cleared = true
+//          여기는 시간표로 완전 등록
+            v.findViewById<Button>(R.id.btn_totable).setOnClickListener {
+                (activity as TimeTableEditActivity).addToTable(dataList[subjectRepList[groupPosition].subjectName]!![childPosition])
             }
 
-            onClick = false
             false
         }
 
@@ -182,4 +239,5 @@ class TimeTableFilterSearchFragment() : Fragment() {
 //        }
 
     }
+
 }

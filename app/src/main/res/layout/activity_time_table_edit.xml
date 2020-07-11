@@ -38,12 +38,11 @@
         android:id="@+id/vp_timetableadd"
         android:layout_width="match_parent"
         android:layout_height="324dp"
-        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
         android:paddingRight="12dp"
         android:paddingTop="10dp"
         android:paddingLeft="11dp"
-        android:paddingBottom="10dp"
-        android:background="@drawable/bg_round_border"/>
+        android:paddingBottom="10dp" />
 
     <com.google.android.material.tabs.TabLayout
         app:layout_constraintLeft_toLeftOf="@id/vp_timetableadd"

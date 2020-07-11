@@ -58,8 +58,4 @@ class TimeTableAddFragment : Fragment() {
         view?.findViewById<NestedScrollView>(R.id.layout_timetable_scrollable)!!.isVerticalScrollBarEnabled = false
     }
 
-
-
-
-
 }

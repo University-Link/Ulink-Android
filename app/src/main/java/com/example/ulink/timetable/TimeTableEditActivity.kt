@@ -6,10 +6,12 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager2.widget.MarginPageTransformer
 import com.example.ulink.R
 import com.example.ulink.repository.Subject
 import com.example.ulink.repository.TimeTable
@@ -63,41 +65,59 @@ class TimeTableEditActivity : AppCompatActivity() {
     fun checkIsOver(subject: Subject, timeTable: TimeTable): Boolean {
 
         var check = false
-        if (timeTable.subjectList != null) {
-            for (s in timeTable.subjectList!!) {
-                if (subject.day == s.day){
-                    check = !(formatToFloat(subject.endtime) <= formatToFloat(s.starttime) || formatToFloat(subject.starttime) >= formatToFloat(s.endtime))
-                    if (check) return check
-                }
+        for (s in timeTable.subjectList!!) {
+            if (subject.day == s.day) {
+                check = !(formatToFloat(subject.endtime) <= formatToFloat(s.starttime) || formatToFloat(subject.starttime) >= formatToFloat(s.endtime))
+                if (check) return check
             }
-            return check
         }
-        return false
+        return check
     }
 
 
     fun addToTable(subject: Subject) {
-        val position =vp_timetableadd.currentItem
+        val position = vp_timetableadd.currentItem
 
+//        TODO 여기서 DB에 저장도 해야함
         val timeTable = mAdapter.timeTableList[position]
-        if (!checkIsOver(subject, timeTable)){
-            Log.d("tag",subject.toString())
-
-            timeTable.subjectList?.add(subject)
-            if (timeTable.subjectList == null){
-                Log.d("tag","dsfasdas")
-            }
-
+        if (!checkIsOver(subject, timeTable)) {
+            timeTable.subjectList.add(subject)
             mAdapter.replaceAtList(position, timeTable)
             mAdapter.reDrawFragment(position)
             vp_timetableadd.setCurrentItem(position, false)
-
-
+            Toast.makeText(this, "시간표에 등록 되었습니다", Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(this,"중복입니다",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "시간표에 등록 실패", Toast.LENGTH_SHORT).show()
         }
 
-//
+        Log.d("tag","addToTable = ${timeTable.toString()}")
+    }
+
+    fun addToSampleTable(subject: Subject) {
+        val position = vp_timetableadd.currentItem
+
+        val timeTable = mAdapter.timeTableSampleList[position]
+
+//        samplelist의 timetable.subjectlist를 초기화 시킬까?
+//        아니면 samplelist에서 subject의 isSample로 그거만 그릴까? 후자가 나은듯
+
+        timeTable.subjectList.add(subject)
+        mAdapter.replaceAtSampleList(position, timeTable)
+        mAdapter.reDrawFragment(position)
+        vp_timetableadd.setCurrentItem(position, false)
+
+        Log.d("tag","addTosampleTable = ${timeTable.toString()}")
+        Log.d("tag","addTosampleTable = ${mAdapter.timeTableList[position].toString()}")
+
+    }
+
+
+    fun rollBack(){
+        mAdapter.timeTableSampleList[vp_timetableadd.currentItem] = mAdapter.timeTableList[vp_timetableadd.currentItem]
+        mAdapter.reDrawFragment(vp_timetableadd.currentItem)
+        vp_timetableadd.setCurrentItem(vp_timetableadd.currentItem, false)
+        Log.d("tag","rollbacked")
+
     }
 
 
@@ -114,8 +134,8 @@ class TimeTableEditActivity : AppCompatActivity() {
             val timeTable = TimeTable(1, "2020-2", et.text.toString(), false, "09:00", "18:00")
 
 //          EditActivity에 넣어줄 필요가 있나? 이걸
+//            timeTableList.add(timeTable)
 
-            timeTableList.add(timeTable)
             mAdapter.addToList(timeTable)
             moveToLastItem()
             dialog.dismiss()
@@ -135,6 +155,12 @@ class TimeTableEditActivity : AppCompatActivity() {
         vp_timetableadd.setCurrentItem(mAdapter.timeTableList.size - 1, false)
     }
 
+
+    fun dptopx(dp: Int): Float {
+        val metrics = resources.displayMetrics
+        return dp * ((metrics.densityDpi.toFloat()) / DisplayMetrics.DENSITY_DEFAULT)
+    }
+
     fun setTimeTableAdd() {
 
 //        TODO TimeTableFragment에서 받아와서 여기서 사용!
@@ -146,6 +172,8 @@ class TimeTableEditActivity : AppCompatActivity() {
             }
         }
         vp_timetableadd.adapter = mAdapter
+
+        vp_timetableadd.setPageTransformer(MarginPageTransformer(dptopx(30).toInt()))
 
         TabLayoutMediator(tl_indicator, vp_timetableadd) { v, p ->
             Unit

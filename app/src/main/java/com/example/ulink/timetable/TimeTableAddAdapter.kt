@@ -13,6 +13,7 @@ class TimeTableAddAdapter(fragmentActivity: FragmentActivity, val fragmentList :
     //  TODO 이 리스트는 어떻게 관리할까?
 
     val timeTableList: MutableList<TimeTable> = arrayListOf()
+    val timeTableSampleList: MutableList<TimeTable> = arrayListOf()
 
     var timeTableAddListener: TimeTableAddListener? = null
 
@@ -20,26 +21,45 @@ class TimeTableAddAdapter(fragmentActivity: FragmentActivity, val fragmentList :
     fun setList(list: MutableList<TimeTable>) {
         timeTableList.clear()
         fragmentList.clear()
+        timeTableSampleList.clear()
+
         timeTableList.addAll(list)
+        timeTableSampleList.addAll(list)
+
         for (i in 0 until timeTableList.size){
             val fragment = TimeTableAddFragment()
             fragmentList.add(fragment)
+
         }
         notifyDataSetChanged()
     }
 
     fun addToList(timeTable: TimeTable) {
         timeTableList.add(timeTable)
+        timeTableSampleList.add(timeTable)
         fragmentList.add(TimeTableAddFragment())
         notifyDataSetChanged()
     }
 
+
     fun replaceAtList(position: Int, timeTable : TimeTable){
         timeTableList.removeAt(position)
         timeTableList.add(position,timeTable)
+        Log.d("tag", "list replaced")
         (fragmentList[position] as TimeTableAddFragment).setTable(timeTable)
         notifyDataSetChanged()
     }
+
+    fun replaceAtSampleList(position: Int, timeTable : TimeTable){
+        timeTableSampleList.removeAt(position)
+        timeTableSampleList.add(position,timeTable)
+        Log.d("tag", "sample list replaced")
+        (fragmentList[position] as TimeTableAddFragment).setTable(timeTable)
+        notifyDataSetChanged()
+    }
+
+
+
 
     fun reDrawFragment(position: Int){
         (fragmentList[position] as TimeTableAddFragment).drawTable()
