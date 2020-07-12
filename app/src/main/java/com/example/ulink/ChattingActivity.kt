@@ -40,6 +40,9 @@ class ChattingActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
         database = Firebase.database.reference
         auth = Firebase.auth
 
+        var intent = intent
+        className = intent.getStringExtra("class")
+
         Log.d("db이름",database.root.toString())
         Log.d("db자식",database.child("users").toString())
         val chatdata = chatdata("id","jieun")
@@ -55,8 +58,6 @@ class ChattingActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
             override fun onChildChanged(p0: DataSnapshot, p1: String?) {
             }
 
-        var intent = intent
-        className = intent.getStringExtra("class")
 
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
                 Log.d("파베불러오기",p0.value.toString())

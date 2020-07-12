@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ulink.ChattingRecycler.ChattingAdapter
 import com.example.ulink.ChattingRecycler.ChattingData
-import com.example.ulink.ScheduleRecycler.spinnerInit
 import com.example.ulink.TimeTable_Search_Recycler.SearchData
 import com.example.ulink.TimeTable_Search_Recycler.TimeTable_Search_Adapter
 import com.example.ulink.timetable.TimeTableAddAdapter
