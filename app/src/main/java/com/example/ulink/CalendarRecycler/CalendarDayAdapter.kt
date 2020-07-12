@@ -10,7 +10,6 @@ import com.example.ulink.R
 class CalendarDayAdapter(private val context : Context) : RecyclerView.Adapter<CalendarViewHolder>() {
     var datas = mutableListOf<CalendarDayData>()
 
-
     private lateinit var dayClickListener : DayClickListener
 
     interface DayClickListener {

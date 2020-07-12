@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".EvaluationActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,10 +34,11 @@
         </activity>
         <activity android:name=".ChattingActivity" />
         <activity android:name=".NoticeActivity" />
-        <activity android:name=".NoticeAddActivity" />
-        <activity android:name=".NoticeTaskMoreActivity" />
-        <activity android:name=".NoticeTestMoreActivity" />
-        <activity android:name=".NoticeClassMoreActivity" />
+        <activity android:name=".NoticeAddActivity"/>
+        <activity android:name=".NoticeTaskMoreActivity"/>
+        <activity android:name=".NoticeTestMoreActivity"/>
+        <activity android:name=".NoticeClassMoreActivity"/>
+
     </application>
 
 </manifest>

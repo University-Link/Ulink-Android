@@ -43,7 +43,8 @@ class ScheduleDateAdapter(private val context : Context) : RecyclerView.Adapter<
                 classname = "유링크",
                 content = "앱잼",
                 startTime = "11:00",
-                endTime = "13:00"
+                endTime = "13:00",
+                memo = "나는 김영민이다."
             )
         )
 
@@ -54,7 +55,8 @@ class ScheduleDateAdapter(private val context : Context) : RecyclerView.Adapter<
                 classname = "안드로이드",
                 content = "개발힘드네",
                 startTime = "11:00",
-                endTime = "13:00"
+                endTime = "13:00",
+                memo = "유링크최고"
             )
         )
 
@@ -65,7 +67,8 @@ class ScheduleDateAdapter(private val context : Context) : RecyclerView.Adapter<
                 classname = "유링크",
                 content = "캘린더뷰",
                 startTime = "11:00",
-                endTime = "13:00"
+                endTime = "13:00",
+                memo = "유링크최고"
             )
         )
 
@@ -76,7 +79,8 @@ class ScheduleDateAdapter(private val context : Context) : RecyclerView.Adapter<
                 classname = "유링크",
                 content = "안드개발",
                 startTime = "11:00",
-                endTime = "13:00"
+                endTime = "13:00",
+                memo = "유링크최고"
             )
         )
 
@@ -88,7 +92,8 @@ class ScheduleDateAdapter(private val context : Context) : RecyclerView.Adapter<
                 classname = "유링크",
                 content = "캘린더뷰",
                 startTime = "11:00",
-                endTime = "13:00"
+                endTime = "13:00",
+                memo = "유링크최고"
             )
         )
 
@@ -99,7 +104,8 @@ class ScheduleDateAdapter(private val context : Context) : RecyclerView.Adapter<
                 classname = "유링크",
                 content = "캘린더뷰",
                 startTime = "11:00",
-                endTime = "13:00"
+                endTime = "13:00",
+                memo = "유링크최고"
             )
         )
 
@@ -110,7 +116,8 @@ class ScheduleDateAdapter(private val context : Context) : RecyclerView.Adapter<
                 classname = "유링크",
                 content = "캘린더뷰",
                 startTime = "11:00",
-                endTime = "13:00"
+                endTime = "13:00",
+                memo = "유링크최고"
             )
         )
 
@@ -121,7 +128,8 @@ class ScheduleDateAdapter(private val context : Context) : RecyclerView.Adapter<
                 classname = "유링크",
                 content = "캘린더뷰",
                 startTime = "11:00",
-                endTime = "13:00"
+                endTime = "13:00",
+                memo = "유링크최고"
             )
         )
 
@@ -132,7 +140,8 @@ class ScheduleDateAdapter(private val context : Context) : RecyclerView.Adapter<
                 classname = "유링크",
                 content = "캘린더뷰",
                 startTime = "11:00",
-                endTime = "13:00"
+                endTime = "13:00",
+                memo = "유링크최고"
             )
         )
 
@@ -143,7 +152,8 @@ class ScheduleDateAdapter(private val context : Context) : RecyclerView.Adapter<
                 classname = "유링크",
                 content = "캘린더뷰",
                 startTime = "11:00",
-                endTime = "13:00"
+                endTime = "13:00",
+                memo = "유링크최고"
             )
         )
 
@@ -155,7 +165,8 @@ class ScheduleDateAdapter(private val context : Context) : RecyclerView.Adapter<
                 classname = "유링크",
                 content = "캘린더뷰",
                 startTime = "11:00",
-                endTime = "13:00"
+                endTime = "13:00",
+                memo = "유링크최고"
             )
         )
 

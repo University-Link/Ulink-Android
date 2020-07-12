@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".timetable.TimeTableAddFragment">
+    tools:context=".timetable.TimeTableAddFragment"
+    android:background="@drawable/bg_round_border"
+    android:padding="10dp">
 <!--    여기는 matchparent해줘야함-->
 
     <LinearLayout

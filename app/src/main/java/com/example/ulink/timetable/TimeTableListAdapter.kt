@@ -19,18 +19,19 @@ class TimeTableListAdapter() : RecyclerView.Adapter<TimeTableListAdapter.VHolder
         val subjectList : MutableList<Subject> = arrayListOf()
 
         val list: MutableList<TimeTable> = arrayListOf()
-        val tt =TimeTable(1,"2020-1","시간표이름1",subjectList,true,"09:00","16:00")
-        val tt2 =TimeTable(1,"2020-1","시간표이름2",subjectList,true,"09:00","16:00")
-        val tt3 = TimeTable(1,"2020-1","시간표이름3",subjectList,true,"09:00","16:00")
+        val tt =TimeTable(1,"2020-1","시간표이름1",true,"09:00","16:00")
+        val tt2 =TimeTable(1,"2020-1","시간표이름2",true,"09:00","16:00")
+        val tt3 = TimeTable(1,"2020-1","시간표이름3",true,"09:00","16:00")
+
         list.apply {
             add(tt)
             add(tt2)
             add(tt3)
         }
         val list2: MutableList<TimeTable> = arrayListOf()
-        val tt4 = TimeTable(1,"2020-1","시간표이름1",subjectList,true,"09:00","16:00")
-        val tt5 = TimeTable(1,"2020-1","시간표이름2",subjectList,true,"09:00","16:00")
-        val tt6 =TimeTable(1,"2020-1","시간표이름3",subjectList,true,"09:00","16:00")
+        val tt4 = TimeTable(1,"2020-1","시간표이름1",true,"09:00","16:00")
+        val tt5 = TimeTable(1,"2020-1","시간표이름2",true,"09:00","16:00")
+        val tt6 =TimeTable(1,"2020-1","시간표이름3",true,"09:00","16:00")
         list2.apply {
             add(tt4)
             add(tt5)

@@ -26,6 +26,9 @@ import kotlinx.android.synthetic.main.activity_main_content.*
 import kotlinx.android.synthetic.main.toolbar_chatting.*
 
 class ChattingActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener {
+
+    lateinit var className : String
+
     lateinit var ChattingAdapter : ChattingAdapter
     val datas : MutableList<ChattingData> = mutableListOf<ChattingData>()
     private lateinit var database: DatabaseReference
@@ -51,6 +54,9 @@ class ChattingActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
 
             override fun onChildChanged(p0: DataSnapshot, p1: String?) {
             }
+
+        var intent = intent
+        className = intent.getStringExtra("class")
 
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
                 Log.d("파베불러오기",p0.value.toString())
@@ -191,6 +197,7 @@ class ChattingActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
         when(item.itemId){
             R.id.notice->{
                 val intent = Intent(this, NoticeActivity::class.java)
+                intent.putExtra("class", className)
                 startActivity(intent)
             }
 //            R.id.QnA-> Toast.makeText(this,"qna공간",Toast.LENGTH_SHORT).show()
