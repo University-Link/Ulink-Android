@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".timetable.TimeTableListActivity">
+    tools:context=".timetable.TimeTableListActivity"
+    android:background="@drawable/chatting_notic_hw_more_bg_under">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_timetablelist"
