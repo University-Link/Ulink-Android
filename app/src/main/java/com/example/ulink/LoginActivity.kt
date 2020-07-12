@@ -12,14 +12,14 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val sharedPref : SharedPreferences = getSharedPreferences("pref", Context.MODE_PRIVATE)
+       /* val sharedPref : SharedPreferences = getSharedPreferences("pref", Context.MODE_PRIVATE)
         val sharedEdit = sharedPref.edit()
 
         if(sharedPref.getBoolean("save", false))
-            et_id.setText(sharedPref.getString("id",""))
+            et_id.setText(sharedPref.getString("id",""))*/
 
         btn_login.setOnClickListener {
-            sharedEdit.putBoolean("save", checkbox_id_save.isChecked)
+            /*sharedEdit.putBoolean("save", checkbox_id_save.isChecked)
             if (sharedPref.getBoolean("save", false)) {
                 sharedEdit.putString("id", et_id.text.toString())
                 sharedEdit.commit()
@@ -27,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
             else{
                 sharedEdit.clear()
                 sharedEdit.commit()
-            }
+            }*/
 
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

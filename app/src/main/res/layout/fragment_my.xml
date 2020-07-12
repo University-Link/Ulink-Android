@@ -210,6 +210,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginBottom="7dp"
             android:drawableRight="@drawable/mypagr_btn_next"
             android:gravity="center_vertical"
             android:paddingLeft="14dp"
@@ -219,6 +220,7 @@
         <View
             android:layout_width="wrap_content"
             android:layout_height="1dp"
+            android:layout_marginBottom="7dp"
             android:background="@color/line" />
 
         <Button
@@ -227,6 +229,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginBottom="7dp"
             android:drawableRight="@drawable/mypagr_btn_next"
             android:gravity="center_vertical"
             android:paddingLeft="14dp"
@@ -235,6 +238,7 @@
         <View
             android:layout_width="wrap_content"
             android:layout_height="1dp"
+            android:layout_marginBottom="7dp"
             android:background="@color/line" />
 
         <Button
@@ -246,6 +250,7 @@
             android:drawableRight="@drawable/mypagr_btn_next"
             android:gravity="center_vertical"
             android:paddingLeft="14dp"
+            android:layout_marginBottom="7dp"
             android:background="@drawable/btn_mypage"/>
 
         <View
@@ -262,6 +267,7 @@
             android:drawableRight="@drawable/mypagr_btn_next"
             android:gravity="center_vertical"
             android:paddingLeft="14dp"
+            android:layout_marginBottom="7dp"
             android:background="@drawable/btn_mypage"/>
 
         <View

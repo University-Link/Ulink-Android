@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ulink" >
+    package="com.example.ulink">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".FilterNormalActivity"></activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,11 +25,10 @@
         <activity android:name=".NotificationActivity" />
         <activity android:name=".ScheduleActivity" />
         <activity android:name=".timetable.TimeTableEditActivity" />
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
         <activity android:name=".ChattingActivity" />
         <activity android:name=".NoticeActivity" />
-        <activity android:name=".NoticeAddActivity"/>
-
+        <activity android:name=".NoticeAddActivity" />
     </application>
 
 </manifest>
