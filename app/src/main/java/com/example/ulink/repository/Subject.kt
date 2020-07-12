@@ -17,5 +17,6 @@ data class Subject (
         var professor : String = "",
         var course : String = "",
         var isSample : Boolean = false,
-        var isCustom : Boolean = false
+        var isCustom : Boolean = false,
+        var number : String = ""
 ) : Parcelable

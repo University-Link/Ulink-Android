@@ -23,6 +23,8 @@
         <activity android:name=".timetable.TimeTableListActivity" />
         <activity android:name=".NotificationActivity" />
         <activity android:name=".ScheduleActivity" />
+        <activity android:name=".timetable.TimeTableDirectEditActivity" />
+        <activity android:name=".timetable.TimeTableDirectTypeActivity" />
         <activity android:name=".timetable.TimeTableEditActivity" />
         <activity android:name=".MainActivity"/>
         <activity android:name=".ChattingActivity" />

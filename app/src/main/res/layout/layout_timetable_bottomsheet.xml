@@ -1,79 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="178dp"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:id="@+id/layout_setasmain"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
+        android:layout_height="39dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
 
         <ImageView
             android:id="@+id/ic_setasmain"
+            android:src="@drawable/main_setting_ic_check"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="26dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
+
         <TextView
-            android:text="1111111111111"
+            android:text="대표 시간표로 설정"
+            android:textColor="@color/text1"
             android:id="@+id/tv_setasmain"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"/>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layout_changename"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
+        android:layout_height="39dp"
+        >
 
         <ImageView
             android:id="@+id/ic_changename"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:src="@drawable/main_setting_ic_edit"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="26dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
         <TextView
             android:id="@+id/tv_changename"
-            android:text="1111111111111"
-
+            android:text="이름 변경"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textColor="@color/text1"
+            android:layout_gravity="center_vertical"/>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layout_saveasimage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
+        android:layout_height="39dp"
+        >
 
         <ImageView
             android:id="@+id/ic_saveasimage"
+            android:src="@drawable/main_setting_gallery"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="26dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
         <TextView
             android:id="@+id/tv_saveasimage"
             android:layout_width="wrap_content"
-            android:text="1111111111111"
-
+            android:text="이미지로 저장"
+            android:textColor="@color/text1"
+            android:layout_gravity="center_vertical"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layout_delete"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
+        android:layout_height="39dp"
+        >
 
         <ImageView
+            android:src="@drawable/main_setting_delete"
             android:id="@+id/ic_delete"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="26dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
         <TextView
             android:id="@+id/tv_delete"
-            android:text="1111111111111"
-
+            android:text="시간표 삭제"
+            android:textColor="#fd4165"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"/>
     </LinearLayout>
 
 </LinearLayout>
