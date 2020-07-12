@@ -31,8 +31,14 @@ class TimeTableFilterSearchFragment() : Fragment() {
         val subjectRepList: MutableList<SubjectExpandableAdapter.SubjectRep> = arrayListOf(
                 SubjectExpandableAdapter.SubjectRep("전자회로I", 3, "박상규"),
                 SubjectExpandableAdapter.SubjectRep("전자회로II", 2, "박상규"),
-                SubjectExpandableAdapter.SubjectRep("전자회로3", 1, "박상규"),
-                SubjectExpandableAdapter.SubjectRep("전자회로4", 3, "박상규")
+                SubjectExpandableAdapter.SubjectRep("전자회로I", 1, "박상규"),
+                SubjectExpandableAdapter.SubjectRep("전자회로I", 3, "박상규"),
+                SubjectExpandableAdapter.SubjectRep("전자회로I", 3, "박상규"),
+                SubjectExpandableAdapter.SubjectRep("전자회로I", 3, "박상규"),
+                SubjectExpandableAdapter.SubjectRep("전자회로I", 3, "박상규"),
+                SubjectExpandableAdapter.SubjectRep("전자회로I", 3, "박상규"),
+                SubjectExpandableAdapter.SubjectRep("전자회로I", 3, "박상규"),
+                SubjectExpandableAdapter.SubjectRep("전자회로I", 3, "박상규")
         )
 
         val subjectList: MutableList<Subject> = arrayListOf()
@@ -40,6 +46,10 @@ class TimeTableFilterSearchFragment() : Fragment() {
         subjectList.add(Subject(2, "전자회로I", "12:30", "13:00", "mon", "과목장소", 1, true, isSample = true))
         subjectList.add(Subject(3, "전자회로I", "11:00", "13:00", "fri", "과목장소", 1, true, isSample = true))
         subjectList.add(Subject(4, "전자회로I", "10:00", "12:00", "wed", "과목장소", 1, true, isSample = true))
+        subjectList.add(Subject(4, "전자회로I", "13:00", "16:00", "thu", "과목장소", 1, true, isSample = true))
+        subjectList.add(Subject(4, "전자회로I", "13:00", "17:30", "wed", "과목장소", 1, true, isSample = true))
+        subjectList.add(Subject(4, "전자회로I", "13:00", "17:30", "wed", "과목장소", 1, true, isSample = true))
+        subjectList.add(Subject(4, "전자회로I", "13:00", "17:30", "wed", "과목장소", 1, true, isSample = true))
 
         val subjectList2: MutableList<Subject> = arrayListOf()
         subjectList2.add(Subject(1, "전자회로II", "09:00", "12:00", "mon", "과목장소", 1, true))
@@ -59,60 +69,151 @@ class TimeTableFilterSearchFragment() : Fragment() {
 
         ev_filterandsearch.setAdapter(adapter)
 
-//
-//        TODO 여기서 OnClick으로 subject클릭하면 preview를 시간표에 표시하기!
-//            Toast.makeText(requireContext(),"${dataList[subjectRepList[groupPosition].subjectName]!!.get(childPosition)}", Toast.LENGTH_SHORT).show()
 
         val previewList: MutableList<View> = arrayListOf()
-        var firstClick = true
-
 
         ev_filterandsearch.setOnGroupClickListener { parent, v, groupPosition, id ->
-            ev_filterandsearch.collapseGroup(groupPosition)
+            (activity as TimeTableEditActivity).rollBack()
+
+            if (parent.isGroupExpanded(groupPosition)) {
+                parent.collapseGroup(groupPosition)
+            } else {
+                parent.expandGroup(groupPosition, false)
+            }
+
+            for (i in previewList) {
+                i.visibility = View.GONE
+            }
             previewList.clear()
-            firstClick = true
-            false
+
+            true
         }
 
+        val previousGroup = -1
+        val previousChild = -1
+        val previousViewList: MutableList<View> = arrayListOf()
+
+        
+//        TODO 정리
+//         전체 onclick은 닫혀있는거 처음으로 열때만
+//         한번 열린것은 안에서 관리
 
         ev_filterandsearch.setOnChildClickListener { parent, v, groupPosition, childPosition, id ->
 
-            (activity as TimeTableEditActivity).addToSampleTable(dataList[subjectRepList[groupPosition].subjectName]!![childPosition])
-            Log.d("tag", " other clicked")
-            Log.d("tag", "add to table1")
+            Log.d("tag", "클릭됨 groupposi = $groupPosition")
+            Log.d("tag", "클릭됨 childposi = $childPosition")
 
             val assess = v.findViewById<Button>(R.id.btn_assess)
             val cart = v.findViewById<Button>(R.id.btn_cart)
             val totable = v.findViewById<Button>(R.id.btn_totable)
 
-            assess.visibility = View.VISIBLE
-            cart.visibility = View.VISIBLE
-            totable.visibility = View.VISIBLE
 
-            if (!firstClick) {
+//            ev_filterandsearch.setSelectedChild(groupPosition,childPosition,false)
+
+            (activity as TimeTableEditActivity).rollBack()
+            (activity as TimeTableEditActivity).addToSampleTable(dataList[subjectRepList[groupPosition].subjectName]!![childPosition])
+//            Log.d("tag", " other clicked")
+//            Log.d("tag", "add to table1")
+
+            if (previewList.size>0){
+                Log.d("tag","새로 접었다 폈다 첫클릭 아님 밑에거 ㄴㄴ ")
+
                 val presassess = previewList.get(0)
                 val precart = previewList.get(1)
                 val pretotable = previewList.get(2)
+
                 presassess.visibility = View.GONE
                 precart.visibility = View.GONE
                 pretotable.visibility = View.GONE
 
                 previewList.clear()
 
-//               리스트에 추가
+                previewList.add(assess)
+                previewList.add(cart)
+                previewList.add(totable)
 
-
+            } else {
+                previewList.clear()
+                previewList.add(assess)
+                previewList.add(cart)
+                previewList.add(totable)
             }
-            firstClick = false
-            previewList.add(assess)
-            previewList.add(cart)
-            previewList.add(totable)
-            
-            v.setOnClickListener {
 
+            assess.visibility = View.VISIBLE
+            cart.visibility = View.VISIBLE
+            totable.visibility = View.VISIBLE
+
+
+            v.setOnClickListener {
+                Log.d("tag", v.toString())
+
+                Log.d("tag","이미 저장된거 접었다 폈다")
                 //                한번씩 돌고 같은뷰 접었다 폈다
-                if (previewList[0] == v.findViewById(R.id.btn_assess)) {
-                    previewList.clear()
+                if(previewList.size>0){
+                    if (previewList[0] == v.findViewById(R.id.btn_assess)) {
+
+                        previewList.clear()
+
+                        if (assess.visibility == View.VISIBLE) {
+                            assess.visibility = View.GONE
+                        } else {
+                            assess.visibility = View.VISIBLE
+                        }
+                        if (cart.visibility == View.VISIBLE) {
+                            cart.visibility = View.GONE
+                        } else {
+                            cart.visibility = View.VISIBLE
+                        }
+                        if (totable.visibility == View.VISIBLE) {
+                            totable.visibility = View.GONE
+                        } else {
+                            totable.visibility = View.VISIBLE
+                        }
+
+                        previewList.add(assess)
+                        previewList.add(cart)
+                        previewList.add(totable)
+
+                        if (assess.visibility == View.GONE ){
+//                    rollback()
+                            (activity as TimeTableEditActivity).rollBack()
+//                        Log.d("tag", "rollback")
+                        } else {
+                            (activity as TimeTableEditActivity).addToSampleTable(dataList[subjectRepList[groupPosition].subjectName]!![childPosition])
+//                        Log.d("tag", "add to table2")
+                        }
+
+//                    todo A 펼쳤다가 A 접었다가 a 펼치고 B 펼치면 A 롤백
+
+//                한번씩 돌고 다른 뷰를 펼쳤을때
+                    } else {
+                        val preassess = previewList.get(0)
+                        val precart = previewList.get(1)
+                        val pretotable = previewList.get(2)
+
+                        preassess.visibility = View.GONE
+                        precart.visibility = View.GONE
+                        pretotable.visibility = View.GONE
+
+
+                        previewList.clear()
+
+
+                        assess.visibility = View.VISIBLE
+                        cart.visibility = View.VISIBLE
+                        totable.visibility = View.VISIBLE
+
+                        (activity as TimeTableEditActivity).rollBack()
+                        (activity as TimeTableEditActivity).addToSampleTable(dataList[subjectRepList[groupPosition].subjectName]!![childPosition])
+//
+//                    Log.d("tag", "rollback")
+//                    Log.d("tag", "add to table3")
+
+                        previewList.add(assess)
+                        previewList.add(cart)
+                        previewList.add(totable)
+                    }
+                } else {
                     if (assess.visibility == View.VISIBLE) {
                         assess.visibility = View.GONE
                     } else {
@@ -128,43 +229,6 @@ class TimeTableFilterSearchFragment() : Fragment() {
                     } else {
                         totable.visibility = View.VISIBLE
                     }
-                    previewList.add(assess)
-                    previewList.add(cart)
-                    previewList.add(totable)
-
-                    if (assess.visibility == View.GONE ){
-//                    rollback()
-                        (activity as TimeTableEditActivity).rollBack()
-                        Log.d("tag", "rollback")
-                    } else {
-                        (activity as TimeTableEditActivity).addToSampleTable(dataList[subjectRepList[groupPosition].subjectName]!![childPosition])
-                        Log.d("tag", "add to table2")
-
-                    }
-
-
-//                한번씩 돌고 다른 뷰를 펼쳤을때
-                } else {
-                    val preassess = previewList.get(0)
-                    val precart = previewList.get(1)
-                    val pretotable = previewList.get(2)
-
-                    preassess.visibility = View.GONE
-                    precart.visibility = View.GONE
-                    pretotable.visibility = View.GONE
-
-                    previewList.clear()
-
-
-                    assess.visibility = View.VISIBLE
-                    cart.visibility = View.VISIBLE
-                    totable.visibility = View.VISIBLE
-
-                    (activity as TimeTableEditActivity).rollBack()
-                    (activity as TimeTableEditActivity).addToSampleTable(dataList[subjectRepList[groupPosition].subjectName]!![childPosition])
-
-                    Log.d("tag", "rollback")
-                    Log.d("tag", "add to table3")
 
                     previewList.add(assess)
                     previewList.add(cart)
@@ -172,6 +236,7 @@ class TimeTableFilterSearchFragment() : Fragment() {
                 }
 
             }
+
 
 
             v.findViewById<Button>(R.id.btn_cart).setOnClickListener {
@@ -187,56 +252,15 @@ class TimeTableFilterSearchFragment() : Fragment() {
 //                dataList[subjectRepList[groupPosition].subjectName]!![childPosition]
             }
 
-
 //          여기는 시간표로 완전 등록
             v.findViewById<Button>(R.id.btn_totable).setOnClickListener {
                 (activity as TimeTableEditActivity).addToTable(dataList[subjectRepList[groupPosition].subjectName]!![childPosition])
+                Log.d("tag,", "plus clicked")
             }
 
-            false
+            true
         }
 
-
-//        Drawable icon = getResources().getDrawable(R.drawable.btn_expandable_group_indicator_state);
-//
-//        exList.setGroupIndicator(icon);
-//
-//
-//
-//        넣어준다음 위치를 변경 시킬 수 잇다..
-//
-//
-//
-//        exList.setIndicatorBounds(m_view.getList().getRight() - 100, m_view.getList().getWidth() - 100);
-//
-//
-//
-//                exList.setGroupIndicator(null);
-//
-//
-//
-//        시켜준다잉..
-//
-//
-//
-//                그럼 없애고 똑같은 기능을 가진 view 를 만들라면??
-//
-//
-//
-//        @Override
-//        public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent)
-//        {
-//
-//            if (isExpanded)
-//            {
-//                imgIndicator.setImageResource(R.drawable.arrow_down);
-//            }
-//            else
-//            {
-//                imgIndicator.setImageResource(R.drawable.arrow_up);
-//            }
-//
-//        }
 
     }
 

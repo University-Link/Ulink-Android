@@ -2,6 +2,7 @@ package com.example.ulink.timetable
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -15,9 +16,13 @@ import androidx.viewpager2.widget.MarginPageTransformer
 import com.example.ulink.R
 import com.example.ulink.repository.Subject
 import com.example.ulink.repository.TimeTable
+import com.example.ulink.utils.deepCopy
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_time_table_edit.*
+
+
+const val REQUEST_DIRECT_ACTIVITY = 999
 
 class TimeTableEditActivity : AppCompatActivity() {
 
@@ -43,6 +48,8 @@ class TimeTableEditActivity : AppCompatActivity() {
         }
 
         Handler().postDelayed({
+
+// TODO sharedpreference 사용해서 영구 저장
             showCheckGrade()
         }, 400)
 
@@ -50,11 +57,28 @@ class TimeTableEditActivity : AppCompatActivity() {
         setClassSearch()
 
         btn_direct.setOnClickListener {
-
+            showAddDialog()
         }
         btn_tableplus.setOnClickListener {
             showDialog()
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_DIRECT_ACTIVITY){
+            if (resultCode == 200){
+                val timeTableAdded = data?.getParcelableExtra<TimeTable>("timeTable")
+                if (timeTableAdded != null) {
+                    timeTableList[vp_timetableadd.currentItem] = deepCopy(timeTableAdded)
+                    mAdapter.replaceAtList(vp_timetableadd.currentItem, deepCopy(timeTableAdded))
+                    mAdapter.replaceAtSampleList(vp_timetableadd.currentItem, deepCopy(timeTableAdded))
+                    mAdapter.reDrawFragment(vp_timetableadd.currentItem)
+                    Log.d("tag", "timetable replaced")
+                }
+            }
+        }
+
     }
 
     fun formatToFloat(time: String): Float {
@@ -76,11 +100,13 @@ class TimeTableEditActivity : AppCompatActivity() {
 
 
     fun addToTable(subject: Subject) {
-        val position = vp_timetableadd.currentItem
 
+        val position = vp_timetableadd.currentItem
 //        TODO 여기서 DB에 저장도 해야함
         val timeTable = mAdapter.timeTableList[position]
+
         if (!checkIsOver(subject, timeTable)) {
+            subject.isSample = false
             timeTable.subjectList.add(subject)
             mAdapter.replaceAtList(position, timeTable)
             mAdapter.reDrawFragment(position)
@@ -90,33 +116,32 @@ class TimeTableEditActivity : AppCompatActivity() {
             Toast.makeText(this, "시간표에 등록 실패", Toast.LENGTH_SHORT).show()
         }
 
-        Log.d("tag","addToTable = ${timeTable.toString()}")
     }
+
 
     fun addToSampleTable(subject: Subject) {
         val position = vp_timetableadd.currentItem
-
-        val timeTable = mAdapter.timeTableSampleList[position]
-
-//        samplelist의 timetable.subjectlist를 초기화 시킬까?
-//        아니면 samplelist에서 subject의 isSample로 그거만 그릴까? 후자가 나은듯
-
+        var timeTable: TimeTable = mAdapter.timeTableSampleList.get(position)
         timeTable.subjectList.add(subject)
         mAdapter.replaceAtSampleList(position, timeTable)
         mAdapter.reDrawFragment(position)
+        mAdapter.scrollToPosition(position, subject)
         vp_timetableadd.setCurrentItem(position, false)
-
-        Log.d("tag","addTosampleTable = ${timeTable.toString()}")
-        Log.d("tag","addTosampleTable = ${mAdapter.timeTableList[position].toString()}")
 
     }
 
 
-    fun rollBack(){
-        mAdapter.timeTableSampleList[vp_timetableadd.currentItem] = mAdapter.timeTableList[vp_timetableadd.currentItem]
+//    TODO 미리보기 저장된거 색깔 왜 그러지 = Sample로 들어가서 그런듯! 추가할때는 sample말고 그냥으로!
+//    DRAWER 고치기
+
+
+    fun rollBack() {
+
+        val position = vp_timetableadd.currentItem
+        mAdapter.replaceAtSampleList(position, mAdapter.timeTableList[position])
         mAdapter.reDrawFragment(vp_timetableadd.currentItem)
+        mAdapter.scrollToTop(position)
         vp_timetableadd.setCurrentItem(vp_timetableadd.currentItem, false)
-        Log.d("tag","rollbacked")
 
     }
 
@@ -131,8 +156,8 @@ class TimeTableEditActivity : AppCompatActivity() {
         val et = layout.findViewById<EditText>(R.id.et_name)
 
         layout.findViewById<Button>(R.id.btn_ok).setOnClickListener {
-            val timeTable = TimeTable(1, "2020-2", et.text.toString(), false, "09:00", "18:00")
 
+            val timeTable = TimeTable(1, "2020-2", et.text.toString(), false, "09:00", "18:00")
 //          EditActivity에 넣어줄 필요가 있나? 이걸
 //            timeTableList.add(timeTable)
 
@@ -242,4 +267,28 @@ class TimeTableEditActivity : AppCompatActivity() {
         dialog.show()
     }
 
+    fun showAddDialog(){
+        val builder = AlertDialog.Builder(this)
+        val layout = LayoutInflater.from(this).inflate(R.layout.dialog_direct_add, null)
+        builder.setView(layout)
+
+        val dialog = builder.create()
+
+        layout.findViewById<Button>(R.id.btn_drag).setOnClickListener {
+            val intent = Intent(this, TimeTableDirectEditActivity::class.java)
+            intent.putExtra("timeTable",mAdapter.timeTableList[vp_timetableadd.currentItem])
+            startActivityForResult(intent, REQUEST_DIRECT_ACTIVITY)
+            dialog.dismiss()
+        }
+        layout.findViewById<Button>(R.id.btn_type).setOnClickListener {
+            dialog.dismiss()
+        }
+        layout.findViewById<Button>(R.id.btn_cancel).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        dialog.show()
+    }
 }

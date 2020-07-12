@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Subject (
-        var id : Long,
+        var id : Long = 0,
         var name : String,
         var starttime : String,
         var endtime : String,
@@ -16,5 +16,6 @@ data class Subject (
         var credit : Float? = 0f,
         var professor : String = "",
         var course : String = "",
-        var isSample : Boolean = false
+        var isSample : Boolean = false,
+        var isCustom : Boolean = false
 ) : Parcelable
