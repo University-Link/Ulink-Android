@@ -22,7 +22,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) {
+class TimeTableDrawerDrag(val context: Context, val layoutInflater: LayoutInflater) {
 
     constructor(context: Context, layoutInflater: LayoutInflater, onClick: TimeTableFragment.subjectOnClick) : this(context, layoutInflater) {
         this.onClick = onClick
@@ -40,7 +40,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 
     var timeTable = TimeTable(0, "", "", false, "", "")
 
-    var endhour = 18
+    var endhour = 21
     var starthour = 9
 
     var timecolumnwidth = 0.0f
@@ -48,9 +48,14 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
     var columnwidth = 0.0f
     var rowheight = 0.0f
 
+    var columngap = 0.0f
+
 
     var minHeight = 60.0f
 
+    var list : ArrayList<Float?> = arrayListOf()
+
+    lateinit var testview : TimeTableDragView
 
     fun draw(frameLayout: FrameLayout) {
         val root = frameLayout.findViewById<LinearLayout>(R.id.timetable_root)
@@ -60,7 +65,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
             starthour = (formatToFloat(timeTable.startTime)).toInt()
         }
 
-        if ((formatToFloat(timeTable.endTime)).toInt()>18){
+        if ((formatToFloat(timeTable.endTime)).toInt()>21){
             endhour = (formatToFloat(timeTable.endTime)).toInt()
         }
 
@@ -73,6 +78,32 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
         drawHorizontalLine(root)
         drawTimeColumn(root)
         drawColums(root)
+    }
+
+    fun getSubject() : MutableList<Subject>{
+//       testview.drawlist[0].
+        val size = testview.drawlist.size
+        val subjectList : MutableList<Subject> = arrayListOf()
+        for (i in 0 until  size){
+            subjectList.add(testview.convertDrawToSubject(testview.drawlist[i]))
+        }
+        return subjectList
+    }
+
+    fun getTable() : TimeTable {
+        timeTable.subjectList.addAll(getSubject())
+        return timeTable
+    }
+
+    @ExperimentalStdlibApi
+    fun rollBack(){
+        testview.rollBack()
+    }
+
+    fun setDragView(root : View){
+        testview = TimeTableDragView(context, root, timecolumnwidth , dayheight, columnwidth, rowheight, columngap)
+        Log.d("tag","timecolumdwidth = $timecolumnwidth")
+        (root.parent as FrameLayout).addView(testview)
     }
 
     fun drawDayRow(linearLayout: LinearLayout){
@@ -116,6 +147,8 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 
         linearLayoutRow.weightSum = 4 * (endhour - starthour).toFloat()
 
+        Log.d("tag",linearLayoutRow.weightSum.toString())
+
 //        until 안쓰는 이유 = 밑에 한칸 추가해주기
         for (i in starthour..endhour) {
             val row = layoutInflater.inflate(
@@ -125,8 +158,9 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
             ) as TextView
             row.setBackgroundResource(R.drawable.bottom_line)
 //          이걸로 최소 줄 크기 조절!
-            linearLayoutRow.addView(row)
-
+            row.minHeight =
+                    TypedValue.applyDimension(1, minHeight, context.resources.displayMetrics)
+                            .toInt()
             val mGlobalListner = ViewTreeObserver.OnGlobalLayoutListener {
                 if (row.measuredHeight > 0.0) {
                     rowheight = row.measuredHeight.toFloat()
@@ -134,9 +168,8 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
             }
             row.viewTreeObserver.addOnGlobalLayoutListener(mGlobalListner)
 
-
+            linearLayoutRow.addView(row)
         }
-
 //      view를 추가할때 이미 다른곳에 추가되어있으면 에러나니까 위에 infalte할때 attachtoroot는 false로!
         linearLayoutWhole.addView(linearLayoutRow)
     }
@@ -539,12 +572,14 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
             verticallines.addView(verticalline)
         }
         linearLayout.addView(verticallines)
+
         val mGlobalListner = ViewTreeObserver.OnGlobalLayoutListener {
             if (verticallines.measuredWidth > 0.0) {
-                columnwidth = verticallines.width.toFloat()
+                columngap = verticallines.width.toFloat()
             }
         }
         verticallines.viewTreeObserver.addOnGlobalLayoutListener(mGlobalListner)
+
 
     }
 

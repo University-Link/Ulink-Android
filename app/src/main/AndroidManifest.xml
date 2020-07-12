@@ -15,6 +15,7 @@
         android:usesCleartextTraffic="true" >
         <activity android:name=".ScheduleNoticeActivity" >
         </activity>
+        <activity android:name=".timetable.TimeTableDirectEditActivity"></activity>
         <activity android:name=".timetable.TimeTableListActivity" />
         <activity android:name=".NotificationActivity" />
         <activity android:name=".ScheduleActivity" />
@@ -34,5 +35,8 @@
         <activity android:name=".NoticeClassMoreActivity"/>
 
     </application>
+    
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
