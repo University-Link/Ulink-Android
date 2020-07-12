@@ -8,4 +8,11 @@
 
     </style>
 
+    <style name="Cursor" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/main</item>
+    </style>
+
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/main</item>
+    </style>
 </resources>

@@ -12,7 +12,9 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
 
+    <string name="first_popup">"캘린더는 과목별 채팅방에 등록된 공지가\n 자동으로 추가되는 일정 관리 시스템입니다."</string>
     <string-array name="time">
+        <item>시간정보없음</item>
         <item>00:00</item>
         <item>01:00</item>
         <item>02:00</item>
@@ -38,6 +40,5 @@
         <item>22:00</item>
         <item>23:00</item>
         <item>24:00</item>
-        <item>시간정보없음</item>
     </string-array>
 </resources>

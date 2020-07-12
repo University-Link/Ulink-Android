@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/layout_schedule_background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:paddingTop="13dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/white_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Button
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginLeft="18dp"
+        android:background="@drawable/ic_clock"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <Button
+        android:layout_width="26dp"
+        android:layout_height="29dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="7dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/timetableadd_textfield_delete"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@
 
     <include
         android:id="@+id/include"
-        layout="@layout/toolbar_schedulenotice" />
+        layout="@layout/toolbar_schedule_notice" />
 
 
     <LinearLayout

@@ -13,9 +13,15 @@ import kotlinx.android.synthetic.main.activity_chatting.*
 import kotlinx.android.synthetic.main.toolbar_chatting.*
 
 class ChattingActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener {
+
+    lateinit var className : String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatting)
+
+        var intent = intent
+        className = intent.getStringExtra("class")
 
         img_hamburger.setOnClickListener {
             setDrawerLayout(drawer_layout_main, nav_view as NavigationView)
@@ -54,6 +60,7 @@ class ChattingActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
         when(item.itemId){
             R.id.notice->{
                 val intent = Intent(this, NoticeActivity::class.java)
+                intent.putExtra("class", className)
                 startActivity(intent)
             }
 //            R.id.QnA-> Toast.makeText(this,"qna공간",Toast.LENGTH_SHORT).show()

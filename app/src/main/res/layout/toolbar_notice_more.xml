@@ -22,11 +22,11 @@
             android:src="@drawable/back" />
 
         <TextView
-            android:id="@+id/tv_schedule_toolbar"
+            android:id="@+id/tv_notice_more_toolbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="일정"
+            android:text="과제공지"
             android:textColor="@color/text1"
             android:textSize="15sp" />
 
