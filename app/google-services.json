@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "522777487259",
+    "firebase_url": "https://ulink-chat.firebaseio.com",
+    "project_id": "ulink-chat",
+    "storage_bucket": "ulink-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:522777487259:android:7712c2ea89adc65685633e",
+        "android_client_info": {
+          "package_name": "com.example.ulink"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "522777487259-ujvr1952t2aub54fd5k7etivsrtlqkbc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ulink",
+            "certificate_hash": "f8dccc0db5f064135420ca6a0e642e0825e98e27"
+          }
+        },
+        {
+          "client_id": "522777487259-3j1e0a6kgi13jn562cbkdjlijdt18bd5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKkmWTwGsBIk7U3ma50N7IYosSGWqpLzY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "522777487259-3j1e0a6kgi13jn562cbkdjlijdt18bd5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "522777487259-t8tcqsqb31m1iegnjol7hbh2c1uo91tm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "kone.ulink"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

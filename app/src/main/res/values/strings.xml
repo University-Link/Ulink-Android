@@ -40,4 +40,10 @@
         <item>24:00</item>
         <item>시간정보없음</item>
     </string-array>
+
+    <string-array name="filter_setting">
+        <item>과목명</item>
+        <item>교수명</item>
+        <item>학수번호</item>
+    </string-array>
 </resources>
