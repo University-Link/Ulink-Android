@@ -12,13 +12,11 @@ import com.example.ulink.NotificationActivity
 import com.example.ulink.R
 import com.example.ulink.repository.Subject
 import com.example.ulink.repository.TimeTable
-import com.example.ulink.timetable.BottomSheetFragment
-import com.example.ulink.timetable.TimeTableDrawer
-import com.example.ulink.timetable.TimeTableEditActivity
-import com.example.ulink.timetable.TimeTableListActivity
+import com.example.ulink.timetable.*
 import kotlinx.android.synthetic.main.fragment_time_table.*
 import kotlin.collections.ArrayList
 
+const val REQUEST_TIMETABLE_LIST_ACTIVITY = 777
 
 class TimeTableFragment : Fragment() {
 
@@ -101,12 +99,16 @@ class TimeTableFragment : Fragment() {
 //           intent로 받아올 필요있나? 걍 서버에서 계속 받아오자
 //           clean architecture이용 local도 파야겠네
 //            시간표 작성시 -> local, remote저장, cache invalidate'
-            startActivity(Intent(context, TimeTableListActivity::class.java))
+            startActivityForResult(Intent(context, TimeTableListActivity::class.java), REQUEST_TIMETABLE_LIST_ACTIVITY)
         }
 
         btn_setting.setOnClickListener {
             val bottomsheet = BottomSheetFragment()
             fragmentManager?.let { it -> bottomsheet.show(it,bottomsheet.tag) }
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

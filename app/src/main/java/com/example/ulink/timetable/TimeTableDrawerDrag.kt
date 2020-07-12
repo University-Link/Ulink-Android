@@ -12,6 +12,7 @@ import android.view.ViewTreeObserver
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.ulink.R
 import com.example.ulink.fragment.TimeTableFragment
@@ -56,6 +57,7 @@ class TimeTableDrawerDrag(val context: Context, val layoutInflater: LayoutInflat
     var list : ArrayList<Float?> = arrayListOf()
 
     lateinit var testview : TimeTableDragView
+    lateinit var onDrawListener: onDrawListener
 
     fun draw(frameLayout: FrameLayout) {
         val root = frameLayout.findViewById<LinearLayout>(R.id.timetable_root)
@@ -85,13 +87,31 @@ class TimeTableDrawerDrag(val context: Context, val layoutInflater: LayoutInflat
         val size = testview.drawlist.size
         val subjectList : MutableList<Subject> = arrayListOf()
         for (i in 0 until  size){
+
             subjectList.add(testview.convertDrawToSubject(testview.drawlist[i]))
         }
         return subjectList
     }
 
-    fun getTable() : TimeTable {
-        timeTable.subjectList.addAll(getSubject())
+    
+//    TODO  이게 여기서 하는게 맞나? modify를 눌렀을때 그려진거 가져와서 작업후 그렇게 그려진거를 다시 timetable에 넣어줘야함
+    fun getAddedTable() : TimeTable {
+
+        var check = 0
+
+        val subjectDrawed = getSubject()
+        for(i in 0 until subjectDrawed.size){
+            if (checkIsOver(subjectDrawed[i], timeTable)){
+                Toast.makeText(context,"중복된 과목이 있습니다", Toast.LENGTH_SHORT).show()
+//        TODO    이게 하나라도 있으면 add 중지 해야함
+                break
+            }
+            check += 1
+        }
+
+        if (check==subjectDrawed.size-1){
+            timeTable.subjectList.addAll(getSubject())
+        }
         return timeTable
     }
 
@@ -104,7 +124,21 @@ class TimeTableDrawerDrag(val context: Context, val layoutInflater: LayoutInflat
         testview = TimeTableDragView(context, root, timecolumnwidth , dayheight, columnwidth, rowheight, columngap)
         Log.d("tag","timecolumdwidth = $timecolumnwidth")
         (root.parent as FrameLayout).addView(testview)
+        testview.onDrawListener = this.onDrawListener
     }
+
+    fun checkIsOver(subject: Subject, timeTable: TimeTable): Boolean {
+
+        var check = false
+        for (s in timeTable.subjectList!!) {
+            if (subject.day == s.day) {
+                check = !(formatToFloat(subject.endtime) <= formatToFloat(s.starttime) || formatToFloat(subject.starttime) >= formatToFloat(s.endtime))
+                if (check) return check
+            }
+        }
+        return check
+    }
+
 
     fun drawDayRow(linearLayout: LinearLayout){
         val dayOfWeek = 5

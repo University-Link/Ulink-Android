@@ -22,7 +22,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_time_table_edit.*
 
 
-const val REQUEST_DIRECT_ACTIVITY = 999
+const val REQUEST_DIRECT_EDIT_ACTIVITY = 999
+const val REQUEST_DIRECT_TYPE_ACTIVITY = 888
 
 class TimeTableEditActivity : AppCompatActivity() {
 
@@ -35,7 +36,6 @@ class TimeTableEditActivity : AppCompatActivity() {
 //    TODO Edit된 timetable 어떡할건지와 어떻게 edit할건지?
 //    TimeTableFilterSearchFragment랑 TimeTableCandidatorFragment의 onclick을 얘가 받아서
 //    timeTableList의 currentitem에 draw해줘야함
-
 //    TODO
 //     클릭했을때 깜빡이는거 해결
 
@@ -66,7 +66,7 @@ class TimeTableEditActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_DIRECT_ACTIVITY){
+        if (requestCode == REQUEST_DIRECT_EDIT_ACTIVITY){
             if (resultCode == 200){
                 val timeTableAdded = data?.getParcelableExtra<TimeTable>("timeTable")
                 if (timeTableAdded != null) {
@@ -130,13 +130,10 @@ class TimeTableEditActivity : AppCompatActivity() {
 
     }
 
-
 //    TODO 미리보기 저장된거 색깔 왜 그러지 = Sample로 들어가서 그런듯! 추가할때는 sample말고 그냥으로!
 //    DRAWER 고치기
 
-
     fun rollBack() {
-
         val position = vp_timetableadd.currentItem
         mAdapter.replaceAtSampleList(position, mAdapter.timeTableList[position])
         mAdapter.reDrawFragment(vp_timetableadd.currentItem)
@@ -211,7 +208,6 @@ class TimeTableEditActivity : AppCompatActivity() {
         vp_timetableeditor.adapter = mEditorAdapter
         TabLayoutMediator(tl_timetableeditor, vp_timetableeditor, object : TabLayoutMediator.TabConfigurationStrategy {
             override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
-
                 val tablayout = LayoutInflater.from(applicationContext).inflate(R.layout.tab_timetableeditor, null)
 
                 when (position) {
@@ -276,11 +272,16 @@ class TimeTableEditActivity : AppCompatActivity() {
 
         layout.findViewById<Button>(R.id.btn_drag).setOnClickListener {
             val intent = Intent(this, TimeTableDirectEditActivity::class.java)
-            intent.putExtra("timeTable",mAdapter.timeTableList[vp_timetableadd.currentItem])
-            startActivityForResult(intent, REQUEST_DIRECT_ACTIVITY)
+            intent.putExtra("timeTable", deepCopy(mAdapter.timeTableList[vp_timetableadd.currentItem]))
+            startActivityForResult(intent, REQUEST_DIRECT_EDIT_ACTIVITY)
             dialog.dismiss()
         }
+
         layout.findViewById<Button>(R.id.btn_type).setOnClickListener {
+            val intent = Intent(this, TimeTableDirectTypeActivity::class.java)
+            intent.putExtra("timeTable", deepCopy(mAdapter.timeTableList[vp_timetableadd.currentItem]))
+            startActivityForResult(intent, REQUEST_DIRECT_TYPE_ACTIVITY)
+
             dialog.dismiss()
         }
         layout.findViewById<Button>(R.id.btn_cancel).setOnClickListener {
