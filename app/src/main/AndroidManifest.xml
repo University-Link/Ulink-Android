@@ -35,7 +35,6 @@
         <activity android:name=".NoticeActivity" />
         <activity android:name=".NoticeMoreActivity" />
         <activity android:name=".NoticeAddActivity"/>
-        <activity android:name=".NoticeMoreActivity"/>
         <activity android:name=".DirectTimeTableActivity"/>
 
     </application>

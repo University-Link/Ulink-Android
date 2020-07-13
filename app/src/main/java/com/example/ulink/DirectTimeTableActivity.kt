@@ -5,10 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import kotlinx.android.synthetic.main.activity_direct_time_table.*
-import kotlinx.android.synthetic.main.activity_direct_time_table.et_title
+import kotlinx.android.synthetic.main.activity_direct_type_time_table.*
 import kotlinx.android.synthetic.main.activity_filter_normal.*
 import kotlinx.android.synthetic.main.activity_notice_add.*
+import kotlinx.android.synthetic.main.activity_notice_add.et_title
 import kotlinx.android.synthetic.main.toolbar_direct_time_table.*
 
 class DirectTimeTableActivity : AppCompatActivity() {
@@ -27,7 +27,7 @@ class DirectTimeTableActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_direct_time_table)
+        setContentView(R.layout.activity_direct_type_time_table)
 
         btn_check.setOnClickListener() {
             if (et_title.text.toString() == "") showToast("제목을 설정해주세요.")
