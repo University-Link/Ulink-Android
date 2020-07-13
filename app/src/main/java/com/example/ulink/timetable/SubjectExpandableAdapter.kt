@@ -70,7 +70,7 @@ class SubjectExpandableAdapter(val context : Context) : BaseExpandableListAdapte
         }
         view!!.findViewById<TextView>(R.id.tv_class_name).text = subject.name
         view.findViewById<TextView>(R.id.tv_professor_name).text = subject.professor
-        view.findViewById<TextView>(R.id.tv_time).text = subject.starttime + subject.endtime
+        view.findViewById<TextView>(R.id.tv_time).text = subject.startTime + subject.endTime
         view.findViewById<TextView>(R.id.tv_place).text = subject.place
         view.findViewById<TextView>(R.id.tv_category).text = subject.course
         view.findViewById<TextView>(R.id.tv_credit).text = subject.credit.toString()
