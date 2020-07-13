@@ -1,6 +1,7 @@
 package com.example.ulink.timetable
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,16 +38,20 @@ class TimeTableClassAdapter(val context : Context, val onItemClickListener: Time
             itemView.findViewById<TextView>(R.id.tv_classnumber).text = subject.number
             itemView.findViewById<TextView>(R.id.tv_classnumber).visibility = View.VISIBLE
 
+
+
             val assess = itemView.findViewById<Button>(R.id.btn_assess)
             val cart = itemView.findViewById<Button>(R.id.btn_cart)
             val toTable = itemView.findViewById<Button>(R.id.btn_totable)
 
+            assess.visibility = View.GONE
+
 
             itemView.setOnClickListener {
-
                 onItemClickListener.onItemClicked(position)
 
                 if (position == prePosition){
+                    Log.d("tag", "pre")
                     if (assess.visibility == View.VISIBLE) {
                         assess.visibility = View.GONE
                     } else {
@@ -86,6 +91,10 @@ class TimeTableClassAdapter(val context : Context, val onItemClickListener: Time
                 (context as TimeTableEditActivity).rollBack()
                 (context as TimeTableEditActivity).addToSampleTable(subject)
 
+                Log.d("tag", "그냥")
+
+                Log.d("tag visibility1", assess.visibility.toString())
+
 
                 if (assess.visibility == View.VISIBLE) {
                     assess.visibility = View.GONE
@@ -102,6 +111,10 @@ class TimeTableClassAdapter(val context : Context, val onItemClickListener: Time
                 } else {
                     toTable.visibility = View.VISIBLE
                 }
+
+
+                Log.d("tag visibility2", assess.visibility.toString())
+
 
                 if (preClickList.size>0){
                     for (i in preClickList){

@@ -30,7 +30,9 @@ class TimeTableCandidateAdapter : RecyclerView.Adapter<TimeTableCandidateAdapter
             itemView.findViewById<TextView>(R.id.tv_category).text = subject.course
             itemView.findViewById<TextView>(R.id.tv_credit).text = subject.credit.toString()
 
+            itemView.findViewById<Button>(R.id.btn_assess).visibility = View.VISIBLE
             itemView.findViewById<Button>(R.id.btn_delete).visibility = View.VISIBLE
+            itemView.findViewById<Button>(R.id.btn_totable).visibility = View.VISIBLE
 
 
         }

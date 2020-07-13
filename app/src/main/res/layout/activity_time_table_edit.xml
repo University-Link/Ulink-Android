@@ -68,11 +68,27 @@
         app:layout_constraintTop_toBottomOf="@+id/vp_timetableadd"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tl_timetableeditor"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabIndicatorColor="#674FEE"/>
+            android:layout_height="40dp">
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="#ededed" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tl_timetableeditor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:tabIndicatorColor="#674FEE"
+                app:tabIndicatorHeight="4dp"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_timetableeditor"

@@ -58,6 +58,8 @@ class ChattingActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
             override fun onChildChanged(p0: DataSnapshot, p1: String?) {
             }
 
+        var intent = intent
+        className = intent.getStringExtra("class")
 
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
                 Log.d("파베불러오기",p0.value.toString())

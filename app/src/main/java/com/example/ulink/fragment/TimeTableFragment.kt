@@ -13,6 +13,7 @@ import com.example.ulink.R
 import com.example.ulink.repository.Subject
 import com.example.ulink.repository.TimeTable
 import com.example.ulink.timetable.*
+import com.example.ulink.utils.deepCopy
 import kotlinx.android.synthetic.main.fragment_time_table.*
 import kotlin.collections.ArrayList
 
@@ -34,6 +35,9 @@ class TimeTableFragment : Fragment() {
         fun onClick(subject: Subject)
     }
 
+    lateinit var timetableDrawer : TimeTableDrawer
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -41,9 +45,9 @@ class TimeTableFragment : Fragment() {
 
         val subjectList : MutableList<Subject> = arrayListOf()
         subjectList.add(Subject(1,"과목이름","09:00","12:00","mon","과목장소",1,true))
-        subjectList.add(Subject(2,"과목이름","14:00","16:00","mon","과목장소",1,true))
-        subjectList.add(Subject(3,"과목이름","11:00","13:00","tue","과목장소",1,true))
-        subjectList.add(Subject(4,"과목이름","14:00","16:00","wed","과목장소",1,true))
+        subjectList.add(Subject(2,"과목이름","14:00","16:00","mon","과목장소",2,true))
+        subjectList.add(Subject(3,"과목이름","11:00","13:00","tue","과목장소",3,true))
+        subjectList.add(Subject(4,"과목이름","14:00","16:00","wed","과목장소",4,true))
 
         val timeTable = TimeTable(1,"2020-1","시간표이름",true,"09:00","16:00",subjectList)
         val timeTable2 = TimeTable(2,"2020-2","시간표이름2",true,"09:00","16:00",subjectList)
@@ -75,7 +79,7 @@ class TimeTableFragment : Fragment() {
             }
         }
 
-        val timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, timeTable)
+        timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, timeTable)
 
         timetableDrawer.draw(view.findViewById<FrameLayout>(R.id.layout_timetable))
 
@@ -95,10 +99,7 @@ class TimeTableFragment : Fragment() {
         }
 
         btn_list.setOnClickListener {
-//          TODO
-//           intent로 받아올 필요있나? 걍 서버에서 계속 받아오자
-//           clean architecture이용 local도 파야겠네
-//            시간표 작성시 -> local, remote저장, cache invalidate'
+
             startActivityForResult(Intent(context, TimeTableListActivity::class.java), REQUEST_TIMETABLE_LIST_ACTIVITY)
         }
 
@@ -110,5 +111,15 @@ class TimeTableFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode== REQUEST_TIMETABLE_LIST_ACTIVITY && resultCode == 200){
+
+            if (data != null) {
+                timetableDrawer.timeTable = deepCopy(data.getParcelableExtra("timeTable"))
+                tv_semister.text = timetableDrawer.timeTable.name
+
+            }
+            view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { timetableDrawer.draw(it) }
+
+        }
     }
 }
