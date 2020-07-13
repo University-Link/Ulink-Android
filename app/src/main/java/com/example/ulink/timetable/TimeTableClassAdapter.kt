@@ -1,6 +1,7 @@
 package com.example.ulink.timetable
 
 import android.content.Context
+import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,25 +9,30 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.R
 import com.example.ulink.repository.Subject
 
 
-class TimeTableClassAdapter(val context : Context, val onItemClickListener: TimeTableFilterSearchFragment.onItemClickListener) : RecyclerView.Adapter<TimeTableClassAdapter.VHolder>() {
+class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeTableFilterSearchFragment.onItemClickListener) : RecyclerView.Adapter<TimeTableClassAdapter.VHolder>() {
 
-    val subjectList : MutableList<Subject> = arrayListOf()
+    val subjectList: MutableList<Subject> = arrayListOf()
 
-    fun addToList(list : MutableList<Subject>){
+    val mSelectedItems: HashMap<Int, Boolean> = HashMap()
+
+    fun addToList(list: MutableList<Subject>) {
         subjectList.addAll(list)
     }
 
-    val preClickList : MutableList<View> = arrayListOf()
-    var prePosition = -1
+    val preClickList: MutableList<View> = arrayListOf()
+    var visible = false
 
-    inner class VHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
+    inner class VHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun setHolder(subject: Subject, position: Int){
+
+        @RequiresApi(Build.VERSION_CODES.N)
+        fun setHolder(subject: Subject) {
             itemView.minimumHeight = 90
 
             itemView.findViewById<TextView>(R.id.tv_class_name).text = subject.name
@@ -39,98 +45,80 @@ class TimeTableClassAdapter(val context : Context, val onItemClickListener: Time
             itemView.findViewById<TextView>(R.id.tv_classnumber).visibility = View.VISIBLE
 
 
-
             val assess = itemView.findViewById<Button>(R.id.btn_assess)
             val cart = itemView.findViewById<Button>(R.id.btn_cart)
             val toTable = itemView.findViewById<Button>(R.id.btn_totable)
 
-            assess.visibility = View.GONE
+            if (mSelectedItems.getOrDefault(adapterPosition, false)){
+                assess.visibility = View.VISIBLE
+                cart.visibility = View.VISIBLE
+                toTable.visibility = View.VISIBLE
+            } else {
+                assess.visibility = View.GONE
+                cart.visibility = View.GONE
+                toTable.visibility = View.GONE
+            }
 
 
             itemView.setOnClickListener {
-                onItemClickListener.onItemClicked(position)
+                Log.d("tag","clicked")
 
-                if (position == prePosition){
-                    Log.d("tag", "pre")
-                    if (assess.visibility == View.VISIBLE) {
-                        assess.visibility = View.GONE
-                    } else {
-                        assess.visibility = View.VISIBLE
+                if (mSelectedItems.getOrDefault(adapterPosition, false)){
+                    mSelectedItems.put(adapterPosition, false)
+                    Log.d("tag","${adapterPosition}clicked to false")
+                    (context as TimeTableEditActivity).rollBack()
+//                   이미 누른적이 잇떤거 다시 눌렀을때 바로 눌렀든 나중에 눌렀든 
+//                    바로 누르면 전에거 지우고 vis 반전하고 등록
+//                     나중에 누르면 리스트에서 지우면서 view gone
+                    if (preClickList.size>0){
+                        for (i in preClickList){
+                            i.visibility = View.GONE
+                        }
                     }
-                    if (cart.visibility == View.VISIBLE) {
-                        cart.visibility = View.GONE
-                    } else {
-                        cart.visibility = View.VISIBLE
-                    }
-                    if (toTable.visibility == View.VISIBLE) {
-                        toTable.visibility = View.GONE
-                    } else {
-                        toTable.visibility = View.VISIBLE
-                    }
-
 
                     preClickList.clear()
                     preClickList.add(assess)
                     preClickList.add(cart)
                     preClickList.add(toTable)
 
-                    prePosition = position
+//                  이전에 눌린거 바로 안누르고 다른거 누른ㄴ뒤에 누르면
+//                  옛날에 눌린적 있는게 바로 전에 눌린건가 확인 아니면 의미 없다
 
-                    if (assess.visibility == View.GONE ){
-//                    rollback()
-                        (context as TimeTableEditActivity).rollBack()
-//                        Log.d("tag", "rollback")
-                    } else{
-                        (context as TimeTableEditActivity).addToSampleTable(subject)
+                } else {
+                    mSelectedItems.clear()
+                    mSelectedItems.put(adapterPosition, true)
+                    Log.d("tag","${adapterPosition}clicked to true")
+//                   전에 눌린 기록이 false
+                    if (preClickList.size>0){
+                        for (i in preClickList){
+                            i.visibility = View.GONE
+                        }
                     }
 
-                    return@setOnClickListener
-                }
+                    (context as TimeTableEditActivity).rollBack()
+                    (context as TimeTableEditActivity).addToSampleTable(subject)
 
-
-                (context as TimeTableEditActivity).rollBack()
-                (context as TimeTableEditActivity).addToSampleTable(subject)
-
-                Log.d("tag", "그냥")
-
-                Log.d("tag visibility1", assess.visibility.toString())
-
-
-                if (assess.visibility == View.VISIBLE) {
-                    assess.visibility = View.GONE
-                } else {
                     assess.visibility = View.VISIBLE
-                }
-                if (cart.visibility == View.VISIBLE) {
-                    cart.visibility = View.GONE
-                } else {
                     cart.visibility = View.VISIBLE
-                }
-                if (toTable.visibility == View.VISIBLE) {
-                    toTable.visibility = View.GONE
-                } else {
                     toTable.visibility = View.VISIBLE
+                    Log.d("tag","${adapterPosition} is visible")
+
+                    visible = true
+
+
+                    preClickList.clear()
+                    preClickList.add(assess)
+                    preClickList.add(cart)
+                    preClickList.add(toTable)
                 }
 
-
-                Log.d("tag visibility2", assess.visibility.toString())
-
-
-                if (preClickList.size>0){
-                    for (i in preClickList){
-                        i.visibility = View.GONE
-                    }
-                }
-                preClickList.clear()
-                preClickList.add(assess)
-                preClickList.add(cart)
-                preClickList.add(toTable)
-                prePosition = position
+                notifyDataSetChanged()
             }
 
             assess.setOnClickListener {
                 Toast.makeText(context, "준비중입니다", Toast.LENGTH_SHORT).show()
             }
+
             cart.setOnClickListener {
 //               TODO DB에 저장!
 
@@ -138,21 +126,54 @@ class TimeTableClassAdapter(val context : Context, val onItemClickListener: Time
             toTable.setOnClickListener {
                 (context as TimeTableEditActivity).addToTable(subject)
             }
+        }
 
+        fun setVisible(){
+            val assess = itemView.findViewById<Button>(R.id.btn_assess)
+            val cart = itemView.findViewById<Button>(R.id.btn_cart)
+            val toTable = itemView.findViewById<Button>(R.id.btn_totable)
+            assess.visibility = View.VISIBLE
+            cart.visibility = View.VISIBLE
+            toTable.visibility = View.VISIBLE
+        }
+        fun setInvisible(){
+            val assess = itemView.findViewById<Button>(R.id.btn_assess)
+            val cart = itemView.findViewById<Button>(R.id.btn_cart)
+            val toTable = itemView.findViewById<Button>(R.id.btn_totable)
+            assess.visibility = View.GONE
+            cart.visibility = View.GONE
+            toTable.visibility = View.GONE
         }
     }
+
+    fun redrawItemSelected(position : Int){
+        if (mSelectedItems.getOrDefault(position, false) == true){
+            mSelectedItems.remove(position)
+            notifyItemChanged(position)
+        } else {
+            mSelectedItems.put(position,true)
+            notifyItemChanged(position)
+        }
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VHolder {
         return VHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_subject_child, parent, false))
     }
 
-    override fun getItemCount(): Int =  subjectList.size
+    override fun getItemCount(): Int = subjectList.size
 
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onBindViewHolder(holder: VHolder, position: Int) {
-        holder.setHolder(subjectList[position], position)
-
+//        if (mSelectedItems.getOrDefault(position, false)){
+//            holder.setInvisible()
+//            Log.d("tag", "visible")
+//        } else {
+//            holder.setVisible()
+//            Log.d("tag", "Invisible")
+//        }
+        holder.setHolder(subjectList[position])
     }
-
 
 }

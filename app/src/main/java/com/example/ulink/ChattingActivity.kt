@@ -40,8 +40,8 @@ class ChattingActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
         database = Firebase.database.reference
         auth = Firebase.auth
 
-        var intent = intent
-        className = intent.getStringExtra("class")
+        val intent = intent
+        className = intent.getStringExtra("className")
 
         Log.d("db이름",database.root.toString())
         Log.d("db자식",database.child("users").toString())

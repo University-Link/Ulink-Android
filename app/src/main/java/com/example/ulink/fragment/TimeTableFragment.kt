@@ -44,10 +44,10 @@ class TimeTableFragment : Fragment() {
 //        서버랑 통신해서 TimeTable가져옴
 
         val subjectList : MutableList<Subject> = arrayListOf()
-        subjectList.add(Subject(1,"과목이름","09:00","12:00","mon","과목장소",1,true))
-        subjectList.add(Subject(2,"과목이름","14:00","16:00","mon","과목장소",2,true))
-        subjectList.add(Subject(3,"과목이름","11:00","13:00","tue","과목장소",3,true))
-        subjectList.add(Subject(4,"과목이름","14:00","16:00","wed","과목장소",4,true))
+        subjectList.add(Subject(1,"유링크","09:00","12:00","mon","이태원",1,true, professor = "최상일"))
+        subjectList.add(Subject(2,"김영민","14:00","16:00","mon","녹사평",2,true))
+        subjectList.add(Subject(3,"박규희","11:00","13:00","tue","한강진",3,true))
+        subjectList.add(Subject(4,"이지은","14:00","16:00","wed","버티고개",4,true))
 
         val timeTable = TimeTable(1,"2020-1","시간표이름",true,"09:00","16:00",subjectList)
         val timeTable2 = TimeTable(2,"2020-2","시간표이름2",true,"09:00","16:00",subjectList)
@@ -62,8 +62,8 @@ class TimeTableFragment : Fragment() {
 //                TODO 이거 table받아와서 classname으로 일주일에 몇번 수업인지 알아서 표시하기 vs 어뜨카지
 
                 layout.findViewById<TextView>(R.id.tv_time).text = subject.starttime +"  "+  subject.endtime
-                layout.findViewById<TextView>(R.id.tv_place).text = subject.place
-                layout.findViewById<TextView>(R.id.tv_professor_name).text = "교수"
+                layout.findViewById<TextView>(R.id.tv_place).text = subject.place + ", "
+                layout.findViewById<TextView>(R.id.tv_professor_name).text = subject.professor + "교수"
                 layout.findViewById<TextView>(R.id.tv_class_name).text = subject.name
 
                 builder.setView(layout)

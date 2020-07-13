@@ -32,7 +32,7 @@ class ClassFragment : Fragment() {
             override fun onClick(view:View, position:Int){
                 //Log.d("click","${position}번 리스트 선택")
                 val intent = Intent(getActivity(), ChattingActivity::class.java)
-                intent.putExtra("class", "소프트웨어공학")
+                intent.putExtra("className", "소프트웨어공학")
                 startActivity(intent)
             }
         })

@@ -30,24 +30,30 @@ class TimeTableFilterSearchFragment() : Fragment() {
 
 
         val subjectList: MutableList<Subject> = arrayListOf()
-        subjectList.add(Subject(1, "전자회로I", "09:00", "12:00", "mon", "과목장소", 1, true, isSample = true))
-        subjectList.add(Subject(2, "전자회로I", "12:30", "13:00", "mon", "과목장소", 1, true, isSample = true))
-        subjectList.add(Subject(3, "전자회로I", "11:00", "13:00", "fri", "과목장소", 1, true, isSample = true))
-        subjectList.add(Subject(4, "전자회로I", "10:00", "12:00", "wed", "과목장소", 1, true, isSample = true))
-        subjectList.add(Subject(4, "전자회로I", "13:00", "16:00", "thu", "과목장소", 1, true, isSample = true))
-        subjectList.add(Subject(4, "전자회로I", "13:00", "17:30", "wed", "과목장소", 1, true, isSample = true))
-        subjectList.add(Subject(4, "전자회로I", "13:00", "17:30", "wed", "과목장소", 1, true, isSample = true))
-        subjectList.add(Subject(4, "전자회로I", "13:00", "17:30", "wed", "과목장소", 1, true, isSample = true))
+        subjectList.add(Subject(1, "전자회로I", "09:00", "12:00", "mon", "과목장소", 1, true, isSample = true, number = "342"))
+        subjectList.add(Subject(2, "전자회로2", "12:30", "13:00", "mon", "과목장소", 1, true, isSample = true))
+        subjectList.add(Subject(3, "전자회로3", "11:00", "13:00", "fri", "과목장소", 1, true, isSample = true))
+        subjectList.add(Subject(4, "전자회로4", "10:00", "12:00", "wed", "과목장소", 1, true, isSample = true))
+        subjectList.add(Subject(4, "전자회로5", "13:00", "16:00", "thu", "과목장소", 1, true, isSample = true))
+        subjectList.add(Subject(4, "전자회로6", "13:00", "17:30", "wed", "과목장소", 1, true, isSample = true))
+        subjectList.add(Subject(4, "전자회로7", "13:00", "17:30", "wed", "과목장소", 1, true, isSample = true))
+        subjectList.add(Subject(4, "전자회로7", "13:00", "17:30", "wed", "과목장소", 1, true, isSample = true))
+        subjectList.add(Subject(4, "전자회로7", "13:00", "17:30", "wed", "과목장소", 1, true, isSample = true))
+        subjectList.add(Subject(4, "전자회로7", "13:00", "17:30", "wed", "과목장소", 1, true, isSample = true))
+        subjectList.add(Subject(4, "전자회로7", "13:00", "17:30", "wed", "과목장소", 1, true, isSample = true))
+        subjectList.add(Subject(4, "전자회로7", "13:00", "17:30", "wed", "과목장소", 1, true, isSample = true))
+        subjectList.add(Subject(4, "전자회로7", "13:00", "17:30", "wed", "과목장소", 1, true, isSample = true))
+        subjectList.add(Subject(4, "전자회로8", "13:00", "17:30", "wed", "과목장소", 1, true, isSample = true))
 
 
 //        TODO 자동 스크롤 고치기
         mAdapter = TimeTableClassAdapter(requireContext(), object : onItemClickListener{
             override fun onItemClicked(position: Int) {
-                rv_classes.scrollToPosition(position)
-                Log.d("tag","scrolled to $position")
+
             }
         })
         rv_classes.adapter = mAdapter
+
         mAdapter.addToList(subjectList)
 
         btn_fitler_major.setOnClickListener {
