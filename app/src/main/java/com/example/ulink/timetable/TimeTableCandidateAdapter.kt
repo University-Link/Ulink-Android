@@ -1,6 +1,5 @@
 package com.example.ulink.timetable
 
-import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.R
 import com.example.ulink.repository.Subject
-import com.example.ulink.repository.TimeTable
 
 class TimeTableCandidateAdapter : RecyclerView.Adapter<TimeTableCandidateAdapter.VHolder>() {
 
@@ -25,7 +23,7 @@ class TimeTableCandidateAdapter : RecyclerView.Adapter<TimeTableCandidateAdapter
         fun setHolder(subject : Subject){
             itemView.findViewById<TextView>(R.id.tv_class_name).text = subject.name
             itemView.findViewById<TextView>(R.id.tv_professor_name).text = subject.professor
-            itemView.findViewById<TextView>(R.id.tv_time).text = subject.starttime + subject.endtime
+            itemView.findViewById<TextView>(R.id.tv_time).text = subject.startTime + subject.endTime
             itemView.findViewById<TextView>(R.id.tv_place).text = subject.place
             itemView.findViewById<TextView>(R.id.tv_category).text = subject.course
             itemView.findViewById<TextView>(R.id.tv_credit).text = subject.credit.toString()

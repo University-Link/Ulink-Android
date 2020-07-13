@@ -95,7 +95,7 @@ class TimeTableEditActivity : AppCompatActivity() {
         var check = false
         for (s in timeTable.subjectList!!) {
             if (subject.day == s.day) {
-                check = !(formatToFloat(subject.endtime) <= formatToFloat(s.starttime) || formatToFloat(subject.starttime) >= formatToFloat(s.endtime))
+                check = !(formatToFloat(subject.endTime) <= formatToFloat(s.startTime) || formatToFloat(subject.startTime) >= formatToFloat(s.endTime))
                 if (check) return check
             }
         }
