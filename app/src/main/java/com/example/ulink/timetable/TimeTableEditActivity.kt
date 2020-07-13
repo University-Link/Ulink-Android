@@ -178,7 +178,6 @@ class TimeTableEditActivity : AppCompatActivity() {
         val inset = InsetDrawable(back, 80)
 
 
-        
         dialog.window?.setBackgroundDrawable(inset)
 
         dialog.show()
@@ -221,18 +220,27 @@ class TimeTableEditActivity : AppCompatActivity() {
     fun setClassSearch() {
         val mEditorAdapter = TimeTableEditorAdapter(this)
         vp_timetableeditor.adapter = mEditorAdapter
+
+        var icon1 : ImageView
+
         TabLayoutMediator(tl_timetableeditor, vp_timetableeditor, object : TabLayoutMediator.TabConfigurationStrategy {
             override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
                 val tablayout = LayoutInflater.from(applicationContext).inflate(R.layout.tab_timetableeditor, null)
 
+                icon1 =tablayout.findViewById<ImageView>(R.id.ic_tab)
+
+
                 when (position) {
                     0 -> {
-                        tablayout.findViewById<ImageView>(R.id.ic_tab).setBackgroundResource(R.drawable.red_circle_for_alert)
+                        icon1.setBackgroundResource(R.drawable.timetableadd_filterandsearch_btn_filterandsearch)
                         tablayout.findViewById<TextView>(R.id.tv_tab).text = "필터"
                     }
                     1 -> {
+                        icon1.setBackgroundResource(R.drawable.timetableadd_ic_filter)
                         tablayout.findViewById<ImageView>(R.id.ic_tab).setBackgroundResource(R.drawable.red_circle_for_alert)
                         tablayout.findViewById<TextView>(R.id.tv_tab).text = "후보"
+                        icon1.setBackgroundResource(R.drawable.timetableadd_ic_filter)
+
                     }
                 }
                 tab.customView = tablayout
@@ -273,7 +281,11 @@ class TimeTableEditActivity : AppCompatActivity() {
             dialog.dismiss()
         }
 
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val back = ColorDrawable(Color.TRANSPARENT)
+        val inset = InsetDrawable(back, 70)
+
+
+        dialog.window?.setBackgroundDrawable(inset)
 
         dialog.show()
     }
@@ -303,7 +315,10 @@ class TimeTableEditActivity : AppCompatActivity() {
             dialog.dismiss()
         }
 
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val back = ColorDrawable(Color.TRANSPARENT)
+        val inset = InsetDrawable(back, 80)
+
+        dialog.window?.setBackgroundDrawable(inset)
 
         dialog.show()
     }
