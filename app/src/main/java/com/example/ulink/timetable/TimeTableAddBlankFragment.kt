@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import com.example.ulink.R
 import com.example.ulink.repository.TimeTable
 
@@ -51,13 +52,13 @@ class TimeTableAddBlankFragment : Fragment() {
 
         val et = layout.findViewById<EditText>(R.id.et_name)
 
-        layout.findViewById<Button>(R.id.btn_ok).setOnClickListener {
+        layout.findViewById<TextView>(R.id.tv_ok).setOnClickListener {
             val timeTable = TimeTable(1,"2020-2",et.text.toString(),false,"09:00","18:00")
             timeTableAddListener.onAdded(timeTable)
             dialog.dismiss()
         }
 
-        layout.findViewById<Button>(R.id.tv_cancel).setOnClickListener {
+        layout.findViewById<TextView>(R.id.tv_cancel).setOnClickListener {
             dialog.dismiss()
         }
 

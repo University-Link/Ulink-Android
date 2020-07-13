@@ -49,14 +49,14 @@
         android:text="취소"
         android:textColor="#674fee"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@id/btn_ok"
-        app:layout_constraintRight_toLeftOf="@id/btn_ok"
+        app:layout_constraintBottom_toBottomOf="@id/tv_ok"
+        app:layout_constraintRight_toLeftOf="@id/tv_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="25dp"/>
 
     <TextView
-        android:id="@+id/btn_ok"
+        android:id="@+id/tv_ok"
         android:text="확인"
         android:layout_marginRight="31dp"
         android:layout_marginBottom="18dp"

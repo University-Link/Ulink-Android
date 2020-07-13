@@ -9,7 +9,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <ImageView
-        android:background="@color/colorPrimaryDark"
+        android:src="@drawable/new_timetable_btn_plus"
         android:id="@+id/iv_plus"
         android:layout_gravity="center"
         android:layout_width="100dp"
