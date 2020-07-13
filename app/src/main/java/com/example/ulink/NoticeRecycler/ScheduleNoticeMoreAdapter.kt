@@ -33,5 +33,6 @@ class ScheduleNoticeMoreAdapter(private val context : Context) : RecyclerView.Ad
     override fun onBindViewHolder(holder: ScheduleNoticeMoreViewHolder, position: Int) {
         holder.bind(datas[position])
         holder.itemView.setOnClickListener{scheduleItemClickListener.onClick(it,position)}
+
     }
 }

@@ -135,14 +135,14 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                     layout.findViewById<RecyclerView>(R.id.rv_popup_schedule_item).adapter = rvPopupAdapter
 
                     //ScheduleNotice
-                    var itemMonth : String = zeroPlus(popupMonth.toString())
-                    var itemDay : String = zeroPlus(rvAdapter.datas[position].day)
+                    //var itemMonth : String = zeroPlus(popupMonth.toString())
+                    //var itemDay : String = zeroPlus(rvAdapter.datas[position].day)
                     var itemYear : String = popupYearCheck(data.year, data.month, position, index, popupLastEmpty).toString()
 
                     rvPopupAdapter.datas.apply {
                         add(
                             ScheduleItemData(
-                                date = "$itemYear-$itemMonth-$itemDay",
+                                date = "$itemYear-$popupMonth-$popupDay",
                                 category = "시험",
                                 classname = "유링",
                                 content = "유링",
@@ -153,7 +153,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                         )
                         add(
                             ScheduleItemData(
-                                date = "$itemYear-$itemMonth-$itemDay",
+                                date = "$itemYear-$popupMonth-$popupDay",
                                 category = "과제",
                                 classname = "안드",
                                 content = "유링크",
@@ -164,7 +164,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                         )
                         add(
                             ScheduleItemData(
-                                date = "$itemYear-$itemMonth-$itemDay",
+                                date = "$itemYear-$popupMonth-$popupDay",
                                 category = "수업",
                                 classname = "바보",
                                 content = "멍청이",

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/calendar_click_bg">
+
     <ImageView
         android:id="@+id/ic_color"
         android:layout_width="22dp"
@@ -25,7 +26,9 @@
         app:layout_constraintTop_toTopOf="@id/ic_color"
         app:layout_constraintBottom_toBottomOf="@id/ic_color"
         app:layout_constraintLeft_toRightOf="@id/ic_color"/>
+
     <ImageView
+
         android:id="@+id/ic_time"
         android:layout_width="16dp"
         android:layout_height="16dp"
@@ -35,6 +38,7 @@
         app:layout_constraintRight_toRightOf="@id/ic_color"
         app:layout_constraintTop_toBottomOf="@id/ic_color"
         />
+
     <TextView
         android:id="@+id/tv_time"
         android:text="수 10:00 - 13:00, 목 13:00 - 16:00"
@@ -45,6 +49,7 @@
         app:layout_constraintLeft_toRightOf="@id/ic_time"
         app:layout_constraintTop_toTopOf="@id/ic_time"
         app:layout_constraintBottom_toBottomOf="@id/ic_time"/>
+
     <ImageView
         android:layout_width="18dp"
         android:layout_height="18dp"
@@ -55,6 +60,7 @@
         app:layout_constraintRight_toRightOf="@id/ic_color"
         app:layout_constraintTop_toBottomOf="@id/ic_time"
         />
+
     <TextView
         android:id="@+id/tv_place"
         android:text="제 2 공학관 304"
@@ -141,6 +147,7 @@
         app:layout_constraintLeft_toRightOf="@id/ic_checkassignment"
         app:layout_constraintTop_toTopOf="@id/ic_checkassignment"
         app:layout_constraintBottom_toBottomOf="@id/ic_checkassignment"/>
+
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -163,4 +170,6 @@
         app:layout_constraintLeft_toRightOf="@id/ic_delete"
         app:layout_constraintTop_toTopOf="@id/ic_delete"
         app:layout_constraintBottom_toBottomOf="@id/ic_delete"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

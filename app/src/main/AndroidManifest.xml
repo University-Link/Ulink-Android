@@ -22,10 +22,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".FilterSettingSearchActivity">
 
-        </activity>
+        <activity android:name=".FilterSettingSearchActivity"></activity>
         <activity android:name=".ScheduleNoticeActivity"></activity>
+        <activity android:name=".FilterSettingActivity"/>
         <activity android:name=".timetable.TimeTableListActivity" />
         <activity android:name=".NotificationActivity" />
         <activity android:name=".ScheduleActivity" />
@@ -37,6 +37,7 @@
         <activity android:name=".NoticeActivity" />
         <activity android:name=".NoticeMoreActivity" />
         <activity android:name=".NoticeAddActivity"/>
+        <activity android:name=".DirectTimeTableActivity"/>
 
     </application>
     <uses-permission android:name="android.permission.VIBRATE" />
