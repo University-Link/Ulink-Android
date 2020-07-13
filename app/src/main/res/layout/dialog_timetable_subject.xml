@@ -15,7 +15,6 @@
         android:background="@drawable/main_timetableclick_ic_tablecolor"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
-
     <TextView
         android:id="@+id/tv_class_name"
         android:text="캡스톤 디자인"
@@ -29,6 +28,7 @@
         app:layout_constraintLeft_toRightOf="@id/ic_color"/>
 
     <ImageView
+
         android:id="@+id/ic_time"
         android:layout_width="16dp"
         android:layout_height="16dp"
@@ -63,7 +63,7 @@
 
     <TextView
         android:id="@+id/tv_place"
-        android:text="제 2 공학관 304, 최상인 교수"
+        android:text="제 2 공학관 304"
         android:textSize="14sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -71,6 +71,18 @@
         app:layout_constraintTop_toTopOf="@id/ic_place"
         app:layout_constraintStart_toStartOf="@id/tv_time"
         app:layout_constraintBottom_toBottomOf="@id/ic_place"/>
+
+    <TextView
+        android:id="@+id/tv_professor_name"
+        android:text="최상인 교수"
+        android:textSize="14sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/ic_place"
+        app:layout_constraintStart_toEndOf="@id/tv_place"
+        app:layout_constraintBottom_toBottomOf="@id/ic_place"/>
+
+
 
     <View
         android:id="@+id/view_division"
@@ -80,7 +92,6 @@
         android:background="@color/line"
         app:layout_constraintTop_toBottomOf="@id/ic_place"
         app:layout_constraintBottom_toTopOf="@id/ic_customizing"/>
-
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -91,7 +102,6 @@
         app:layout_constraintRight_toRightOf="@id/ic_color"
         app:layout_constraintTop_toBottomOf="@id/view_division"
         />
-
     <TextView
         android:id="@+id/tv_customizing"
         android:text="시간표 커스텀마이징"
@@ -101,7 +111,6 @@
         app:layout_constraintLeft_toRightOf="@id/ic_customizing"
         app:layout_constraintTop_toTopOf="@id/ic_customizing"
         app:layout_constraintBottom_toBottomOf="@id/ic_customizing"/>
-
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -111,7 +120,6 @@
         app:layout_constraintRight_toRightOf="@id/ic_color"
         app:layout_constraintTop_toBottomOf="@id/ic_customizing"
         />
-
     <TextView
         android:id="@+id/tv_tochat"
         android:text="채팅방 이동"
@@ -121,7 +129,6 @@
         app:layout_constraintLeft_toRightOf="@id/ic_tochat"
         app:layout_constraintTop_toTopOf="@id/ic_tochat"
         app:layout_constraintBottom_toBottomOf="@id/ic_tochat"/>
-
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -131,7 +138,6 @@
         app:layout_constraintRight_toRightOf="@id/ic_color"
         app:layout_constraintTop_toBottomOf="@id/ic_tochat"
         />
-
     <TextView
         android:id="@+id/tv_checkassignment"
         android:text="공지 확인"
@@ -153,7 +159,6 @@
         app:layout_constraintRight_toRightOf="@id/ic_color"
         app:layout_constraintTop_toBottomOf="@id/ic_checkassignment"
         />
-
     <TextView
         android:id="@+id/tv_delete"
         android:text="삭제"

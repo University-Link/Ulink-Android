@@ -5,24 +5,30 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Parcelable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.core.widget.NestedScrollView
 import com.example.ulink.R
-import com.example.ulink.repository.Subject
 import com.example.ulink.repository.TimeTable
-import kotlinx.android.synthetic.main.activity_time_table_direct_edit.*
+import com.example.ulink.utils.deepCopy
 import java.util.ArrayList
 
+interface onDrawListener{
+    fun onDrawed(size : Int)
+}
 
-class TimeTableDirectEditActivity : AppCompatActivity() {
+class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
+
+    override fun onDrawed(size: Int) {
+        if (size>0){
+            findViewById<Button>(R.id.btn_ok).visibility = View.GONE
+            findViewById<Button>(R.id.btn_modify).visibility = View.VISIBLE
+        }
+    }
 
     lateinit var timeTableDrawerDrag : TimeTableDrawerDrag
+    lateinit var timeTable : TimeTable
 
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,18 +36,18 @@ class TimeTableDirectEditActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_time_table_direct_edit)
 
-        val timeTable = intent.getParcelableExtra<TimeTable>("timeTable")
+        timeTable = intent.getParcelableExtra<TimeTable>("timeTable")
 
         timeTableDrawerDrag = TimeTableDrawerDrag(this, LayoutInflater.from(this), timeTable)
+        timeTableDrawerDrag.onDrawListener = this
+        findViewById<Button>(R.id.btn_ok).visibility = View.VISIBLE
 
         timeTableDrawerDrag.draw(findViewById<FrameLayout>(R.id.layout_timetable))
         findViewById<NestedScrollView>(R.id.layout_timetable_scrollable).isVerticalScrollBarEnabled = false
 
-
         Handler().postDelayed({
             setDragView()
         }, 100)
-
 
         findViewById<Button>(R.id.btn_cancel).setOnClickListener {
             finish()
@@ -51,23 +57,61 @@ class TimeTableDirectEditActivity : AppCompatActivity() {
             rollBack()
         }
 
-        findViewById<TextView>(R.id.btn_ok).setOnClickListener {
+        findViewById<Button>(R.id.btn_ok).setOnClickListener {
             val intent = Intent()
-            intent.putExtra("timeTable", timeTableDrawerDrag.getTable())
-            setResult(200, intent)
-            finish()
+
+//            TODO 잘 들어갔으면!
+            if (timeTableDrawerDrag.getAddedTable() == null){
+                Toast.makeText(this,"중복된 과목이 있습니다", Toast.LENGTH_SHORT).show()
+            } else {
+                intent.putExtra("timeTable", timeTableDrawerDrag.getAddedTable())
+                setResult(200, intent)
+            }
+
+        }
+
+//       수정 눌렀다가 취소해서 그대로 돌아온 경우
+
+        findViewById<Button>(R.id.btn_modify).setOnClickListener {
+            val intent = Intent(this, TimeTableDirectTypeActivity::class.java)
+            if (timeTableDrawerDrag.getAddedSubject() == null){
+                Toast.makeText(this,"중복된 과목이 있습니다", Toast.LENGTH_SHORT).show()
+            } else {
+                intent.putParcelableArrayListExtra("subjects", timeTableDrawerDrag.getAddedSubject() as ArrayList<out Parcelable>)
+                intent.putExtra("timeTable", timeTableDrawerDrag.getAddedTable())
+                startActivityForResult(intent, REQUEST_DIRECT_TYPE_ACTIVITY)
+            }
         }
     }
 
 
+//    drag에서 drawlist에 쌓이고 다시 draw하기 전까지는 testview유지
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_DIRECT_TYPE_ACTIVITY){
+            if (resultCode == 200){
+                findViewById<Button>(R.id.btn_ok).visibility = View.VISIBLE
+                findViewById<Button>(R.id.btn_modify).visibility = View.GONE
+                intent.getParcelableExtra<TimeTable>("timeTable")
+//           TODO 여기서 timetablelist에 넣어줘야함 그리고 deepcopy꼭하기!! 그리고 다시 그려주기!!
+            } else{
+                timeTableDrawerDrag
+            }
+
+        }
+    }
+
     @ExperimentalStdlibApi
     fun rollBack(){
         timeTableDrawerDrag.rollBack()
+        if ( timeTableDrawerDrag.getSubject().size ==0 ){
+            findViewById<Button>(R.id.btn_ok).visibility = View.VISIBLE
+            findViewById<Button>(R.id.btn_modify).visibility = View.GONE
+        }
     }
 
     fun setDragView(){
         timeTableDrawerDrag.setDragView((findViewById<LinearLayout>(R.id.timetable_root)))
     }
-
 
 }

@@ -12,13 +12,12 @@ import com.example.ulink.NotificationActivity
 import com.example.ulink.R
 import com.example.ulink.repository.Subject
 import com.example.ulink.repository.TimeTable
-import com.example.ulink.timetable.BottomSheetFragment
-import com.example.ulink.timetable.TimeTableDrawer
-import com.example.ulink.timetable.TimeTableEditActivity
-import com.example.ulink.timetable.TimeTableListActivity
+import com.example.ulink.timetable.*
+import com.example.ulink.utils.deepCopy
 import kotlinx.android.synthetic.main.fragment_time_table.*
 import kotlin.collections.ArrayList
 
+const val REQUEST_TIMETABLE_LIST_ACTIVITY = 777
 
 class TimeTableFragment : Fragment() {
 
@@ -36,16 +35,19 @@ class TimeTableFragment : Fragment() {
         fun onClick(subject: Subject)
     }
 
+    lateinit var timetableDrawer : TimeTableDrawer
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 //        서버랑 통신해서 TimeTable가져옴
 
         val subjectList : MutableList<Subject> = arrayListOf()
-        subjectList.add(Subject(1,"과목이름","09:00","12:00","mon","과목장소",1,true))
-        subjectList.add(Subject(2,"과목이름","14:00","16:00","mon","과목장소",1,true))
-        subjectList.add(Subject(3,"과목이름","11:00","13:00","tue","과목장소",1,true))
-        subjectList.add(Subject(4,"과목이름","14:00","16:00","wed","과목장소",1,true))
+        subjectList.add(Subject(1,"유링크","09:00","12:00","mon","이태원",1,true, professor = "최상일"))
+        subjectList.add(Subject(2,"김영민","14:00","16:00","mon","녹사평",2,true))
+        subjectList.add(Subject(3,"박규희","11:00","13:00","tue","한강진",3,true))
+        subjectList.add(Subject(4,"이지은","14:00","16:00","wed","버티고개",4,true))
 
         val timeTable = TimeTable(1,"2020-1","시간표이름",true,"09:00","16:00",subjectList)
         val timeTable2 = TimeTable(2,"2020-2","시간표이름2",true,"09:00","16:00",subjectList)
@@ -59,9 +61,9 @@ class TimeTableFragment : Fragment() {
                 layout.findViewById<TextView>(R.id.tv_class_name).text = subject.name
 //                TODO 이거 table받아와서 classname으로 일주일에 몇번 수업인지 알아서 표시하기 vs 어뜨카지
 
-                layout.findViewById<TextView>(R.id.tv_time).text = subject.starttime +"  "+  subject.endtime
-                layout.findViewById<TextView>(R.id.tv_place).text = subject.place
-                layout.findViewById<TextView>(R.id.tv_professor_name).text = "교수"
+                layout.findViewById<TextView>(R.id.tv_time).text = subject.startTime +"  "+  subject.endTime
+                layout.findViewById<TextView>(R.id.tv_place).text = subject.place + ", "
+                layout.findViewById<TextView>(R.id.tv_professor_name).text = subject.professor + "교수"
                 layout.findViewById<TextView>(R.id.tv_class_name).text = subject.name
 
                 builder.setView(layout)
@@ -77,7 +79,7 @@ class TimeTableFragment : Fragment() {
             }
         }
 
-        val timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, timeTable)
+        timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, timeTable)
 
         timetableDrawer.draw(view.findViewById<FrameLayout>(R.id.layout_timetable))
 
@@ -97,16 +99,27 @@ class TimeTableFragment : Fragment() {
         }
 
         btn_list.setOnClickListener {
-//          TODO
-//           intent로 받아올 필요있나? 걍 서버에서 계속 받아오자
-//           clean architecture이용 local도 파야겠네
-//            시간표 작성시 -> local, remote저장, cache invalidate'
-            startActivity(Intent(context, TimeTableListActivity::class.java))
+
+            startActivityForResult(Intent(context, TimeTableListActivity::class.java), REQUEST_TIMETABLE_LIST_ACTIVITY)
         }
 
         btn_setting.setOnClickListener {
             val bottomsheet = BottomSheetFragment()
             fragmentManager?.let { it -> bottomsheet.show(it,bottomsheet.tag) }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode== REQUEST_TIMETABLE_LIST_ACTIVITY && resultCode == 200){
+
+            if (data != null) {
+                timetableDrawer.timeTable = deepCopy(data.getParcelableExtra("timeTable"))
+                tv_semister.text = timetableDrawer.timeTable.name
+
+            }
+            view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { timetableDrawer.draw(it) }
+
         }
     }
 }

@@ -15,4 +15,11 @@
     <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorAccent">@color/main</item>
     </style>
+    
+    <style name="EditTextTheme" parent = "Theme.AppCompat.Light.NoActionBar">
+
+
+        <item name="colorControlActivated">#674fee</item>
+        <item name="colorControlNormal">#363636</item>
+    </style>
 </resources>

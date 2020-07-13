@@ -5,13 +5,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.R
 import com.example.ulink.repository.TimeTable
+import com.example.ulink.utils.deepCopy
 
-class TimeTableInnerListAdapter(mutableList: MutableList<TimeTable>) : RecyclerView.Adapter<TimeTableInnerListAdapter.VHolder>() {
+class TimeTableInnerListAdapter(mutableList: MutableList<TimeTable>,val timeTableOnClickListener: TimeTableOnClickListener) : RecyclerView.Adapter<TimeTableInnerListAdapter.VHolder>() {
 
     val timeTableList: MutableList<TimeTable> = mutableList
 
@@ -30,15 +32,21 @@ class TimeTableInnerListAdapter(mutableList: MutableList<TimeTable>) : RecyclerV
     }
 
 
-    class VHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class VHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun setHolder(timeTable: TimeTable) {
             itemView.findViewById<TextView>(R.id.tv_timetablename).text = timeTable.name
 
             timeTable.isMain?.let {
                 if (it){
-                    itemView.findViewById<TextView>(R.id.tv_main).visibility = View.VISIBLE
+                    itemView.findViewById<ImageView>(R.id.iv_main).visibility = View.VISIBLE
+                } else{
+                    itemView.findViewById<ImageView>(R.id.iv_main).visibility = View.GONE
                 }
+            }
+
+            itemView.setOnClickListener {
+                timeTableOnClickListener.onClicked(deepCopy(timeTable))
             }
 
         }

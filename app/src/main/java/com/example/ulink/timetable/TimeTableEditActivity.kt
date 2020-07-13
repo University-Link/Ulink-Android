@@ -5,12 +5,15 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.InsetDrawable
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.MarginPageTransformer
 import com.example.ulink.R
@@ -22,7 +25,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_time_table_edit.*
 
 
-const val REQUEST_DIRECT_ACTIVITY = 999
+const val REQUEST_DIRECT_EDIT_ACTIVITY = 999
+const val REQUEST_DIRECT_TYPE_ACTIVITY = 888
 
 class TimeTableEditActivity : AppCompatActivity() {
 
@@ -35,10 +39,10 @@ class TimeTableEditActivity : AppCompatActivity() {
 //    TODO Edit된 timetable 어떡할건지와 어떻게 edit할건지?
 //    TimeTableFilterSearchFragment랑 TimeTableCandidatorFragment의 onclick을 얘가 받아서
 //    timeTableList의 currentitem에 draw해줘야함
-
 //    TODO
 //     클릭했을때 깜빡이는거 해결
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_time_table_edit)
@@ -60,13 +64,13 @@ class TimeTableEditActivity : AppCompatActivity() {
             showAddDialog()
         }
         btn_tableplus.setOnClickListener {
-            showDialog()
+            showAddTableDialog()
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_DIRECT_ACTIVITY){
+        if (requestCode == REQUEST_DIRECT_EDIT_ACTIVITY){
             if (resultCode == 200){
                 val timeTableAdded = data?.getParcelableExtra<TimeTable>("timeTable")
                 if (timeTableAdded != null) {
@@ -91,7 +95,7 @@ class TimeTableEditActivity : AppCompatActivity() {
         var check = false
         for (s in timeTable.subjectList!!) {
             if (subject.day == s.day) {
-                check = !(formatToFloat(subject.endtime) <= formatToFloat(s.starttime) || formatToFloat(subject.starttime) >= formatToFloat(s.endtime))
+                check = !(formatToFloat(subject.endTime) <= formatToFloat(s.startTime) || formatToFloat(subject.startTime) >= formatToFloat(s.endTime))
                 if (check) return check
             }
         }
@@ -130,13 +134,10 @@ class TimeTableEditActivity : AppCompatActivity() {
 
     }
 
-
 //    TODO 미리보기 저장된거 색깔 왜 그러지 = Sample로 들어가서 그런듯! 추가할때는 sample말고 그냥으로!
 //    DRAWER 고치기
 
-
     fun rollBack() {
-
         val position = vp_timetableadd.currentItem
         mAdapter.replaceAtSampleList(position, mAdapter.timeTableList[position])
         mAdapter.reDrawFragment(vp_timetableadd.currentItem)
@@ -146,8 +147,8 @@ class TimeTableEditActivity : AppCompatActivity() {
     }
 
 
-    fun showDialog() {
-
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun showAddTableDialog() {
         val builder = AlertDialog.Builder(this)
         val layout = LayoutInflater.from(this).inflate(R.layout.dialog_timetable_name, null)
         builder.setView(layout)
@@ -155,24 +156,33 @@ class TimeTableEditActivity : AppCompatActivity() {
 
         val et = layout.findViewById<EditText>(R.id.et_name)
 
-        layout.findViewById<Button>(R.id.btn_ok).setOnClickListener {
+        layout.findViewById<TextView>(R.id.tv_ok).setOnClickListener {
+
+//            TODO 여기서 DB로 저장하고 edit에 넣긴 해야함
 
             val timeTable = TimeTable(1, "2020-2", et.text.toString(), false, "09:00", "18:00")
 //          EditActivity에 넣어줄 필요가 있나? 이걸
 //            timeTableList.add(timeTable)
 
-            mAdapter.addToList(timeTable)
+            mAdapter.addToList(deepCopy(timeTable))
             moveToLastItem()
             dialog.dismiss()
         }
 
-        layout.findViewById<Button>(R.id.btn_cancel).setOnClickListener {
+        layout.findViewById<TextView>(R.id.tv_cancel).setOnClickListener {
             dialog.dismiss()
         }
 
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val back = ColorDrawable(Color.TRANSPARENT)
+        val inset = InsetDrawable(back, 80)
+
+
+        dialog.window?.setBackgroundDrawable(inset)
 
         dialog.show()
+
+
+
     }
 
     fun moveToLastItem() {
@@ -209,19 +219,27 @@ class TimeTableEditActivity : AppCompatActivity() {
     fun setClassSearch() {
         val mEditorAdapter = TimeTableEditorAdapter(this)
         vp_timetableeditor.adapter = mEditorAdapter
+
+        var icon1 : ImageView
+
         TabLayoutMediator(tl_timetableeditor, vp_timetableeditor, object : TabLayoutMediator.TabConfigurationStrategy {
             override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
-
                 val tablayout = LayoutInflater.from(applicationContext).inflate(R.layout.tab_timetableeditor, null)
+
+                icon1 =tablayout.findViewById<ImageView>(R.id.ic_tab)
+
 
                 when (position) {
                     0 -> {
-                        tablayout.findViewById<ImageView>(R.id.ic_tab).setBackgroundResource(R.drawable.red_circle_for_alert)
+                        icon1.setBackgroundResource(R.drawable.timetableadd_filterandsearch_btn_filterandsearch)
                         tablayout.findViewById<TextView>(R.id.tv_tab).text = "필터"
                     }
                     1 -> {
+                        icon1.setBackgroundResource(R.drawable.timetableadd_ic_filter)
                         tablayout.findViewById<ImageView>(R.id.ic_tab).setBackgroundResource(R.drawable.red_circle_for_alert)
                         tablayout.findViewById<TextView>(R.id.tv_tab).text = "후보"
+                        icon1.setBackgroundResource(R.drawable.timetableadd_ic_filter)
+
                     }
                 }
                 tab.customView = tablayout
@@ -262,7 +280,11 @@ class TimeTableEditActivity : AppCompatActivity() {
             dialog.dismiss()
         }
 
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val back = ColorDrawable(Color.TRANSPARENT)
+        val inset = InsetDrawable(back, 70)
+
+
+        dialog.window?.setBackgroundDrawable(inset)
 
         dialog.show()
     }
@@ -276,18 +298,26 @@ class TimeTableEditActivity : AppCompatActivity() {
 
         layout.findViewById<Button>(R.id.btn_drag).setOnClickListener {
             val intent = Intent(this, TimeTableDirectEditActivity::class.java)
-            intent.putExtra("timeTable",mAdapter.timeTableList[vp_timetableadd.currentItem])
-            startActivityForResult(intent, REQUEST_DIRECT_ACTIVITY)
+            intent.putExtra("timeTable", deepCopy(mAdapter.timeTableList[vp_timetableadd.currentItem]))
+            startActivityForResult(intent, REQUEST_DIRECT_EDIT_ACTIVITY)
             dialog.dismiss()
         }
+
         layout.findViewById<Button>(R.id.btn_type).setOnClickListener {
+            val intent = Intent(this, TimeTableDirectTypeActivity::class.java)
+            intent.putExtra("timeTable", deepCopy(mAdapter.timeTableList[vp_timetableadd.currentItem]))
+            startActivityForResult(intent, REQUEST_DIRECT_TYPE_ACTIVITY)
+
             dialog.dismiss()
         }
         layout.findViewById<Button>(R.id.btn_cancel).setOnClickListener {
             dialog.dismiss()
         }
 
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val back = ColorDrawable(Color.TRANSPARENT)
+        val inset = InsetDrawable(back, 80)
+
+        dialog.window?.setBackgroundDrawable(inset)
 
         dialog.show()
     }
