@@ -1,35 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single">
-
-
+    <group android:id="@+id/drawer_bar_divider1"
+            android:checkableBehavior="single">
         <item
             android:id="@+id/notice"
             android:icon="@drawable/chatting_ic_notification"
             android:textSize="13sp"
-            android:title="수업공지"
-
-            />
-
-    <item
+            android:title="수업공지" />
+        <item
             android:id="@+id/QnA"
-            android:textSize="13sp"
             android:icon="@drawable/chatting_ic_qna"
-            android:title="Q\u0026A공간"
-            />
+            android:textSize="13sp"
+            android:title="Q\u0026A공간" />
+    </group>
+    <group android:id="@+id/drawer_bar_divider2"
+            android:checkableBehavior="single">
         <item
             android:id="@+id/picture"
-            android:textSize="13sp"
             android:icon="@drawable/chatting_ic_gallery"
-            android:title="사진, 동영상"
-            />
+            android:textSize="13sp"
+            android:title="사진, 동영상" />
         <item
             android:id="@+id/logout"
-            android:textSize="13sp"
             android:icon="@drawable/chatting_btn_file"
-            android:title="파일"
-            />
+            android:textSize="13sp"
+            android:title="파일" />
     </group>
-
-
 </menu>

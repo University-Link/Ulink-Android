@@ -12,24 +12,23 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-       /* val sharedPref : SharedPreferences = getSharedPreferences("pref", Context.MODE_PRIVATE)
-        val sharedEdit = sharedPref.edit()
-
-        if(sharedPref.getBoolean("save", false))
-            et_id.setText(sharedPref.getString("id",""))*/
+        val sharedPref : SharedPreferences = getSharedPreferences("pref", Context.MODE_PRIVATE)
+        et_id.setText(sharedPref.getString("id", ""))
 
         btn_login.setOnClickListener {
-            /*sharedEdit.putBoolean("save", checkbox_id_save.isChecked)
-            if (sharedPref.getBoolean("save", false)) {
+            val sharedPref: SharedPreferences = getSharedPreferences("pref", Context.MODE_PRIVATE)
+            val sharedEdit = sharedPref.edit()
+
+            if(checkbox_id_save.isChecked) {
                 sharedEdit.putString("id", et_id.text.toString())
                 sharedEdit.commit()
             }
             else{
                 sharedEdit.clear()
                 sharedEdit.commit()
-            }*/
+            }
 
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, DirectTimeTableActivity::class.java)
             startActivity(intent)
             /*if(et_id.text.isNullOrBlank() || et_pw.text.isNullOrBlank()){
                        showToast("아이디와 비밀번호를 확인하세요.")
@@ -52,6 +51,5 @@ class LoginActivity : AppCompatActivity() {
                        )
                    }*/
         }
-
     }
 }

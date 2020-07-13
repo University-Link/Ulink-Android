@@ -54,121 +54,125 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="간편 이름 설정"
+            android:layout_marginBottom="12dp"
             android:layout_marginLeft="22dp"
             android:textSize="16sp"
             android:textColor="@color/text1"/>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btn_club"
+                android:layout_width="73dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="18dp"
+                android:text="동아리"
+                android:textColor="@color/radiobtn_textcolor"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:button="@null"
+                android:background="@drawable/textfield_btn_box_bg"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <Button
+                android:id="@+id/btn_part_time"
+                android:layout_width="73dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="11dp"
+                android:text="알바"
+                android:textColor="@color/radiobtn_textcolor"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:button="@null"
+                android:background="@drawable/textfield_btn_box_bg"
+                app:layout_constraintStart_toEndOf="@id/btn_club"
+                app:layout_constraintTop_toTopOf="@id/btn_club"/>
+            <Button
+                android:id="@+id/btn_study"
+                android:layout_width="73dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="11dp"
+                android:text="스터디"
+                android:textColor="@color/radiobtn_textcolor"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:button="@null"
+                android:background="@drawable/textfield_btn_box_bg"
+                app:layout_constraintStart_toEndOf="@id/btn_part_time"
+                app:layout_constraintTop_toTopOf="@id/btn_club"/>
+            <Button
+                android:id="@+id/btn_student_council"
+                android:layout_width="73dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="11dp"
+                android:text="학생회"
+                android:textColor="@color/radiobtn_textcolor"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:button="@null"
+                android:background="@drawable/textfield_btn_box_bg"
+                app:layout_constraintStart_toEndOf="@id/btn_study"
+                app:layout_constraintTop_toTopOf="@id/btn_club"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_marginTop="10dp">
-            <RadioGroup
-                android:id="@+id/rg_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="22dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-                <RadioButton
-                    android:id="@+id/btn_club"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="11dp"
-                    android:text="동아리"
-                    android:textColor="@color/radiobtn_textcolor"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:button="@null"
-                    android:background="@drawable/radiobtn_title"/>
-                <RadioButton
-                    android:id="@+id/btn_part_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="11dp"
-                    android:text="알바"
-                    android:textColor="@color/radiobtn_textcolor"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:button="@null"
-                    android:background="@drawable/radiobtn_title"/>
-                <RadioButton
-                    android:id="@+id/btn_study"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="11dp"
-                    android:text="스터디"
-                    android:textColor="@color/radiobtn_textcolor"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:button="@null"
-                    android:background="@drawable/radiobtn_title"/>
-                <RadioButton
-                    android:id="@+id/btn_class_notice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="학생회"
-                    android:textColor="@color/radiobtn_textcolor"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:button="@null"
-                    android:background="@drawable/radiobtn_title"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp">
-                    <RadioButton
-                        android:id="@+id/btn_lesson"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="11dp"
-                        android:text="과외"
-                        android:textColor="@color/radiobtn_textcolor"
-                        android:textSize="14sp"
-                        android:gravity="center"
-                        android:button="@null"
-                        android:background="@drawable/radiobtn_title"/>
-                    <RadioButton
-                        android:id="@+id/btn_academy"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="11dp"
-                        android:text="학원"
-                        android:textColor="@color/radiobtn_textcolor"
-                        android:textSize="14sp"
-                        android:gravity="center"
-                        android:button="@null"
-                        android:background="@drawable/radiobtn_title"/>
-                    <RadioButton
-                        android:id="@+id/btn_work"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="11dp"
-                        android:text="근로"
-                        android:textColor="@color/radiobtn_textcolor"
-                        android:textSize="14sp"
-                        android:gravity="center"
-                        android:button="@null"
-                        android:background="@drawable/radiobtn_title"/>
-                    <RadioButton
-                        android:id="@+id/btn_service"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="봉사"
-                        android:textColor="@color/radiobtn_textcolor"
-                        android:textSize="14sp"
-                        android:gravity="center"
-                        android:button="@null"
-                        android:background="@drawable/radiobtn_title"/>
-                </LinearLayout>
-            </RadioGroup>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/btn_lesson"
+                android:layout_width="73dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="18dp"
+                android:text="과외"
+                android:textColor="@color/radiobtn_textcolor"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:button="@null"
+                android:background="@drawable/textfield_btn_box_bg"
+                app:layout_constraintStart_toStartOf="@id/btn_club"
+                app:layout_constraintTop_toBottomOf="@id/btn_club"/>
+            <Button
+                android:id="@+id/btn_academy"
+                android:layout_width="73dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="11dp"
+                android:text="학원"
+                android:textColor="@color/radiobtn_textcolor"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:button="@null"
+                android:background="@drawable/textfield_btn_box_bg"
+                app:layout_constraintStart_toEndOf="@id/btn_lesson"
+                app:layout_constraintTop_toTopOf="@id/btn_lesson"/>
+            <Button
+                android:id="@+id/btn_work"
+                android:layout_width="73dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="11dp"
+                android:text="근로"
+                android:textColor="@color/radiobtn_textcolor"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:button="@null"
+                android:background="@drawable/textfield_btn_box_bg"
+                app:layout_constraintStart_toEndOf="@id/btn_academy"
+                app:layout_constraintTop_toTopOf="@id/btn_lesson"/>
+            <Button
+                android:id="@+id/btn_service"
+                android:layout_width="73dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="11dp"
+                android:text="봉사"
+                android:textColor="@color/radiobtn_textcolor"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:button="@null"
+                android:background="@drawable/textfield_btn_box_bg"
+                app:layout_constraintStart_toEndOf="@id/btn_work"
+                app:layout_constraintTop_toTopOf="@id/btn_lesson"/>
+        </LinearLayout>
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -183,7 +187,7 @@
         app:layout_constraintTop_toBottomOf="@id/layout_simple_title">
 
         <TextView
-            android:id="@+id/tv_title"
+            android:id="@+id/tv_title_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="직접 이름 설정"
@@ -203,7 +207,7 @@
             android:hint="제목"
             android:textSize="15sp"
             android:theme="@style/Cursor"
-            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_setting"
             app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
@@ -214,7 +218,7 @@
             android:text="세부 정보"
             android:textColor="@color/text1"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/tv_title"
+            app:layout_constraintStart_toStartOf="@+id/tv_title_setting"
             app:layout_constraintTop_toBottomOf="@id/et_title" />
 
         <EditText
