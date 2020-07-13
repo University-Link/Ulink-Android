@@ -40,6 +40,8 @@ class TimeTableInnerListAdapter(mutableList: MutableList<TimeTable>,val timeTabl
             timeTable.isMain?.let {
                 if (it){
                     itemView.findViewById<ImageView>(R.id.iv_main).visibility = View.VISIBLE
+                } else{
+                    itemView.findViewById<ImageView>(R.id.iv_main).visibility = View.GONE
                 }
             }
 
