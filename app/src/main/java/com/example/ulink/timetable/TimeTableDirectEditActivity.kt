@@ -24,7 +24,7 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
 
     override fun onDrawed(size: Int) {
         if (size>0){
-            findViewById<TextView>(R.id.tv_ok).visibility = View.GONE
+            findViewById<TextView>(R.id.btn_ok).visibility = View.GONE
             findViewById<TextView>(R.id.tv_modify).visibility = View.VISIBLE
         }
     }
@@ -41,7 +41,7 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
 
         timeTableDrawerDrag = TimeTableDrawerDrag(this, LayoutInflater.from(this), timeTable)
         timeTableDrawerDrag.onDrawListener = this
-        findViewById<TextView>(R.id.tv_ok).visibility = View.VISIBLE
+        findViewById<TextView>(R.id.btn_ok).visibility = View.VISIBLE
 
         timeTableDrawerDrag.draw(findViewById<FrameLayout>(R.id.layout_timetable))
         findViewById<NestedScrollView>(R.id.layout_timetable_scrollable).isVerticalScrollBarEnabled = false
@@ -58,7 +58,7 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
             rollBack()
         }
 
-        findViewById<TextView>(R.id.tv_ok).setOnClickListener {
+        findViewById<TextView>(R.id.btn_ok).setOnClickListener {
             val intent = Intent()
             intent.putExtra("timeTable", timeTableDrawerDrag.getAddedTable())
             setResult(200, intent)
@@ -78,7 +78,7 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_DIRECT_TYPE_ACTIVITY && resultCode == 200){
             timeTableDrawerDrag.testview.drawlist.clear()
-            findViewById<TextView>(R.id.tv_ok).visibility = View.VISIBLE
+            findViewById<TextView>(R.id.btn_ok).visibility = View.VISIBLE
             findViewById<TextView>(R.id.tv_modify).visibility = View.GONE
 //            intent.getParcelableExtra<TimeTable>()
 //           TODO 여기서 timetablelist에 넣어줘야함 그리고 deepcopy꼭하기!!

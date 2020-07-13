@@ -5,12 +5,16 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.InsetDrawable
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.WindowManager
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.MarginPageTransformer
 import com.example.ulink.R
@@ -39,6 +43,7 @@ class TimeTableEditActivity : AppCompatActivity() {
 //    TODO
 //     클릭했을때 깜빡이는거 해결
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_time_table_edit)
@@ -60,7 +65,7 @@ class TimeTableEditActivity : AppCompatActivity() {
             showAddDialog()
         }
         btn_tableplus.setOnClickListener {
-            showDialog()
+            showAddTableDialog()
         }
     }
 
@@ -143,8 +148,8 @@ class TimeTableEditActivity : AppCompatActivity() {
     }
 
 
-    fun showDialog() {
-
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun showAddTableDialog() {
         val builder = AlertDialog.Builder(this)
         val layout = LayoutInflater.from(this).inflate(R.layout.dialog_timetable_name, null)
         builder.setView(layout)
@@ -152,24 +157,32 @@ class TimeTableEditActivity : AppCompatActivity() {
 
         val et = layout.findViewById<EditText>(R.id.et_name)
 
-        layout.findViewById<Button>(R.id.btn_ok).setOnClickListener {
+        layout.findViewById<TextView>(R.id.btn_ok).setOnClickListener {
+
+//            TODO 여기서 DB로 저장하고 edit에 넣긴 해야함
 
             val timeTable = TimeTable(1, "2020-2", et.text.toString(), false, "09:00", "18:00")
 //          EditActivity에 넣어줄 필요가 있나? 이걸
 //            timeTableList.add(timeTable)
 
-            mAdapter.addToList(timeTable)
+            mAdapter.addToList(deepCopy(timeTable))
             moveToLastItem()
             dialog.dismiss()
         }
 
-        layout.findViewById<Button>(R.id.btn_cancel).setOnClickListener {
+        layout.findViewById<TextView>(R.id.tv_cancel).setOnClickListener {
             dialog.dismiss()
         }
 
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val back = ColorDrawable(Color.TRANSPARENT)
+        val inset = InsetDrawable(back, 80)
+
+        dialog.window?.setBackgroundDrawable(inset)
 
         dialog.show()
+
+
+
     }
 
     fun moveToLastItem() {

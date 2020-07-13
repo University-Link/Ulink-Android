@@ -24,8 +24,8 @@
         app:layout_constraintRight_toLeftOf="@id/btn_ok"
         android:background="@drawable/btn_replay"/>
 
-    <TextView
-        android:id="@+id/tv_ok"
+    <Button
+        android:id="@+id/btn_ok"
         android:layout_width="46dp"
         android:layout_height="24dp"
         app:layout_constraintRight_toRightOf="parent"

@@ -3,7 +3,9 @@ package com.example.ulink.timetable
 import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.InsetDrawable
 import android.os.Bundle
+import android.util.DisplayMetrics
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -55,13 +57,25 @@ class TimeTableAddBlankFragment : Fragment() {
             dialog.dismiss()
         }
 
-        layout.findViewById<Button>(R.id.btn_cancel).setOnClickListener {
+        layout.findViewById<Button>(R.id.tv_cancel).setOnClickListener {
             dialog.dismiss()
         }
 
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+
+        val back = ColorDrawable(Color.TRANSPARENT)
+        val inset = InsetDrawable(back, 80)
+
+        dialog.window?.setBackgroundDrawable(inset)
 
         dialog.show()
+
+
+    }
+
+    fun dptopx(dp: Int): Float {
+        val metrics = resources.displayMetrics
+        return dp * ((metrics.densityDpi.toFloat()) / DisplayMetrics.DENSITY_DEFAULT)
     }
 
 }
