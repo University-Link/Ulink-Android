@@ -1,6 +1,7 @@
 package com.example.ulink.timetable
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.ulink.FilterNormalActivity
 import com.example.ulink.R
 import com.example.ulink.repository.Subject
 import kotlinx.android.synthetic.main.fragment_timetablefiltersearch.*
@@ -48,6 +50,14 @@ class TimeTableFilterSearchFragment() : Fragment() {
         rv_classes.adapter = mAdapter
         mAdapter.addToList(subjectList)
 
+        btn_fitler_major.setOnClickListener {
+            //TODO 전공필터 만들면 연결
+        }
+
+        btn_filter_normal.setOnClickListener {
+            val intent = Intent(activity,FilterNormalActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     interface onItemClickListener{

@@ -46,13 +46,14 @@
             android:layout_marginRight="26dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"/>
+
         <TextView
             android:id="@+id/tv_changename"
-            android:text="이름 변경"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/text1"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:text="이름 변경"
+            android:textColor="@color/text1" />
     </LinearLayout>
 
     <LinearLayout

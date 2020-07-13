@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_round_border"
+    >
+
+    <TextView
+        android:id="@+id/tv_insertname"
+        android:layout_width="wrap_content"
+        android:text="삭제"
+        android:textSize="18sp"
+        android:layout_marginTop="22dp"
+        android:layout_marginLeft="22dp"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tv_tv_explanation"
+        android:layout_width="wrap_content"
+        android:text="시간표를 삭제하겠습니까?"
+        android:textSize="15sp"
+        android:textColor="@color/text1"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintLeft_toLeftOf="@id/tv_insertname"
+        app:layout_constraintTop_toBottomOf="@id/tv_insertname"
+        />
+
+    <TextView
+        android:id="@+id/tv_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="35dp"
+        android:text="취소"
+        android:textColor="#674fee"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_delete"
+        app:layout_constraintRight_toLeftOf="@id/tv_delete"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tv_explanation" />
+
+    <TextView
+        android:id="@+id/tv_delete"
+        android:text="삭제"
+        android:layout_marginBottom="18dp"
+        android:layout_marginRight="31dp"
+        android:textColor="#fd4165"
+        android:textSize="15sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
