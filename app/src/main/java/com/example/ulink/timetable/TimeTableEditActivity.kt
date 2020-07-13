@@ -12,7 +12,6 @@ import android.os.Handler
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.WindowManager
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -157,7 +156,7 @@ class TimeTableEditActivity : AppCompatActivity() {
 
         val et = layout.findViewById<EditText>(R.id.et_name)
 
-        layout.findViewById<TextView>(R.id.btn_ok).setOnClickListener {
+        layout.findViewById<TextView>(R.id.tv_ok).setOnClickListener {
 
 //            TODO 여기서 DB로 저장하고 edit에 넣긴 해야함
 
