@@ -12,11 +12,10 @@ class MainPagerAdapter (fm: FragmentManager):
         return when(position){
             0-> TimeTableFragment()
             1-> ClassFragment()
-            2-> UlinkFragment()
-            3-> CalendarFragment()
+            2-> CalendarFragment()
             else-> MyFragment()
         }
     }
 
-    override fun getCount() = 5
+    override fun getCount() = 4
 }

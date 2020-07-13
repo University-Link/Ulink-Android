@@ -17,7 +17,7 @@
         android:orientation="vertical"
         android:layout_marginTop="10.5dp"
         android:paddingVertical="18dp"
-        android:background="@color/white"
+        android:background="@drawable/white_background"
         app:layout_constraintTop_toBottomOf="@id/toolbar_notice_add"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -36,44 +36,47 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
-
-            <Button
+        <RadioGroup
+            android:id="@+id/rg_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="22dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+            <RadioButton
                 android:id="@+id/btn_task_notice"
                 android:layout_width="wrap_content"
-                android:layout_height="33dp"
-                android:background="@drawable/btn_bg_notice"
-                android:textColor="@color/text2"
-                android:textSize="14sp"
-                android:text="과제공지"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="8dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/btn_test_notice"/>
-
-            <Button
+                android:text="과제공지"
+                android:textColor="@color/radiobtn_textcolor"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:button="@null"
+                android:background="@drawable/radiobtn_category"/>
+            <RadioButton
                 android:id="@+id/btn_test_notice"
                 android:layout_width="wrap_content"
-                android:layout_height="33dp"
-                android:background="@drawable/btn_bg_notice"
-                android:textColor="@color/text2"
-                android:textSize="14sp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
                 android:text="시험공지"
-                app:layout_constraintTop_toTopOf="@id/btn_task_notice"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                />
-
-            <Button
+                android:textColor="@color/radiobtn_textcolor"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:button="@null"
+                android:background="@drawable/radiobtn_category"/>
+            <RadioButton
                 android:id="@+id/btn_class_notice"
                 android:layout_width="wrap_content"
-                android:layout_height="33dp"
-                android:background="@drawable/btn_bg_notice"
-                android:textColor="@color/text2"
-                android:textSize="14sp"
+                android:layout_height="wrap_content"
                 android:text="수업공지"
-                android:layout_marginLeft="8dp"
-                app:layout_constraintTop_toTopOf="@id/btn_task_notice"
-                app:layout_constraintStart_toEndOf="@id/btn_test_notice"
-                />
+                android:textColor="@color/radiobtn_textcolor"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:button="@null"
+                android:background="@drawable/radiobtn_category"/>
+        </RadioGroup>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
@@ -85,7 +88,7 @@
         android:paddingHorizontal="22dp"
         android:paddingVertical="20dp"
         android:layout_marginTop="10dp"
-        android:background="@color/white"
+        android:background="@drawable/white_background"
         app:layout_constraintEnd_toEndOf="@id/layout_category"
         app:layout_constraintStart_toStartOf="@id/layout_category"
         app:layout_constraintTop_toBottomOf="@id/layout_category">
@@ -105,6 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2020년 7월 5일"
+            android:textColor="@color/text1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -115,7 +119,7 @@
         android:layout_height="wrap_content"
         android:paddingVertical="20dp"
         android:layout_marginTop="10dp"
-        android:background="@color/white"
+        android:background="@drawable/white_background"
         app:layout_constraintEnd_toEndOf="@id/layout_category"
         app:layout_constraintStart_toStartOf="@id/layout_category"
         app:layout_constraintTop_toBottomOf="@id/layout_date">
@@ -137,7 +141,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="21dp"
+            android:backgroundTint="@color/edittext_selector"
             android:hint="제목을 입력하세요"
+            android:textSize="14sp"
+            android:theme="@style/Cursor"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
             app:layout_constraintStart_toStartOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -148,7 +155,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:paddingVertical="20dp"
-        android:background="@color/white"
+        android:background="@drawable/white_background"
         app:layout_constraintEnd_toEndOf="@id/layout_category"
         app:layout_constraintStart_toStartOf="@id/layout_category"
         app:layout_constraintTop_toBottomOf="@id/layout_title">
@@ -164,51 +171,67 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.52" />
+
         <TextView
             android:id="@+id/tv_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="27dp"
             android:text="시작"
             android:textSize="15sp"
             android:textColor="@color/text2"
-            app:layout_constraintStart_toEndOf="@id/tv_time_setting"
-            app:layout_constraintTop_toTopOf="@id/tv_time_setting" />
+            app:layout_constraintTop_toTopOf="@id/tv_time_setting"
+            app:layout_constraintStart_toStartOf="@id/guideline"/>
 
-        <Spinner
-            android:id="@+id/spinner_start"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             app:layout_constraintStart_toEndOf="@id/tv_start"
-            app:layout_constraintTop_toTopOf="@id/tv_start" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_start">
+            <Spinner
+                android:id="@+id/spinner_start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
             android:text="종료"
+            android:layout_marginTop="12dp"
             android:textSize="15sp"
             android:textColor="@color/text2"
-            app:layout_constraintStart_toEndOf="@id/spinner_start"
-            app:layout_constraintTop_toTopOf="@id/tv_start" />
+            app:layout_constraintTop_toBottomOf="@id/tv_start"
+            app:layout_constraintStart_toStartOf="@id/guideline"/>
 
-        <Spinner
-            android:id="@+id/spinner_end"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            app:layout_constraintStart_toEndOf="@+id/tv_end"
-            app:layout_constraintTop_toTopOf="@id/tv_start" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintStart_toEndOf="@id/tv_end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_end">
+            <Spinner
+                android:id="@+id/spinner_end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_memo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@color/white"
+        android:background="@drawable/white_background"
         app:layout_constraintEnd_toEndOf="@id/layout_category"
         app:layout_constraintStart_toStartOf="@id/layout_category"
         app:layout_constraintTop_toBottomOf="@id/layout_time">
@@ -218,20 +241,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="22dp"
+            android:layout_marginTop="20dp"
             android:text="메모"
-            android:textSize="16sp"
             android:textColor="@color/text1"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/et_memo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="13dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="12dp"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="12dp"
+            android:background="@drawable/memo_background"
+            android:theme="@style/Cursor"
+            android:lines="8"
+            android:gravity="top"
+            android:textSize="14sp"
+            android:hint="내용을 입력하세요"
             app:layout_constraintStart_toStartOf="@id/tv_memo"
             app:layout_constraintTop_toBottomOf="@id/tv_memo"
-            />
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -147,7 +147,8 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                                 classname = "유링",
                                 content = "유링",
                                 startTime = "11:00",
-                                endTime = "13:00"
+                                endTime = "13:00",
+                                memo = "유링크최고"
                             )
                         )
                         add(
@@ -157,7 +158,8 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                                 classname = "안드",
                                 content = "유링크",
                                 startTime = "11:00",
-                                endTime = "13:00"
+                                endTime = "13:00",
+                                memo = "유링크최고"
                             )
                         )
                         add(
@@ -167,7 +169,8 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                                 classname = "바보",
                                 content = "멍청이",
                                 startTime = "11:00",
-                                endTime = "13:00"
+                                endTime = "13:00",
+                                memo = "유링크최고"
                             )
                         )
                         rvPopupAdapter.notifyDataSetChanged()

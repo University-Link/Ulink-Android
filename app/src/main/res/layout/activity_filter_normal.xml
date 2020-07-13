@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".FilterNormalActivity">
+
+    <include
+        android:id="@+id/toolbar_filter_normal"
+        layout="@layout/toolbar_filter_normal" />
+
+    <LinearLayout
+        android:id="@+id/layout_filter_normal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10.5dp"
+        android:background="@drawable/white_background"
+        android:orientation="vertical"
+        android:paddingTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_filter_normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:id="@+id/filter_normal_layout1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="22dp">
+
+            <TextView
+                android:id="@+id/tv_date_select"
+                android:text="요일 지정"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
+
+            <Button
+                android:id="@+id/date_all_clear"
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/main_filtersetting_btn_allcancel01"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_date_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/filter_normal_layout1"
+            app:layout_constraintStart_toStartOf="@id/filter_normal_layout1">
+
+        <Button
+            android:id="@+id/btn_monday"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
+            android:layout_marginRight="11dp"
+            android:background="@drawable/io_main_filtersetting_btn_mon_selected"/>
+
+        <Button
+            android:id="@+id/btn_tuesday"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
+            android:layout_marginRight="11dp"
+            android:background="@drawable/io_main_filtersetting_btn_tue_selected"/>
+
+        <Button
+            android:id="@+id/btn_wednesday"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
+            android:layout_marginRight="11dp"
+            android:background="@drawable/io_main_filtersetting_btn_wed_selected"/>
+
+        <Button
+            android:id="@+id/btn_thursday"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
+            android:layout_marginRight="11dp"
+            android:background="@drawable/io_main_filtersetting_btn_thu_selected"/>
+
+        <Button
+            android:id="@+id/btn_friday"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
+            android:layout_marginRight="11dp"
+            android:background="@drawable/io_main_filtersetting_btn_fri_selected"/>
+         </LinearLayout>
+
+         <TextView
+             android:id="@+id/tv_empty_select"
+             android:text="공강 지정"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textColor="@color/black"
+             android:textSize="16sp"
+             android:layout_marginTop="24dp"
+             android:layout_marginLeft="22dp"/>
+
+        <LinearLayout
+            android:id="@+id/layout_date_empty_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/filter_normal_layout1"
+            app:layout_constraintStart_toStartOf="@id/filter_normal_layout1">
+
+            <Button
+                android:id="@+id/btn_monday_empty"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:layout_marginRight="11dp"
+                android:background="@drawable/io_main_filtersetting_btn_monempty_unselected"/>
+
+            <Button
+                android:id="@+id/btn_tuesday_empty"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:layout_marginRight="11dp"
+                android:background="@drawable/io_main_filtersetting_btn_tueempty_unselected"/>
+
+            <Button
+                android:id="@+id/btn_wednesday_empty"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:layout_marginRight="11dp"
+                android:background="@drawable/io_main_filtersetting_btn_wedempty_unselected"/>
+
+            <Button
+                android:id="@+id/btn_thursday_empty"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:layout_marginRight="11dp"
+                android:background="@drawable/io_main_filtersetting_btn_thuempty_unselected"/>
+
+            <Button
+                android:id="@+id/btn_friday_empty"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:layout_marginRight="11dp"
+                android:background="@drawable/io_main_filtersetting_btn_friempty_unselected"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_first_exclude_select"
+            android:text="1교시 제외"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="22dp"/>
+
+        <ToggleButton
+            android:id="@+id/one_class_exclude"
+            android:layout_width="51dp"
+            android:layout_height="31dp"
+            android:background="@drawable/filter_toggle_selector"
+            android:textOn=""
+            android:textOff=""
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="22dp"/>
+
+        <LinearLayout
+            android:id="@+id/filter_normal_layout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="22dp">
+
+            <TextView
+                android:id="@+id/tv_credit_select"
+                android:text="수강학점"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
+
+            <Button
+                android:id="@+id/credit_all_clear"
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/main_filtersetting_btn_allcancel01"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_credit_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="58dp"
+            app:layout_constraintTop_toBottomOf="@id/filter_normal_layout1"
+            app:layout_constraintStart_toStartOf="@id/filter_normal_layout1">
+
+            <Button
+                android:id="@+id/btn_credit_1"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:layout_marginRight="11dp"
+                android:background="@drawable/credit_btn_1"/>
+
+            <Button
+                android:id="@+id/btn_credit_2"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:layout_marginRight="11dp"
+                android:background="@drawable/credit_btn_2"/>
+
+            <Button
+                android:id="@+id/btn_credit_3"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:layout_marginRight="11dp"
+                android:background="@drawable/credit_btn_3"/>
+
+            <Button
+                android:id="@+id/btn_credit_4"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:layout_marginRight="11dp"
+                android:background="@drawable/credit_btn_4"/>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

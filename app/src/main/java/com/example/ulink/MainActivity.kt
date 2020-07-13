@@ -30,8 +30,7 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.nv_timetable -> main_viewPager.currentItem = 0
                 R.id.nv_class -> main_viewPager.currentItem = 1
-                R.id.nv_ulink -> main_viewPager.currentItem = 2
-                R.id.nv_calendar -> main_viewPager.currentItem = 3
+                R.id.nv_calendar -> main_viewPager.currentItem = 2
                 R.id.nv_my -> main_viewPager.currentItem = 4
             }
             true

@@ -48,6 +48,7 @@ class TimeTableDragView(context: Context, root: View, val timecolumnWidth: Float
     init {
         mGestureDetector = GestureDetectorCompat(context, this)
     }
+    lateinit var onDrawListener: onDrawListener
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
@@ -180,6 +181,7 @@ class TimeTableDragView(context: Context, root: View, val timecolumnWidth: Float
                     val draw2 = RectF(draw.left, draw.top, draw.right, draw.bottom)
                     drawlist.add(draw2)
                     nomore = true
+                    onDrawListener.onDrawed(drawlist.size)
                 }
             }
         }

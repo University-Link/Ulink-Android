@@ -25,12 +25,23 @@
         android:background="@drawable/btn_replay"/>
 
     <TextView
-        android:id="@+id/btn_ok"
+        android:id="@+id/tv_ok"
         android:layout_width="46dp"
         android:layout_height="24dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/btn_cancel"
         app:layout_constraintBottom_toBottomOf="@id/btn_cancel"
+        android:background="@drawable/timetableadd_timetable_direct_add_drag_btn_ok"/>
+
+
+    <TextView
+        android:id="@+id/tv_modify"
+        android:layout_width="46dp"
+        android:layout_height="24dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btn_cancel"
+        app:layout_constraintBottom_toBottomOf="@id/btn_cancel"
+        android:visibility="gone"
         android:background="@drawable/timetableadd_timetable_direct_add_drag_btn_ok"/>
 
     <LinearLayout
