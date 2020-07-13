@@ -62,7 +62,6 @@ class TimeTableAddBlankFragment : Fragment() {
         }
 
 
-
         val back = ColorDrawable(Color.TRANSPARENT)
         val inset = InsetDrawable(back, 80)
 

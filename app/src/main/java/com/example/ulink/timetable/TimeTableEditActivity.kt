@@ -177,6 +177,8 @@ class TimeTableEditActivity : AppCompatActivity() {
         val back = ColorDrawable(Color.TRANSPARENT)
         val inset = InsetDrawable(back, 80)
 
+
+        
         dialog.window?.setBackgroundDrawable(inset)
 
         dialog.show()
