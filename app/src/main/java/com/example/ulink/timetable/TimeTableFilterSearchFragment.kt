@@ -1,6 +1,7 @@
 package com.example.ulink.timetable
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -11,13 +12,18 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.ulink.FilterSettingSearchActivity
 import com.example.ulink.R
 import com.example.ulink.repository.Subject
 import kotlinx.android.synthetic.main.fragment_timetablefiltersearch.*
 
+
+const val REQUEST_FILTER_SETTING_SEARCH_ACTIVITY = 666
 class TimeTableFilterSearchFragment() : Fragment() {
 
     lateinit var mAdapter : TimeTableClassAdapter
+
+    var prevent = true
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_timetablefiltersearch, container, false)
@@ -25,7 +31,6 @@ class TimeTableFilterSearchFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         val subjectList: MutableList<Subject> = arrayListOf()
         subjectList.add(Subject(1, "전자회로I", "09:00", "12:00", "mon", "과목장소", 1, true, isSample = true, number = "342"))
@@ -43,8 +48,6 @@ class TimeTableFilterSearchFragment() : Fragment() {
         subjectList.add(Subject(4, "전자회로7", "13:00", "17:30", "wed", "과목장소", 1, true, isSample = true))
         subjectList.add(Subject(4, "전자회로8", "13:00", "17:30", "wed", "과목장소", 1, true, isSample = true))
 
-
-//        TODO 자동 스크롤 고치기
         mAdapter = TimeTableClassAdapter(requireContext(), object : onItemClickListener{
             override fun onItemClicked(position: Int) {
 
@@ -54,6 +57,26 @@ class TimeTableFilterSearchFragment() : Fragment() {
 
         mAdapter.addToList(subjectList)
 
+        et_class_name.setOnFocusChangeListener { v, hasFocus ->
+            if (prevent){
+                val intent = Intent(context,FilterSettingSearchActivity::class.java)
+                startActivityForResult(intent, REQUEST_FILTER_SETTING_SEARCH_ACTIVITY)
+                prevent = false
+                et_class_name.clearFocus()
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        prevent = true
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_FILTER_SETTING_SEARCH_ACTIVITY){
+            et_class_name.setText(data?.getStringExtra("query"))
+        }
     }
 
     interface onItemClickListener{
