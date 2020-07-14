@@ -12,7 +12,7 @@ data class Subject (
         var name : String,
         var startTime : String,
         var endTime : String,
-        var day : Int,
+        var day : Int, 
         @SerializedName("content")
         var place : String?,
         var color : Int,
