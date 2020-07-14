@@ -99,6 +99,7 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
                     }, onFailure = {
                         Log.d("tag", it)
                     })
+//                    TODO 여기 위에 찍히나 확인!!
                 }
             }
 

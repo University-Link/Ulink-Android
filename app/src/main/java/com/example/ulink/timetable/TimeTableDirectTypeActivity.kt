@@ -77,6 +77,10 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
         var textUncheck = "#727272"
 
 
+        btn_back.setOnClickListener {
+            finish()
+        }
+
 
         et_title.setOnFocusChangeListener(object : View.OnFocusChangeListener {
             override fun onFocusChange(v: View?, hasFocus: Boolean) {
@@ -304,6 +308,7 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
 
         //시간표 전부 추가 후 확인
         btn_check.setOnClickListener() {
+
             if (et_title.text.toString() == "") directAddPageDialog()
             else {
                 val intent = Intent()
@@ -404,6 +409,8 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
     override fun onClick(position: Int, check: Boolean) {
         time_picker.visibility = View.VISIBLE
         btn_ok.visibility = View.VISIBLE
+        time_picker.setIs24HourView(true)
+
         time_picker.setOnTimeChangedListener(OnTimeChangedListener { timePicker, hour, min ->
 
             if (!check) {
@@ -419,7 +426,19 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
             }
         })
 
+
+
+        //삭제 다이얼로그
+        btn_check.setOnClickListener() {
+            if (et_title.text.toString() == "") directAddPageDialog()
+            else {
+                //제목설정 다이얼로그
+                //시간입력 다이얼로그
+
+            }
+        }
     }
+
 
     fun formatToFloat(time: String): Float {
         val timesplit = time.split(":")
