@@ -45,7 +45,7 @@ class TimeTableCandidateFragment() : Fragment(){
 
     override fun onResume() {
         super.onResume()
-<<<<<<< HEAD
+
         var cartDatas : MutableList<SubjectDetail> = mutableListOf()
 
         //getCartList 후보 등록  TODO SEMESTER넘겨주기
@@ -92,16 +92,5 @@ class TimeTableCandidateFragment() : Fragment(){
                 }
             }
         })
-=======
-//        btn_assess.setOnClickListener {
-//            val intent = Intent(context,EvaluationActivity::class.java)
-//            startActivity(intent)
-//        }
-
-
-
-        mAdapter.addToList(Subject(1, "전자회로I", "09:00", "12:00", 0, "과목장소", 1, true))
-        mAdapter.notifyDataSetChanged()
->>>>>>> 02e9367c07136cb08229aab9c965dd1aafa974aa
     }
 }
