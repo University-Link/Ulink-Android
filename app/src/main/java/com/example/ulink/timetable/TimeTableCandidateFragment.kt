@@ -46,7 +46,7 @@ class TimeTableCandidateFragment() : Fragment(){
 //            startActivity(intent)
 //        }
 
-        mAdapter.addToList(Subject(1, "전자회로I", "09:00", "12:00", "mon", "과목장소", 1, true))
+        mAdapter.addToList(Subject(1, "전자회로I", "09:00", "12:00", 0, "과목장소", 1, true))
         mAdapter.notifyDataSetChanged()
     }
 

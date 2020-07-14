@@ -28,7 +28,7 @@ class LoginActivity : AppCompatActivity() {
                 sharedEdit.commit()
             }
 
-            val intent = Intent(this, DirectTimeTableActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             /*if(et_id.text.isNullOrBlank() || et_pw.text.isNullOrBlank()){
                        showToast("아이디와 비밀번호를 확인하세요.")

@@ -35,6 +35,7 @@ class TimeTableInnerListAdapter(mutableList: MutableList<TimeTable>,val timeTabl
     inner class VHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun setHolder(timeTable: TimeTable) {
+
             itemView.findViewById<TextView>(R.id.tv_timetablename).text = timeTable.name
 
             timeTable.isMain?.let {

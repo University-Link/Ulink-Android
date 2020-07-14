@@ -7,12 +7,12 @@ data class ResponseMainTimeTable(
         val success: Boolean,
         val message: String,
         val data: Data
-)
-
-data class Data(
-        val timeTable: TimeTable,
-        val subjects: Subjects
-)
+){
+        data class Data(
+                val timeTable: TimeTable,
+                val subjects: Subjects
+        )
+}
 
 data class Subjects(
         @SerializedName("0")

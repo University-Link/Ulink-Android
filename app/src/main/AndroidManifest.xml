@@ -25,6 +25,8 @@
         </activity>
         <activity android:name=".FilterSettingActivity">
         </activity>
+
+        <activity android:name=".FilterSettingSearchActivity"></activity>
         <activity android:name=".ScheduleNoticeActivity"></activity>
         <activity android:name=".timetable.TimeTableListActivity" />
         <activity android:name=".NotificationActivity" />
