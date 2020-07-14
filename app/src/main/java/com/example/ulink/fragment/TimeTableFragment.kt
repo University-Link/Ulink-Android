@@ -62,17 +62,13 @@ class TimeTableFragment : Fragment() {
 //                TODO 이거 table받아와서 classname으로 일주일에 몇번 수업인지 알아서 표시하기 vs 어뜨카지
 
                 layout.findViewById<TextView>(R.id.tv_time).text = subject.startTime + "  " + subject.endTime
-                layout.findViewById<TextView>(R.id.tv_place).text = subject.place + ", "
+                layout.findViewById<TextView>(R.id.tv_place).text = subject.place + " "
                 layout.findViewById<TextView>(R.id.tv_professor_name).text = subject.professor
                 layout.findViewById<TextView>(R.id.tv_class_name).text = subject.name
 
                 builder.setView(layout)
                 val dialog = builder.create()
 
-//          기타 클릭 이벤트
-                layout.setOnClickListener {
-                    Toast.makeText(context, "dfasdf", Toast.LENGTH_SHORT).show()
-                }
 
                 dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
