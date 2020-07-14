@@ -172,7 +172,15 @@ interface RequestInterface {
     @GET("/subject")
     fun getSubjectList(
             @Header("token") token : String
-    ) : Call<ResponseCalendar>
+    ) : Call<ResponseSubject>
+
+    //학년 검색
+    @GET("/subject")
+    fun getSubjectByGrade(
+        @Header("token") token :String,
+        @Query("grade") grade : Int
+    ) : Call<ResponseGetSubjectByGrade>
+
     //수업(과목)검색 자동완성 - 키워드
     @GET("/subject/recommend")
     fun getSubjectWithKeyword(

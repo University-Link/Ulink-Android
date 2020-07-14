@@ -9,4 +9,5 @@ data class ResponseLogin(
 
 data class SomeData(
     val jwt : String
+    //TODO uid, accessToken
 )
