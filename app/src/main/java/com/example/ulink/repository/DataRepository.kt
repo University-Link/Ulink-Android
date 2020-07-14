@@ -70,6 +70,20 @@ object DataRepository {
         })
     }
 
+    fun getAllTimeTableList(){
+        retrofit.getAllTimeTableList(token).enqueue(object :Callback<ResponseTimeTable>{
+            override fun onFailure(call: Call<ResponseTimeTable>, t: Throwable) {
+
+            }
+
+            override fun onResponse(call: Call<ResponseTimeTable>, response: Response<ResponseTimeTable>) {
+                response.body().let {
+                    val tableList : MutableList<TimeTable> = arrayListOf()
+                }
+            }
+        })
+    }
+
 
 
 
@@ -82,5 +96,6 @@ object DataRepository {
             }
         })
     }
+
 
 }
