@@ -12,7 +12,7 @@ data class Subject (
         var name : String,
         var startTime : String,
         var endTime : String,
-        var day : String,
+        var day : Int,
         @SerializedName("content")
         var place : String?,
         var color : Int,
@@ -23,5 +23,5 @@ data class Subject (
         var isSample : Boolean = false,
         var number : String = ""
 ) : Parcelable {
-        constructor() : this(0,"","","","","",1,false,0f,"","",false,"")
+        constructor() : this(0,"","","",0,"",1,false,0f,"","",false,"")
 }

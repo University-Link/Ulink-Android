@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.ulink.ScheduleRecycler.ScheduleItemData
 import com.example.ulink.NoticeRecycler.ScheduleNoticeAdapter
 import com.example.ulink.NoticeRecycler.emptyCheck
+import com.example.ulink.repository.RetrofitService
 import kotlinx.android.synthetic.main.activity_notice.*
 import kotlinx.android.synthetic.main.toolbar_notice.*
 import kotlinx.android.synthetic.main.toolbar_notice.btn_back
@@ -24,6 +25,7 @@ class NoticeActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notice)
+
 
         var className = intent.getStringExtra("class")
         if(className!="") tv_classname.text = className+" 공지"

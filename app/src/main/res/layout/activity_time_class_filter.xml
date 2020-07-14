@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:indicatorRight="24dp"
         android:divider="#f7f7f7"
+        android:childDivider="@null"
         android:dividerHeight="10dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

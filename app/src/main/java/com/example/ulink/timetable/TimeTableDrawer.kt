@@ -223,7 +223,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 //        subject sort한번 해줘야함
 
         subjectsize.let { itit ->
-            val daylist = arrayListOf("mon", "tue", "wed", "thu", "fri", "sat", "sun")
+            val daylist = arrayListOf(1,2,3,4,5,6,7)
             val list0: MutableList<Subject> = arrayListOf()
             val list1: MutableList<Subject> = arrayListOf()
             val list2: MutableList<Subject> = arrayListOf()
@@ -345,7 +345,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 
 
         subjectsize?.let { itit ->
-            val daylist = arrayListOf("mon", "tue", "wed", "thu", "fri", "sat", "sun")
+            val daylist = arrayListOf(1,2,3,4,5,6,7)
             val list0: MutableList<Subject> = arrayListOf()
             val list1: MutableList<Subject> = arrayListOf()
             val list2: MutableList<Subject> = arrayListOf()
@@ -559,18 +559,17 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 
 
     fun getColors(type: Int): Int {
-
         return when (type) {
-            1 -> R.drawable.bg_round_border_subject_color_1
-            2 -> R.drawable.bg_round_border_subject_color_2
-            3 -> R.drawable.bg_round_border_subject_color_3
-            4 -> R.drawable.bg_round_border_subject_color_4
-            5 -> R.drawable.bg_round_border_subject_color_5
-            6 -> R.drawable.bg_round_border_subject_color_6
-            7 -> R.drawable.bg_round_border_subject_color_7
-            8 -> R.drawable.bg_round_border_subject_color_8
-            9 -> R.drawable.bg_round_border_subject_color_9
-            10 -> R.drawable.bg_round_border_subject_color_10
+            0 -> R.drawable.bg_round_border_subject_color_1
+            1 -> R.drawable.bg_round_border_subject_color_2
+            2 -> R.drawable.bg_round_border_subject_color_3
+            3 -> R.drawable.bg_round_border_subject_color_4
+            4 -> R.drawable.bg_round_border_subject_color_5
+            5 -> R.drawable.bg_round_border_subject_color_6
+            6 -> R.drawable.bg_round_border_subject_color_7
+            7 -> R.drawable.bg_round_border_subject_color_8
+            8 -> R.drawable.bg_round_border_subject_color_9
+            9 -> R.drawable.bg_round_border_subject_color_10
             else -> R.drawable.bg_round_border_subject
         }
     }

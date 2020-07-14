@@ -17,7 +17,6 @@
         app:layout_constraintLeft_toLeftOf="parent"/>
     <TextView
         android:id="@+id/tv_class_name"
-        android:text="캡스톤 디자인"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="6dp"
@@ -41,7 +40,6 @@
 
     <TextView
         android:id="@+id/tv_time"
-        android:text="수 10:00 - 13:00, 목 13:00 - 16:00"
         android:textSize="14sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -63,7 +61,6 @@
 
     <TextView
         android:id="@+id/tv_place"
-        android:text="제 2 공학관 304"
         android:textSize="14sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -74,7 +71,6 @@
 
     <TextView
         android:id="@+id/tv_professor_name"
-        android:text="최상인 교수"
         android:textSize="14sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -104,7 +100,6 @@
         />
     <TextView
         android:id="@+id/tv_customizing"
-        android:text="시간표 커스텀마이징"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="26dp"

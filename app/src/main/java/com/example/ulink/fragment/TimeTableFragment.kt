@@ -5,21 +5,29 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.*
-import android.widget.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.ulink.NotificationActivity
 import com.example.ulink.R
-import com.example.ulink.repository.Subject
-import com.example.ulink.repository.TimeTable
-import com.example.ulink.timetable.*
+import com.example.ulink.repository.*
+import com.example.ulink.timetable.BottomSheetFragment
+import com.example.ulink.timetable.TimeTableDrawer
+import com.example.ulink.timetable.TimeTableEditActivity
+import com.example.ulink.timetable.TimeTableListActivity
 import com.example.ulink.utils.deepCopy
 import kotlinx.android.synthetic.main.fragment_time_table.*
-import kotlin.collections.ArrayList
 
 const val REQUEST_TIMETABLE_LIST_ACTIVITY = 777
 
 class TimeTableFragment : Fragment() {
+
+    lateinit var mainTable : TimeTable
+
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -31,26 +39,18 @@ class TimeTableFragment : Fragment() {
 //        클릭시 좌표로 subject list에서 찾기! 몇시 과목인지로!
     }
 
-    interface subjectOnClick{
+    interface subjectOnClick {
         fun onClick(subject: Subject)
     }
 
-    lateinit var timetableDrawer : TimeTableDrawer
+    lateinit var timetableDrawer: TimeTableDrawer
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        서버랑 통신해서 TimeTable가져옴
 
-        val subjectList : MutableList<Subject> = arrayListOf()
-        subjectList.add(Subject(1,"유링크","09:00","12:00","mon","이태원",1,true, professor = "최상일"))
-        subjectList.add(Subject(2,"김영민","14:00","16:00","mon","녹사평",2,true))
-        subjectList.add(Subject(3,"박규희","11:00","13:00","tue","한강진",3,true))
-        subjectList.add(Subject(4,"이지은","14:00","16:00","wed","버티고개",4,true))
-
-        val timeTable = TimeTable(1,"2020-1","시간표이름",true,"09:00","16:00",subjectList)
-        val timeTable2 = TimeTable(2,"2020-2","시간표이름2",true,"09:00","16:00",subjectList)
+        mainTable = TimeTable(1, "2020-1", "시간표1", true, "09:00", "16:00")
 
 
         val onClick = object : subjectOnClick {
@@ -61,9 +61,9 @@ class TimeTableFragment : Fragment() {
                 layout.findViewById<TextView>(R.id.tv_class_name).text = subject.name
 //                TODO 이거 table받아와서 classname으로 일주일에 몇번 수업인지 알아서 표시하기 vs 어뜨카지
 
-                layout.findViewById<TextView>(R.id.tv_time).text = subject.startTime +"  "+  subject.endTime
+                layout.findViewById<TextView>(R.id.tv_time).text = subject.startTime + "  " + subject.endTime
                 layout.findViewById<TextView>(R.id.tv_place).text = subject.place + ", "
-                layout.findViewById<TextView>(R.id.tv_professor_name).text = subject.professor + "교수"
+                layout.findViewById<TextView>(R.id.tv_professor_name).text = subject.professor
                 layout.findViewById<TextView>(R.id.tv_class_name).text = subject.name
 
                 builder.setView(layout)
@@ -71,27 +71,38 @@ class TimeTableFragment : Fragment() {
 
 //          기타 클릭 이벤트
                 layout.setOnClickListener {
-                    Toast.makeText(context,"dfasdf", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "dfasdf", Toast.LENGTH_SHORT).show()
                 }
 
                 dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
             }
         }
+//        서버랑 통신해서 TimeTable가져옴
+        DataRepository.getMainTimeTable(
+                onSuccess = {
+                    this.mainTable = it
+                    timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, mainTable)
+                    timetableDrawer.draw(view.findViewById<FrameLayout>(R.id.layout_timetable))
 
-        timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, timeTable)
+                },
+                onFailure = {
+                    val mainTimeTable = mainTable
+                }
+        )
 
-        timetableDrawer.draw(view.findViewById<FrameLayout>(R.id.layout_timetable))
+
+
+
+
+
 
         btn_plus.setOnClickListener {
-
             val intent = Intent(context, TimeTableEditActivity::class.java)
             val list: ArrayList<TimeTable> = arrayListOf()
-            list.add(timeTable)
-            list.add(timeTable2)
-            intent.putParcelableArrayListExtra("timeTableList",list)
+            list.add(mainTable)
+            intent.putParcelableArrayListExtra("timeTableList", list)
             startActivity(intent)
-
         }
 
         btn_alarm.setOnClickListener {
@@ -99,24 +110,25 @@ class TimeTableFragment : Fragment() {
         }
 
         btn_list.setOnClickListener {
-
             startActivityForResult(Intent(context, TimeTableListActivity::class.java), REQUEST_TIMETABLE_LIST_ACTIVITY)
         }
 
         btn_setting.setOnClickListener {
             val bottomsheet = BottomSheetFragment()
-            fragmentManager?.let { it -> bottomsheet.show(it,bottomsheet.tag) }
+            fragmentManager?.let { it -> bottomsheet.show(it, bottomsheet.tag) }
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode== REQUEST_TIMETABLE_LIST_ACTIVITY && resultCode == 200){
+        if (requestCode == REQUEST_TIMETABLE_LIST_ACTIVITY && resultCode == 200) {
 
             if (data != null) {
                 timetableDrawer.timeTable = deepCopy(data.getParcelableExtra("timeTable"))
-                tv_semister.text = timetableDrawer.timeTable.semseter
-
+                val t = timetableDrawer.timeTable.semseter.split("-")
+                if (t.size == 2) {
+                    tv_semister.text = "${t[0]}년 ${t[1]}학기"
+                }
             }
             view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { timetableDrawer.draw(it) }
         }
