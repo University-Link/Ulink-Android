@@ -73,7 +73,6 @@ object DataRepository {
 
 
 
-
     fun getAllNotice(start: String, end: String, onSuccess: (Map<String, List<ScheduleItemData>>) -> Unit, onFailure: (String) -> Unit) {
         retrofit.getAllNotice(token, start, end).enqueue(object : Callback<ResponseCalendar> {
             override fun onFailure(call: Call<ResponseCalendar>, t: Throwable) {
