@@ -76,13 +76,11 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
         var textCheck = "#ffffff"
         var textUncheck = "#727272"
 
-<<<<<<< HEAD
+
         btn_back.setOnClickListener {
             finish()
         }
-=======
 
->>>>>>> 02e9367c07136cb08229aab9c965dd1aafa974aa
 
         et_title.setOnFocusChangeListener(object : View.OnFocusChangeListener {
             override fun onFocusChange(v: View?, hasFocus: Boolean) {
@@ -310,10 +308,7 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
 
         //시간표 전부 추가 후 확인
         btn_check.setOnClickListener() {
-<<<<<<< HEAD
-           // if (et_title.text.toString() == "") showToast("제목을 설정해주세요.")
-            finish()
-=======
+
             if (et_title.text.toString() == "") directAddPageDialog()
             else {
                 val intent = Intent()
@@ -339,7 +334,6 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
                 setResult(200,intent)
                 finish()
             }
->>>>>>> 02e9367c07136cb08229aab9c965dd1aafa974aa
         }
 
         //타임피커 시간 설정
@@ -445,14 +439,11 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
         }
     }
 
-<<<<<<< HEAD
 
-=======
     fun formatToFloat(time: String): Float {
         val timesplit = time.split(":")
         return timesplit[0].toFloat() + (timesplit[1].toFloat() - timesplit[1].toFloat() % 15) / 60
     }
->>>>>>> 02e9367c07136cb08229aab9c965dd1aafa974aa
 
 }
 
