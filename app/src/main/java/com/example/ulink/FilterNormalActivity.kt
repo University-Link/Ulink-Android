@@ -66,7 +66,6 @@ class FilterNormalActivity : AppCompatActivity() {
             btn_thursday.setBackgroundResource(R.drawable.io_main_filtersetting_btn_thu_selected)
             btn_friday.setBackgroundResource(R.drawable.io_main_filtersetting_btn_fri_selected)
 
-
             one_class_exclude.setBackgroundResource(R.drawable.main_filtersetting_toggle01)
 
             btn_monday_empty.setBackgroundResource(R.drawable.io_main_filtersetting_btn_monempty_unselected)

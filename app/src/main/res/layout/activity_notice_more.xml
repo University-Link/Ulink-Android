@@ -13,22 +13,15 @@
         android:id="@+id/toolbar_notice_more"
         layout="@layout/toolbar_notice_more" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="11.5dp"
-        android:background="@drawable/white_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_notice_more">
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_notice_more"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="11.5dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_notice_more"/>
-    </LinearLayout>
+        tools:listitem="@layout/item_notice_more"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_notice_more"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
