@@ -105,6 +105,9 @@ class TimeTableFragment : Fragment() {
                     timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, mainTable)
                     timetableDrawer.draw(view.findViewById<FrameLayout>(R.id.layout_timetable))
 
+                    Log.d("tag","size" + mainTable)
+
+
                 },
                 onFailure = {
                     val mainTimeTable = mainTable

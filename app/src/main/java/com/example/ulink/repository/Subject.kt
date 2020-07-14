@@ -13,7 +13,7 @@ data class Subject (
         var endTime : String,
         var day : Int, 
         @SerializedName("content")
-        var place : String?,
+        var place : String,
         var color : Int,
         var subject : Boolean,
         var credit : Float? = 0f,

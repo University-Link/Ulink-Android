@@ -10,7 +10,7 @@ object DataRepository {
 
     val retrofit = RetrofitService.service
 
-    val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ3MTk0NjQsImV4cCI6MTU5NjE1OTQ2NCwiaXNzIjoiYm9iYWUifQ.I0OuZ02a6iC1R9pUMOTKKreqMwqJD4m3G45u275bGNo"
+    var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ3NDgyNTQsImV4cCI6MTU5NjE4ODI1NCwiaXNzIjoiYm9iYWUifQ.dFU9h8EZLqoMekAfRNTfGQkUAbq_CXoQmA5Jl7KsQ70"
 
     fun getMainTimeTable(onSuccess: (TimeTable) -> Unit, onFailure: (String) -> Unit) {
 
@@ -30,6 +30,7 @@ object DataRepository {
                             addAll(it.data.subjects.thu)
                             addAll(it.data.subjects.fri)
                         }
+//                        , startTime = it.data.getMinTime, endTime = it.data.getMaxTime
                         val timeTable = TimeTable(it.data.timeTable.id, it.data.timeTable.semseter, it.data.timeTable.name, true, subjectList = subjectList)
                         onSuccess(timeTable)
                     } else {
@@ -44,6 +45,7 @@ object DataRepository {
         retrofit.addTimeTable(token, RequestAddTimeTable(semester, name)).enqueue(object : Callback<ResponseAddTimeTable>{
             override fun onFailure(call: Call<ResponseAddTimeTable>, t: Throwable) {
                 Log.d("tag", t.localizedMessage)
+                onFailure(t.localizedMessage)
             }
 
             override fun onResponse(call: Call<ResponseAddTimeTable>, response: Response<ResponseAddTimeTable>) {
@@ -53,6 +55,22 @@ object DataRepository {
             }
         })
     }
+
+    fun addPersonalPlan(request : RequestAddPersonalPlan, onSuccess : (Int) ->Unit, onFailure : (String) -> Unit){
+        retrofit.addPersonalPlan(token,request).enqueue(object : Callback<ResponseAddPersonalPlan>{
+            override fun onFailure(call: Call<ResponseAddPersonalPlan>, t: Throwable) {
+                onFailure(t.localizedMessage)
+            }
+
+            override fun onResponse(call: Call<ResponseAddPersonalPlan>, response: Response<ResponseAddPersonalPlan>) {
+                response.body()?.let {
+                    onSuccess(it.data.idx)
+                } ?: onFailure(response.message())
+            }
+        })
+    }
+
+    fun get
 
 
 

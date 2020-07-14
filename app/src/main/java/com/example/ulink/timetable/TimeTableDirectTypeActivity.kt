@@ -1,11 +1,13 @@
 package com.example.ulink.timetable
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
@@ -15,7 +17,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.ulink.R
 import com.example.ulink.TimeTableDirectRecycler.TimeTableDirectAdapter
 import com.example.ulink.TimeTableDirectRecycler.TimeTableDirectData
+import com.example.ulink.repository.Subject
+import com.example.ulink.repository.TimeTable
 import com.example.ulink.showToast
+import com.example.ulink.utils.deepCopy
 import kotlinx.android.synthetic.main.activity_direct_type_time_table.*
 import kotlinx.android.synthetic.main.toolbar_direct_time_table.*
 
@@ -33,6 +38,8 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
     lateinit var start: String
     lateinit var end: String
 
+    var newSubject : MutableList<Subject> = arrayListOf()
+
     lateinit var TimeTableDirectAdapter: TimeTableDirectAdapter
     val datas: MutableList<TimeTableDirectData> = mutableListOf<TimeTableDirectData>()
 
@@ -42,17 +49,41 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
         setContentView(R.layout.activity_direct_type_time_table)
 
         time_picker.setTimeInterval() // 시간 간격을 15분 단위로 설정
+        time_picker.setIs24HourView(true)
+
+        val addable = intent.getBooleanExtra("addable", true)
+        val nextcolor = intent.getIntExtra("color", 0)
+        val subjectList = intent.getParcelableArrayListExtra<Subject>("subjects")
+        val timeTable = deepCopy(intent.getParcelableExtra<TimeTable>("timeTable"))
+
+
+        if (addable){
+            findViewById<LinearLayout>(R.id.layout_time_plus).visibility = View.VISIBLE
+        } else {
+            findViewById<LinearLayout>(R.id.layout_time_plus).visibility = View.GONE
+        }
+
+
+        for (i in 0 until subjectList.size){
+            datas.add(TimeTableDirectData(subjectList[i].day,subjectList[i].startTime,subjectList[i].endTime))
+        }
+
 
         TimeTableDirectAdapter = TimeTableDirectAdapter(this, this)
+        TimeTableDirectAdapter.datas = datas
         rv_time_add.adapter = TimeTableDirectAdapter
         lateinit var title: String
 
         var textCheck = "#ffffff"
         var textUncheck = "#727272"
 
+<<<<<<< HEAD
         btn_back.setOnClickListener {
             finish()
         }
+=======
+
+>>>>>>> 02e9367c07136cb08229aab9c965dd1aafa974aa
 
         et_title.setOnFocusChangeListener(object : View.OnFocusChangeListener {
             override fun onFocusChange(v: View?, hasFocus: Boolean) {
@@ -269,30 +300,47 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
         }
 
 
-
-
-
-
-
-        btn_timetable_add.setOnClickListener {
+        findViewById<LinearLayout>(R.id.layout_time_plus).setOnClickListener {
             check = false
-            datas.apply {
-                add(
-                    TimeTableDirectData(
-                        day = 0,
-                        start_time = "오전 12 : 00",
-                        end_time = "오후 3 : 00"
-                    )
-                )
-            }
+            datas.add(TimeTableDirectData(0,"09:00","17:00"))
+
             TimeTableDirectAdapter.datas = datas
             TimeTableDirectAdapter.notifyDataSetChanged()
         }
 
+
         //시간표 전부 추가 후 확인
         btn_check.setOnClickListener() {
+<<<<<<< HEAD
            // if (et_title.text.toString() == "") showToast("제목을 설정해주세요.")
             finish()
+=======
+            if (et_title.text.toString() == "") directAddPageDialog()
+            else {
+                val intent = Intent()
+//                어댑터의 각 아이템을 newsubject 의 subject에 적용!
+                subjectList?.let {
+                    for (i in 0 until TimeTableDirectAdapter.datas.size){
+                        if (formatToFloat(datas[i].start_time)>=formatToFloat(datas[i].end_time)){
+                            Toast.makeText(this,"시간이 잘못되었습니다", Toast.LENGTH_SHORT).show()
+                            return@setOnClickListener
+                        }
+                        subjectList[i].name = et_title.text.toString()
+                        subjectList[i].place = et_memo.text.toString()
+                        subjectList[i].color = nextcolor
+                        subjectList[i].startTime = datas[i].start_time
+                        subjectList[i].endTime = datas[i].end_time
+                        subjectList[i].isSample = false
+                    }
+                }
+
+                Log.d("tag","afsfsf" + subjectList.toString())
+                intent.putParcelableArrayListExtra("subjects",subjectList)
+                intent.putExtra("timeTable", timeTable)
+                setResult(200,intent)
+                finish()
+            }
+>>>>>>> 02e9367c07136cb08229aab9c965dd1aafa974aa
         }
 
         //타임피커 시간 설정
@@ -371,22 +419,16 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
         time_picker.setIs24HourView(true)
 
         time_picker.setOnTimeChangedListener(OnTimeChangedListener { timePicker, hour, min ->
-            if (hour < 12) {
-                time = "오전"
-            } else {
-                time = "오후"
-            }
-            if (!check) {
 
-                start = "${time}${hour}:${time_picker.getDisplayedMinute()}"
+            if (!check) {
+                start = "${hour}:${time_picker.getDisplayedMinute()}"
                 TimeTableDirectAdapter.datas[position].start_time =
-                    String.format("${time}" + "%02d:%02d", hour, time_picker.getDisplayedMinute())
+                    String.format("%02d:%02d", hour, time_picker.getDisplayedMinute())
                 TimeTableDirectAdapter.notifyDataSetChanged()
             } else {
-                end = "${time}${hour}:${time_picker.getDisplayedMinute()}"
+                end = "${hour}:${time_picker.getDisplayedMinute()}"
                 TimeTableDirectAdapter.datas[position].end_time =
-                    String.format("${time}" + "%02d:%02d", hour, time_picker.getDisplayedMinute())
-
+                    String.format("%02d:%02d", hour, time_picker.getDisplayedMinute())
                 TimeTableDirectAdapter.notifyDataSetChanged()
             }
         })
@@ -404,7 +446,14 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
         }
     }
 
+<<<<<<< HEAD
 
+=======
+    fun formatToFloat(time: String): Float {
+        val timesplit = time.split(":")
+        return timesplit[0].toFloat() + (timesplit[1].toFloat() - timesplit[1].toFloat() % 15) / 60
+    }
+>>>>>>> 02e9367c07136cb08229aab9c965dd1aafa974aa
 
 }
 

@@ -20,8 +20,8 @@ class TimeTableFilterSearchFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val subjectList: MutableList<Subject> = arrayListOf()
-        subjectList.add(Subject(1, "전자회로I", "09:00", "12:00", 0, "과목장소", 1, true, isSample = true, number = "342"))
-        subjectList.add(Subject(2, "전자회로2", "12:30", "13:00", 0, "과목장소", 1, true, isSample = true))
+        subjectList.add(Subject(1, "전자회로I", "09:00", "12:00", 1, "과목장소", 1, true, isSample = true, number = "342"))
+        subjectList.add(Subject(2, "전자회로2", "12:30", "13:00", 1, "과목장소", 1, true, isSample = true))
         subjectList.add(Subject(3, "전자회로3", "11:00", "13:00", 4, "과목장소", 1, true, isSample = true))
         subjectList.add(Subject(4, "전자회로4", "10:00", "12:00", 3, "과목장소", 1, true, isSample = true))
         subjectList.add(Subject(4, "전자회로5", "13:00", "16:00", 4, "과목장소", 1, true, isSample = true))
@@ -41,8 +41,9 @@ class TimeTableFilterSearchFragment() : Fragment() {
             }
         }
         btn_fitler_major.setOnClickListener {
-            val intent = Intent(context,TimeTableClassFilterActivity::class.java)
-            startActivityForResult(intent, REQUEST_FILTER_MAJOR_ACTIVITY)
+//            TODO
+//            val intent = Intent(context,TimeTableClassFilterActivity::class.java)
+//            startActivityForResult(intent, REQUEST_FILTER_MAJOR_ACTIVITY)
         }
     }
     override fun onResume() {

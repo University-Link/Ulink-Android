@@ -68,11 +68,13 @@ interface RequestInterface {
     fun getAllTimeTableList(
             @Header("token") token: String
     ) : Call<ResponseTimeTable>
+
     //시간표 - 개인일정 만들기
     @POST("/schedule/personal")
     fun addPersonalPlan(
-            @Header("token") token: String
-    ) : Call<ResponseTimeTable>
+            @Header("token") token: String,
+            @Body body : RequestAddPersonalPlan
+    ) : Call<ResponseAddPersonalPlan>
     //시간표 - 학교수업일정 만들기
     @POST("/schedule/school")
     fun addSchoolPlan(
