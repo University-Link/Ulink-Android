@@ -173,16 +173,16 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 //            TODO 여기서 DB로 저장하고 edit에 넣긴 해야함
 
             DataRepository.addTimeTable("2020-2", et.text.toString(),
-                    onSuccess = {
-                        val timeTable = TimeTable(1, "2020-2", et.text.toString(), false, "09:00", "18:00")
-                        mAdapter.addToList(deepCopy(timeTable))
-                        moveToLastItem()
-                        Log.d("debug","${it.data.idx} 시간표 생성")
-                    },
-                    onFailure = {
-                        Toast.makeText(this, "오류가 발생하였습니다", Toast.LENGTH_SHORT).show();
-                        Log.d("error",it)
-                    }
+                onSuccess = {
+                    val timeTable = TimeTable(1, "2020-2", et.text.toString(), false, "09:00", "18:00")
+                    mAdapter.addToList(deepCopy(timeTable))
+                    moveToLastItem()
+                    Log.d("debug","${it.data.idx} 시간표 생성")
+                },
+                onFailure = {
+                    Toast.makeText(this, "오류가 발생하였습니다", Toast.LENGTH_SHORT).show();
+                    Log.d("error",it)
+                }
             )
             dialog.dismiss()
         }
@@ -274,9 +274,9 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
         layout.findViewById<Button>(R.id.btn_grade1).setOnClickListener {
             it.setBackgroundColor(resources.getColor(R.color.black))
-                //1학년 필터
-                onClick(1)
-                dialog.dismiss()
+            //1학년 필터
+            onClick(1)
+            dialog.dismiss()
 
         }
         layout.findViewById<Button>(R.id.btn_grade2).setOnClickListener {
@@ -326,13 +326,10 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         }
 
         layout.findViewById<Button>(R.id.btn_type).setOnClickListener {
-<<<<<<< HEAD
-            val intent = Intent(this, TimeTableDirectTypeActivity::class.java)
-=======
+
 //            TODO 이거 해제
             val intent = Intent(this, TimeTableDirectTypeActivity::class.java)
             intent.putExtra("addable", true)
->>>>>>> 02e9367c07136cb08229aab9c965dd1aafa974aa
             intent.putExtra("timeTable", deepCopy(mAdapter.timeTableList[vp_timetableadd.currentItem]))
             startActivityForResult(intent, REQUEST_DIRECT_TYPE_ACTIVITY)
 
@@ -350,7 +347,6 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         dialog.show()
     }
 
-<<<<<<< HEAD
     override fun onClick(position: Int) {
         RetrofitService.service.getSubjectByGrade(token,position).enqueue(object : Callback<ResponseGetSubjectByGrade>{
             override fun onFailure(call: Call<ResponseGetSubjectByGrade>, t: Throwable) {
@@ -377,13 +373,4 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 }
 interface getGradeClickListener{
     fun onClick(position : Int)
-=======
-    override fun onResume() {
-        super.onResume()
-
-//        TODO
-//         시간표 다 불러와서 addfragment에 보내주기!
-
-    }
->>>>>>> 02e9367c07136cb08229aab9c965dd1aafa974aa
 }
