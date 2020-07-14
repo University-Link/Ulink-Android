@@ -26,25 +26,6 @@ class CalendarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        RetrofitService.service.getAllNotice(token,"2020-06-01", "2020-07-31").enqueue(object : Callback<ResponseCalendar>{
-//            override fun onFailure(call: Call<ResponseCalendar>, t: Throwable) {
-//                Log.d("dlwldms", t.localizedMessage)
-//            }
-//
-//            override fun onResponse(
-//                call: Call<ResponseCalendar>,
-//                response: Response<ResponseCalendar>
-//            ) {
-//                response.body()?.let{
-//                    if(it.status == 200){
-//                        Log.d("dlwldms", it.data[0].notice[0].name)
-//                    } else {
-//                        Log.d("qkrrbgml", "애매")
-//                    }
-//                } ?: Log.d("tag", "??")
-//            }
-//        })
-
         lateinit var dialog : AlertDialog
         btn_today.text = nowDay.toString()
 

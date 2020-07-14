@@ -24,14 +24,14 @@ interface RequestInterface {
     fun getMainTimeTable(
             @Header("token") token : String
     ) : Call<ResponseMainTimeTable>
-    //시간표 - 일정 상세정보(통합) 조회
+    //시간표 만들기
     @POST("/schedule")
     fun addTimeTable(
             @Header("token") token: String,
             @Body body : RequestAddTimeTable
     ) : Call<ResponseAddTimeTable>
 
-    //시간표 만들기
+    //시간표 - 일정 상세정보(통합) 조회
     @GET("/schedule/{idx}")
     fun getTimeTableWithId(
             @Header("token") token: String,
@@ -124,12 +124,14 @@ interface RequestInterface {
             @Query("start") start : String,
             @Query("end") end : String
     ) : Call<ResponseCalendar>
+
     //특정 과목의 공지 가져오기
     @GET("/notice/subject/{idx}")
     fun getClassNotice(
             @Header("token") token : String,
             @Path("idx") idx : String
-    ) : Call<ResponseCalendar>
+    ) : Call<ResponseGetClassNotice>
+
     //공지 등록하기
     @POST("/notice/subject/{idx}")
     fun registerNotice(
@@ -154,19 +156,22 @@ interface RequestInterface {
     fun getCartList(
             @Header("token") token : String,
             @Query("semester") semester : String
-    ) : Call<ResponseCalendar>
+    ) : Call<ResponseGetCartList>
+
     //장바구니 과목 추가하기
     @POST("/cart/{idx}")
     fun addCartList(
             @Header("token") token : String,
             @Path("idx") idx : String
     ) : Call<ResponseCalendar>
+
     //장바구니 과목 삭제하기
     @DELETE("/cart/{idx}")
     fun deleteCartList(
             @Header("token") token : String,
             @Path("idx") idx : String
-    ) : Call<ResponseCalendar>
+    ) : Call<ResponseDeleteCartList>
+
     //Subject
     //수업(과목) 목록 조회
     @GET("/subject")

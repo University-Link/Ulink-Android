@@ -6,7 +6,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Subject (
-
         @SerializedName("idx")
         var id : Long = 0,
         var name : String,

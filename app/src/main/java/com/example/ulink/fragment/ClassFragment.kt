@@ -52,14 +52,14 @@ class ClassFragment : Fragment() {
                 response.body()?.let{
                     if(it.status == 200){
                         if(it.data.chat.isNotEmpty()) {
-                            Log.d("dlwldms", it.data.chat[0].name)
+                            //Log.d("dlwldms", it.data.chat[0].subjectIdx.toString())
                                 var size = it.data.chat.size
                                 for(i in 0 until size)
                                 {
                                 datas.apply{
                                     add(
                                         ClassData(
-                                            scheduleSchoolIdx = it.data.chat[i].scheduleSchoolIdx,
+                                            subjectIdx = it.data.chat[i].subjectIdx,
                                             name = it.data.chat[i].name,
                                             color = it.data.chat[i].color,
                                             total = it.data.chat[i].total,
@@ -71,10 +71,6 @@ class ClassFragment : Fragment() {
                                 ClassAdapter.notifyDataSetChanged()
                             }
                         }
-                        else
-                            Log.d("gn", "후")
-                    } else {
-                        Log.d("qkrrbgml", "애매")
                     }
                 } ?: Log.d("tag", response.message())
             }
@@ -82,10 +78,10 @@ class ClassFragment : Fragment() {
 
         ClassAdapter.setItemClickLIstener(object:ClassAdapter.ItemClickListener{
             override fun onClick(view:View, position:Int){
-                //Log.d("click","${position}번 리스트 선택")
                 val intent = Intent(getActivity(), ChattingActivity::class.java)
                 intent.putExtra("className", datas[position].name) //과목명
                 intent.putExtra("current", datas[position].current) //현재원
+                intent.putExtra("idx", datas[position].subjectIdx.toString())
                 startActivity(intent)
             }
         })

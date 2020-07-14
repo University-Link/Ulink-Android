@@ -2,15 +2,23 @@ package com.example.ulink
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.ulink.ClassRecycler.ClassAdapter
+import com.example.ulink.ClassRecycler.ClassData
 import com.example.ulink.ScheduleRecycler.ScheduleItemData
 import com.example.ulink.NoticeRecycler.ScheduleNoticeAdapter
 import com.example.ulink.NoticeRecycler.emptyCheck
+import com.example.ulink.repository.ResponseChatting
+import com.example.ulink.repository.ResponseGetClassNotice
 import com.example.ulink.repository.RetrofitService
 import kotlinx.android.synthetic.main.activity_notice.*
 import kotlinx.android.synthetic.main.toolbar_notice.*
 import kotlinx.android.synthetic.main.toolbar_notice.btn_back
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class NoticeActivity : AppCompatActivity(){
 
@@ -22,12 +30,13 @@ class NoticeActivity : AppCompatActivity(){
     private val taskData = mutableListOf<ScheduleItemData>()
     private val classData = mutableListOf<ScheduleItemData>()
 
+    var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ3NDgyNTQsImV4cCI6MTU5NjE4ODI1NCwiaXNzIjoiYm9iYWUifQ.dFU9h8EZLqoMekAfRNTfGQkUAbq_CXoQmA5Jl7KsQ70"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notice)
 
-
         var className = intent.getStringExtra("class")
+        var idx = intent.getStringExtra("idx")
         if(className!="") tv_classname.text = className+" 공지"
 
         testNoticeAdapter = ScheduleNoticeAdapter(this)
@@ -100,9 +109,88 @@ class NoticeActivity : AppCompatActivity(){
             startActivity(intent)
         }
 
+        RetrofitService.service.getClassNotice(token, idx).enqueue(object : Callback<ResponseGetClassNotice> {
+            override fun onFailure(call: Call<ResponseGetClassNotice>, t: Throwable) {
+            }
+
+            override fun onResponse(
+                call: Call<ResponseGetClassNotice>,
+                response: Response<ResponseGetClassNotice>
+            ) {
+                response.body()?.let {
+                    if (it.status == 200) {
+                        Log.d("rjq", idx)
+                        Log.d("rjq", it.toString())
+                        if (it.data.assignment.isNotEmpty()) {
+                            var size = it.data.assignment.size
+                            for (i in 0 until size) {
+                                taskData.apply {
+                                    add(
+                                        ScheduleItemData(
+                                          //idx = it.data.assignment[i].idx,
+                                            date = it.data.assignment[i].date,
+                                            category = "과제",
+                                            classname = className,
+                                            content = it.data.assignment[i].title,
+                                            startTime = it.data.assignment[i].startTime,
+                                            endTime = it.data.assignment[i].endTime,
+                                            memo = ""
+                                        )
+                                    )
+                                }
+                                taskNoticeAdapter.notifyDataSetChanged()
+                                emptyCheck(taskData, tv_task_notice_empty, rv_task_notice, tv_task_notice_more)
+                            }
+                        }
+                        if (it.data.exam.isNotEmpty()) {
+                            var size = it.data.exam.size
+                            for (i in 0 until size) {
+                                testData.apply {
+                                    add(
+                                        ScheduleItemData(
+                                            //idx = it.data.exam[i].idx,
+                                            date = it.data.exam[i].date,
+                                            category = "시험",
+                                            classname = className,
+                                            content = it.data.exam[i].title,
+                                            startTime = it.data.exam[i].startTime,
+                                            endTime = it.data.exam[i].endTime,
+                                            memo = ""
+                                        )
+                                    )
+                                }
+                                testNoticeAdapter.notifyDataSetChanged()
+                                emptyCheck(testData, tv_test_notice_empty, rv_test_notice, tv_test_notice_more)
+                            }
+                        }
+                        if (it.data.lecture.isNotEmpty()) {
+                            var size = it.data.lecture.size
+                            for (i in 0 until size) {
+                                classData.apply {
+                                    ScheduleItemData(
+                                        //idx = it.data.lecture[i].idx,
+                                        date = it.data.lecture[i].date,
+                                        category = "수업",
+                                        classname = className,
+                                        content = it.data.lecture[i].title,
+                                        startTime = it.data.lecture[i].startTime,
+                                        endTime = it.data.lecture[i].endTime,
+                                        memo = ""
+                                    )
+                                }
+                            }
+                            classNoticeAdapter.notifyDataSetChanged()
+                            emptyCheck(classData, tv_class_notice_empty, rv_class_notice, tv_class_notice_more)
+                        }
+                    }
+                } ?: Log.d("tag", response.message())
+            }
+        })
+
         emptyCheck(taskData, tv_task_notice_empty, rv_task_notice, tv_task_notice_more)
         emptyCheck(testData, tv_test_notice_empty, rv_test_notice, tv_test_notice_more)
         emptyCheck(classData, tv_class_notice_empty, rv_class_notice, tv_class_notice_more)
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

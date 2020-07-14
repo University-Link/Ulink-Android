@@ -18,6 +18,7 @@ import com.example.ulink.ScheduleRecycler.*
 class CalendarAdapter(private val context : Context, data : CalendarData) : RecyclerView.Adapter<CalendarAdapter.Vholder>(){
     var data: CalendarData = data
     var endDay = arrayOf(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
+    val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ3MTk1NDYsImV4cCI6MTU5NjE1OTU0NiwiaXNzIjoiYm9iYWUifQ.sim2YHX1mHhoP3eH_dGpxFwTRbVYHCGfPE4sfozFh5U"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Vholder {
 

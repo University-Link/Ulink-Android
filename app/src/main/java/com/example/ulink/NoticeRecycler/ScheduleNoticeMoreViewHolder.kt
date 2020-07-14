@@ -31,7 +31,13 @@ class ScheduleNoticeMoreViewHolder(itemView : View) : RecyclerView.ViewHolder(it
         title.text = scheduleData.content
         time.text = scheduleData.startTime + " ~ " + scheduleData.endTime
         if(dayRemainder!=0.toLong()) {
-            dday.text = "D-" + dayRemainder.toString()
+            if(dayRemainder > 0.toLong()) {
+                dday.text = "완료"
+            }
+            else {
+                dayRemainder *= -1
+                dday.text = "D-" + dayRemainder.toString()
+            }
         }
         else
             dday.text = "D-day"

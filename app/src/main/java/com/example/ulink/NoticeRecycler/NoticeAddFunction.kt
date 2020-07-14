@@ -132,7 +132,6 @@ fun ddayCheck(scheduleItemData : ScheduleItemData) : Long{
 
     var dayRemainder = nowDate.time - scheduleDate.time
     dayRemainder /= (24 * 60 * 60 * 1000)
-    if(dayRemainder<0) dayRemainder*=-1
 
     return dayRemainder
 }

@@ -9,11 +9,11 @@ data class ResponseChatting(
 
 data class ChatData(
     val semester : String,
-    val chat : List<Chat>
+    val     chat : List<Chat>
 )
 
 data class Chat(
-    val scheduleSchoolIdx : Int,
+    val subjectIdx : Int,
     val name : String,
     val color : Int,
     val total : Int,

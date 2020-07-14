@@ -22,6 +22,8 @@ import kotlinx.android.synthetic.main.nav_header_main.*
 import kotlinx.android.synthetic.main.toolbar_chatting.*
 class ChattingActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener {
     lateinit var className : String
+    var current : Int = 0
+    lateinit var idx : String
     lateinit var ChattingAdapter : ChattingAdapter
     val datas : MutableList<ChattingData> = mutableListOf<ChattingData>()
 
@@ -30,12 +32,11 @@ class ChattingActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatting)
 
+        current = intent.getIntExtra("current", 0)
         className = intent.getStringExtra("className")
-        if(className != null)
-            tv_classname.text = className
+        idx = intent.getStringExtra("idx")
 
-
-        var current = intent.getIntExtra("current", 0)
+        if(className != null) tv_classname.text = className
         if(current != null) tv_chatting_room_count.text = current.toString()
 
         ChattingAdapter = ChattingAdapter(this)
@@ -76,6 +77,7 @@ class ChattingActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
             R.id.notice->{
                 val intent = Intent(this, NoticeActivity::class.java)
                 intent.putExtra("class", className)
+                intent.putExtra("idx", idx)
                 startActivity(intent)
             }
 //            R.id.QnA-> Toast.makeText(this,"qna공간",Toast.LENGTH_SHORT).show()

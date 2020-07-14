@@ -48,7 +48,6 @@ class TimeTableCandidateAdapter : RecyclerView.Adapter<TimeTableCandidateAdapter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VHolder {
         return VHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_subject_child, parent, false))
-
     }
 
     override fun getItemCount(): Int {

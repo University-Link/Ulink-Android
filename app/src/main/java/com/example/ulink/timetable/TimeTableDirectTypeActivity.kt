@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.ulink.R
 import com.example.ulink.TimeTableDirectRecycler.TimeTableDirectAdapter
 import com.example.ulink.TimeTableDirectRecycler.TimeTableDirectData
-import com.example.ulink.showToast
 import kotlinx.android.synthetic.main.activity_direct_type_time_table.*
 import kotlinx.android.synthetic.main.toolbar_direct_time_table.*
 
@@ -294,7 +293,7 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
 
         //시간표 전부 추가 후 확인
         btn_check.setOnClickListener() {
-            if (et_title.text.toString() == "") showToast("제목을 설정해주세요.")
+ //           if (et_title.text.toString() == "") showToast("제목을 설정해주세요.")
             finish()
         }
 
