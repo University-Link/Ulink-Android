@@ -4,17 +4,22 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.viewpager.widget.ViewPager
+import com.example.ulink.repository.ResponseChatting
 import com.example.ulink.repository.ResponseMainTimeTable
+import com.example.ulink.repository.ResponseSubject
 import com.example.ulink.repository.RetrofitService
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
 
 
         main_viewPager.adapter = MainPagerAdapter(supportFragmentManager)
@@ -42,6 +47,8 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
+
     }
 
 }

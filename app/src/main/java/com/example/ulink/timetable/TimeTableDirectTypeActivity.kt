@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.ulink.R
 import com.example.ulink.TimeTableDirectRecycler.TimeTableDirectAdapter
 import com.example.ulink.TimeTableDirectRecycler.TimeTableDirectData
+import com.example.ulink.showToast
 import kotlinx.android.synthetic.main.activity_direct_type_time_table.*
 import kotlinx.android.synthetic.main.toolbar_direct_time_table.*
 
@@ -49,13 +50,10 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
         var textCheck = "#ffffff"
         var textUncheck = "#727272"
 
-
-        btn_check.setOnClickListener() {
-            if (et_title.text.toString() == "") directAddPageDialog()
-            else {
-                // TODO 확인누르면 어디로?
-            }
+        btn_back.setOnClickListener {
+            finish()
         }
+
         et_title.setOnFocusChangeListener(object : View.OnFocusChangeListener {
             override fun onFocusChange(v: View?, hasFocus: Boolean) {
                 when (et_title.text.toString()) {
@@ -293,7 +291,7 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
 
         //시간표 전부 추가 후 확인
         btn_check.setOnClickListener() {
- //           if (et_title.text.toString() == "") showToast("제목을 설정해주세요.")
+           // if (et_title.text.toString() == "") showToast("제목을 설정해주세요.")
             finish()
         }
 
@@ -370,6 +368,8 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
     override fun onClick(position: Int, check: Boolean) {
         time_picker.visibility = View.VISIBLE
         btn_ok.visibility = View.VISIBLE
+        time_picker.setIs24HourView(true)
+
         time_picker.setOnTimeChangedListener(OnTimeChangedListener { timePicker, hour, min ->
             if (hour < 12) {
                 time = "오전"
@@ -391,7 +391,21 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
             }
         })
 
+
+
+        //삭제 다이얼로그
+        btn_check.setOnClickListener() {
+            if (et_title.text.toString() == "") directAddPageDialog()
+            else {
+                //제목설정 다이얼로그
+                //시간입력 다이얼로그
+
+            }
+        }
     }
+
+
+
 }
 
 interface onClickListener{

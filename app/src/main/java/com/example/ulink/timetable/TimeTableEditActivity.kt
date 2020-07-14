@@ -17,26 +17,26 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.MarginPageTransformer
 import com.example.ulink.R
-import com.example.ulink.repository.DataRepository
-import com.example.ulink.repository.Subject
-import com.example.ulink.repository.TimeTable
+import com.example.ulink.repository.*
 import com.example.ulink.utils.deepCopy
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_time_table_edit.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-
+var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ3NDgyNTQsImV4cCI6MTU5NjE4ODI1NCwiaXNzIjoiYm9iYWUifQ.dFU9h8EZLqoMekAfRNTfGQkUAbq_CXoQmA5Jl7KsQ70"
 const val REQUEST_DIRECT_EDIT_ACTIVITY = 999
 const val REQUEST_DIRECT_TYPE_ACTIVITY = 888
 
-class TimeTableEditActivity : AppCompatActivity() {
-
+class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
     //    Timetable 다보여주고 마지막에 항상 하나 더 보여주는거 자동
-
     val timeTableList: MutableList<TimeTable> = arrayListOf()
-
     val mAdapter = TimeTableAddAdapter(this)
+
+
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -72,6 +72,10 @@ class TimeTableEditActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_DIRECT_EDIT_ACTIVITY) {
@@ -155,7 +159,6 @@ class TimeTableEditActivity : AppCompatActivity() {
         vp_timetableadd.setCurrentItem(vp_timetableadd.currentItem, false)
 
     }
-
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun showAddTableDialog() {
@@ -260,6 +263,7 @@ class TimeTableEditActivity : AppCompatActivity() {
     }
 
 
+
     @SuppressLint("ResourceType")
     fun showCheckGrade() {
         val builder = AlertDialog.Builder(this)
@@ -270,24 +274,32 @@ class TimeTableEditActivity : AppCompatActivity() {
 
         layout.findViewById<Button>(R.id.btn_grade1).setOnClickListener {
             it.setBackgroundColor(resources.getColor(R.color.black))
-            Handler().postDelayed({
+                //1학년 필터
+                onClick(1)
                 dialog.dismiss()
-            }, 200)
 
         }
         layout.findViewById<Button>(R.id.btn_grade2).setOnClickListener {
+            //2학년 필터
+            onClick(2)
             dialog.dismiss()
 
         }
         layout.findViewById<Button>(R.id.btn_grade3).setOnClickListener {
+            //3학년 필터
+            onClick(3)
             dialog.dismiss()
 
         }
         layout.findViewById<Button>(R.id.btn_grade4).setOnClickListener {
+            //4학년 필터
+            onClick(4)
             dialog.dismiss()
 
         }
         layout.findViewById<Button>(R.id.btn_grade5).setOnClickListener {
+            //5학년 필터
+            onClick(5)
             dialog.dismiss()
         }
 
@@ -332,4 +344,31 @@ class TimeTableEditActivity : AppCompatActivity() {
 
         dialog.show()
     }
+
+    override fun onClick(position: Int) {
+        RetrofitService.service.getSubjectByGrade(token,position).enqueue(object : Callback<ResponseGetSubjectByGrade>{
+            override fun onFailure(call: Call<ResponseGetSubjectByGrade>, t: Throwable) {
+            }
+
+            override fun onResponse(
+                call: Call<ResponseGetSubjectByGrade>,
+                response: Response<ResponseGetSubjectByGrade>
+            ) {
+                response.body()?.let{
+                    if(it.status == 200){
+                        Log.d("성공",it.toString())
+                        val list : MutableList<SubjectListByGrade> = arrayListOf()
+                        list.addAll(it.data)
+                    }else{
+                        Log.d("실패",it.toString())
+
+                    }
+                }
+            }
+
+        })
+    }
+}
+interface getGradeClickListener{
+    fun onClick(position : Int)
 }
