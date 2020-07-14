@@ -35,7 +35,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             builder.setView(layout)
             val dialog = builder.create()
             dialog.show()
-            layout.findViewById<TextView>(R.id.btn_ok).setOnClickListener {
+            layout.findViewById<TextView>(R.id.tv_ok).setOnClickListener {
                 //TODO 시간표 이름 바꾸기
                 dialog.dismiss()
             }

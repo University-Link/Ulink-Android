@@ -24,7 +24,6 @@
         <activity android:name=".EvaluationActivity">
         </activity>
         <activity android:name=".FilterSettingActivity">
-
         </activity>
         <activity android:name=".ScheduleNoticeActivity"></activity>
         <activity android:name=".timetable.TimeTableListActivity" />

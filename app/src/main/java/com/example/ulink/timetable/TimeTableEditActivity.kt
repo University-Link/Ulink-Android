@@ -51,6 +51,10 @@ class TimeTableEditActivity : AppCompatActivity() {
             timeTableList.addAll(it)
         }
 
+        btn_cancel.setOnClickListener {
+            finish()
+        }
+
         Handler().postDelayed({
 
 // TODO sharedpreference 사용해서 영구 저장

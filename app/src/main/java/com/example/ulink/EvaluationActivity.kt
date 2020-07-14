@@ -13,6 +13,10 @@ class EvaluationActivity : AppCompatActivity(){
         cardview.setBackgroundResource(R.drawable.class_evaluation_upper_bg)
         cardview2.setBackgroundResource(R.drawable.class_eval_bg)
 
+        btn_back.setOnClickListener{
+            finish()
+        }
+
     }
 
 }
