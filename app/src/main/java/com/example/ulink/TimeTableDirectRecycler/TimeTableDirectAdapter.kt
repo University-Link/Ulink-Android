@@ -48,7 +48,7 @@ class TimeTableDirectAdapter(private val context: Context, val onClickListener: 
             val myAdapter = ArrayAdapter.createFromResource(context, R.array.days,R.layout.item_spinner)
             myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             val spinner_days = itemView.findViewById<Spinner>(R.id.spinner_days)
-                spinner_days.adapter = myAdapter
+            spinner_days.adapter = myAdapter
 
             val tv_start_time = itemView.findViewById<TextView>(R.id.tv_start_time)
             val tv_end_time = itemView.findViewById<TextView>(R.id.tv_end_time)
@@ -56,7 +56,7 @@ class TimeTableDirectAdapter(private val context: Context, val onClickListener: 
             spinner_days.setSelection(TimeTableDirectData.day)
 
 
-           // 타임피커 보이도록
+            // 타임피커 보이도록
 
             tv_start_time.setOnClickListener {
                 check = false
