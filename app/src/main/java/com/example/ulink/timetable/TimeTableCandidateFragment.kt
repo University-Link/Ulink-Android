@@ -45,63 +45,52 @@ class TimeTableCandidateFragment() : Fragment(){
 
     override fun onResume() {
         super.onResume()
-<<<<<<< HEAD
-        var cartDatas : MutableList<SubjectDetail> = mutableListOf()
+        var cartDatas: MutableList<SubjectDetail> = mutableListOf()
 
         //getCartList 후보 등록  TODO SEMESTER넘겨주기
-        RetrofitService.service.getCartList(token, "2020-1").enqueue(object : Callback<ResponseGetCartList> {
-            override fun onFailure(call: Call<ResponseGetCartList>, t: Throwable) {
-            }
+        RetrofitService.service.getCartList(token, "2020-1")
+            .enqueue(object : Callback<ResponseGetCartList> {
+                override fun onFailure(call: Call<ResponseGetCartList>, t: Throwable) {
+                }
 
-            override fun onResponse(
-                call: Call<ResponseGetCartList>,
-                response: Response<ResponseGetCartList>
-            ) {
-                response.body()?.let {
-                    if (it.status == 200) {
-                        if (it.data.isNotEmpty()) {
-                            Log.d("cart", it.toString())
-                            var size = it.data.size
-                            for (i in 0 until size) {
-                                cartDatas.apply {
-                                    add(
-                                        SubjectDetail(
-                                            cartIdx = it.data[i].cartIdx,
-                                            userIdx = it.data[i].userIdx,
-                                            subjectIdx = it.data[i].subjectIdx,
-                                            semester = it.data[i].semester,
-                                            subjectCode = it.data[i].subjectCode,
-                                            name = it.data[i].name,
-                                            nameAtomic = it.data[i].nameAtomic,
-                                            professor = it.data[i].professor,
-                                            school = it.data[i].school,
-                                            college = it.data[i].college,
-                                            major = it.data[i].major,
-                                            grade = it.data[i].grade,
-                                            credit = it.data[i].credit,
-                                            people = it.data[i].people,
-                                            course = it.data[i].course
+                override fun onResponse(
+                    call: Call<ResponseGetCartList>,
+                    response: Response<ResponseGetCartList>
+                ) {
+                    response.body()?.let {
+                        if (it.status == 200) {
+                            if (it.data.isNotEmpty()) {
+                                Log.d("cart", it.toString())
+                                var size = it.data.size
+                                for (i in 0 until size) {
+                                    cartDatas.apply {
+                                        add(
+                                            SubjectDetail(
+                                                cartIdx = it.data[i].cartIdx,
+                                                userIdx = it.data[i].userIdx,
+                                                subjectIdx = it.data[i].subjectIdx,
+                                                semester = it.data[i].semester,
+                                                subjectCode = it.data[i].subjectCode,
+                                                name = it.data[i].name,
+                                                nameAtomic = it.data[i].nameAtomic,
+                                                professor = it.data[i].professor,
+                                                school = it.data[i].school,
+                                                college = it.data[i].college,
+                                                major = it.data[i].major,
+                                                grade = it.data[i].grade,
+                                                credit = it.data[i].credit,
+                                                people = it.data[i].people,
+                                                course = it.data[i].course
+                                            )
                                         )
-                                    )
+                                    }
+                                    cartAdapter.cartDataList = cartDatas
+                                    cartAdapter.notifyDataSetChanged()
                                 }
-                                cartAdapter.cartDataList = cartDatas
-                                cartAdapter.notifyDataSetChanged()
                             }
                         }
                     }
                 }
-            }
-        })
-=======
-//        btn_assess.setOnClickListener {
-//            val intent = Intent(context,EvaluationActivity::class.java)
-//            startActivity(intent)
-//        }
-
-
-
-        mAdapter.addToList(Subject(1, "전자회로I", "09:00", "12:00", 0, "과목장소", 1, true))
-        mAdapter.notifyDataSetChanged()
->>>>>>> 02e9367c07136cb08229aab9c965dd1aafa974aa
+            })
     }
 }

@@ -19,7 +19,6 @@ import com.example.ulink.TimeTableDirectRecycler.TimeTableDirectAdapter
 import com.example.ulink.TimeTableDirectRecycler.TimeTableDirectData
 import com.example.ulink.repository.Subject
 import com.example.ulink.repository.TimeTable
-import com.example.ulink.showToast
 import com.example.ulink.utils.deepCopy
 import kotlinx.android.synthetic.main.activity_direct_type_time_table.*
 import kotlinx.android.synthetic.main.toolbar_direct_time_table.*
@@ -77,13 +76,7 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
         var textCheck = "#ffffff"
         var textUncheck = "#727272"
 
-<<<<<<< HEAD
-        btn_back.setOnClickListener {
-            finish()
-        }
-=======
 
->>>>>>> 02e9367c07136cb08229aab9c965dd1aafa974aa
 
         et_title.setOnFocusChangeListener(object : View.OnFocusChangeListener {
             override fun onFocusChange(v: View?, hasFocus: Boolean) {
@@ -311,10 +304,6 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
 
         //시간표 전부 추가 후 확인
         btn_check.setOnClickListener() {
-<<<<<<< HEAD
-           // if (et_title.text.toString() == "") showToast("제목을 설정해주세요.")
-            finish()
-=======
             if (et_title.text.toString() == "") directAddPageDialog()
             else {
                 val intent = Intent()
@@ -340,7 +329,6 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
                 setResult(200,intent)
                 finish()
             }
->>>>>>> 02e9367c07136cb08229aab9c965dd1aafa974aa
         }
 
         //타임피커 시간 설정
@@ -416,8 +404,6 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
     override fun onClick(position: Int, check: Boolean) {
         time_picker.visibility = View.VISIBLE
         btn_ok.visibility = View.VISIBLE
-        time_picker.setIs24HourView(true)
-
         time_picker.setOnTimeChangedListener(OnTimeChangedListener { timePicker, hour, min ->
 
             if (!check) {
@@ -433,27 +419,12 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
             }
         })
 
-
-
-        //삭제 다이얼로그
-        btn_check.setOnClickListener() {
-            if (et_title.text.toString() == "") directAddPageDialog()
-            else {
-                //제목설정 다이얼로그
-                //시간입력 다이얼로그
-
-            }
-        }
     }
 
-<<<<<<< HEAD
-
-=======
     fun formatToFloat(time: String): Float {
         val timesplit = time.split(":")
         return timesplit[0].toFloat() + (timesplit[1].toFloat() - timesplit[1].toFloat() % 15) / 60
     }
->>>>>>> 02e9367c07136cb08229aab9c965dd1aafa974aa
 
 }
 
