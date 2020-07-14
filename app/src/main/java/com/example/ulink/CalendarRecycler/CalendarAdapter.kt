@@ -173,6 +173,39 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                                 memo = "유링크최고"
                             )
                         )
+                        add(
+                            ScheduleItemData(
+                                date = "$itemYear-$popupMonth-$popupDay",
+                                category = "수업",
+                                classname = "바보",
+                                content = "멍청이",
+                                startTime = "11:00",
+                                endTime = "13:00",
+                                memo = "유링크최고"
+                            )
+                        )
+                        add(
+                            ScheduleItemData(
+                                date = "$itemYear-$popupMonth-$popupDay",
+                                category = "수업",
+                                classname = "바보",
+                                content = "멍청이",
+                                startTime = "11:00",
+                                endTime = "13:00",
+                                memo = "유링크최고"
+                            )
+                        )
+                        add(
+                            ScheduleItemData(
+                                date = "$itemYear-$popupMonth-$popupDay",
+                                category = "수업",
+                                classname = "바보",
+                                content = "멍청이",
+                                startTime = "11:00",
+                                endTime = "13:00",
+                                memo = "유링크최고"
+                            )
+                        )
                         rvPopupAdapter.notifyDataSetChanged()
                     }
 

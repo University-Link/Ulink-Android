@@ -28,4 +28,17 @@
     <color name="timeTable8">#B97CFE</color>
     <color name="timeTable9">#73DBE8</color>
     <color name="timeTable10">#7BA7FF</color>
+
+    <array name="chatting_list">
+        <item>@drawable/class_img_subject_1</item>
+        <item>@drawable/class_img_subject_0</item>
+        <item>@drawable/class_img_subject_2</item>
+        <item>@drawable/class_img_subject_3</item>
+        <item>@drawable/class_img_subject_4</item>
+        <item>@drawable/class_img_subject_5</item>
+        <item>@drawable/class_img_subject_6</item>
+        <item>@drawable/class_img_subject_7</item>
+        <item>@drawable/class_img_subject_8</item>
+        <item>@drawable/class_img_subject_9</item>
+    </array>
 </resources>

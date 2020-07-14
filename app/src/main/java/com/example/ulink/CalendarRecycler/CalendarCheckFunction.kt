@@ -13,10 +13,6 @@ var now_day = cal.get(Calendar.DATE)
 var now_month = cal.get(Calendar.MONTH)+1
 var now_year = cal.get(Calendar.YEAR)
 
-fun nowDay() : Int {
-    return now_day
-}
-
 fun calendarTodayCheck(i : Int, data : CalendarData) : Boolean { //today
     return (i == now_day && data.month == now_month && data.year == now_year)
 }

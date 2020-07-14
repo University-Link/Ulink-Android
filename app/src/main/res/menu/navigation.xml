@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/nv_timetable"
-        android:icon="@drawable/img_btn_timetable"
+        android:icon="@drawable/tab_ic_timetable"
         android:title="시간표" />
     <item android:id="@+id/nv_class"
-        android:icon="@drawable/img_btn_class"
+        android:icon="@drawable/tab_ic_class"
         android:title="수업"/>
     <item android:id="@+id/nv_calendar"
-        android:icon="@drawable/img_btn_calender"
+        android:icon="@drawable/tab_ic_calendar"
         android:title="캘린더"/>
     <item android:id="@+id/nv_my"
-        android:icon="@drawable/img_btn_mypage"
+        android:icon="@drawable/tab_ic_my"
         android:title="내정보"/>
 </menu>

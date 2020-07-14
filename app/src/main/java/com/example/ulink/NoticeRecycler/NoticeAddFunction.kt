@@ -7,6 +7,10 @@ import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.R
 import com.example.ulink.ScheduleRecycler.ScheduleItemData
+import com.example.ulink.ScheduleRecycler.nowDay
+import com.example.ulink.ScheduleRecycler.nowMonth
+import com.example.ulink.ScheduleRecycler.nowYear
+import java.text.SimpleDateFormat
 
 fun intentNoticeAdd(scheduleItemData : ScheduleItemData,
                     btn_task : Button, btn_test : Button, btn_class : Button,
@@ -118,5 +122,17 @@ fun ddayBackground(category : String, dday : TextView) {
         "과제" -> dday.setBackgroundResource(R.drawable.chatting_notice_label_bg_hw)
         "시험" -> dday.setBackgroundResource(R.drawable.chatting_notice_label_bg_test)
     }
+}
 
+fun ddayCheck(scheduleItemData : ScheduleItemData) : Long{
+
+    var now = "$nowYear-$nowMonth-$nowDay"
+    var nowDate = SimpleDateFormat("yyyy-mm-dd").parse(now)
+    var scheduleDate = SimpleDateFormat("yyyy-mm-dd").parse(scheduleItemData.date)
+
+    var dayRemainder = nowDate.time - scheduleDate.time
+    dayRemainder /= (24 * 60 * 60 * 1000)
+    if(dayRemainder<0) dayRemainder*=-1
+
+    return dayRemainder
 }

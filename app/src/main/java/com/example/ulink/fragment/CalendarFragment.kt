@@ -1,26 +1,18 @@
 package com.example.ulink.fragment
 
 import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.widget.TextView
-import androidx.room.RoomSQLiteQuery.copyFrom
 import com.example.ulink.CalendarRecycler.*
 import com.example.ulink.R
 import com.example.ulink.ScheduleActivity
-import com.example.ulink.ScheduleNoticeActivity
-import com.example.ulink.ScheduleRecycler.SchedulePopupAdapter
-import kotlinx.android.synthetic.main.calendar_question_popup_layout.*
+import com.example.ulink.ScheduleRecycler.nowDay
 import kotlinx.android.synthetic.main.fragment_calendar.*
 
 class CalendarFragment : Fragment() {
@@ -34,8 +26,27 @@ class CalendarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        RetrofitService.service.getAllNotice(token,"2020-06-01", "2020-07-31").enqueue(object : Callback<ResponseCalendar>{
+//            override fun onFailure(call: Call<ResponseCalendar>, t: Throwable) {
+//                Log.d("dlwldms", t.localizedMessage)
+//            }
+//
+//            override fun onResponse(
+//                call: Call<ResponseCalendar>,
+//                response: Response<ResponseCalendar>
+//            ) {
+//                response.body()?.let{
+//                    if(it.status == 200){
+//                        Log.d("dlwldms", it.data[0].notice[0].name)
+//                    } else {
+//                        Log.d("qkrrbgml", "애매")
+//                    }
+//                } ?: Log.d("tag", "??")
+//            }
+//        })
+
         lateinit var dialog : AlertDialog
-        btn_today.text = nowDay().toString()
+        btn_today.text = nowDay.toString()
 
         var nowCalendarData = calendarDataInit(tv_month) // now_month
 

@@ -18,23 +18,32 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import kotlinx.android.synthetic.main.activity_chatting.*
 import kotlinx.android.synthetic.main.activity_main_content.*
+import kotlinx.android.synthetic.main.nav_header_main.*
 import kotlinx.android.synthetic.main.toolbar_chatting.*
 class ChattingActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener {
     lateinit var className : String
     lateinit var ChattingAdapter : ChattingAdapter
     val datas : MutableList<ChattingData> = mutableListOf<ChattingData>()
+
     private lateinit var database: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatting)
-        val intent = intent
+
         className = intent.getStringExtra("className")
+        if(className != null)
+            tv_classname.text = className
+
+
+        var current = intent.getIntExtra("current", 0)
+        if(current != null) tv_chatting_room_count.text = current.toString()
 
         ChattingAdapter = ChattingAdapter(this)
         rv_chatting.adapter = ChattingAdapter
-        loadDatas()
+
         img_hamburger.setOnClickListener {
             setDrawerLayout(drawer_layout_main, nav_view as NavigationView)
+            tv_drawer_class_name.text = className
         }
         nav_view.setNavigationItemSelectedListener(this) //navigation 리스너
         tv_back.setOnClickListener{
@@ -43,72 +52,6 @@ class ChattingActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
         btn_back.setOnClickListener {
             finish()
         }
-    }
-    private fun loadDatas() {
-        datas.apply {
-            add(
-                ChattingData(
-                    token = "user",
-                    profile = "",
-                    username = "익명의 가지",
-                    message = "안녕하세요",
-                    count = 11,
-                    time = "오후 6:30"
-                )
-            )
-            add(
-                ChattingData(
-                    token = "user",
-                    profile = "",
-                    username = "익명의 가지",
-                    message = "안녕하세요 채팅테스트 하기 ㅎㅎㅎㅎㅎㅎㅎㅎ",
-                    count = 11,
-                    time = "오후 6:30"
-                )
-            )
-            add(
-                ChattingData(
-                    token = "user",
-                    profile = "",
-                    username = "익명의 가지",
-                    message = "어렵다",
-                    count = 11,
-                    time = "오후 6:30"
-                )
-            )
-            add(
-                ChattingData(
-                    token = "user",
-                    profile = "",
-                    username = "익명의 가지",
-                    message = "안녕하세요",
-                    count = 11,
-                    time = "오후 6:30"
-                )
-            )
-            add(
-                ChattingData(
-                    token = "user",
-                    profile = "",
-                    username = "익명의 가지",
-                    message = "안녕하세요",
-                    count = 11,
-                    time = "오후 6:30"
-                )
-            )
-            add(
-                ChattingData(
-                    token = "user",
-                    profile = "",
-                    username = "익명의 가지",
-                    message = "안녕하세요",
-                    count = 11,
-                    time = "오후 6:30"
-                )
-            )
-        }
-        ChattingAdapter.datas = datas
-        ChattingAdapter.notifyDataSetChanged()
     }
     private fun setDrawerLayout(drawerLayout: DrawerLayout, navigationView: NavigationView){
         drawerLayout.openDrawer(Gravity.RIGHT)

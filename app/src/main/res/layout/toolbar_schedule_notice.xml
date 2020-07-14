@@ -28,12 +28,21 @@
             android:layout_gravity="center"
             android:text="시험공지"/>
 
+
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_width="27dp"
+            android:layout_height="31dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="6dp"
+            android:background="@drawable/timetableadd_textfield_timeadd_delete" />
+
         <Button
             android:id="@+id/btn_edit"
             android:layout_width="46dp"
             android:layout_height="24dp"
             android:layout_gravity="right"
-            android:layout_marginRight="14dp"
+            android:layout_marginRight="6dp"
             android:background="@drawable/btn_notice_edit" />
 
     </androidx.appcompat.widget.Toolbar>

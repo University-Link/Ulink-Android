@@ -1,9 +1,9 @@
 package com.example.ulink.ClassRecycler
 
 data class ClassData(
-    val ClassImage : String,
-    val ClassName : String,
-    val now : Int,
+    val scheduleSchoolIdx : Int,
+    val name : String,
+    val color : Int,
     val total : Int,
-    val count : String
+    val current : Int
 )

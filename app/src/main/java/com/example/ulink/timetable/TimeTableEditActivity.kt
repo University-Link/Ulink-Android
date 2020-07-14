@@ -304,9 +304,8 @@ class TimeTableEditActivity : AppCompatActivity() {
         }
 
         layout.findViewById<Button>(R.id.btn_type).setOnClickListener {
-            val intent = Intent(this, TimeTableDirectTypeActivity::class.java)
-            intent.putExtra("timeTable", deepCopy(mAdapter.timeTableList[vp_timetableadd.currentItem]))
-            startActivityForResult(intent, REQUEST_DIRECT_TYPE_ACTIVITY)
+            //intent.putExtra("timeTable", deepCopy(mAdapter.timeTableList[vp_timetableadd.currentItem]))
+            //startActivityForResult(intent, REQUEST_DIRECT_TYPE_ACTIVITY)
 
             dialog.dismiss()
         }

@@ -73,7 +73,7 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
 //       수정 눌렀다가 취소해서 그대로 돌아온 경우
 
         findViewById<Button>(R.id.btn_modify).setOnClickListener {
-            val intent = Intent(this, TimeTableDirectTypeActivity::class.java)
+           // val intent = Intent(this, TimeTableDirectTypeActivity::class.java)
             if (timeTableDrawerDrag.getAddedSubject() == null){
                 Toast.makeText(this,"중복된 과목이 있습니다", Toast.LENGTH_SHORT).show()
             } else {
