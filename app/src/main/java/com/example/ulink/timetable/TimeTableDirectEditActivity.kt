@@ -27,6 +27,12 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
         }
     }
 
+
+//    TODO 그리고 type갔다가 다시 돌아와서 type가려하면 중복이라고 나옴!!
+//    예상 그리고 type 갈때 getsubject로 여기 테이블에 더하고 보내는데 이거때문인듯!!
+//     밑에 getAddedTable로 들어가는데 subject랑 원래 테이블 따로 보내주기! 거기서 구별을 못함 ㅠ
+
+
     lateinit var timeTableDrawerDrag : TimeTableDrawerDrag
     lateinit var timeTable : TimeTable
 

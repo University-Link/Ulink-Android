@@ -115,11 +115,10 @@ class TimeTableFragment : Fragment() {
 
             if (data != null) {
                 timetableDrawer.timeTable = deepCopy(data.getParcelableExtra("timeTable"))
-                tv_semister.text = timetableDrawer.timeTable.name
+                tv_semister.text = timetableDrawer.timeTable.semseter
 
             }
             view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { timetableDrawer.draw(it) }
-
         }
     }
 }

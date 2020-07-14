@@ -1,16 +1,10 @@
 package com.example.ulink.timetable
 
-import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.ulink.FilterSettingSearchActivity
 import com.example.ulink.R
@@ -19,6 +13,7 @@ import kotlinx.android.synthetic.main.fragment_timetablefiltersearch.*
 
 
 const val REQUEST_FILTER_SETTING_SEARCH_ACTIVITY = 666
+const val REQUEST_FILTER_MAJOR_ACTIVITY = 555
 class TimeTableFilterSearchFragment() : Fragment() {
 
     lateinit var mAdapter : TimeTableClassAdapter
@@ -65,6 +60,13 @@ class TimeTableFilterSearchFragment() : Fragment() {
                 et_class_name.clearFocus()
             }
         }
+
+        btn_fitler_major.setOnClickListener {
+            val intent = Intent(context,TimeTableClassFilterActivity::class.java)
+            startActivityForResult(intent, REQUEST_FILTER_MAJOR_ACTIVITY)
+        }
+
+
     }
 
     override fun onResume() {
