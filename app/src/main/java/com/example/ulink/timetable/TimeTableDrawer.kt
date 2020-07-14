@@ -251,14 +251,14 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
                 0 -> {
                     list = list0
                     list.retainAll { !it.isSample }
-                    list.sortBy { formatToFloat(it.starttime) }
+                    list.sortBy { formatToFloat(it.startTime) }
                     for (a in 0 until list.size) {
                         if (a == 0) {
-                            subjectstarttime = formatToFloat(list[a].starttime) * 4
+                            subjectstarttime = formatToFloat(list[a].startTime) * 4
                             presubjectendtimeortablestarttime = formatToFloat(timeTable.startTime) * 4
                         } else {
-                            subjectstarttime = formatToFloat(list[a].starttime) * 4
-                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endtime)) * 4
+                            subjectstarttime = formatToFloat(list[a].startTime) * 4
+                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endTime)) * 4
                         }
                         DrawDummy(linearLayout, subjectstarttime - presubjectendtimeortablestarttime)
                         DrawSubject(linearLayout, list[a])
@@ -268,14 +268,14 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
                     list = list1
                     list.retainAll { !it.isSample }
 
-                    list.sortBy { formatToFloat(it.starttime) }
+                    list.sortBy { formatToFloat(it.startTime) }
                     for (a in 0 until list.size) {
                         if (a == 0) {
-                            subjectstarttime = formatToFloat(list[a].starttime) * 4
+                            subjectstarttime = formatToFloat(list[a].startTime) * 4
                             presubjectendtimeortablestarttime = formatToFloat(timeTable.startTime) * 4
                         } else {
-                            subjectstarttime = formatToFloat(list[a].starttime) * 4
-                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endtime)) * 4
+                            subjectstarttime = formatToFloat(list[a].startTime) * 4
+                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endTime)) * 4
                         }
                         DrawDummy(linearLayout, subjectstarttime - presubjectendtimeortablestarttime)
                         DrawSubject(linearLayout, list[a])
@@ -285,14 +285,14 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
                     list = list2
                     list.retainAll { !it.isSample }
 
-                    list.sortBy { formatToFloat(it.starttime) }
+                    list.sortBy { formatToFloat(it.startTime) }
                     for (a in 0 until list.size) {
                         if (a == 0) {
-                            subjectstarttime = formatToFloat(list[a].starttime) * 4
+                            subjectstarttime = formatToFloat(list[a].startTime) * 4
                             presubjectendtimeortablestarttime = formatToFloat(timeTable.startTime) * 4
                         } else {
-                            subjectstarttime = formatToFloat(list[a].starttime) * 4
-                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endtime)) * 4
+                            subjectstarttime = formatToFloat(list[a].startTime) * 4
+                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endTime)) * 4
                         }
                         DrawDummy(linearLayout, subjectstarttime - presubjectendtimeortablestarttime)
                         DrawSubject(linearLayout, list[a])
@@ -302,14 +302,14 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
                     list = list3
                     list.retainAll { !it.isSample }
 
-                    list.sortBy { formatToFloat(it.starttime) }
+                    list.sortBy { formatToFloat(it.startTime) }
                     for (a in 0 until list.size) {
                         if (a == 0) {
-                            subjectstarttime = formatToFloat(list[a].starttime) * 4
+                            subjectstarttime = formatToFloat(list[a].startTime) * 4
                             presubjectendtimeortablestarttime = formatToFloat(timeTable.startTime) * 4
                         } else {
-                            subjectstarttime = formatToFloat(list[a].starttime) * 4
-                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endtime)) * 4
+                            subjectstarttime = formatToFloat(list[a].startTime) * 4
+                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endTime)) * 4
                         }
                         DrawDummy(linearLayout, subjectstarttime - presubjectendtimeortablestarttime)
                         DrawSubject(linearLayout, list[a])
@@ -319,14 +319,14 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
                     list = list4
                     list.retainAll { !it.isSample }
 
-                    list.sortBy { formatToFloat(it.starttime) }
+                    list.sortBy { formatToFloat(it.startTime) }
                     for (a in 0 until list.size) {
                         if (a == 0) {
-                            subjectstarttime = formatToFloat(list[a].starttime) * 4
+                            subjectstarttime = formatToFloat(list[a].startTime) * 4
                             presubjectendtimeortablestarttime = formatToFloat(timeTable.startTime) * 4
                         } else {
-                            subjectstarttime = formatToFloat(list[a].starttime) * 4
-                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endtime)) * 4
+                            subjectstarttime = formatToFloat(list[a].startTime) * 4
+                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endTime)) * 4
                         }
                         DrawDummy(linearLayout, subjectstarttime - presubjectendtimeortablestarttime)
                         DrawSubject(linearLayout, list[a])
@@ -371,14 +371,14 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
                 0 -> {
                     list = list0
                     list.retainAll { it.isSample }
-                    list.sortBy { formatToFloat(it.starttime) }
+                    list.sortBy { formatToFloat(it.startTime) }
                     for (a in 0 until list.size) {
                         if (a == 0) {
-                            subjectstarttime = formatToFloat(list[a].starttime) * 4
+                            subjectstarttime = formatToFloat(list[a].startTime) * 4
                             presubjectendtimeortablestarttime = formatToFloat(timeTable.startTime) * 4
                         } else {
-                            subjectstarttime = formatToFloat(list[a].starttime) * 4
-                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endtime)) * 4
+                            subjectstarttime = formatToFloat(list[a].startTime) * 4
+                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endTime)) * 4
                         }
                         DrawDummy(linearLayout, subjectstarttime - presubjectendtimeortablestarttime)
                         DrawSubject(linearLayout, list[a])
@@ -388,14 +388,14 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
                     list = list1
                     list.filter { it.isSample }
 
-                    list.sortBy { formatToFloat(it.starttime) }
+                    list.sortBy { formatToFloat(it.startTime) }
                     for (a in 0 until list.size) {
                         if (a == 0) {
-                            subjectstarttime = formatToFloat(list[a].starttime) * 4
+                            subjectstarttime = formatToFloat(list[a].startTime) * 4
                             presubjectendtimeortablestarttime = formatToFloat(timeTable.startTime) * 4
                         } else {
-                            subjectstarttime = formatToFloat(list[a].starttime) * 4
-                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endtime)) * 4
+                            subjectstarttime = formatToFloat(list[a].startTime) * 4
+                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endTime)) * 4
                         }
                         DrawDummy(linearLayout, subjectstarttime - presubjectendtimeortablestarttime)
                         DrawSubject(linearLayout, list[a])
@@ -405,14 +405,14 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
                     list = list2
                     list.filter { it.isSample }
 
-                    list.sortBy { formatToFloat(it.starttime) }
+                    list.sortBy { formatToFloat(it.startTime) }
                     for (a in 0 until list.size) {
                         if (a == 0) {
-                            subjectstarttime = formatToFloat(list[a].starttime) * 4
+                            subjectstarttime = formatToFloat(list[a].startTime) * 4
                             presubjectendtimeortablestarttime = formatToFloat(timeTable.startTime) * 4
                         } else {
-                            subjectstarttime = formatToFloat(list[a].starttime) * 4
-                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endtime)) * 4
+                            subjectstarttime = formatToFloat(list[a].startTime) * 4
+                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endTime)) * 4
                         }
                         DrawDummy(linearLayout, subjectstarttime - presubjectendtimeortablestarttime)
                         DrawSubject(linearLayout, list[a])
@@ -422,14 +422,14 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
                     list = list3
                     list.filter { it.isSample }
 
-                    list.sortBy { formatToFloat(it.starttime) }
+                    list.sortBy { formatToFloat(it.startTime) }
                     for (a in 0 until list.size) {
                         if (a == 0) {
-                            subjectstarttime = formatToFloat(list[a].starttime) * 4
+                            subjectstarttime = formatToFloat(list[a].startTime) * 4
                             presubjectendtimeortablestarttime = formatToFloat(timeTable.startTime) * 4
                         } else {
-                            subjectstarttime = formatToFloat(list[a].starttime) * 4
-                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endtime)) * 4
+                            subjectstarttime = formatToFloat(list[a].startTime) * 4
+                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endTime)) * 4
                         }
                         DrawDummy(linearLayout, subjectstarttime - presubjectendtimeortablestarttime)
                         DrawSubject(linearLayout, list[a])
@@ -439,14 +439,14 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
                     list = list4
                     list.filter { it.isSample }
 
-                    list.sortBy { formatToFloat(it.starttime) }
+                    list.sortBy { formatToFloat(it.startTime) }
                     for (a in 0 until list.size) {
                         if (a == 0) {
-                            subjectstarttime = formatToFloat(list[a].starttime) * 4
+                            subjectstarttime = formatToFloat(list[a].startTime) * 4
                             presubjectendtimeortablestarttime = formatToFloat(timeTable.startTime) * 4
                         } else {
-                            subjectstarttime = formatToFloat(list[a].starttime) * 4
-                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endtime)) * 4
+                            subjectstarttime = formatToFloat(list[a].startTime) * 4
+                            presubjectendtimeortablestarttime = formatToFloat((list[a - 1].endTime)) * 4
                         }
                         DrawDummy(linearLayout, subjectstarttime - presubjectendtimeortablestarttime)
                         DrawSubject(linearLayout, list[a])
@@ -480,7 +480,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 //        cell = 0일때 오류
             val celllayout = layoutInflater.inflate(R.layout.cell_subject, linearLayout, false) as LinearLayout
             celllayout.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
-                    4 * (formatToFloat(subject.endtime) - formatToFloat(subject.starttime)) - 0.5f)
+                    4 * (formatToFloat(subject.endTime) - formatToFloat(subject.startTime)) - 0.5f)
 
 //        TODO 여기서 color를 int값에 따라 골라서 넣어주기!!
             celllayout.setBackgroundResource(R.drawable.bg_round_border_subject_sample)
@@ -499,7 +499,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 //        cell = 0일때 오류
             val celllayout = layoutInflater.inflate(R.layout.cell_subject, linearLayout, false) as LinearLayout
             celllayout.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
-                    4 * (formatToFloat(subject.endtime) - formatToFloat(subject.starttime)) - 0.5f)
+                    4 * (formatToFloat(subject.endTime) - formatToFloat(subject.startTime)) - 0.5f)
 
 //        TODO 여기서 color를 int값에 따라 골라서 넣어주기!!
 //            celllayout.setBackgroundColor(Color.parseColor("#de91ff"))

@@ -15,6 +15,7 @@ import android.view.LayoutInflater
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.size
 import androidx.viewpager2.widget.MarginPageTransformer
 import com.example.ulink.R
 import com.example.ulink.repository.Subject
@@ -99,7 +100,7 @@ class TimeTableEditActivity : AppCompatActivity() {
         var check = false
         for (s in timeTable.subjectList!!) {
             if (subject.day == s.day) {
-                check = !(formatToFloat(subject.endtime) <= formatToFloat(s.starttime) || formatToFloat(subject.starttime) >= formatToFloat(s.endtime))
+                check = !(formatToFloat(subject.endTime) <= formatToFloat(s.startTime) || formatToFloat(subject.startTime) >= formatToFloat(s.endTime))
                 if (check) return check
             }
         }
@@ -108,8 +109,10 @@ class TimeTableEditActivity : AppCompatActivity() {
 
 
     fun addToTable(subject: Subject) {
-
         val position = vp_timetableadd.currentItem
+        if(position == mAdapter.itemCount-1){
+            return
+        }
 //        TODO 여기서 DB에 저장도 해야함
         val timeTable = mAdapter.timeTableList[position]
 
@@ -129,6 +132,9 @@ class TimeTableEditActivity : AppCompatActivity() {
 
     fun addToSampleTable(subject: Subject) {
         val position = vp_timetableadd.currentItem
+        if(position == mAdapter.itemCount-1){
+            return
+        }
         var timeTable: TimeTable = mAdapter.timeTableSampleList.get(position)
         timeTable.subjectList.add(subject)
         mAdapter.replaceAtSampleList(position, timeTable)
@@ -140,9 +146,14 @@ class TimeTableEditActivity : AppCompatActivity() {
 
 //    TODO 미리보기 저장된거 색깔 왜 그러지 = Sample로 들어가서 그런듯! 추가할때는 sample말고 그냥으로!
 //    DRAWER 고치기
+//    여기 맨 처음에 에러남
 
     fun rollBack() {
         val position = vp_timetableadd.currentItem
+        if(position == mAdapter.itemCount-1){
+            return
+        }
+        Log.d("tag", vp_timetableadd.childCount.toString())
         mAdapter.replaceAtSampleList(position, mAdapter.timeTableList[position])
         mAdapter.reDrawFragment(vp_timetableadd.currentItem)
         mAdapter.scrollToTop(position)

@@ -230,6 +230,7 @@
             android:textColor="@color/text1"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
+
         <EditText
             android:id="@+id/et_title"
             android:layout_marginTop="12dp"
@@ -244,6 +245,7 @@
             android:imeOptions="actionDone"
             app:layout_constraintTop_toBottomOf="@id/tv_title_setting"
             app:layout_constraintStart_toStartOf="parent"/>
+
         <TextView
             android:id="@+id/tv_detail"
             android:layout_width="wrap_content"

@@ -1,7 +1,6 @@
 package com.example.ulink.timetable
 
 import android.app.AlertDialog
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -12,14 +11,17 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.ulink.FilterNormalActivity
 import com.example.ulink.R
 import com.example.ulink.repository.Subject
 import kotlinx.android.synthetic.main.fragment_timetablefiltersearch.*
 
+
+const val REQUEST_FILTER_SETTING_SEARCH_ACTIVITY = 666
 class TimeTableFilterSearchFragment() : Fragment() {
 
     lateinit var mAdapter : TimeTableClassAdapter
+
+    var prevent = true
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_timetablefiltersearch, container, false)
@@ -56,13 +58,25 @@ class TimeTableFilterSearchFragment() : Fragment() {
 
         mAdapter.addToList(subjectList)
 
-        btn_fitler_major.setOnClickListener {
-            //TODO 전공필터 만들면 연결
+        et_class_name.setOnFocusChangeListener { v, hasFocus ->
+            if (prevent){
+                val intent = Intent(context,FilterSettingSearchActivity::class.java)
+                startActivityForResult(intent, REQUEST_FILTER_SETTING_SEARCH_ACTIVITY)
+                prevent = false
+                et_class_name.clearFocus()
+            }
         }
+    }
 
-        btn_filter_normal.setOnClickListener {
-            val intent = Intent(activity,FilterNormalActivity::class.java)
-            startActivity(intent)
+    override fun onResume() {
+        super.onResume()
+        prevent = true
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_FILTER_SETTING_SEARCH_ACTIVITY){
+            et_class_name.setText(data?.getStringExtra("query"))
         }
     }
 

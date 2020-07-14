@@ -177,11 +177,11 @@ fun popupMonthCheck(position : Int, index : Int, last_empty : Int, data_month : 
 }
 
 fun popupYearCheck(data_year : Int, data_month : Int, position : Int, index : Int, last_empty : Int) : Int{
-    var year = data_year
+    var popupYear = data_year
 
-    if(data_month == 1 && position < index) year-=1
+    if(data_month == 1 && position < index) popupYear-=1
 
-    if(data_month == 12 && position >= last_empty) year +=1
+    if(data_month == 12 && position >= last_empty) popupYear +=1
 
-    return year
+    return popupYear
 }

@@ -40,7 +40,7 @@ class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeT
 
             itemView.findViewById<TextView>(R.id.tv_class_name).text = subject.name
             itemView.findViewById<TextView>(R.id.tv_professor_name).text = subject.professor
-            itemView.findViewById<TextView>(R.id.tv_time).text = subject.starttime + subject.endtime
+            itemView.findViewById<TextView>(R.id.tv_time).text = subject.startTime + subject.endTime
             itemView.findViewById<TextView>(R.id.tv_place).text = subject.place
             itemView.findViewById<TextView>(R.id.tv_category).text = subject.course
             itemView.findViewById<TextView>(R.id.tv_credit).text = subject.credit.toString()

@@ -61,7 +61,7 @@ class TimeTableFragment : Fragment() {
                 layout.findViewById<TextView>(R.id.tv_class_name).text = subject.name
 //                TODO 이거 table받아와서 classname으로 일주일에 몇번 수업인지 알아서 표시하기 vs 어뜨카지
 
-                layout.findViewById<TextView>(R.id.tv_time).text = subject.starttime +"  "+  subject.endtime
+                layout.findViewById<TextView>(R.id.tv_time).text = subject.startTime +"  "+  subject.endTime
                 layout.findViewById<TextView>(R.id.tv_place).text = subject.place + ", "
                 layout.findViewById<TextView>(R.id.tv_professor_name).text = subject.professor + "교수"
                 layout.findViewById<TextView>(R.id.tv_class_name).text = subject.name

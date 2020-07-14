@@ -4,6 +4,7 @@ import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "TimeTable")
@@ -18,10 +19,13 @@ data class TimeTable(
         @ColumnInfo(name = "main")
         var isMain: Boolean?,
         @ColumnInfo(name = "startTime")
-        var startTime: String,
+        @SerializedName("startTime")
+        var startTime: String = "",
         @ColumnInfo(name = "endTime")
         var endTime: String,
 //    TODO 여기 바꿔야함 DB에 객체 리스트 못넣음
         @ColumnInfo(name = "list")
         var subjectList: MutableList<Subject> = arrayListOf()
-) : Parcelable
+) : Parcelable {
+        constructor() : this(0,"","",false,"","", arrayListOf())
+}

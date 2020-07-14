@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.EvaluationActivity
 import com.example.ulink.R
 import com.example.ulink.repository.Subject
-import com.example.ulink.repository.TimeTable
 
 class TimeTableCandidateAdapter : RecyclerView.Adapter<TimeTableCandidateAdapter.VHolder>() {
 
@@ -20,7 +19,6 @@ class TimeTableCandidateAdapter : RecyclerView.Adapter<TimeTableCandidateAdapter
 
     fun addToList(subject : Subject){
         candidateList.add(subject)
-
     }
 
     class VHolder(itemView : View) : RecyclerView.ViewHolder(itemView){

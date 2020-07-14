@@ -1,5 +1,6 @@
 package com.example.ulink.NoticeRecycler
 
+import android.graphics.Color
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -14,16 +15,16 @@ class ScheduleNoticeMoreViewHolder(itemView : View) : RecyclerView.ViewHolder(it
     var time : TextView = itemView.findViewById(R.id.rv_notice_more_time)
     var dday : TextView = itemView.findViewById(R.id.rv_notice_more_dday)
 
-
-    fun bind(scheduleData : ScheduleItemData){
+    fun bind(scheduleData : ScheduleItemData) {
 
         ddayBackground(scheduleData.category, dday)
 
         var dateIndex = scheduleData.date.split("-")
 
-        date.text = dateIndex[1] + " / " +dateIndex[2]
+        date.text = dateIndex[1] + " / " + dateIndex[2]
         title.text = scheduleData.content
         time.text = scheduleData.startTime + " ~ " + scheduleData.endTime
         dday.text = "D-day"
+
     }
  }
