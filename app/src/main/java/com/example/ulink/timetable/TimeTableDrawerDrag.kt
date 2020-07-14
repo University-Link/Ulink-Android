@@ -119,6 +119,7 @@ class TimeTableDrawerDrag(val context: Context, val layoutInflater: LayoutInflat
         val subjectDrawed = getSubject()
         for(i in 0 until subjectDrawed.size){
             if (checkIsOver(subjectDrawed[i], timeTable)){
+                Log.d("tag","ruqcla")
                 break
             }
             check += 1
@@ -310,7 +311,7 @@ class TimeTableDrawerDrag(val context: Context, val layoutInflater: LayoutInflat
 //        subject sort한번 해줘야함
 
         subjectsize.let { itit ->
-            val daylist = arrayListOf(1,2,3,4,5,6,7)
+            val daylist = arrayListOf(0,1,2,3,4,5,6,7)
             val list0: MutableList<Subject> = arrayListOf()
             val list1: MutableList<Subject> = arrayListOf()
             val list2: MutableList<Subject> = arrayListOf()
@@ -432,7 +433,7 @@ class TimeTableDrawerDrag(val context: Context, val layoutInflater: LayoutInflat
 
 
         subjectsize?.let { itit ->
-            val daylist = arrayListOf(1,2,3,4,5,6,7)
+            val daylist = arrayListOf(0,1,2,3,4,5,6,7)
             val list0: MutableList<Subject> = arrayListOf()
             val list1: MutableList<Subject> = arrayListOf()
             val list2: MutableList<Subject> = arrayListOf()
@@ -589,7 +590,7 @@ class TimeTableDrawerDrag(val context: Context, val layoutInflater: LayoutInflat
                     4*(formatToFloat(subject.endTime) - formatToFloat(subject.startTime)) - 0.5f)
 
 //        TODO 여기서 color를 int값에 따라 골라서 넣어주기!!
-            celllayout.setBackgroundResource(R.drawable.bg_round_border_subject)
+            celllayout.setBackgroundResource(getColors(subject.color))
             celllayout.findViewById<TextView>(R.id.tv_cell_subject).text = subject.name
             celllayout.findViewById<TextView>(R.id.tv_cell_custom).apply {
                 text = subject.place

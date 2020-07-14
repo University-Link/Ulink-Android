@@ -129,13 +129,16 @@ class TimeTableDragView(context: Context, root: View, val timecolumnWidth: Float
     fun convertDrawToSubject(draw: RectF): Subject {
 
         var dayIndex = 0
+
         for (i in 0 until days) {
             if (draw.centerX() < timecolumnWidth!! + columnGap!! * (i + 1) + columnWidth!! * (i + 1)) {
                 dayIndex += 1
             }
         }
 
-        dayIndex = 5 - dayIndex
+        dayIndex = days - dayIndex
+
+        Log.d("tag", dayIndex.toString())
 //        for ()
 //        월화수목금.. 리스트에서 index를 나타냄!
 
@@ -158,7 +161,7 @@ class TimeTableDragView(context: Context, root: View, val timecolumnWidth: Float
 
         val topHour = starthour + top * 0.25f
         val bottomHour = starthour + bottom*0.25f
-        val daylist = arrayListOf(1,2,3,4,5,6,7)
+        val daylist = arrayListOf(0,1,2,3,4,5,6)
 
         val subject = Subject(1, "과목이름", formatToString(topHour), formatToString(bottomHour), daylist[dayIndex], "과목장소", 1, true)
         Log.d("tag",subject.toString())

@@ -33,6 +33,7 @@ class ClassFragment : Fragment() {
                 //Log.d("click","${position}번 리스트 선택")
                 val intent = Intent(getActivity(), ChattingActivity::class.java)
                 intent.putExtra("className", "소프트웨어공학")
+                intent.putExtra("idx", "1")
                 startActivity(intent)
             }
         })

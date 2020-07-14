@@ -42,8 +42,10 @@ class TimeTableDirectAdapter(private val context: Context, val onClickListener: 
 
         @RequiresApi(Build.VERSION_CODES.M)
         fun bind(TimeTableDirectData:TimeTableDirectData){
-            start_time.text =TimeTableDirectData.start_time
-            end_time.text =TimeTableDirectData.end_time
+
+            start_time.text = TimeTableDirectData.start_time
+            end_time.text = TimeTableDirectData.end_time
+
 
             val myAdapter = ArrayAdapter.createFromResource(context, R.array.days,R.layout.item_spinner)
             myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -84,6 +86,12 @@ class TimeTableDirectAdapter(private val context: Context, val onClickListener: 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(holder: TimeTalbeDirectViewHolder, position: Int) {
         holder.bind(datas[position])
+    }
+
+
+    fun formatToFloat(time: String): Float {
+        val timesplit = time.split(":")
+        return timesplit[0].toFloat() + (timesplit[1].toFloat() - timesplit[1].toFloat() % 15) / 60
     }
 
 }

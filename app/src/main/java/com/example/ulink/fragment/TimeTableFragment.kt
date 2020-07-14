@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,7 +70,6 @@ class TimeTableFragment : Fragment() {
                 builder.setView(layout)
                 val dialog = builder.create()
 
-
                 dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
             }
@@ -80,6 +80,9 @@ class TimeTableFragment : Fragment() {
                     this.mainTable = it
                     timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, mainTable)
                     timetableDrawer.draw(view.findViewById<FrameLayout>(R.id.layout_timetable))
+
+                    Log.d("tag","size" + mainTable)
+
 
                 },
                 onFailure = {

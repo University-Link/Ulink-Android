@@ -293,7 +293,6 @@ class TimeTableEditActivity : AppCompatActivity() {
         val back = ColorDrawable(Color.TRANSPARENT)
         val inset = InsetDrawable(back, 70)
 
-
         dialog.window?.setBackgroundDrawable(inset)
 
         dialog.show()
@@ -315,7 +314,8 @@ class TimeTableEditActivity : AppCompatActivity() {
 
         layout.findViewById<Button>(R.id.btn_type).setOnClickListener {
 //            TODO 이거 해제
-//            val intent = Intent(this, TimeTableDirectTypeActivity::class.java)
+            val intent = Intent(this, TimeTableDirectTypeActivity::class.java)
+            intent.putExtra("addable", true)
             intent.putExtra("timeTable", deepCopy(mAdapter.timeTableList[vp_timetableadd.currentItem]))
             startActivityForResult(intent, REQUEST_DIRECT_TYPE_ACTIVITY)
 
@@ -331,5 +331,13 @@ class TimeTableEditActivity : AppCompatActivity() {
         dialog.window?.setBackgroundDrawable(inset)
 
         dialog.show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+//        TODO
+//         시간표 다 불러와서 addfragment에 보내주기!
+
     }
 }
