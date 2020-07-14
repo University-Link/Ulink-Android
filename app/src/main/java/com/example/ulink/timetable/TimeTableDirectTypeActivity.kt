@@ -19,7 +19,6 @@ import com.example.ulink.TimeTableDirectRecycler.TimeTableDirectAdapter
 import com.example.ulink.TimeTableDirectRecycler.TimeTableDirectData
 import com.example.ulink.repository.Subject
 import com.example.ulink.repository.TimeTable
-import com.example.ulink.showToast
 import com.example.ulink.utils.deepCopy
 import kotlinx.android.synthetic.main.activity_direct_type_time_table.*
 import kotlinx.android.synthetic.main.toolbar_direct_time_table.*

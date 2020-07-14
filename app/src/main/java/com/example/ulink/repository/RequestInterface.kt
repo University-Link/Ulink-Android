@@ -63,6 +63,7 @@ interface RequestInterface {
             @Header("token") token: String,
             @Path("idx") idx : String
     ) : Call<ResponseTimeTable>
+
     //모든 학기 시간표 목록 가져오기
     @GET("/schedule/list")
     fun getAllTimeTableList(
