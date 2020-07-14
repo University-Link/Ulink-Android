@@ -32,7 +32,7 @@ class ScheduleActivity : AppCompatActivity() {
             for (i in 0 until 10) {
                 add(
                     ScheduleDateData(
-                        day = nowDay()+i,
+                        day = nowDay+i,
                         date = nowDateCheck(i),
                         dday = ddayCheck(i)
                     )

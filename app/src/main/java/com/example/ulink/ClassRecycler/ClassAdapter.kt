@@ -24,8 +24,8 @@ class ClassAdapter(private val context: Context) :RecyclerView.Adapter<ClassView
   }
   override fun onBindViewHolder(holder: ClassViewHolder, position: Int) {
     holder.bind(datas[position])
-    holder.itemView.setOnClickListener{
-      itemClickListener.onClick(it,position)
+    holder.itemView.setOnClickListener {
+      itemClickListener.onClick(it, position)
     }
   }
 }

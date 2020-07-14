@@ -17,11 +17,14 @@ class ScheduleNoticeViewHolder(itemView : View) : RecyclerView.ViewHolder(itemVi
         date.text = dateIndex[1] + "/" +dateIndex[2]
         title.text = scheduleData.content
 
-        if(scheduleData.startTime == "" && scheduleData.endTime == "") {
-            time.text = "시간정보없음"
-        }
-        else
+        if(scheduleData.startTime == "-1") scheduleData.startTime= ""
+        if (scheduleData.endTime == "-1") scheduleData.endTime=""
+
+        if (scheduleData.startTime != "" || scheduleData.endTime != "")
             time.text = scheduleData.startTime + " ~ " + scheduleData.endTime
+
+        if (scheduleData.startTime == "" && scheduleData.endTime == "")
+            time.text = "시간정보없음"
 
     }
  }

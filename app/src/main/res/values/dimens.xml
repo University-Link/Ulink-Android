@@ -8,7 +8,7 @@
 
     <dimen name="popup_width">290dp</dimen>
     <dimen name="popup_height">400dp</dimen>
+
     <dimen name="my_popup_width">298dp</dimen>
     <dimen name="my_popup_height">105dp</dimen>
-
 </resources>

@@ -12,10 +12,6 @@ var nowDay = cal.get(Calendar.DATE)
 var nowYear = cal.get(Calendar.YEAR)
 var nowMonth = cal.get(Calendar.MONTH)+1
 
-fun nowDay() : Int {
-    return nowDay
-}
-
 fun nowDateCheck(i : Int) : String {
 
     var tempDate = (cal.get(Calendar.DAY_OF_WEEK)+i)%7

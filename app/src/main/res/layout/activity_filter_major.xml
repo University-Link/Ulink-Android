@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FilterMajorActivity">
+
+    <include
+        android:id="@+id/toolbar_filter_normal"
+        layout="@layout/toolbar_filter_normal" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/white_background"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_filter_normal"
+        app:layout_constraintStart_toStartOf="parent" >
+
+        <TextView
+            android:id="@+id/tv_my_major"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="바이오시스템학부"
+            android:textSize="16sp"
+            android:textColor="@color/text1"
+            android:layout_marginVertical="20dp"
+            android:layout_marginLeft="21dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+        </TextView>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/major_setting_ic_mymajor"
+            app:layout_constraintBottom_toBottomOf="@id/tv_my_major"
+            app:layout_constraintStart_toEndOf="@id/tv_my_major"
+            app:layout_constraintTop_toTopOf="@id/tv_my_major" />
+
+        <Button
+            android:id="@+id/btn_my_major"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/major_setting_btn_round_unselected"
+            app:layout_constraintBottom_toBottomOf="@id/tv_my_major"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_my_major" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/white_background"
+        app:layout_constraintTop_toBottomOf="@id/layout1"
+        app:layout_constraintStart_toStartOf="parent" >
+
+        <TextView
+            android:id="@+id/tv_essential_culture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="필수교양"
+            android:textSize="16sp"
+            android:textColor="@color/text1"
+            android:layout_marginVertical="20dp"
+            android:layout_marginLeft="21dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+        </TextView>
+
+        <Button
+            android:id="@+id/btn_essential_culture"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/major_setting_btn_round_unselected"
+            app:layout_constraintBottom_toBottomOf="@id/tv_essential_culture"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_essential_culture" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/white_background"
+        app:layout_constraintTop_toBottomOf="@id/layout2"
+        app:layout_constraintStart_toStartOf="parent" >
+
+        <TextView
+            android:id="@+id/tv_select_culture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="선택교양"
+            android:textSize="16sp"
+            android:textColor="@color/text1"
+            android:layout_marginVertical="20dp"
+            android:layout_marginLeft="21dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+        </TextView>
+
+        <Button
+            android:id="@+id/btn_select_culture"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/major_setting_btn_round_unselected"
+            app:layout_constraintBottom_toBottomOf="@id/tv_select_culture"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_select_culture" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/white_background"
+        app:layout_constraintTop_toBottomOf="@id/layout3"
+        app:layout_constraintStart_toStartOf="parent" >
+
+        <TextView
+            android:id="@+id/tv_general_culture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="일반교양"
+            android:textSize="16sp"
+            android:textColor="@color/text1"
+            android:layout_marginVertical="20dp"
+            android:layout_marginLeft="21dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+        </TextView>
+
+        <Button
+            android:id="@+id/btn_general_culture"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/major_setting_btn_round_unselected"
+            app:layout_constraintBottom_toBottomOf="@id/tv_general_culture"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_general_culture" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/white_background"
+        app:layout_constraintTop_toBottomOf="@id/layout4"
+        app:layout_constraintStart_toStartOf="parent" >
+
+        <TextView
+            android:id="@+id/tv_teacher_course"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="교직이수"
+            android:textSize="16sp"
+            android:textColor="@color/text1"
+            android:layout_marginVertical="20dp"
+            android:layout_marginLeft="21dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+        </TextView>
+
+        <Button
+            android:id="@+id/btn_teacher_course"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/major_setting_btn_round_unselected"
+            app:layout_constraintBottom_toBottomOf="@id/tv_teacher_course"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_teacher_course" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/white_background"
+        app:layout_constraintTop_toBottomOf="@id/layout5"
+        app:layout_constraintStart_toStartOf="parent" >
+
+        <TextView
+            android:id="@+id/tv_other_major"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="타전공"
+            android:textSize="16sp"
+            android:textColor="@color/text1"
+            android:layout_marginVertical="20dp"
+            android:layout_marginLeft="21dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+        </TextView>
+
+        <Button
+            android:id="@+id/btn_other_major"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/major_setting_btn_round_unselected"
+            app:layout_constraintBottom_toBottomOf="@id/tv_other_major"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_other_major" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

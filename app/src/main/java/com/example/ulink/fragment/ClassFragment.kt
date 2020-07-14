@@ -7,12 +7,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.ulink.repository.ResponseCalendar
 import com.example.ulink.ChattingActivity
 import com.example.ulink.ClassRecycler.ClassAdapter
 import com.example.ulink.ClassRecycler.ClassData
 import com.example.ulink.R
-import com.example.ulink.ScheduleActivity
+import com.example.ulink.repository.ResponseChatting
+import com.example.ulink.repository.RetrofitService
 import kotlinx.android.synthetic.main.fragment_class.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ClassFragment : Fragment() {
     lateinit var ClassAdapter : ClassAdapter
@@ -25,120 +30,60 @@ class ClassFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_class, container, false)
     }
 
+    val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ2OTEzNzAsImV4cCI6MTU5NDc3Nzc3MCwiaXNzIjoiYm9iYWUifQ.5uqlexbvFsPfn1I9zZM1yN8-lrQcjQk8ZtI93KFdJOY"
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         ClassAdapter = ClassAdapter(view.context)
-        ClassAdapter.setItemClickLIstener(object:ClassAdapter.ItemClickListener{
-            override fun onClick(view:View, position:Int){
-                //Log.d("click","${position}번 리스트 선택")
-                val intent = Intent(getActivity(), ChattingActivity::class.java)
-                intent.putExtra("className", "소프트웨어공학")
-                intent.putExtra("idx", "1")
-                startActivity(intent)
+
+        rv_class.adapter = ClassAdapter
+
+        // TODO INDEX가 0일 경우 어떻게 처리할까? if 0일 경우는 무시 else 뿌리기 outofIndex error
+        RetrofitService.service.getChatList(token).enqueue(object : Callback<ResponseChatting> {
+            override fun onFailure(call: Call<ResponseChatting>, t: Throwable) {
+                Log.d("지혜", "바보")
+            }
+
+            override fun onResponse(
+                call: Call<ResponseChatting>,
+                response: Response<ResponseChatting>
+            ) {
+                response.body()?.let{
+                    if(it.status == 200){
+                        if(it.data.chat.isNotEmpty()) {
+                            //Log.d("dlwldms", it.data.chat[0].subjectIdx.toString())
+                                var size = it.data.chat.size
+                                for(i in 0 until size)
+                                {
+                                datas.apply{
+                                    add(
+                                        ClassData(
+                                            subjectIdx = it.data.chat[i].subjectIdx,
+                                            name = it.data.chat[i].name,
+                                            color = it.data.chat[i].color,
+                                            total = it.data.chat[i].total,
+                                            current = it.data.chat[i].current
+                                        )
+                                    )
+                                }
+                                ClassAdapter.datas = datas
+                                ClassAdapter.notifyDataSetChanged()
+                            }
+                        }
+                    }
+                } ?: Log.d("tag", response.message())
             }
         })
 
-        rv_class.adapter = ClassAdapter
-        loadDatas()
+        ClassAdapter.setItemClickLIstener(object:ClassAdapter.ItemClickListener{
+            override fun onClick(view:View, position:Int){
+                val intent = Intent(getActivity(), ChattingActivity::class.java)
+                intent.putExtra("className", datas[position].name) //과목명
+                intent.putExtra("current", datas[position].current) //현재원
+                intent.putExtra("idx", datas[position].subjectIdx.toString())
+                startActivity(intent)
+            }
+        })
     }
-
-    private fun loadDatas(){
-        datas.apply{
-            add(
-                ClassData(
-                    ClassImage="https://img1.daumcdn.net/thumb/R720x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fliveboard%2Fholapet%2F0e5f90af436e4c218343073164a5f657.JPG",
-                    ClassName = "전자기학1",
-                    now = 17,
-                    total = 20,
-                    count = "6"
-                )
-            )
-            add(
-                ClassData(
-                    ClassImage="https://img1.daumcdn.net/thumb/R720x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fliveboard%2Fholapet%2F0e5f90af436e4c218343073164a5f657.JPG",
-                    ClassName = "전자기학1",
-                    now = 17,
-                    total = 20,
-                    count = "66"
-                )
-            )
-            add(
-                ClassData(
-                    ClassImage="https://img1.daumcdn.net/thumb/R720x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fliveboard%2Fholapet%2F0e5f90af436e4c218343073164a5f657.JPG",
-                    ClassName = "전자기학1",
-                    now = 17,
-                    total = 20,
-                    count = "99+"
-                )
-            )
-            add(
-                ClassData(
-                    ClassImage="https://img1.daumcdn.net/thumb/R720x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fliveboard%2Fholapet%2F0e5f90af436e4c218343073164a5f657.JPG",
-                    ClassName = "전자기학1",
-                    now = 17,
-                    total = 20,
-                    count = "6"
-                )
-            )
-            add(
-                ClassData(
-                    ClassImage="https://img1.daumcdn.net/thumb/R720x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fliveboard%2Fholapet%2F0e5f90af436e4c218343073164a5f657.JPG",
-                    ClassName = "전자기학1",
-                    now = 17,
-                    total = 20,
-                    count = "6"
-                )
-            )
-            add(
-                ClassData(
-                    ClassImage="https://img1.daumcdn.net/thumb/R720x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fliveboard%2Fholapet%2F0e5f90af436e4c218343073164a5f657.JPG",
-                    ClassName = "전자기학1",
-                    now = 17,
-                    total = 20,
-                    count = "6"
-                )
-            )
-            add(
-                ClassData(
-                    ClassImage="https://img1.daumcdn.net/thumb/R720x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fliveboard%2Fholapet%2F0e5f90af436e4c218343073164a5f657.JPG",
-                    ClassName = "전자기학1",
-                    now = 17,
-                    total = 20,
-                    count = "6"
-                )
-            )
-            add(
-                ClassData(
-                    ClassImage="https://img1.daumcdn.net/thumb/R720x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fliveboard%2Fholapet%2F0e5f90af436e4c218343073164a5f657.JPG",
-                    ClassName = "전자기학1",
-                    now = 17,
-                    total = 20,
-                    count = "6"
-                )
-            )
-            add(
-                ClassData(
-                    ClassImage="https://img1.daumcdn.net/thumb/R720x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fliveboard%2Fholapet%2F0e5f90af436e4c218343073164a5f657.JPG",
-                    ClassName = "전자기학1",
-                    now = 17,
-                    total = 20,
-                    count = "6"
-                )
-            )
-            add(
-                ClassData(
-                    ClassImage="https://img1.daumcdn.net/thumb/R720x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fliveboard%2Fholapet%2F0e5f90af436e4c218343073164a5f657.JPG",
-                    ClassName = "전자기학1",
-                    now = 17,
-                    total = 20,
-                    count = "6"
-                )
-            )
-
-        }
-        ClassAdapter.datas = datas
-        ClassAdapter.notifyDataSetChanged()
-    }
-
-
 }

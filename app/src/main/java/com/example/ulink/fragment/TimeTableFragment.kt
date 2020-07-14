@@ -13,6 +13,10 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.ulink.ChattingActivity
+import com.example.ulink.ClassRecycler.ClassAdapter
+import com.example.ulink.ClassRecycler.ClassData
+import com.example.ulink.NoticeActivity
 import com.example.ulink.NotificationActivity
 import com.example.ulink.R
 import com.example.ulink.repository.*
@@ -22,6 +26,9 @@ import com.example.ulink.timetable.TimeTableEditActivity
 import com.example.ulink.timetable.TimeTableListActivity
 import com.example.ulink.utils.deepCopy
 import kotlinx.android.synthetic.main.fragment_time_table.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 const val REQUEST_TIMETABLE_LIST_ACTIVITY = 777
 
@@ -67,6 +74,23 @@ class TimeTableFragment : Fragment() {
                 layout.findViewById<TextView>(R.id.tv_professor_name).text = subject.professor
                 layout.findViewById<TextView>(R.id.tv_class_name).text = subject.name
 
+                layout.findViewById<TextView>(R.id.tv_tochat).setOnClickListener {
+                    //val idx = subject.id.toString()
+                    val intent = Intent(view.context, ChattingActivity::class.java) //과목명
+                    intent.putExtra("class", subject.name)
+                    //intent.putExtra("idx", subject.id.toString())
+                    startActivity(intent)
+                }
+
+                layout.findViewById<TextView>(R.id.tv_checkassignment).setOnClickListener {
+                    val className = subject.name
+                    //val idx = subject.id.toString()
+                    val intent = Intent(view.context, NoticeActivity::class.java)
+                    intent.putExtra("class", subject.name)
+                    //intent.putExtra("idx", "4")
+                    startActivity(intent)
+                }
+
                 builder.setView(layout)
                 val dialog = builder.create()
 
@@ -89,11 +113,6 @@ class TimeTableFragment : Fragment() {
                     val mainTimeTable = mainTable
                 }
         )
-
-
-
-
-
 
 
         btn_plus.setOnClickListener {

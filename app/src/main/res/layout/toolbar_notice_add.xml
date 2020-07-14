@@ -37,7 +37,6 @@
             android:text="확인"
             android:textColor="@color/white"
             android:background="@drawable/bg_round_border_update" />
-
     </androidx.appcompat.widget.Toolbar>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

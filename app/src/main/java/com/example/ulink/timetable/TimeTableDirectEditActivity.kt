@@ -25,6 +25,7 @@ interface onDrawListener{
 
 class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
 
+
     override fun onDrawed(size: Int) {
         if (size>0){
             findViewById<Button>(R.id.btn_ok).visibility = View.GONE

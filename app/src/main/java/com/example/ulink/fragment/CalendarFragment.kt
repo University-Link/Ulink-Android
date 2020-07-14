@@ -1,26 +1,18 @@
 package com.example.ulink.fragment
 
 import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.widget.TextView
-import androidx.room.RoomSQLiteQuery.copyFrom
 import com.example.ulink.CalendarRecycler.*
 import com.example.ulink.R
 import com.example.ulink.ScheduleActivity
-import com.example.ulink.ScheduleNoticeActivity
-import com.example.ulink.ScheduleRecycler.SchedulePopupAdapter
-import kotlinx.android.synthetic.main.calendar_question_popup_layout.*
+import com.example.ulink.ScheduleRecycler.nowDay
 import kotlinx.android.synthetic.main.fragment_calendar.*
 
 class CalendarFragment : Fragment() {
@@ -35,7 +27,7 @@ class CalendarFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         lateinit var dialog : AlertDialog
-        btn_today.text = nowDay().toString()
+        btn_today.text = nowDay.toString()
 
         var nowCalendarData = calendarDataInit(tv_month) // now_month
 

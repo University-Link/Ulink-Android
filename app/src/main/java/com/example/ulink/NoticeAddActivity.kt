@@ -65,8 +65,8 @@ class NoticeAddActivity : AppCompatActivity() {
         // register
         btn_check.setOnClickListener {
             when {
-                category == "" -> showToast("카테고리를 설정하세요.")
-                et_title.text.toString()=="" -> showToast("제목을 입력하세요.")
+                //category == "" -> showToast("카테고리를 설정하세요.")
+                //et_title.text.toString()=="" -> showToast("제목을 입력하세요.")
                 else -> {
                     resultCode = resultCode(category)
                     var item = dataReturn(datePickerYear, datePickerMonth, datePickerDay, category, intentClassName, et_title, et_memo, spinner_start, spinner_end)
@@ -104,5 +104,7 @@ class NoticeAddActivity : AppCompatActivity() {
                     cal.get(Calendar.MONTH),
                     cal.get(Calendar.DAY_OF_MONTH)).show()
         }
+
+        spinner_start.isFocused
     }
 }

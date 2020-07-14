@@ -38,6 +38,10 @@ class ScheduleNoticeActivity : AppCompatActivity() {
             intent.putExtra("scheduleItemData", scheduleItemData)
             startActivityForResult(intent,100)
         }
+
+        btn_delete.setOnClickListener(){
+            // TODO 삭제 통신
+        }
     }
 }
 
