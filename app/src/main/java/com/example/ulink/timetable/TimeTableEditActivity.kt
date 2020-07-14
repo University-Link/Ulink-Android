@@ -17,6 +17,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.MarginPageTransformer
 import com.example.ulink.R
+import com.example.ulink.repository.DataRepository
 import com.example.ulink.repository.Subject
 import com.example.ulink.repository.TimeTable
 import com.example.ulink.utils.deepCopy
@@ -30,25 +31,28 @@ const val REQUEST_DIRECT_TYPE_ACTIVITY = 888
 
 class TimeTableEditActivity : AppCompatActivity() {
 
+
     //    Timetable 다보여주고 마지막에 항상 하나 더 보여주는거 자동
+
     val timeTableList: MutableList<TimeTable> = arrayListOf()
 
     val mAdapter = TimeTableAddAdapter(this)
 
-
-//    TODO Edit된 timetable 어떡할건지와 어떻게 edit할건지?
-//    TimeTableFilterSearchFragment랑 TimeTableCandidatorFragment의 onclick을 얘가 받아서
-//    timeTableList의 currentitem에 draw해줘야함
-//    TODO
-//     클릭했을때 깜빡이는거 해결
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_time_table_edit)
 
+//      TODO 여기서 불러오기
+
+
         intent.getParcelableArrayListExtra<TimeTable>("timeTableList")?.let {
             timeTableList.addAll(it)
+        }
+
+        btn_cancel.setOnClickListener {
+            finish()
         }
 
         Handler().postDelayed({
@@ -70,8 +74,8 @@ class TimeTableEditActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_DIRECT_EDIT_ACTIVITY){
-            if (resultCode == 200){
+        if (requestCode == REQUEST_DIRECT_EDIT_ACTIVITY) {
+            if (resultCode == 200) {
                 val timeTableAdded = data?.getParcelableExtra<TimeTable>("timeTable")
                 if (timeTableAdded != null) {
                     timeTableList[vp_timetableadd.currentItem] = deepCopy(timeTableAdded)
@@ -104,8 +108,10 @@ class TimeTableEditActivity : AppCompatActivity() {
 
 
     fun addToTable(subject: Subject) {
-
         val position = vp_timetableadd.currentItem
+        if (position == mAdapter.itemCount - 1) {
+            return
+        }
 //        TODO 여기서 DB에 저장도 해야함
         val timeTable = mAdapter.timeTableList[position]
 
@@ -125,6 +131,9 @@ class TimeTableEditActivity : AppCompatActivity() {
 
     fun addToSampleTable(subject: Subject) {
         val position = vp_timetableadd.currentItem
+        if (position == mAdapter.itemCount - 1) {
+            return
+        }
         var timeTable: TimeTable = mAdapter.timeTableSampleList.get(position)
         timeTable.subjectList.add(subject)
         mAdapter.replaceAtSampleList(position, timeTable)
@@ -134,11 +143,12 @@ class TimeTableEditActivity : AppCompatActivity() {
 
     }
 
-//    TODO 미리보기 저장된거 색깔 왜 그러지 = Sample로 들어가서 그런듯! 추가할때는 sample말고 그냥으로!
-//    DRAWER 고치기
-
     fun rollBack() {
         val position = vp_timetableadd.currentItem
+        if (position == mAdapter.itemCount - 1) {
+            return
+        }
+        Log.d("tag", vp_timetableadd.childCount.toString())
         mAdapter.replaceAtSampleList(position, mAdapter.timeTableList[position])
         mAdapter.reDrawFragment(vp_timetableadd.currentItem)
         mAdapter.scrollToTop(position)
@@ -157,15 +167,20 @@ class TimeTableEditActivity : AppCompatActivity() {
         val et = layout.findViewById<EditText>(R.id.et_name)
 
         layout.findViewById<TextView>(R.id.tv_ok).setOnClickListener {
-
 //            TODO 여기서 DB로 저장하고 edit에 넣긴 해야함
 
-            val timeTable = TimeTable(1, "2020-2", et.text.toString(), false, "09:00", "18:00")
-//          EditActivity에 넣어줄 필요가 있나? 이걸
-//            timeTableList.add(timeTable)
-
-            mAdapter.addToList(deepCopy(timeTable))
-            moveToLastItem()
+            DataRepository.addTimeTable("2020-2", et.text.toString(),
+                    onSuccess = {
+                        val timeTable = TimeTable(1, "2020-2", et.text.toString(), false, "09:00", "18:00")
+                        mAdapter.addToList(deepCopy(timeTable))
+                        moveToLastItem()
+                        Log.d("debug","${it.data.idx} 시간표 생성")
+                    },
+                    onFailure = {
+                        Toast.makeText(this, "오류가 발생하였습니다", Toast.LENGTH_SHORT).show();
+                        Log.d("error",it)
+                    }
+            )
             dialog.dismiss()
         }
 
@@ -176,11 +191,9 @@ class TimeTableEditActivity : AppCompatActivity() {
         val back = ColorDrawable(Color.TRANSPARENT)
         val inset = InsetDrawable(back, 80)
 
-
         dialog.window?.setBackgroundDrawable(inset)
 
         dialog.show()
-
 
 
     }
@@ -197,8 +210,6 @@ class TimeTableEditActivity : AppCompatActivity() {
     }
 
     fun setTimeTableAdd() {
-
-//        TODO TimeTableFragment에서 받아와서 여기서 사용!
         mAdapter.setList(timeTableList)
 
         mAdapter.timeTableAddListener = object : TimeTableAddListener {
@@ -220,13 +231,13 @@ class TimeTableEditActivity : AppCompatActivity() {
         val mEditorAdapter = TimeTableEditorAdapter(this)
         vp_timetableeditor.adapter = mEditorAdapter
 
-        var icon1 : ImageView
+        var icon1: ImageView
 
         TabLayoutMediator(tl_timetableeditor, vp_timetableeditor, object : TabLayoutMediator.TabConfigurationStrategy {
             override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
                 val tablayout = LayoutInflater.from(applicationContext).inflate(R.layout.tab_timetableeditor, null)
 
-                icon1 =tablayout.findViewById<ImageView>(R.id.ic_tab)
+                icon1 = tablayout.findViewById<ImageView>(R.id.ic_tab)
 
 
                 when (position) {
@@ -289,7 +300,7 @@ class TimeTableEditActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    fun showAddDialog(){
+    fun showAddDialog() {
         val builder = AlertDialog.Builder(this)
         val layout = LayoutInflater.from(this).inflate(R.layout.dialog_direct_add, null)
         builder.setView(layout)
@@ -304,8 +315,10 @@ class TimeTableEditActivity : AppCompatActivity() {
         }
 
         layout.findViewById<Button>(R.id.btn_type).setOnClickListener {
-            //intent.putExtra("timeTable", deepCopy(mAdapter.timeTableList[vp_timetableadd.currentItem]))
-            //startActivityForResult(intent, REQUEST_DIRECT_TYPE_ACTIVITY)
+//            TODO 이거 해제
+//            val intent = Intent(this, TimeTableDirectTypeActivity::class.java)
+            intent.putExtra("timeTable", deepCopy(mAdapter.timeTableList[vp_timetableadd.currentItem]))
+            startActivityForResult(intent, REQUEST_DIRECT_TYPE_ACTIVITY)
 
             dialog.dismiss()
         }

@@ -1,6 +1,7 @@
 package com.example.ulink.timetable
 
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,7 +11,9 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ulink.EvaluationActivity
 import com.example.ulink.R
 import com.example.ulink.repository.Subject
 
@@ -116,7 +119,8 @@ class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeT
             }
 
             assess.setOnClickListener {
-                Toast.makeText(context, "준비중입니다", Toast.LENGTH_SHORT).show()
+                val intent = Intent(context,EvaluationActivity::class.java)
+                context.startActivity(intent)
             }
 
             cart.setOnClickListener {

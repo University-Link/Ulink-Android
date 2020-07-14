@@ -20,12 +20,12 @@ data class TimeTable(
         var isMain: Boolean?,
         @ColumnInfo(name = "startTime")
         @SerializedName("startTime")
-        var startTime: String = "",
+        var startTime: String = "09:00",
         @ColumnInfo(name = "endTime")
-        var endTime: String,
+        var endTime: String = "18:00",
 //    TODO 여기 바꿔야함 DB에 객체 리스트 못넣음
         @ColumnInfo(name = "list")
         var subjectList: MutableList<Subject> = arrayListOf()
 ) : Parcelable {
-        constructor() : this(0,"","",false,"","", arrayListOf())
+        constructor() : this(0,"","",false,"09:00","18:00", arrayListOf())
 }

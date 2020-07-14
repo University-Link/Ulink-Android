@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Parcelable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
@@ -26,6 +27,12 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
             findViewById<Button>(R.id.btn_modify).visibility = View.VISIBLE
         }
     }
+
+
+//    TODO type갔다가 다시 돌아와서 type가려하면 중복이라고 나옴!!
+//    예상 그리고 type 갈때 getsubject로 여기 테이블에 더하고 보내는데 이거때문인듯!!
+//     밑에 getAddedTable로 들어가는데 subject랑 원래 테이블 따로 보내주기! 거기서 구별을 못함 ㅠ
+
 
     lateinit var timeTableDrawerDrag : TimeTableDrawerDrag
     lateinit var timeTable : TimeTable
@@ -71,9 +78,9 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
         }
 
 //       수정 눌렀다가 취소해서 그대로 돌아온 경우
-
         findViewById<Button>(R.id.btn_modify).setOnClickListener {
-           // val intent = Intent(this, TimeTableDirectTypeActivity::class.java)
+//            TODO 이거 해제
+//            val intent = Intent(this, TimeTableDirectTypeActivity::class.java)
             if (timeTableDrawerDrag.getAddedSubject() == null){
                 Toast.makeText(this,"중복된 과목이 있습니다", Toast.LENGTH_SHORT).show()
             } else {
@@ -90,6 +97,8 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_DIRECT_TYPE_ACTIVITY){
             if (resultCode == 200){
+                timeTableDrawerDrag.testview.drawlist.clear()
+
                 findViewById<Button>(R.id.btn_ok).visibility = View.VISIBLE
                 findViewById<Button>(R.id.btn_modify).visibility = View.GONE
                 intent.getParcelableExtra<TimeTable>("timeTable")

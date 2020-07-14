@@ -63,9 +63,22 @@ class TimeTableDragView(context: Context, root: View, val timecolumnWidth: Float
             var xfix = ((realstartx - xbase) / xindex).toInt()
             var yfix = ((realstarty) / (rowHeight)).toInt()
 
+
+
+
+            Log.d("tag",xfix.toString())
+
             realstartx = realstartx - (realstartx - xbase) % xindex
 
+            if (xfix == days){
+                realstartx = realstartx - (realstartx - xbase) % xindex - xindex
+                xfix = days -1
+            }
+
             realstartx += (xfix + 1) * columnGap!!
+
+            Log.d("tag",realstartx.toString())
+
 
             if (realstarty - yindex > 0) {
                 realstarty = realstarty - (realstarty) % yindex
@@ -145,7 +158,7 @@ class TimeTableDragView(context: Context, root: View, val timecolumnWidth: Float
 
         val topHour = starthour + top * 0.25f
         val bottomHour = starthour + bottom*0.25f
-        val daylist = arrayListOf("mon", "tue", "wed", "thu", "fri", "sat", "sun")
+        val daylist = arrayListOf(1,2,3,4,5,6,7)
 
         val subject = Subject(1, "과목이름", formatToString(topHour), formatToString(bottomHour), daylist[dayIndex], "과목장소", 1, true)
         Log.d("tag",subject.toString())

@@ -90,13 +90,13 @@ class TimeTableDrawerDrag(val context: Context, val layoutInflater: LayoutInflat
         return subjectList
     }
 
-    
 //    TODO  이게 여기서 하는게 맞나? modify를 눌렀을때 그려진거 가져와서 작업후 그렇게 그려진거를 다시 timetable에 넣어줘야함
     fun getAddedTable() : TimeTable? {
 
         var check = 0
 
         val subjectDrawed = getSubject()
+
         for(i in 0 until subjectDrawed.size){
             if (checkIsOver(subjectDrawed[i], timeTable)){
                 break
@@ -105,8 +105,9 @@ class TimeTableDrawerDrag(val context: Context, val layoutInflater: LayoutInflat
         }
 
         if (check == subjectDrawed.size){
-            timeTable.subjectList.addAll(getSubject())
-            return deepCopy(timeTable)
+            val newTimeTable = deepCopy(timeTable)
+            newTimeTable.subjectList.addAll(getSubject())
+            return deepCopy(newTimeTable)
         }
 
         return null
@@ -128,8 +129,6 @@ class TimeTableDrawerDrag(val context: Context, val layoutInflater: LayoutInflat
         }
 
         return null
-
-
     }
 
 
@@ -298,7 +297,7 @@ class TimeTableDrawerDrag(val context: Context, val layoutInflater: LayoutInflat
             }
         }
     }
-    
+
 //    TODO
 //      i에따라 draw할 수 있게 지금은 0~4 즉 월~금 고정인데 주말도 포함해야함
 
@@ -311,7 +310,7 @@ class TimeTableDrawerDrag(val context: Context, val layoutInflater: LayoutInflat
 //        subject sort한번 해줘야함
 
         subjectsize.let { itit ->
-            val daylist = arrayListOf("mon", "tue", "wed", "thu", "fri", "sat", "sun")
+            val daylist = arrayListOf(1,2,3,4,5,6,7)
             val list0: MutableList<Subject> = arrayListOf()
             val list1: MutableList<Subject> = arrayListOf()
             val list2: MutableList<Subject> = arrayListOf()
@@ -433,7 +432,7 @@ class TimeTableDrawerDrag(val context: Context, val layoutInflater: LayoutInflat
 
 
         subjectsize?.let { itit ->
-            val daylist = arrayListOf("mon", "tue", "wed", "thu", "fri", "sat", "sun")
+            val daylist = arrayListOf(1,2,3,4,5,6,7)
             val list0: MutableList<Subject> = arrayListOf()
             val list1: MutableList<Subject> = arrayListOf()
             val list2: MutableList<Subject> = arrayListOf()
@@ -646,4 +645,20 @@ class TimeTableDrawerDrag(val context: Context, val layoutInflater: LayoutInflat
         return timesplit[0].toFloat() + (timesplit[1].toFloat() - timesplit[1].toFloat() % 15) / 60
     }
 
+
+    fun getColors(type: Int): Int {
+        return when (type) {
+            0 -> R.drawable.bg_round_border_subject_color_1
+            1 -> R.drawable.bg_round_border_subject_color_2
+            2 -> R.drawable.bg_round_border_subject_color_3
+            3 -> R.drawable.bg_round_border_subject_color_4
+            4 -> R.drawable.bg_round_border_subject_color_5
+            5 -> R.drawable.bg_round_border_subject_color_6
+            6 -> R.drawable.bg_round_border_subject_color_7
+            7 -> R.drawable.bg_round_border_subject_color_8
+            8 -> R.drawable.bg_round_border_subject_color_9
+            9 -> R.drawable.bg_round_border_subject_color_10
+            else -> R.drawable.bg_round_border_subject
+        }
+    }
 }

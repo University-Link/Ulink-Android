@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:paddingVertical="13dp"
     android:background="@color/white">
+
     <ImageView
         android:id="@+id/img_clock"
         android:layout_width="wrap_content"
@@ -15,6 +16,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <Spinner
         android:id="@+id/spinner_days"
         android:layout_width="wrap_content"
@@ -23,6 +25,7 @@
         app:layout_constraintBottom_toBottomOf="@id/img_clock"
         app:layout_constraintStart_toEndOf="@id/img_clock"
         app:layout_constraintTop_toTopOf="@id/img_clock" />
+
     <TextView
         android:id="@+id/tv_start_time"
         android:layout_width="wrap_content"
@@ -33,6 +36,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/spinner_days"
         app:layout_constraintStart_toEndOf="@+id/spinner_days"
         app:layout_constraintTop_toTopOf="@+id/spinner_days" />
+
     <TextView
         android:id="@+id/time_split"
         android:layout_width="wrap_content"
@@ -43,6 +47,8 @@
         app:layout_constraintBottom_toBottomOf="@id/tv_start_time"
         app:layout_constraintStart_toEndOf="@+id/tv_start_time"
         app:layout_constraintTop_toTopOf="@id/tv_start_time" />
+
+
     <TextView
         android:id="@+id/tv_end_time"
         android:layout_width="wrap_content"
@@ -53,4 +59,5 @@
         app:layout_constraintBottom_toBottomOf="@+id/tv_start_time"
         app:layout_constraintStart_toEndOf="@+id/time_split"
         app:layout_constraintTop_toTopOf="@+id/tv_start_time" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
