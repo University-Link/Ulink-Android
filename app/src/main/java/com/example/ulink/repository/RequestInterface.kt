@@ -20,7 +20,7 @@ interface RequestInterface {
 //
     //Schedule
     //시간표 - 메인 시간표 조회
-    @GET("/schedule")
+    @GET("/schedule/main")
     fun getMainTimeTable(
             @Header("token") token : String
     ) : Call<ResponseMainTimeTable>
@@ -31,13 +31,20 @@ interface RequestInterface {
             @Body body : RequestAddTimeTable
     ) : Call<ResponseAddTimeTable>
 
-    //시간표 - 일정 상세정보(통합) 조회
     @GET("/schedule/{idx}")
     fun getTimeTableWithId(
+            @Header("token") token: String,
+            @Path("idx") number : Int
+    ) : Call<ResponseGetTimeTableWithId>
+
+    //시간표 - 일정 상세정보(통합) 조회
+    @GET("/schedule/{idx}")
+    fun getSpecificTimeTableWithId(
             @Header("token") token: String,
             @Path("idx") idx : String,
             @Query("isSubject") isSubject : Boolean
     ) : Call<ResponseTimeTable>
+
     //시간표 - 메인 시간표 이름 수정(변경)
     @PUT("/schedule/{idx}")
     fun updateMainTimeTableName(
@@ -69,7 +76,7 @@ interface RequestInterface {
     @GET("/schedule/list")
     fun getAllTimeTableList(
             @Header("token") token: String
-    ) : Call<ResponseTimeTable>
+    ) : Call<ResponseGetAllTimeTableList>
 
     //시간표 - 개인일정 만들기
     @POST("/schedule/personal")
@@ -77,11 +84,14 @@ interface RequestInterface {
             @Header("token") token: String,
             @Body body : RequestAddPersonalPlan
     ) : Call<ResponseAddPersonalPlan>
+
     //시간표 - 학교수업일정 만들기
     @POST("/schedule/school")
     fun addSchoolPlan(
-            @Header("token") token: String
-    ) : Call<ResponseTimeTable>
+            @Header("token") token: String,
+            @Body body : RequestAddSchoolPlan
+    ) : Call<ResponseAddSchoolPlan>
+
     //특정 시간표 - 개인일정 상세정보 조회
     @GET("/schedule/personal/{idx}")
     fun getPersonalPlan(

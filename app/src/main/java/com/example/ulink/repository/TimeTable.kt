@@ -11,15 +11,16 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class TimeTable(
         @PrimaryKey
-        var id: Long,
+        @SerializedName("scheduleIdx")
+        var id: Int,
         @ColumnInfo(name = "semester")
-        var semseter: String,
+        @SerializedName("semester")
+        var semester: String = "",
         @ColumnInfo(name = "name")
         var name: String,
         @ColumnInfo(name = "main")
-        var isMain: Boolean?,
+        var isMain: Int,
         @ColumnInfo(name = "startTime")
-        @SerializedName("startTime")
         var startTime: String = "09:00",
         @ColumnInfo(name = "endTime")
         var endTime: String = "18:00",
@@ -27,5 +28,5 @@ data class TimeTable(
         @ColumnInfo(name = "list")
         var subjectList: MutableList<Subject> = arrayListOf()
 ) : Parcelable {
-        constructor() : this(0,"","",false,"09:00","18:00", arrayListOf())
+        constructor() : this(0,"","",0,"09:00","18:00", arrayListOf())
 }

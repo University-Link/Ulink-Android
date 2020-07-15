@@ -2,6 +2,7 @@ package com.example.ulink.timetable
 
 import android.content.Context
 import android.util.DisplayMetrics
+import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -34,7 +35,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 
     var onClick: TimeTableFragment.subjectOnClick? = null
 
-    var timeTable = TimeTable(0, "", "", false, "", "")
+    var timeTable = TimeTable(0, "", "", 0, "", "")
 
     var endhour = 18
     var starthour = 9
@@ -52,12 +53,17 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
         val root = frameLayout.findViewById<LinearLayout>(R.id.timetable_root)
 
 //        시간 9.0 9.25 이런식!
+
         if ((formatToFloat(timeTable.startTime)).toInt() < 9) {
             starthour = (formatToFloat(timeTable.startTime)).toInt()
+            Log.d("tag", "changed")
+
         }
 
         if ((formatToFloat(timeTable.endTime)).toInt() > 18) {
             endhour = (formatToFloat(timeTable.endTime)).toInt()
+            Log.d("tag", "changed")
+
         }
 
         val rowroot = (frameLayout.parent.parent as LinearLayout).findViewById<LinearLayout>(R.id.layout_dayrow)

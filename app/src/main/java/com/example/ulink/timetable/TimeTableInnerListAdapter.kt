@@ -22,7 +22,7 @@ class TimeTableInnerListAdapter(mutableList: MutableList<TimeTable>,val timeTabl
     fun arrangeList(list : MutableList<TimeTable>) : MutableList<TimeTable>{
         for (i in 0 until list.size){
             list[i].isMain?.let {
-                if (it){
+                if (it == 1){
                     list.add(0,list[i])
                     list.removeAt(i+1)
                 }
@@ -39,7 +39,7 @@ class TimeTableInnerListAdapter(mutableList: MutableList<TimeTable>,val timeTabl
             itemView.findViewById<TextView>(R.id.tv_timetablename).text = timeTable.name
 
             timeTable.isMain?.let {
-                if (it){
+                if (it == 1){
                     itemView.findViewById<ImageView>(R.id.iv_main).visibility = View.VISIBLE
                 } else{
                     itemView.findViewById<ImageView>(R.id.iv_main).visibility = View.GONE

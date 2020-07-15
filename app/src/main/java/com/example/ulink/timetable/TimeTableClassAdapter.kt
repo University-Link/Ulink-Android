@@ -15,12 +15,14 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.EvaluationActivity
 import com.example.ulink.R
+import com.example.ulink.repository.DataRepository
+import com.example.ulink.repository.RequestAddSchoolPlan
 import com.example.ulink.repository.Subject
 
 
 class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeTableFilterSearchFragment.onItemClickListener) : RecyclerView.Adapter<TimeTableClassAdapter.VHolder>() {
 
-    val subjectList: MutableList<Subject> = arrayListOf()
+    var subjectList: MutableList<Subject> = arrayListOf()
 
     val mSelectedItems: HashMap<Int, Boolean> = HashMap()
 
@@ -99,6 +101,7 @@ class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeT
                     }
 
                     (context as TimeTableEditActivity).rollBack()
+//                    TODO 여기 주시
                     (context as TimeTableEditActivity).addToSampleTable(subject)
 
                     assess.visibility = View.VISIBLE
@@ -127,8 +130,11 @@ class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeT
 //               TODO DB에 저장!
 
             }
+
             toTable.setOnClickListener {
+//                등록되면 올리기
                 (context as TimeTableEditActivity).addToTable(subject)
+
             }
         }
 

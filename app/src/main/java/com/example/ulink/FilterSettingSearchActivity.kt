@@ -69,8 +69,11 @@ class FilterSettingSearchActivity : AppCompatActivity() {
 //         스피너 아이템 별로 sharepref저장
         }
         edit.setOnEditorActionListener { v, actionId, event ->
+            Log.d("tag1",v.text.toString())
+
             if (actionId == EditorInfo.IME_ACTION_DONE){
 
+                Log.d("tag2",v.text.toString())
                 recentList?.add(v.text.toString())
                 editor.putStringSet("recentSearch", recentList)
                 editor.commit()

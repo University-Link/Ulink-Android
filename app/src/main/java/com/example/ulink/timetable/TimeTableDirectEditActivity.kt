@@ -72,14 +72,39 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
 
         findViewById<Button>(R.id.btn_ok).setOnClickListener {
             val intent = Intent()
-            Log.d("tag", "onclicked")
-            Log.d("tag", "${subjectAddedList.size}")
+
+//  DirectEdit Activity의 timeTable이 거의 최종적인거!
+//  DirectEditActivity의 DragDrawer은 그냥 그리는애
+//  DirectTypeActivity는 DragDrawer에서 그린것과 통신
+//  둘이 통신한 결과는 DirectEditActivity에 저장
+//  DirectEdit의 DragDrawer결과를 type으로 넘기는거 다시 받는거 취소한거 롤백한거 생각하기
+
+
+            
 //            TODO 잘 들어갔으면! 등록!!
             var requestnum =0
             if (timeTableDrawerDrag.getAddedTable() == null){
                 Toast.makeText(this,"중복된 과목이 있습니다", Toast.LENGTH_SHORT).show()
-            } else {
+            }
+            else {
                 for (i in 0 until subjectAddedList.size){
+                    if(checkIsOver(subjectAddedList[i],timeTable)){
+                        Toast.makeText(this,"중복된 과목이 있습니다", Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
+                    timeTable.subjectList.add(subjectAddedList[i])
+
+
+                    Log.d("tag",RequestAddPersonalPlan(
+                            subjectAddedList[i].name,
+                            subjectAddedList[i].startTime,
+                            subjectAddedList[i].endTime,
+                            subjectAddedList[i].day,
+                            subjectAddedList[i].place,
+                            subjectAddedList[i].color,
+                            timeTable.id.toInt()
+                    ).toString())
+
                     DataRepository.addPersonalPlan(RequestAddPersonalPlan(
                             subjectAddedList[i].name,
                             subjectAddedList[i].startTime,
@@ -91,13 +116,16 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
                     ), onSuccess = {
                         requestnum+= 1
                         Log.d("tag", requestnum.toString())
+                        Log.d("tag", subjectAddedList.size.toString())
                         if (requestnum == subjectAddedList.size){
-                            intent.putExtra("timeTable", timeTable)
+                            intent.putExtra("timeTable", timeTableDrawerDrag.timeTable)
                             setResult(200, intent)
+                            finish()
                         }
                         Log.d("tag", "requested")
                     }, onFailure = {
                         Log.d("tag", it)
+                        Toast.makeText(this, "서버 오류가 발생하였습니다", Toast.LENGTH_SHORT).show();
                     })
 //                    TODO 여기 위에 찍히나 확인!!
                 }
@@ -108,7 +136,6 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
 //       수정 눌렀다가 취소해서 그대로 돌아온 경우
         findViewById<Button>(R.id.btn_modify).setOnClickListener {
             val intent = Intent(this, TimeTableDirectTypeActivity::class.java)
-
             if (timeTableDrawerDrag.getAddedSubject() == null){
                 Toast.makeText(this,"중복된 과목이 있습니다", Toast.LENGTH_SHORT).show()
             } else {
@@ -139,7 +166,6 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
                 val subjectList = data?.getParcelableArrayListExtra<Subject>("subjects")
                 Log.d("tag", tt.toString())
 
-
                 if (subjectList != null) {
                     tt?.subjectList?.addAll(subjectList)
                     subjectAddedList.addAll(subjectList)
@@ -147,7 +173,6 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
 
                 if (tt != null){
                     timeTableDrawerDrag.timeTable = deepCopy(tt)
-                    timeTable = deepCopy(tt)
                 }
                 timeTableDrawerDrag.draw(findViewById<FrameLayout>(R.id.layout_timetable))
             } else{
@@ -183,4 +208,21 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
         return ids
     }
 
+
+    fun checkIsOver(subject: Subject, timeTable: TimeTable): Boolean {
+
+        var check = false
+        for (s in timeTable.subjectList!!) {
+            if (subject.day == s.day) {
+                check = !(formatToFloat(subject.endTime) <= formatToFloat(s.startTime) || formatToFloat(subject.startTime) >= formatToFloat(s.endTime))
+                if (check) return check
+            }
+        }
+        return check
+    }
+
+    fun formatToFloat(time: String): Float {
+        val timesplit = time.split(":")
+        return timesplit[0].toFloat() + (timesplit[1].toFloat() - timesplit[1].toFloat() % 15) / 60
+    }
 }

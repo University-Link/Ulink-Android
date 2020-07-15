@@ -18,8 +18,9 @@ class TimeTableListAdapter(val arrangedList: MutableList<MutableList<TimeTable>>
         val recyclerview = itemView.findViewById<RecyclerView>(R.id.rv_timetablelist)
 
         fun setHolder(timeTableList: MutableList<TimeTable>) {
-            itemView.findViewById<TextView>(R.id.tv_semester).text = timeTableList[0].semseter
+            itemView.findViewById<TextView>(R.id.tv_semester).text = timeTableList[0].semester
         }
+
 
 
     }
