@@ -14,7 +14,6 @@ import com.example.ulink.TimeTable_Search_Recycler.TimeTable_Search_Adapter
 import com.example.ulink.repository.ResponsegetSubjectWithWord
 import com.example.ulink.repository.RetrofitService
 import com.example.ulink.repository.SearchedData
-import com.example.ulink.repository.SubjectListByGrade
 import com.example.ulink.timetable.token
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

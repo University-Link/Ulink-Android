@@ -11,8 +11,8 @@ data class ResponseMainTimeTable(
         data class Data(
                 val timeTable: TimeTable,
                 val subjects: Subjects,
-                val getMinTime : String,
-                val getMaxTime : String
+                val minTime : String,
+                val maxTime : String
         )
 }
 

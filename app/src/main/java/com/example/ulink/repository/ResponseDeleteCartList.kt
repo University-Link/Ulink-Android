@@ -4,9 +4,9 @@ data class ResponseDeleteCartList(
     val status : Int,
     val success : Boolean,
     val message : String,
-    val data : List<DeleteCartData>
+    val data : DeleteCartData
 )
 
 data class DeleteCartData(
-    val subjectIdx : Int
+    val subjectIdx : String
 )

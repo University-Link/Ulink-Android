@@ -36,9 +36,17 @@ interface RequestInterface {
     @GET("/schedule/specific/{idx}")
     fun getTimeTableWithId(
             @Header("token") token: String,
+            @Path("idx") number : Int
+    ) : Call<ResponseGetTimeTableWithId>
+
+    //시간표 - 일정 상세정보(통합) 조회
+    @GET("/schedule/{idx}")
+    fun getSpecificTimeTableWithId(
+            @Header("token") token: String,
             @Path("idx") idx : String,
             @Query("isSubject") isSubject : Boolean
     ) : Call<ResponseTimeTable>
+
     //시간표 - 메인 시간표 이름 수정(변경)
     @PUT("/schedule/{idx}")
     fun updateMainTimeTableName(
@@ -58,7 +66,6 @@ interface RequestInterface {
             @Header("token") token: String,
             @Path("idx") idx : String
     ) : Call<ResponseTimeTable>
-
     //메인 시간표 삭제하기
     @DELETE("/schedule/main/{idx}")
     fun deleteMainTimeTable(
@@ -70,7 +77,7 @@ interface RequestInterface {
     @GET("/schedule/list")
     fun getAllTimeTableList(
             @Header("token") token: String
-    ) : Call<ResponseTimeTable>
+    ) : Call<ResponseGetAllTimeTableList>
 
     //시간표 - 개인일정 만들기
     @POST("/schedule/personal")
@@ -78,11 +85,14 @@ interface RequestInterface {
             @Header("token") token: String,
             @Body body : RequestAddPersonalPlan
     ) : Call<ResponseAddPersonalPlan>
+
     //시간표 - 학교수업일정 만들기
     @POST("/schedule/school")
     fun addSchoolPlan(
-            @Header("token") token: String
-    ) : Call<ResponseTimeTable>
+            @Header("token") token: String,
+            @Body body : RequestAddSchoolPlan
+    ) : Call<ResponseAddSchoolPlan>
+
     //특정 시간표 - 개인일정 상세정보 조회
     @GET("/schedule/personal/{idx}")
     fun getPersonalPlan(
@@ -141,20 +151,25 @@ interface RequestInterface {
     @POST("/notice/subject/{idx}")
     fun registerNotice(
             @Header("token") token : String,
-            @Path("idx") idx : String
-    ) : Call<ResponseCalendar>
+            @Path("idx") idx : String,
+            @Body body : RequestRegisterNotice
+    ) : Call<ResponseRegisterNotice>
+
     //공지 상세조회
     @GET("/notice/{idx}")
     fun getSpecificNotice(
             @Header("token") token : String,
             @Path("idx") idx : String
-    ) : Call<ResponseCalendar>
+    ) : Call<ResponseSpecificNotice>
+
     //공지 수정(업데이트)
     @PUT("/notice/{idx}")
-    fun updateReviseNotice(
+    fun updateNotice(
             @Header("token") token : String,
-            @Path("idx") idx : String
-    ) : Call<ResponseCalendar>
+            @Path("idx") idx : String,
+            @Body body : RequestRegisterNotice
+    ) : Call<ResponseUpdateNotice>
+
     //Cart
     //장바구니(후보) 목록 조회
     @GET("/cart")
@@ -174,7 +189,8 @@ interface RequestInterface {
     @DELETE("/cart/{idx}")
     fun deleteCartList(
             @Header("token") token : String,
-            @Path("idx") idx : String
+            @Path("idx") idx : String,
+            @Body body : RequestDeleteCartList
     ) : Call<ResponseDeleteCartList>
 
     //Subject

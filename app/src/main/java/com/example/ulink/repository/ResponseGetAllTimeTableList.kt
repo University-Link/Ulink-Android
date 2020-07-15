@@ -7,7 +7,7 @@ data class ResponseGetAllTimeTableList (
         val data : List<TimeTables>
 ) {
     data class TimeTables(
-            val semeseter: String,
+            val semester: String,
             val timeTableList : List<TimeTable>
     )
 }

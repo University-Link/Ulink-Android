@@ -36,47 +36,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
-        <RadioGroup
-            android:id="@+id/rg_category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="22dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-            <RadioButton
+
+            <Button
                 android:id="@+id/btn_task_notice"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
+                android:layout_height="33dp"
+                android:layout_marginLeft="19dp"
                 android:text="과제공지"
-                android:textColor="@color/radiobtn_textcolor"
+                android:textColor="@color/text2"
                 android:textSize="14sp"
-                android:gravity="center"
-                android:button="@null"
-                android:background="@drawable/radiobtn_category"/>
-            <RadioButton
+                android:background="@drawable/btn_bg_notice"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <Button
                 android:id="@+id/btn_test_notice"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
+                android:layout_height="33dp"
+                android:layout_marginLeft="8dp"
                 android:text="시험공지"
-                android:textColor="@color/radiobtn_textcolor"
+                android:textColor="@color/text2"
                 android:textSize="14sp"
-                android:gravity="center"
-                android:button="@null"
-                android:background="@drawable/radiobtn_category"/>
-            <RadioButton
+                android:background="@drawable/btn_bg_notice"
+                app:layout_constraintStart_toEndOf="@id/btn_task_notice"
+                app:layout_constraintTop_toTopOf="@id/btn_task_notice"/>
+
+            <Button
                 android:id="@+id/btn_class_notice"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
+                android:layout_marginLeft="8dp"
                 android:text="수업공지"
-                android:textColor="@color/radiobtn_textcolor"
+                android:textColor="@color/text2"
                 android:textSize="14sp"
-                android:gravity="center"
-                android:button="@null"
-                android:background="@drawable/radiobtn_category"/>
-        </RadioGroup>
+                android:background="@drawable/btn_bg_notice"
+                app:layout_constraintStart_toEndOf="@id/btn_test_notice"
+                app:layout_constraintTop_toTopOf="@id/btn_task_notice" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
