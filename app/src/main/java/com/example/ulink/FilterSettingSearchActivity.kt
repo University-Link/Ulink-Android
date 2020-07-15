@@ -61,7 +61,7 @@ class FilterSettingSearchActivity : AppCompatActivity() {
             TimeTable_Search_Adapter.recentdatas.addAll(recentList)
             Log.d("tag","added")
         }
-        loadDatas()
+        //loadDatas()
 
 
 
@@ -81,11 +81,7 @@ class FilterSettingSearchActivity : AppCompatActivity() {
 ////         스피너 아이템 별로 sharepref저장
 //        }
 
-//        edit.textChangedListener {
-//
-//        }
-        edit.setOnEditorActionListener { v, actionId, event ->
-            Log.d("검색단어",v.text.toString())
+        edit.textChangedListener {
 
             RetrofitService.service.getSubjectWithWord(token,edit.text.toString()).enqueue(object : Callback<ResponsegetSubjectWithWord>{
                 override fun onFailure(call: Call<ResponsegetSubjectWithWord>, t: Throwable) {
@@ -98,25 +94,33 @@ class FilterSettingSearchActivity : AppCompatActivity() {
                 ) {
                     response.body()?.let{
                         if(it.status == 200){
-                            Log.d("검색성공",it.toString())
-                            list.clear()
-                            list.addAll(it.data)
-                            for(i in 0 until list.size)
-                            {
-                                Log.d("데이",list[i].toString())
-                                datas.apply {
-                                    add(
-                                        SearchData(
-                                            search_result = list[i].name,
-                                            search_type = "1"
+                            //Log.d("검색성공",it.toString())
+
+                                list.clear()
+                                datas.clear()
+
+                                if(edit.text.toString()!=""){
+                                    list.addAll(it.data)
+                                 }
+                                for (i in 0 until list.size) {
+                                    Log.d("데이터", list[i].toString())
+                                    datas.apply {
+                                        add(
+                                            SearchData(
+                                                search_result = list[i].name,
+                                                search_type = ""
+                                            )
                                         )
-                                    )
 
+                                    }
                                 }
-                            }
+//                                list.clear()
 
-                            TimeTable_Search_Adapter.searchdatas = datas
-                            TimeTable_Search_Adapter.notifyDataSetChanged()
+                                TimeTable_Search_Adapter.searchdatas = datas
+                                TimeTable_Search_Adapter.viewType = 1
+                                TimeTable_Search_Adapter.notifyDataSetChanged()
+                                editor.commit()
+
                         }else{
                             Log.d("검색실패",it.toString())
 
@@ -125,20 +129,21 @@ class FilterSettingSearchActivity : AppCompatActivity() {
                 }
             })
 
+        }
+        edit.setOnEditorActionListener { v, actionId, event ->
+
             Log.d("tag",actionId.toString())
-            if (actionId == EditorInfo.IME_ACTION_DONE){
-                list.clear()
+            if (actionId == EditorInfo.IME_ACTION_SEARCH){
 
-                recentList?.add(v.text.toString())
-                editor.putStringSet("recentSearch", recentList)
+//                recentList?.add(v.text.toString())
+//                editor.putStringSet("recentSearch", recentList)
 
-//                TODO 서버 search해서 adapter로 데이터 넣어주기! 리스트 아예 새로 만들어줘야 안섞임 notify도 잘하기
+//                Log.d("search클릭","search")
+//                TimeTable_Search_Adapter.viewType = 1
+//                TimeTable_Search_Adapter.notifyDataSetChanged()
+//                editor.commit()
 
-
-                TimeTable_Search_Adapter.viewType = 1
-                TimeTable_Search_Adapter.notifyDataSetChanged()
-                editor.commit()
-
+                //datas 넘겨주기
                 return@setOnEditorActionListener true
 
 
@@ -180,7 +185,7 @@ class FilterSettingSearchActivity : AppCompatActivity() {
             add(
                 SearchData(
                     search_result = "전자기학",
-                        search_type = "0"
+                    search_type = ""
                 )
             )
 
