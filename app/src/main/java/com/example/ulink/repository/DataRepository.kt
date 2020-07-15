@@ -119,7 +119,7 @@ object DataRepository {
 //                    TODO 나중에 비어있을때 어떻게 처리할까
 
                     if (it != null && it.data.isNotEmpty()) {
-                        for (i in it.data.indices){
+                        for (i in it.data.indices){5
                             if (it.data[i].timeTableList.isNotEmpty()){
                                 tableList.clear()
                                 for (a in it.data[i].timeTableList.indices){
