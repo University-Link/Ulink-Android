@@ -152,7 +152,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         if (position == mAdapter.itemCount - 1) {
             return
         }
-        Log.d("tag", vp_timetableadd.childCount.toString())
+        Log.d("t₩ag", vp_timetableadd.childCount.toString())
         mAdapter.replaceAtSampleList(position, mAdapter.timeTableList[position])
         mAdapter.reDrawFragment(vp_timetableadd.currentItem)
         mAdapter.scrollToTop(position)

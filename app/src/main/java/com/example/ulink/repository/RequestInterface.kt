@@ -1,6 +1,7 @@
 package com.example.ulink.repository
 
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 interface RequestInterface {
@@ -20,7 +21,7 @@ interface RequestInterface {
 //
     //Schedule
     //시간표 - 메인 시간표 조회
-    @GET("/schedule")
+    @GET("/schedule/main")
     fun getMainTimeTable(
             @Header("token") token : String
     ) : Call<ResponseMainTimeTable>
@@ -32,7 +33,7 @@ interface RequestInterface {
     ) : Call<ResponseAddTimeTable>
 
     //시간표 - 일정 상세정보(통합) 조회
-    @GET("/schedule/{idx}")
+    @GET("/schedule/specific/{idx}")
     fun getTimeTableWithId(
             @Header("token") token: String,
             @Path("idx") idx : String,
@@ -45,7 +46,7 @@ interface RequestInterface {
             @Path("idx") idx : String
     ) : Call<ResponseTimeTable>
     //시간표 - 일정 삭제(통합)
-    @DELETE("/schedule/{idx}")
+    @DELETE("/schedule/specific/{idx}")
     fun deleteNotice(
             @Header("token") token: String,
             @Path("idx") idx : String,
@@ -201,5 +202,5 @@ interface RequestInterface {
     fun getSubjectWithWord(
             @Header("token") token : String,
             @Query("name") name : String
-    ) : Call<ResponseCalendar>
+    ) : Call<ResponsegetSubjectWithWord>
 }
