@@ -27,6 +27,8 @@ class FilterSettingSearchActivity : AppCompatActivity() {
     val datas : MutableList<SearchData> = mutableListOf<SearchData>()
     lateinit var TimeTable_Search_Adapter : TimeTable_Search_Adapter
     lateinit var filter_name :String
+    val list : MutableList<SearchedData> = arrayListOf()
+
     val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ4MTY1NzQsImV4cCI6MTU5NjI1NjU3NCwiaXNzIjoiYm9iYWUifQ.JwRDELH1lA1Fb8W1ltTmhThpmgFrUTQZVocUTATv3so"
 //    TODO 아이템 클릭이나 검색버튼 클릭하면 setresult
 
@@ -98,8 +100,24 @@ class FilterSettingSearchActivity : AppCompatActivity() {
                     response.body()?.let{
                         if(it.status == 200){
                             Log.d("검색성공",it.toString())
-                            val list : MutableList<SearchedData> = arrayListOf()
+                            list.clear()
                             list.addAll(it.data)
+                            for(i in 0 until list.size)
+                            {
+                                Log.d("데이",list[i].toString())
+                                datas.apply {
+                                    add(
+                                        SearchData(
+                                            search_result = list[i].name,
+                                            search_type = "1"
+                                        )
+                                    )
+
+                                }
+                            }
+
+                            TimeTable_Search_Adapter.searchdatas = datas
+                            TimeTable_Search_Adapter.notifyDataSetChanged()
                         }else{
                             Log.d("검색실패",it.toString())
 
@@ -110,6 +128,8 @@ class FilterSettingSearchActivity : AppCompatActivity() {
 
             Log.d("tag",actionId.toString())
             if (actionId == EditorInfo.IME_ACTION_DONE){
+                list.clear()
+
                 recentList?.add(v.text.toString())
                 editor.putStringSet("recentSearch", recentList)
 
@@ -161,7 +181,7 @@ class FilterSettingSearchActivity : AppCompatActivity() {
             add(
                 SearchData(
                     search_result = "전자기학",
-                        search_type = ""
+                        search_type = "0"
                 )
             )
 
