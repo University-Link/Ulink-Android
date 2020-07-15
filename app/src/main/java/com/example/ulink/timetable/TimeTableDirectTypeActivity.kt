@@ -81,7 +81,6 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
         var textCheck = "#ffffff"
         var textUncheck = "#727272"
 
-
         btn_back.setOnClickListener {
             finish()
         }
@@ -313,7 +312,8 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
 
         //시간표 전부 추가 후 확인
         btn_check.setOnClickListener() {
-
+           // if (et_title.text.toString() == "") showToast("제목을 설정해주세요.")
+            finish()
             if (et_title.text.toString() == "") directAddPageDialog()
             else {
                 val intent = Intent()
@@ -464,7 +464,6 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
             }
         }
     }
-
 
     fun formatToFloat(time: String): Float {
         val timesplit = time.split(":")

@@ -28,6 +28,7 @@ class TimeTableFilterSearchFragment() : Fragment() {
 
 
         mAdapter = TimeTableClassAdapter(requireContext(), object : onItemClickListener{
+
             override fun onItemClicked(position: Int) {
             }
         })

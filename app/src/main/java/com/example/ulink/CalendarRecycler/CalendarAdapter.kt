@@ -143,6 +143,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                     rvPopupAdapter.datas.apply {
                         add(
                             ScheduleItemData(
+                                idx = 1,
                                 date = "$itemYear-$popupMonth-$popupDay",
                                 category = "시험",
                                 classname = "유링",
@@ -154,6 +155,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                         )
                         add(
                             ScheduleItemData(
+                                idx = 1,
                                 date = "$itemYear-$popupMonth-$popupDay",
                                 category = "과제",
                                 classname = "안드",
@@ -165,6 +167,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                         )
                         add(
                             ScheduleItemData(
+                                idx = 1,
                                 date = "$itemYear-$popupMonth-$popupDay",
                                 category = "수업",
                                 classname = "바보",
@@ -176,6 +179,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                         )
                         add(
                             ScheduleItemData(
+                                idx = 1,
                                 date = "$itemYear-$popupMonth-$popupDay",
                                 category = "수업",
                                 classname = "바보",
@@ -187,6 +191,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                         )
                         add(
                             ScheduleItemData(
+                                idx = 1,
                                 date = "$itemYear-$popupMonth-$popupDay",
                                 category = "수업",
                                 classname = "바보",
@@ -198,6 +203,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                         )
                         add(
                             ScheduleItemData(
+                                idx = 1,
                                 date = "$itemYear-$popupMonth-$popupDay",
                                 category = "수업",
                                 classname = "바보",

@@ -40,7 +40,6 @@ class TimeTableCandidateAdapter : RecyclerView.Adapter<TimeTableCandidateAdapter
                 itemView.context.startActivity(intent)
             }
 
-
         }
 
     }

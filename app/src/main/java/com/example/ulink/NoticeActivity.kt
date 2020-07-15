@@ -30,7 +30,7 @@ class NoticeActivity : AppCompatActivity(){
     private val taskData = mutableListOf<ScheduleItemData>()
     private val classData = mutableListOf<ScheduleItemData>()
 
-    var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ3NDgyNTQsImV4cCI6MTU5NjE4ODI1NCwiaXNzIjoiYm9iYWUifQ.dFU9h8EZLqoMekAfRNTfGQkUAbq_CXoQmA5Jl7KsQ70"
+    var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ3NzkxODAsImV4cCI6MTU5NjIxOTE4MCwiaXNzIjoiYm9iYWUifQ.BAOeiZ_uqtIVPzFJd2oZbfVz44A2_QSXLQliNhN6pv4"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notice)
@@ -57,6 +57,7 @@ class NoticeActivity : AppCompatActivity(){
                 val intent = Intent(view.context, ScheduleNoticeActivity::class.java)
                 intent.putExtra("scheduleItemData", testNoticeAdapter.datas[position])
                 startActivity(intent)
+                finish()
             }
         })
 
@@ -65,6 +66,7 @@ class NoticeActivity : AppCompatActivity(){
                 val intent = Intent(view.context, ScheduleNoticeActivity::class.java)
                 intent.putExtra("scheduleItemData", taskNoticeAdapter.datas[position])
                 startActivity(intent)
+                finish()
             }
         })
 
@@ -73,6 +75,7 @@ class NoticeActivity : AppCompatActivity(){
                 val intent = Intent(view.context, ScheduleNoticeActivity::class.java)
                 intent.putExtra("scheduleItemData", classNoticeAdapter.datas[position])
                 startActivity(intent)
+                finish()
             }
         })
 
@@ -87,8 +90,11 @@ class NoticeActivity : AppCompatActivity(){
         }
         btn_plus.setOnClickListener {
             val intent = Intent(this, NoticeAddActivity::class.java)
+            intent.putExtra("idx", idx)
             intent.putExtra("class", className)
-            startActivityForResult(intent,100)
+            intent.putExtra("addcheck", "add")
+            startActivity(intent)
+            finish()
         }
         tv_task_notice_more.setOnClickListener {
             val intent = Intent(this, NoticeMoreActivity::class.java)
@@ -127,7 +133,7 @@ class NoticeActivity : AppCompatActivity(){
                                 taskData.apply {
                                     add(
                                         ScheduleItemData(
-                                          //idx = it.data.assignment[i].idx,
+                                            idx = it.data.assignment[i].noticeIdx,
                                             date = it.data.assignment[i].date,
                                             category = "과제",
                                             classname = className,
@@ -148,7 +154,7 @@ class NoticeActivity : AppCompatActivity(){
                                 testData.apply {
                                     add(
                                         ScheduleItemData(
-                                            //idx = it.data.exam[i].idx,
+                                            idx = it.data.exam[i].noticeIdx,
                                             date = it.data.exam[i].date,
                                             category = "시험",
                                             classname = className,
@@ -167,15 +173,17 @@ class NoticeActivity : AppCompatActivity(){
                             var size = it.data.lecture.size
                             for (i in 0 until size) {
                                 classData.apply {
-                                    ScheduleItemData(
-                                        //idx = it.data.lecture[i].idx,
-                                        date = it.data.lecture[i].date,
-                                        category = "수업",
-                                        classname = className,
-                                        content = it.data.lecture[i].title,
-                                        startTime = it.data.lecture[i].startTime,
-                                        endTime = it.data.lecture[i].endTime,
-                                        memo = ""
+                                    add(
+                                        ScheduleItemData(
+                                            idx = it.data.lecture[i].noticeIdx,
+                                            date = it.data.lecture[i].date,
+                                            category = "수업",
+                                            classname = className,
+                                            content = it.data.lecture[i].title,
+                                            startTime = it.data.lecture[i].startTime,
+                                            endTime = it.data.lecture[i].endTime,
+                                            memo = ""
+                                        )
                                     )
                                 }
                             }
@@ -187,13 +195,13 @@ class NoticeActivity : AppCompatActivity(){
             }
         })
 
-        emptyCheck(taskData, tv_task_notice_empty, rv_task_notice, tv_task_notice_more)
-        emptyCheck(testData, tv_test_notice_empty, rv_test_notice, tv_test_notice_more)
-        emptyCheck(classData, tv_class_notice_empty, rv_class_notice, tv_class_notice_more)
+      emptyCheck(taskData, tv_task_notice_empty, rv_task_notice, tv_task_notice_more)
+      emptyCheck(testData, tv_test_notice_empty, rv_test_notice, tv_test_notice_more)
+      emptyCheck(classData, tv_class_notice_empty, rv_class_notice, tv_class_notice_more)
 
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 100 && data != null) {
             if (resultCode == 200) {
@@ -214,5 +222,5 @@ class NoticeActivity : AppCompatActivity(){
         emptyCheck(taskData, tv_task_notice_empty, rv_task_notice, tv_task_notice_more)
         emptyCheck(testData, tv_test_notice_empty, rv_test_notice, tv_test_notice_more)
         emptyCheck(classData, tv_class_notice_empty, rv_class_notice, tv_class_notice_more)
-    }
+    }*/
 }

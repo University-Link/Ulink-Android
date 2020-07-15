@@ -5,6 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class ScheduleItemData (
+    var idx : Int,
     var date : String,
     var category : String,
     var classname : String,

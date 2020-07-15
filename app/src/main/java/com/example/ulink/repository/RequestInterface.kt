@@ -1,6 +1,7 @@
 package com.example.ulink.repository
 
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 interface RequestInterface {
@@ -31,7 +32,8 @@ interface RequestInterface {
             @Body body : RequestAddTimeTable
     ) : Call<ResponseAddTimeTable>
 
-    @GET("/schedule/{idx}")
+    //시간표 - 일정 상세정보(통합) 조회
+    @GET("/schedule/specific/{idx}")
     fun getTimeTableWithId(
             @Header("token") token: String,
             @Path("idx") number : Int
@@ -52,7 +54,7 @@ interface RequestInterface {
             @Path("idx") idx : String
     ) : Call<ResponseTimeTable>
     //시간표 - 일정 삭제(통합)
-    @DELETE("/schedule/{idx}")
+    @DELETE("/schedule/specific/{idx}")
     fun deleteNotice(
             @Header("token") token: String,
             @Path("idx") idx : String,
@@ -64,7 +66,6 @@ interface RequestInterface {
             @Header("token") token: String,
             @Path("idx") idx : String
     ) : Call<ResponseTimeTable>
-
     //메인 시간표 삭제하기
     @DELETE("/schedule/main/{idx}")
     fun deleteMainTimeTable(
@@ -150,20 +151,25 @@ interface RequestInterface {
     @POST("/notice/subject/{idx}")
     fun registerNotice(
             @Header("token") token : String,
-            @Path("idx") idx : String
-    ) : Call<ResponseCalendar>
+            @Path("idx") idx : String,
+            @Body body : RequestRegisterNotice
+    ) : Call<ResponseRegisterNotice>
+
     //공지 상세조회
     @GET("/notice/{idx}")
     fun getSpecificNotice(
             @Header("token") token : String,
             @Path("idx") idx : String
-    ) : Call<ResponseCalendar>
+    ) : Call<ResponseSpecificNotice>
+
     //공지 수정(업데이트)
     @PUT("/notice/{idx}")
-    fun updateReviseNotice(
+    fun updateNotice(
             @Header("token") token : String,
-            @Path("idx") idx : String
-    ) : Call<ResponseCalendar>
+            @Path("idx") idx : String,
+            @Body body : RequestRegisterNotice
+    ) : Call<ResponseUpdateNotice>
+
     //Cart
     //장바구니(후보) 목록 조회
     @GET("/cart")
@@ -183,7 +189,8 @@ interface RequestInterface {
     @DELETE("/cart/{idx}")
     fun deleteCartList(
             @Header("token") token : String,
-            @Path("idx") idx : String
+            @Path("idx") idx : String,
+            @Body body : RequestDeleteCartList
     ) : Call<ResponseDeleteCartList>
 
     //Subject
@@ -211,5 +218,5 @@ interface RequestInterface {
     fun getSubjectWithWord(
             @Header("token") token : String,
             @Query("name") name : String
-    ) : Call<ResponseCalendar>
+    ) : Call<ResponsegetSubjectWithWord>
 }

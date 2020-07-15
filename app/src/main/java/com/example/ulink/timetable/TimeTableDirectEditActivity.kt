@@ -127,7 +127,6 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
                         Log.d("tag", it)
                         Toast.makeText(this, "서버 오류가 발생하였습니다", Toast.LENGTH_SHORT).show();
                     })
-//                    TODO 여기 위에 찍히나 확인!!
                 }
             }
 
