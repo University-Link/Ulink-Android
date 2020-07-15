@@ -13,19 +13,19 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 class TimeTableCandidateFragment() : Fragment(){
+
     var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ3NDgyNTQsImV4cCI6MTU5NjE4ODI1NCwiaXNzIjoiYm9iYWUifQ.dFU9h8EZLqoMekAfRNTfGQkUAbq_CXoQmA5Jl7KsQ70"
-    var cartAdapter = TimeTableCandidateDetailAdapter()
+    var cartAdapter =
+        TimeTableCandidateDetailAdapter()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_time_table_candidate, container, false)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rv_candidate.adapter = cartAdapter
     }
-    //    여기로 subject list 받아서 recyclerview로 표시하기
-    //    onResume마다 db에서 로딩
+
     override fun onResume() {
         super.onResume()
         var cartDatas : MutableList<SubjectDetail> = mutableListOf()

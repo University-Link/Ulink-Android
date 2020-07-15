@@ -2,6 +2,7 @@ package com.example.ulink.NoticeRecycler
 
 import android.graphics.Color
 import android.text.Editable
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
@@ -16,13 +17,22 @@ fun intentNoticeAdd(scheduleItemData : ScheduleItemData,
                     btn_task : Button, btn_test : Button, btn_class : Button,
                     tv_date : TextView, tv_classname : TextView,
                     et_title : EditText, et_memo : EditText,
-                    spinner_start : Spinner, spinner_end : Spinner) {
+                    spinner_start : Spinner, spinner_end : Spinner) : String {
 
-    var intentStartTime = scheduleItemData.startTime.split(":")
-    var intentEndTime = scheduleItemData.endTime.split(":")
+    lateinit var category : String
+    lateinit var intentStartTime : List<String>
+    lateinit var intentEndTime : List<String>
+    var timeStartIndex : Int = 0
+    var timeEndIndex : Int = 0
 
-    var timeStartIndex = intentStartTime[0].toInt()+1
-    var timeEndIndex = intentEndTime[0].toInt()+1
+    if(scheduleItemData.startTime!="") {
+        intentStartTime = scheduleItemData.startTime.split(":")
+        timeStartIndex = intentStartTime[0].toInt() + 1
+    }
+    if(scheduleItemData.endTime!="") {
+        intentEndTime = scheduleItemData.endTime.split(":")
+        timeEndIndex = intentEndTime[0].toInt() + 1
+    }
 
     spinner_start.setSelection(timeStartIndex)
     spinner_end.setSelection(timeEndIndex)
@@ -39,17 +49,21 @@ fun intentNoticeAdd(scheduleItemData : ScheduleItemData,
         "과제" -> {
             btn_task.setBackgroundResource(R.drawable.btn_bg_notice_selected)
             btn_task.setTextColor(Color.parseColor(whiteColor))
+            category = "과제"
         }
         "시험" -> {
             btn_test.setBackgroundResource(R.drawable.btn_bg_notice_selected)
             btn_test.setTextColor(Color.parseColor(whiteColor))
+            category = "시험"
         }
         "수업" -> {
             btn_class.setBackgroundResource(R.drawable.btn_bg_notice_selected)
             btn_class.setTextColor(Color.parseColor(whiteColor))
+            category = "수업"
         }
     }
 
+    return category
 }
 
 fun spinnerInit(spinner : Spinner, adapter : ArrayAdapter<CharSequence>){
@@ -79,6 +93,7 @@ fun dataReturn(year : Int, month : Int, day : Int, category : String, classname 
 
     var item =
         ScheduleItemData(
+            idx = 0,
             date = "$year-$month-$day",
             category = category,
             classname = classname,
@@ -127,8 +142,8 @@ fun ddayBackground(category : String, dday : TextView) {
 fun ddayCheck(scheduleItemData : ScheduleItemData) : Long{
 
     var now = "$nowYear-$nowMonth-$nowDay"
-    var nowDate = SimpleDateFormat("yyyy-mm-dd").parse(now)
-    var scheduleDate = SimpleDateFormat("yyyy-mm-dd").parse(scheduleItemData.date)
+    var nowDate = SimpleDateFormat("yyyy-MM-dd").parse(now)
+    var scheduleDate = SimpleDateFormat("yyyy-MM-dd").parse(scheduleItemData.date)
 
     var dayRemainder = nowDate.time - scheduleDate.time
     dayRemainder /= (24 * 60 * 60 * 1000)

@@ -27,6 +27,7 @@ class TimeTableFilterSearchFragment() : Fragment() {
         subjectList.add(Subject(4, "전자회로5", "13:00", "16:00", 4, "과목장소", 1, true, isSample = true))
         subjectList.add(Subject(4, "전자회로6", "13:00", "17:30", 2, "과목장소", 1, true, isSample = true))
         mAdapter = TimeTableClassAdapter(requireContext(), object : onItemClickListener{
+
             override fun onItemClicked(position: Int) {
             }
         })

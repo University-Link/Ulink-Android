@@ -139,20 +139,25 @@ interface RequestInterface {
     @POST("/notice/subject/{idx}")
     fun registerNotice(
             @Header("token") token : String,
-            @Path("idx") idx : String
-    ) : Call<ResponseCalendar>
+            @Path("idx") idx : String,
+            @Body body : RequestRegisterNotice
+    ) : Call<ResponseRegisterNotice>
+
     //공지 상세조회
     @GET("/notice/{idx}")
     fun getSpecificNotice(
             @Header("token") token : String,
             @Path("idx") idx : String
-    ) : Call<ResponseCalendar>
+    ) : Call<ResponseSpecificNotice>
+
     //공지 수정(업데이트)
     @PUT("/notice/{idx}")
-    fun updateReviseNotice(
+    fun updateNotice(
             @Header("token") token : String,
-            @Path("idx") idx : String
-    ) : Call<ResponseCalendar>
+            @Path("idx") idx : String,
+            @Body body : RequestRegisterNotice
+    ) : Call<ResponseUpdateNotice>
+
     //Cart
     //장바구니(후보) 목록 조회
     @GET("/cart")
@@ -172,7 +177,8 @@ interface RequestInterface {
     @DELETE("/cart/{idx}")
     fun deleteCartList(
             @Header("token") token : String,
-            @Path("idx") idx : String
+            @Path("idx") idx : String,
+            @Body body : RequestDeleteCartList
     ) : Call<ResponseDeleteCartList>
 
     //Subject

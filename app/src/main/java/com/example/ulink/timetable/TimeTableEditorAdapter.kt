@@ -13,8 +13,6 @@ class TimeTableEditorAdapter(fragmentActivity: FragmentActivity) : FragmentState
     }
 
     override fun createFragment(position: Int): Fragment {
-
-
         return when(position){
             0 -> TimeTableFilterSearchFragment()
             else -> TimeTableCandidateFragment()

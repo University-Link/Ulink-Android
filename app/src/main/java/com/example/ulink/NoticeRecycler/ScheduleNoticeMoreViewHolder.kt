@@ -4,10 +4,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.R
-import com.example.ulink.ScheduleRecycler.ScheduleItemData
-import com.example.ulink.ScheduleRecycler.nowDay
-import com.example.ulink.ScheduleRecycler.nowMonth
-import com.example.ulink.ScheduleRecycler.nowYear
+import com.example.ulink.ScheduleRecycler.*
 import kotlinx.android.synthetic.main.activity_notice_add.*
 import java.text.SimpleDateFormat
 
@@ -23,13 +20,25 @@ class ScheduleNoticeMoreViewHolder(itemView : View) : RecyclerView.ViewHolder(it
         // TODO 달바뀌는부분디데이계산
         ddayBackground(scheduleData.category, dday)
 
+
         var dayRemainder = ddayCheck(scheduleData)
 
         var dateIndex = scheduleData.date.split("-")
 
-        date.text = dateIndex[1] + " / " + dateIndex[2]
+        date.text = zeroCheck(dateIndex[1]) + "/" + zeroCheck(dateIndex[2])
         title.text = scheduleData.content
-        time.text = scheduleData.startTime + " ~ " + scheduleData.endTime
+
+        if(scheduleData.startTime == "-1") scheduleData.startTime= ""
+        if (scheduleData.endTime == "-1") scheduleData.endTime=""
+
+        if (scheduleData.startTime != "" || scheduleData.endTime != "")
+            time.text = scheduleData.startTime + " ~ " + scheduleData.endTime
+
+        if (scheduleData.startTime == "" && scheduleData.endTime == "")
+            time.text = "시간정보없음"
+
+        if (scheduleData.category=="과제" && scheduleData.endTime != "") time.text = scheduleData.endTime
+
         if(dayRemainder!=0.toLong()) {
             if(dayRemainder > 0.toLong()) {
                 dday.text = "완료"

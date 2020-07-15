@@ -27,6 +27,7 @@ class NoticeMoreActivity : AppCompatActivity() {
         rv_notice_more.adapter = rvMoreAdapter
 
         var toolbarTitle = intent.getStringExtra("category")
+
         if (toolbarTitle != "")
             tv_notice_more_toolbar.text = toolbarTitle + "공지"
 
