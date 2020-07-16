@@ -37,7 +37,7 @@ class TimeTableCandidateFragment() : Fragment() {
         //getCartList 후보 등록
         // TODO SEMESTER넘겨주기
 
-        
+
 
         RetrofitService.service.getCartList(token, "2020-1").enqueue(object : Callback<ResponseGetCartList> {
             override fun onFailure(call: Call<ResponseGetCartList>, t: Throwable) {

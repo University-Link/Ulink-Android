@@ -110,6 +110,7 @@ class TimeTableFragment : Fragment() {
                             }
 
                             mainTable = deepCopy(table)
+                            timetableDrawer.setMinMax()
                             view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { timetableDrawer.draw(it) }
                         },
                         onFailure = {
@@ -140,6 +141,7 @@ class TimeTableFragment : Fragment() {
                             }
 
                             mainTable = deepCopy(table)
+                            timetableDrawer.setMinMax()
                             view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { timetableDrawer.draw(it) }
                         },
                         onFailure = {
@@ -220,11 +222,13 @@ class TimeTableFragment : Fragment() {
                         this.mainTable = it
                         Log.d("tag", it.toString())
                         timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, mainTable)
+                        timetableDrawer.setMinMax()
                         view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { it1 -> timetableDrawer.draw(it1) }
                     },
                     onFailure = {
                         mainTable = TimeTable(1, "2020-1", "시간표1", 1, "09:00", "16:00")
                         timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, mainTable)
+                        timetableDrawer.setMinMax()
                         view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { it1 -> timetableDrawer.draw(it1) }
                     }
             )
