@@ -54,7 +54,6 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
             var index = firstIndex(data.year, data.month)
             var lastindex = endDay[data.month - 1]
 
-            //Log.d("idx","$index")
 
             //previous_month
             var prevEmptyIndex = calendarPreviousIndexCheck(data, index)
