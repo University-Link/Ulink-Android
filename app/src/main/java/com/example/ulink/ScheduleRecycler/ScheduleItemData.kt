@@ -5,11 +5,15 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class ScheduleItemData (
+    var idx : Int,
     var date : String,
     var category : String,
     var classname : String,
     var content : String,
     var startTime : String,
     var endTime : String,
-    var memo : String
+    var memo : String,
+    var day : String = "",
+    var dayindex : String = "",
+    var dday : Long = 0L
 ) : Parcelable

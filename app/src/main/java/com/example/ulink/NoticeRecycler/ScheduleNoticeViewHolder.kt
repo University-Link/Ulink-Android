@@ -5,6 +5,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.R
 import com.example.ulink.ScheduleRecycler.ScheduleItemData
+import com.example.ulink.ScheduleRecycler.zeroCheck
 
 class ScheduleNoticeViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
     var date : TextView = itemView.findViewById(R.id.rv_item_notice_date)
@@ -12,9 +13,10 @@ class ScheduleNoticeViewHolder(itemView : View) : RecyclerView.ViewHolder(itemVi
     var time : TextView = itemView.findViewById(R.id.rv_item_notice_time)
 
     fun bind(scheduleData : ScheduleItemData){
+
         var dateIndex = scheduleData.date.split("-")
 
-        date.text = dateIndex[1] + "/" +dateIndex[2]
+        date.text = zeroCheck(dateIndex[1]) + "/" + zeroCheck(dateIndex[2])
         title.text = scheduleData.content
 
         if(scheduleData.startTime == "-1") scheduleData.startTime= ""

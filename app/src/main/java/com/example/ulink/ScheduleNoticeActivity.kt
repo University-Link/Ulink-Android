@@ -5,29 +5,89 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ulink.ScheduleRecycler.ScheduleItemData
+import com.example.ulink.ScheduleRecycler.zeroCheck
+import com.example.ulink.repository.ResponseSpecificNotice
+import com.example.ulink.repository.ResponseUpdateNotice
+import com.example.ulink.repository.RetrofitService
 import kotlinx.android.synthetic.main.activity_class_notice.*
 import kotlinx.android.synthetic.main.calendar_item.*
 import kotlinx.android.synthetic.main.toolbar_schedule_notice.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ScheduleNoticeActivity : AppCompatActivity() {
+    lateinit var item : ScheduleItemData
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_class_notice)
 
+        var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ3NzkxODAsImV4cCI6MTU5NjIxOTE4MCwiaXNzIjoiYm9iYWUifQ.BAOeiZ_uqtIVPzFJd2oZbfVz44A2_QSXLQliNhN6pv4"
+
         var scheduleItemData = intent.getParcelableExtra<ScheduleItemData>("scheduleItemData")
+        var idx = scheduleItemData.idx
+
         tv_schedule_notice_toolbar.text = scheduleItemData.category+"공지" //툴바타이틀
 
-        if(scheduleItemData.startTime!="" && scheduleItemData.endTime!="") //시간
+        /*if(scheduleItemData.startTime == "-1") scheduleItemData.startTime= "" //시간
+        if (scheduleItemData.endTime == "-1") scheduleItemData.endTime=""
+
+        if (scheduleItemData.startTime != "" || scheduleItemData.endTime != "")
             tv_schedule_notice_time_content.text = scheduleItemData.startTime + " ~ " + scheduleItemData.endTime
-        else
+
+        if (scheduleItemData.startTime == "" && scheduleItemData.endTime == "")
             tv_schedule_notice_time_content.text = "시간정보없음"
 
         var scheduleDate = scheduleItemData.date.split("-")
-        tv_schedule_notice_date_content.text = scheduleDate[0]+"년 "+scheduleDate[1]+"월 "+scheduleDate[2]+"일" //날짜
+        tv_schedule_notice_date_content.text = scheduleDate[0]+"년 "+zeroCheck(scheduleDate[1])+"월 "+zeroCheck(scheduleDate[2])+"일" //날짜
 
         tv_schedule_notice_title.text = scheduleItemData.content //제목
 
-        tv_schedule_notice_memo_content.text = scheduleItemData.memo //메모
+        tv_schedule_notice_memo_content.text = scheduleItemData.memo //메모*/
+
+        RetrofitService.service.getSpecificNotice(token, idx.toString())
+            .enqueue(object : Callback<ResponseSpecificNotice> {
+                override fun onFailure(call: Call<ResponseSpecificNotice>, t: Throwable) {
+                    Log.d("실패", "실패")
+                }
+
+                override fun onResponse(
+                    call: Call<ResponseSpecificNotice>,
+                    response: Response<ResponseSpecificNotice>
+                ) {
+                    response.body()?.let {
+                        if (it.status == 200) {
+                            item = ScheduleItemData(
+                                idx = it.data.noticeIdx,
+                                category = it.data.category,
+                                date = it.data.date,
+                                classname = scheduleItemData.classname,
+                                content = it.data.title,
+                                startTime = it.data.startTime,
+                                endTime = it.data.endTime,
+                                memo = it.data.content
+                            )
+                            Log.d("가보자", "가보자")
+
+                            if(item.startTime == "-1") item.startTime= "" //시간
+                            if (item.endTime == "-1") item.endTime=""
+
+                            if (item.startTime != "" || item.endTime != "")
+                                tv_schedule_notice_time_content.text = item.startTime + " ~ " + item.endTime
+
+                            if (item.startTime == "" && item.endTime == "")
+                                tv_schedule_notice_time_content.text = "시간정보없음"
+
+                            var date = item.date.split("-")
+                            tv_schedule_notice_date_content.text = date[0]+"년 "+zeroCheck(date[1])+"월 "+zeroCheck(date[2])+"일" //날짜
+                            tv_schedule_notice_title.text = item.content //제목
+                            tv_schedule_notice_memo_content.text = item.memo //메모*/
+                            Log.d("상세정보", "성공")
+                        }
+                    } ?: Log.d("실패1", response.message())
+                }
+            })
 
         btn_back.setOnClickListener() {
             finish()
@@ -35,8 +95,11 @@ class ScheduleNoticeActivity : AppCompatActivity() {
 
         btn_edit.setOnClickListener() {
             val intent = Intent(this, NoticeAddActivity::class.java)
-            intent.putExtra("scheduleItemData", scheduleItemData)
-            startActivityForResult(intent,100)
+            intent.putExtra("scheduleItemData", item)
+            intent.putExtra("addcheck", "revise")
+            intent.putExtra("class", item.classname)
+            intent.putExtra("noticeIdx", scheduleItemData.idx.toString())
+            startActivity(intent)
         }
 
         btn_delete.setOnClickListener(){

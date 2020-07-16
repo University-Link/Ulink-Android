@@ -58,8 +58,8 @@ fun todayBackground(todayCheck : String, background : ConstraintLayout) {
 
 }
 
-fun zeroPlus(check : String) : String {
+fun zeroCheck(check : String) : String {
     var zeroCheck = check
-    if(zeroCheck.length==1) zeroCheck = "0"+check
+    if(zeroCheck.length==2 && zeroCheck.toInt()<10) zeroCheck = zeroCheck.replace("0", "")
     return zeroCheck
 }

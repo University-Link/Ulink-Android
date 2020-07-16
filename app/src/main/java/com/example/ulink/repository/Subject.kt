@@ -9,11 +9,11 @@ data class Subject (
         @SerializedName("idx")
         var id : Long = 0,
         var name : String,
-        var startTime : String,
-        var endTime : String,
-        var day : Int, 
+        var startTime : List<String>,
+        var endTime : List<String>,
+        var day : List<Int>,
         @SerializedName("content")
-        var place : String,
+        var place : List<String>,
         var color : Int,
         var subject : Boolean,
         var credit : Float? = 0f,
@@ -22,5 +22,5 @@ data class Subject (
         var isSample : Boolean = false,
         var number : String = ""
 ) : Parcelable {
-        constructor() : this(0,"","","",0,"",1,false,0f,"","",false,"")
+        constructor() : this(0,"", listOf(),listOf(),listOf(),listOf(),1,false,0f,"","",false,"")
 }

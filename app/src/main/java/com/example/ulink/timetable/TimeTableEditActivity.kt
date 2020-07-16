@@ -16,6 +16,7 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.MarginPageTransformer
+import androidx.viewpager2.widget.ViewPager2
 import com.example.ulink.R
 import com.example.ulink.repository.*
 import com.example.ulink.utils.deepCopy
@@ -27,6 +28,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ3NDgyNTQsImV4cCI6MTU5NjE4ODI1NCwiaXNzIjoiYm9iYWUifQ.dFU9h8EZLqoMekAfRNTfGQkUAbq_CXoQmA5Jl7KsQ70"
+var tokenforsearch = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLsnLXtlansoITsnpDqs7XtlZnrtoAiLCJpYXQiOjE1OTQ4MzkzOTEsImV4cCI6MTU5ODQzNTc5MSwiaXNzIjoiYm9iYWUifQ.jxont3bUINSAtQt_F90KeE376WX-cZJoB5rzM2K7Ccg"
 const val REQUEST_DIRECT_EDIT_ACTIVITY = 999
 const val REQUEST_DIRECT_TYPE_ACTIVITY = 888
 
@@ -35,9 +37,19 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
     //    Timetable 다보여주고 마지막에 항상 하나 더 보여주는거 자동
     val timeTableList: MutableList<TimeTable> = arrayListOf()
     val mAdapter = TimeTableAddAdapter(this)
+    val mEditorAdapter = TimeTableEditorAdapter(this)
 
+    var lastpage = 0
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        val intent = Intent()
+        if (vp_timetableadd.currentItem < timeTableList.size){
+            Log.d("tag",timeTableList[lastpage].toString())
+            intent.putExtra("timeTable", timeTableList[lastpage])
+            setResult(200, intent)
+        }
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +57,6 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         setContentView(R.layout.activity_time_table_edit)
 
 //      TODO 여기서 불러오기
-
 
         intent.getParcelableArrayListExtra<TimeTable>("timeTableList")?.let {
             timeTableList.addAll(it)
@@ -89,6 +100,11 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
                     Log.d("tag", "timetable replaced")
                 }
             }
+        } else if(requestCode == REQUEST_DIRECT_TYPE_ACTIVITY){
+            if (resultCode == 200){
+                val subjectList = data?.getParcelableArrayListExtra<Subject>("subjects")
+//                TODO 여기 어떻게 등록할지?
+            }
         }
 
     }
@@ -98,13 +114,16 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         return timesplit[0].toFloat() + (timesplit[1].toFloat() - timesplit[1].toFloat() % 15) / 60
     }
 
+
     fun checkIsOver(subject: Subject, timeTable: TimeTable): Boolean {
 
         var check = false
         for (s in timeTable.subjectList!!) {
-            if (subject.day == s.day) {
-                check = !(formatToFloat(subject.endTime) <= formatToFloat(s.startTime) || formatToFloat(subject.startTime) >= formatToFloat(s.endTime))
-                if (check) return check
+            for (b in 0 until subject.day.size){
+                if (s.day.contains(subject.day[b])){
+                    check = !(formatToFloat(subject.endTime[b]) <= formatToFloat(s.startTime[0]) || formatToFloat(subject.startTime[b]) >= formatToFloat(s.endTime[0]))
+                    if (check) return check
+                }
             }
         }
         return check
@@ -112,7 +131,10 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
 
     fun addToTable(subject: Subject) {
+        Toast.makeText(this, "클릭", Toast.LENGTH_SHORT).show()
+
         val position = vp_timetableadd.currentItem
+        Log.d("tag",mAdapter.itemCount.toString())
         if (position == mAdapter.itemCount - 1) {
             return
         }
@@ -121,11 +143,18 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
         if (!checkIsOver(subject, timeTable)) {
             subject.isSample = false
-            timeTable.subjectList.add(subject)
-            mAdapter.replaceAtList(position, timeTable)
-            mAdapter.reDrawFragment(position)
-            vp_timetableadd.setCurrentItem(position, false)
-            Toast.makeText(this, "시간표에 등록 되었습니다", Toast.LENGTH_SHORT).show()
+            DataRepository.addSchoolPlan(RequestAddSchoolPlan(
+                  subject.id.toInt(), subject.color, timeTable.id
+            ), onSuccess = {
+                timeTable.subjectList.add(subject)
+                mAdapter.replaceAtList(position, timeTable)
+                mAdapter.reDrawFragment(position)
+                vp_timetableadd.setCurrentItem(position, false)
+                Toast.makeText(this, "시간표에 등록 되었습니다", Toast.LENGTH_SHORT).show()
+            }, onFailure = {
+                Toast.makeText(this, "시간표에 등록 실패", Toast.LENGTH_SHORT).show()
+                Log.d("tag",it)
+            })
         } else {
             Toast.makeText(this, "시간표에 등록 실패", Toast.LENGTH_SHORT).show()
         }
@@ -139,6 +168,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
             return
         }
         var timeTable: TimeTable = mAdapter.timeTableSampleList.get(position)
+        
         timeTable.subjectList.add(subject)
         mAdapter.replaceAtSampleList(position, timeTable)
         mAdapter.reDrawFragment(position)
@@ -173,16 +203,16 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 //            TODO 여기서 DB로 저장하고 edit에 넣긴 해야함
 
             DataRepository.addTimeTable("2020-2", et.text.toString(),
-                onSuccess = {
-                    val timeTable = TimeTable(1, "2020-2", et.text.toString(), false, "09:00", "18:00")
-                    mAdapter.addToList(deepCopy(timeTable))
-                    moveToLastItem()
-                    Log.d("debug","${it.data.idx} 시간표 생성")
-                },
-                onFailure = {
-                    Toast.makeText(this, "오류가 발생하였습니다", Toast.LENGTH_SHORT).show();
-                    Log.d("error",it)
-                }
+                    onSuccess = {
+                        val timeTable = TimeTable(1, "2020-2", et.text.toString(), 0, "09:00", "18:00")
+                        mAdapter.addToList(deepCopy(timeTable))
+                        moveToLastItem()
+                        Log.d("debug","${it.data.idx} 시간표 생성")
+                    },
+                    onFailure = {
+                        Toast.makeText(this, "오류가 발생하였습니다", Toast.LENGTH_SHORT).show();
+                        Log.d("error",it)
+                    }
             )
             dialog.dismiss()
         }
@@ -227,33 +257,35 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         TabLayoutMediator(tl_indicator, vp_timetableadd) { v, p ->
             Unit
         }.attach()
+
+        vp_timetableadd.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                lastpage = position
+            }
+        })
+
     }
 
 
     fun setClassSearch() {
-        val mEditorAdapter = TimeTableEditorAdapter(this)
+
+        mEditorAdapter.setFragments()
         vp_timetableeditor.adapter = mEditorAdapter
 
-        var icon1: ImageView
 
         TabLayoutMediator(tl_timetableeditor, vp_timetableeditor, object : TabLayoutMediator.TabConfigurationStrategy {
             override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
                 val tablayout = LayoutInflater.from(applicationContext).inflate(R.layout.tab_timetableeditor, null)
 
-                icon1 = tablayout.findViewById<ImageView>(R.id.ic_tab)
-
-
                 when (position) {
                     0 -> {
-                        icon1.setBackgroundResource(R.drawable.timetableadd_filterandsearch_btn_filterandsearch)
-                        tablayout.findViewById<TextView>(R.id.tv_tab).text = "필터"
+                        tablayout.findViewById<ImageView>(R.id.ic_tab).setBackgroundResource(R.drawable.timetableadd_filterandsearch_btn_filterandsearch)
+                        tablayout.findViewById<TextView>(R.id.tv_tab).text = "필터 및 검색"
                     }
                     1 -> {
-                        icon1.setBackgroundResource(R.drawable.timetableadd_ic_filter)
-                        tablayout.findViewById<ImageView>(R.id.ic_tab).setBackgroundResource(R.drawable.red_circle_for_alert)
+                        tablayout.findViewById<ImageView>(R.id.ic_tab).setBackgroundResource(R.drawable.timetableadd_ic_cart_selected)
                         tablayout.findViewById<TextView>(R.id.tv_tab).text = "후보"
-                        icon1.setBackgroundResource(R.drawable.timetableadd_ic_filter)
-
                     }
                 }
                 tab.customView = tablayout
@@ -326,7 +358,6 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         }
 
         layout.findViewById<Button>(R.id.btn_type).setOnClickListener {
-
 //            TODO 이거 해제
             val intent = Intent(this, TimeTableDirectTypeActivity::class.java)
             intent.putExtra("addable", true)
@@ -348,7 +379,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
     }
 
     override fun onClick(position: Int) {
-        RetrofitService.service.getSubjectByGrade(token,position).enqueue(object : Callback<ResponseGetSubjectByGrade>{
+        RetrofitService.service.getSubjectByGrade(tokenforsearch,position).enqueue(object : Callback<ResponseGetSubjectByGrade>{
             override fun onFailure(call: Call<ResponseGetSubjectByGrade>, t: Throwable) {
             }
 
@@ -359,11 +390,21 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
                 response.body()?.let{
                     if(it.status == 200){
                         Log.d("성공",it.toString())
-                        val list : MutableList<SubjectListByGrade> = arrayListOf()
-                        list.addAll(it.data)
-                    }else{
-                        Log.d("실패",it.toString())
+                        val list : MutableList<Subject> = arrayListOf()
 
+                        for (i in it.data){
+                            val subject = Subject(i.subjectIdx,i.name,i.startTime,i.endTime,i.day,i.content,0,true,i.credit,i.professor,i.course,true,i.subjectCode)
+                            list.add(subject)
+                        }
+
+//                        TODO 여기 나중에 정리하기 setList로
+                        (mEditorAdapter.fragmentList[0] as TimeTableFilterSearchFragment).subjectList = list
+                        (mEditorAdapter.fragmentList[0] as TimeTableFilterSearchFragment).mAdapter.subjectList = list
+                        (mEditorAdapter.fragmentList[0] as TimeTableFilterSearchFragment).mAdapter.notifyDataSetChanged()
+
+                        Log.d("tag",it.toString())
+                    }else {
+                        Log.d("실패", it.toString())
                     }
                 }
             }

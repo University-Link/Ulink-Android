@@ -47,6 +47,7 @@ class TimeTableAddAdapter(fragmentActivity: FragmentActivity, val fragmentList :
 
     fun replaceAtList(position: Int, timeTable : TimeTable){
         timeTableList.removeAt(position)
+//      TODO 이거 샘플도 바꾸는지?
         timeTableList.add(position,deepCopy(timeTable))
         (fragmentList[position] as TimeTableAddFragment).setTable(deepCopy(timeTable))
     }

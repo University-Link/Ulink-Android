@@ -37,7 +37,7 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
     lateinit var start: String
     lateinit var end: String
 
-    var newSubject : MutableList<Subject> = arrayListOf()
+    var newSubject: MutableList<Subject> = arrayListOf()
 
     lateinit var TimeTableDirectAdapter: TimeTableDirectAdapter
     val datas: MutableList<TimeTableDirectData> = mutableListOf<TimeTableDirectData>()
@@ -52,19 +52,24 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
 
         val addable = intent.getBooleanExtra("addable", true)
         val nextcolor = intent.getIntExtra("color", 0)
-        val subjectList = intent.getParcelableArrayListExtra<Subject>("subjects")
+        var subjectList = intent.getParcelableArrayListExtra<Subject>("subjects")
         val timeTable = deepCopy(intent.getParcelableExtra<TimeTable>("timeTable"))
 
+//      Edit에서 말고 그냥 바로 왔을때! Edit에서 왔을때는 subject 들어있음!
+        if (subjectList == null) {
+            subjectList = arrayListOf()
+        }
 
-        if (addable){
+
+        if (addable) {
             findViewById<LinearLayout>(R.id.layout_time_plus).visibility = View.VISIBLE
         } else {
             findViewById<LinearLayout>(R.id.layout_time_plus).visibility = View.GONE
         }
 
 
-        for (i in 0 until subjectList.size){
-            datas.add(TimeTableDirectData(subjectList[i].day,subjectList[i].startTime,subjectList[i].endTime))
+        for (i in 0 until subjectList.size) {
+            datas.add(TimeTableDirectData(subjectList[i].day[0], subjectList[i].startTime[0], subjectList[i].endTime[0]))
         }
 
 
@@ -75,7 +80,6 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
 
         var textCheck = "#ffffff"
         var textUncheck = "#727272"
-
 
         btn_back.setOnClickListener {
             finish()
@@ -299,7 +303,7 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
 
         findViewById<LinearLayout>(R.id.layout_time_plus).setOnClickListener {
             check = false
-            datas.add(TimeTableDirectData(0,"09:00","17:00"))
+            datas.add(TimeTableDirectData(0, "09:00", "17:00"))
 
             TimeTableDirectAdapter.datas = datas
             TimeTableDirectAdapter.notifyDataSetChanged()
@@ -308,31 +312,51 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
 
         //시간표 전부 추가 후 확인
         btn_check.setOnClickListener() {
-
             if (et_title.text.toString() == "") directAddPageDialog()
             else {
                 val intent = Intent()
 //                어댑터의 각 아이템을 newsubject 의 subject에 적용!
-                subjectList?.let {
-                    for (i in 0 until TimeTableDirectAdapter.datas.size){
-                        if (formatToFloat(datas[i].start_time)>=formatToFloat(datas[i].end_time)){
-                            Toast.makeText(this,"시간이 잘못되었습니다", Toast.LENGTH_SHORT).show()
-                            return@setOnClickListener
-                        }
-                        subjectList[i].name = et_title.text.toString()
-                        subjectList[i].place = et_memo.text.toString()
-                        subjectList[i].color = nextcolor
-                        subjectList[i].startTime = datas[i].start_time
-                        subjectList[i].endTime = datas[i].end_time
-                        subjectList[i].isSample = false
-                    }
-                }
+                if (addable){
+                    if (TimeTableDirectAdapter.datas.size == 0){
+                        Toast.makeText(this, "과목을 추가해주세요", Toast.LENGTH_SHORT).show()
+                    } else{
+                        Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show()
+                        for (i in 0 until TimeTableDirectAdapter.datas.size) {
 
-                Log.d("tag","afsfsf" + subjectList.toString())
-                intent.putParcelableArrayListExtra("subjects",subjectList)
-                intent.putExtra("timeTable", timeTable)
-                setResult(200,intent)
-                finish()
+                            subjectList.add(Subject())
+                            subjectList[i].name = et_title.text.toString()
+                            subjectList[i].place = listOf(et_memo.text.toString())
+                            subjectList[i].color = nextcolor
+                            subjectList[i].startTime = listOf(datas[i].start_time)
+                            subjectList[i].endTime = listOf(datas[i].end_time)
+                            subjectList[i].isSample = false
+                        }
+                        intent.putParcelableArrayListExtra("subjects", subjectList)
+                        intent.putExtra("timeTable", timeTable)
+                        setResult(200, intent)
+                        finish()
+                    }
+                } else {
+                    subjectList?.let {
+                        for (i in 0 until TimeTableDirectAdapter.datas.size) {
+                            if (formatToFloat(datas[i].start_time) >= formatToFloat(datas[i].end_time)) {
+                                Toast.makeText(this, "시간이 잘못되었습니다", Toast.LENGTH_SHORT).show()
+                                return@setOnClickListener
+                            }
+                            subjectList[i].name = et_title.text.toString()
+                            subjectList[i].place = listOf(et_memo.text.toString())
+                            subjectList[i].color = nextcolor
+                            subjectList[i].startTime = listOf(datas[i].start_time)
+                            subjectList[i].endTime = listOf(datas[i].end_time)
+                            subjectList[i].isSample = false
+                        }
+                    }
+
+                    intent.putParcelableArrayListExtra("subjects", subjectList)
+                    intent.putExtra("timeTable", timeTable)
+                    setResult(200, intent)
+                    finish()
+                }
             }
         }
 
@@ -348,7 +372,8 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
         }
 
     } //oncreate 끝
-    fun directAddPageDialog(){
+
+    fun directAddPageDialog() {
         val builder = android.app.AlertDialog.Builder(this)
         val layout = LayoutInflater.from(this).inflate(R.layout.dialog_my_page_layout, null)
 
@@ -363,7 +388,7 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
         var height = getResources().getDimensionPixelSize(R.dimen.my_popup_height)
         dialog.window?.setLayout(width, height)
 
-        layout.findViewById<TextView>(R.id.tv_my_dialog).text="제목을 설정해주세요."
+        layout.findViewById<TextView>(R.id.tv_my_dialog).text = "제목을 설정해주세요."
         layout.findViewById<TextView>(R.id.tv_check).setOnClickListener {
             dialog.dismiss()
         }
@@ -372,7 +397,7 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
     //타임피커 15분단위로 바꾸기
     @SuppressLint("PrivateApi")
     fun TimePicker.setTimeInterval(
-        timeInterval: Int = DEFAULT_INTERVAL
+            timeInterval: Int = DEFAULT_INTERVAL
     ) {
         try {
             val classForId = Class.forName("com.android.internal.R\$id")
@@ -389,7 +414,7 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
     }
 
     private fun getDisplayedValue(
-        timeInterval: Int = DEFAULT_INTERVAL
+            timeInterval: Int = DEFAULT_INTERVAL
     ): Array<String> {
         val minutesArray = ArrayList<String>()
         for (i in 0 until MINUTES_MAX step timeInterval) {
@@ -401,7 +426,7 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
 
     @RequiresApi(Build.VERSION_CODES.M)
     fun TimePicker.getDisplayedMinute(
-        timeInterval: Int = DEFAULT_INTERVAL
+            timeInterval: Int = DEFAULT_INTERVAL
     ): Int = minute * timeInterval
 
 
@@ -416,29 +441,19 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
             if (!check) {
                 start = "${hour}:${time_picker.getDisplayedMinute()}"
                 TimeTableDirectAdapter.datas[position].start_time =
-                    String.format("%02d:%02d", hour, time_picker.getDisplayedMinute())
+                        String.format("%02d:%02d", hour, time_picker.getDisplayedMinute())
                 TimeTableDirectAdapter.notifyDataSetChanged()
             } else {
                 end = "${hour}:${time_picker.getDisplayedMinute()}"
                 TimeTableDirectAdapter.datas[position].end_time =
-                    String.format("%02d:%02d", hour, time_picker.getDisplayedMinute())
+                        String.format("%02d:%02d", hour, time_picker.getDisplayedMinute())
                 TimeTableDirectAdapter.notifyDataSetChanged()
             }
         })
 
 
 
-        //삭제 다이얼로그
-        btn_check.setOnClickListener() {
-            if (et_title.text.toString() == "") directAddPageDialog()
-            else {
-                //제목설정 다이얼로그
-                //시간입력 다이얼로그
-
-            }
-        }
     }
-
 
     fun formatToFloat(time: String): Float {
         val timesplit = time.split(":")
@@ -447,8 +462,8 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
 
 }
 
-interface onClickListener{
-    fun onClick(position : Int,check:Boolean
+interface onClickListener {
+    fun onClick(position: Int, check: Boolean
 
     )
 }

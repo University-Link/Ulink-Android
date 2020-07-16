@@ -26,8 +26,28 @@ class TimeTableCandidateAdapter : RecyclerView.Adapter<TimeTableCandidateAdapter
         fun setHolder(subject : Subject){
             itemView.findViewById<TextView>(R.id.tv_class_name).text = subject.name
             itemView.findViewById<TextView>(R.id.tv_professor_name).text = subject.professor
-            itemView.findViewById<TextView>(R.id.tv_time).text = subject.startTime + subject.endTime
-            itemView.findViewById<TextView>(R.id.tv_place).text = subject.place
+
+            for (i in 0 until subject.startTime.size) {
+                itemView.findViewById<TextView>(R.id.tv_time).text = itemView.findViewById<TextView>(R.id.tv_time).text.toString() + getDay(subject.day[i]) + " " + subject.startTime[i] + " - " + subject.endTime[i]
+                if (subject.startTime.size>1 && i<subject.startTime.size-1) {
+                    var text = itemView.findViewById<TextView>(R.id.tv_time).text
+                    val text2 = "$text, "
+                    itemView.findViewById<TextView>(R.id.tv_time).text = text2
+                }
+            }
+
+
+            for (i in 0 until subject.place.size) {
+                itemView.findViewById<TextView>(R.id.tv_place).text =  itemView.findViewById<TextView>(R.id.tv_place).text.toString() + subject.place[i]
+                if (subject.place.size>1 && i < subject.place.size-1){
+                    var text =  itemView.findViewById<TextView>(R.id.tv_place).text
+                    val text2 = "$text, "
+                    itemView.findViewById<TextView>(R.id.tv_place).text = text2
+                }
+            }
+
+
+
             itemView.findViewById<TextView>(R.id.tv_category).text = subject.course
             itemView.findViewById<TextView>(R.id.tv_credit).text = subject.credit.toString()
 
@@ -40,9 +60,21 @@ class TimeTableCandidateAdapter : RecyclerView.Adapter<TimeTableCandidateAdapter
                 itemView.context.startActivity(intent)
             }
 
-
         }
 
+
+        fun getDay(day: Int): String {
+            return when (day) {
+                0 -> "월"
+                1 -> "화"
+                2 -> "수"
+                3 -> "목"
+                4 -> "금"
+                5 -> "토"
+                6 -> "일"
+                else -> "월"
+            }
+        }
     }
 
 
@@ -59,5 +91,7 @@ class TimeTableCandidateAdapter : RecyclerView.Adapter<TimeTableCandidateAdapter
         Log.d("tag", "bindholder")
 
     }
+
+
 
 }

@@ -16,6 +16,9 @@ import com.example.ulink.repository.ResponsegetSubjectWithWord
 import com.example.ulink.repository.RetrofitService
 import com.example.ulink.repository.SearchedData
 import com.example.ulink.timetable.TimeTableFilterSearchFragment
+import com.example.ulink.timetable.token
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_filtersetting_search.*
 import kotlinx.android.synthetic.main.fragment_timetablefiltersearch.*
 import retrofit2.Call
@@ -64,7 +67,6 @@ class FilterSettingSearchActivity : AppCompatActivity() {
             Log.d("tag","added")
         }
         //loadDatas()
-
 
         TimeTable_Search_Adapter.itemClick = object : TimeTable_Search_Adapter.ItemClick{
             override fun onClick(view: View, position: Int) {
