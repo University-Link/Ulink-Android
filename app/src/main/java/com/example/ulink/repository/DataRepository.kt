@@ -8,13 +8,16 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
+
+
 object DataRepository {
 
     val retrofit = RetrofitService.service
 
-    var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ3NDgyNTQsImV4cCI6MTU5NjE4ODI1NCwiaXNzIjoiYm9iYWUifQ.dFU9h8EZLqoMekAfRNTfGQkUAbq_CXoQmA5Jl7KsQ70"
+    val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLsnLXtlansoITsnpDqs7XtlZnrtoAiLCJpYXQiOjE1OTQ4MzkzOTEsImV4cCI6MTU5ODQzNTc5MSwiaXNzIjoiYm9iYWUifQ.jxont3bUINSAtQt_F90KeE376WX-cZJoB5rzM2K7Ccg"
 
-    var token2 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ4MTY1NzQsImV4cCI6MTU5NjI1NjU3NCwiaXNzIjoiYm9iYWUifQ.JwRDELH1lA1Fb8W1ltTmhThpmgFrUTQZVocUTATv3so"
+
 
 
     fun getMainTimeTable(onSuccess: (TimeTable) -> Unit, onFailure: (String) -> Unit) {
@@ -82,12 +85,23 @@ object DataRepository {
             override fun onResponse(call: Call<ResponseGetTimeTableList>, response: Response<ResponseGetTimeTableList>) {
                 response.body()?.let {
                     val tableList : MutableList<TimeTable> = arrayListOf()
+                    Log.d("tag",it.data.toString())
 
-                    if (it != null && it.data.isNotEmpty()) {
-                        for (i in it.data){
-                            tableList.add(i)
+                    for(i in 0 until it.data.size){
+                        val subjectList: MutableList<Subject> = arrayListOf()
+                        subjectList.apply {
+                            addAll(it.data[i].subjects.mon)
+                            addAll(it.data[i].subjects.tue)
+                            addAll(it.data[i].subjects.wed)
+                            addAll(it.data[i].subjects.thu)
+                            addAll(it.data[i].subjects.fri)
                         }
+                        val timeTable = TimeTable(it.data[i].timeTable.id, it.data[i].timeTable.semester, it.data[i].timeTable.name, 0, startTime = it.data[i].minTime, endTime = it.data[i].maxTime, subjectList = subjectList)
+                        tableList.add(deepCopy(timeTable))
                     }
+
+//                  소영새안   새로운 메인  새 영 안 소
+
                     onSuccess(tableList)
                 } ?: onFailure(response.message())
             }

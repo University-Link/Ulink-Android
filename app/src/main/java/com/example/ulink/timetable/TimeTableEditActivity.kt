@@ -87,25 +87,13 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
         intent.getParcelableExtra<TimeTable>("timeTable")?.let { timeTable ->
 
-            val tableList : MutableList<TimeTable> = arrayListOf()
+            Log.d("tag",timeTable.semester.toString())
             DataRepository.getTimeTableBySemester(timeTable.semester,
                     onSuccess = {
                         for (table in it){
-                            val size = it.size
-                            DataRepository.getTimeTableWithId(table.id,
-                                    onSuccess = { tableFromServer ->
-
-                                        tableList.add(tableFromServer)
-
-                                        timeTableList.add(deepCopy(tableFromServer))
-                                        timeTableList.reverse()
-                                        if (tableList.size == size){
-                                            setTimeTableAdd()
-                                        }
-                                    },
-                                    onFailure = {
-                                        Log.d("tag", it)
-                                    })
+                            timeTableList.add(deepCopy(table))
+                            setTimeTableAdd()
+                            Log.d("tag", table.toString())
                         }
                     },
                     onFailure = {
@@ -172,7 +160,6 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         if (position == mAdapter.itemCount - 1) {
             return
         }
-//        TODO 여기서 DB에 저장도 해야함
         val timeTable = mAdapter.timeTableList[position]
 
         if (!checkIsOver(subject, timeTable)) {
@@ -238,8 +225,9 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
             DataRepository.addTimeTable("2020-2", et.text.toString(),
                     onSuccess = {
-                        val timeTable = TimeTable(1, "2020-2", et.text.toString(), 0, "09:00", "18:00")
+                        val timeTable = TimeTable(it.data.idx.toInt(), "2020-2", et.text.toString(), 0, "09:00", "18:00")
                         mAdapter.addToList(deepCopy(timeTable))
+                        timeTableList.add(deepCopy(timeTable))
                         moveToLastItem()
                         Log.d("debug","${it.data.idx} 시간표 생성")
                     },
@@ -422,7 +410,6 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
             ) {
                 response.body()?.let{
                     if(it.status == 200){
-                        Log.d("성공",it.toString())
                         val list : MutableList<Subject> = arrayListOf()
 
                         for (i in it.data){
@@ -434,10 +421,8 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
                         (mEditorAdapter.fragmentList[0] as TimeTableFilterSearchFragment).subjectList = list
                         (mEditorAdapter.fragmentList[0] as TimeTableFilterSearchFragment).mAdapter.subjectList = list
                         (mEditorAdapter.fragmentList[0] as TimeTableFilterSearchFragment).mAdapter.notifyDataSetChanged()
-
-                        Log.d("tag",it.toString())
                     }else {
-                        Log.d("실패", it.toString())
+
                     }
                 }
             }
