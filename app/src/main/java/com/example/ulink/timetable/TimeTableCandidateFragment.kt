@@ -15,7 +15,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TimeTableCandidateFragment() : Fragment() {
+class TimeTableCandidateFragment() : Fragment(),onDeleteCartClickListener {
 
     var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ3NDgyNTQsImV4cCI6MTU5NjE4ODI1NCwiaXNzIjoiYm9iYWUifQ.dFU9h8EZLqoMekAfRNTfGQkUAbq_CXoQmA5Jl7KsQ70"
     lateinit var cartAdapter : TimeTableCandidateDetailAdapter
@@ -27,7 +27,7 @@ class TimeTableCandidateFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        cartAdapter = TimeTableCandidateDetailAdapter(requireContext())
+        cartAdapter = TimeTableCandidateDetailAdapter(requireContext(),this)
         rv_candidate.adapter = cartAdapter
     }
 
@@ -65,4 +65,10 @@ class TimeTableCandidateFragment() : Fragment() {
             }
         })
     }
+    override fun onClickeddelete() : String{
+        return(context as TimeTableEditActivity).getSemesterFromActivity()
+    }
+}
+interface onDeleteCartClickListener{
+    fun onClickeddelete() : String
 }

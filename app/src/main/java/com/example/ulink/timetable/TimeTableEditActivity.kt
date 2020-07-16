@@ -94,28 +94,28 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
             val tableList : MutableList<TimeTable> = arrayListOf()
             DataRepository.getTimeTableBySemester(timeTable.semester,
-                    onSuccess = {
-                        for (table in it){
-                            val size = it.size
-                            DataRepository.getTimeTableWithId(table.id,
-                                    onSuccess = { tableFromServer ->
+                onSuccess = {
+                    for (table in it){
+                        val size = it.size
+                        DataRepository.getTimeTableWithId(table.id,
+                            onSuccess = { tableFromServer ->
 
-                                        tableList.add(tableFromServer)
+                                tableList.add(tableFromServer)
 
-                                        timeTableList.add(deepCopy(tableFromServer))
-                                        timeTableList.reverse()
-                                        if (tableList.size == size){
-                                            setTimeTableAdd()
-                                        }
-                                    },
-                                    onFailure = {
-                                        Log.d("tag", it)
-                                    })
-                        }
-                    },
-                    onFailure = {
+                                timeTableList.add(deepCopy(tableFromServer))
+                                timeTableList.reverse()
+                                if (tableList.size == size){
+                                    setTimeTableAdd()
+                                }
+                            },
+                            onFailure = {
+                                Log.d("tag", it)
+                            })
+                    }
+                },
+                onFailure = {
 
-            } )
+                } )
         }
 
 
@@ -183,7 +183,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         if (!checkIsOver(subject, timeTable)) {
             subject.isSample = false
             DataRepository.addSchoolPlan(RequestAddSchoolPlan(
-                  subject.id.toInt(), subject.color, timeTable.id
+                subject.id.toInt(), subject.color, timeTable.id
             ), onSuccess = {
                 timeTable.subjectList.add(subject)
                 mAdapter.replaceAtList(position, timeTable)
@@ -208,7 +208,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         }
 
         var timeTable: TimeTable = mAdapter.timeTableSampleList.get(position)
-        
+
         timeTable.subjectList.add(subject)
         mAdapter.replaceAtSampleList(position, timeTable)
         mAdapter.reDrawFragment(position)
@@ -242,16 +242,16 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 //            TODO 여기서 DB로 저장하고 edit에 넣긴 해야함
 
             DataRepository.addTimeTable("2020-2", et.text.toString(),
-                    onSuccess = {
-                        val timeTable = TimeTable(1, "2020-2", et.text.toString(), 0, "09:00", "18:00")
-                        mAdapter.addToList(deepCopy(timeTable))
-                        moveToLastItem()
-                        Log.d("debug","${it.data.idx} 시간표 생성")
-                    },
-                    onFailure = {
-                        Toast.makeText(this, "오류가 발생하였습니다", Toast.LENGTH_SHORT).show();
-                        Log.d("error",it)
-                    }
+                onSuccess = {
+                    val timeTable = TimeTable(1, "2020-2", et.text.toString(), 0, "09:00", "18:00")
+                    mAdapter.addToList(deepCopy(timeTable))
+                    moveToLastItem()
+                    Log.d("debug","${it.data.idx} 시간표 생성")
+                },
+                onFailure = {
+                    Toast.makeText(this, "오류가 발생하였습니다", Toast.LENGTH_SHORT).show();
+                    Log.d("error",it)
+                }
             )
             dialog.dismiss()
         }

@@ -11,25 +11,33 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.EvaluationActivity
 import com.example.ulink.R
+import com.example.ulink.repository.RequestDeleteCartList
+import com.example.ulink.repository.ResponseDeleteCartList
+import com.example.ulink.repository.RetrofitService
 import com.example.ulink.repository.Subject
+import kotlinx.android.synthetic.main.item_subject_child.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class TimeTableCandidateAdapter : RecyclerView.Adapter<TimeTableCandidateAdapter.VHolder>() {
 
-    val candidateList : MutableList<Subject> = arrayListOf()
+    val candidateList: MutableList<Subject> = arrayListOf()
 
-    fun addToList(subject : Subject){
+    fun addToList(subject: Subject) {
         candidateList.add(subject)
     }
 
-    class VHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
+    class VHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun setHolder(subject : Subject){
+        fun setHolder(subject: Subject) {
             itemView.findViewById<TextView>(R.id.tv_class_name).text = subject.name
             itemView.findViewById<TextView>(R.id.tv_professor_name).text = subject.professor
 
             for (i in 0 until subject.startTime.size) {
-                itemView.findViewById<TextView>(R.id.tv_time).text = itemView.findViewById<TextView>(R.id.tv_time).text.toString() + getDay(subject.day[i]) + " " + subject.startTime[i] + " - " + subject.endTime[i]
-                if (subject.startTime.size>1 && i<subject.startTime.size-1) {
+                itemView.findViewById<TextView>(R.id.tv_time).text =
+                    itemView.findViewById<TextView>(R.id.tv_time).text.toString() + getDay(subject.day[i]) + " " + subject.startTime[i] + " - " + subject.endTime[i]
+                if (subject.startTime.size > 1 && i < subject.startTime.size - 1) {
                     var text = itemView.findViewById<TextView>(R.id.tv_time).text
                     val text2 = "$text, "
                     itemView.findViewById<TextView>(R.id.tv_time).text = text2
@@ -38,15 +46,16 @@ class TimeTableCandidateAdapter : RecyclerView.Adapter<TimeTableCandidateAdapter
 
 
             for (i in 0 until subject.place.size) {
-                itemView.findViewById<TextView>(R.id.tv_place).text =  itemView.findViewById<TextView>(R.id.tv_place).text.toString() + subject.place[i]
-                if (subject.place.size>1 && i < subject.place.size-1){
-                    var text =  itemView.findViewById<TextView>(R.id.tv_place).text
+                itemView.findViewById<TextView>(R.id.tv_place).text =
+                    itemView.findViewById<TextView>(R.id.tv_place).text.toString() + subject.place[i]
+                if (subject.place.size > 1 && i < subject.place.size - 1) {
+                    var text = itemView.findViewById<TextView>(R.id.tv_place).text
                     val text2 = "$text, "
                     itemView.findViewById<TextView>(R.id.tv_place).text = text2
                 }
             }
 
-
+//
 
             itemView.findViewById<TextView>(R.id.tv_category).text = subject.course
             itemView.findViewById<TextView>(R.id.tv_credit).text = subject.credit.toString()
@@ -55,12 +64,17 @@ class TimeTableCandidateAdapter : RecyclerView.Adapter<TimeTableCandidateAdapter
             itemView.findViewById<Button>(R.id.btn_delete).visibility = View.VISIBLE
             itemView.findViewById<Button>(R.id.btn_totable).visibility = View.VISIBLE
 
+
             itemView.findViewById<Button>(R.id.btn_assess).setOnClickListener {
-                val intent = Intent(itemView.context,EvaluationActivity::class.java)
+                val intent = Intent(itemView.context, EvaluationActivity::class.java)
                 itemView.context.startActivity(intent)
+            }
+            itemView.findViewById<Button>(R.id.btn_delete).setOnClickListener{
+                //삭제 왜 안먹지?
             }
 
         }
+
 
 
         fun getDay(day: Int): String {
@@ -75,11 +89,15 @@ class TimeTableCandidateAdapter : RecyclerView.Adapter<TimeTableCandidateAdapter
                 else -> "월"
             }
         }
+
     }
 
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VHolder {
-        return VHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_subject_child, parent, false))
+        return VHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_subject_child, parent, false)
+        )
     }
 
     override fun getItemCount(): Int {
@@ -91,7 +109,5 @@ class TimeTableCandidateAdapter : RecyclerView.Adapter<TimeTableCandidateAdapter
         Log.d("tag", "bindholder")
 
     }
-
-
 
 }

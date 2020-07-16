@@ -18,7 +18,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TimeTableCandidateDetailAdapter(val context : Context) : RecyclerView.Adapter<TimeTableCandidateDetailAdapter.VHolder>() {
+class TimeTableCandidateDetailAdapter(val context : Context,val onDeleteCartClickListener: onDeleteCartClickListener) : RecyclerView.Adapter<TimeTableCandidateDetailAdapter.VHolder>() {
     var cartDataList: MutableList<GetCartData> = arrayListOf()
 
 
@@ -203,35 +203,35 @@ class TimeTableCandidateDetailAdapter(val context : Context) : RecyclerView.Adap
             }
 
             itemView.findViewById<Button>(R.id.btn_delete).setOnClickListener {
-               /* Log.d("100", "100")
-                var semester = RequestDeleteCartList(cartDataList[adapterPosition].semester)
-                        Log.d("semester", cartDataList[adapterPosition].semester)
-                RetrofitService.service.deleteCartList(token, cartDataList[adapterPosition].subjectIdx.toString(), semester).enqueue(object : Callback<ResponseDeleteCartList> {
-                    override fun onFailure(call: Call<ResponseDeleteCartList>, t: Throwable) {
-                        Log.d("c", "B")
+                Log.d("후보삭semester",onDeleteCartClickListener.onClickeddelete())
+                Log.d("후보삭제subjectidx", subject.subjectIdx.toString())
+
+                RetrofitService.service.deleteCartList(token, subject.subjectIdx.toString(),
+                    RequestDeleteCartList(
+                    semester = onDeleteCartClickListener.onClickeddelete()
+                )
+                ).enqueue(object : Callback<ResponseDeleteCartList> {
+                override fun onFailure(call: Call<ResponseDeleteCartList>, t: Throwable) {
+                    Log.d("후보 삭제",t.message.toString())
+                }
+
+                override fun onResponse(
+                    call: Call<ResponseDeleteCartList>,
+                    response: Response<ResponseDeleteCartList>
+                ) {
+                    response.body().let {
+                        Log.d("후보 삭제","성공")
+                        notifyItemRemoved(adapterPosition)
                     }
+                }
 
-                    override fun onResponse(
-                        call: Call<ResponseDeleteCartList>,
-                        response: Response<ResponseDeleteCartList>
-                    ) {
-                        response.body()?.let {
-                            if (it.status == 200) {
-                                Log.d("a", it.toString())
-                            }
-                            else
-                                Log.d("b", it.toString())
-                        } ?: Log.d("tag", response.message())
-                    }
-                })*/
-
-
+            })
              itemView.findViewById<Button>(R.id.btn_totable).setOnClickListener {
 
              }
 
-
             }
         }
     }
+
 }
