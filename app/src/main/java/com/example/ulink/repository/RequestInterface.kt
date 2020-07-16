@@ -195,11 +195,11 @@ interface RequestInterface {
     ) : Call<ResponseGetCartList>
 
     //장바구니 과목 추가하기
-    @POST("/cart/{idx}")
+    @POST("/cart")
     fun addCartList(
             @Header("token") token : String,
-            @Path("idx") idx : String
-    ) : Call<ResponseCalendar>
+            @Body body : RequestaddCartList
+    ) : Call<ResponseaddCartList>
 
     //장바구니 과목 삭제하기
     @DELETE("/cart/{idx}")

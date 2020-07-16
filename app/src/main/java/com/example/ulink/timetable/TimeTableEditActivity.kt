@@ -40,6 +40,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
     val mAdapter = TimeTableAddAdapter(this)
     val mEditorAdapter = TimeTableEditorAdapter(this)
 
+    lateinit var semester : String
     var lastpage = 0
 
 
@@ -84,6 +85,10 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         btn_tableplus.setOnClickListener {
             showAddTableDialog()
         }
+
+        //timeTableList[0].semester
+
+        semester = intent.getParcelableExtra<TimeTable>("timeTable").semester
 
         intent.getParcelableExtra<TimeTable>("timeTable")?.let { timeTable ->
 
@@ -444,6 +449,8 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
         })
     }
+
+    fun getSemesterFromActivity() : String = semester
 }
 interface getGradeClickListener{
     fun onClick(position : Int)

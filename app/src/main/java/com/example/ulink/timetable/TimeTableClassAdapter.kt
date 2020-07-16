@@ -15,9 +15,10 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.EvaluationActivity
 import com.example.ulink.R
-import com.example.ulink.repository.DataRepository
-import com.example.ulink.repository.RequestAddSchoolPlan
-import com.example.ulink.repository.Subject
+import com.example.ulink.repository.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeTableFilterSearchFragment.onItemClickListener) : RecyclerView.Adapter<TimeTableClassAdapter.VHolder>() {
@@ -165,7 +166,24 @@ class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeT
             }
 
             cart.setOnClickListener {
-//               TODO DB에 저장!
+                RetrofitService.service.addCartList(token, RequestaddCartList(
+                    semester = "",
+                    subjectIdx = 5
+                )).enqueue(object : Callback<ResponseaddCartList>{
+                    override fun onFailure(call: Call<ResponseaddCartList>, t: Throwable) {
+                        Log.d("후보등록실패",t.message.toString())
+                    }
+
+                    override fun onResponse(
+                        call: Call<ResponseaddCartList>,
+                        response: Response<ResponseaddCartList>
+                    ) {
+                        response.body().let {
+                            Log.d("후보등록성공","후보등록성공")
+                        }
+                    }
+
+                })
 
             }
 
