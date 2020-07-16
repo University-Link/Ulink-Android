@@ -18,7 +18,7 @@ class CalendarSmallScheduleAdapter: RecyclerView.Adapter<CalendarSmallScheduleAd
 
         fun setHolder(item : ResponseNoticeData){
 
-            val textView = itemView.findViewById<TextView>(R.id.schedule)
+            val textView = itemView.findViewById<TextView>(R.id.tv_schedule)
             textView.text = item.name
             textView.setBackgroundResource(getColors(item.color))
             Log.d("tagggggggggggggg",item.toString())

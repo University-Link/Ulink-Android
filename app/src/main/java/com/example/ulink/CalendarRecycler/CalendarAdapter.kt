@@ -21,10 +21,11 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class CalendarAdapter(private val context : Context, data : CalendarData) : RecyclerView.Adapter<CalendarAdapter.Vholder>(){
+class CalendarAdapter(private val context : Context, data : CalendarData) : RecyclerView.Adapter<CalendarAdapter.Vholder>() {
     var data: CalendarData = data
     var endDay = arrayOf(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
-    val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ3MTk1NDYsImV4cCI6MTU5NjE1OTU0NiwiaXNzIjoiYm9iYWUifQ.sim2YHX1mHhoP3eH_dGpxFwTRbVYHCGfPE4sfozFh5U"
+    val token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ3MTk1NDYsImV4cCI6MTU5NjE1OTU0NiwiaXNzIjoiYm9iYWUifQ.sim2YHX1mHhoP3eH_dGpxFwTRbVYHCGfPE4sfozFh5U"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Vholder {
 
@@ -46,6 +47,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
 
             val rvCalendar = itemView as RecyclerView
             val rvAdapter = CalendarDayAdapter(context)
+            val rvScheduleAdapter = CalendarScheduleAdapter(context)
 
             //LeapYear
             endDay[1] = calendarLeapYearCheck(data)
@@ -53,8 +55,6 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
             //month
             var index = firstIndex(data.year, data.month)
             var lastindex = endDay[data.month - 1]
-
-            //Log.d("idx","$index")
 
             //previous_month
             var prevEmptyIndex = calendarPreviousIndexCheck(data, index)
@@ -66,7 +66,56 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
             var popupLastEmpty = index + lastindex
             var popupEmptyIndex = prevEmptyIndex
 
+            var strFirstDay = strFirstDay(prevEmptyIndex, data)
+            var strLastDay = strLastDay(lastEmpty, data)
+
+            Log.d("day", strFirstDay)
+            Log.d("day", strLastDay)
+
             rvCalendar.adapter = rvAdapter
+            val schedule: MutableList<ScheduleItemData> = arrayListOf()
+
+            RetrofitService.service.getAllNotice(token, strFirstDay, strLastDay)
+                .enqueue(object : Callback<ResponseCalendar> {
+                    override fun onFailure(call: Call<ResponseCalendar>, t: Throwable) {
+                    }
+
+                    override fun onResponse(
+                        call: Call<ResponseCalendar>,
+                        response: Response<ResponseCalendar>
+                    ) {
+                        response.body()?.let {
+                            if (it.status == 200) {
+                                for (i in 0 until it.data.size) {
+                                    for (j in 0 until it.data[i].notice.size) {
+                                        rvScheduleAdapter.datas.apply {
+                                            add(
+                                                ScheduleItemData(
+                                                    idx = it.data[i].notice[j].noticeIdx,
+                                                    date = it.data[i].date,
+                                                    category = it.data[i].notice[j].category,
+                                                    classname = it.data[i].notice[j].name,
+                                                    content = it.data[i].notice[j].title,
+                                                    startTime = it.data[i].notice[j].startTime,
+                                                    endTime = it.data[i].notice[j].endTime,
+                                                    memo = "",
+                                                    color = it.data[i].notice[j].color,
+                                                    day = it.data[i].date.split("-")[2],
+                                                    dayindex = nowDateCheck(i),
+                                                    dday = ddaySchedule(it.data[i])
+                                                )
+                                            )
+                                        }
+                                    }
+                                }
+                                rvScheduleAdapter.notifyDataSetChanged()
+                                Log.d("size", rvScheduleAdapter.datas.size.toString())
+                                Log.d("size", schedule.toString())
+                            }
+                        } ?: Log.d("tag4", response.message())
+                    }
+                })
+
 
             rvAdapter.datas.apply {
                 //previous_month
@@ -122,96 +171,109 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                     } else break;
                 }
                 rvAdapter.notifyDataSetChanged()
-            }
 
+                // TODO 리싸이클러뷰 크기 조정
+                rvAdapter.setDayClickListener(
+                    object : CalendarDayAdapter.DayClickListener {
+                        override fun onClick(view: View, position: Int) {
 
-            // TODO 리싸이클러뷰 크기 조정
-            rvAdapter.setDayClickListener(
-                object : CalendarDayAdapter.DayClickListener {
-                    override fun onClick(view: View, position: Int) {
+                            val builder = android.app.AlertDialog.Builder(context)
+                            val layout = LayoutInflater.from(context)
+                                .inflate(R.layout.calendar_popup_layout, null)
 
-                        val builder = android.app.AlertDialog.Builder(context)
-                        val layout = LayoutInflater.from(context).inflate(R.layout.calendar_popup_layout, null)
+                            //Popup
+                            var popupMonth =
+                                popupMonthCheck(position, index, popupLastEmpty, data.month)
+                            var popupDay =
+                                popupDayCheck(position, index, popupLastEmpty, popupEmptyIndex)
 
-                        //Popup
-                        var popupMonth =
-                            popupMonthCheck(position, index, popupLastEmpty, data.month)
-                        var popupDay =
-                            popupDayCheck(position, index, popupLastEmpty, popupEmptyIndex)
+                            layout.findViewById<TextView>(R.id.tv_calendar_popup_date).text =
+                                popupMonth.toString() + "월 " + popupDay.toString() + "일 " + popupDateCheck(
+                                    position
+                                )
 
-                        layout.findViewById<TextView>(R.id.tv_calendar_popup_date).text =
-                            popupMonth.toString() + "월 " + popupDay.toString() + "일 " + popupDateCheck(
-                                position
-                            )
+                            val rvPopupAdapter = SchedulePopupAdapter(context)
+                            layout.findViewById<RecyclerView>(R.id.rv_popup_schedule_item).adapter =
+                                rvPopupAdapter
 
-                        val rvPopupAdapter = SchedulePopupAdapter(context)
-                        layout.findViewById<RecyclerView>(R.id.rv_popup_schedule_item).adapter =
-                            rvPopupAdapter
+                            //ScheduleNotice
+                            //var itemMonth : String = zeroPlus(popupMonth.toString())
+                            //var itemDay : String = zeroPlus(rvAdapter.datas[position].day)
+                            var itemYear: String = popupYearCheck(
+                                data.year,
+                                data.month,
+                                position,
+                                index,
+                                popupLastEmpty
+                            ).toString()
 
-                        //ScheduleNotice
-                        //var itemMonth : String = zeroPlus(popupMonth.toString())
-                        //var itemDay : String = zeroPlus(rvAdapter.datas[position].day)
-                        var itemYear: String = popupYearCheck(data.year, data.month, position, index, popupLastEmpty).toString()
+                            var retrofitStr =
+                                itemYear + "-" + popupMonth.toString() + "-" + popupDay.toString() // 통신용
 
-                        var retrofitStr =
-                            itemYear + "-" + popupMonth.toString() + "-" + popupDay.toString() // 통신용
+                            val popupList: MutableList<ScheduleItemData> = arrayListOf()
 
-                        val popupList: MutableList<ScheduleItemData> = arrayListOf()
+                            RetrofitService.service.getAllNotice(token, retrofitStr, retrofitStr)
+                                .enqueue(object : Callback<ResponseCalendar> {
+                                    override fun onFailure(
+                                        call: Call<ResponseCalendar>,
+                                        t: Throwable
+                                    ) {
+                                    }
 
-                        RetrofitService.service.getAllNotice(token, retrofitStr, retrofitStr)
-                            .enqueue(object : Callback<ResponseCalendar> {
-                                override fun onFailure(call: Call<ResponseCalendar>, t: Throwable) {
-                                }
-
-                                override fun onResponse(
-                                    call: Call<ResponseCalendar>,
-                                    response: Response<ResponseCalendar>
-                                ) {
-                                    response.body()?.let {
-                                        if (it.status == 200) {
-                                            for (i in 0 until it.data.size) {
-                                                for (j in 0 until it.data[i].notice.size) {
-                                                    popupList.add(
-                                                        ScheduleItemData(
-                                                            idx = it.data[i].notice[j].noticeIdx,
-                                                            date = it.data[i].date,
-                                                            category = it.data[i].notice[j].category,
-                                                            classname = it.data[i].notice[j].name,
-                                                            content = it.data[i].notice[j].title,
-                                                            startTime = it.data[i].notice[j].startTime,
-                                                            endTime = it.data[i].notice[j].endTime,
-                                                            memo = "",
-                                                            day = it.data[i].date.split("-")[2],
-                                                            dayindex = nowDateCheck(i),
-                                                            dday = ddaySchedule(it.data[i])
+                                    override fun onResponse(
+                                        call: Call<ResponseCalendar>,
+                                        response: Response<ResponseCalendar>
+                                    ) {
+                                        response.body()?.let {
+                                            if (it.status == 200) {
+                                                for (i in 0 until it.data.size) {
+                                                    for (j in 0 until it.data[i].notice.size) {
+                                                        popupList.add(
+                                                            ScheduleItemData(
+                                                                idx = it.data[i].notice[j].noticeIdx,
+                                                                date = it.data[i].date,
+                                                                category = it.data[i].notice[j].category,
+                                                                classname = it.data[i].notice[j].name,
+                                                                content = it.data[i].notice[j].title,
+                                                                startTime = it.data[i].notice[j].startTime,
+                                                                endTime = it.data[i].notice[j].endTime,
+                                                                memo = "",
+                                                                day = it.data[i].date.split("-")[2],
+                                                                dayindex = nowDateCheck(i),
+                                                                dday = ddaySchedule(it.data[i])
+                                                            )
                                                         )
-                                                    )
+                                                    }
+                                                    rvPopupAdapter.datas = popupList
+                                                    rvPopupAdapter.notifyDataSetChanged()
                                                 }
-                                                rvPopupAdapter.datas = popupList
-                                                rvPopupAdapter.notifyDataSetChanged()
                                             }
-                                        }
-                                    } ?: Log.d("tag4", response.message())
+                                        } ?: Log.d("tag4", response.message())
+                                    }
+                                })
+
+                            rvPopupAdapter.setScheduleItemClickListener(object :
+                                SchedulePopupAdapter.ScheduleItemClickListener {
+                                override fun onClick(view: View, position: Int) {
+                                    val intent =
+                                        Intent(view.context, ScheduleNoticeActivity::class.java)
+                                    intent.putExtra(
+                                        "scheduleItemData",
+                                        rvPopupAdapter.datas[position]
+                                    )
+                                    view.context.startActivity(intent)
                                 }
                             })
 
-                        rvPopupAdapter.setScheduleItemClickListener(object :
-                            SchedulePopupAdapter.ScheduleItemClickListener {
-                            override fun onClick(view: View, position: Int) {
-                                val intent = Intent(view.context, ScheduleNoticeActivity::class.java)
-                                intent.putExtra("scheduleItemData", rvPopupAdapter.datas[position])
-                                view.context.startActivity(intent)
-                            }
-                        })
+                            builder.setView(layout)
 
-                        builder.setView(layout)
+                            val dialog = builder.create()
 
-                        val dialog = builder.create()
-
-                        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                        dialog.show()
-                    }
-                })
+                            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                            dialog.show()
+                        }
+                    })
+            }
         }
     }
 }

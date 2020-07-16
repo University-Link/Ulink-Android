@@ -13,6 +13,7 @@ data class ScheduleItemData (
     var startTime : String,
     var endTime : String,
     var memo : String,
+    var color : Int = 0,
     var day : String = "",
     var dayindex : String = "",
     var dday : Long = 0L

@@ -145,6 +145,9 @@ class TimeTableFragment : Fragment() {
         super.onResume()
         val onClick = object : subjectOnClick {
             override fun onClick(subject: Subject) {
+
+                Log.d("idx", subject.toString())
+
                 val builder = AlertDialog.Builder(context)
                 val layout = LayoutInflater.from(context).inflate(R.layout.dialog_timetable_subject, null)
 
@@ -173,7 +176,6 @@ class TimeTableFragment : Fragment() {
                     }
                 }
 
-
                 layout.findViewById<TextView>(R.id.tv_professor_name).text = subject.professor
                 layout.findViewById<TextView>(R.id.tv_class_name).text = subject.name
 
@@ -181,16 +183,17 @@ class TimeTableFragment : Fragment() {
                     //val idx = subject.id.toString()
                     val intent = Intent(view?.context, ChattingActivity::class.java) //과목명
                     intent.putExtra("class", subject.name)
-                    //intent.putExtra("idx", subject.id.toString())
+                    intent.putExtra("idx", subject.subjectIdx.toString())
+                    Log.d("idx", subject.subjectIdx.toString())
                     startActivity(intent)
                 }
 
                 layout.findViewById<TextView>(R.id.tv_checkassignment).setOnClickListener {
-                    val className = subject.name
                     //val idx = subject.id.toString()
                     val intent = Intent(view?.context, NoticeActivity::class.java)
                     intent.putExtra("class", subject.name)
-                    //intent.putExtra("idx", "4")
+                    intent.putExtra("idx", subject.subjectIdx.toString())
+                    Log.d("idx", subject.subjectIdx.toString())
                     startActivity(intent)
                 }
 

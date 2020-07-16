@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 var endDay = arrayOf(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
+var leafCheck  = arrayOf(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
 
 var cal: Calendar = Calendar.getInstance()
 var now_day = cal.get(Calendar.DATE)
@@ -109,7 +110,6 @@ fun firstIndex (data_year : Int, data_month : Int) : Int
     val month : Int = data_month
     val index = getDay(year, month);
 
-    Log.d("tag index 제일처으",index.toString())
     return index;
 }
 
@@ -179,20 +179,18 @@ fun popupYearCheck(data_year : Int, data_month : Int, position : Int, index : In
 
 fun strFirstDay(prevEmptyIndex : Int, data : CalendarData) : String{
 
-    var day = 0
     var month = data.month
     var year = data.year
 
     lateinit var strFirstDay : String
-
-    endDay[1] = calendarLeapYearCheck(data)
 
     if(month == 1) {
         month = 13
         year -= 1
     }
 
-    if(prevEmptyIndex>endDay[data.month-1]) {
+    leafCheck[1] = calendarLeapYearCheck(data)
+    if(prevEmptyIndex> leafCheck[data.month-1]) {
         var firstDay  = 1
         strFirstDay = year.toString() + "-" + month.toString() + "-" + firstDay.toString()
     }
@@ -207,10 +205,11 @@ fun strLastDay(lastEmpty : Int, data : CalendarData) : String{
     var month = data.month
     var year = data.year
 
-    endDay[1] = calendarLeapYearCheck(data)
-
     var lastday = lastEmpty
+
     lateinit var strLastDay : String
+
+    leafCheck[1] = calendarLeapYearCheck(data)
 
     while(lastday % 7 != 0) {
         day ++
@@ -223,9 +222,8 @@ fun strLastDay(lastEmpty : Int, data : CalendarData) : String{
     }
 
     if(day == 0) {
-        day = endDay[data.month-1]
-        strLastDay = year.toString() + "-" + month.toString() + "-" + day.toString()
-    }
+        day = leafCheck[month - 1]
+        strLastDay = year.toString() + "-" + month.toString() + "-" + day.toString() }
     else
         strLastDay = year.toString() + "-" + (month+1).toString() + "-" + day.toString()
 
