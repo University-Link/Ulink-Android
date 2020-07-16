@@ -11,6 +11,7 @@ import com.example.ulink.ScheduleRecycler.ScheduleItemData
 import com.example.ulink.ScheduleRecycler.nowDay
 import com.example.ulink.ScheduleRecycler.nowMonth
 import com.example.ulink.ScheduleRecycler.nowYear
+import com.example.ulink.repository.CalendarNoticeData
 import java.text.SimpleDateFormat
 
 fun intentNoticeAdd(scheduleItemData : ScheduleItemData,
@@ -86,9 +87,9 @@ fun dataReturn(year : Int, month : Int, day : Int, category : String, classname 
     var startTime : String
     var endTime : String
 
-    if(spinner_start.selectedItem.toString()=="시간정보없음") startTime = ""
+    if(spinner_start.selectedItem.toString()=="시간정보없음") startTime = "-1"
     else startTime = spinner_start.selectedItem.toString()
-    if(spinner_end.selectedItem.toString()=="시간정보없음") endTime = ""
+    if(spinner_end.selectedItem.toString()=="시간정보없음") endTime = "-1"
     else endTime = spinner_end.selectedItem.toString()
 
     var item =
@@ -149,4 +150,17 @@ fun ddayCheck(scheduleItemData : ScheduleItemData) : Long{
     dayRemainder /= (24 * 60 * 60 * 1000)
 
     return dayRemainder
+}
+
+fun ddaySchedule(calendarNoticeData : CalendarNoticeData) : Long{
+
+    var now = "$nowYear-$nowMonth-$nowDay"
+    var nowDate = SimpleDateFormat("yyyy-MM-dd").parse(now)
+    var scheduleDate = SimpleDateFormat("yyyy-MM-dd").parse(calendarNoticeData.date)
+
+    var dayRemainder = nowDate.time - scheduleDate.time
+    dayRemainder /= (24 * 60 * 60 * 1000)
+
+    return dayRemainder
+
 }

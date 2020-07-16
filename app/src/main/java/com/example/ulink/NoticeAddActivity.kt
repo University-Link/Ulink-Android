@@ -32,7 +32,6 @@ class NoticeAddActivity : AppCompatActivity() {
     private var datePickerMonth = cal.get(Calendar.MONTH)+1
     private var datePickerDay =  cal.get(Calendar.DATE)
     var category = ""
-    var resultCode = 0
 
     var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ3NzkxODAsImV4cCI6MTU5NjIxOTE4MCwiaXNzIjoiYm9iYWUifQ.BAOeiZ_uqtIVPzFJd2oZbfVz44A2_QSXLQliNhN6pv4"
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -169,7 +168,7 @@ class NoticeAddActivity : AppCompatActivity() {
                             response: Response<ResponseRegisterNotice>
                         ) {
                             response.body()?.let {
-                                if (it.status == 200) {
+                                if (it.status == 201) {
                                     Log.d("가보자", "가보자")
                                 }
                             } ?: Log.d("실패1", response.message())

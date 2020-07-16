@@ -80,7 +80,7 @@ class TimeTableFragment : Fragment() {
         }
 
         btn_setting.setOnClickListener {
-            val bottomsheet = BottomSheetFragment()
+            val bottomsheet = BottomSheetFragment(mainTable)
             fragmentManager?.let { it -> bottomsheet.show(it, bottomsheet.tag) }
 
 

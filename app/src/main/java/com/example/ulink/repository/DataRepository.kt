@@ -35,6 +35,7 @@ object DataRepository {
                             addAll(it.data.subjects.fri)
                         }
                         val timeTable = TimeTable(it.data.timeTable.id, it.data.timeTable.semester, it.data.timeTable.name, 1, startTime = it.data.minTime, endTime = it.data.maxTime, subjectList = subjectList)
+                        Log.d("tag",timeTable.toString())
                         onSuccess(timeTable)
                     } else {
                         onFailure(response.errorBody().toString())

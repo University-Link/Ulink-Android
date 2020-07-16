@@ -18,7 +18,18 @@ class ScheduleItemViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView
         category.text = scheduleItemData.category
         className.text = scheduleItemData.classname+" "
         content.text = scheduleItemData.content
-        time.text = scheduleItemData.startTime
+
+        if(scheduleItemData.category=="과제" && scheduleItemData.endTime!="-1")
+            time.text = scheduleItemData.endTime
+        if(scheduleItemData.endTime=="-1") time.text = ""
+
+        if (scheduleItemData.category=="수업")
+            time.text = ""
+
+        if(scheduleItemData.category=="시험" && scheduleItemData.startTime!="-1")
+            time.text = scheduleItemData.startTime
+        if(scheduleItemData.startTime=="-1") time.text = ""
+
         categoryBackground(scheduleItemData.category, category)
         todayBackground(scheduleItemData.date, background)
     }

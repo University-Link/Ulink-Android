@@ -12,5 +12,8 @@ data class ScheduleItemData (
     var content : String,
     var startTime : String,
     var endTime : String,
-    var memo : String
+    var memo : String,
+    var day : String = "",
+    var dayindex : String = "",
+    var dday : Long = 0L
 ) : Parcelable

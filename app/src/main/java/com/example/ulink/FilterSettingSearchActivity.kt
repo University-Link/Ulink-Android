@@ -1,26 +1,31 @@
 package com.example.ulink
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ulink.TimeTable_Search_Recycler.SearchData
 import com.example.ulink.TimeTable_Search_Recycler.TimeTable_Search_Adapter
 import com.example.ulink.repository.ResponsegetSubjectWithWord
 import com.example.ulink.repository.RetrofitService
 import com.example.ulink.repository.SearchedData
+import com.example.ulink.timetable.TimeTableFilterSearchFragment
 import com.example.ulink.timetable.token
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_filtersetting_search.*
+import kotlinx.android.synthetic.main.fragment_timetablefiltersearch.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.ArrayList
+
 
 class FilterSettingSearchActivity : AppCompatActivity() {
     val datas : MutableList<SearchData> = mutableListOf<SearchData>()
@@ -63,7 +68,19 @@ class FilterSettingSearchActivity : AppCompatActivity() {
         }
         //loadDatas()
 
+        TimeTable_Search_Adapter.itemClick = object : TimeTable_Search_Adapter.ItemClick{
+            override fun onClick(view: View, position: Int) {
+                //list[position]을 TimeTableFilterSearchFragment 에전달 후 띄워줘야함
+                val intent = Intent()
+                intent.putExtra("item",list[position])
+                setResult(300,intent)
+                intent.putExtra("et_class_name",edit.text.toString())
+                finish()
 
+               // finish()
+            }
+
+        }
 
         btn_back.setOnClickListener {
             finish()
@@ -96,30 +113,30 @@ class FilterSettingSearchActivity : AppCompatActivity() {
                         if(it.status == 200){
                             //Log.d("검색성공",it.toString())
 
-                                list.clear()
-                                datas.clear()
+                            list.clear()
+                            datas.clear()
 
-                                if(edit.text.toString()!=""){
-                                    list.addAll(it.data)
-                                 }
-                                for (i in 0 until list.size) {
-                                    Log.d("데이터", list[i].toString())
-                                    datas.apply {
-                                        add(
-                                            SearchData(
-                                                search_result = list[i].name,
-                                                search_type = ""
-                                            )
+                            if(edit.text.toString()!=""){
+                                list.addAll(it.data)
+                            }
+                            for (i in 0 until list.size) {
+                                Log.d("데이터", list[i].toString())
+                                datas.apply {
+                                    add(
+                                        SearchData(
+                                            search_result = list[i].name,
+                                            search_type = ""
                                         )
+                                    )
 
-                                    }
                                 }
+                            }
 //                                list.clear()
 
-                                TimeTable_Search_Adapter.searchdatas = datas
-                                TimeTable_Search_Adapter.viewType = 1
-                                TimeTable_Search_Adapter.notifyDataSetChanged()
-                                editor.commit()
+                            TimeTable_Search_Adapter.searchdatas = datas
+                            TimeTable_Search_Adapter.viewType = 1
+                            TimeTable_Search_Adapter.notifyDataSetChanged()
+                            editor.commit()
 
                         }else{
                             Log.d("검색실패",it.toString())
@@ -144,6 +161,12 @@ class FilterSettingSearchActivity : AppCompatActivity() {
 //                editor.commit()
 
                 //datas 넘겨주기
+                val intent = Intent()
+                intent.putParcelableArrayListExtra("list",list as ArrayList<out Parcelable>)
+                setResult(200,intent)
+                intent.putExtra("et_class_name",edit.text.toString())
+                finish()
+
                 return@setOnEditorActionListener true
 
 
@@ -174,6 +197,7 @@ class FilterSettingSearchActivity : AppCompatActivity() {
                 }
             }
         }
+
 
 
 

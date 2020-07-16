@@ -18,6 +18,13 @@ class TimeTable_Search_Adapter (private val context: Context):RecyclerView.Adapt
     
     var viewType = 0
 
+    interface ItemClick
+    {
+        fun onClick(view: View, position: Int)
+    }
+    var itemClick: ItemClick? = null
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when(viewType){
             0->{
@@ -44,6 +51,15 @@ class TimeTable_Search_Adapter (private val context: Context):RecyclerView.Adapt
             }
         } else {
             (holder as TimeTable_Searched_ViewHolder).bind(searchdatas[position])
+
+        }
+        if(itemClick != null)
+        {
+            holder?.itemView?.setOnClickListener { v ->
+                itemClick?.onClick(v, position)
+            }
         }
     }
+
+
 }
