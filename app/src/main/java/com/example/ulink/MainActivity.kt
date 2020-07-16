@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
         main_viewPager.adapter = MainPagerAdapter(supportFragmentManager)
         main_viewPager.offscreenPageLimit = 2
         main_viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
@@ -37,6 +36,10 @@ class MainActivity : AppCompatActivity() {
                 bottomNavigationView.menu.getItem(position).isChecked = true
             }
         })
+
+        if(intent.getBooleanExtra("flag", false)){
+                main_viewPager.setCurrentItem(2)
+            }
 
         bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {

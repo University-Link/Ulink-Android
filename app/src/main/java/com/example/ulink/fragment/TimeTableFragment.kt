@@ -58,7 +58,7 @@ class TimeTableFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        mainTable = TimeTable(1, "2020-1", "시간표1", true, "09:00", "16:00")
+        mainTable = TimeTable(0, "2020-1", "시간표1", true, "09:00", "16:00")
 
 
         val onClick = object : subjectOnClick {
@@ -132,7 +132,7 @@ class TimeTableFragment : Fragment() {
         }
 
         btn_setting.setOnClickListener {
-            val bottomsheet = BottomSheetFragment()
+            val bottomsheet = BottomSheetFragment(mainTable)
             fragmentManager?.let { it -> bottomsheet.show(it, bottomsheet.tag) }
         }
     }

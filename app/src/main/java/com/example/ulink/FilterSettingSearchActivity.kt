@@ -1,32 +1,35 @@
 package com.example.ulink
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ulink.TimeTable_Search_Recycler.SearchData
 import com.example.ulink.TimeTable_Search_Recycler.TimeTable_Search_Adapter
 import com.example.ulink.repository.ResponsegetSubjectWithWord
 import com.example.ulink.repository.RetrofitService
 import com.example.ulink.repository.SearchedData
-import com.example.ulink.repository.SubjectListByGrade
-import com.example.ulink.timetable.token
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import com.example.ulink.timetable.TimeTableFilterSearchFragment
 import kotlinx.android.synthetic.main.activity_filtersetting_search.*
+import kotlinx.android.synthetic.main.fragment_timetablefiltersearch.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.ArrayList
+
 
 class FilterSettingSearchActivity : AppCompatActivity() {
     val datas : MutableList<SearchData> = mutableListOf<SearchData>()
     lateinit var TimeTable_Search_Adapter : TimeTable_Search_Adapter
     lateinit var filter_name :String
+    val list : MutableList<SearchedData> = arrayListOf()
+
     val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ4MTY1NzQsImV4cCI6MTU5NjI1NjU3NCwiaXNzIjoiYm9iYWUifQ.JwRDELH1lA1Fb8W1ltTmhThpmgFrUTQZVocUTATv3so"
 //    TODO 아이템 클릭이나 검색버튼 클릭하면 setresult
 
@@ -60,9 +63,22 @@ class FilterSettingSearchActivity : AppCompatActivity() {
             TimeTable_Search_Adapter.recentdatas.addAll(recentList)
             Log.d("tag","added")
         }
-        loadDatas()
+        //loadDatas()
 
 
+        TimeTable_Search_Adapter.itemClick = object : TimeTable_Search_Adapter.ItemClick{
+            override fun onClick(view: View, position: Int) {
+                //list[position]을 TimeTableFilterSearchFragment 에전달 후 띄워줘야함
+                val intent = Intent()
+                intent.putExtra("item",list[position])
+                setResult(300,intent)
+                intent.putExtra("et_class_name",edit.text.toString())
+                finish()
+
+               // finish()
+            }
+
+        }
 
         btn_back.setOnClickListener {
             finish()
@@ -80,11 +96,7 @@ class FilterSettingSearchActivity : AppCompatActivity() {
 ////         스피너 아이템 별로 sharepref저장
 //        }
 
-//        edit.textChangedListener {
-//
-//        }
-        edit.setOnEditorActionListener { v, actionId, event ->
-            Log.d("검색단어",v.text.toString())
+        edit.textChangedListener {
 
             RetrofitService.service.getSubjectWithWord(token,edit.text.toString()).enqueue(object : Callback<ResponsegetSubjectWithWord>{
                 override fun onFailure(call: Call<ResponsegetSubjectWithWord>, t: Throwable) {
@@ -97,9 +109,33 @@ class FilterSettingSearchActivity : AppCompatActivity() {
                 ) {
                     response.body()?.let{
                         if(it.status == 200){
-                            Log.d("검색성공",it.toString())
-                            val list : MutableList<SearchedData> = arrayListOf()
-                            list.addAll(it.data)
+                            //Log.d("검색성공",it.toString())
+
+                            list.clear()
+                            datas.clear()
+
+                            if(edit.text.toString()!=""){
+                                list.addAll(it.data)
+                            }
+                            for (i in 0 until list.size) {
+                                Log.d("데이터", list[i].toString())
+                                datas.apply {
+                                    add(
+                                        SearchData(
+                                            search_result = list[i].name,
+                                            search_type = ""
+                                        )
+                                    )
+
+                                }
+                            }
+//                                list.clear()
+
+                            TimeTable_Search_Adapter.searchdatas = datas
+                            TimeTable_Search_Adapter.viewType = 1
+                            TimeTable_Search_Adapter.notifyDataSetChanged()
+                            editor.commit()
+
                         }else{
                             Log.d("검색실패",it.toString())
 
@@ -108,17 +144,26 @@ class FilterSettingSearchActivity : AppCompatActivity() {
                 }
             })
 
+        }
+        edit.setOnEditorActionListener { v, actionId, event ->
+
             Log.d("tag",actionId.toString())
-            if (actionId == EditorInfo.IME_ACTION_DONE){
-                recentList?.add(v.text.toString())
-                editor.putStringSet("recentSearch", recentList)
+            if (actionId == EditorInfo.IME_ACTION_SEARCH){
 
-//                TODO 서버 search해서 adapter로 데이터 넣어주기! 리스트 아예 새로 만들어줘야 안섞임 notify도 잘하기
+//                recentList?.add(v.text.toString())
+//                editor.putStringSet("recentSearch", recentList)
 
+//                Log.d("search클릭","search")
+//                TimeTable_Search_Adapter.viewType = 1
+//                TimeTable_Search_Adapter.notifyDataSetChanged()
+//                editor.commit()
 
-                TimeTable_Search_Adapter.viewType = 1
-                TimeTable_Search_Adapter.notifyDataSetChanged()
-                editor.commit()
+                //datas 넘겨주기
+                val intent = Intent()
+                intent.putParcelableArrayListExtra("list",list as ArrayList<out Parcelable>)
+                setResult(200,intent)
+                intent.putExtra("et_class_name",edit.text.toString())
+                finish()
 
                 return@setOnEditorActionListener true
 
@@ -155,13 +200,14 @@ class FilterSettingSearchActivity : AppCompatActivity() {
 
 
 
+
     }
     private fun loadDatas() {
         datas.apply {
             add(
                 SearchData(
                     search_result = "전자기학",
-                        search_type = ""
+                    search_type = ""
                 )
             )
 

@@ -82,7 +82,9 @@ class NoticeActivity : AppCompatActivity(){
 
         btn_home.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("flag", true)
             startActivity(intent)
+
             finish()
         }
         btn_plus.setOnClickListener {

@@ -1,7 +1,6 @@
 package com.example.ulink.repository
 
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.*
 
 interface RequestInterface {
@@ -39,12 +38,15 @@ interface RequestInterface {
             @Path("idx") idx : String,
             @Query("isSubject") isSubject : Boolean
     ) : Call<ResponseTimeTable>
+
     //시간표 - 메인 시간표 이름 수정(변경)
-    @PUT("/schedule/{idx}")
+    @PUT("/schedule/main/{idx}")
     fun updateMainTimeTableName(
-            @Header("token") token: String,
-            @Path("idx") idx : String
+        @Header("token") token: String,
+        @Path("idx") idx: String
+
     ) : Call<ResponseTimeTable>
+
     //시간표 - 일정 삭제(통합)
     @DELETE("/schedule/specific/{idx}")
     fun deleteNotice(
@@ -57,14 +59,22 @@ interface RequestInterface {
     fun updateMainTimeTable(
             @Header("token") token: String,
             @Path("idx") idx : String
-    ) : Call<ResponseTimeTable>
+    ) : Call<ResponseupdateMainTimeTable>
 
     //메인 시간표 삭제하기
     @DELETE("/schedule/main/{idx}")
     fun deleteMainTimeTable(
             @Header("token") token: String,
             @Path("idx") idx : String
-    ) : Call<ResponseTimeTable>
+    ) : Call<ResponsedeleteMainTimeTable>
+
+    //시간표 - 시간표 이름 수정(변경)
+    @PUT("/schedule/name/{idx}")
+    fun updateTimeTableName(
+        @Header("token") token : String,
+        @Path("idx") idx : Long,
+        @Body body: RequestupdateTimeTableName
+    ) : Call<ResponseupdateTimeTableName>
 
     //모든 학기 시간표 목록 가져오기
     @GET("/schedule/list")
