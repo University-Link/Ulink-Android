@@ -4,10 +4,10 @@ data class ResponseCalendar(
     val status : Int,
     val success : Boolean,
     val message : String,
-    val data : List<SomeData>
+    val data : List<CalendarNoticeData>
 )
 
-data class SomeData(
+data class CalendarNoticeData(
     val date : String,
     val notice : List<Notice>
 )

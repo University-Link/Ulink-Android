@@ -1,9 +1,12 @@
 package com.example.ulink.CalendarRecycler
 
 import android.graphics.Color
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import com.example.ulink.R
+import com.example.ulink.ResponseNoticeData
+import java.text.SimpleDateFormat
 import java.util.*
 
 var endDay = arrayOf(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
@@ -49,19 +52,9 @@ fun calendarDayColorCheck(dayData: CalendarDayData, itemView : View) {
 
 fun calendarAlpha(dayData: CalendarDayData, itemView : View){
     val day : TextView = itemView.findViewById(R.id.day)
-    val schedule1 : TextView = itemView.findViewById(R.id.schedule1)
-    val schedule2 : TextView = itemView.findViewById(R.id.schedule2)
-    val schedule3 : TextView = itemView.findViewById(R.id.schedule3)
-    val schedule4 : TextView = itemView.findViewById(R.id.schedule4)
-    val schedule5 : TextView = itemView.findViewById(R.id.schedule5)
 
     if(!dayData.check){
         day.alpha=0.3f
-        schedule1.alpha=0.3f
-        schedule2.alpha=0.3f
-        schedule3.alpha=0.3f
-        schedule4.alpha=0.3f
-        schedule5.alpha=0.3f
     } // prev, next month
 }
 
@@ -115,6 +108,8 @@ fun firstIndex (data_year : Int, data_month : Int) : Int
     val year : Int = data_year
     val month : Int = data_month
     val index = getDay(year, month);
+
+    Log.d("tag index 제일처으",index.toString())
     return index;
 }
 
@@ -180,4 +175,78 @@ fun popupYearCheck(data_year : Int, data_month : Int, position : Int, index : In
     if(data_month == 12 && position >= last_empty) popupYear +=1
 
     return popupYear
+}
+
+fun strFirstDay(prevEmptyIndex : Int, data : CalendarData) : String{
+
+    var day = 0
+    var month = data.month
+    var year = data.year
+
+    lateinit var strFirstDay : String
+
+    endDay[1] = calendarLeapYearCheck(data)
+
+    if(month == 1) {
+        month = 13
+        year -= 1
+    }
+
+    if(prevEmptyIndex>endDay[data.month-1]) {
+        var firstDay  = 1
+        strFirstDay = year.toString() + "-" + month.toString() + "-" + firstDay.toString()
+    }
+    else
+        strFirstDay = year.toString() + "-" + (month-1).toString() + "-" + prevEmptyIndex.toString()
+
+    return strFirstDay
+}
+
+fun strLastDay(lastEmpty : Int, data : CalendarData) : String{
+    var day = 0
+    var month = data.month
+    var year = data.year
+
+    endDay[1] = calendarLeapYearCheck(data)
+
+    var lastday = lastEmpty
+    lateinit var strLastDay : String
+
+    while(lastday % 7 != 0) {
+        day ++
+        lastday++
+    }
+
+    if(month == 12) {
+        month = 0
+        year += 1
+    }
+
+    if(day == 0) {
+        day = endDay[data.month-1]
+        strLastDay = year.toString() + "-" + month.toString() + "-" + day.toString()
+    }
+    else
+        strLastDay = year.toString() + "-" + (month+1).toString() + "-" + day.toString()
+
+    return strLastDay
+}
+
+fun today() : String{
+    return now_year.toString()+"-"+now_month.toString()+"-"+now_day.toString()
+}
+
+fun tenday() : String{
+    var year = now_year
+    var month = now_month
+    var day = now_day+10
+
+    if(day > endDay[month+1]) {
+        day = endDay[month + 1] - day
+        month += 1
+    }
+
+    if(month>=12) year+=1
+
+    return year.toString()+"-"+month.toString()+"-"+day.toString()
 }
