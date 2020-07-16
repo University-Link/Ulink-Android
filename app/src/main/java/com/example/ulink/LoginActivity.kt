@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -18,6 +19,9 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        //Glide.with(this).load(R.drawable.io_loginview).into(gif_login);
+//        json_login.setAnimation("lan_login_s10")
+//        json_login.playAnimation()
 
         val sharedPref : SharedPreferences = getSharedPreferences("pref", Context.MODE_PRIVATE)
         et_id.setText(sharedPref.getString("id", ""))

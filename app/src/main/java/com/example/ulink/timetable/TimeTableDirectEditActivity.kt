@@ -91,24 +91,17 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
                         return@setOnClickListener
                     }
                     timeTable.subjectList.add(subjectAddedList[i])
-                    Log.d("tag",RequestAddPersonalPlan(
-                            subjectAddedList[i].name,
-                            subjectAddedList[i].startTime[0],
-                            subjectAddedList[i].endTime[0],
-                            subjectAddedList[i].day[0].toString(),
-                            subjectAddedList[i].place[0],
-                            subjectAddedList[i].color,
-                            timeTable.id.toInt()
-                    ).toString())
 
-                    DataRepository.addPersonalPlan(RequestAddPersonalPlan(
-                            subjectAddedList[i].name,
-                            subjectAddedList[i].startTime[0],
-                            subjectAddedList[i].endTime[0],
-                            subjectAddedList[i].day[0].toString(),
-                            subjectAddedList[i].place[0],
-                            subjectAddedList[i].color,
-                            timeTable.id.toInt()
+                    DataRepository.addPersonalPlan( RequestAddPersonalPlan(
+                            scheduleList = listOf<RequestAddPersonalPlan.Schedule>(
+                                    RequestAddPersonalPlan.Schedule(subjectAddedList[i].name,
+                                            subjectAddedList[i].startTime[0],
+                                            subjectAddedList[i].endTime[0],
+                                            subjectAddedList[i].day[0],
+                                            subjectAddedList[i].place[0],
+                                            subjectAddedList[i].color,
+                                            timeTable.id)
+                            )
                     ), onSuccess = {
                         requestnum+= 1
                         Log.d("tag", requestnum.toString())

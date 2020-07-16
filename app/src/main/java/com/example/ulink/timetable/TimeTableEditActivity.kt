@@ -23,6 +23,7 @@ import com.example.ulink.utils.deepCopy
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_time_table_edit.*
+import kotlinx.android.synthetic.main.fragment_time_table.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,13 +40,14 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
     val mAdapter = TimeTableAddAdapter(this)
     val mEditorAdapter = TimeTableEditorAdapter(this)
 
+    lateinit var semester : String
     var lastpage = 0
 
-    override fun onDestroy() {
-        super.onDestroy()
+
+    override fun onBackPressed() {
+        super.onBackPressed()
         val intent = Intent()
         if (vp_timetableadd.currentItem < timeTableList.size){
-            Log.d("tag",timeTableList[lastpage].toString())
             intent.putExtra("timeTable", timeTableList[lastpage])
             setResult(200, intent)
         }
@@ -56,15 +58,17 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_time_table_edit)
 
-//      TODO 여기서 불러오기
-
-        intent.getParcelableArrayListExtra<TimeTable>("timeTableList")?.let {
-            timeTableList.addAll(it)
-        }
+//      여기서 set
 
         btn_cancel.setOnClickListener {
+            val intent = Intent()
+            if (vp_timetableadd.currentItem < timeTableList.size){
+                intent.putExtra("timeTable", timeTableList[lastpage])
+                setResult(200, intent)
+            }
             finish()
         }
+
 
         Handler().postDelayed({
 
@@ -81,6 +85,43 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         btn_tableplus.setOnClickListener {
             showAddTableDialog()
         }
+
+        //timeTableList[0].semester
+
+        semester = intent.getParcelableExtra<TimeTable>("timeTable").semester
+
+        intent.getParcelableExtra<TimeTable>("timeTable")?.let { timeTable ->
+
+            val tableList : MutableList<TimeTable> = arrayListOf()
+            DataRepository.getTimeTableBySemester(timeTable.semester,
+                    onSuccess = {
+                        for (table in it){
+                            val size = it.size
+                            DataRepository.getTimeTableWithId(table.id,
+                                    onSuccess = { tableFromServer ->
+
+                                        tableList.add(tableFromServer)
+
+                                        timeTableList.add(deepCopy(tableFromServer))
+                                        timeTableList.reverse()
+                                        if (tableList.size == size){
+                                            setTimeTableAdd()
+                                        }
+                                    },
+                                    onFailure = {
+                                        Log.d("tag", it)
+                                    })
+                        }
+                    },
+                    onFailure = {
+
+            } )
+        }
+
+
+
+
+
     }
 
     override fun onResume() {
@@ -131,10 +172,8 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
 
     fun addToTable(subject: Subject) {
-        Toast.makeText(this, "클릭", Toast.LENGTH_SHORT).show()
 
         val position = vp_timetableadd.currentItem
-        Log.d("tag",mAdapter.itemCount.toString())
         if (position == mAdapter.itemCount - 1) {
             return
         }
@@ -167,6 +206,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         if (position == mAdapter.itemCount - 1) {
             return
         }
+
         var timeTable: TimeTable = mAdapter.timeTableSampleList.get(position)
         
         timeTable.subjectList.add(subject)
@@ -174,15 +214,14 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         mAdapter.reDrawFragment(position)
         mAdapter.scrollToPosition(position, subject)
         vp_timetableadd.setCurrentItem(position, false)
-
     }
+
 
     fun rollBack() {
         val position = vp_timetableadd.currentItem
         if (position == mAdapter.itemCount - 1) {
             return
         }
-        Log.d("t₩ag", vp_timetableadd.childCount.toString())
         mAdapter.replaceAtSampleList(position, mAdapter.timeTableList[position])
         mAdapter.reDrawFragment(vp_timetableadd.currentItem)
         mAdapter.scrollToTop(position)
@@ -243,15 +282,14 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
     }
 
     fun setTimeTableAdd() {
-        mAdapter.setList(timeTableList)
 
+        mAdapter.setList(timeTableList)
         mAdapter.timeTableAddListener = object : TimeTableAddListener {
             override fun onAdded(timeTable: TimeTable) {
                 moveToLastItem()
             }
         }
         vp_timetableadd.adapter = mAdapter
-
         vp_timetableadd.setPageTransformer(MarginPageTransformer(dptopx(30).toInt()))
 
         TabLayoutMediator(tl_indicator, vp_timetableadd) { v, p ->
@@ -393,7 +431,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
                         val list : MutableList<Subject> = arrayListOf()
 
                         for (i in it.data){
-                            val subject = Subject(i.subjectIdx,i.name,i.startTime,i.endTime,i.day,i.content,0,true,i.credit,i.professor,i.course,true,i.subjectCode)
+                            val subject = Subject(i.subjectIdx,i.name,i.startTime,i.endTime,i.day,i.content,0,true,i.credit,i.professor,i.course,true,i.subjectCode,i.subjectIdx.toInt())
                             list.add(subject)
                         }
 
@@ -411,6 +449,8 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
         })
     }
+
+    fun getSemesterFromActivity() : String = semester
 }
 interface getGradeClickListener{
     fun onClick(position : Int)

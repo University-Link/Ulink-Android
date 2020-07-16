@@ -35,7 +35,6 @@ class TimeTableFragment : Fragment() {
 
     var refresh = true
 
-
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -66,8 +65,7 @@ class TimeTableFragment : Fragment() {
         btn_plus.setOnClickListener {
             val intent = Intent(context, TimeTableEditActivity::class.java)
             val list: ArrayList<TimeTable> = arrayListOf()
-            list.add(mainTable)
-            intent.putParcelableArrayListExtra("timeTableList", list)
+            intent.putExtra("timeTable", mainTable)
             startActivityForResult(intent, REQUEST_TIMETABLE_EDIT_ACITYVITY)
         }
 
@@ -81,13 +79,17 @@ class TimeTableFragment : Fragment() {
         }
 
         btn_setting.setOnClickListener {
-            val bottomsheet = BottomSheetFragment()
+            val bottomsheet = BottomSheetFragment(mainTable)
             fragmentManager?.let { it -> bottomsheet.show(it, bottomsheet.tag) }
+
+
+
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
         if (requestCode == REQUEST_TIMETABLE_LIST_ACTIVITY && resultCode == 200) {
             if (data != null) {
 
@@ -107,6 +109,7 @@ class TimeTableFragment : Fragment() {
                             }
 
                             mainTable = deepCopy(table)
+                            timetableDrawer.setMinMax()
                             view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { timetableDrawer.draw(it) }
                         },
                         onFailure = {
@@ -115,22 +118,29 @@ class TimeTableFragment : Fragment() {
 //              TODO 마지막 시간표 id 저장하고 그 id로 계속 요청하자
             }
         } else if (requestCode == REQUEST_TIMETABLE_EDIT_ACITYVITY && resultCode == 200) {
+            Log.d("tag","nullllllll")
 
             if (data != null) {
                 val table: TimeTable = deepCopy(data.getParcelableExtra("timeTable"))
 //                시간표 요청
+                Log.d("tag1111111111",table.toString())
+
                 DataRepository.getTimeTableWithId(table.id,
                         onSuccess = { table ->
 
-                            Log.d("tagdddddddddddd", table.toString())
+                            Log.d("tag2222222",table.toString())
+
                             timetableDrawer.timeTable = deepCopy(table)
+
                             refresh = false
+
                             val t = timetableDrawer.timeTable.semester.split("-")
                             if (t.size == 2) {
                                 tv_semister.text = "${t[0]}년 ${t[1]}학기"
                             }
 
                             mainTable = deepCopy(table)
+                            timetableDrawer.setMinMax()
                             view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { timetableDrawer.draw(it) }
                         },
                         onFailure = {
@@ -214,11 +224,13 @@ class TimeTableFragment : Fragment() {
                         this.mainTable = it
                         Log.d("tag", it.toString())
                         timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, mainTable)
+                        timetableDrawer.setMinMax()
                         view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { it1 -> timetableDrawer.draw(it1) }
                     },
                     onFailure = {
                         mainTable = TimeTable(1, "2020-1", "시간표1", 1, "09:00", "16:00")
                         timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, mainTable)
+                        timetableDrawer.setMinMax()
                         view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { it1 -> timetableDrawer.draw(it1) }
                     }
             )

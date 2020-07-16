@@ -1,7 +1,6 @@
 package com.example.ulink.repository
 
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.*
 
 interface RequestInterface {
@@ -46,12 +45,12 @@ interface RequestInterface {
             @Path("idx") idx : String,
             @Query("isSubject") isSubject : Boolean
     ) : Call<ResponseTimeTable>
-
     //시간표 - 메인 시간표 이름 수정(변경)
     @PUT("/schedule/main/{idx}")
     fun updateMainTimeTableName(
-            @Header("token") token: String,
-            @Path("idx") idx : String
+        @Header("token") token: String,
+        @Path("idx") idx: String
+
     ) : Call<ResponseTimeTable>
     //시간표 - 일정 삭제(통합)
     @DELETE("/schedule/specific/{idx}")
@@ -65,19 +64,36 @@ interface RequestInterface {
     fun updateMainTimeTable(
             @Header("token") token: String,
             @Path("idx") idx : String
-    ) : Call<ResponseTimeTable>
+    ) : Call<ResponseupdateMainTimeTable>
+
     //메인 시간표 삭제하기
     @DELETE("/schedule/main/{idx}")
     fun deleteMainTimeTable(
             @Header("token") token: String,
             @Path("idx") idx : String
-    ) : Call<ResponseTimeTable>
+    ) : Call<ResponsedeleteMainTimeTable>
+
+    //시간표 - 시간표 이름 수정(변경)
+    @PUT("/schedule/name/{idx}")
+    fun updateTimeTableName(
+        @Header("token") token : String,
+        @Path("idx") idx : Int,
+        @Body body: RequestupdateTimeTableName
+    ) : Call<ResponseupdateTimeTableName>
 
     //모든 학기 시간표 목록 가져오기
     @GET("/schedule/list")
     fun getAllTimeTableList(
             @Header("token") token: String
     ) : Call<ResponseGetAllTimeTableList>
+
+    //특정 학기 시간표 목록 가져오기
+    @GET("/schedule/list")
+    fun getTimeTableList(
+            @Header("token") token: String,
+            @Query ("semester") semester: String
+    ) : Call<ResponseGetTimeTableList>
+
 
     //시간표 - 개인일정 만들기
     @POST("/schedule/personal")
@@ -179,11 +195,11 @@ interface RequestInterface {
     ) : Call<ResponseGetCartList>
 
     //장바구니 과목 추가하기
-    @POST("/cart/{idx}")
+    @POST("/cart")
     fun addCartList(
             @Header("token") token : String,
-            @Path("idx") idx : String
-    ) : Call<ResponseCalendar>
+            @Body body : RequestaddCartList
+    ) : Call<ResponseaddCartList>
 
     //장바구니 과목 삭제하기
     @DELETE("/cart/{idx}")
