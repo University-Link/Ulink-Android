@@ -15,10 +15,12 @@ import com.example.ulink.repository.Subject
 import kotlinx.android.synthetic.main.fragment_timetablefiltersearch.*
 const val REQUEST_FILTER_SETTING_SEARCH_ACTIVITY = 666
 const val REQUEST_FILTER_MAJOR_ACTIVITY = 555
-class TimeTableFilterSearchFragment() : Fragment() {
+class TimeTableFilterSearchFragment() : Fragment(), onCartAddClickListener {
     lateinit var mAdapter : TimeTableClassAdapter
     var subjectList: MutableList<Subject> = arrayListOf()
     var prevent = true
+
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_timetablefiltersearch, container, false)
@@ -34,7 +36,7 @@ class TimeTableFilterSearchFragment() : Fragment() {
         mAdapter = TimeTableClassAdapter(requireContext(), object : onItemClickListener{
             override fun onItemClicked(position: Int) {
             }
-        })
+        }, this)
         rv_classes.adapter = mAdapter
         mAdapter.addToList(subjectList)
         et_class_name.setOnFocusChangeListener { v, hasFocus ->
@@ -85,4 +87,14 @@ class TimeTableFilterSearchFragment() : Fragment() {
     interface onItemClickListener{
         fun onItemClicked(position : Int)
     }
+
+    override fun onClicked() : String{
+        return(context as TimeTableEditActivity).getSemesterFromActivity()
+    }
+
+
+}
+
+interface onCartAddClickListener{
+    fun onClicked() : String
 }
