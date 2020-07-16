@@ -426,7 +426,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
                         val list : MutableList<Subject> = arrayListOf()
 
                         for (i in it.data){
-                            val subject = Subject(i.subjectIdx,i.name,i.startTime,i.endTime,i.day,i.content,0,true,i.credit,i.professor,i.course,true,i.subjectCode)
+                            val subject = Subject(i.subjectIdx,i.name,i.startTime,i.endTime,i.day,i.content,0,true,i.credit,i.professor,i.course,true,i.subjectCode,i.subjectIdx.toInt())
                             list.add(subject)
                         }
 

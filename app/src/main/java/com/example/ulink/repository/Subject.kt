@@ -20,7 +20,8 @@ data class Subject (
         var professor : String = "",
         var course : String = "",
         var isSample : Boolean = false,
-        var number : String = ""
+        var number : String = "",
+        var subjectIdx : Int =0
 ) : Parcelable {
-        constructor() : this(0,"", listOf(),listOf(),listOf(),listOf(),1,false,0f,"","",false,"")
+        constructor() : this(0,"", listOf(),listOf(),listOf(),listOf(),1,false,0f,"","",false,"", 0)
 }
