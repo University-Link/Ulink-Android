@@ -39,6 +39,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
     val mAdapter = TimeTableAddAdapter(this)
     val mEditorAdapter = TimeTableEditorAdapter(this)
 
+
     var lastpage = 0
 
     override fun onDestroy() {
@@ -55,6 +56,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_time_table_edit)
+
 
 //      TODO 여기서 불러오기
 
