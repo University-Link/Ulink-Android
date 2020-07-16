@@ -21,7 +21,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeTableFilterSearchFragment.onItemClickListener) : RecyclerView.Adapter<TimeTableClassAdapter.VHolder>() {
+class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeTableFilterSearchFragment.onItemClickListener, val onCartAddClickListener: onCartAddClickListener) : RecyclerView.Adapter<TimeTableClassAdapter.VHolder>() {
 
     var subjectList: MutableList<Subject> = arrayListOf()
 
@@ -167,8 +167,8 @@ class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeT
 
             cart.setOnClickListener {
                 RetrofitService.service.addCartList(token, RequestaddCartList(
-                    semester = "",
-                    subjectIdx = 5
+                    semester = onCartAddClickListener.onClicked(),
+                    subjectIdx = subject.subjectIdx
                 )).enqueue(object : Callback<ResponseaddCartList>{
                     override fun onFailure(call: Call<ResponseaddCartList>, t: Throwable) {
                         Log.d("후보등록실패",t.message.toString())

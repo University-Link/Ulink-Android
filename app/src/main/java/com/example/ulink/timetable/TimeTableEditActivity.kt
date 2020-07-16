@@ -103,7 +103,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
                     },
                     onFailure = {
 
-            } )
+                } )
         }
 
 
@@ -170,7 +170,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         if (!checkIsOver(subject, timeTable)) {
             subject.isSample = false
             DataRepository.addSchoolPlan(RequestAddSchoolPlan(
-                  subject.id.toInt(), subject.color, timeTable.id
+                subject.id.toInt(), subject.color, timeTable.id
             ), onSuccess = {
                 timeTable.subjectList.add(subject)
                 mAdapter.replaceAtList(position, timeTable)
@@ -195,7 +195,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         }
 
         var timeTable: TimeTable = mAdapter.timeTableSampleList.get(position)
-        
+
         timeTable.subjectList.add(subject)
         mAdapter.replaceAtSampleList(position, timeTable)
         mAdapter.reDrawFragment(position)
