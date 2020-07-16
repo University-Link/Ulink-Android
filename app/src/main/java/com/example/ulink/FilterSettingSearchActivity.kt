@@ -128,7 +128,6 @@ class FilterSettingSearchActivity : AppCompatActivity() {
                                             search_type = ""
                                         )
                                     )
-
                                 }
                             }
 //                                list.clear()
@@ -140,13 +139,12 @@ class FilterSettingSearchActivity : AppCompatActivity() {
 
                         }else{
                             Log.d("검색실패",it.toString())
-
                         }
                     }
                 }
             })
-
         }
+
         edit.setOnEditorActionListener { v, actionId, event ->
 
             Log.d("tag",actionId.toString())
@@ -197,12 +195,6 @@ class FilterSettingSearchActivity : AppCompatActivity() {
                 }
             }
         }
-
-
-
-
-
-
     }
     private fun loadDatas() {
         datas.apply {

@@ -228,7 +228,8 @@ interface RequestInterface {
     fun getSubjectWithKeyword(
             @Header("token") token : String,
             @Query("name") name : String
-    ) : Call<ResponseCalendar>
+    ) : Call<ResponsegetSubjectWithWord>
+
     //수업(과목)검색 자동완성 - 단어
     @GET("/subject/search")
     fun getSubjectWithWord(
