@@ -79,8 +79,6 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
 //  둘이 통신한 결과는 DirectEditActivity에 저장
 //  DirectEdit의 DragDrawer결과를 type으로 넘기는거 다시 받는거 취소한거 롤백한거 생각하기
 
-
-            
 //            TODO 잘 들어갔으면! 등록!!
             var requestnum =0
             if (timeTableDrawerDrag.getAddedTable() == null){
@@ -93,24 +91,22 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
                         return@setOnClickListener
                     }
                     timeTable.subjectList.add(subjectAddedList[i])
-
-
                     Log.d("tag",RequestAddPersonalPlan(
                             subjectAddedList[i].name,
-                            subjectAddedList[i].startTime,
-                            subjectAddedList[i].endTime,
-                            subjectAddedList[i].day,
-                            subjectAddedList[i].place,
+                            subjectAddedList[i].startTime[0],
+                            subjectAddedList[i].endTime[0],
+                            subjectAddedList[i].day[0].toString(),
+                            subjectAddedList[i].place[0],
                             subjectAddedList[i].color,
                             timeTable.id.toInt()
                     ).toString())
 
                     DataRepository.addPersonalPlan(RequestAddPersonalPlan(
                             subjectAddedList[i].name,
-                            subjectAddedList[i].startTime,
-                            subjectAddedList[i].endTime,
-                            subjectAddedList[i].day,
-                            subjectAddedList[i].place,
+                            subjectAddedList[i].startTime[0],
+                            subjectAddedList[i].endTime[0],
+                            subjectAddedList[i].day[0].toString(),
+                            subjectAddedList[i].place[0],
                             subjectAddedList[i].color,
                             timeTable.id.toInt()
                     ), onSuccess = {
@@ -138,10 +134,8 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
             if (timeTableDrawerDrag.getAddedSubject() == null){
                 Toast.makeText(this,"중복된 과목이 있습니다", Toast.LENGTH_SHORT).show()
             } else {
-
                 val nextcolor = findNextColor(timeTableDrawerDrag.timeTable) + 1
                 Log.d("tag next color", nextcolor.toString())
-
                 intent.putParcelableArrayListExtra("subjects", timeTableDrawerDrag.getAddedSubject() as ArrayList<out Parcelable>)
                 intent.putExtra("color",nextcolor)
                 intent.putExtra("timeTable", deepCopy(timeTableDrawerDrag.timeTable))
@@ -163,7 +157,6 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
                 findViewById<Button>(R.id.btn_modify).visibility = View.GONE
                 val tt = data?.getParcelableExtra<TimeTable>("timeTable")
                 val subjectList = data?.getParcelableArrayListExtra<Subject>("subjects")
-                Log.d("tag", tt.toString())
 
                 if (subjectList != null) {
                     tt?.subjectList?.addAll(subjectList)
@@ -173,6 +166,7 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
                 if (tt != null){
                     timeTableDrawerDrag.timeTable = deepCopy(tt)
                 }
+
                 timeTableDrawerDrag.draw(findViewById<FrameLayout>(R.id.layout_timetable))
             } else{
                 timeTableDrawerDrag
@@ -207,14 +201,16 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
         return ids
     }
 
-
     fun checkIsOver(subject: Subject, timeTable: TimeTable): Boolean {
 
         var check = false
         for (s in timeTable.subjectList!!) {
-            if (subject.day == s.day) {
-                check = !(formatToFloat(subject.endTime) <= formatToFloat(s.startTime) || formatToFloat(subject.startTime) >= formatToFloat(s.endTime))
-                if (check) return check
+
+            for (b in 0 until subject.day.size){
+                if (s.day.contains(subject.day[b])){
+                    check = !(formatToFloat(subject.endTime[b]) <= formatToFloat(s.startTime[b]) || formatToFloat(subject.startTime[b]) >= formatToFloat(s.endTime[b]))
+                    if (check) return check
+                }
             }
         }
         return check

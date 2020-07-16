@@ -45,7 +45,7 @@ object DataRepository {
         })
     }
 
-    fun getTimeTableWithId(id : Int, onSuccess : ()-> Unit, onFailure : (String) -> Unit){
+    fun getTimeTableWithId(id : Int, onSuccess : (TimeTable)-> Unit, onFailure : (String) -> Unit){
         retrofit.getTimeTableWithId(token, id).enqueue(object : Callback<ResponseGetTimeTableWithId>{
             override fun onFailure(call: Call<ResponseGetTimeTableWithId>, t: Throwable) {
                 onFailure(t.localizedMessage)
@@ -54,8 +54,20 @@ object DataRepository {
             override fun onResponse(call: Call<ResponseGetTimeTableWithId>, response: Response<ResponseGetTimeTableWithId>) {
                 response.body()?.let {
 
-                    onSuccess()
-                    Log.d("tag", it.toString())
+
+                    val subjectList: MutableList<Subject> = arrayListOf()
+                    subjectList.apply {
+                        addAll(it.data.subjects.mon)
+                        addAll(it.data.subjects.tue)
+                        addAll(it.data.subjects.wed)
+                        addAll(it.data.subjects.thu)
+                        addAll(it.data.subjects.fri)
+                    }
+
+//                    TODO 여기 Main 시간표 어떻게 할것인지 ismain을 해놓는거랑 차이가 있나??
+                    val timeTable = TimeTable(it.data.timeTable.id, it.data.timeTable.semester, it.data.timeTable.name, 0, startTime = it.data.minTime, endTime = it.data.maxTime, subjectList = subjectList)
+                    onSuccess(timeTable)
+
                 } ?: onFailure(response.message())
             }
         })
@@ -120,7 +132,7 @@ object DataRepository {
 //                    TODO 나중에 비어있을때 어떻게 처리할까
 
                     if (it != null && it.data.isNotEmpty()) {
-                        for (i in it.data.indices){5
+                        for (i in it.data.indices){
                             if (it.data[i].timeTableList.isNotEmpty()){
                                 tableList.clear()
                                 for (a in it.data[i].timeTableList.indices){

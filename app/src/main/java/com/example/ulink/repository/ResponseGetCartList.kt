@@ -1,5 +1,7 @@
 package com.example.ulink.repository
 
+import com.google.gson.annotations.SerializedName
+
 data class ResponseGetCartList(
     val status : Int,
     val success : Boolean,
@@ -8,19 +10,15 @@ data class ResponseGetCartList(
 )
 
 data class GetCartData(
-    val cartIdx : Int,
-    val userIdx : Int,
     val subjectIdx : Int,
-    val semester : String,
     val subjectCode : String,
     val name : String,
-    val nameAtomic : String,
     val professor : String,
-    val school : String,
-    val college : String,
-    val major : String,
-    val grade : Int,
     val credit : Int,
-    val people : Int,
-    val course : String
+    val course : String,
+    var startTime : List<String>,
+    var endTime : List<String>,
+    var day : List<Int>,
+    @SerializedName("content")
+    var place : List<String>
 )

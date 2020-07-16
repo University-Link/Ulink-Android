@@ -33,14 +33,14 @@ interface RequestInterface {
     ) : Call<ResponseAddTimeTable>
 
     //시간표 - 일정 상세정보(통합) 조회
-    @GET("/schedule/specific/{idx}")
+    @GET("/schedule/{idx}")
     fun getTimeTableWithId(
             @Header("token") token: String,
             @Path("idx") number : Int
     ) : Call<ResponseGetTimeTableWithId>
 
     //시간표 - 일정 상세정보(통합) 조회
-    @GET("/schedule/{idx}")
+    @GET("/schedule/specific/{idx}")
     fun getSpecificTimeTableWithId(
             @Header("token") token: String,
             @Path("idx") idx : String,
@@ -48,7 +48,7 @@ interface RequestInterface {
     ) : Call<ResponseTimeTable>
 
     //시간표 - 메인 시간표 이름 수정(변경)
-    @PUT("/schedule/{idx}")
+    @PUT("/schedule/main/{idx}")
     fun updateMainTimeTableName(
             @Header("token") token: String,
             @Path("idx") idx : String

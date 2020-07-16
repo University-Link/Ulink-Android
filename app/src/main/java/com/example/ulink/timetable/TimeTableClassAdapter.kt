@@ -36,14 +36,52 @@ class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeT
     inner class VHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
+
+        fun getDay(day: Int): String {
+            return when (day) {
+                0 -> "월"
+                1 -> "화"
+                2 -> "수"
+                3 -> "목"
+                4 -> "금"
+                5 -> "토"
+                6 -> "일"
+                else -> "월"
+            }
+        }
+
         @RequiresApi(Build.VERSION_CODES.N)
         fun setHolder(subject: Subject) {
             itemView.minimumHeight = 90
 
+            Log.d("tag","그려질 과목 +$subject")
+
             itemView.findViewById<TextView>(R.id.tv_class_name).text = subject.name
             itemView.findViewById<TextView>(R.id.tv_professor_name).text = subject.professor
-            itemView.findViewById<TextView>(R.id.tv_time).text = subject.startTime + subject.endTime
-            itemView.findViewById<TextView>(R.id.tv_place).text = subject.place
+
+            itemView.findViewById<TextView>(R.id.tv_time).text = ""
+
+            for (i in 0 until subject.startTime.size) {
+                itemView.findViewById<TextView>(R.id.tv_time).text = itemView.findViewById<TextView>(R.id.tv_time).text.toString() + getDay(subject.day[i]) + " " + subject.startTime[i] + " - " + subject.endTime[i]
+                if (subject.startTime.size>1 && i<subject.startTime.size-1) {
+                    var text = itemView.findViewById<TextView>(R.id.tv_time).text
+                    val text2 = "$text, "
+                    itemView.findViewById<TextView>(R.id.tv_time).text = text2
+                }
+            }
+
+            itemView.findViewById<TextView>(R.id.tv_place).text = ""
+
+
+            for (i in 0 until subject.place.size) {
+                itemView.findViewById<TextView>(R.id.tv_place).text =  itemView.findViewById<TextView>(R.id.tv_place).text.toString() + subject.place[i]
+                if (subject.place.size>1 && i < subject.place.size-1){
+                    var text =  itemView.findViewById<TextView>(R.id.tv_place).text
+                    val text2 = "$text, "
+                    itemView.findViewById<TextView>(R.id.tv_place).text = text2
+                }
+            }
+
             itemView.findViewById<TextView>(R.id.tv_category).text = subject.course
             itemView.findViewById<TextView>(R.id.tv_credit).text = subject.credit.toString()
             itemView.findViewById<TextView>(R.id.tv_classnumber).text = subject.number
@@ -134,7 +172,6 @@ class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeT
             toTable.setOnClickListener {
 //                등록되면 올리기
                 (context as TimeTableEditActivity).addToTable(subject)
-
             }
         }
 

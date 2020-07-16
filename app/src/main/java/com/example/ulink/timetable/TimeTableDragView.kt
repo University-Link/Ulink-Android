@@ -163,7 +163,7 @@ class TimeTableDragView(context: Context, root: View, val timecolumnWidth: Float
         val bottomHour = starthour + bottom*0.25f
         val daylist = arrayListOf(0,1,2,3,4,5,6)
 
-        val subject = Subject(1, "과목이름", formatToString(topHour), formatToString(bottomHour), daylist[dayIndex], "과목장소", 1, true)
+        val subject = Subject(1, "과목이름", listOf(formatToString(topHour)), listOf(formatToString(bottomHour)), listOf(daylist[dayIndex]), listOf("과목장소"), 1, true)
         Log.d("tag",subject.toString())
 
         return subject
