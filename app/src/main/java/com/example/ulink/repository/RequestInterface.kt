@@ -202,7 +202,7 @@ interface RequestInterface {
     ) : Call<ResponseaddCartList>
 
     //장바구니 과목 삭제하기
-    @DELETE("/cart/{idx}")
+    @HTTP(method = "DELETE", path="/cart/{idx}",hasBody=true)
     fun deleteCartList(
             @Header("token") token : String,
             @Path("idx") idx : String,
