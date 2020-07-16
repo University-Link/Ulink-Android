@@ -76,6 +76,7 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
         TimeTableDirectAdapter = TimeTableDirectAdapter(this, this)
         TimeTableDirectAdapter.datas = datas
         rv_time_add.adapter = TimeTableDirectAdapter
+
         lateinit var title: String
 
         var textCheck = "#ffffff"
@@ -451,9 +452,8 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
             }
         })
 
-
-
     }
+
 
     fun formatToFloat(time: String): Float {
         val timesplit = time.split(":")

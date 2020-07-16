@@ -27,6 +27,5 @@ data class Subjects(
         val thu : List<Subject>,
         @SerializedName("4")
         val fri : List<Subject>
-
 )
 
