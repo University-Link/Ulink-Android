@@ -4,14 +4,13 @@ import android.animation.Animator
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.animation.Animation
-import kotlinx.android.synthetic.main.splash_activity.*
+import kotlinx.android.synthetic.main.activity_splash.*
 
 
 class SplashActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.splash_activity)
+        setContentView(R.layout.activity_splash)
         lottie.setAnimation("io_ulink_splash_galaxy10.json")
          lottie.addAnimatorListener (object :
              Animator.AnimatorListener {

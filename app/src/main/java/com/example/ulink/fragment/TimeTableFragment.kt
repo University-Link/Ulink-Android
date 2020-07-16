@@ -35,7 +35,6 @@ class TimeTableFragment : Fragment() {
 
     var refresh = true
 
-
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
