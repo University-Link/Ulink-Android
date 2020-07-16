@@ -42,6 +42,7 @@ class TimeTableAddFragment : Fragment() {
 
         val timeTableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(requireContext()), timeTable)
         timeTableDrawer.minHeight = 50.0f
+        timeTableDrawer.setMinMax()
         timeTableDrawer.draw(view.findViewById<FrameLayout>(R.id.layout_timetable))
         view.findViewById<NestedScrollView>(R.id.layout_timetable_scrollable).isVerticalScrollBarEnabled = false
     }
@@ -53,6 +54,7 @@ class TimeTableAddFragment : Fragment() {
     fun drawTable() {
         val timeTableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(requireContext()), timeTable)
         timeTableDrawer.minHeight = 50.0f
+        timeTableDrawer.setMinMax()
         view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { timeTableDrawer.draw(it) }
         view?.findViewById<NestedScrollView>(R.id.layout_timetable_scrollable)!!.isVerticalScrollBarEnabled = false
     }

@@ -50,6 +50,23 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
     var minHeight = 60.0f
 
 
+
+    fun setMinMax(){
+
+        for (sub in timeTable.subjectList){
+            for(i in sub.startTime){
+                if ( formatToFloat(i) < starthour) {
+                    starthour = formatToFloat(i).toInt()
+                }
+            }
+            for (k in sub.endTime){
+                if ( formatToFloat(k) > endhour){
+                    endhour = formatToFloat(k).toInt()
+                }
+            }
+        }
+    }
+
     fun draw(frameLayout: FrameLayout) {
         val root = frameLayout.findViewById<LinearLayout>(R.id.timetable_root)
 
@@ -66,19 +83,6 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
             Log.d("tag", "changed")
         }
 
-
-        for (sub in timeTable.subjectList){
-            for(i in sub.startTime){
-                if ( formatToFloat(i) < starthour) {
-                    starthour = formatToFloat(i).toInt()
-                }
-            }
-            for (k in sub.endTime){
-                if ( formatToFloat(k) > endhour){
-                    endhour = formatToFloat(k).toInt()
-                }
-            }
-        }
 
         val rowroot = (frameLayout.parent.parent as LinearLayout).findViewById<LinearLayout>(R.id.layout_dayrow)
 
