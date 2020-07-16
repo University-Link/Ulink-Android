@@ -57,6 +57,7 @@ class TimeTableListActivity : AppCompatActivity(), TimeTableOnClickListener {
         DataRepository.getAllTimeTableList(
                 onSuccess = {
                     semesterList.addAll(it)
+                    semesterList.reverse()
                     adapter.notifyDataSetChanged()
                 },
                 onFailure = {

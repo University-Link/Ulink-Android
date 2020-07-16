@@ -27,6 +27,7 @@ import com.example.ulink.utils.deepCopy
 import kotlinx.android.synthetic.main.fragment_time_table.*
 
 const val REQUEST_TIMETABLE_LIST_ACTIVITY = 777
+const val REQUEST_TIMETABLE_EDIT_ACITYVITY = 111
 
 class TimeTableFragment : Fragment() {
 
@@ -67,10 +68,11 @@ class TimeTableFragment : Fragment() {
             val list: ArrayList<TimeTable> = arrayListOf()
             list.add(mainTable)
             intent.putParcelableArrayListExtra("timeTableList", list)
-            startActivity(intent)
+            startActivityForResult(intent, REQUEST_TIMETABLE_EDIT_ACITYVITY)
         }
 
         btn_alarm.setOnClickListener {
+            refresh = true
             startActivity(Intent(context, NotificationActivity::class.java))
         }
 
@@ -88,28 +90,53 @@ class TimeTableFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_TIMETABLE_LIST_ACTIVITY && resultCode == 200) {
             if (data != null) {
-                timetableDrawer.timeTable = deepCopy(data.getParcelableExtra("timeTable"))
-                mainTable = deepCopy(data.getParcelableExtra("timeTable"))
+
+                val table: TimeTable = deepCopy(data.getParcelableExtra("timeTable"))
 
 //                시간표 요청
-                DataRepository.getTimeTableWithId(mainTable.id,
-                        onSuccess = {
+                DataRepository.getTimeTableWithId(table.id,
+                        onSuccess = { table ->
 
+                            timetableDrawer.timeTable = deepCopy(table)
+
+                            refresh = false
+
+                            val t = timetableDrawer.timeTable.semester.split("-")
+                            if (t.size == 2) {
+                                tv_semister.text = "${t[0]}년 ${t[1]}학기"
+                            }
+
+                            mainTable = deepCopy(table)
+                            view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { timetableDrawer.draw(it) }
                         },
                         onFailure = {
-                            Log.d("tag",it)
-
-                })
-
+                            Log.d("tag", it)
+                        })
 //              TODO 마지막 시간표 id 저장하고 그 id로 계속 요청하자
-                refresh = false
-
-                val t = timetableDrawer.timeTable.semester.split("-")
-                if (t.size == 2) {
-                    tv_semister.text = "${t[0]}년 ${t[1]}학기"
-                }
             }
-            view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { timetableDrawer.draw(it) }
+        } else if (requestCode == REQUEST_TIMETABLE_EDIT_ACITYVITY && resultCode == 200) {
+
+            if (data != null) {
+                val table: TimeTable = deepCopy(data.getParcelableExtra("timeTable"))
+//                시간표 요청
+                DataRepository.getTimeTableWithId(table.id,
+                        onSuccess = { table ->
+
+                            Log.d("tagdddddddddddd", table.toString())
+                            timetableDrawer.timeTable = deepCopy(table)
+                            refresh = false
+                            val t = timetableDrawer.timeTable.semester.split("-")
+                            if (t.size == 2) {
+                                tv_semister.text = "${t[0]}년 ${t[1]}학기"
+                            }
+
+                            mainTable = deepCopy(table)
+                            view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { timetableDrawer.draw(it) }
+                        },
+                        onFailure = {
+                            Log.d("tag", it)
+                        })
+            }
 
         }
     }
@@ -124,8 +151,29 @@ class TimeTableFragment : Fragment() {
                 layout.findViewById<TextView>(R.id.tv_class_name).text = subject.name
 //                TODO 이거 table받아와서 classname으로 일주일에 몇번 수업인지 알아서 표시하기 vs 어뜨카지
 
-                layout.findViewById<TextView>(R.id.tv_time).text = subject.startTime + "  " + subject.endTime
-                layout.findViewById<TextView>(R.id.tv_place).text = subject.place + " "
+
+                for (i in 0 until subject.startTime.size) {
+                    layout.findViewById<TextView>(R.id.tv_time).text = layout.findViewById<TextView>(R.id.tv_time).text.toString() + getDay(subject.day[i]) + " " + subject.startTime[i] + " - " + subject.endTime[i]
+                    if (subject.startTime.size > 1 && i < subject.startTime.size - 1) {
+                        var text = layout.findViewById<TextView>(R.id.tv_time).text
+                        val text2 = "$text, " + getDay(subject.day[i])
+                        layout.findViewById<TextView>(R.id.tv_time).text = text2
+                    }
+                }
+
+
+
+                for (i in 0 until subject.place.size) {
+                    layout.findViewById<TextView>(R.id.tv_place).text = layout.findViewById<TextView>(R.id.tv_place).text.toString() + subject.place[i]
+
+                    if (subject.place.size > 1 && i < subject.place.size - 1) {
+                        var text = layout.findViewById<TextView>(R.id.tv_place).text
+                        val text2 = "$text, "
+                        layout.findViewById<TextView>(R.id.tv_place).text = text2
+                    }
+                }
+
+
                 layout.findViewById<TextView>(R.id.tv_professor_name).text = subject.professor
                 layout.findViewById<TextView>(R.id.tv_class_name).text = subject.name
 
@@ -151,16 +199,19 @@ class TimeTableFragment : Fragment() {
 
                 dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
+
             }
         }
 
+
+        Log.d("tag", refresh.toString())
         if (refresh) {
             DataRepository.getMainTimeTable(
                     onSuccess = {
                         this.mainTable = it
+                        Log.d("tag", it.toString())
                         timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, mainTable)
                         view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { it1 -> timetableDrawer.draw(it1) }
-                        Log.d("tag", "size" + mainTable)
                     },
                     onFailure = {
                         mainTable = TimeTable(1, "2020-1", "시간표1", 1, "09:00", "16:00")
@@ -169,6 +220,19 @@ class TimeTableFragment : Fragment() {
                     }
             )
         }
+        refresh = false
+    }
 
+    fun getDay(day: Int): String {
+        return when (day) {
+            0 -> "월"
+            1 -> "화"
+            2 -> "수"
+            3 -> "목"
+            4 -> "금"
+            5 -> "토"
+            6 -> "일"
+            else -> "월"
+        }
     }
 }

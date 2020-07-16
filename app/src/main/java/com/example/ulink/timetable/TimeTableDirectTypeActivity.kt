@@ -69,7 +69,7 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
 
 
         for (i in 0 until subjectList.size) {
-            datas.add(TimeTableDirectData(subjectList[i].day, subjectList[i].startTime, subjectList[i].endTime))
+            datas.add(TimeTableDirectData(subjectList[i].day[0], subjectList[i].startTime[0], subjectList[i].endTime[0]))
         }
 
 
@@ -312,8 +312,6 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
 
         //시간표 전부 추가 후 확인
         btn_check.setOnClickListener() {
-           // if (et_title.text.toString() == "") showToast("제목을 설정해주세요.")
-            finish()
             if (et_title.text.toString() == "") directAddPageDialog()
             else {
                 val intent = Intent()
@@ -324,12 +322,13 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
                     } else{
                         Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show()
                         for (i in 0 until TimeTableDirectAdapter.datas.size) {
+
                             subjectList.add(Subject())
                             subjectList[i].name = et_title.text.toString()
-                            subjectList[i].place = et_memo.text.toString()
+                            subjectList[i].place = listOf(et_memo.text.toString())
                             subjectList[i].color = nextcolor
-                            subjectList[i].startTime = datas[i].start_time
-                            subjectList[i].endTime = datas[i].end_time
+                            subjectList[i].startTime = listOf(datas[i].start_time)
+                            subjectList[i].endTime = listOf(datas[i].end_time)
                             subjectList[i].isSample = false
                         }
                         intent.putParcelableArrayListExtra("subjects", subjectList)
@@ -345,10 +344,10 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
                                 return@setOnClickListener
                             }
                             subjectList[i].name = et_title.text.toString()
-                            subjectList[i].place = et_memo.text.toString()
+                            subjectList[i].place = listOf(et_memo.text.toString())
                             subjectList[i].color = nextcolor
-                            subjectList[i].startTime = datas[i].start_time
-                            subjectList[i].endTime = datas[i].end_time
+                            subjectList[i].startTime = listOf(datas[i].start_time)
+                            subjectList[i].endTime = listOf(datas[i].end_time)
                             subjectList[i].isSample = false
                         }
                     }
@@ -358,7 +357,6 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
                     setResult(200, intent)
                     finish()
                 }
-              
             }
         }
 
@@ -454,15 +452,7 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
         })
 
 
-        //삭제 다이얼로그
-        btn_check.setOnClickListener() {
-            if (et_title.text.toString() == "") directAddPageDialog()
-            else {
-                //제목설정 다이얼로그
-                //시간입력 다이얼로그
 
-            }
-        }
     }
 
     fun formatToFloat(time: String): Float {

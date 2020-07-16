@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.fragment_time_table_add.*
 
 class TimeTableAddFragment : Fragment() {
 
-    lateinit var subjectAddListener: SubjectAddListener
 
     lateinit var timeTable: TimeTable
 
@@ -82,11 +81,11 @@ class TimeTableAddFragment : Fragment() {
         var gap: Float = 0f
 
         scrollView?.let { sv ->
-            if (sv.height > sv.getChildAt(0)?.measuredHeight?.times((formatToFloat(subject.endTime) - formatToFloat(subject.startTime)) / (endhour - starthour))!!)
-                gap = sv.height?.minus(sv.getChildAt(0)?.measuredHeight?.times((formatToFloat(subject.endTime) - formatToFloat(subject.startTime)) / (endhour - starthour))!!)
+            if (sv.height > sv.getChildAt(0)?.measuredHeight?.times((formatToFloat(subject.endTime[0]) - formatToFloat(subject.startTime[0])) / (endhour - starthour))!!)
+                gap = sv.height?.minus(sv.getChildAt(0)?.measuredHeight?.times((formatToFloat(subject.endTime[0]) - formatToFloat(subject.startTime[0])) / (endhour - starthour))!!)
 
             (sv.getChildAt(0)?.measuredHeight)?.times(
-                    (formatToFloat(subject.startTime) - starthour) /
+                    (formatToFloat(subject.startTime[0]) - starthour) /
                             (endhour - starthour)
             )?.let {
                 if (gap == 0f) {
