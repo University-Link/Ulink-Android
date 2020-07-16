@@ -17,7 +17,6 @@ class TimeTableInnerListAdapter(mutableList: MutableList<TimeTable>,val timeTabl
 
     val timeTableList: MutableList<TimeTable> = mutableList
 
-//    리스트 대표인거 제일 위로 올리기!!
 
     fun arrangeList(list : MutableList<TimeTable>) : MutableList<TimeTable>{
         for (i in 0 until list.size){
