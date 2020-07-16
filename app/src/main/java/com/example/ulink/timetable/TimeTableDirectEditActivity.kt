@@ -1,14 +1,17 @@
 package com.example.ulink.timetable
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.FrameLayout
+import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
 import com.example.ulink.R
 import com.example.ulink.repository.DataRepository
@@ -16,32 +19,30 @@ import com.example.ulink.repository.RequestAddPersonalPlan
 import com.example.ulink.repository.Subject
 import com.example.ulink.repository.TimeTable
 import com.example.ulink.utils.deepCopy
-import kotlinx.android.synthetic.main.fragment_time_table.*
-import java.util.ArrayList
+import retrofit2.Retrofit
+import java.util.*
 
-interface onDrawListener{
-    fun onDrawed(size : Int)
+interface onDrawListener {
+    fun onDrawed(size: Int)
 }
 
 class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
 
 
     override fun onDrawed(size: Int) {
-        if (size>0){
+        if (size > 0) {
             findViewById<Button>(R.id.btn_ok).visibility = View.GONE
             findViewById<Button>(R.id.btn_modify).visibility = View.VISIBLE
         }
     }
 
-
 //    TODO type갔다가 다시 돌아와서 type가려하면 중복이라고 나옴!!
 //    예상 그리고 type 갈때 getsubject로 여기 테이블에 더하고 보내는데 이거때문인듯!!
 //     밑에 getAddedTable로 들어가는데 subject랑 원래 테이블 따로 보내주기! 거기서 구별을 못함 ㅠ
 
-
-    lateinit var timeTableDrawerDrag : TimeTableDrawerDrag
-    lateinit var timeTable : TimeTable
-    var subjectAddedList : MutableList<Subject> = arrayListOf()
+    lateinit var timeTableDrawerDrag: TimeTableDrawerDrag
+    lateinit var timeTable: TimeTable
+    var subjectAddedList: MutableList<Subject> = arrayListOf()
 
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,19 +81,27 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
 //  DirectEdit의 DragDrawer결과를 type으로 넘기는거 다시 받는거 취소한거 롤백한거 생각하기
 
 //            TODO 잘 들어갔으면! 등록!!
-            var requestnum =0
-            if (timeTableDrawerDrag.getAddedTable() == null){
-                Toast.makeText(this,"중복된 과목이 있습니다", Toast.LENGTH_SHORT).show()
-            }
-            else {
-                for (i in 0 until subjectAddedList.size){
-                    if(checkIsOver(subjectAddedList[i],timeTable)){
-                        Toast.makeText(this,"중복된 과목이 있습니다", Toast.LENGTH_SHORT).show()
+            var requestnum = 0
+            if (timeTableDrawerDrag.getAddedTable() == null) {
+                Toast.makeText(this, "중복된 과목이 있습니다", Toast.LENGTH_SHORT).show()
+            } else {
+                for (i in 0 until subjectAddedList.size) {
+                    if (checkIsOver(subjectAddedList[i], timeTable)) {
+                        Toast.makeText(this, "중복된 과목이 있습니다", Toast.LENGTH_SHORT).show()
                         return@setOnClickListener
                     }
                     timeTable.subjectList.add(subjectAddedList[i])
 
-                    DataRepository.addPersonalPlan( RequestAddPersonalPlan(
+                    Log.d("tag 등록 신청한 과목", RequestAddPersonalPlan.Schedule(subjectAddedList[i].name,
+                            subjectAddedList[i].startTime[0],
+                            subjectAddedList[i].endTime[0],
+                            subjectAddedList[i].day[0],
+                            subjectAddedList[i].place[0],
+                            subjectAddedList[i].color,
+                            timeTable.id).toString()
+                    )
+
+                    DataRepository.addPersonalPlan(RequestAddPersonalPlan(
                             scheduleList = listOf<RequestAddPersonalPlan.Schedule>(
                                     RequestAddPersonalPlan.Schedule(subjectAddedList[i].name,
                                             subjectAddedList[i].startTime[0],
@@ -103,10 +112,10 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
                                             timeTable.id)
                             )
                     ), onSuccess = {
-                        requestnum+= 1
+                        requestnum += 1
                         Log.d("tag", requestnum.toString())
                         Log.d("tag", subjectAddedList.size.toString())
-                        if (requestnum == subjectAddedList.size){
+                        if (requestnum == subjectAddedList.size) {
                             intent.putExtra("timeTable", timeTableDrawerDrag.timeTable)
                             setResult(200, intent)
                             finish()
@@ -124,13 +133,13 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
 //       수정 눌렀다가 취소해서 그대로 돌아온 경우
         findViewById<Button>(R.id.btn_modify).setOnClickListener {
             val intent = Intent(this, TimeTableDirectTypeActivity::class.java)
-            if (timeTableDrawerDrag.getAddedSubject() == null){
-                Toast.makeText(this,"중복된 과목이 있습니다", Toast.LENGTH_SHORT).show()
+            if (timeTableDrawerDrag.getAddedSubject() == null) {
+                Toast.makeText(this, "중복된 과목이 있습니다", Toast.LENGTH_SHORT).show()
             } else {
                 val nextcolor = findNextColor(timeTableDrawerDrag.timeTable) + 1
                 Log.d("tag next color", nextcolor.toString())
                 intent.putParcelableArrayListExtra("subjects", timeTableDrawerDrag.getAddedSubject() as ArrayList<out Parcelable>)
-                intent.putExtra("color",nextcolor)
+                intent.putExtra("color", nextcolor)
                 intent.putExtra("timeTable", deepCopy(timeTableDrawerDrag.timeTable))
                 intent.putExtra("addable", false)
                 startActivityForResult(intent, REQUEST_DIRECT_TYPE_ACTIVITY)
@@ -139,15 +148,15 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
     }
 
 
-//    drag에서 drawlist에 쌓이고 다시 draw하기 전까지는 testview유지
+    //    drag에서 drawlist에 쌓이고 다시 draw하기 전까지는 testview유지
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_DIRECT_TYPE_ACTIVITY){
-            if (resultCode == 200){
+        if (requestCode == REQUEST_DIRECT_TYPE_ACTIVITY) {
+            if (resultCode == 200) {
                 timeTableDrawerDrag.testview.drawlist.clear()
-
                 findViewById<Button>(R.id.btn_ok).visibility = View.VISIBLE
                 findViewById<Button>(R.id.btn_modify).visibility = View.GONE
+
                 val tt = data?.getParcelableExtra<TimeTable>("timeTable")
                 val subjectList = data?.getParcelableArrayListExtra<Subject>("subjects")
 
@@ -156,36 +165,37 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
                     subjectAddedList.addAll(subjectList)
                 }
 
-                if (tt != null){
+//              FIXME 이거 없애면 그림 안그려짐 다시 한번 살펴보기
+                if (tt != null) {
                     timeTableDrawerDrag.timeTable = deepCopy(tt)
                 }
 
                 timeTableDrawerDrag.draw(findViewById<FrameLayout>(R.id.layout_timetable))
             } else{
-                timeTableDrawerDrag
+
             }
 
         }
     }
 
     @ExperimentalStdlibApi
-    fun rollBack(){
+    fun rollBack() {
         timeTableDrawerDrag.rollBack()
-        if ( timeTableDrawerDrag.getSubject().size ==0 ){
+        if (timeTableDrawerDrag.getSubject().size == 0) {
             findViewById<Button>(R.id.btn_ok).visibility = View.VISIBLE
             findViewById<Button>(R.id.btn_modify).visibility = View.GONE
         }
     }
 
-    fun setDragView(){
+    fun setDragView() {
         timeTableDrawerDrag.setDragView((findViewById<LinearLayout>(R.id.timetable_root)))
     }
 
-    fun findNextColor(timeTable: TimeTable) : Int{
-        val size : HashMap<Int, Int> = hashMapOf()
-        for (i in 0 until timeTable.subjectList.size){
-            if (size.containsKey(timeTable.subjectList[i].color)){
-                size.put(timeTable.subjectList[i].color, size.get(timeTable.subjectList[i].color)!!+1)
+    fun findNextColor(timeTable: TimeTable): Int {
+        val size: HashMap<Int, Int> = hashMapOf()
+        for (i in 0 until timeTable.subjectList.size) {
+            if (size.containsKey(timeTable.subjectList[i].color)) {
+                size.put(timeTable.subjectList[i].color, size.get(timeTable.subjectList[i].color)!! + 1)
             } else {
                 size.put(timeTable.subjectList[i].color, 1)
             }
@@ -199,8 +209,8 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
         var check = false
         for (s in timeTable.subjectList!!) {
 
-            for (b in 0 until subject.day.size){
-                if (s.day.contains(subject.day[b])){
+            for (b in 0 until subject.day.size) {
+                if (s.day.contains(subject.day[b])) {
                     check = !(formatToFloat(subject.endTime[b]) <= formatToFloat(s.startTime[b]) || formatToFloat(subject.startTime[b]) >= formatToFloat(s.endTime[b]))
                     if (check) return check
                 }
