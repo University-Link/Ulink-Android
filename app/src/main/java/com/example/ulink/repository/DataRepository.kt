@@ -72,6 +72,27 @@ object DataRepository {
         })
     }
 
+    fun getTimeTableBySemester(semester : String, onSuccess : (List<TimeTable>) -> Unit, onFailure: (String) -> Unit){
+        retrofit.getTimeTableList(token, semester).enqueue(object : Callback<ResponseGetTimeTableList>{
+            override fun onFailure(call: Call<ResponseGetTimeTableList>, t: Throwable) {
+                onFailure(t.localizedMessage)
+            }
+
+            override fun onResponse(call: Call<ResponseGetTimeTableList>, response: Response<ResponseGetTimeTableList>) {
+                response.body()?.let {
+                    val tableList : MutableList<TimeTable> = arrayListOf()
+
+                    if (it != null && it.data.isNotEmpty()) {
+                        for (i in it.data){
+                            tableList.add(i)
+                        }
+                    }
+                    onSuccess(tableList)
+                } ?: onFailure(response.message())
+            }
+        })
+    }
+
     fun addTimeTable(semester : String, name : String, onSuccess : (ResponseAddTimeTable) -> Unit, onFailure :(String) -> Unit){
         retrofit.addTimeTable(token, RequestAddTimeTable(semester, name)).enqueue(object : Callback<ResponseAddTimeTable>{
             override fun onFailure(call: Call<ResponseAddTimeTable>, t: Throwable) {
@@ -100,7 +121,7 @@ object DataRepository {
         })
     }
 
-    fun addPersonalPlan(request : RequestAddPersonalPlan, onSuccess : (Int) ->Unit, onFailure : (String) -> Unit){
+    fun addPersonalPlan(request : RequestAddPersonalPlan, onSuccess : () ->Unit, onFailure : (String) -> Unit){
         retrofit.addPersonalPlan(token,request).enqueue(object : Callback<ResponseAddPersonalPlan>{
             override fun onFailure(call: Call<ResponseAddPersonalPlan>, t: Throwable) {
                 Log.d("tag", t.localizedMessage)
@@ -109,7 +130,7 @@ object DataRepository {
 
             override fun onResponse(call: Call<ResponseAddPersonalPlan>, response: Response<ResponseAddPersonalPlan>) {
                 response.body()?.let {
-                    onSuccess(it.data.idx)
+                    onSuccess()
                 } ?: onFailure(response.message())
             }
         })

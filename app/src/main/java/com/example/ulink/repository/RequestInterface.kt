@@ -79,6 +79,14 @@ interface RequestInterface {
             @Header("token") token: String
     ) : Call<ResponseGetAllTimeTableList>
 
+    //특정 학기 시간표 목록 가져오기
+    @GET("/schedule/list")
+    fun getTimeTableList(
+            @Header("token") token: String,
+            @Query ("semester") semester: String
+    ) : Call<ResponseGetTimeTableList>
+
+
     //시간표 - 개인일정 만들기
     @POST("/schedule/personal")
     fun addPersonalPlan(
