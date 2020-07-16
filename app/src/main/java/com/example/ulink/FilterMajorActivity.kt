@@ -18,6 +18,10 @@ class FilterMajorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_filter_major)
 
+        btn_back.setOnClickListener() {
+            finish()
+        }
+
         btn_check.setOnClickListener(){
             //TODO 확인 누를 때 보낼 정보
         }

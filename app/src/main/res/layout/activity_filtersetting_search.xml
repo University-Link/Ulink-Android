@@ -28,14 +28,25 @@
         android:lines="1"
         android:imeOptions="actionSearch"
         android:inputType="text"
+        android:textSize="15sp"
+        android:drawablePadding="8dp"
         android:drawableLeft="@drawable/filtersetting_ic_search"
-        android:drawableRight="@drawable/detailsearch_btn_cancel_search"
-        android:paddingRight="9dp"
         android:background="@drawable/main_filtersetting_search_bg"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton"
+        app:layout_constraintStart_toEndOf="@id/btn_back"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_back"
         app:layout_constraintEnd_toStartOf="@+id/spinner_filter_setting"
-        app:layout_constraintStart_toEndOf="@+id/imageButton"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_reset"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginRight="12dp"
+        android:background="@drawable/detailsearch_btn_cancel_search"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="@id/edit"
+        app:layout_constraintBottom_toBottomOf="@id/edit"
+        app:layout_constraintEnd_toEndOf="@id/edit" />
 
     <Spinner
         android:id="@+id/spinner_filter_setting"

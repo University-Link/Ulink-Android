@@ -46,6 +46,8 @@ class FilterSettingSearchActivity : AppCompatActivity() {
             android.R.layout.simple_spinner_item
         )
 
+        btn_reset.textResetButton(edit) // 검색x버튼추가
+
         TimeTable_Search_Adapter = TimeTable_Search_Adapter(this)
         rv_search.adapter = TimeTable_Search_Adapter
 
@@ -120,7 +122,7 @@ class FilterSettingSearchActivity : AppCompatActivity() {
                                 list.addAll(it.data)
                             }
                             for (i in 0 until list.size) {
-                                Log.d("데이터", list[i].toString())
+                                Log.d("데이터", it.toString())
                                 datas.apply {
                                     add(
                                         SearchData(

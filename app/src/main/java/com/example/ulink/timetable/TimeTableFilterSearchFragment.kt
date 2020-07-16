@@ -1,4 +1,7 @@
 package com.example.ulink.timetable
+
+import com.example.ulink.timetable.TimeTableClassAdapter
+import com.example.ulink.timetable.TimeTableEditActivity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -66,21 +69,60 @@ class TimeTableFilterSearchFragment() : Fragment(), onCartAddClickListener {
             et_class_name.setText(data?.getStringExtra("query"))
 
         }
-        if(resultCode==200){ //한개 클릭 후 한개 리턴
+        if(resultCode==200){
             val list = data?.getParcelableArrayListExtra<SearchedData>("list")
             val class_name = data?.getStringExtra("et_class_name")
             et_class_name.setText(class_name)
+            Log.d("9999", list.toString())
+            Log.d("9999", subjectList.toString())
+            subjectList.clear()
+            for(i in 0 until list!!.size) {
+                subjectList.add(Subject(
+                    0,
+                    list[i].name,
+                    list[i].startTime,
+                    list[i].endTime,
+                    list[i].day,
+                    list[i].content,
+                    1,
+                    false,
+                    list[i].credit,
+                    list[i].professor,
+                    list[i].course,
+                    false,
+                    "",  //학수번호
+                    list[i].subjectIdx.toInt()))
+            }
 
-
-
+            Log.d("9999", subjectList.toString())
         }
-        if(resultCode==300){//해당하는 모든 검색결과 리턴
+        if(resultCode==300){
             val item = data?.getParcelableExtra<SearchedData>("item")
             val class_name = data?.getStringExtra("et_class_name")
             rv_classes.adapter = mAdapter
             et_class_name.setText(class_name)
-
-
+            Log.d("9999", item.toString())
+            if(item!=null) {
+                subjectList.clear()
+                subjectList.add(
+                    Subject(
+                        0,
+                        item.name,
+                        item.startTime,
+                        item.endTime,
+                        item.day,
+                        item.content,
+                        1,
+                        false,
+                        item.credit,
+                        item.professor,
+                        item.course,
+                        false,
+                        "", //학수번호
+                        item.subjectIdx.toInt()
+                    )
+                )
+            }
         }
 
     }
@@ -91,7 +133,6 @@ class TimeTableFilterSearchFragment() : Fragment(), onCartAddClickListener {
     override fun onClicked() : String{
         return(context as TimeTableEditActivity).getSemesterFromActivity()
     }
-
 
 }
 
