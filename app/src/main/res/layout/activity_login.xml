@@ -7,13 +7,21 @@
     android:background="@drawable/login_"
     tools:context=".LoginActivity">
 
-<!--    <ImageView-->
-<!--        android:id="@+id/gif_image"-->
+<!--    <com.airbnb.lottie.LottieAnimationView-->
+<!--        android:id="@+id/json_login"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="180dp"-->
+<!--        app:lottie_autoPlay="true"-->
+<!--        app:lottie_fileName="lan_login_s10.json"-->
 <!--        app:layout_constraintEnd_toEndOf="parent"-->
 <!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
+<!--    <ImageView-->
+<!--        android:id="@+id/gif_login"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="180dp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <ImageView

@@ -66,7 +66,6 @@ interface RequestInterface {
             @Path("idx") idx : String
     ) : Call<ResponseupdateMainTimeTable>
 
-    ) : Call<ResponseTimeTable>
     //메인 시간표 삭제하기
     @DELETE("/schedule/main/{idx}")
     fun deleteMainTimeTable(
@@ -78,7 +77,7 @@ interface RequestInterface {
     @PUT("/schedule/name/{idx}")
     fun updateTimeTableName(
         @Header("token") token : String,
-        @Path("idx") idx : Long,
+        @Path("idx") idx : Int,
         @Body body: RequestupdateTimeTableName
     ) : Call<ResponseupdateTimeTableName>
 

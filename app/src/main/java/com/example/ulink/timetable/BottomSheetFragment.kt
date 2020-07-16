@@ -33,7 +33,6 @@ class BottomSheetFragment(val mainTable : TimeTable) : BottomSheetDialogFragment
 
 
             view.findViewById<TextView>(R.id.tv_setasmain).setOnClickListener {
-            Toast.makeText(context,"대표시간표로 설정되었습니다.",Toast.LENGTH_SHORT).show()
             RetrofitService.service.updateMainTimeTable(token,"8").enqueue(object : Callback<ResponseupdateMainTimeTable>{
                 override fun onFailure(call: Call<ResponseupdateMainTimeTable>, t: Throwable) {
                     Log.d("대표시간표 설정 실패",t.message.toString())
@@ -45,6 +44,11 @@ class BottomSheetFragment(val mainTable : TimeTable) : BottomSheetDialogFragment
                 ) {
                     response.body().let{
                         Log.d("대표시간표 설정 성공","성")
+                        Toast.makeText(context,"대표시간표로 설정되었습니다.",Toast.LENGTH_SHORT).show()
+                        val fragmentManager = activity!!.supportFragmentManager
+                        fragmentManager.beginTransaction().remove(this@BottomSheetFragment).commit()
+                        fragmentManager.popBackStack()
+
                     }
                 }
 
@@ -76,14 +80,16 @@ class BottomSheetFragment(val mainTable : TimeTable) : BottomSheetDialogFragment
                     ) {
                         response.body()?.let{
                            Log.d("이름변경성공","성")
+                            dialog.dismiss()
+                            val fragmentManager = activity!!.supportFragmentManager
+                            fragmentManager.beginTransaction().remove(this@BottomSheetFragment).commit()
+                            fragmentManager.popBackStack()
                         }
 
                     }
 
                 })
 
-                Log.d("이름변경",dialog.et_name.text.toString())
-                dialog.dismiss()
             }
             layout.findViewById<TextView>(R.id.tv_cancel).setOnClickListener {
                 dialog.dismiss()
@@ -97,6 +103,8 @@ class BottomSheetFragment(val mainTable : TimeTable) : BottomSheetDialogFragment
             dialog.show()
             layout.findViewById<TextView>(R.id.btn_ok).setOnClickListener {
                 dialog.dismiss()
+
+
             }
         }
         view.findViewById<TextView>(R.id.tv_delete).setOnClickListener {
@@ -120,12 +128,17 @@ class BottomSheetFragment(val mainTable : TimeTable) : BottomSheetDialogFragment
                         response: Response<ResponsedeleteMainTimeTable>
                     ) {
                         response.body().let {
-                                Log.d("삭제성공","성공")
+                            Log.d("삭제성공","성공")
+                            dialog.dismiss()
+                            val fragmentManager = activity!!.supportFragmentManager
+                            fragmentManager.beginTransaction().remove(this@BottomSheetFragment).commit()
+                            fragmentManager.popBackStack()
+
                         }
                     }
 
                 })
-                dialog.dismiss()
+
             }
         }
     }

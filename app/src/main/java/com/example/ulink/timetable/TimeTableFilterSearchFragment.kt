@@ -18,9 +18,7 @@ const val REQUEST_FILTER_MAJOR_ACTIVITY = 555
 class TimeTableFilterSearchFragment() : Fragment() {
     lateinit var mAdapter : TimeTableClassAdapter
     var subjectList: MutableList<Subject> = arrayListOf()
-
     var prevent = true
-    val subjectList: MutableList<Subject> = arrayListOf()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_timetablefiltersearch, container, false)
