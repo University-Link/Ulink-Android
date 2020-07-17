@@ -22,13 +22,11 @@ import com.example.ulink.R
 import com.example.ulink.repository.DataRepository
 import com.example.ulink.repository.Subject
 import com.example.ulink.repository.TimeTable
-import com.example.ulink.timetable.BottomSheetFragment
-import com.example.ulink.timetable.TimeTableDrawer
-import com.example.ulink.timetable.TimeTableEditActivity
-import com.example.ulink.timetable.TimeTableListActivity
+import com.example.ulink.timetable.*
 import com.example.ulink.utils.deepCopy
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import kotlinx.android.synthetic.main.fragment_time_table.*
+import org.w3c.dom.Text
 
 const val REQUEST_TIMETABLE_LIST_ACTIVITY = 777
 const val REQUEST_TIMETABLE_EDIT_ACITYVITY = 111
@@ -189,6 +187,11 @@ class TimeTableFragment : Fragment() {
                     }
                 }
 
+                layout.findViewById<TextView>(R.id.tv_customizing).setOnClickListener {
+                    val bottomsheet = CustomizingBottomSheetFragment()
+                    fragmentManager?.let { it -> bottomsheet.show(it, bottomsheet.tag) }
+
+                }
                 if (subject.subject == true) {
                     layout.findViewById<TextView>(R.id.tv_tochat).setOnClickListener {
                         //val idx = subject.id.toString()
