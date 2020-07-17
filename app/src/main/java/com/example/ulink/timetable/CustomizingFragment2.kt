@@ -77,7 +77,7 @@ class CustomizingFragment2(subject : Subject, val onRefreshListener: onRefreshLi
                     response: Response<ResponseChangeColor>
                 ) {
                     response.body()?.let{
-                        if(it.status == 200){
+                        if(it.status == 201){
                             Log.d("dlwldms", it.toString())
                             onRefreshListener.onRefresh()
                         }
