@@ -27,7 +27,6 @@ class ChattingActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
     lateinit var ChattingAdapter : ChattingAdapter
     val datas : MutableList<ChattingData> = mutableListOf<ChattingData>()
 
-    private lateinit var database: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatting)

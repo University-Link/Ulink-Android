@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.R
+import com.example.ulink.ScheduleRecycler.ScheduleItemData
 
-class CalendarDayAdapter(private val context : Context) : RecyclerView.Adapter<CalendarViewHolder>() {
+class CalendarDayAdapter(private val context : Context, val rootView : View, val scheduleDatas : MutableList<ScheduleItemData>) : RecyclerView.Adapter<CalendarViewHolder>() {
     var datas = mutableListOf<CalendarDayData>()
 
     private lateinit var dayClickListener : DayClickListener
@@ -30,7 +31,7 @@ class CalendarDayAdapter(private val context : Context) : RecyclerView.Adapter<C
     }
 
     override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) {
-        holder.bind(datas[position])
+        holder.bind(datas[position],rootView, scheduleDatas)
         holder.itemView.setOnClickListener{ dayClickListener.onClick(it,position)}
     }
 }

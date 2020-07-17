@@ -56,8 +56,7 @@ class TimeTableFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        mainTable = TimeTable(1, "2020-1", "시간표1", 1, "09:00", "16:00")
-
+        mainTable = TimeTable(1, "2020-1", "시간표1", 1, "09:00", "16:00", arrayListOf())
 
 //        서버랑 통신해서 TimeTable가져옴
 
@@ -171,8 +170,6 @@ class TimeTableFragment : Fragment() {
                     }
                 }
 
-
-
                 for (i in 0 until subject.place.size) {
                     layout.findViewById<TextView>(R.id.tv_place).text = layout.findViewById<TextView>(R.id.tv_place).text.toString() + subject.place[i]
 
@@ -189,7 +186,7 @@ class TimeTableFragment : Fragment() {
                 layout.findViewById<TextView>(R.id.tv_tochat).setOnClickListener {
                     //val idx = subject.id.toString()
                     val intent = Intent(view?.context, ChattingActivity::class.java) //과목명
-                    intent.putExtra("class", subject.name)
+                    intent.putExtra("className", subject.name)
                     intent.putExtra("idx", subject.subjectIdx.toString())
                     Log.d("idx", subject.subjectIdx.toString())
                     startActivity(intent)
@@ -198,7 +195,7 @@ class TimeTableFragment : Fragment() {
                 layout.findViewById<TextView>(R.id.tv_checkassignment).setOnClickListener {
                     //val idx = subject.id.toString()
                     val intent = Intent(view?.context, NoticeActivity::class.java)
-                    intent.putExtra("class", subject.name)
+                    intent.putExtra("className", subject.name)
                     intent.putExtra("idx", subject.subjectIdx.toString())
                     intent.putExtra("check", "add")
                     Log.d("idx", subject.subjectIdx.toString())
@@ -210,7 +207,6 @@ class TimeTableFragment : Fragment() {
 
                 dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
-
             }
         }
 
@@ -221,11 +217,10 @@ class TimeTableFragment : Fragment() {
                     onSuccess = {
                         this.mainTable = it
                         Log.d("tag", it.toString())
-                        timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, mainTable)
+                        timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, deepCopy(it))
                         view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { it1 -> timetableDrawer.draw(it1) }
                     },
                     onFailure = {
-                        mainTable = TimeTable(1, "2020-1", "시간표1", 1, "09:00", "16:00")
                         timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, mainTable)
                         view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { it1 -> timetableDrawer.draw(it1) }
                     }
