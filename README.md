@@ -20,7 +20,7 @@
 
 ### :pushpin:A-1 ConstraintLayout을 사용한 화면 개발
 
-**1. Match_constraint, chain, guideLine 등 constraintLayout의 다양한 속성 활용**
+#### **1. Match_constraint, chain, guideLine 등 constraintLayout의 다양한 속성 활용**
 
 **item_subject_child.xml**
 
@@ -168,7 +168,7 @@
 
 <img width="327" alt="스크린샷 2020-07-17 오후 9 52 41" src="https://user-images.githubusercontent.com/53978090/87793525-5d01f580-c880-11ea-997c-77a8f0dce7fa.png">
 
-**2. 제약조건은 연관성이 있어야 함**
+#### **2. 제약조건은 연관성이 있어야 함**
 
 **activity_notice.xml**
 
@@ -393,7 +393,7 @@
 
 <img width="163" alt="스크린샷 2020-07-17 오후 10 02 59" src="https://user-images.githubusercontent.com/53978090/87793549-6723f400-c880-11ea-994a-02e8176d39cc.png">
 
-**3. width, height 속성에 dp 단위 적용은 필요한 경우 아니면 match_parent, wrap_content, match_constraint 위주로 사용할것**
+#### **3. width, height 속성에 dp 단위 적용은 필요한 경우 아니면 match_parent, wrap_content, match_constraint 위주로 사용할것**
 
 **activity_schedule.xml**
 
@@ -446,7 +446,7 @@
 
 ### :pushpin:A-2 코틀린으로 안드로이드 앱 개발
 
-**1. kotlin collection 의 확장함수 사용**
+#### **1. kotlin collection 의 확장함수 사용**
 
 ~~~
 subjectList.retainAll { !it.isSample }
@@ -469,7 +469,7 @@ subjectList.retainAll { !it.isSample }
 
 시간순으로 정렬하기위해 sortBy{formatToFloat(it.startTime[0])}사용
 
-**2. custom 확장 함수 사용**
+#### **2. custom 확장 함수 사용**
 
 ~~~
 fun Button.textResetButton(ed : EditText) {
@@ -496,7 +496,7 @@ fun Button.textResetButton(ed : EditText) {
 
 ### :pushpin:A-3 
 
-**1. 프로젝트 사용 라이브러리**
+#### **1. 프로젝트 사용 라이브러리**
 
 **Retrofit라이브러리**
 
@@ -542,7 +542,7 @@ implementation 'com.airbnb.android:lottie:3.0.0'
 
 
 
-**2.프로그램 구조 - package 분류 이미지**
+#### **2.프로그램 구조 - package 분류 이미지**
 
 
 <img width="356" alt="스크린샷 2020-07-17 오후 10 15 01" src="https://user-images.githubusercontent.com/53978090/87793619-79059700-c880-11ea-96e3-ee7e712f2d76.png">
@@ -568,7 +568,7 @@ implementation 'com.airbnb.android:lottie:3.0.0'
   시간표부분 다 묶어놓기
   
 
-**3. 핵심 기능 구현 방법**
+#### **3. 핵심 기능 구현 방법**
 
 **:fire:워크플로우**:fire:
 
