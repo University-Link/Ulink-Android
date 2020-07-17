@@ -88,7 +88,7 @@
                 android:id="@+id/tl_timetableeditor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:tabIndicatorColor="#674FEE"
+                app:tabIndicatorColor="@color/tab_selector"
                 app:tabIndicatorHeight="4dp"/>
 
 

@@ -11,6 +11,7 @@
         android:layout_height="29dp"
         android:background="@drawable/timetableadd_btn_search"
         android:drawableLeft="@drawable/tableadd_ic_search"
+        android:drawablePadding="3dp"
         android:hint=" 검색"
         android:textColorHint="#989898"
         android:textSize="14sp"

@@ -2,6 +2,7 @@ package com.example.ulink.timetable
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +12,8 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.constraintlayout.widget.ConstraintHelper
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.EvaluationActivity
@@ -92,15 +95,19 @@ class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeT
             val assess = itemView.findViewById<Button>(R.id.btn_assess)
             val cart = itemView.findViewById<Button>(R.id.btn_cart)
             val toTable = itemView.findViewById<Button>(R.id.btn_totable)
+            val layoutCart = itemView.findViewById<ConstraintLayout>(R.id.layout_cart)
 
             if (mSelectedItems.getOrDefault(adapterPosition, false)){
                 assess.visibility = View.VISIBLE
                 cart.visibility = View.VISIBLE
                 toTable.visibility = View.VISIBLE
+                layoutCart.setBackgroundColor(Color.parseColor("#f2f0ff"))
+
             } else {
                 assess.visibility = View.GONE
                 cart.visibility = View.GONE
                 toTable.visibility = View.GONE
+                layoutCart.setBackgroundColor(Color.parseColor("#ffffff"))
             }
 
 
@@ -137,6 +144,7 @@ class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeT
                         for (i in preClickList){
                             i.visibility = View.GONE
                         }
+
                     }
 
                     (context as TimeTableEditActivity).rollBack()

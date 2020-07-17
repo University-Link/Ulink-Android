@@ -35,7 +35,6 @@ class TimeTableFilterSearchFragment() : Fragment(), onCartAddClickListener {
 
         super.onViewCreated(view, savedInstanceState)
 
-
         mAdapter = TimeTableClassAdapter(requireContext(), object : onItemClickListener{
             override fun onItemClicked(position: Int) {
             }
@@ -50,10 +49,12 @@ class TimeTableFilterSearchFragment() : Fragment(), onCartAddClickListener {
                 et_class_name.clearFocus()
             }
         }
+
         btn_fitler_major.setOnClickListener {
             val intent = Intent(context,FilterMajorActivity::class.java)
             startActivityForResult(intent, REQUEST_FILTER_MAJOR_ACTIVITY)
         }
+
         btn_filter_normal.setOnClickListener {
             val intent = Intent(context, FilterNormalActivity::class.java)
             startActivityForResult(intent, REQUEST_FILTER_MAJOR_ACTIVITY)
@@ -67,14 +68,14 @@ class TimeTableFilterSearchFragment() : Fragment(), onCartAddClickListener {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_FILTER_SETTING_SEARCH_ACTIVITY){
             et_class_name.setText(data?.getStringExtra("query"))
-
         }
+
         if(resultCode==200){
             val list = data?.getParcelableArrayListExtra<SearchedData>("list")
             val class_name = data?.getStringExtra("et_class_name")
             et_class_name.setText(class_name)
-            Log.d("9999", list.toString())
-            Log.d("9999", subjectList.toString())
+            //Log.d("9999", list.toString())
+            //Log.d("9999", subjectList.toString())
             subjectList.clear()
             for(i in 0 until list!!.size) {
                 subjectList.add(Subject(
@@ -94,14 +95,14 @@ class TimeTableFilterSearchFragment() : Fragment(), onCartAddClickListener {
                     list[i].subjectIdx.toInt()))
             }
 
-            Log.d("9999", subjectList.toString())
+            //Log.d("9999", subjectList.toString())
         }
         if(resultCode==300){
             val item = data?.getParcelableExtra<SearchedData>("item")
             val class_name = data?.getStringExtra("et_class_name")
             rv_classes.adapter = mAdapter
             et_class_name.setText(class_name)
-            Log.d("9999", item.toString())
+            //Log.d("9999", item.toString())
             if(item!=null) {
                 subjectList.clear()
                 subjectList.add(

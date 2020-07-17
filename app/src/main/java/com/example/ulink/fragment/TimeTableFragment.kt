@@ -200,6 +200,7 @@ class TimeTableFragment : Fragment() {
                     val intent = Intent(view?.context, NoticeActivity::class.java)
                     intent.putExtra("class", subject.name)
                     intent.putExtra("idx", subject.subjectIdx.toString())
+                    intent.putExtra("check", "add")
                     Log.d("idx", subject.subjectIdx.toString())
                     startActivity(intent)
                 }

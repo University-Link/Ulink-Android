@@ -103,19 +103,23 @@ class TimeTableCandidateDetailAdapter(val context : Context,val onDeleteCartClic
                 assess.visibility = View.VISIBLE
                 delete.visibility = View.VISIBLE
                 toTable.visibility = View.VISIBLE
+                layout.setBackgroundColor(Color.parseColor("#f2f0ff"))
+
             } else {
                 assess.visibility = View.GONE
                 delete.visibility = View.GONE
                 toTable.visibility = View.GONE
+                layout.setBackgroundColor(Color.parseColor("#ffffff"))
+
             }
 
-            if (!selector) {
-                layout.setBackgroundResource(R.drawable.candidate_suject_bg_selected)
-                selector = true
-            } else {
-                layout.setBackgroundColor(Color.parseColor("#ffffff"))
-                selector = false
-            }
+//            if (!selector) {
+//                layout.setBackgroundResource(R.drawable.candidate_suject_bg_selected)
+//                selector = true
+//            } else {
+//                layout.setBackgroundColor(Color.parseColor("#ffffff"))
+//                selector = false
+//            }
 
 
             itemView.setOnClickListener {

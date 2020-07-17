@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="18dp"
             android:layout_marginTop="24dp"
-            android:src="@drawable/main_ic_logo" />
+            android:src="@drawable/io_main_ic_logo" />
 
     </LinearLayout>
 

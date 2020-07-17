@@ -83,11 +83,10 @@ class NoticeActivity : AppCompatActivity(){
             finish()
         }
 
-        btn_home.setOnClickListener{
+        btn_calendar.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("flag", true)
             startActivity(intent)
-
             finish()
         }
         btn_plus.setOnClickListener {

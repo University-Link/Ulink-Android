@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.example.ulink.R
+import com.example.ulink.R.*
 import com.example.ulink.repository.*
 import com.example.ulink.utils.deepCopy
 import com.google.android.material.tabs.TabLayout
@@ -56,7 +57,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_time_table_edit)
+        setContentView(layout.activity_time_table_edit)
 
 //      여기서 set
 
@@ -219,13 +220,13 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
     @RequiresApi(Build.VERSION_CODES.O)
     fun showAddTableDialog() {
         val builder = AlertDialog.Builder(this)
-        val layout = LayoutInflater.from(this).inflate(R.layout.dialog_timetable_name, null)
+        val layout = LayoutInflater.from(this).inflate(layout.dialog_timetable_name, null)
         builder.setView(layout)
         val dialog = builder.create()
 
-        val et = layout.findViewById<EditText>(R.id.et_name)
+        val et = layout.findViewById<EditText>(id.et_name)
 
-        layout.findViewById<TextView>(R.id.tv_ok).setOnClickListener {
+        layout.findViewById<TextView>(id.tv_ok).setOnClickListener {
 //            TODO 여기서 DB로 저장하고 edit에 넣긴 해야함
 
             DataRepository.addTimeTable("2020-2", et.text.toString(),
@@ -244,7 +245,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
             dialog.dismiss()
         }
 
-        layout.findViewById<TextView>(R.id.tv_cancel).setOnClickListener {
+        layout.findViewById<TextView>(id.tv_cancel).setOnClickListener {
             dialog.dismiss()
         }
 
@@ -302,16 +303,19 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
         TabLayoutMediator(tl_timetableeditor, vp_timetableeditor, object : TabLayoutMediator.TabConfigurationStrategy {
             override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
-                val tablayout = LayoutInflater.from(applicationContext).inflate(R.layout.tab_timetableeditor, null)
-
+                val tablayout = LayoutInflater.from(applicationContext).inflate(layout.tab_timetableeditor, null)
+                var filterIcon = tablayout.findViewById<ImageView>(id.ic_tab)
+                var cartIcon = tablayout.findViewById<ImageView>(id.ic_tab)
+                var filterText = tablayout.findViewById<TextView>(id.tv_tab)
+                var cartText = tablayout.findViewById<TextView>(id.tv_tab)
                 when (position) {
                     0 -> {
-                        tablayout.findViewById<ImageView>(R.id.ic_tab).setBackgroundResource(R.drawable.timetableadd_filterandsearch_btn_filterandsearch)
-                        tablayout.findViewById<TextView>(R.id.tv_tab).text = "필터 및 검색"
+                        filterIcon.setBackgroundResource(drawable.timetableadd_ic_filter_selected)
+                        filterText.text = "필터 및 검색"
                     }
                     1 -> {
-                        tablayout.findViewById<ImageView>(R.id.ic_tab).setBackgroundResource(R.drawable.timetableadd_ic_cart_selected)
-                        tablayout.findViewById<TextView>(R.id.tv_tab).text = "후보"
+                        cartIcon.setBackgroundResource(drawable.timetableadd_ic_cart_selected)
+                        cartText.text = "후보"
                     }
                 }
                 tab.customView = tablayout
@@ -325,37 +329,37 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
     @SuppressLint("ResourceType")
     fun showCheckGrade() {
         val builder = AlertDialog.Builder(this)
-        val layout = LayoutInflater.from(this).inflate(R.layout.dialog_timetable_checkgrade, null)
+        val layout = LayoutInflater.from(this).inflate(layout.dialog_timetable_checkgrade, null)
         builder.setView(layout)
 
         val dialog = builder.create()
 
-        layout.findViewById<Button>(R.id.btn_grade1).setOnClickListener {
-            it.setBackgroundColor(resources.getColor(R.color.black))
+        layout.findViewById<Button>(id.btn_grade1).setOnClickListener {
+            it.setBackgroundColor(resources.getColor(color.black))
             //1학년 필터
             onClick(1)
             dialog.dismiss()
 
         }
-        layout.findViewById<Button>(R.id.btn_grade2).setOnClickListener {
+        layout.findViewById<Button>(id.btn_grade2).setOnClickListener {
             //2학년 필터
             onClick(2)
             dialog.dismiss()
 
         }
-        layout.findViewById<Button>(R.id.btn_grade3).setOnClickListener {
+        layout.findViewById<Button>(id.btn_grade3).setOnClickListener {
             //3학년 필터
             onClick(3)
             dialog.dismiss()
 
         }
-        layout.findViewById<Button>(R.id.btn_grade4).setOnClickListener {
+        layout.findViewById<Button>(id.btn_grade4).setOnClickListener {
             //4학년 필터
             onClick(4)
             dialog.dismiss()
 
         }
-        layout.findViewById<Button>(R.id.btn_grade5).setOnClickListener {
+        layout.findViewById<Button>(id.btn_grade5).setOnClickListener {
             //5학년 필터
             onClick(5)
             dialog.dismiss()
@@ -371,19 +375,19 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
     fun showAddDialog() {
         val builder = AlertDialog.Builder(this)
-        val layout = LayoutInflater.from(this).inflate(R.layout.dialog_direct_add, null)
+        val layout = LayoutInflater.from(this).inflate(layout.dialog_direct_add, null)
         builder.setView(layout)
 
         val dialog = builder.create()
 
-        layout.findViewById<Button>(R.id.btn_drag).setOnClickListener {
+        layout.findViewById<Button>(id.btn_drag).setOnClickListener {
             val intent = Intent(this, TimeTableDirectEditActivity::class.java)
             intent.putExtra("timeTable", deepCopy(mAdapter.timeTableList[vp_timetableadd.currentItem]))
             startActivityForResult(intent, REQUEST_DIRECT_EDIT_ACTIVITY)
             dialog.dismiss()
         }
 
-        layout.findViewById<Button>(R.id.btn_type).setOnClickListener {
+        layout.findViewById<Button>(id.btn_type).setOnClickListener {
 //            TODO 이거 해제
             val intent = Intent(this, TimeTableDirectTypeActivity::class.java)
             intent.putExtra("addable", true)
@@ -392,7 +396,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
             dialog.dismiss()
         }
-        layout.findViewById<Button>(R.id.btn_cancel).setOnClickListener {
+        layout.findViewById<Button>(id.btn_cancel).setOnClickListener {
             dialog.dismiss()
         }
 

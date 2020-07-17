@@ -14,6 +14,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".FilterNormalActivity"></activity>
+        <activity android:name=".FilterMajorActivity"></activity>
         <activity android:name=".SplashActivity"
             android:theme = "@android:style/Theme.NoTitleBar.Fullscreen">
 

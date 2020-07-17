@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.EvaluationActivity
 import com.example.ulink.R
@@ -63,6 +64,7 @@ class TimeTableCandidateAdapter : RecyclerView.Adapter<TimeTableCandidateAdapter
             itemView.findViewById<Button>(R.id.btn_assess).visibility = View.VISIBLE
             itemView.findViewById<Button>(R.id.btn_delete).visibility = View.VISIBLE
             itemView.findViewById<Button>(R.id.btn_totable).visibility = View.VISIBLE
+            itemView.findViewById<ConstraintLayout>(R.id.layout_cart).setBackgroundColor(Color.parseColor("#ffffff"))
 
 
             itemView.findViewById<Button>(R.id.btn_assess).setOnClickListener {

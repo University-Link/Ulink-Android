@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         if(intent.getBooleanExtra("flag", false)){
                 main_viewPager.setCurrentItem(2)
-            }
+        }
 
         bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
