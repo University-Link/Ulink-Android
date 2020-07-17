@@ -10,6 +10,7 @@ import com.example.ulink.ClassRecycler.ClassData
 import com.example.ulink.ScheduleRecycler.ScheduleItemData
 import com.example.ulink.NoticeRecycler.ScheduleNoticeAdapter
 import com.example.ulink.NoticeRecycler.emptyCheck
+import com.example.ulink.repository.DataRepository
 import com.example.ulink.repository.ResponseChatting
 import com.example.ulink.repository.ResponseGetClassNotice
 import com.example.ulink.repository.RetrofitService
@@ -30,7 +31,6 @@ class NoticeActivity : AppCompatActivity(){
     private val taskData = mutableListOf<ScheduleItemData>()
     private val classData = mutableListOf<ScheduleItemData>()
 
-    var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ3NzkxODAsImV4cCI6MTU5NjIxOTE4MCwiaXNzIjoiYm9iYWUifQ.BAOeiZ_uqtIVPzFJd2oZbfVz44A2_QSXLQliNhN6pv4"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notice)
@@ -116,7 +116,7 @@ class NoticeActivity : AppCompatActivity(){
             startActivity(intent)
         }
 
-        RetrofitService.service.getClassNotice(token, idx).enqueue(object : Callback<ResponseGetClassNotice> {
+        RetrofitService.service.getClassNotice(DataRepository.token, idx).enqueue(object : Callback<ResponseGetClassNotice> {
             override fun onFailure(call: Call<ResponseGetClassNotice>, t: Throwable) {
             }
 

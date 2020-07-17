@@ -86,11 +86,11 @@ class TimeTableFilterSearchFragment() : Fragment(), onCartAddClickListener {
                     list[i].day,
                     list[i].content,
                     1,
-                    false,
+                    true,
                     list[i].credit,
                     list[i].professor,
                     list[i].course,
-                    false,
+                    true,
                     "",  //학수번호
                     list[i].subjectIdx.toInt()))
             }
@@ -114,11 +114,11 @@ class TimeTableFilterSearchFragment() : Fragment(), onCartAddClickListener {
                         item.day,
                         item.content,
                         1,
-                        false,
+                        true,
                         item.credit,
                         item.professor,
                         item.course,
-                        false,
+                        true,
                         "", //학수번호
                         item.subjectIdx.toInt()
                     )

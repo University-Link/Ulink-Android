@@ -15,9 +15,7 @@ object DataRepository {
 
     val retrofit = RetrofitService.service
 
-    val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLsnLXtlansoITsnpDqs7XtlZnrtoAiLCJpYXQiOjE1OTQ4MzkzOTEsImV4cCI6MTU5ODQzNTc5MSwiaXNzIjoiYm9iYWUifQ.jxont3bUINSAtQt_F90KeE376WX-cZJoB5rzM2K7Ccg"
-
-
+    const val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLsnLXtlansoITsnpDqs7XtlZnrtoAiLCJpYXQiOjE1OTQ4MzkzOTEsImV4cCI6MTU5ODQzNTc5MSwiaXNzIjoiYm9iYWUifQ.jxont3bUINSAtQt_F90KeE376WX-cZJoB5rzM2K7Ccg"
 
 
     fun getMainTimeTable(onSuccess: (TimeTable) -> Unit, onFailure: (String) -> Unit) {
@@ -37,6 +35,7 @@ object DataRepository {
                             addAll(it.data.subjects.thu)
                             addAll(it.data.subjects.fri)
                         }
+
                         val timeTable = TimeTable(it.data.timeTable.id, it.data.timeTable.semester, it.data.timeTable.name, 1, startTime = it.data.minTime, endTime = it.data.maxTime, subjectList = subjectList)
                         Log.d("tag",timeTable.toString())
                         onSuccess(timeTable)
@@ -96,11 +95,11 @@ object DataRepository {
                             addAll(it.data[i].subjects.thu)
                             addAll(it.data[i].subjects.fri)
                         }
-                        val timeTable = TimeTable(it.data[i].timeTable.id, it.data[i].timeTable.semester, it.data[i].timeTable.name, 0, startTime = it.data[i].minTime, endTime = it.data[i].maxTime, subjectList = subjectList)
+
+                        val timeTable = TimeTable(it.data[i].timeTable.id, it.data[i].timeTable.semester, it.data[i].timeTable.name, 0, startTime = "09:00", endTime = "18:00", subjectList = subjectList)
                         tableList.add(deepCopy(timeTable))
                     }
 
-//                  소영새안   새로운 메인  새 영 안 소
 
                     onSuccess(tableList)
                 } ?: onFailure(response.message())

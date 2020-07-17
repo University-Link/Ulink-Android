@@ -1,6 +1,7 @@
 package com.example.ulink.CalendarRecycler
 
 import android.graphics.Color
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,8 @@ class CalendarScheduleViewHolder(itemView : View) : RecyclerView.ViewHolder(item
 
     fun bind(data : ScheduleItemData) {
         schedule.text = data.classname
-        schedule.setTextColor(getColors(data.color))
+        Log.d("tag",data.toString())
+        itemView.setBackgroundResource(getColors(data.color))
     }
 
     fun getColors(type: Int): Int {

@@ -19,7 +19,9 @@ class SplashActivity : Activity() {
 
              override fun onAnimationEnd(animation: Animator?) {
                  val intent = Intent(baseContext, LoginActivity::class.java)
-                 startActivity(intent)             }
+                 startActivity(intent)
+                 finish()
+             }
 
              override fun onAnimationCancel(animation: Animator?) {
              }
@@ -29,8 +31,6 @@ class SplashActivity : Activity() {
 
          })
         lottie.playAnimation()
-
-
 
     }
 }

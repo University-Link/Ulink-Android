@@ -18,7 +18,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TimeTableCandidateDetailAdapter(val context : Context,val onDeleteCartClickListener: onDeleteCartClickListener) : RecyclerView.Adapter<TimeTableCandidateDetailAdapter.VHolder>() {
+class TimeTableCandidateDetailAdapter(val context: Context, val onDeleteCartClickListener: onDeleteCartClickListener, val onAddtoTableClickListener: onAddtoTableClickListener) : RecyclerView.Adapter<TimeTableCandidateDetailAdapter.VHolder>() {
     var cartDataList: MutableList<GetCartData> = arrayListOf()
 
 
@@ -37,7 +37,7 @@ class TimeTableCandidateDetailAdapter(val context : Context,val onDeleteCartClic
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VHolder {
         return VHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_subject_child, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.item_subject_child, parent, false)
         )
     }
 
@@ -59,14 +59,13 @@ class TimeTableCandidateDetailAdapter(val context : Context,val onDeleteCartClic
 
         fun setHolder(subject: GetCartData) {
             var token =
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ3NzkxODAsImV4cCI6MTU5NjIxOTE4MCwiaXNzIjoiYm9iYWUifQ.BAOeiZ_uqtIVPzFJd2oZbfVz44A2_QSXLQliNhN6pv4"
+                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ3NzkxODAsImV4cCI6MTU5NjIxOTE4MCwiaXNzIjoiYm9iYWUifQ.BAOeiZ_uqtIVPzFJd2oZbfVz44A2_QSXLQliNhN6pv4"
 
             itemView.findViewById<TextView>(R.id.tv_class_name).text = subject.name
             itemView.findViewById<TextView>(R.id.tv_professor_name).text = subject.professor
             itemView.findViewById<TextView>(R.id.tv_category).text = subject.course //전공필수등
             itemView.findViewById<TextView>(R.id.tv_credit).text = subject.credit.toString() + "학점"
             itemView.findViewById<TextView>(R.id.tv_classnumber).text = subject.subjectCode
-
 
 
             var layout = itemView.findViewById<ConstraintLayout>(R.id.layout_cart)
@@ -80,7 +79,7 @@ class TimeTableCandidateDetailAdapter(val context : Context,val onDeleteCartClic
             itemView.findViewById<TextView>(R.id.tv_time).text = ""
             for (i in 0 until subject.startTime.size) {
                 itemView.findViewById<TextView>(R.id.tv_time).text = itemView.findViewById<TextView>(R.id.tv_time).text.toString() + getDay(subject.day[i]) + " " + subject.startTime[i] + " - " + subject.endTime[i]
-                if (subject.startTime.size>1 && i<subject.startTime.size-1) {
+                if (subject.startTime.size > 1 && i < subject.startTime.size - 1) {
                     var text = itemView.findViewById<TextView>(R.id.tv_time).text
                     val text2 = "$text, "
                     itemView.findViewById<TextView>(R.id.tv_time).text = text2
@@ -90,16 +89,16 @@ class TimeTableCandidateDetailAdapter(val context : Context,val onDeleteCartClic
             itemView.findViewById<TextView>(R.id.tv_place).text = ""
 
             for (i in 0 until subject.place.size) {
-                itemView.findViewById<TextView>(R.id.tv_place).text =  itemView.findViewById<TextView>(R.id.tv_place).text.toString() + subject.place[i]
-                if (subject.place.size>1 && i < subject.place.size-1){
-                    var text =  itemView.findViewById<TextView>(R.id.tv_place).text
+                itemView.findViewById<TextView>(R.id.tv_place).text = itemView.findViewById<TextView>(R.id.tv_place).text.toString() + subject.place[i]
+                if (subject.place.size > 1 && i < subject.place.size - 1) {
+                    var text = itemView.findViewById<TextView>(R.id.tv_place).text
                     val text2 = "$text, "
                     itemView.findViewById<TextView>(R.id.tv_place).text = text2
                 }
             }
 
 
-            if (mSelectedItems.getOrDefault(adapterPosition, false)){
+            if (mSelectedItems.getOrDefault(adapterPosition, false)) {
                 assess.visibility = View.VISIBLE
                 delete.visibility = View.VISIBLE
                 toTable.visibility = View.VISIBLE
@@ -123,18 +122,19 @@ class TimeTableCandidateDetailAdapter(val context : Context,val onDeleteCartClic
 
 
             itemView.setOnClickListener {
-                Log.d("tag","clicked")
+                Log.d("tag", "clicked")
 
-                if (mSelectedItems.getOrDefault(adapterPosition, false)){
+                if (mSelectedItems.getOrDefault(adapterPosition, false)) {
                     mSelectedItems.put(adapterPosition, false)
-                    Log.d("tag","${adapterPosition}clicked to false")
+                    Log.d("tag", "${adapterPosition}clicked to false")
                     (context as TimeTableEditActivity).rollBack()
 //                   이미 누른적이 잇떤거 다시 눌렀을때 바로 눌렀든 나중에 눌렀든
 //                    바로 누르면 전에거 지우고 vis 반전하고 등록
 //                     나중에 누르면 리스트에서 지우면서 view gone
-                    if (preClickList.size>0){
-                        for (i in preClickList){ preClickList
-                            if (i == preClickList.last()){
+                    if (preClickList.size > 0) {
+                        for (i in preClickList) {
+                            preClickList
+                            if (i == preClickList.last()) {
                                 layout.setBackgroundColor(Color.parseColor("#ffffff"))
                                 break
                             }
@@ -154,11 +154,12 @@ class TimeTableCandidateDetailAdapter(val context : Context,val onDeleteCartClic
                 } else {
                     mSelectedItems.clear()
                     mSelectedItems.put(adapterPosition, true)
-                    Log.d("tag","${adapterPosition}clicked to true")
+                    Log.d("tag", "${adapterPosition}clicked to true")
 //                   전에 눌린 기록이 false
-                    if (preClickList.size>0){
-                        for (i in preClickList){ preClickList
-                            if (i == preClickList.last()){
+                    if (preClickList.size > 0) {
+                        for (i in preClickList) {
+                            preClickList
+                            if (i == preClickList.last()) {
                                 layout.setBackgroundColor(Color.parseColor("#ffffff"))
                                 break
                             }
@@ -171,7 +172,7 @@ class TimeTableCandidateDetailAdapter(val context : Context,val onDeleteCartClic
 
 //                    TODO 여기 주시
 
-                    val carttosubject = Subject(subject.subjectIdx.toLong(), subject.name, subject.startTime, subject.endTime,subject.day, subject.place,0, true,subject.credit.toFloat(),subject.professor,subject.course,true)
+                    val carttosubject = Subject(subject.subjectIdx.toLong(), subject.name, subject.startTime, subject.endTime, subject.day, subject.place, 0, true, subject.credit.toFloat(), subject.professor, subject.course, true)
                     (context as TimeTableEditActivity).addToSampleTable(carttosubject)
 
                     itemView.setBackgroundResource(R.drawable.candidate_suject_bg_selected)
@@ -180,7 +181,7 @@ class TimeTableCandidateDetailAdapter(val context : Context,val onDeleteCartClic
                     assess.visibility = View.VISIBLE
                     delete.visibility = View.VISIBLE
                     toTable.visibility = View.VISIBLE
-                    Log.d("tag","${adapterPosition} is visible")
+                    Log.d("tag", "${adapterPosition} is visible")
 
 
 
@@ -207,35 +208,54 @@ class TimeTableCandidateDetailAdapter(val context : Context,val onDeleteCartClic
             }
 
             itemView.findViewById<Button>(R.id.btn_delete).setOnClickListener {
-                Log.d("후보삭semester",onDeleteCartClickListener.onClickeddelete())
+                Log.d("후보삭semester", onDeleteCartClickListener.onClickeddelete())
                 Log.d("후보삭제subjectidx", subject.subjectIdx.toString())
 
                 RetrofitService.service.deleteCartList(token, subject.subjectIdx.toString(),
-                    RequestDeleteCartList(
-                    semester = onDeleteCartClickListener.onClickeddelete()
-                )
+                        RequestDeleteCartList(
+                                semester = onDeleteCartClickListener.onClickeddelete()
+                        )
                 ).enqueue(object : Callback<ResponseDeleteCartList> {
-                override fun onFailure(call: Call<ResponseDeleteCartList>, t: Throwable) {
-                    Log.d("후보 삭제",t.message.toString())
-                }
-
-                override fun onResponse(
-                    call: Call<ResponseDeleteCartList>,
-                    response: Response<ResponseDeleteCartList>
-                ) {
-                    response.body().let {
-                        Log.d("후보 삭제","성공")
-                        notifyItemRemoved(adapterPosition)
+                    override fun onFailure(call: Call<ResponseDeleteCartList>, t: Throwable) {
+                        Log.d("후보 삭제", t.message.toString())
                     }
-                }
 
-            })
-             itemView.findViewById<Button>(R.id.btn_totable).setOnClickListener {
+                    override fun onResponse(
+                            call: Call<ResponseDeleteCartList>,
+                            response: Response<ResponseDeleteCartList>
+                    ) {
+                        response.body().let {
+                            Log.d("후보 삭제", "성공")
+                            cartDataList.removeAt(adapterPosition)
+                            notifyItemRemoved(adapterPosition)
+                        }
+                    }
+                })
+            }
 
-             }
+            val color = findNextColor(onAddtoTableClickListener.onClicked())
 
+            itemView.findViewById<Button>(R.id.btn_totable).setOnClickListener {
+//                FIXME 여기 id 원래 다른 아이디인데 addToTable새로 넣기 귀찮아서 일시적으로 subjectIDX 두번넣음
+//                  나중에는 0번째에 그냥 0값 dealut로 넣고 맨 마지막의 subjectidx이용
+                (context as TimeTableEditActivity).addToTable(Subject(subject.subjectIdx.toLong() , subject.name, subject.startTime, subject.endTime, subject.day, subject.place, color,
+                        true , subject.credit.toFloat(),subject.professor,subject.course,false,subject.subjectCode,subject.subjectIdx ))
             }
         }
+
+        fun findNextColor(timeTable: TimeTable): Int {
+            val size: java.util.HashMap<Int, Int> = hashMapOf()
+            for (i in 0 until timeTable.subjectList.size) {
+                if (size.containsKey(timeTable.subjectList[i].color)) {
+                    size.put(timeTable.subjectList[i].color, size.get(timeTable.subjectList[i].color)!! + 1)
+                } else {
+                    size.put(timeTable.subjectList[i].color, 1)
+                }
+            }
+            var ids = size.keys.size - 1
+            return ids
+        }
     }
+
 
 }
