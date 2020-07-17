@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import com.example.ulink.R
-import com.example.ulink.ResponseNoticeData
 import java.text.SimpleDateFormat
 import java.util.*
 
