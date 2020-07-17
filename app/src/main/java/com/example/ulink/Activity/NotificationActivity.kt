@@ -1,9 +1,11 @@
-package com.example.ulink
+package com.example.ulink.Activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ulink.NotificationRecyclerAdapter
+import com.example.ulink.R
 import com.example.ulink.repository.Notification
 import com.example.ulink.repository.NotificationDB
 

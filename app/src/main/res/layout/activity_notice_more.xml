@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/calendar_img_bg_under"
-    tools:context=".NoticeMoreActivity">
+    tools:context=".Activity.NoticeMoreActivity">
 
     <include
         android:id="@+id/toolbar_notice_more"

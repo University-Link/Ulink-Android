@@ -12,11 +12,9 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.constraintlayout.widget.ConstraintHelper
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ulink.EvaluationActivity
+import com.example.ulink.Activity.EvaluationActivity
 import com.example.ulink.R
 import com.example.ulink.repository.*
 import retrofit2.Call
@@ -169,7 +167,8 @@ class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeT
             }
 
             assess.setOnClickListener {
-                val intent = Intent(context,EvaluationActivity::class.java)
+                val intent = Intent(context,
+                    EvaluationActivity::class.java)
                 context.startActivity(intent)
             }
 

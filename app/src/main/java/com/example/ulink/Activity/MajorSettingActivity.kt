@@ -1,8 +1,8 @@
-package com.example.ulink
+package com.example.ulink.Activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_class_evaluation.*
+import com.example.ulink.R
 
 class MajorSettingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

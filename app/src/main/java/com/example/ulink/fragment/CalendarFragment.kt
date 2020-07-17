@@ -5,26 +5,16 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.ulink.CalendarRecycler.*
-import com.example.ulink.ClassRecycler.ClassAdapter
-import com.example.ulink.ClassRecycler.ClassData
 import com.example.ulink.R
-import com.example.ulink.ScheduleActivity
+import com.example.ulink.Activity.ScheduleActivity
 import com.example.ulink.ScheduleRecycler.nowDay
-import com.example.ulink.repository.Notice
-import com.example.ulink.repository.ResponseCalendar
-import com.example.ulink.repository.ResponseChatting
-import com.example.ulink.repository.RetrofitService
 import kotlinx.android.synthetic.main.fragment_calendar.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class CalendarFragment : Fragment() {
     override fun onCreateView(

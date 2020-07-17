@@ -18,16 +18,14 @@
         android:layout_marginTop="15dp"
         android:textColor="@color/text1"/>
 
-    <ImageButton
-        android:id="@+id/tv_ok"
-        android:textColor="@color/white"
-        android:text="확인"
-        android:textSize="12sp"
+    <Button
+        android:id="@+id/btn_ok"
         android:layout_width="44dp"
         android:layout_height="23dp"
         android:layout_marginRight="23dp"
         android:background="@drawable/color_btn_change_check"
         app:layout_constraintTop_toTopOf="@id/tv_name"
+        app:layout_constraintBottom_toBottomOf="@id/tv_name"
         app:layout_constraintRight_toRightOf="parent"/>
 
 

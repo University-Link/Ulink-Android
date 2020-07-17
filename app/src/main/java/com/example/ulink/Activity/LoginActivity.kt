@@ -1,6 +1,5 @@
-package com.example.ulink
+package com.example.ulink.Activity
 
-import android.animation.Animator
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -10,9 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.TextView
-import com.bumptech.glide.Glide
+import com.example.ulink.MainActivity
+import com.example.ulink.R
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_splash.*
 
 class LoginActivity : AppCompatActivity() {
 

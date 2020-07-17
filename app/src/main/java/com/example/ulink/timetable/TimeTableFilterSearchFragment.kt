@@ -1,17 +1,14 @@
 package com.example.ulink.timetable
 
-import com.example.ulink.timetable.TimeTableClassAdapter
-import com.example.ulink.timetable.TimeTableEditActivity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.ulink.FilterMajorActivity
-import com.example.ulink.FilterNormalActivity
-import com.example.ulink.FilterSettingSearchActivity
+import com.example.ulink.Activity.FilterMajorActivity
+import com.example.ulink.Activity.FilterNormalActivity
+import com.example.ulink.Activity.FilterSettingSearchActivity
 import com.example.ulink.R
 import com.example.ulink.repository.SearchedData
 import com.example.ulink.repository.Subject
@@ -43,7 +40,8 @@ class TimeTableFilterSearchFragment() : Fragment(), onCartAddClickListener {
         mAdapter.addToList(subjectList)
         et_class_name.setOnFocusChangeListener { v, hasFocus ->
             if (prevent){
-                val intent = Intent(context,FilterSettingSearchActivity::class.java)
+                val intent = Intent(context,
+                    FilterSettingSearchActivity::class.java)
                 startActivityForResult(intent, REQUEST_FILTER_SETTING_SEARCH_ACTIVITY)
                 prevent = false
                 et_class_name.clearFocus()
@@ -51,7 +49,8 @@ class TimeTableFilterSearchFragment() : Fragment(), onCartAddClickListener {
         }
 
         btn_fitler_major.setOnClickListener {
-            val intent = Intent(context,FilterMajorActivity::class.java)
+            val intent = Intent(context,
+                FilterMajorActivity::class.java)
             startActivityForResult(intent, REQUEST_FILTER_MAJOR_ACTIVITY)
         }
 
