@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.ulink.R
+import com.example.ulink.fragment.onRefreshListener
 import com.example.ulink.repository.*
 import kotlinx.android.synthetic.main.layout_timetable_bottomsheet_customize1.*
 import kotlinx.android.synthetic.main.layout_timetable_bottomsheet_customize1.tv_name
@@ -17,7 +18,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class CustomizingFragment2(subject : Subject) :Fragment() {
+class CustomizingFragment2(subject : Subject, val onRefreshListener: onRefreshListener) :Fragment() {
     val subject = subject
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.layout_timetable_bottomsheet_customize2, container, false)
@@ -62,9 +63,10 @@ class CustomizingFragment2(subject : Subject) :Fragment() {
             Toast.makeText(view.context, "코랄 핑크", Toast.LENGTH_SHORT).show()
         }
 
-        var body = RequestChangeColor(color)
 
         btn_ok2.setOnClickListener(){
+            var body = RequestChangeColor(color = color)
+
             RetrofitService.service.updateChangeColor(DataRepository.token, subject.id.toString(), subject.subject, body).enqueue(object : Callback<ResponseChangeColor> {
                 override fun onFailure(call: Call<ResponseChangeColor>, t: Throwable) {
                     Log.d("tag", "1")
@@ -77,6 +79,7 @@ class CustomizingFragment2(subject : Subject) :Fragment() {
                     response.body()?.let{
                         if(it.status == 200){
                             Log.d("dlwldms", it.toString())
+                            onRefreshListener.onRefresh()
                         }
                     } ?: Log.d("tag", response.message())
                 }

@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.ulink.R
+import com.example.ulink.fragment.onRefreshListener
 import com.example.ulink.repository.*
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.tabs.TabLayoutMediator
@@ -24,7 +25,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class CustomizingBottomSheetFragment(subject : Subject) : BottomSheetDialogFragment() {
+class CustomizingBottomSheetFragment(subject : Subject, val onRefreshListener: onRefreshListener) : BottomSheetDialogFragment() {
     val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ4MTY1NzQsImV4cCI6MTU5NjI1NjU3NCwiaXNzIjoiYm9iYWUifQ.JwRDELH1lA1Fb8W1ltTmhThpmgFrUTQZVocUTATv3so"
     val subject = subject
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,8 +40,25 @@ class CustomizingBottomSheetFragment(subject : Subject) : BottomSheetDialogFragm
         super.onViewCreated(view, savedInstanceState)
 
 
+
+
         val fragment_list : MutableList<Fragment> = arrayListOf()
-        fragment_list.addAll(listOf(CustomizingFragment1(subject),CustomizingFragment2(subject),CustomizingFragment3(subject)))
+        fragment_list.addAll(listOf(CustomizingFragment1(subject, object : onRefreshListener{
+            override fun onRefresh() {
+                onRefreshListener.onRefresh()
+                dismiss()
+            }
+        }),CustomizingFragment2(subject, object : onRefreshListener{
+            override fun onRefresh() {
+                onRefreshListener.onRefresh()
+                dismiss()
+            }
+        }),CustomizingFragment3(subject, object : onRefreshListener{
+            override fun onRefresh() {
+                onRefreshListener.onRefresh()
+                dismiss()
+            }
+        })))
         val adapter = CustomizingPagerAdapter(this, fragment_list)
         vp_custom.adapter = adapter
 

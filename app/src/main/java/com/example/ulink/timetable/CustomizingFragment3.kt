@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.ulink.R
+import com.example.ulink.fragment.onRefreshListener
 import com.example.ulink.repository.*
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.dialog_timetable_name.*
@@ -22,7 +23,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class CustomizingFragment3(subject : Subject) : Fragment() {
+class CustomizingFragment3(subject : Subject, val onRefreshListener: onRefreshListener) : Fragment() {
     val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ4MTY1NzQsImV4cCI6MTU5NjI1NjU3NCwiaXNzIjoiYm9iYWUifQ.JwRDELH1lA1Fb8W1ltTmhThpmgFrUTQZVocUTATv3so"
     val subject = subject
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -51,9 +52,9 @@ class CustomizingFragment3(subject : Subject) : Fragment() {
             Toast.makeText(view.context, "허니 옐로우", Toast.LENGTH_SHORT).show()
         }
 
-        var body = RequestChangeColor(color)
 
         btn_ok3.setOnClickListener(){
+            var body = RequestChangeColor(color=color)
             RetrofitService.service.updateChangeColor(DataRepository.token, subject.id.toString(), subject.subject, body).enqueue(object : Callback<ResponseChangeColor> {
                 override fun onFailure(call: Call<ResponseChangeColor>, t: Throwable) {
                     Log.d("tag", "1")
@@ -66,6 +67,7 @@ class CustomizingFragment3(subject : Subject) : Fragment() {
                     response.body()?.let{
                         if(it.status == 200){
                             Log.d("dlwldms", it.toString())
+                            onRefreshListener.onRefresh()
                         }
                     } ?: Log.d("tag", response.message())
                 }

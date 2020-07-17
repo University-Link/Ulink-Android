@@ -13,6 +13,7 @@ import com.example.ulink.ClassRecycler.ClassAdapter
 import com.example.ulink.ClassRecycler.ClassData
 import com.example.ulink.R
 import com.example.ulink.fragment.TimeTableFragment
+import com.example.ulink.fragment.onRefreshListener
 import com.example.ulink.repository.*
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.dialog_timetable_name.*
@@ -22,7 +23,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class CustomizingFragment1(subject : Subject) :Fragment() {
+class CustomizingFragment1(subject : Subject,val  onRefreshListener: onRefreshListener) :Fragment() {
     val subject = subject
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.layout_timetable_bottomsheet_customize1, container, false)
@@ -67,9 +68,9 @@ class CustomizingFragment1(subject : Subject) :Fragment() {
             Toast.makeText(view.context, "마티니 블루", Toast.LENGTH_SHORT).show()
         }
 
-        var body = RequestChangeColor(color=color)
 
         btn_ok.setOnClickListener(){
+            var body = RequestChangeColor(color=color)
             RetrofitService.service.updateChangeColor(DataRepository.token, subject.id.toString(), subject.subject, body).enqueue(object : Callback<ResponseChangeColor> {
                 override fun onFailure(call: Call<ResponseChangeColor>, t: Throwable) {
                     Log.d("tag", "1")
@@ -82,6 +83,7 @@ class CustomizingFragment1(subject : Subject) :Fragment() {
                     response.body()?.let{
                         if(it.status == 201){
                             Log.d("dlwldms", it.toString())
+                            onRefreshListener.onRefresh()
                         }
                     } ?: Log.d("tag", response.message())
                 }
