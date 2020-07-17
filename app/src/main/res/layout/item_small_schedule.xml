@@ -7,11 +7,9 @@
     <TextView
         android:id="@+id/tv_schedule"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="16dp"
         android:text="전자기학"
-        android:background="@color/main"
         android:textColor="@color/white"
-        android:layout_gravity="center"
         android:gravity="center"
         android:layout_marginTop="3dp"
         android:textSize="10sp"

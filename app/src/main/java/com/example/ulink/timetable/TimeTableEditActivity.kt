@@ -89,11 +89,12 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
         //timeTableList[0].semester
 
-        semester = intent.getParcelableExtra<TimeTable>("timeTable").semester
+        if (intent.getParcelableExtra<TimeTable>("timeTable") != null){
+            semester = intent.getParcelableExtra<TimeTable>("timeTable")!!.semester
+        }
 
         intent.getParcelableExtra<TimeTable>("timeTable")?.let { timeTable ->
-
-            Log.d("tag",timeTable.semester.toString())
+            Log.d("tag",timeTable.toString())
             DataRepository.getTimeTableBySemester(timeTable.semester,
                     onSuccess = {
                         for (table in it){
@@ -113,10 +114,6 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-
-    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_DIRECT_EDIT_ACTIVITY) {
@@ -425,6 +422,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
                             val subject = Subject(i.subjectIdx,i.name,i.startTime,i.endTime,i.day,i.content,0,true,i.credit,i.professor,i.course,true,i.subjectCode,i.subjectIdx.toInt())
                             list.add(subject)
                         }
+                        Log.d("tag",list.toString())
 
 //                        TODO 여기 나중에 정리하기 setList로
                         (mEditorAdapter.fragmentList[0] as TimeTableFilterSearchFragment).subjectList = list
@@ -440,6 +438,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
     }
 
     fun getSemesterFromActivity() : String = semester
+    fun getTimeTableFromActivity() : TimeTable = mAdapter.timeTableList[vp_timetableadd.currentItem]
 }
 interface getGradeClickListener{
     fun onClick(position : Int)

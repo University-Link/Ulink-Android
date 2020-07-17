@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.example.ulink.CalendarRecycler.*
 import com.example.ulink.ClassRecycler.ClassAdapter
 import com.example.ulink.ClassRecycler.ClassData
@@ -33,6 +34,10 @@ class CalendarFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_calendar, container, false)
     }
 
+    override fun onResume() {
+        super.onResume()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         var token =
@@ -40,12 +45,13 @@ class CalendarFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         lateinit var dialog: AlertDialog
+
         btn_today.text = nowDay.toString()
 
         var nowCalendarData = calendarDataInit(tv_month) // now_month
 
         calendar_viewPager.setUserInputEnabled(false)
-        calendar_viewPager.adapter = CalendarAdapter(view.context, nowCalendarData)
+        calendar_viewPager.adapter = CalendarAdapter(view.context, nowCalendarData, view)
 
         btn_left_month.setOnClickListener() {
             nowCalendarData = calendarPrevMonth(
@@ -53,7 +59,7 @@ class CalendarFragment : Fragment() {
                 nowCalendarData.month,
                 nowCalendarData.year
             ) // prev_month
-            calendar_viewPager.adapter = CalendarAdapter(view.context, nowCalendarData)
+            calendar_viewPager.adapter = CalendarAdapter(view.context, nowCalendarData, view)
         }
 
         btn_right_month.setOnClickListener() {
@@ -62,12 +68,12 @@ class CalendarFragment : Fragment() {
                 nowCalendarData.month,
                 nowCalendarData.year
             ) // next_month
-            calendar_viewPager.adapter = CalendarAdapter(view.context, nowCalendarData)
+            calendar_viewPager.adapter = CalendarAdapter(view.context, nowCalendarData, view)
         }
 
         btn_today.setOnClickListener() {
             nowCalendarData = calendarDataInit(tv_month) // today
-            calendar_viewPager.adapter = CalendarAdapter(view.context, nowCalendarData)
+            calendar_viewPager.adapter = CalendarAdapter(view.context, nowCalendarData, view)
         }
 
         btn_schedule.setOnClickListener() {
@@ -92,4 +98,9 @@ class CalendarFragment : Fragment() {
             dialog.window?.setLayout(width, height)
         }
     }
+
+    fun getYearMonth() : String{
+        return view?.findViewById<TextView>(R.id.tv_month)?.text.toString()
+    }
+
 }

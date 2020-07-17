@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.*
 import com.example.ulink.NoticeRecycler.ddaySchedule
 import com.example.ulink.ScheduleRecycler.*
+import com.example.ulink.repository.DataRepository
 import com.example.ulink.repository.ResponseCalendar
 import com.example.ulink.repository.RetrofitService
 import retrofit2.Call
@@ -21,11 +22,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class CalendarAdapter(private val context : Context, data : CalendarData) : RecyclerView.Adapter<CalendarAdapter.Vholder>() {
+class CalendarAdapter(private val context : Context, data : CalendarData, val rootView : View) : RecyclerView.Adapter<CalendarAdapter.Vholder>() {
     var data: CalendarData = data
     var endDay = arrayOf(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
-    val token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ3MTk1NDYsImV4cCI6MTU5NjE1OTU0NiwiaXNzIjoiYm9iYWUifQ.sim2YHX1mHhoP3eH_dGpxFwTRbVYHCGfPE4sfozFh5U"
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Vholder {
 
@@ -46,8 +46,10 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
         fun bind(data: CalendarData) {
 
             val rvCalendar = itemView as RecyclerView
-            val rvAdapter = CalendarDayAdapter(context)
-            val rvScheduleAdapter = CalendarScheduleAdapter(context)
+
+            var datas = mutableListOf<ScheduleItemData>()
+
+            val rvAdapter = CalendarDayAdapter(context, rootView, datas)
 
             //LeapYear
             endDay[1] = calendarLeapYearCheck(data)
@@ -73,9 +75,13 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
             Log.d("day", strLastDay)
 
             rvCalendar.adapter = rvAdapter
-            val schedule: MutableList<ScheduleItemData> = arrayListOf()
 
-            RetrofitService.service.getAllNotice(token, strFirstDay, strLastDay)
+
+            val schedule: MutableList<ScheduleItemData> = arrayListOf()
+            var datass = mutableListOf<ScheduleItemData>()
+
+
+            RetrofitService.service.getAllNotice(DataRepository.token, strFirstDay, strLastDay)
                 .enqueue(object : Callback<ResponseCalendar> {
                     override fun onFailure(call: Call<ResponseCalendar>, t: Throwable) {
                     }
@@ -88,7 +94,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                             if (it.status == 200) {
                                 for (i in 0 until it.data.size) {
                                     for (j in 0 until it.data[i].notice.size) {
-                                        rvScheduleAdapter.datas.apply {
+                                        datass.apply {
                                             add(
                                                 ScheduleItemData(
                                                     idx = it.data[i].notice[j].noticeIdx,
@@ -108,9 +114,12 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
                                         }
                                     }
                                 }
-                                rvScheduleAdapter.notifyDataSetChanged()
-                                Log.d("size", rvScheduleAdapter.datas.size.toString())
-                                Log.d("size", schedule.toString())
+
+                                rvAdapter.scheduleDatas.clear()
+                                rvAdapter.scheduleDatas.addAll(datass)
+                                rvAdapter.notifyDataSetChanged()
+
+                                Log.d("size", datas.toString())
                             }
                         } ?: Log.d("tag4", response.message())
                     }
@@ -212,7 +221,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData) : Recy
 
                             val popupList: MutableList<ScheduleItemData> = arrayListOf()
 
-                            RetrofitService.service.getAllNotice(token, retrofitStr, retrofitStr)
+                            RetrofitService.service.getAllNotice(DataRepository.token, retrofitStr, retrofitStr)
                                 .enqueue(object : Callback<ResponseCalendar> {
                                     override fun onFailure(
                                         call: Call<ResponseCalendar>,

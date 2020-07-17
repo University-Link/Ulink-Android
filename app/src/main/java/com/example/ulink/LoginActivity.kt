@@ -1,5 +1,6 @@
 package com.example.ulink
 
+import android.animation.Animator
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -11,6 +12,7 @@ import android.view.LayoutInflater
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_splash.*
 
 class LoginActivity : AppCompatActivity() {
 
@@ -26,6 +28,7 @@ class LoginActivity : AppCompatActivity() {
         val sharedPref : SharedPreferences = getSharedPreferences("pref", Context.MODE_PRIVATE)
         et_id.setText(sharedPref.getString("id", ""))
 
+
         btn_login.setOnClickListener {
             val sharedPref: SharedPreferences = getSharedPreferences("pref", Context.MODE_PRIVATE)
             val sharedEdit = sharedPref.edit()
@@ -37,6 +40,7 @@ class LoginActivity : AppCompatActivity() {
                 sharedEdit.clear()
                 sharedEdit.commit()
             }
+
 
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

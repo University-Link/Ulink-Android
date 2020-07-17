@@ -329,6 +329,7 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
                             subjectList[i].place = listOf(et_memo.text.toString())
                             subjectList[i].color = nextcolor
                             subjectList[i].startTime = listOf(datas[i].start_time)
+
                             subjectList[i].endTime = listOf(datas[i].end_time)
                             subjectList[i].isSample = false
                         }

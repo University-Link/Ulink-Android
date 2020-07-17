@@ -33,7 +33,6 @@ class FilterSettingSearchActivity : AppCompatActivity() {
     lateinit var filter_name :String
     val list : MutableList<SearchedData> = arrayListOf()
 
-    val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ4MTY1NzQsImV4cCI6MTU5NjI1NjU3NCwiaXNzIjoiYm9iYWUifQ.JwRDELH1lA1Fb8W1ltTmhThpmgFrUTQZVocUTATv3so"
 //    TODO 아이템 클릭이나 검색버튼 클릭하면 setresult
 
     override fun onCreate(savedInstanceState: Bundle?) {
