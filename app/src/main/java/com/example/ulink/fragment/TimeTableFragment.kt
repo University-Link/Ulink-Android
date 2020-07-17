@@ -163,6 +163,7 @@ class TimeTableFragment : Fragment() {
                 val layout =
                     LayoutInflater.from(context).inflate(R.layout.dialog_timetable_subject, null)
 
+                layout.findViewById<ImageView>(R.id.ic_color).setBackgroundResource(getColors(subject.color))
                 layout.findViewById<TextView>(R.id.tv_class_name).text = subject.name
 //                TODO 이거 table받아와서 classname으로 일주일에 몇번 수업인지 알아서 표시하기 vs 어뜨카지
 
@@ -258,4 +259,21 @@ class TimeTableFragment : Fragment() {
             else -> "월"
         }
     }
+    fun getColors(type: Int): Int {
+        return when (type) {
+            0 -> R.drawable.bg_round_border_subject_color_1
+            1 -> R.drawable.bg_round_border_subject_color_2
+            2 -> R.drawable.bg_round_border_subject_color_3
+            3 -> R.drawable.bg_round_border_subject_color_4
+            4 -> R.drawable.bg_round_border_subject_color_5
+            5 -> R.drawable.bg_round_border_subject_color_6
+            6 -> R.drawable.bg_round_border_subject_color_7
+            7 -> R.drawable.bg_round_border_subject_color_8
+            8 -> R.drawable.bg_round_border_subject_color_9
+            9 -> R.drawable.bg_round_border_subject_color_10
+            else -> R.drawable.bg_round_border_subject
+        }
+    }
+
+
 }
