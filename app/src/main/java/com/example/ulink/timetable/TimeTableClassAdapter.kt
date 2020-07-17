@@ -179,6 +179,7 @@ class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeT
                     subjectIdx = subject.subjectIdx
                 )).enqueue(object : Callback<ResponseaddCartList>{
                     override fun onFailure(call: Call<ResponseaddCartList>, t: Throwable) {
+                        Toast.makeText(context, "후보등록실패", Toast.LENGTH_SHORT).show()
                         Log.d("후보등록실패",t.message.toString())
                     }
 
@@ -187,6 +188,7 @@ class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeT
                         response: Response<ResponseaddCartList>
                     ) {
                         response.body().let {
+                            Toast.makeText(context, "후보등록성공", Toast.LENGTH_SHORT).show()
                             Log.d("후보등록성공","후보등록성공")
                         }
                     }
@@ -248,5 +250,4 @@ class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeT
 //        }
         holder.setHolder(subjectList[position])
     }
-
 }

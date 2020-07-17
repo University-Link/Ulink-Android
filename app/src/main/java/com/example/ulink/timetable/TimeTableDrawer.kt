@@ -251,9 +251,10 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
         for (k in timeTable.subjectList){
             for(m in 0 until k.day.size){
                 if (k.day[m] == i){
-                    val b = Subject(k.id,k.name, listOf(k.startTime[m]), listOf(k.endTime[m]), listOf(k.day[m]), listOf(k.place[m]), k.color,k.subject,k.credit,k.professor,k.course,k.isSample,k.number)
+                    val b = Subject(k.id,k.name, listOf(k.startTime[m]), listOf(k.endTime[m]), listOf(k.day[m]), listOf(k.place[m]), k.color,k.subject,k.credit,k.professor,k.course,k.isSample,"",k.subjectIdx)
                     subjectList.add(b)
                 }
+
             }
         }
         subjectList.retainAll { !it.isSample }
@@ -433,7 +434,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
         for (k in timeTable.subjectList){
             for(m in 0 until k.day.size){
                 if (k.day[m] == i){
-                    val b = Subject(k.id,k.name, listOf(k.startTime[m]), listOf(k.endTime[m]), listOf(k.day[m]), listOf(k.place[m]), k.color,k.subject,k.credit,k.professor,k.course,k.isSample,k.number)
+                    val b = Subject(k.id,k.name, listOf(k.startTime[m]), listOf(k.endTime[m]), listOf(k.day[m]), listOf(k.place[m]), k.color,k.subject,k.credit,k.professor,k.course,k.isSample,k.number,k.subjectIdx)
                     subjectList.add(b)
                 }
             }
