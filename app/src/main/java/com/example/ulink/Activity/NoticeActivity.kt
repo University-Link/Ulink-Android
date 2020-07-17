@@ -1,17 +1,15 @@
-package com.example.ulink
+package com.example.ulink.Activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.ulink.ClassRecycler.ClassAdapter
-import com.example.ulink.ClassRecycler.ClassData
+import com.example.ulink.*
 import com.example.ulink.ScheduleRecycler.ScheduleItemData
 import com.example.ulink.NoticeRecycler.ScheduleNoticeAdapter
 import com.example.ulink.NoticeRecycler.emptyCheck
 import com.example.ulink.repository.DataRepository
-import com.example.ulink.repository.ResponseChatting
 import com.example.ulink.repository.ResponseGetClassNotice
 import com.example.ulink.repository.RetrofitService
 import kotlinx.android.synthetic.main.activity_notice.*
@@ -29,6 +27,8 @@ class NoticeActivity : AppCompatActivity(){
 
     lateinit var className : String
     lateinit var idx : String
+
+    var refresh = true
 
     private val testData = mutableListOf<ScheduleItemData>()
     private val taskData = mutableListOf<ScheduleItemData>()
@@ -130,6 +130,12 @@ class NoticeActivity : AppCompatActivity(){
             ) {
                 response.body()?.let {
                     if (it.status == 200) {
+                        taskData.clear()
+                        testData.clear()
+                        classData.clear()
+
+
+                        refresh = false
                         Log.d("rjq", idx)
                         Log.d("rjq", it.toString())
                         if (it.data.assignment.isNotEmpty()) {
@@ -246,6 +252,8 @@ class NoticeActivity : AppCompatActivity(){
                         if (it.data.assignment.isNotEmpty()) {
                             var size = it.data.assignment.size
                             for (i in 0 until size) {
+
+
                                 taskData.apply {
                                     add(
                                             ScheduleItemData(

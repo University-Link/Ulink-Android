@@ -1,4 +1,4 @@
-package com.example.ulink
+package com.example.ulink.Activity
 
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -8,12 +8,10 @@ import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
-import com.example.ulink.ClassRecycler.ClassAdapter
-import com.example.ulink.ClassRecycler.ClassData
 import com.example.ulink.NoticeRecycler.*
+import com.example.ulink.R
 import com.example.ulink.ScheduleRecycler.*
 import com.example.ulink.repository.*
-import kotlinx.android.synthetic.main.activity_filter_normal.*
 import kotlinx.android.synthetic.main.activity_notice_add.*
 import kotlinx.android.synthetic.main.toolbar_notice_add.*
 import kotlinx.android.synthetic.main.toolbar_notice_add.btn_back
@@ -49,7 +47,8 @@ class NoticeAddActivity : AppCompatActivity() {
         //spinner
         spinner_start = findViewById(R.id.spinner_start)
         spinner_end = findViewById(R.id.spinner_end)
-        val adapter = ArrayAdapter.createFromResource(this, R.array.time, android.R.layout.simple_spinner_item)
+        val adapter = ArrayAdapter.createFromResource(this,
+            R.array.time, android.R.layout.simple_spinner_item)
         spinnerInit(spinner_start, adapter)
         spinnerInit(spinner_end, adapter)
 

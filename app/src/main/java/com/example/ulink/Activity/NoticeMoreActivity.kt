@@ -1,4 +1,4 @@
-package com.example.ulink
+package com.example.ulink.Activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,11 +6,9 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ulink.NoticeRecycler.ScheduleNoticeMoreAdapter
+import com.example.ulink.R
 import com.example.ulink.ScheduleRecycler.ScheduleItemData
-import com.example.ulink.ScheduleRecycler.SchedulePopupAdapter
-import kotlinx.android.synthetic.main.activity_notice.*
 import kotlinx.android.synthetic.main.activity_notice_more.*
-import kotlinx.android.synthetic.main.item_notice_more.*
 import kotlinx.android.synthetic.main.toolbar_notice_more.*
 import kotlinx.android.synthetic.main.toolbar_notice_more.btn_back
 import java.util.ArrayList

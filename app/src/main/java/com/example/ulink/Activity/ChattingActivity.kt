@@ -1,21 +1,15 @@
-package com.example.ulink
+package com.example.ulink.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.ulink.ChattingRecycler.ChattingAdapter
 import com.example.ulink.ChattingRecycler.ChattingData
-import com.google.android.gms.tasks.OnCompleteListener
+import com.example.ulink.R
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
 import kotlinx.android.synthetic.main.activity_chatting.*
 import kotlinx.android.synthetic.main.activity_main_content.*
 import kotlinx.android.synthetic.main.nav_header_main.*
@@ -73,7 +67,7 @@ class ChattingActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.notice->{
+            R.id.notice ->{
                 val intent = Intent(this, NoticeActivity::class.java)
                 intent.putExtra("class", className)
                 intent.putExtra("idx", idx)

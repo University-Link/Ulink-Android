@@ -13,9 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".FilterNormalActivity"></activity>
-        <activity android:name=".FilterMajorActivity"></activity>
-        <activity android:name=".SplashActivity"
+        <activity android:name=".Activity.FilterNormalActivity"></activity>
+        <activity android:name=".Activity.FilterMajorActivity"></activity>
+        <activity android:name=".Activity.SplashActivity"
             android:theme = "@android:style/Theme.NoTitleBar.Fullscreen">
 
             <intent-filter>
@@ -23,23 +23,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".Activity.LoginActivity">
         </activity>
-        <activity android:name=".EvaluationActivity">
+        <activity android:name=".Activity.EvaluationActivity">
         </activity>
-        <activity android:name=".FilterSettingSearchActivity"></activity>
-        <activity android:name=".ScheduleNoticeActivity"></activity>
+        <activity android:name=".Activity.FilterSettingSearchActivity"></activity>
+        <activity android:name=".Activity.ScheduleNoticeActivity"></activity>
         <activity android:name=".timetable.TimeTableListActivity" />
-        <activity android:name=".NotificationActivity" />
-        <activity android:name=".ScheduleActivity" />
+        <activity android:name=".Activity.NotificationActivity" />
+        <activity android:name=".Activity.ScheduleActivity" />
         <activity android:name=".timetable.TimeTableDirectEditActivity" />
         <activity android:name=".timetable.TimeTableDirectTypeActivity" />
         <activity android:name=".timetable.TimeTableEditActivity" />
         <activity android:name=".MainActivity"/>
-        <activity android:name=".ChattingActivity" />
-        <activity android:name=".NoticeActivity" />
-        <activity android:name=".NoticeMoreActivity" />
-        <activity android:name=".NoticeAddActivity"/>
+        <activity android:name=".Activity.ChattingActivity" />
+        <activity android:name=".Activity.NoticeActivity" />
+        <activity android:name=".Activity.NoticeMoreActivity" />
+        <activity android:name=".Activity.NoticeAddActivity"/>
 
     </application>
     <uses-permission android:name="android.permission.VIBRATE" />

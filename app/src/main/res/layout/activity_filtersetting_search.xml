@@ -59,27 +59,27 @@
         app:layout_constraintEnd_toEndOf="parent"
     />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="21dp"
-        android:layout_marginTop="16dp"
-        android:text="최근검색"
-        android:textColor="#404040"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit" />
+<!--    <TextView-->
+<!--        android:id="@+id/textView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="21dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:text="최근검색"-->
+<!--        android:textColor="#404040"-->
+<!--        android:textSize="12sp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/edit" />-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="전체삭제"
-        android:textSize="12sp"
-        android:textColor="#acacac"
-        android:layout_marginRight="18dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="전체삭제"-->
+<!--        android:textSize="12sp"-->
+<!--        android:textColor="#acacac"-->
+<!--        android:layout_marginRight="18dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/textView" />-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_search"

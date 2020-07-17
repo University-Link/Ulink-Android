@@ -10,16 +10,9 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ulink.EvaluationActivity
+import com.example.ulink.Activity.EvaluationActivity
 import com.example.ulink.R
-import com.example.ulink.repository.RequestDeleteCartList
-import com.example.ulink.repository.ResponseDeleteCartList
-import com.example.ulink.repository.RetrofitService
 import com.example.ulink.repository.Subject
-import kotlinx.android.synthetic.main.item_subject_child.view.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class TimeTableCandidateAdapter : RecyclerView.Adapter<TimeTableCandidateAdapter.VHolder>() {
 

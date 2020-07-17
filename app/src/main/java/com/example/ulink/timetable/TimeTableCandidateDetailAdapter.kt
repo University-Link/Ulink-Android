@@ -12,7 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ulink.EvaluationActivity
+import com.example.ulink.Activity.EvaluationActivity
 import com.example.ulink.R
 import com.example.ulink.repository.*
 import retrofit2.Call

@@ -7,8 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.ulink.repository.ResponseCalendar
-import com.example.ulink.ChattingActivity
+import com.example.ulink.Activity.ChattingActivity
 import com.example.ulink.ClassRecycler.ClassAdapter
 import com.example.ulink.ClassRecycler.ClassData
 import com.example.ulink.R

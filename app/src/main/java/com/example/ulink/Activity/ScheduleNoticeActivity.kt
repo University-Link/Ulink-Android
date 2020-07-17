@@ -1,18 +1,17 @@
-package com.example.ulink
+package com.example.ulink.Activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.ulink.R
 import com.example.ulink.ScheduleRecycler.ScheduleItemData
 import com.example.ulink.ScheduleRecycler.zeroCheck
 import com.example.ulink.repository.DataRepository
 import com.example.ulink.repository.ResponseSpecificNotice
-import com.example.ulink.repository.ResponseUpdateNotice
 import com.example.ulink.repository.RetrofitService
 import kotlinx.android.synthetic.main.activity_class_notice.*
-import kotlinx.android.synthetic.main.calendar_item.*
 import kotlinx.android.synthetic.main.toolbar_schedule_notice.*
 import retrofit2.Call
 import retrofit2.Callback

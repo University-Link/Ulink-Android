@@ -12,18 +12,17 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.view.isInvisible
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import com.example.ulink.*
+import com.example.ulink.Activity.ChattingActivity
+import com.example.ulink.Activity.NoticeActivity
+import com.example.ulink.Activity.NotificationActivity
+import com.example.ulink.R
 import com.example.ulink.repository.DataRepository
 import com.example.ulink.repository.Subject
 import com.example.ulink.repository.TimeTable
 import com.example.ulink.timetable.*
 import com.example.ulink.utils.deepCopy
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import kotlinx.android.synthetic.main.fragment_time_table.*
-import org.w3c.dom.Text
 
 const val REQUEST_TIMETABLE_LIST_ACTIVITY = 777
 const val REQUEST_TIMETABLE_EDIT_ACITYVITY = 111
@@ -55,7 +54,6 @@ class TimeTableFragment : Fragment(), onRefreshListener {
 
     lateinit var timetableDrawer: TimeTableDrawer
 
-
     val onClick = object : subjectOnClick {
         override fun onClick(subject: Subject) {
 
@@ -63,13 +61,10 @@ class TimeTableFragment : Fragment(), onRefreshListener {
 
             val builder = AlertDialog.Builder(context)
             val layout =
-                LayoutInflater.from(context).inflate(R.layout.dialog_timetable_subject, null)
-
+                    LayoutInflater.from(context).inflate(R.layout.dialog_timetable_subject, null)
 
             layout.findViewById<TextView>(R.id.tv_class_name).text = subject.name
 //                TODO 이거 table받아와서 classname으로 일주일에 몇번 수업인지 알아서 표시하기 vs 어뜨카지
-
-            layout.findViewById<ImageView>(R.id.ic_color).setBackgroundResource(getColors(subject.color))
 
             for (i in 0 until subject.startTime.size) {
                 layout.findViewById<TextView>(R.id.tv_time).text =
@@ -93,8 +88,7 @@ class TimeTableFragment : Fragment(), onRefreshListener {
                 }
             }
 
-            builder.setView(layout)
-            val dialog = builder.create()
+            layout.findViewById<ImageView>(R.id.ic_color).setBackgroundResource(getColors(subject.color))
 
             layout.findViewById<TextView>(R.id.tv_customizing).setOnClickListener {
                 val bottomsheet = CustomizingBottomSheetFragment(subject, object : onRefreshListener{
@@ -103,10 +97,8 @@ class TimeTableFragment : Fragment(), onRefreshListener {
                         refreshMainTable()
                     }
                 })
-                fragmentManager?.let { it -> bottomsheet.show(it, bottomsheet.tag)
-                dialog.dismiss()}
+                fragmentManager?.let { it -> bottomsheet.show(it, bottomsheet.tag) }
             }
-
             if (subject.subject == true) {
                 layout.findViewById<TextView>(R.id.tv_tochat).setOnClickListener {
                     //val idx = subject.id.toString()
@@ -134,6 +126,10 @@ class TimeTableFragment : Fragment(), onRefreshListener {
                 layout.findViewById<ImageView>(R.id.ic_name_update).visibility=View.VISIBLE
                 layout.findViewById<TextView>(R.id.tv_name_update).visibility=View.VISIBLE
             }
+
+
+            builder.setView(layout)
+            val dialog = builder.create()
 
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.show()
@@ -290,6 +286,33 @@ class TimeTableFragment : Fragment(), onRefreshListener {
         }
         refresh = false
     }
+
+    fun getColors(type: Int): Int {
+        return when (type) {
+            0 -> R.drawable.bg_round_border_subject_color_1
+            1 -> R.drawable.bg_round_border_subject_color_2
+            2 -> R.drawable.bg_round_border_subject_color_3
+            3 -> R.drawable.bg_round_border_subject_color_4
+            4 -> R.drawable.bg_round_border_subject_color_5
+            5 -> R.drawable.bg_round_border_subject_color_6
+            6 -> R.drawable.bg_round_border_subject_color_7
+            7 -> R.drawable.bg_round_border_subject_color_8
+            8 -> R.drawable.bg_round_border_subject_color_9
+            9 -> R.drawable.bg_round_border_subject_color_10
+            10 -> R.drawable.bg_round_border_subject_color_11
+            11 -> R.drawable.bg_round_border_subject_color_12
+            12 -> R.drawable.bg_round_border_subject_color_13
+            13 -> R.drawable.bg_round_border_subject_color_14
+            14 -> R.drawable.bg_round_border_subject_color_15
+            15 -> R.drawable.bg_round_border_subject_color_16
+            16 -> R.drawable.bg_round_border_subject_color_17
+            17 -> R.drawable.bg_round_border_subject_color_18
+            18 -> R.drawable.bg_round_border_subject_color_19
+            19 -> R.drawable.bg_round_border_subject_color_20
+            else -> R.drawable.bg_round_border_subject
+        }
+    }
+
 }
 
 interface onRefreshListener{

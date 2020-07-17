@@ -1,8 +1,8 @@
-package com.example.ulink
+package com.example.ulink.Activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
+import com.example.ulink.R
 import kotlinx.android.synthetic.main.activity_filter_major.*
 import kotlinx.android.synthetic.main.toolbar_filter_normal.*
 
@@ -24,6 +24,7 @@ class FilterMajorActivity : AppCompatActivity() {
 
         btn_check.setOnClickListener(){
             //TODO 확인 누를 때 보낼 정보
+            finish()
         }
 
         btn_reset.setOnClickListener(){

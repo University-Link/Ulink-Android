@@ -6,7 +6,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white">
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +17,6 @@
         android:textColor="@color/text1"
         android:textStyle="bold"
         android:text="전자회로 I"/>
-
     <TextView
         app:layout_constraintTop_toTopOf="@id/tv_class_name"
         app:layout_constraintBottom_toBottomOf="@id/tv_class_name"
@@ -36,7 +34,6 @@
         android:id="@+id/gl_1"
         android:orientation="vertical"
         app:layout_constraintGuide_percent = "0.7"/>
-
     <TextView
         android:id="@+id/tv_time"
         android:layout_width="wrap_content"
@@ -45,7 +42,6 @@
         android:textColor="#898989"
         app:layout_constraintTop_toBottomOf="@id/tv_class_name"
         app:layout_constraintLeft_toLeftOf="@id/tv_class_name"/>
-
     <TextView
         android:id="@+id/tv_place"
         android:layout_width="0dp"
@@ -56,7 +52,6 @@
         app:layout_constraintRight_toLeftOf="@id/gl_1"
         android:textSize="12sp"
         android:textColor="#898989" />
-
     <TextView
         android:id="@+id/tv_category"
         app:layout_constraintLeft_toRightOf="@id/tv_place"
@@ -67,7 +62,6 @@
         android:layout_marginLeft="6dp"
         android:textColor="#898989"
         android:layout_height="wrap_content"/>
-
     <TextView
         android:id="@+id/tv_credit"
         app:layout_constraintLeft_toRightOf="@id/tv_category"
@@ -78,7 +72,6 @@
         android:textSize="12sp"
         android:layout_marginLeft="6dp"
         android:layout_height="wrap_content"/>
-
     <Button
         android:id="@+id/btn_assess"
         android:background="@drawable/timetableadd_filterandsearch_touch_btn_star"
@@ -90,7 +83,6 @@
         app:layout_constraintTop_toBottomOf="@id/tv_place"
         app:layout_constraintBottom_toBottomOf="parent"
         android:visibility="gone"/>
-
     <Button
         android:id="@+id/btn_cart"
         android:background="@drawable/timetableadd_filterandsearch_btn_cart"
@@ -101,7 +93,6 @@
         app:layout_constraintBottom_toBottomOf="@id/btn_assess"
         app:layout_constraintLeft_toRightOf="@id/btn_assess"
         android:visibility="gone"/>
-
     <Button
         android:id="@+id/btn_totable"
         android:layout_width="82dp"
@@ -112,7 +103,6 @@
         app:layout_constraintBottom_toBottomOf="@id/btn_assess"
         app:layout_constraintRight_toRightOf="parent"
         android:visibility="gone"/>
-
     <Button
         android:id="@+id/btn_delete"
         android:background="@drawable/btn_cart_delete"
@@ -123,7 +113,6 @@
         app:layout_constraintBottom_toBottomOf="@id/btn_assess"
         app:layout_constraintLeft_toRightOf="@id/btn_assess"
         android:visibility="gone"/>
-
     <TextView
         android:id="@+id/tv_classnumber"
         android:layout_width="wrap_content"
@@ -134,7 +123,6 @@
         app:layout_constraintTop_toTopOf="@id/tv_class_name"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/tv_class_name"/>
-
     <View
         android:layout_width="0dp"
         android:layout_height="1dp"
@@ -144,5 +132,4 @@
         app:layout_constraintTop_toBottomOf="@id/btn_assess"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
