@@ -2,7 +2,7 @@
 
 ### :clock1: 시간표 기반 대학생 정보교환 플랫폼 
 
-![슬라이드2](/Users/oopsla/Downloads/슬라이드2.png)
+![슬라이드2](https://user-images.githubusercontent.com/53978090/87794101-1a8ce880-c881-11ea-9895-c490fe49f7cd.png)
 
 ![슬라이드5](https://user-images.githubusercontent.com/53978090/86901042-08a39b00-c147-11ea-93a9-327a0abdcd2b.png)
 
