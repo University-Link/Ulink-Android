@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ulink.TimeTable_Search_Recycler.SearchData
 import com.example.ulink.TimeTable_Search_Recycler.TimeTable_Search_Adapter
-import com.example.ulink.repository.ResponsegetSubjectWithKeyWord
 import com.example.ulink.repository.ResponsegetSubjectWithWord
 import com.example.ulink.repository.RetrofitService
 import com.example.ulink.repository.SearchedData
@@ -33,7 +32,7 @@ class FilterSettingSearchActivity : AppCompatActivity() {
     lateinit var TimeTable_Search_Adapter : TimeTable_Search_Adapter
     lateinit var filter_name :String
     val list : MutableList<SearchedData> = arrayListOf()
-    //val classNameKeyword : MutableList<String>
+
     val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ4MTY1NzQsImV4cCI6MTU5NjI1NjU3NCwiaXNzIjoiYm9iYWUifQ.JwRDELH1lA1Fb8W1ltTmhThpmgFrUTQZVocUTATv3so"
 //    TODO 아이템 클릭이나 검색버튼 클릭하면 setresult
 
@@ -103,7 +102,7 @@ class FilterSettingSearchActivity : AppCompatActivity() {
 
         edit.textChangedListener {
 
-            RetrofitService.service.getSubjectWithKeyword(token,edit.text.toString()).enqueue(object : Callback<ResponsegetSubjectWithWord>{
+            RetrofitService.service.getSubjectWithWord(token,edit.text.toString()).enqueue(object : Callback<ResponsegetSubjectWithWord>{
                 override fun onFailure(call: Call<ResponsegetSubjectWithWord>, t: Throwable) {
 
                 }

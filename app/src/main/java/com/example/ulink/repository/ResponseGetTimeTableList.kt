@@ -8,9 +8,10 @@ data class ResponseGetTimeTableList(
 ){
     data class Data(
             val timeTable: TimeTable,
-            val subjects: Subjects,
             val minTime : String,
-            val maxTime : String
+            val maxTime : String,
+            val subjects: Subjects
+
     )
 }
 

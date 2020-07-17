@@ -12,6 +12,7 @@ import com.example.ulink.ChattingActivity
 import com.example.ulink.ClassRecycler.ClassAdapter
 import com.example.ulink.ClassRecycler.ClassData
 import com.example.ulink.R
+import com.example.ulink.repository.DataRepository
 import com.example.ulink.repository.ResponseChatting
 import com.example.ulink.repository.RetrofitService
 import kotlinx.android.synthetic.main.fragment_class.*
@@ -30,7 +31,6 @@ class ClassFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_class, container, false)
     }
 
-    val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ4MTY1NzQsImV4cCI6MTU5NjI1NjU3NCwiaXNzIjoiYm9iYWUifQ.JwRDELH1lA1Fb8W1ltTmhThpmgFrUTQZVocUTATv3so"
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -40,7 +40,7 @@ class ClassFragment : Fragment() {
         rv_class.adapter = ClassAdapter
 
         // TODO INDEX가 0일 경우 어떻게 처리할까? if 0일 경우는 무시 else 뿌리기 outofIndex error
-        RetrofitService.service.getChatList(token).enqueue(object : Callback<ResponseChatting> {
+        RetrofitService.service.getChatList(DataRepository.token).enqueue(object : Callback<ResponseChatting> {
             override fun onFailure(call: Call<ResponseChatting>, t: Throwable) {
                 Log.d("지혜", "바보")
             }

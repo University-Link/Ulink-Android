@@ -79,7 +79,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
         }
 
         if ((formatToFloat(timeTable.endTime)).toInt() > 18) {
-            endhour = (formatToFloat(timeTable.endTime)).toInt()
+            endhour = (formatToFloat(timeTable.endTime)).toInt() +1
             Log.d("tag", "changed")
         }
 
