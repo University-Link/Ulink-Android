@@ -29,8 +29,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ3NDgyNTQsImV4cCI6MTU5NjE4ODI1NCwiaXNzIjoiYm9iYWUifQ.dFU9h8EZLqoMekAfRNTfGQkUAbq_CXoQmA5Jl7KsQ70"
-var tokenforsearch = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLsnLXtlansoITsnpDqs7XtlZnrtoAiLCJpYXQiOjE1OTQ4MzkzOTEsImV4cCI6MTU5ODQzNTc5MSwiaXNzIjoiYm9iYWUifQ.jxont3bUINSAtQt_F90KeE376WX-cZJoB5rzM2K7Ccg"
 const val REQUEST_DIRECT_EDIT_ACTIVITY = 999
 const val REQUEST_DIRECT_TYPE_ACTIVITY = 888
 
@@ -406,7 +404,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
     }
 
     override fun onClick(position: Int) {
-        RetrofitService.service.getSubjectByGrade(tokenforsearch,position).enqueue(object : Callback<ResponseGetSubjectByGrade>{
+        RetrofitService.service.getSubjectByGrade(DataRepository.token,position).enqueue(object : Callback<ResponseGetSubjectByGrade>{
             override fun onFailure(call: Call<ResponseGetSubjectByGrade>, t: Throwable) {
             }
 

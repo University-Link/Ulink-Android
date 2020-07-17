@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ulink.ScheduleRecycler.ScheduleItemData
 import com.example.ulink.ScheduleRecycler.zeroCheck
+import com.example.ulink.repository.DataRepository
 import com.example.ulink.repository.ResponseSpecificNotice
 import com.example.ulink.repository.ResponseUpdateNotice
 import com.example.ulink.repository.RetrofitService
@@ -23,7 +24,6 @@ class ScheduleNoticeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_class_notice)
 
-        var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ3NzkxODAsImV4cCI6MTU5NjIxOTE4MCwiaXNzIjoiYm9iYWUifQ.BAOeiZ_uqtIVPzFJd2oZbfVz44A2_QSXLQliNhN6pv4"
 
         var scheduleItemData = intent.getParcelableExtra<ScheduleItemData>("scheduleItemData")
         var idx = scheduleItemData.idx
@@ -46,7 +46,7 @@ class ScheduleNoticeActivity : AppCompatActivity() {
 
         tv_schedule_notice_memo_content.text = scheduleItemData.memo //메모*/
 
-        RetrofitService.service.getSpecificNotice(token, idx.toString())
+        RetrofitService.service.getSpecificNotice(DataRepository.token, idx.toString())
             .enqueue(object : Callback<ResponseSpecificNotice> {
                 override fun onFailure(call: Call<ResponseSpecificNotice>, t: Throwable) {
                     Log.d("실패", "실패")

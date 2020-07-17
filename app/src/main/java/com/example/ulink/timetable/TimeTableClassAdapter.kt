@@ -174,7 +174,7 @@ class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeT
             }
 
             cart.setOnClickListener {
-                RetrofitService.service.addCartList(token, RequestaddCartList(
+                RetrofitService.service.addCartList(DataRepository.token, RequestaddCartList(
                     semester = onCartAddClickListener.onClicked(),
                     subjectIdx = subject.subjectIdx
                 )).enqueue(object : Callback<ResponseaddCartList>{

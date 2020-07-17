@@ -9,6 +9,7 @@ import com.example.ulink.CalendarRecycler.today
 import com.example.ulink.NoticeRecycler.ddaySchedule
 import com.example.ulink.ScheduleRecycler.*
 import com.example.ulink.repository.CalendarNoticeData
+import com.example.ulink.repository.DataRepository
 import com.example.ulink.repository.ResponseCalendar
 import com.example.ulink.repository.RetrofitService
 import com.example.ulink.utils.deepCopy
@@ -29,8 +30,7 @@ class ScheduleActivity : AppCompatActivity() {
     lateinit var scheduleDateAdapter: ScheduleDateAdapter
     val dateDatas = mutableListOf<ScheduleDateData>()
 
-    val token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ3NzkxODAsImV4cCI6MTU5NjIxOTE4MCwiaXNzIjoiYm9iYWUifQ.BAOeiZ_uqtIVPzFJd2oZbfVz44A2_QSXLQliNhN6pv4"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +49,7 @@ class ScheduleActivity : AppCompatActivity() {
         scheduleDateAdapter = ScheduleDateAdapter(this, bigList)
         rv_schedule_date.adapter = scheduleDateAdapter
 
-        RetrofitService.service.getAllNotice(token, today(), tenday())
+        RetrofitService.service.getAllNotice(DataRepository.token, today(), tenday())
             .enqueue(object : Callback<ResponseCalendar> {
                 override fun onFailure(call: Call<ResponseCalendar>, t: Throwable) {
                 }

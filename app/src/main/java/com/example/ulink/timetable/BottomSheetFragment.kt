@@ -18,7 +18,6 @@ import retrofit2.Response
 
 
 class BottomSheetFragment(val mainTable : TimeTable) : BottomSheetDialogFragment() {
-    val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ4MTY1NzQsImV4cCI6MTU5NjI1NjU3NCwiaXNzIjoiYm9iYWUifQ.JwRDELH1lA1Fb8W1ltTmhThpmgFrUTQZVocUTATv3so"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +32,7 @@ class BottomSheetFragment(val mainTable : TimeTable) : BottomSheetDialogFragment
 
 
             view.findViewById<TextView>(R.id.tv_setasmain).setOnClickListener {
-            RetrofitService.service.updateMainTimeTable(token,"8").enqueue(object : Callback<ResponseupdateMainTimeTable>{
+            RetrofitService.service.updateMainTimeTable(DataRepository.token,"8").enqueue(object : Callback<ResponseupdateMainTimeTable>{
                 override fun onFailure(call: Call<ResponseupdateMainTimeTable>, t: Throwable) {
                     Log.d("대표시간표 설정 실패",t.message.toString())
                 }
@@ -65,7 +64,7 @@ class BottomSheetFragment(val mainTable : TimeTable) : BottomSheetDialogFragment
             dialog.show()
             layout.findViewById<TextView>(R.id.tv_ok).setOnClickListener {
                 //TODO 시간표 이름 바꾸기
-                RetrofitService.service.updateTimeTableName(token,mainTable.id,
+                RetrofitService.service.updateTimeTableName(DataRepository.token,mainTable.id,
                     RequestupdateTimeTableName(
                         name =  dialog.et_name.text.toString()
                     )
@@ -118,7 +117,7 @@ class BottomSheetFragment(val mainTable : TimeTable) : BottomSheetDialogFragment
             }
             layout.findViewById<TextView>(R.id.tv_delete).setOnClickListener {
                 //TODO 시간표 삭제
-                RetrofitService.service.deleteMainTimeTable(token,mainTable.id.toString()).enqueue(object : Callback<ResponsedeleteMainTimeTable>{
+                RetrofitService.service.deleteMainTimeTable(DataRepository.token,mainTable.id.toString()).enqueue(object : Callback<ResponsedeleteMainTimeTable>{
                     override fun onFailure(call: Call<ResponsedeleteMainTimeTable>, t: Throwable) {
                         Log.d("삭제실패",t.message.toString())
                     }

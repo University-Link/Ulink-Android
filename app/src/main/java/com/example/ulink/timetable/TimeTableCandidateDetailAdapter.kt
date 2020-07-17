@@ -58,8 +58,6 @@ class TimeTableCandidateDetailAdapter(val context: Context, val onDeleteCartClic
         }
 
         fun setHolder(subject: GetCartData) {
-            var token =
-                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ3NzkxODAsImV4cCI6MTU5NjIxOTE4MCwiaXNzIjoiYm9iYWUifQ.BAOeiZ_uqtIVPzFJd2oZbfVz44A2_QSXLQliNhN6pv4"
 
             itemView.findViewById<TextView>(R.id.tv_class_name).text = subject.name
             itemView.findViewById<TextView>(R.id.tv_professor_name).text = subject.professor
@@ -211,7 +209,7 @@ class TimeTableCandidateDetailAdapter(val context: Context, val onDeleteCartClic
                 Log.d("후보삭semester", onDeleteCartClickListener.onClickeddelete())
                 Log.d("후보삭제subjectidx", subject.subjectIdx.toString())
 
-                RetrofitService.service.deleteCartList(token, subject.subjectIdx.toString(),
+                RetrofitService.service.deleteCartList(DataRepository.token, subject.subjectIdx.toString(),
                         RequestDeleteCartList(
                                 semester = onDeleteCartClickListener.onClickeddelete()
                         )
