@@ -194,5 +194,17 @@ object DataRepository {
         })
     }
 
+    fun deleteNoticeWithIdx(idx : String, onSuccess: () -> Unit, onFailure: (String) -> Unit){
+        retrofit.deleteNoticeWithIdx(token, idx).enqueue(object  : Callback<ResponseDeleteNoticeWithIdx>{
+            override fun onFailure(call: Call<ResponseDeleteNoticeWithIdx>, t: Throwable) {
+                onFailure(t.localizedMessage)
+            }
+
+            override fun onResponse(call: Call<ResponseDeleteNoticeWithIdx>, response: Response<ResponseDeleteNoticeWithIdx>) {
+                onSuccess()
+            }
+        })
+    }
+
 
 }

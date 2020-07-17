@@ -785,6 +785,16 @@ class TimeTableDrawerDrag(val context: Context, val layoutInflater: LayoutInflat
             7 -> R.drawable.bg_round_border_subject_color_8
             8 -> R.drawable.bg_round_border_subject_color_9
             9 -> R.drawable.bg_round_border_subject_color_10
+            10 -> R.drawable.bg_round_border_subject_color_11
+            11 -> R.drawable.bg_round_border_subject_color_12
+            12 -> R.drawable.bg_round_border_subject_color_13
+            13 -> R.drawable.bg_round_border_subject_color_14
+            14 -> R.drawable.bg_round_border_subject_color_15
+            15 -> R.drawable.bg_round_border_subject_color_16
+            16 -> R.drawable.bg_round_border_subject_color_17
+            17 -> R.drawable.bg_round_border_subject_color_18
+            18 -> R.drawable.bg_round_border_subject_color_19
+            19 -> R.drawable.bg_round_border_subject_color_20
             else -> R.drawable.bg_round_border_subject
         }
     }

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.example.ulink.R
+import com.example.ulink.fragment.onRefreshListener
 import com.example.ulink.repository.*
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.dialog_timetable_name.*
@@ -17,7 +18,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class BottomSheetFragment(val mainTable : TimeTable) : BottomSheetDialogFragment() {
+class BottomSheetFragment(val mainTable : TimeTable, val onRefreshListener: onRefreshListener) : BottomSheetDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +33,8 @@ class BottomSheetFragment(val mainTable : TimeTable) : BottomSheetDialogFragment
 
 
             view.findViewById<TextView>(R.id.tv_setasmain).setOnClickListener {
-            RetrofitService.service.updateMainTimeTable(DataRepository.token,"8").enqueue(object : Callback<ResponseupdateMainTimeTable>{
+
+            RetrofitService.service.updateMainTimeTable(DataRepository.token, mainTable.id.toString()).enqueue(object : Callback<ResponseupdateMainTimeTable>{
                 override fun onFailure(call: Call<ResponseupdateMainTimeTable>, t: Throwable) {
                     Log.d("대표시간표 설정 실패",t.message.toString())
                 }
@@ -47,6 +49,7 @@ class BottomSheetFragment(val mainTable : TimeTable) : BottomSheetDialogFragment
                         val fragmentManager = activity!!.supportFragmentManager
                         fragmentManager.beginTransaction().remove(this@BottomSheetFragment).commit()
                         fragmentManager.popBackStack()
+                        onRefreshListener.onRefresh()
 
                     }
                 }
@@ -83,6 +86,8 @@ class BottomSheetFragment(val mainTable : TimeTable) : BottomSheetDialogFragment
                             val fragmentManager = activity!!.supportFragmentManager
                             fragmentManager.beginTransaction().remove(this@BottomSheetFragment).commit()
                             fragmentManager.popBackStack()
+                            onRefreshListener.onRefresh()
+
                         }
 
                     }
@@ -132,6 +137,8 @@ class BottomSheetFragment(val mainTable : TimeTable) : BottomSheetDialogFragment
                             val fragmentManager = activity!!.supportFragmentManager
                             fragmentManager.beginTransaction().remove(this@BottomSheetFragment).commit()
                             fragmentManager.popBackStack()
+                            onRefreshListener.onRefresh()
+
 
                         }
                     }
