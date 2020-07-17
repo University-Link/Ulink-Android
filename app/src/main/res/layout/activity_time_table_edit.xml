@@ -15,8 +15,9 @@
         android:background="@drawable/timetableadd_btn_cancel"
         app:layout_constraintTop_toTopOf="@+id/btn_direct"
         app:layout_constraintBottom_toBottomOf="@id/btn_direct"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-    
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:contentDescription="TODO" />
+
     <Button
         android:id="@+id/btn_tableplus"
         android:layout_marginTop="24dp"

@@ -10,7 +10,7 @@
         android:id="@+id/ic_tab"
         android:layout_width="18dp"
         android:layout_height="18dp"
-        android:background="@color/tab_selector"/>
+        android:textColor="@color/tab_selector"/>
 
     <TextView
         android:id="@+id/tv_tab"
