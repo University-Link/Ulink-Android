@@ -50,13 +50,8 @@ dependencies {
 
     //Retrofit 라이브러리 : https://github.com/square/retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
-    //Retrofit 라이브러리 응답으로 가짜 객체를 만들기 위해
     implementation 'com.squareup.retrofit2:retrofit-mock:2.6.2'
-    //Retrofit json 변환하기 위해
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
-
-
-
     //객체 시리얼라이즈를 위한 Gson 라이브러리: https://github.com/google/gson
     implementation 'com.google.code.gson:gson:2.8.6'
     //Retrofit에서 Gson을 사용하기 위한 라이브러리
@@ -65,8 +60,6 @@ dependencies {
 
     //Recyclerview 다루기 위한 라이브러리
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    //material 디자인 라이브러리 BottomNavigation 등 구글에서 제공하는 디자인 라이브러리
-    //implementation "com.google.android.material:material:1.2.0-alpha05"
     //이미지 로딩 라이브러리:glide 이미지 url을 로딩시켜 뷰에 연결해주는 라이브러리
     implementation "com.github.bumptech.glide:glide:4.10.0"
     kapt "com.github.bumptech.glide:compiler:4.10.0"
@@ -93,6 +86,8 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.1'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.1"
 
+    //스플래시 화면을 위한 라이브러리
+    implementation 'com.airbnb.android:lottie:3.0.0'
 
     //Firebase
 //    implementation 'com.google.firebase:firebase-analytics:17.4.3'
@@ -101,6 +96,5 @@ dependencies {
 //    implementation 'com.firebaseui:firebase-ui-auth:6.2.0'
 //    implementation 'com.google.firebase:firebase-auth-ktx:19.3.1'
 
-    implementation 'com.airbnb.android:lottie:3.0.0'
 
 }
