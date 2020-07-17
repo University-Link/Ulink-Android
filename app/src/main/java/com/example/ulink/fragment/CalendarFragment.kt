@@ -106,7 +106,4 @@ class CalendarFragment : Fragment() {
     fun getYearMonth() : String{
         return view?.findViewById<TextView>(R.id.tv_month)?.text.toString()
     }
-
-
-
 }

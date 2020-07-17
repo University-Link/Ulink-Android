@@ -456,22 +456,6 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
     fun getSemesterFromActivity() : String = semester
     fun getTimeTableFromActivity() : TimeTable = mAdapter.timeTableList[vp_timetableadd.currentItem]
 
-    fun getColors(type: Int): Int {
-        return when (type) {
-            0 -> R.drawable.bg_round_border_subject_color_1
-            1 -> R.drawable.bg_round_border_subject_color_2
-            2 -> R.drawable.bg_round_border_subject_color_3
-            3 -> R.drawable.bg_round_border_subject_color_4
-            4 -> R.drawable.bg_round_border_subject_color_5
-            5 -> R.drawable.bg_round_border_subject_color_6
-            6 -> R.drawable.bg_round_border_subject_color_7
-            7 -> R.drawable.bg_round_border_subject_color_8
-            8 -> R.drawable.bg_round_border_subject_color_9
-            9 -> R.drawable.bg_round_border_subject_color_10
-            else -> R.drawable.bg_round_border_subject
-        }
-    }
-
 }
 interface getGradeClickListener{
     fun onClick(position : Int)

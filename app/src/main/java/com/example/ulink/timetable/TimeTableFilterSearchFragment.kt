@@ -91,7 +91,7 @@ class TimeTableFilterSearchFragment() : Fragment(), onCartAddClickListener {
                     list[i].professor,
                     list[i].course,
                     true,
-                    "",  //학수번호
+                    list[i].subjectCode,  //학수번호
                     list[i].subjectIdx.toInt()))
             }
 
@@ -119,7 +119,7 @@ class TimeTableFilterSearchFragment() : Fragment(), onCartAddClickListener {
                         item.professor,
                         item.course,
                         true,
-                        "", //학수번호
+                        item.subjectCode, //학수번호
                         item.subjectIdx.toInt()
                     )
                 )

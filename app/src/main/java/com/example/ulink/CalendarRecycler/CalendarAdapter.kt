@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -125,7 +126,6 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                     }
                 })
 
-
             rvAdapter.datas.apply {
                 //previous_month
                 var dateindex = 0
@@ -180,8 +180,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                     } else break;
                 }
                 rvAdapter.notifyDataSetChanged()
-
-                // TODO 리싸이클러뷰 크기 조정
+                 // TODO 리싸이클러뷰 크기 조정
                 rvAdapter.setDayClickListener(
                     object : CalendarDayAdapter.DayClickListener {
                         override fun onClick(view: View, position: Int) {
@@ -280,8 +279,8 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
 
                             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                             dialog.show()
-                        }
-                    })
+                    }
+                })
             }
         }
     }
