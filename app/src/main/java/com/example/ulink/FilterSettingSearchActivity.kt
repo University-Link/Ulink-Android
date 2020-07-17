@@ -12,11 +12,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ulink.TimeTable_Search_Recycler.SearchData
 import com.example.ulink.TimeTable_Search_Recycler.TimeTable_Search_Adapter
+import com.example.ulink.repository.DataRepository
 import com.example.ulink.repository.ResponsegetSubjectWithWord
 import com.example.ulink.repository.RetrofitService
 import com.example.ulink.repository.SearchedData
 import com.example.ulink.timetable.TimeTableFilterSearchFragment
-import com.example.ulink.timetable.token
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_filtersetting_search.*
@@ -101,7 +101,7 @@ class FilterSettingSearchActivity : AppCompatActivity() {
 
         edit.textChangedListener {
 
-            RetrofitService.service.getSubjectWithWord(token,edit.text.toString()).enqueue(object : Callback<ResponsegetSubjectWithWord>{
+            RetrofitService.service.getSubjectWithWord(DataRepository.token,edit.text.toString()).enqueue(object : Callback<ResponsegetSubjectWithWord>{
                 override fun onFailure(call: Call<ResponsegetSubjectWithWord>, t: Throwable) {
 
                 }

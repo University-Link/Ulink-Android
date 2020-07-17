@@ -69,7 +69,6 @@ class TimeTableFragment : Fragment() {
         }
 
         btn_alarm.setOnClickListener {
-            refresh = true
             startActivity(Intent(context, NotificationActivity::class.java))
         }
 
@@ -91,22 +90,16 @@ class TimeTableFragment : Fragment() {
 
         if (requestCode == REQUEST_TIMETABLE_LIST_ACTIVITY && resultCode == 200) {
             if (data != null) {
-
                 val table: TimeTable = deepCopy(data.getParcelableExtra("timeTable"))
-
 //                시간표 요청
                 DataRepository.getTimeTableWithId(table.id,
                         onSuccess = { table ->
-
                             timetableDrawer.timeTable = deepCopy(table)
-
                             refresh = false
-
                             val t = timetableDrawer.timeTable.semester.split("-")
                             if (t.size == 2) {
                                 tv_semister.text = "${t[0]}년 ${t[1]}학기"
                             }
-
                             mainTable = deepCopy(table)
                             view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { timetableDrawer.draw(it) }
                         },
@@ -115,27 +108,17 @@ class TimeTableFragment : Fragment() {
                         })
             }
         } else if (requestCode == REQUEST_TIMETABLE_EDIT_ACITYVITY && resultCode == 200) {
-            Log.d("tag","nullllllll")
-
             if (data != null) {
                 val table: TimeTable = deepCopy(data.getParcelableExtra("timeTable"))
 //                시간표 요청
-                Log.d("tag1111111111",table.toString())
-
                 DataRepository.getTimeTableWithId(table.id,
                         onSuccess = { table ->
-
-                            Log.d("tag2222222",table.toString())
-
                             timetableDrawer.timeTable = deepCopy(table)
-
                             refresh = false
-
                             val t = timetableDrawer.timeTable.semester.split("-")
                             if (t.size == 2) {
                                 tv_semister.text = "${t[0]}년 ${t[1]}학기"
                             }
-
                             mainTable = deepCopy(table)
                             view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { timetableDrawer.draw(it) }
                         },
@@ -210,13 +193,10 @@ class TimeTableFragment : Fragment() {
             }
         }
 
-
-        Log.d("tag", refresh.toString())
         if (refresh) {
             DataRepository.getMainTimeTable(
                     onSuccess = {
                         this.mainTable = it
-                        Log.d("tag", it.toString())
                         timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, deepCopy(it))
                         view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { it1 -> timetableDrawer.draw(it1) }
                     },
