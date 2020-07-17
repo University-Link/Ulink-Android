@@ -31,7 +31,12 @@ import org.w3c.dom.Text
 const val REQUEST_TIMETABLE_LIST_ACTIVITY = 777
 const val REQUEST_TIMETABLE_EDIT_ACITYVITY = 111
 
-class TimeTableFragment : Fragment() {
+class TimeTableFragment : Fragment(), onRefreshListener {
+
+    override fun onRefresh() {
+        refresh = true
+        refreshMainTable()
+    }
 
     lateinit var mainTable: TimeTable
 
@@ -52,6 +57,83 @@ class TimeTableFragment : Fragment() {
     }
 
     lateinit var timetableDrawer: TimeTableDrawer
+
+    val onClick = object : subjectOnClick {
+        override fun onClick(subject: Subject) {
+
+            Log.d("idx", subject.toString())
+
+            val builder = AlertDialog.Builder(context)
+            val layout =
+                    LayoutInflater.from(context).inflate(R.layout.dialog_timetable_subject, null)
+
+            layout.findViewById<TextView>(R.id.tv_class_name).text = subject.name
+//                TODO 이거 table받아와서 classname으로 일주일에 몇번 수업인지 알아서 표시하기 vs 어뜨카지
+
+            for (i in 0 until subject.startTime.size) {
+                layout.findViewById<TextView>(R.id.tv_time).text =
+                        layout.findViewById<TextView>(R.id.tv_time).text.toString() + getDay(subject.day[i]) + " " + subject.startTime[i] + " - " + subject.endTime[i]
+                if (subject.startTime.size > 1 && i < subject.startTime.size - 1) {
+                    var text = layout.findViewById<TextView>(R.id.tv_time).text
+                    val text2 = "$text, " + getDay(subject.day[i])
+                    layout.findViewById<TextView>(R.id.tv_time).text = text2
+                }
+            }
+
+
+            for (i in 0 until subject.place.size) {
+                layout.findViewById<TextView>(R.id.tv_place).text =
+                        layout.findViewById<TextView>(R.id.tv_place).text.toString() + subject.place[i]
+
+                if (subject.place.size > 1 && i < subject.place.size - 1) {
+                    var text = layout.findViewById<TextView>(R.id.tv_place).text
+                    val text2 = "$text, "
+                    layout.findViewById<TextView>(R.id.tv_place).text = text2
+                }
+            }
+
+            layout.findViewById<TextView>(R.id.tv_customizing).setOnClickListener {
+                val bottomsheet = CustomizingBottomSheetFragment(subject)
+                fragmentManager?.let { it -> bottomsheet.show(it, bottomsheet.tag) }
+
+            }
+            if (subject.subject == true) {
+                layout.findViewById<TextView>(R.id.tv_tochat).setOnClickListener {
+                    //val idx = subject.id.toString()
+                    val intent = Intent(view?.context, ChattingActivity::class.java) //과목명
+                    intent.putExtra("class", subject.name)
+                    intent.putExtra("idx", subject.subjectIdx.toString())
+                    Log.d("idx", subject.subjectIdx.toString())
+                    startActivity(intent)
+                }
+
+                layout.findViewById<TextView>(R.id.tv_checkassignment).setOnClickListener {
+                    //val idx = subject.id.toString()
+                    val intent = Intent(view?.context, NoticeActivity::class.java)
+                    intent.putExtra("class", subject.name)
+                    intent.putExtra("idx", subject.subjectIdx.toString())
+                    intent.putExtra("check", "add")
+                    Log.d("idx", subject.subjectIdx.toString())
+                    startActivity(intent)
+                }
+            } else{
+                layout.findViewById<ImageView>(R.id.ic_tochat).visibility=View.INVISIBLE
+                layout.findViewById<TextView>(R.id.tv_tochat).visibility=View.INVISIBLE
+                layout.findViewById<ImageView>(R.id.ic_checkassignment).visibility=View.GONE
+                layout.findViewById<TextView>(R.id.tv_checkassignment).visibility=View.GONE
+                layout.findViewById<ImageView>(R.id.ic_name_update).visibility=View.VISIBLE
+                layout.findViewById<TextView>(R.id.tv_name_update).visibility=View.VISIBLE
+            }
+
+
+            builder.setView(layout)
+            val dialog = builder.create()
+
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.show()
+
+        }
+    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,10 +163,8 @@ class TimeTableFragment : Fragment() {
         }
 
         btn_setting.setOnClickListener {
-            val bottomsheet = BottomSheetFragment(mainTable)
+            val bottomsheet = BottomSheetFragment(mainTable, this)
             fragmentManager?.let { it -> bottomsheet.show(it, bottomsheet.tag) }
-
-
 
         }
     }
@@ -152,83 +232,6 @@ class TimeTableFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        val onClick = object : subjectOnClick {
-            override fun onClick(subject: Subject) {
-
-                Log.d("idx", subject.toString())
-
-                val builder = AlertDialog.Builder(context)
-                val layout =
-                    LayoutInflater.from(context).inflate(R.layout.dialog_timetable_subject, null)
-
-                layout.findViewById<ImageView>(R.id.ic_color).setBackgroundResource(getColors(subject.color))
-                layout.findViewById<TextView>(R.id.tv_class_name).text = subject.name
-//                TODO 이거 table받아와서 classname으로 일주일에 몇번 수업인지 알아서 표시하기 vs 어뜨카지
-
-                for (i in 0 until subject.startTime.size) {
-                    layout.findViewById<TextView>(R.id.tv_time).text =
-                        layout.findViewById<TextView>(R.id.tv_time).text.toString() + getDay(subject.day[i]) + " " + subject.startTime[i] + " - " + subject.endTime[i]
-                    if (subject.startTime.size > 1 && i < subject.startTime.size - 1) {
-                        var text = layout.findViewById<TextView>(R.id.tv_time).text
-                        val text2 = "$text, " + getDay(subject.day[i])
-                        layout.findViewById<TextView>(R.id.tv_time).text = text2
-                    }
-                }
-
-
-                for (i in 0 until subject.place.size) {
-                    layout.findViewById<TextView>(R.id.tv_place).text =
-                        layout.findViewById<TextView>(R.id.tv_place).text.toString() + subject.place[i]
-
-                    if (subject.place.size > 1 && i < subject.place.size - 1) {
-                        var text = layout.findViewById<TextView>(R.id.tv_place).text
-                        val text2 = "$text, "
-                        layout.findViewById<TextView>(R.id.tv_place).text = text2
-                    }
-                }
-
-                layout.findViewById<TextView>(R.id.tv_customizing).setOnClickListener {
-                    val bottomsheet = CustomizingBottomSheetFragment(subject)
-                    fragmentManager?.let { it -> bottomsheet.show(it, bottomsheet.tag) }
-                }
-
-                if (subject.subject == true) {
-                    layout.findViewById<TextView>(R.id.tv_tochat).setOnClickListener {
-                        //val idx = subject.id.toString()
-                        val intent = Intent(view?.context, ChattingActivity::class.java) //과목명
-                        intent.putExtra("class", subject.name)
-                        intent.putExtra("idx", subject.subjectIdx.toString())
-                        Log.d("idx", subject.subjectIdx.toString())
-                        startActivity(intent)
-                    }
-
-                    layout.findViewById<TextView>(R.id.tv_checkassignment).setOnClickListener {
-                        //val idx = subject.id.toString()
-                        val intent = Intent(view?.context, NoticeActivity::class.java)
-                        intent.putExtra("class", subject.name)
-                        intent.putExtra("idx", subject.subjectIdx.toString())
-                        intent.putExtra("check", "add")
-                        Log.d("idx", subject.subjectIdx.toString())
-                        startActivity(intent)
-                    }
-                } else{
-                    layout.findViewById<ImageView>(R.id.ic_tochat).visibility=View.INVISIBLE
-                    layout.findViewById<TextView>(R.id.tv_tochat).visibility=View.INVISIBLE
-                    layout.findViewById<ImageView>(R.id.ic_checkassignment).visibility=View.GONE
-                    layout.findViewById<TextView>(R.id.tv_checkassignment).visibility=View.GONE
-                    layout.findViewById<ImageView>(R.id.ic_name_update).visibility=View.VISIBLE
-                    layout.findViewById<TextView>(R.id.tv_name_update).visibility=View.VISIBLE
-                }
-
-
-                builder.setView(layout)
-                val dialog = builder.create()
-
-                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                dialog.show()
-
-            }
-        }
 
 
         Log.d("tag", refresh.toString())
@@ -262,21 +265,29 @@ class TimeTableFragment : Fragment() {
             else -> "월"
         }
     }
-    fun getColors(type: Int): Int {
-        return when (type) {
-            0 -> R.drawable.bg_round_border_subject_color_1
-            1 -> R.drawable.bg_round_border_subject_color_2
-            2 -> R.drawable.bg_round_border_subject_color_3
-            3 -> R.drawable.bg_round_border_subject_color_4
-            4 -> R.drawable.bg_round_border_subject_color_5
-            5 -> R.drawable.bg_round_border_subject_color_6
-            6 -> R.drawable.bg_round_border_subject_color_7
-            7 -> R.drawable.bg_round_border_subject_color_8
-            8 -> R.drawable.bg_round_border_subject_color_9
-            9 -> R.drawable.bg_round_border_subject_color_10
-            else -> R.drawable.bg_round_border_subject
+
+    fun refreshMainTable(){
+        if (refresh) {
+            DataRepository.getMainTimeTable(
+                    onSuccess = {
+                        this.mainTable = it
+                        Log.d("tag", it.toString())
+                        timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, mainTable)
+                        view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { it1 -> timetableDrawer.draw(it1) }
+                    },
+                    onFailure = {
+                        mainTable = TimeTable(1, "2020-1", "시간표1", 1, "09:00", "16:00")
+                        timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, mainTable)
+                        view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { it1 -> timetableDrawer.draw(it1) }
+                    }
+            )
         }
+        refresh = false
     }
 
 
+}
+
+interface onRefreshListener{
+    fun onRefresh()
 }

@@ -47,8 +47,7 @@
         app:layout_constraintTop_toTopOf="@id/btn_cancel"
         app:layout_constraintBottom_toBottomOf="@id/btn_cancel"
         android:visibility="gone"
-        android:text="추가"
-        android:background="@color/gray"/>
+        android:background="@drawable/timetableadd_drag_1_btn_add"/>
 
     <LinearLayout
         android:id="@+id/layout_timetablewhole"

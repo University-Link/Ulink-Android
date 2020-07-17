@@ -3,6 +3,7 @@ package com.example.ulink
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ulink.ScheduleRecycler.ScheduleItemData
 import com.example.ulink.ScheduleRecycler.zeroCheck
@@ -104,6 +105,14 @@ class ScheduleNoticeActivity : AppCompatActivity() {
 
         btn_delete.setOnClickListener(){
             // TODO 삭제 통신
+            DataRepository.deleteNoticeWithIdx(scheduleItemData.idx.toString(),
+            onSuccess = {
+                Toast.makeText(this,"삭제되었습니다",Toast.LENGTH_SHORT).show()
+            },
+            onFailure = {
+
+            })
+
         }
     }
 }
