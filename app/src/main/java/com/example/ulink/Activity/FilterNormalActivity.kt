@@ -1,7 +1,8 @@
-package com.example.ulink
+package com.example.ulink.Activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.ulink.R
 import kotlinx.android.synthetic.main.activity_filter_normal.*
 import kotlinx.android.synthetic.main.toolbar_filter_normal.*
 

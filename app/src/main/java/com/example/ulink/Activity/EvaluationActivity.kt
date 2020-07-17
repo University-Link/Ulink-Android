@@ -1,8 +1,8 @@
-package com.example.ulink
+package com.example.ulink.Activity
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.ulink.R
 import kotlinx.android.synthetic.main.activity_class_evaluation.*
 
 class EvaluationActivity : AppCompatActivity(){

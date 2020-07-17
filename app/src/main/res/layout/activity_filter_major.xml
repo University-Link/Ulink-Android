@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FilterMajorActivity">
+    tools:context=".Activity.FilterMajorActivity">
 
     <include
         android:id="@+id/toolbar_filter_normal"

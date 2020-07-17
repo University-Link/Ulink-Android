@@ -12,21 +12,17 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.view.isInvisible
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import com.example.ulink.ChattingActivity
-import com.example.ulink.NoticeActivity
-import com.example.ulink.NotificationActivity
+import com.example.ulink.Activity.ChattingActivity
+import com.example.ulink.Activity.NoticeActivity
+import com.example.ulink.Activity.NotificationActivity
 import com.example.ulink.R
 import com.example.ulink.repository.DataRepository
 import com.example.ulink.repository.Subject
 import com.example.ulink.repository.TimeTable
 import com.example.ulink.timetable.*
 import com.example.ulink.utils.deepCopy
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import kotlinx.android.synthetic.main.fragment_time_table.*
-import org.w3c.dom.Text
 
 const val REQUEST_TIMETABLE_LIST_ACTIVITY = 777
 const val REQUEST_TIMETABLE_EDIT_ACITYVITY = 111

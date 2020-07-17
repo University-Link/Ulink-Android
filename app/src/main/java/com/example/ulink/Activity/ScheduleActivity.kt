@@ -1,28 +1,23 @@
-package com.example.ulink
+package com.example.ulink.Activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.ulink.CalendarRecycler.CalendarDayData
 import com.example.ulink.CalendarRecycler.tenday
 import com.example.ulink.CalendarRecycler.today
 import com.example.ulink.NoticeRecycler.ddaySchedule
+import com.example.ulink.R
 import com.example.ulink.ScheduleRecycler.*
 import com.example.ulink.repository.CalendarNoticeData
 import com.example.ulink.repository.DataRepository
 import com.example.ulink.repository.ResponseCalendar
 import com.example.ulink.repository.RetrofitService
-import com.example.ulink.utils.deepCopy
 import com.example.ulink.utils.deepCopySchedule
 import kotlinx.android.synthetic.main.activity_schedule.*
 import kotlinx.android.synthetic.main.toolbar_schedule_notice.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.util.*
-import kotlin.collections.HashMap
 
 
 class ScheduleActivity : AppCompatActivity() {

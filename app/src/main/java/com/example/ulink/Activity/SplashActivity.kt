@@ -1,9 +1,10 @@
-package com.example.ulink
+package com.example.ulink.Activity
 
 import android.animation.Animator
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import com.example.ulink.R
 import kotlinx.android.synthetic.main.activity_splash.*
 
 

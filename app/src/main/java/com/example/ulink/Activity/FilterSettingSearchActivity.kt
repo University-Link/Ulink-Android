@@ -1,4 +1,4 @@
-package com.example.ulink
+package com.example.ulink.Activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,17 +10,16 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ulink.R
 import com.example.ulink.TimeTable_Search_Recycler.SearchData
 import com.example.ulink.TimeTable_Search_Recycler.TimeTable_Search_Adapter
 import com.example.ulink.repository.DataRepository
 import com.example.ulink.repository.ResponsegetSubjectWithWord
 import com.example.ulink.repository.RetrofitService
 import com.example.ulink.repository.SearchedData
-import com.example.ulink.timetable.TimeTableFilterSearchFragment
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import com.example.ulink.textChangedListener
+import com.example.ulink.textResetButton
 import kotlinx.android.synthetic.main.activity_filtersetting_search.*
-import kotlinx.android.synthetic.main.fragment_timetablefiltersearch.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
