@@ -26,12 +26,16 @@ class CalendarFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+
+        var nowCalendarData = calendarDataInit(tv_month) // now_month
+
+        calendar_viewPager.setUserInputEnabled(false)
+        calendar_viewPager.adapter = view?.context?.let { CalendarAdapter(it, nowCalendarData, view!!) }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        var token =
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ4MTY1NzQsImV4cCI6MTU5NjI1NjU3NCwiaXNzIjoiYm9iYWUifQ.JwRDELH1lA1Fb8W1ltTmhThpmgFrUTQZVocUTATv3so"
         super.onViewCreated(view, savedInstanceState)
 
         lateinit var dialog: AlertDialog
@@ -92,5 +96,7 @@ class CalendarFragment : Fragment() {
     fun getYearMonth() : String{
         return view?.findViewById<TextView>(R.id.tv_month)?.text.toString()
     }
+
+
 
 }

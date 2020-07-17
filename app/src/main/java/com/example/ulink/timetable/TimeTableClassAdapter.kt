@@ -198,7 +198,8 @@ class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeT
 
             toTable.setOnClickListener {
 //                등록되면 올리기
-                Log.d("tag","등록")
+                subject.subjectIdx
+                Log.d("tag","등록  ${subject.subjectIdx}")
                 (context as TimeTableEditActivity).addToTable(subject)
 
             }

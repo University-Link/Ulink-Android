@@ -139,6 +139,17 @@ interface RequestInterface {
             @Header("token") token: String,
             @Path("idx") idx : String
     ) : Call<ResponseTimeTable>
+
+
+    //일정 색상 변경
+    @PUT("/schedule/specific/{idx}")
+    fun updateChangeColor(
+        @Header("token") token : String,
+        @Path("idx") idx : String,
+        @Query("isSubject") isSubject : Boolean,
+        @Body body : RequestChangeColor
+    ) : Call<ResponseChangeColor>
+
     //Chatting
     //채팅방 리스트 조회
     @GET("/chat")
@@ -236,4 +247,17 @@ interface RequestInterface {
             @Header("token") token : String,
             @Query("name") name : String
     ) : Call<ResponsegetSubjectWithWord>
+
+    @DELETE("/notice/[idx")
+    fun deleteNoticeWithIdx(
+            @Header("token") token: String,
+            @Path("idx") idx : String
+    ) : Call<ResponseDeleteNoticeWithIdx>
+
+    @DELETE("/schedule/specific/{idx}")
+    fun deleteSubjectWithIdx(
+            @Header("token") token : String,
+            @Path("idx") idx : String,
+            @Query("isSubject") isSubject: Boolean
+    )
 }

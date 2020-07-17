@@ -85,4 +85,55 @@ class ClassFragment : Fragment() {
             }
         })
     }
+
+    override fun onResume() {
+        super.onResume()
+        ClassAdapter.datas.clear()
+        RetrofitService.service.getChatList(DataRepository.token).enqueue(object : Callback<ResponseChatting> {
+            override fun onFailure(call: Call<ResponseChatting>, t: Throwable) {
+                Log.d("지혜", "바보")
+            }
+
+            override fun onResponse(
+                    call: Call<ResponseChatting>,
+                    response: Response<ResponseChatting>
+            ) {
+                response.body()?.let{
+                    if(it.status == 200){
+                        if(it.data.chat.isNotEmpty()) {
+                            //Log.d("dlwldms", it.data.chat[0].subjectIdx.toString())
+                            var size = it.data.chat.size
+                            for(i in 0 until size)
+                            {
+                                datas.apply{
+                                    add(
+                                            ClassData(
+                                                    subjectIdx = it.data.chat[i].subjectIdx,
+                                                    name = it.data.chat[i].name,
+                                                    color = it.data.chat[i].color,
+                                                    total = it.data.chat[i].total,
+                                                    current = it.data.chat[i].current
+                                            )
+                                    )
+                                }
+                                ClassAdapter.datas = datas
+                                ClassAdapter.notifyDataSetChanged()
+                            }
+                        }
+                    }
+                } ?: Log.d("tag", response.message())
+            }
+        })
+
+        ClassAdapter.setItemClickLIstener(object:ClassAdapter.ItemClickListener{
+            override fun onClick(view:View, position:Int){
+                val intent = Intent(getActivity(), ChattingActivity::class.java)
+                intent.putExtra("class", datas[position].name) //과목명
+                intent.putExtra("current", datas[position].current) //현재원
+                intent.putExtra("idx", datas[position].subjectIdx.toString())
+                startActivity(intent)
+            }
+        })
+
+    }
 }

@@ -25,6 +25,7 @@ class CalendarViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         var year = yearMonth.text.toString().split("년")[0]
         var month = yearMonth.text.toString().split("년")[1].split(" ")[1].split("월")[0]
         var currentposdate = ""
+
         if(month.length == 1){
             currentposdate = year + "-"+ "0"+month + "-"+day.text.toString()
         } else{
