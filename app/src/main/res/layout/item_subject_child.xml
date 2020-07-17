@@ -61,7 +61,6 @@
         android:id="@+id/tv_category"
         app:layout_constraintLeft_toRightOf="@id/tv_place"
         app:layout_constraintTop_toTopOf="@id/tv_place"
-        app:layout_constraintBottom_toBottomOf="@id/tv_place"
         android:layout_width="wrap_content"
         android:text="전공선택"
         android:textSize="12sp"
@@ -72,7 +71,7 @@
     <TextView
         android:id="@+id/tv_credit"
         app:layout_constraintLeft_toRightOf="@id/tv_category"
-        app:layout_constraintTop_toTopOf="@id/tv_place"
+        app:layout_constraintTop_toTopOf="@id/tv_category"
         android:layout_width="wrap_content"
         android:text="3학점"
         android:textColor="#898989"

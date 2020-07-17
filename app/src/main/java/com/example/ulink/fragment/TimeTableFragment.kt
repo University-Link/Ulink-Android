@@ -188,10 +188,10 @@ class TimeTableFragment : Fragment() {
                 }
 
                 layout.findViewById<TextView>(R.id.tv_customizing).setOnClickListener {
-                    val bottomsheet = CustomizingBottomSheetFragment()
+                    val bottomsheet = CustomizingBottomSheetFragment(subject)
                     fragmentManager?.let { it -> bottomsheet.show(it, bottomsheet.tag) }
-
                 }
+
                 if (subject.subject == true) {
                     layout.findViewById<TextView>(R.id.tv_tochat).setOnClickListener {
                         //val idx = subject.id.toString()

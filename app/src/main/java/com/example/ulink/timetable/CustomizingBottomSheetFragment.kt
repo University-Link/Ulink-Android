@@ -24,9 +24,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class CustomizingBottomSheetFragment() : BottomSheetDialogFragment() {
+class CustomizingBottomSheetFragment(subject : Subject) : BottomSheetDialogFragment() {
     val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ4MTY1NzQsImV4cCI6MTU5NjI1NjU3NCwiaXNzIjoiYm9iYWUifQ.JwRDELH1lA1Fb8W1ltTmhThpmgFrUTQZVocUTATv3so"
-
+    val subject = subject
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -40,7 +40,7 @@ class CustomizingBottomSheetFragment() : BottomSheetDialogFragment() {
 
 
         val fragment_list : MutableList<Fragment> = arrayListOf()
-        fragment_list.addAll(listOf(CustomizingFragment1(),CustomizingFragment2(),CustomizingFragment3()))
+        fragment_list.addAll(listOf(CustomizingFragment1(subject),CustomizingFragment2(subject),CustomizingFragment3(subject)))
         val adapter = CustomizingPagerAdapter(this, fragment_list)
         vp_custom.adapter = adapter
 
@@ -55,12 +55,6 @@ class CustomizingBottomSheetFragment() : BottomSheetDialogFragment() {
                // lastpage = position
             }
         })
-
-
-
-
-
-
     }
 }
 
