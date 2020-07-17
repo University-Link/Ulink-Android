@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.fragment_time_table.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.HashMap
 
 const val REQUEST_DIRECT_EDIT_ACTIVITY = 999
 const val REQUEST_DIRECT_TYPE_ACTIVITY = 888
@@ -154,6 +155,18 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         return check
     }
 
+    fun findNextColor(timeTable: TimeTable): Int {
+        val size: HashMap<Int, Int> = hashMapOf()
+        for (i in 0 until timeTable.subjectList.size) {
+            if (size.containsKey(timeTable.subjectList[i].color)) {
+                size.put(timeTable.subjectList[i].color, size.get(timeTable.subjectList[i].color)!! + 1)
+            } else {
+                size.put(timeTable.subjectList[i].color, 1)
+            }
+        }
+        var ids = size.keys.size - 1
+        return ids
+    }
 
     fun addToTable(subject: Subject) {
 
@@ -164,9 +177,13 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         val timeTable = mAdapter.timeTableList[position]
 
         if (!checkIsOver(subject, timeTable)) {
+
+
             subject.isSample = false
+            findNextColor(timeTable)
+
             DataRepository.addSchoolPlan(RequestAddSchoolPlan(
-                subject.id.toInt(), subject.color, timeTable.id
+                subject.id.toInt(),  findNextColor(timeTable), timeTable.id
             ), onSuccess = {
                 timeTable.subjectList.add(subject)
                 mAdapter.replaceAtList(position, timeTable)
@@ -391,6 +408,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
             dialog.dismiss()
         }
+
         layout.findViewById<Button>(id.btn_cancel).setOnClickListener {
             dialog.dismiss()
         }
@@ -437,6 +455,23 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
     fun getSemesterFromActivity() : String = semester
     fun getTimeTableFromActivity() : TimeTable = mAdapter.timeTableList[vp_timetableadd.currentItem]
+
+    fun getColors(type: Int): Int {
+        return when (type) {
+            0 -> R.drawable.bg_round_border_subject_color_1
+            1 -> R.drawable.bg_round_border_subject_color_2
+            2 -> R.drawable.bg_round_border_subject_color_3
+            3 -> R.drawable.bg_round_border_subject_color_4
+            4 -> R.drawable.bg_round_border_subject_color_5
+            5 -> R.drawable.bg_round_border_subject_color_6
+            6 -> R.drawable.bg_round_border_subject_color_7
+            7 -> R.drawable.bg_round_border_subject_color_8
+            8 -> R.drawable.bg_round_border_subject_color_9
+            9 -> R.drawable.bg_round_border_subject_color_10
+            else -> R.drawable.bg_round_border_subject
+        }
+    }
+
 }
 interface getGradeClickListener{
     fun onClick(position : Int)

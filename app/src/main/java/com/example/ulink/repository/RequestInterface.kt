@@ -236,4 +236,17 @@ interface RequestInterface {
             @Header("token") token : String,
             @Query("name") name : String
     ) : Call<ResponsegetSubjectWithWord>
+
+    @DELETE("/notice/[idx")
+    fun deleteNoticeWithIdx(
+            @Header("token") token: String,
+            @Path("idx") idx : String
+    ) : Call<ResponseDeleteNoticeWithIdx>
+
+    @DELETE("/schedule/specific/{idx}")
+    fun deleteSubjectWithIdx(
+            @Header("token") token : String,
+            @Path("idx") idx : String,
+            @Query("isSubject") isSubject: Boolean
+    )
 }
