@@ -16,6 +16,9 @@ class TimeTableListActivity : AppCompatActivity(), TimeTableOnClickListener {
 //
         val semesterList: MutableList<MutableList<TimeTable>> = arrayListOf()
 
+        btn_back.setOnClickListener(){
+            finish()
+        }
 //
 ////     서버에서 데이터 받아오기
 //        //          TODO

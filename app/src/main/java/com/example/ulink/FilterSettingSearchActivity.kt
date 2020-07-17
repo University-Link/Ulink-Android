@@ -12,11 +12,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ulink.TimeTable_Search_Recycler.SearchData
 import com.example.ulink.TimeTable_Search_Recycler.TimeTable_Search_Adapter
+import com.example.ulink.repository.DataRepository
 import com.example.ulink.repository.ResponsegetSubjectWithWord
 import com.example.ulink.repository.RetrofitService
 import com.example.ulink.repository.SearchedData
 import com.example.ulink.timetable.TimeTableFilterSearchFragment
-import com.example.ulink.timetable.token
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_filtersetting_search.*
@@ -33,6 +33,7 @@ class FilterSettingSearchActivity : AppCompatActivity() {
     lateinit var filter_name :String
     val list : MutableList<SearchedData> = arrayListOf()
 
+    val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ4MTY1NzQsImV4cCI6MTU5NjI1NjU3NCwiaXNzIjoiYm9iYWUifQ.JwRDELH1lA1Fb8W1ltTmhThpmgFrUTQZVocUTATv3so"
 //    TODO 아이템 클릭이나 검색버튼 클릭하면 setresult
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +46,7 @@ class FilterSettingSearchActivity : AppCompatActivity() {
             android.R.layout.simple_spinner_item
         )
 
-        //btn_reset.textResetButton(edit) 검색x버튼추가
+        btn_reset.textResetButton(edit) //검색x버튼추가
 
         TimeTable_Search_Adapter = TimeTable_Search_Adapter(this)
         rv_search.adapter = TimeTable_Search_Adapter
@@ -101,7 +102,7 @@ class FilterSettingSearchActivity : AppCompatActivity() {
 
         edit.textChangedListener {
 
-            RetrofitService.service.getSubjectWithWord(token,edit.text.toString()).enqueue(object : Callback<ResponsegetSubjectWithWord>{
+            RetrofitService.service.getSubjectWithWord(DataRepository.token,edit.text.toString()).enqueue(object : Callback<ResponsegetSubjectWithWord>{
                 override fun onFailure(call: Call<ResponsegetSubjectWithWord>, t: Throwable) {
 
                 }

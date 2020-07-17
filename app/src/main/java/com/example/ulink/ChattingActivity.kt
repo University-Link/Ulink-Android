@@ -32,7 +32,7 @@ class ChattingActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
         setContentView(R.layout.activity_chatting)
 
         current = intent.getIntExtra("current", 0)
-        className = intent.getStringExtra("className")
+        className = intent.getStringExtra("class")
         idx = intent.getStringExtra("idx")
 
         if(className != null) tv_classname.text = className

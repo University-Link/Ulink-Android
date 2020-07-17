@@ -33,7 +33,6 @@ class NoticeAddActivity : AppCompatActivity() {
     private var datePickerDay =  cal.get(Calendar.DATE)
     var category = ""
 
-    var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ3NzkxODAsImV4cCI6MTU5NjIxOTE4MCwiaXNzIjoiYm9iYWUifQ.BAOeiZ_uqtIVPzFJd2oZbfVz44A2_QSXLQliNhN6pv4"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notice_add)
@@ -158,7 +157,7 @@ class NoticeAddActivity : AppCompatActivity() {
             var check = intent.getStringExtra("addcheck")
             Log.d("check", check.toString())
             if(check.equals("add")) {
-                RetrofitService.service.registerNotice(token, idx, body)
+                RetrofitService.service.registerNotice(DataRepository.token, idx, body)
                     .enqueue(object : Callback<ResponseRegisterNotice> {
                         override fun onFailure(call: Call<ResponseRegisterNotice>, t: Throwable) {
                             Log.d("실패", "실패")
@@ -183,7 +182,7 @@ class NoticeAddActivity : AppCompatActivity() {
             else if(check.equals("revise")){
                 idx = intent.getStringExtra("noticeIdx")
                 Log.d("check", idx.toString())
-                RetrofitService.service.updateNotice(token, idx, body)
+                RetrofitService.service.updateNotice(DataRepository.token, idx, body)
                     .enqueue(object : Callback<ResponseUpdateNotice> {
                         override fun onFailure(call: Call<ResponseUpdateNotice>, t: Throwable) {
                             Log.d("수정실패", "수정실패")

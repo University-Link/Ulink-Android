@@ -79,7 +79,7 @@ class ClassFragment : Fragment() {
         ClassAdapter.setItemClickLIstener(object:ClassAdapter.ItemClickListener{
             override fun onClick(view:View, position:Int){
                 val intent = Intent(getActivity(), ChattingActivity::class.java)
-                intent.putExtra("className", datas[position].name) //과목명
+                intent.putExtra("class", datas[position].name) //과목명
                 intent.putExtra("current", datas[position].current) //현재원
                 intent.putExtra("idx", datas[position].subjectIdx.toString())
                 startActivity(intent)
