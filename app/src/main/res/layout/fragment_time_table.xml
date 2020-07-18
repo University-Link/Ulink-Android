@@ -26,7 +26,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:lineHeight="27sp"
-        android:text="2020년 2학기"
         android:textColor="#ffffff"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@id/layout_timetablewhole"

@@ -156,16 +156,10 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
     }
 
     fun findNextColor(timeTable: TimeTable): Int {
-        val size: HashMap<Int, Int> = hashMapOf()
-        for (i in 0 until timeTable.subjectList.size) {
-            if (size.containsKey(timeTable.subjectList[i].color)) {
-                size.put(timeTable.subjectList[i].color, size.get(timeTable.subjectList[i].color)!! + 1)
-            } else {
-                size.put(timeTable.subjectList[i].color, 1)
-            }
-        }
-        var ids = size.keys.size - 1
-        return ids
+
+
+        Log.d("tag",timeTable.toString())
+        return timeTable.subjectList.size
     }
 
     fun addToTable(subject: Subject) {
@@ -178,12 +172,14 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
         if (!checkIsOver(subject, timeTable)) {
 
-
             subject.isSample = false
-            findNextColor(timeTable)
+
+            Log.d("tagfindnextcolor", findNextColor(timeTable).toString())
+
+            subject.color = findNextColor(timeTable)
 
             DataRepository.addSchoolPlan(RequestAddSchoolPlan(
-                subject.id.toInt(),  findNextColor(timeTable), timeTable.id
+                subject.id.toInt(), subject.color, timeTable.id
             ), onSuccess = {
                 timeTable.subjectList.add(subject)
                 mAdapter.replaceAtList(position, timeTable)
@@ -208,6 +204,8 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         }
 
         var timeTable: TimeTable = mAdapter.timeTableSampleList.get(position)
+
+        Log.d("tag11111", timeTable.toString())
 
         timeTable.subjectList.add(subject)
         mAdapter.replaceAtSampleList(position, timeTable)
@@ -241,9 +239,9 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         layout.findViewById<TextView>(id.tv_ok).setOnClickListener {
 //            TODO 여기서 DB로 저장하고 edit에 넣긴 해야함
 
-            DataRepository.addTimeTable("2020-2", et.text.toString(),
+            DataRepository.addTimeTable(timeTableList[0].semester, et.text.toString(),
                     onSuccess = {
-                        val timeTable = TimeTable(it.data.idx.toInt(), "2020-2", et.text.toString(), 0, "09:00", "18:00")
+                        val timeTable = TimeTable(it.data.idx.toInt(),timeTableList[0].semester , et.text.toString(), 0, "09:00", "18:00")
                         mAdapter.addToList(deepCopy(timeTable))
                         timeTableList.add(deepCopy(timeTable))
                         moveToLastItem()
@@ -286,8 +284,21 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
         mAdapter.setList(timeTableList)
         mAdapter.timeTableAddListener = object : TimeTableAddListener {
-            override fun onAdded(timeTable: TimeTable) {
-                moveToLastItem()
+            override fun onAdded(name: String) {
+                DataRepository.addTimeTable(timeTableList[0].semester, name,
+                        onSuccess = {
+                            val timeTable = TimeTable(it.data.idx.toInt(),timeTableList[0].semester ,name, 0, "09:00", "18:00")
+                            mAdapter.addToList(deepCopy(timeTable))
+                            timeTableList.add(deepCopy(timeTable))
+                            moveToLastItem()
+                            Log.d("debug","${it.data.idx} 시간표 생성")
+
+                        },
+                        onFailure = {
+                            Toast.makeText(this@TimeTableEditActivity, "오류가 발생하였습니다", Toast.LENGTH_SHORT).show();
+                            Log.d("error",it)
+                        }
+                )
             }
         }
         vp_timetableadd.adapter = mAdapter
@@ -456,21 +467,6 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
     fun getSemesterFromActivity() : String = semester
     fun getTimeTableFromActivity() : TimeTable = mAdapter.timeTableList[vp_timetableadd.currentItem]
 
-    fun getColors(type: Int): Int {
-        return when (type) {
-            0 -> R.drawable.bg_round_border_subject_color_1
-            1 -> R.drawable.bg_round_border_subject_color_2
-            2 -> R.drawable.bg_round_border_subject_color_3
-            3 -> R.drawable.bg_round_border_subject_color_4
-            4 -> R.drawable.bg_round_border_subject_color_5
-            5 -> R.drawable.bg_round_border_subject_color_6
-            6 -> R.drawable.bg_round_border_subject_color_7
-            7 -> R.drawable.bg_round_border_subject_color_8
-            8 -> R.drawable.bg_round_border_subject_color_9
-            9 -> R.drawable.bg_round_border_subject_color_10
-            else -> R.drawable.bg_round_border_subject
-        }
-    }
 
 }
 interface getGradeClickListener{

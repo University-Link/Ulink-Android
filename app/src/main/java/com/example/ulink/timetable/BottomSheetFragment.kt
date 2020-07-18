@@ -50,7 +50,6 @@ class BottomSheetFragment(val mainTable : TimeTable, val onRefreshListener: onRe
                         fragmentManager.beginTransaction().remove(this@BottomSheetFragment).commit()
                         fragmentManager.popBackStack()
                         onRefreshListener.onRefresh()
-
                     }
                 }
 

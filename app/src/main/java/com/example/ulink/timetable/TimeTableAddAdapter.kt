@@ -86,10 +86,8 @@ class TimeTableAddAdapter(fragmentActivity: FragmentActivity, val fragmentList :
         if (position == fragmentList.size){
             val fragment =  TimeTableAddBlankFragment()
             fragment.setTimeTableAddListner(object : TimeTableAddListener{
-                override fun onAdded(timeTable: TimeTable) {
-                    addToList(timeTable)
-                    //                  이 listener은 그냥 move용!
-                    timeTableAddListener?.onAdded(timeTable)
+                override fun onAdded(name: String) {
+                    timeTableAddListener?.onAdded(name)
                 }
             })
             return fragment

@@ -107,6 +107,7 @@ class ScheduleNoticeActivity : AppCompatActivity() {
             DataRepository.deleteNoticeWithIdx(scheduleItemData.idx.toString(),
             onSuccess = {
                 Toast.makeText(this,"삭제되었습니다",Toast.LENGTH_SHORT).show()
+                finish()
             },
             onFailure = {
 

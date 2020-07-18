@@ -30,12 +30,14 @@ const val REQUEST_TIMETABLE_EDIT_ACITYVITY = 111
 class TimeTableFragment : Fragment(), onRefreshListener {
 
     override fun onRefresh() {
-        refresh = true
-        refreshMainTable()
+        refreshLastTimeTable()
+        refresh = false
     }
 
     lateinit var mainTable: TimeTable
 
+
+    var lastTimeTableId = 0
     var refresh = true
 
     override fun onCreateView(
@@ -91,10 +93,10 @@ class TimeTableFragment : Fragment(), onRefreshListener {
             layout.findViewById<ImageView>(R.id.ic_color).setBackgroundResource(getColors(subject.color))
 
             layout.findViewById<TextView>(R.id.tv_customizing).setOnClickListener {
-                val bottomsheet = CustomizingBottomSheetFragment(subject, object : onRefreshListener{
+                val bottomsheet = CustomizingBottomSheetFragment(subject, object : onRefreshListener {
                     override fun onRefresh() {
                         refresh = true
-                        refreshMainTable()
+                        refreshLastTimeTable()
                     }
                 })
                 fragmentManager?.let { it -> bottomsheet.show(it, bottomsheet.tag) }
@@ -118,13 +120,13 @@ class TimeTableFragment : Fragment(), onRefreshListener {
                     Log.d("idx", subject.subjectIdx.toString())
                     startActivity(intent)
                 }
-            } else{
-                layout.findViewById<ImageView>(R.id.ic_tochat).visibility=View.INVISIBLE
-                layout.findViewById<TextView>(R.id.tv_tochat).visibility=View.INVISIBLE
-                layout.findViewById<ImageView>(R.id.ic_checkassignment).visibility=View.GONE
-                layout.findViewById<TextView>(R.id.tv_checkassignment).visibility=View.GONE
-                layout.findViewById<ImageView>(R.id.ic_name_update).visibility=View.VISIBLE
-                layout.findViewById<TextView>(R.id.tv_name_update).visibility=View.VISIBLE
+            } else {
+                layout.findViewById<ImageView>(R.id.ic_tochat).visibility = View.INVISIBLE
+                layout.findViewById<TextView>(R.id.tv_tochat).visibility = View.INVISIBLE
+                layout.findViewById<ImageView>(R.id.ic_checkassignment).visibility = View.GONE
+                layout.findViewById<TextView>(R.id.tv_checkassignment).visibility = View.GONE
+                layout.findViewById<ImageView>(R.id.ic_name_update).visibility = View.VISIBLE
+                layout.findViewById<TextView>(R.id.tv_name_update).visibility = View.VISIBLE
             }
 
 
@@ -142,11 +144,10 @@ class TimeTableFragment : Fragment(), onRefreshListener {
         super.onViewCreated(view, savedInstanceState)
 
 
-        mainTable = TimeTable(1, "2020-1", "시간표1", 1, "09:00", "16:00")
-
-
+        mainTable = TimeTable(0, "2020-1", "시간표1", 1, "09:00", "16:00")
 //        서버랑 통신해서 TimeTable가져옴
 
+        refreshMainTable()
 
         btn_plus.setOnClickListener {
             val intent = Intent(context, TimeTableEditActivity::class.java)
@@ -167,31 +168,24 @@ class TimeTableFragment : Fragment(), onRefreshListener {
         btn_setting.setOnClickListener {
             val bottomsheet = BottomSheetFragment(mainTable, this)
             fragmentManager?.let { it -> bottomsheet.show(it, bottomsheet.tag) }
-
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if (requestCode == REQUEST_TIMETABLE_LIST_ACTIVITY && resultCode == 200) {
             if (data != null) {
 
                 val table: TimeTable = deepCopy(data.getParcelableExtra("timeTable"))
+                lastTimeTableId = table.id
 
-//                시간표 요청
                 DataRepository.getTimeTableWithId(table.id,
                         onSuccess = { table ->
-
                             timetableDrawer.timeTable = deepCopy(table)
-
-                            refresh = false
-
                             val t = timetableDrawer.timeTable.semester.split("-")
                             if (t.size == 2) {
                                 tv_semister.text = "${t[0]}년 ${t[1]}학기"
                             }
-
                             mainTable = deepCopy(table)
                             view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { timetableDrawer.draw(it) }
                         },
@@ -200,59 +194,14 @@ class TimeTableFragment : Fragment(), onRefreshListener {
                         })
             }
         } else if (requestCode == REQUEST_TIMETABLE_EDIT_ACITYVITY && resultCode == 200) {
-            Log.d("tag","nullllllll")
-
             if (data != null) {
                 val table: TimeTable = deepCopy(data.getParcelableExtra("timeTable"))
-//                시간표 요청
-                Log.d("tag1111111111",table.toString())
 
-                DataRepository.getTimeTableWithId(table.id,
-                        onSuccess = { table ->
-
-                            Log.d("tag2222222",table.toString())
-
-                            timetableDrawer.timeTable = deepCopy(table)
-
-                            refresh = false
-
-                            val t = timetableDrawer.timeTable.semester.split("-")
-                            if (t.size == 2) {
-                                tv_semister.text = "${t[0]}년 ${t[1]}학기"
-                            }
-
-                            mainTable = deepCopy(table)
-                            view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { timetableDrawer.draw(it) }
-                        },
-                        onFailure = {
-                            Log.d("tag", it)
-                        })
+                lastTimeTableId = table.id
+                refreshLastTimeTable()
             }
 
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-
-        Log.d("tag", refresh.toString())
-        if (refresh) {
-            DataRepository.getMainTimeTable(
-                    onSuccess = {
-                        this.mainTable = it
-                        Log.d("tag", it.toString())
-                        timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, mainTable)
-                        view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { it1 -> timetableDrawer.draw(it1) }
-                    },
-                    onFailure = {
-                        mainTable = TimeTable(1, "2020-1", "시간표1", 1, "09:00", "16:00")
-                        timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, mainTable)
-                        view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { it1 -> timetableDrawer.draw(it1) }
-                    }
-            )
-        }
-        refresh = false
     }
 
     fun getDay(day: Int): String {
@@ -268,24 +217,46 @@ class TimeTableFragment : Fragment(), onRefreshListener {
         }
     }
 
-    fun refreshMainTable(){
-        if (refresh) {
-            DataRepository.getMainTimeTable(
-                    onSuccess = {
-                        this.mainTable = it
-                        Log.d("tag", it.toString())
-                        timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, mainTable)
-                        view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { it1 -> timetableDrawer.draw(it1) }
-                    },
-                    onFailure = {
-                        mainTable = TimeTable(1, "2020-1", "시간표1", 1, "09:00", "16:00")
-                        timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, mainTable)
-                        view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { it1 -> timetableDrawer.draw(it1) }
+    fun refreshMainTable() {
+        DataRepository.getMainTimeTable(
+                onSuccess = {
+                    this.mainTable = it
+                    Log.d("tag2", it.toString())
+                    timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, mainTable)
+                    view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { it1 -> timetableDrawer.draw(it1) }
+                    lastTimeTableId = it.id
+                    val t = timetableDrawer.timeTable.semester.split("-")
+                    if (t.size == 2) {
+                        tv_semister.text = "${t[0]}년 ${t[1]}학기"
                     }
-            )
-        }
-        refresh = false
+                },
+                onFailure = {
+                    mainTable = TimeTable(1, "2020-1", "시간표1", 1, "09:00", "16:00")
+                    timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, mainTable)
+                    view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { it1 -> timetableDrawer.draw(it1) }
+                }
+        )
     }
+
+    fun refreshLastTimeTable(){
+        DataRepository.getTimeTableWithId(lastTimeTableId,
+                onSuccess = {
+                    this.mainTable = it
+                    Log.d("tag1", it.toString())
+                    timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, mainTable)
+                    view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { it1 -> timetableDrawer.draw(it1) }
+                    lastTimeTableId = it.id
+                    val t = timetableDrawer.timeTable.semester.split("-")
+                    if (t.size == 2) {
+                        tv_semister.text = "${t[0]}년 ${t[1]}학기"
+                    }
+
+                },
+                onFailure = {
+
+                })
+    }
+
 
     fun getColors(type: Int): Int {
         return when (type) {
@@ -315,6 +286,6 @@ class TimeTableFragment : Fragment(), onRefreshListener {
 
 }
 
-interface onRefreshListener{
+interface onRefreshListener {
     fun onRefresh()
 }
