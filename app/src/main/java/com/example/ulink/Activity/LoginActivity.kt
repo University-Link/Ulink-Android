@@ -27,7 +27,6 @@ class LoginActivity : AppCompatActivity() {
         val sharedPref : SharedPreferences = getSharedPreferences("pref", Context.MODE_PRIVATE)
         et_id.setText(sharedPref.getString("id", ""))
 
-
         btn_login.setOnClickListener {
             val sharedPref: SharedPreferences = getSharedPreferences("pref", Context.MODE_PRIVATE)
             val sharedEdit = sharedPref.edit()
@@ -43,27 +42,27 @@ class LoginActivity : AppCompatActivity() {
 
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-
-            /*if (et_id.text.isNullOrBlank() || et_pw.text.isNullOrBlank()) {
-                loginPageDialog()
-            } else {
-                requestLoginToServer.service.requestLogin(
-                    RequestLogin(
-                        id = et_id.text.toString(),
-                        password = et_pw.text.toString()
-                    )
-                ).customEnqueue(
-                    onError = { loginPageDialog() },
-                    onSuccess = {
-                        if (it.success) {
-                            val intent = Intent(this, MainActivity::class.java)
-                            startActivity(intent)
-                        } else {
-                              loginPageDialog()
-                        }
-                    }
-                )
-            }*/
+//
+//            if (et_id.text.isNullOrBlank() || et_pw.text.isNullOrBlank()) {
+//                loginPageDialog()
+//            } else {
+//                requestLoginToServer.service.requestLogin(
+//                    RequestLogin(
+//                        id = et_id.text.toString(),
+//                        password = et_pw.text.toString()
+//                    )
+//                ).customEnqueue(
+//                    onError = { loginPageDialog() },
+//                    onSuccess = {
+//                        if (it.success) {
+//                            val intent = Intent(this, MainActivity::class.java)
+//                            startActivity(intent)
+//                        } else {
+//                              loginPageDialog()
+//                        }
+//                    }
+//                )
+//            }*/
         }
     }
 

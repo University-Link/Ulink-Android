@@ -68,6 +68,9 @@ class TimeTableFragment : Fragment(), onRefreshListener {
             layout.findViewById<TextView>(R.id.tv_class_name).text = subject.name
 //                TODO 이거 table받아와서 classname으로 일주일에 몇번 수업인지 알아서 표시하기 vs 어뜨카지
 
+            builder.setView(layout)
+            val dialog = builder.create()
+
             for (i in 0 until subject.startTime.size) {
                 layout.findViewById<TextView>(R.id.tv_time).text =
                         layout.findViewById<TextView>(R.id.tv_time).text.toString() + getDay(subject.day[i]) + " " + subject.startTime[i] + " - " + subject.endTime[i]
@@ -99,7 +102,8 @@ class TimeTableFragment : Fragment(), onRefreshListener {
                         refreshLastTimeTable()
                     }
                 })
-                fragmentManager?.let { it -> bottomsheet.show(it, bottomsheet.tag) }
+                fragmentManager?.let { it -> bottomsheet.show(it, bottomsheet.tag)
+                dialog.dismiss()}
             }
             if (subject.subject == true) {
                 layout.findViewById<TextView>(R.id.tv_tochat).setOnClickListener {
@@ -128,10 +132,6 @@ class TimeTableFragment : Fragment(), onRefreshListener {
                 layout.findViewById<ImageView>(R.id.ic_name_update).visibility = View.VISIBLE
                 layout.findViewById<TextView>(R.id.tv_name_update).visibility = View.VISIBLE
             }
-
-
-            builder.setView(layout)
-            val dialog = builder.create()
 
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.show()

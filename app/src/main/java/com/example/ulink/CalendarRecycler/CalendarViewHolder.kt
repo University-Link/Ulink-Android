@@ -42,8 +42,6 @@ class CalendarViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
 
 
 
-
-
 //        TODO 전달 다음달은 index로 나중에 해결하기 currentposition과 비교해ㅓㅅ!
 
 

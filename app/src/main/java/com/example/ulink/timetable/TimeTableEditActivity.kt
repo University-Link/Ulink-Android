@@ -467,7 +467,6 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
     fun getSemesterFromActivity() : String = semester
     fun getTimeTableFromActivity() : TimeTable = mAdapter.timeTableList[vp_timetableadd.currentItem]
 
-
 }
 interface getGradeClickListener{
     fun onClick(position : Int)
