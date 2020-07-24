@@ -29,6 +29,8 @@ const val REQUEST_TIMETABLE_EDIT_ACITYVITY = 111
 
 class TimeTableFragment : Fragment(), onRefreshListener {
 
+
+
     override fun onRefresh() {
         refreshLastTimeTable()
         refresh = false
@@ -144,7 +146,7 @@ class TimeTableFragment : Fragment(), onRefreshListener {
         super.onViewCreated(view, savedInstanceState)
 
 
-        mainTable = TimeTable(0, "2020-1", "시간표1", 1, "09:00", "16:00")
+        mainTable = TimeTable(0, "2020-1", "시간표1", 1, "09:00", "18:00")
 //        서버랑 통신해서 TimeTable가져옴
 
         refreshMainTable()
@@ -197,6 +199,7 @@ class TimeTableFragment : Fragment(), onRefreshListener {
             if (data != null) {
                 val table: TimeTable = deepCopy(data.getParcelableExtra("timeTable"))
 
+                Log.d("tag", table.toString())
                 lastTimeTableId = table.id
                 refreshLastTimeTable()
             }
@@ -242,7 +245,7 @@ class TimeTableFragment : Fragment(), onRefreshListener {
         DataRepository.getTimeTableWithId(lastTimeTableId,
                 onSuccess = {
                     this.mainTable = it
-                    Log.d("tag1", it.toString())
+                    Log.d("tag refreshedtimetable", it.toString())
                     timetableDrawer = TimeTableDrawer(requireContext(), LayoutInflater.from(context), onClick, mainTable)
                     view?.findViewById<FrameLayout>(R.id.layout_timetable)?.let { it1 -> timetableDrawer.draw(it1) }
                     lastTimeTableId = it.id

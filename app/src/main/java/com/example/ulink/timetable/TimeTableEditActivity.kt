@@ -257,6 +257,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
         layout.findViewById<TextView>(id.tv_cancel).setOnClickListener {
             dialog.dismiss()
+            onBackPressed()
         }
 
         val back = ColorDrawable(Color.TRANSPARENT)
