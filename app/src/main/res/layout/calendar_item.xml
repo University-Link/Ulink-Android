@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:id="@+id/rv_item_layout"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="125dp"
     android:orientation="vertical"
     android:background="@drawable/calendar_item_background"
     android:paddingHorizontal="2dp"
-    android:paddingVertical="5dp"
+    android:paddingTop="5dp"
+    android:paddingBottom="2dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
@@ -16,12 +17,14 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="16sp"/>
+        android:textSize="14sp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_small_schedule"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_small_schedule"/>
-    </LinearLayout>
+
+</LinearLayout>

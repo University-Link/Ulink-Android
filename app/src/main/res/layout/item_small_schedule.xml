@@ -2,18 +2,19 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="2dp">
 
     <TextView
         android:id="@+id/tv_schedule"
         android:layout_width="match_parent"
-        android:layout_height="16dp"
+        android:layout_height="wrap_content"
         android:text="전자기학"
         android:textColor="@color/white"
-        android:gravity="center"
-        android:layout_marginTop="3dp"
-        android:textSize="10sp"
-        android:paddingHorizontal="3dp"
-        android:singleLine="true"/>
+        android:textSize="11sp"
+        android:paddingVertical="1dp"
+        android:paddingLeft="3dp"
+        android:singleLine="true"
+        android:ellipsize="none"/>
 
 </LinearLayout>

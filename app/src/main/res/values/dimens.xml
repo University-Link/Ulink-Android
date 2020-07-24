@@ -11,4 +11,7 @@
 
     <dimen name="my_popup_width">298dp</dimen>
     <dimen name="my_popup_height">105dp</dimen>
+
+    <dimen name="calendar_popup_width">352dp</dimen>
+    <dimen name="calendar_popup_height">317dp</dimen>
 </resources>
