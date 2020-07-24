@@ -56,6 +56,7 @@ fun calendarAlpha(dayData: CalendarDayData, itemView : View){
     if(!dayData.check){
         day.alpha=0.3f
     } // prev, next month
+    //TODO 일정 있을 경우 alpha 적용해야 한다.
 }
 
 fun calendarDataInit(tv_month : TextView) : CalendarData {

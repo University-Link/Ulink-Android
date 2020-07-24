@@ -2,7 +2,6 @@ package com.example.ulink.timetable
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -23,28 +22,27 @@ import com.example.ulink.R.*
 import com.example.ulink.repository.*
 import com.example.ulink.utils.deepCopy
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_time_table_edit.*
+import kotlinx.android.synthetic.main.fragment_time_table.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
+import java.util.HashMap
 
 const val REQUEST_DIRECT_EDIT_ACTIVITY = 999
 const val REQUEST_DIRECT_TYPE_ACTIVITY = 888
 
-class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener ,onGetPositionListener{
+class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
     //    Timetable 다보여주고 마지막에 항상 하나 더 보여주는거 자동
     val timeTableList: MutableList<TimeTable> = arrayListOf()
     val mAdapter = TimeTableAddAdapter(this)
-    val mEditorAdapter = TimeTableEditorAdapter(this,this)
+    val mEditorAdapter = TimeTableEditorAdapter(this)
 
-    var please = 0
     lateinit var semester : String
     var lastpage = 0
-    var boolean = false
+
 
     override fun onBackPressed() {
         super.onBackPressed()
@@ -157,16 +155,10 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener ,onGetPo
     }
 
     fun findNextColor(timeTable: TimeTable): Int {
-        val size: HashMap<Int, Int> = hashMapOf()
-        for (i in 0 until timeTable.subjectList.size) {
-            if (size.containsKey(timeTable.subjectList[i].color)) {
-                size.put(timeTable.subjectList[i].color, size.get(timeTable.subjectList[i].color)!! + 1)
-            } else {
-                size.put(timeTable.subjectList[i].color, 1)
-            }
-        }
-        var ids = size.keys.size - 1
-        return ids
+
+
+        Log.d("tag",timeTable.toString())
+        return timeTable.subjectList.size
     }
 
     fun addToTable(subject: Subject) {
@@ -179,12 +171,14 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener ,onGetPo
 
         if (!checkIsOver(subject, timeTable)) {
 
-
             subject.isSample = false
-            findNextColor(timeTable)
+
+            Log.d("tagfindnextcolor", findNextColor(timeTable).toString())
+
+            subject.color = findNextColor(timeTable)
 
             DataRepository.addSchoolPlan(RequestAddSchoolPlan(
-                subject.id.toInt(),  findNextColor(timeTable), timeTable.id
+                subject.id.toInt(), subject.color, timeTable.id
             ), onSuccess = {
                 timeTable.subjectList.add(subject)
                 mAdapter.replaceAtList(position, timeTable)
@@ -242,9 +236,9 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener ,onGetPo
         layout.findViewById<TextView>(id.tv_ok).setOnClickListener {
 //            TODO 여기서 DB로 저장하고 edit에 넣긴 해야함
 
-            DataRepository.addTimeTable("2020-2", et.text.toString(),
+            DataRepository.addTimeTable(timeTableList[0].semester, et.text.toString(),
                     onSuccess = {
-                        val timeTable = TimeTable(it.data.idx.toInt(), "2020-2", et.text.toString(), 0, "09:00", "18:00")
+                        val timeTable = TimeTable(it.data.idx.toInt(),timeTableList[0].semester , et.text.toString(), 0, "09:00", "18:00")
                         mAdapter.addToList(deepCopy(timeTable))
                         timeTableList.add(deepCopy(timeTable))
                         moveToLastItem()
@@ -259,6 +253,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener ,onGetPo
 
         layout.findViewById<TextView>(id.tv_cancel).setOnClickListener {
             dialog.dismiss()
+            onBackPressed()
         }
 
         val back = ColorDrawable(Color.TRANSPARENT)
@@ -286,8 +281,21 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener ,onGetPo
 
         mAdapter.setList(timeTableList)
         mAdapter.timeTableAddListener = object : TimeTableAddListener {
-            override fun onAdded(timeTable: TimeTable) {
-                moveToLastItem()
+            override fun onAdded(name: String) {
+                DataRepository.addTimeTable(timeTableList[0].semester, name,
+                        onSuccess = {
+                            val timeTable = TimeTable(it.data.idx.toInt(),timeTableList[0].semester ,name, 0, "09:00", "18:00")
+                            mAdapter.addToList(deepCopy(timeTable))
+                            timeTableList.add(deepCopy(timeTable))
+                            moveToLastItem()
+                            Log.d("debug","${it.data.idx} 시간표 생성")
+
+                        },
+                        onFailure = {
+                            Toast.makeText(this@TimeTableEditActivity, "오류가 발생하였습니다", Toast.LENGTH_SHORT).show();
+                            Log.d("error",it)
+                        }
+                )
             }
         }
         vp_timetableadd.adapter = mAdapter
@@ -311,49 +319,28 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener ,onGetPo
 
         mEditorAdapter.setFragments()
         vp_timetableeditor.adapter = mEditorAdapter
-        TabLayoutMediator(tl_timetableeditor,vp_timetableeditor){tab,position->
-            val tablayout = LayoutInflater.from(applicationContext).inflate(layout.tab_timetableeditor, null)
-            var filterIcon = tablayout.findViewById<ImageView>(id.ic_tab)
-            var cartIcon = tablayout.findViewById<ImageView>(id.ic_tab)
-            var filterText = tablayout.findViewById<TextView>(id.tv_tab)
-            var cartText = tablayout.findViewById<TextView>(id.tv_tab)
 
-            if(position==0) {
-                filterIcon.setBackgroundResource(drawable.timetableadd_ic_filter_selected)
-                //cartIcon.setBackgroundResource(drawable.timetableadd_ic_cart)
-                filterText.text = "필터 및 검색"
-            }else{
-                //filterIcon.setBackgroundResource(drawable.timetableadd_ic_filter)
-                filterIcon.setBackgroundResource(drawable.timetableadd_ic_cart)
-                filterText.text = "후보"
+
+        TabLayoutMediator(tl_timetableeditor, vp_timetableeditor, object : TabLayoutMediator.TabConfigurationStrategy {
+            override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
+                val tablayout = LayoutInflater.from(applicationContext).inflate(layout.tab_timetableeditor, null)
+                var filterIcon = tablayout.findViewById<ImageView>(id.ic_tab)
+                var cartIcon = tablayout.findViewById<ImageView>(id.ic_tab)
+                var filterText = tablayout.findViewById<TextView>(id.tv_tab)
+                var cartText = tablayout.findViewById<TextView>(id.tv_tab)
+                when (position) {
+                    0 -> {
+                        filterIcon.setBackgroundResource(drawable.timetableadd_ic_filter_selected)
+                        filterText.text = "필터 및 검색"
+                    }
+                    1 -> {
+                        cartIcon.setBackgroundResource(drawable.timetableadd_ic_cart_selected)
+                        cartText.text = "후보"
+                    }
+                }
+                tab.customView = tablayout
             }
-            tab.customView = tablayout
-
-        }.attach()
-
-
-//        TabLayoutMediator(tl_timetableeditor, vp_timetableeditor, object : TabLayoutMediator.TabConfigurationStrategy {
-//            override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
-//                val tablayout = LayoutInflater.from(applicationContext).inflate(layout.tab_timetableeditor, null)
-//                var filterIcon = tablayout.findViewById<ImageView>(id.ic_tab)
-//                var cartIcon = tablayout.findViewById<ImageView>(id.ic_tab)
-//                var filterText = tablayout.findViewById<TextView>(id.tv_tab)
-//                var cartText = tablayout.findViewById<TextView>(id.tv_tab)
-//                when (position) {
-//                    0 -> {
-//                        Log.d("position001",position.toString())
-//
-//                    }
-//                    1 -> {
-//                        Log.d("position002",position.toString())
-//
-//                    }
-//                }
-//                tab.customView = tablayout
-//            }
-//
-//
-//        }).attach()
+        }).attach()
 
     }
 
@@ -459,6 +446,8 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener ,onGetPo
                             val subject = Subject(i.subjectIdx,i.name,i.startTime,i.endTime,i.day,i.content,0,true,i.credit,i.professor,i.course,true,i.subjectCode,i.subjectIdx.toInt())
                             list.add(subject)
                         }
+                        Log.d("tag",list.toString())
+
 //                        TODO 여기 나중에 정리하기 setList로
                         (mEditorAdapter.fragmentList[0] as TimeTableFilterSearchFragment).subjectList = list
                         (mEditorAdapter.fragmentList[0] as TimeTableFilterSearchFragment).mAdapter.subjectList = list
@@ -475,51 +464,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener ,onGetPo
     fun getSemesterFromActivity() : String = semester
     fun getTimeTableFromActivity() : TimeTable = mAdapter.timeTableList[vp_timetableadd.currentItem]
 
-    fun getColors(type: Int): Int {
-        return when (type) {
-            0 -> R.drawable.bg_round_border_subject_color_1
-            1 -> R.drawable.bg_round_border_subject_color_2
-            2 -> R.drawable.bg_round_border_subject_color_3
-            3 -> R.drawable.bg_round_border_subject_color_4
-            4 -> R.drawable.bg_round_border_subject_color_5
-            5 -> R.drawable.bg_round_border_subject_color_6
-            6 -> R.drawable.bg_round_border_subject_color_7
-            7 -> R.drawable.bg_round_border_subject_color_8
-            8 -> R.drawable.bg_round_border_subject_color_9
-            9 -> R.drawable.bg_round_border_subject_color_10
-            else -> R.drawable.bg_round_border_subject
-        }
-    }
-
-    override fun ongetPosition(position: Int) {
-        please = position
-        Log.d("please",please.toString())
-
-        //TODO 넘어온 position값으로 아이콘,텍스트 바꿔보자
-        val tablayout = LayoutInflater.from(applicationContext).inflate(layout.tab_timetableeditor, null)
-        var filterIcon = tablayout.findViewById<ImageView>(id.ic_tab)
-        var cartIcon = tablayout.findViewById<ImageView>(id.ic_tab)
-        var filterText = tablayout.findViewById<TextView>(id.tv_tab)
-        var cartText = tablayout.findViewById<TextView>(id.tv_tab)
-        Log.d("position값",position.toString())
-        if(position==0) {
-
-            filterIcon.setBackgroundResource(drawable.timetableadd_ic_filter_selected)
-            cartIcon.setBackgroundResource(drawable.timetableadd_ic_cart)
-            filterText.text = "필터 및 검색"
-        }else{
-            filterIcon.setBackgroundResource(drawable.timetableadd_ic_filter)
-            cartIcon.setBackgroundResource(drawable.timetableadd_ic_cart_selected)
-            filterText.text = "후보"
-        }
-    }
-
 }
 interface getGradeClickListener{
     fun onClick(position : Int)
-}
-interface onGetPositionListener {
-    fun ongetPosition(position: Int
-
-    )
 }

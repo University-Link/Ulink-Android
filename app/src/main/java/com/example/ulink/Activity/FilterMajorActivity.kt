@@ -24,6 +24,7 @@ class FilterMajorActivity : AppCompatActivity() {
 
         btn_check.setOnClickListener(){
             //TODO 확인 누를 때 보낼 정보
+            finish()
         }
 
         btn_reset.setOnClickListener(){

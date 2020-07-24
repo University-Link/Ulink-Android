@@ -55,6 +55,7 @@ class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeT
         @RequiresApi(Build.VERSION_CODES.N)
         fun setHolder(subject: Subject) {
             itemView.minimumHeight = 90
+
             itemView.findViewById<TextView>(R.id.tv_class_name).text = subject.name
             itemView.findViewById<TextView>(R.id.tv_professor_name).text = subject.professor
 

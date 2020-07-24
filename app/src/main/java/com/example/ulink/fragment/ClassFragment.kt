@@ -39,9 +39,10 @@ class ClassFragment : Fragment() {
         rv_class.adapter = ClassAdapter
 
         // TODO INDEX가 0일 경우 어떻게 처리할까? if 0일 경우는 무시 else 뿌리기 outofIndex error
+
         RetrofitService.service.getChatList(DataRepository.token).enqueue(object : Callback<ResponseChatting> {
             override fun onFailure(call: Call<ResponseChatting>, t: Throwable) {
-                Log.d("에러",t.message.toString() )
+                Log.d("tag", t.localizedMessage)
             }
 
             override fun onResponse(

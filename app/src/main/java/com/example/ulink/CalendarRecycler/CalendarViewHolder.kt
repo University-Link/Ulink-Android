@@ -13,7 +13,6 @@ class CalendarViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(dayData : CalendarDayData, rootView : View, datas : List<ScheduleItemData>){
 
-
         calendarDayColorCheck(dayData, itemView)
         calendarAlpha(dayData, itemView)
 
@@ -40,13 +39,7 @@ class CalendarViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
             adapter.notifyDataSetChanged()
         }
 
-
-
-
-
 //        TODO 전달 다음달은 index로 나중에 해결하기 currentposition과 비교해ㅓㅅ!
-
-
 
     }
 }

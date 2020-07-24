@@ -2,12 +2,14 @@ package com.example.ulink.CalendarRecycler
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ulink.*
@@ -25,7 +27,6 @@ import retrofit2.Response
 class CalendarAdapter(private val context : Context, data : CalendarData, val rootView : View) : RecyclerView.Adapter<CalendarAdapter.Vholder>() {
     var data: CalendarData = data
     var endDay = arrayOf(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Vholder {
 
@@ -68,15 +69,14 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
             var popupLastEmpty = index + lastindex
             var popupEmptyIndex = prevEmptyIndex
 
+            //request
             var strFirstDay = strFirstDay(prevEmptyIndex, data)
             var strLastDay = strLastDay(lastEmpty, data)
 
             rvCalendar.adapter = rvAdapter
 
-
             val schedule: MutableList<ScheduleItemData> = arrayListOf()
             var datass = mutableListOf<ScheduleItemData>()
-
 
             RetrofitService.service.getAllNotice(DataRepository.token, strFirstDay, strLastDay)
                 .enqueue(object : Callback<ResponseCalendar> {
@@ -119,7 +119,6 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                         }
                     }
                 })
-
 
             rvAdapter.datas.apply {
                 //previous_month
@@ -176,7 +175,6 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                 }
                 rvAdapter.notifyDataSetChanged()
 
-                // TODO 리싸이클러뷰 크기 조정
                 rvAdapter.setDayClickListener(
                     object : CalendarDayAdapter.DayClickListener {
                         override fun onClick(view: View, position: Int) {
@@ -197,8 +195,8 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                                 )
 
                             val rvPopupAdapter = SchedulePopupAdapter(context)
-                            layout.findViewById<RecyclerView>(R.id.rv_popup_schedule_item).adapter =
-                                rvPopupAdapter
+                            var rv_popup = layout.findViewById<RecyclerView>(R.id.rv_popup_schedule_item)
+                            rv_popup.adapter = rvPopupAdapter
 
                             //ScheduleNotice
                             //var itemMonth : String = zeroPlus(popupMonth.toString())
@@ -212,7 +210,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                             ).toString()
 
                             var retrofitStr =
-                                itemYear + "-" + popupMonth.toString() + "-" + popupDay.toString() // 통신용
+                                itemYear + "-" + popupMonth.toString() + "-" + popupDay.toString() // request
 
                             val popupList: MutableList<ScheduleItemData> = arrayListOf()
 
@@ -250,11 +248,23 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                                                     }
                                                     rvPopupAdapter.datas = popupList
                                                     rvPopupAdapter.notifyDataSetChanged()
+
+                                                    var tv_schedule_empty = layout.findViewById<TextView>(R.id.tv_schedule_empty)
+
+                                                    if(rvPopupAdapter.datas.isEmpty()){
+                                                        rv_popup.visibility = View.GONE
+                                                        tv_schedule_empty.visibility=View.VISIBLE
+                                                    }else{
+                                                        rv_popup.visibility = View.VISIBLE
+                                                        tv_schedule_empty.visibility=View.GONE
+                                                    }
+
                                                 }
                                             }
                                         } ?: Log.d("tag4", response.message())
                                     }
                                 })
+
 
                             rvPopupAdapter.setScheduleItemClickListener(object :
                                 SchedulePopupAdapter.ScheduleItemClickListener {
@@ -275,8 +285,13 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
 
                             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                             dialog.show()
+
+                            val width = view.resources.getDimensionPixelSize(R.dimen.calendar_popup_width)
+                            val height = view.resources.getDimensionPixelSize(R.dimen.calendar_popup_height)
+                            dialog.window?.setLayout(width, height)
+
                         }
-                    })
+                })
             }
         }
     }

@@ -15,12 +15,10 @@ object DataRepository {
 
     val retrofit = RetrofitService.service
 
-    var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLsnLXtlansoITsnpDqs7XtlZnrtoAiLCJpYXQiOjE1OTQ4MzkzOTEsImV4cCI6MTU5ODQzNTc5MSwiaXNzIjoiYm9iYWUifQ.jxont3bUINSAtQt_F90KeE376WX-cZJoB5rzM2K7Ccg"
-
+    const val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjozNSwibmFtZSI6IuyGneuTseydtCIsInNjaG9vbCI6Iu2VnOyWkeuMgO2Vmeq1kCIsIm1ham9yIjoi7Jy17ZWp7KCE7J6Q6rO17ZWZ67aAIiwiaWF0IjoxNTk1MDU0NjkxLCJleHAiOjE1OTY0OTQ2OTEsImlzcyI6ImJvYmFlIn0.smlD2n6C1RmwuUp2YNvB5POKXH9ourR6oh1Of3dVzVc"
+   // const val token : String
 
     fun getMainTimeTable(onSuccess: (TimeTable) -> Unit, onFailure: (String) -> Unit) {
-
-        Log.d("tag", token)
 
         retrofit.getMainTimeTable(token).enqueue(object : Callback<ResponseMainTimeTable> {
             override fun onFailure(call: Call<ResponseMainTimeTable>, t: Throwable) {
@@ -85,6 +83,7 @@ object DataRepository {
             override fun onResponse(call: Call<ResponseGetTimeTableList>, response: Response<ResponseGetTimeTableList>) {
                 response.body()?.let {
                     val tableList : MutableList<TimeTable> = arrayListOf()
+                    Log.d("tag",it.data.toString())
 
                     for(i in 0 until it.data.size){
                         val subjectList: MutableList<Subject> = arrayListOf()

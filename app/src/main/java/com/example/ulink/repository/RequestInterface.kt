@@ -248,7 +248,7 @@ interface RequestInterface {
             @Query("name") name : String
     ) : Call<ResponsegetSubjectWithWord>
 
-    @DELETE("/notice/[idx")
+    @DELETE("/notice/{idx}")
     fun deleteNoticeWithIdx(
             @Header("token") token: String,
             @Path("idx") idx : String

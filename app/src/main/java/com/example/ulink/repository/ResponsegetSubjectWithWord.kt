@@ -22,5 +22,6 @@ data class SearchedData(
     val startTime: List<String>,
     val endTime: List<String>,
     val day: List<Int>,
+    val subjectCode : String,
     val content: List<String>
 ) : Parcelable
