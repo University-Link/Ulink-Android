@@ -55,9 +55,6 @@ class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeT
         @RequiresApi(Build.VERSION_CODES.N)
         fun setHolder(subject: Subject) {
             itemView.minimumHeight = 90
-
-            Log.d("tag","그려질 과목 +$subject")
-
             itemView.findViewById<TextView>(R.id.tv_class_name).text = subject.name
             itemView.findViewById<TextView>(R.id.tv_professor_name).text = subject.professor
 
@@ -110,8 +107,6 @@ class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeT
 
 
             itemView.setOnClickListener {
-                Log.d("tag","clicked")
-
                 if (mSelectedItems.getOrDefault(adapterPosition, false)){
                     mSelectedItems.put(adapterPosition, false)
                     Log.d("tag","${adapterPosition}clicked to false")
@@ -188,7 +183,6 @@ class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeT
                     ) {
                         response.body().let {
                             Toast.makeText(context, "후보등록성공", Toast.LENGTH_SHORT).show()
-                            Log.d("후보등록성공","후보등록성공")
                         }
                     }
 

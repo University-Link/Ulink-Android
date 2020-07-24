@@ -44,7 +44,6 @@ class BottomSheetFragment(val mainTable : TimeTable, val onRefreshListener: onRe
                     response: Response<ResponseupdateMainTimeTable>
                 ) {
                     response.body().let{
-                        Log.d("대표시간표 설정 성공","성")
                         Toast.makeText(context,"대표시간표로 설정되었습니다.",Toast.LENGTH_SHORT).show()
                         val fragmentManager = activity!!.supportFragmentManager
                         fragmentManager.beginTransaction().remove(this@BottomSheetFragment).commit()
@@ -81,7 +80,6 @@ class BottomSheetFragment(val mainTable : TimeTable, val onRefreshListener: onRe
                         response: Response<ResponseupdateTimeTableName>
                     ) {
                         response.body()?.let{
-                           Log.d("이름변경성공","성")
                             dialog.dismiss()
                             val fragmentManager = activity!!.supportFragmentManager
                             fragmentManager.beginTransaction().remove(this@BottomSheetFragment).commit()
@@ -132,7 +130,6 @@ class BottomSheetFragment(val mainTable : TimeTable, val onRefreshListener: onRe
                         response: Response<ResponsedeleteMainTimeTable>
                     ) {
                         response.body().let {
-                            Log.d("삭제성공","성공")
                             dialog.dismiss()
                             val fragmentManager = activity!!.supportFragmentManager
                             fragmentManager.beginTransaction().remove(this@BottomSheetFragment).commit()

@@ -89,8 +89,8 @@
                 android:id="@+id/tl_timetableeditor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:tabIndicatorColor="@color/tab_selector"
-                app:tabIndicatorHeight="4dp"/>
+                app:tabIndicatorHeight="4dp">
+        </com.google.android.material.tabs.TabLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

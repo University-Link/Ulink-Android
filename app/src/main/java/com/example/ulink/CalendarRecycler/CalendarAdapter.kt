@@ -71,9 +71,6 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
             var strFirstDay = strFirstDay(prevEmptyIndex, data)
             var strLastDay = strLastDay(lastEmpty, data)
 
-            Log.d("day", strFirstDay)
-            Log.d("day", strLastDay)
-
             rvCalendar.adapter = rvAdapter
 
 
@@ -118,10 +115,8 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                                 rvAdapter.scheduleDatas.clear()
                                 rvAdapter.scheduleDatas.addAll(datass)
                                 rvAdapter.notifyDataSetChanged()
-
-                                Log.d("size", datas.toString())
                             }
-                        } ?: Log.d("tag4", response.message())
+                        }
                     }
                 })
 

@@ -65,7 +65,6 @@ class FilterSettingSearchActivity : AppCompatActivity() {
         recentList = pref.getStringSet("recentSearch", null)
         if (recentList != null) {
             TimeTable_Search_Adapter.recentdatas.addAll(recentList)
-            Log.d("tag","added")
         }
         //loadDatas()
 
@@ -87,23 +86,12 @@ class FilterSettingSearchActivity : AppCompatActivity() {
             finish()
         }
 
-//        edit.setOnFocusChangeListener { v, hasFocus ->
-//            //Log.d("단어??",v.toString())
-//            Log.d("단어",edit.text.toString())
-//
-//
-//            TimeTable_Search_Adapter.viewType = 1
-//            TimeTable_Search_Adapter.notifyDataSetChanged()
-////         foucs전에는 최근검색
-////         focus후에는 자동완성
-////         스피너 아이템 별로 sharepref저장
-//        }
 
         edit.textChangedListener {
 
             RetrofitService.service.getSubjectWithWord(DataRepository.token,edit.text.toString()).enqueue(object : Callback<ResponsegetSubjectWithWord>{
                 override fun onFailure(call: Call<ResponsegetSubjectWithWord>, t: Throwable) {
-
+                    Log.d("검색실패",t.message.toString())
                 }
 
                 override fun onResponse(
@@ -121,7 +109,6 @@ class FilterSettingSearchActivity : AppCompatActivity() {
                                 list.addAll(it.data)
                             }
                             for (i in 0 until list.size) {
-                                Log.d("데이터", it.toString())
                                 datas.apply {
                                     add(
                                         SearchData(
@@ -148,7 +135,6 @@ class FilterSettingSearchActivity : AppCompatActivity() {
 
         edit.setOnEditorActionListener { v, actionId, event ->
 
-            Log.d("tag",actionId.toString())
             if (actionId == EditorInfo.IME_ACTION_SEARCH){
 
 //                recentList?.add(v.text.toString())

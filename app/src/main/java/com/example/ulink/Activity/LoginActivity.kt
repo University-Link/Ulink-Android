@@ -7,11 +7,19 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.TextView
 import com.example.ulink.MainActivity
 import com.example.ulink.R
+import com.example.ulink.repository.DataRepository
+import com.example.ulink.repository.RequestLogin
+import com.example.ulink.repository.ResponseLogin
+import com.example.ulink.repository.RetrofitService
 import kotlinx.android.synthetic.main.activity_login.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
 
@@ -44,26 +52,31 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
 
-            /*if (et_id.text.isNullOrBlank() || et_pw.text.isNullOrBlank()) {
-                loginPageDialog()
+            if (et_id.text.isNullOrBlank() || et_pw.text.isNullOrBlank()) {
+                //loginPageDialog()
             } else {
-                requestLoginToServer.service.requestLogin(
+                RetrofitService.service.requestLogin(
                     RequestLogin(
                         id = et_id.text.toString(),
                         password = et_pw.text.toString()
                     )
-                ).customEnqueue(
-                    onError = { loginPageDialog() },
-                    onSuccess = {
-                        if (it.success) {
-                            val intent = Intent(this, MainActivity::class.java)
-                            startActivity(intent)
-                        } else {
-                              loginPageDialog()
+
+                ).enqueue(object : Callback<ResponseLogin>{
+                    override fun onFailure(call: Call<ResponseLogin>, t: Throwable) {
+                        Log.d("로그인에러",t.message.toString())
+                    }
+
+                    override fun onResponse(
+                        call: Call<ResponseLogin>,
+                        response: Response<ResponseLogin>
+                    ) {
+                        response.body().let {
+                            DataRepository.token = it?.data?.accessToken.toString()
                         }
                     }
-                )
-            }*/
+
+                })
+            }
         }
     }
 

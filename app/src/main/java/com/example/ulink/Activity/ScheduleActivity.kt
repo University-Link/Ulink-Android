@@ -35,9 +35,6 @@ class ScheduleActivity : AppCompatActivity() {
             finish()
         }
 
-        Log.d("day", today())
-        Log.d("dayten", tenday())
-
         var tenDayData: List<CalendarNoticeData> = arrayListOf()
         val bigList: MutableList<MutableList<ScheduleItemData>> = arrayListOf()
 
@@ -82,7 +79,7 @@ class ScheduleActivity : AppCompatActivity() {
                                 scheduleDateAdapter.notifyDataSetChanged()
                             }
                         }
-                    } ?: Log.d("tag4", response.message())
+                    }
                 }
             })
     }

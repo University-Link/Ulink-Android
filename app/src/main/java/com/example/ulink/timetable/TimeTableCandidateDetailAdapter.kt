@@ -120,8 +120,6 @@ class TimeTableCandidateDetailAdapter(val context: Context, val onDeleteCartClic
 
 
             itemView.setOnClickListener {
-                Log.d("tag", "clicked")
-
                 if (mSelectedItems.getOrDefault(adapterPosition, false)) {
                     mSelectedItems.put(adapterPosition, false)
                     Log.d("tag", "${adapterPosition}clicked to false")
@@ -206,8 +204,6 @@ class TimeTableCandidateDetailAdapter(val context: Context, val onDeleteCartClic
             }
 
             itemView.findViewById<Button>(R.id.btn_delete).setOnClickListener {
-                Log.d("후보삭semester", onDeleteCartClickListener.onClickeddelete())
-                Log.d("후보삭제subjectidx", subject.subjectIdx.toString())
 
                 RetrofitService.service.deleteCartList(DataRepository.token, subject.subjectIdx.toString(),
                         RequestDeleteCartList(
@@ -223,7 +219,6 @@ class TimeTableCandidateDetailAdapter(val context: Context, val onDeleteCartClic
                             response: Response<ResponseDeleteCartList>
                     ) {
                         response.body().let {
-                            Log.d("후보 삭제", "성공")
                             cartDataList.removeAt(adapterPosition)
                             notifyItemRemoved(adapterPosition)
                         }

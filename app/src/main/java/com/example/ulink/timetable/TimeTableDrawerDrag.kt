@@ -62,13 +62,11 @@ class TimeTableDrawerDrag(val context: Context, val layoutInflater: LayoutInflat
 //        시간 9.0 9.25 이런식!
         if ((formatToFloat(timeTable.startTime)).toInt() < 9) {
             starthour = (formatToFloat(timeTable.startTime)).toInt()
-            Log.d("tag", "changed")
 
         }
 
         if ((formatToFloat(timeTable.endTime)).toInt() > 21) {
             endhour = (formatToFloat(timeTable.endTime)).toInt()
-            Log.d("tag", "changed")
         }
 
         for (sub in timeTable.subjectList){
@@ -155,7 +153,6 @@ class TimeTableDrawerDrag(val context: Context, val layoutInflater: LayoutInflat
         val subjectDrawed = getSubject()
         for (i in 0 until subjectDrawed.size) {
             if (checkIsOver(subjectDrawed[i], timeTable)) {
-                Log.d("tag", "ruqcla")
                 break
             }
             check += 1

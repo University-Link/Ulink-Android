@@ -66,7 +66,6 @@ class CustomizingFragment3(subject : Subject, val onRefreshListener: onRefreshLi
                 ) {
                     response.body()?.let{
                         if(it.status == 201){
-                            Log.d("dlwldms", it.toString())
                             onRefreshListener.onRefresh()
                         }
                     } ?: Log.d("tag", response.message())

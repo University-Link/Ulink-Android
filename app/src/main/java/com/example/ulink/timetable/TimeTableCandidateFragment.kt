@@ -52,7 +52,6 @@ class TimeTableCandidateFragment() : Fragment(),onDeleteCartClickListener {
                 response.body()?.let {
                     if (it.status == 200) {
                         if (it.data.isNotEmpty()) {
-                            Log.d("cart", it.toString())
 
                             for(i in it.data){
                                 cartDatas.add(i)

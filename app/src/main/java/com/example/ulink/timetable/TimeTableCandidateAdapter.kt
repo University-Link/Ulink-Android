@@ -65,7 +65,6 @@ class TimeTableCandidateAdapter : RecyclerView.Adapter<TimeTableCandidateAdapter
                 itemView.context.startActivity(intent)
             }
             itemView.findViewById<Button>(R.id.btn_delete).setOnClickListener{
-                //삭제 왜 안먹지?
             }
 
         }
@@ -101,7 +100,6 @@ class TimeTableCandidateAdapter : RecyclerView.Adapter<TimeTableCandidateAdapter
 
     override fun onBindViewHolder(holder: VHolder, position: Int) {
         holder.setHolder(candidateList[position])
-        Log.d("tag", "bindholder")
 
     }
 

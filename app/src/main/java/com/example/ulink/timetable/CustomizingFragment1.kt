@@ -73,7 +73,7 @@ class CustomizingFragment1(subject : Subject,val  onRefreshListener: onRefreshLi
             var body = RequestChangeColor(color=color)
             RetrofitService.service.updateChangeColor(DataRepository.token, subject.id.toString(), subject.subject, body).enqueue(object : Callback<ResponseChangeColor> {
                 override fun onFailure(call: Call<ResponseChangeColor>, t: Throwable) {
-                    Log.d("tag", "1")
+                    Log.d("tag", t.message.toString())
                 }
 
                 override fun onResponse(
@@ -82,7 +82,6 @@ class CustomizingFragment1(subject : Subject,val  onRefreshListener: onRefreshLi
                 ) {
                     response.body()?.let{
                         if(it.status == 201){
-                            Log.d("dlwldms", it.toString())
                             onRefreshListener.onRefresh()
                         }
                     } ?: Log.d("tag", response.message())

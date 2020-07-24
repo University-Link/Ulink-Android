@@ -68,8 +68,6 @@ class ScheduleNoticeActivity : AppCompatActivity() {
                                 endTime = it.data.endTime,
                                 memo = it.data.content
                             )
-                            Log.d("가보자", "가보자")
-
                             if(item.startTime == "-1") item.startTime= "" //시간
                             if (item.endTime == "-1") item.endTime=""
 
@@ -83,9 +81,8 @@ class ScheduleNoticeActivity : AppCompatActivity() {
                             tv_schedule_notice_date_content.text = date[0]+"년 "+zeroCheck(date[1])+"월 "+zeroCheck(date[2])+"일" //날짜
                             tv_schedule_notice_title.text = item.content //제목
                             tv_schedule_notice_memo_content.text = item.memo //메모*/
-                            Log.d("상세정보", "성공")
                         }
-                    } ?: Log.d("실패1", response.message())
+                    }
                 }
             })
 

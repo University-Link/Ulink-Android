@@ -56,9 +56,6 @@ class TimeTableFragment : Fragment(), onRefreshListener {
 
     val onClick = object : subjectOnClick {
         override fun onClick(subject: Subject) {
-
-            Log.d("idx", subject.toString())
-
             val builder = AlertDialog.Builder(context)
             val layout =
                     LayoutInflater.from(context).inflate(R.layout.dialog_timetable_subject, null)
@@ -105,7 +102,6 @@ class TimeTableFragment : Fragment(), onRefreshListener {
                     val intent = Intent(view?.context, ChattingActivity::class.java) //과목명
                     intent.putExtra("class", subject.name)
                     intent.putExtra("idx", subject.subjectIdx.toString())
-                    Log.d("idx", subject.subjectIdx.toString())
                     startActivity(intent)
                 }
 
@@ -115,7 +111,6 @@ class TimeTableFragment : Fragment(), onRefreshListener {
                     intent.putExtra("class", subject.name)
                     intent.putExtra("idx", subject.subjectIdx.toString())
                     intent.putExtra("check", "add")
-                    Log.d("idx", subject.subjectIdx.toString())
                     startActivity(intent)
                 }
             } else{
@@ -200,17 +195,13 @@ class TimeTableFragment : Fragment(), onRefreshListener {
                         })
             }
         } else if (requestCode == REQUEST_TIMETABLE_EDIT_ACITYVITY && resultCode == 200) {
-            Log.d("tag","nullllllll")
 
             if (data != null) {
                 val table: TimeTable = deepCopy(data.getParcelableExtra("timeTable"))
 //                시간표 요청
-                Log.d("tag1111111111",table.toString())
 
                 DataRepository.getTimeTableWithId(table.id,
                         onSuccess = { table ->
-
-                            Log.d("tag2222222",table.toString())
 
                             timetableDrawer.timeTable = deepCopy(table)
 
@@ -235,8 +226,6 @@ class TimeTableFragment : Fragment(), onRefreshListener {
     override fun onResume() {
         super.onResume()
 
-
-        Log.d("tag", refresh.toString())
         if (refresh) {
             DataRepository.getMainTimeTable(
                     onSuccess = {

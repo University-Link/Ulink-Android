@@ -20,7 +20,6 @@ class ClassViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
     fun bind(ClassData : ClassData) {
         tv_class.text = ClassData.name
         tv_partition.setText("참여 (${ClassData.current}/${ClassData.total})")
-        Log.d("color", ClassData.color.toString())
         img_class.setBackgroundResource(chatImgSelector(ClassData.color))
     }
 }

@@ -128,8 +128,6 @@ class NoticeActivity : AppCompatActivity(){
             ) {
                 response.body()?.let {
                     if (it.status == 200) {
-                        Log.d("rjq", idx)
-                        Log.d("rjq", it.toString())
                         if (it.data.assignment.isNotEmpty()) {
                             var size = it.data.assignment.size
                             for (i in 0 until size) {
@@ -194,7 +192,7 @@ class NoticeActivity : AppCompatActivity(){
                             emptyCheck(classData, tv_class_notice_empty, rv_class_notice, tv_class_notice_more)
                         }
                     }
-                } ?: Log.d("tag", response.message())
+                }
             }
         })
 
@@ -305,7 +303,7 @@ class NoticeActivity : AppCompatActivity(){
                             emptyCheck(classData, tv_class_notice_empty, rv_class_notice, tv_class_notice_more)
                         }
                     }
-                } ?: Log.d("tag", response.message())
+                }
             }
         })
     }

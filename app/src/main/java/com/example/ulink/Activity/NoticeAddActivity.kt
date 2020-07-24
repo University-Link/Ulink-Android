@@ -159,7 +159,7 @@ class NoticeAddActivity : AppCompatActivity() {
                 RetrofitService.service.registerNotice(DataRepository.token, idx, body)
                     .enqueue(object : Callback<ResponseRegisterNotice> {
                         override fun onFailure(call: Call<ResponseRegisterNotice>, t: Throwable) {
-                            Log.d("실패", "실패")
+                            Log.d("실패", t.message.toString())
                         }
                         override fun onResponse(
                             call: Call<ResponseRegisterNotice>,
@@ -167,9 +167,8 @@ class NoticeAddActivity : AppCompatActivity() {
                         ) {
                             response.body()?.let {
                                 if (it.status == 201) {
-                                    Log.d("가보자", "가보자")
                                 }
-                            } ?: Log.d("실패1", response.message())
+                            }
                         }
                     })
                 val intent = Intent(this, NoticeActivity::class.java)
@@ -192,7 +191,7 @@ class NoticeAddActivity : AppCompatActivity() {
                         ) {
                             response.body()?.let {
                                 if (it.status == 204) {
-                                    Log.d("수정성공", "수정성공")
+
                                 }
                             } ?: Log.d("수정실패1", response.message())
                         }

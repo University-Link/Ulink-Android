@@ -63,11 +63,6 @@ class TimeTableDragView(context: Context, root: View, val timecolumnWidth: Float
             var xfix = ((realstartx - xbase) / xindex).toInt()
             var yfix = ((realstarty) / (rowHeight)).toInt()
 
-
-
-
-            Log.d("tag",xfix.toString())
-
             realstartx = realstartx - (realstartx - xbase) % xindex
 
             if (xfix == days){
@@ -138,7 +133,6 @@ class TimeTableDragView(context: Context, root: View, val timecolumnWidth: Float
 
         dayIndex = days - dayIndex
 
-        Log.d("tag", dayIndex.toString())
 //        for ()
 //        월화수목금.. 리스트에서 index를 나타냄!
 
@@ -164,7 +158,6 @@ class TimeTableDragView(context: Context, root: View, val timecolumnWidth: Float
         val daylist = arrayListOf(0,1,2,3,4,5,6)
 
         val subject = Subject(1, "과목이름", listOf(formatToString(topHour)), listOf(formatToString(bottomHour)), listOf(daylist[dayIndex]), listOf("과목장소"), 1, true)
-        Log.d("tag",subject.toString())
 
         return subject
     }
@@ -244,8 +237,6 @@ class TimeTableDragView(context: Context, root: View, val timecolumnWidth: Float
 //        TODO 여기 버전에 따라서 다르게 구성!! 이게 오레오 이상
         (context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator).vibrate(VibrationEffect.createOneShot(100, 30))
 
-        Log.d("tag", "action long down x= ${e?.x}")
-        Log.d("tag", "action long up y= ${e?.y}")
         realstartx = e?.x!!
         realstarty = e.y
         pointx = e.x
