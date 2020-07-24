@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@drawable/calendar_click_bg">
 
@@ -33,12 +33,9 @@
         android:id="@+id/tv_schedule_empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
-        android:layout_marginBottom="24dp"
-        android:text="일정이 없습니다."
-        android:textSize="16sp"
-        android:textColor="@color/text1"
+        android:layout_marginTop="65dp"
         android:layout_gravity="center"
-        android:gravity="center"/>
-
+        android:text="일정이 없습니다."
+        android:textColor="#e9e9ea"
+        android:textSize="20sp" />
 </LinearLayout>
