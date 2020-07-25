@@ -23,9 +23,6 @@ import retrofit2.Response
 class ScheduleActivity : AppCompatActivity() {
 
     lateinit var scheduleDateAdapter: ScheduleDateAdapter
-    val dateDatas = mutableListOf<ScheduleDateData>()
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +41,7 @@ class ScheduleActivity : AppCompatActivity() {
         scheduleDateAdapter = ScheduleDateAdapter(this, bigList)
         rv_schedule_date.adapter = scheduleDateAdapter
 
+        // TODO 10일말고 30일
         RetrofitService.service.getAllNotice(DataRepository.token, today(), tenday())
             .enqueue(object : Callback<ResponseCalendar> {
                 override fun onFailure(call: Call<ResponseCalendar>, t: Throwable) {
@@ -75,8 +73,8 @@ class ScheduleActivity : AppCompatActivity() {
                                         )
                                     )
                                 }
+                                // TODO deepCopy 빼보기
                                 bigList.add(deepCopySchedule(innerList))
-
 
                                 scheduleDateAdapter.dateDatas = bigList
                                 scheduleDateAdapter.notifyDataSetChanged()

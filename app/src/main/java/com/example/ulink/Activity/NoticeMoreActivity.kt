@@ -29,13 +29,12 @@ class NoticeMoreActivity : AppCompatActivity() {
         if (toolbarTitle != "")
             tv_notice_more_toolbar.text = toolbarTitle + "공지"
 
+        //공지 list 가져오기
         var item : ArrayList<ScheduleItemData> = intent.getParcelableArrayListExtra("rvData")
-
         rvMoreAdapter.datas = item
         rvMoreAdapter.notifyDataSetChanged()
 
-        Log.d("item", rvMoreAdapter.datas.size.toString())
-
+        //공지를 클릭 할 때 scheduleNoticeActivity
         rvMoreAdapter.setScheduleItemClickListener(object: ScheduleNoticeMoreAdapter.ScheduleNoticeClickListener{
             override fun onClick(view: View, position:Int){
                 val intent = Intent(view.context, ScheduleNoticeActivity::class.java)

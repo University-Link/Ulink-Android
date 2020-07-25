@@ -11,8 +11,6 @@ import com.example.ulink.R
 class CalendarScheduleAdapter() : RecyclerView.Adapter<CalendarScheduleViewHolder>(){
     var datas = mutableListOf<ScheduleItemData>()
 
-    lateinit var dayClickListener : CalendarDayAdapter.DayClickListener
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarScheduleViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_small_schedule, parent,false)
         return CalendarScheduleViewHolder(view)

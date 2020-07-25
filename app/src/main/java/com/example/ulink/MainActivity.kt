@@ -19,10 +19,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
-
-
         main_viewPager.adapter = MainPagerAdapter(supportFragmentManager)
         main_viewPager.offscreenPageLimit = 3
         main_viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
@@ -52,8 +48,5 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
-
     }
-
 }

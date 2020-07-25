@@ -24,27 +24,10 @@ class ScheduleNoticeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_class_notice)
 
-
         var scheduleItemData = intent.getParcelableExtra<ScheduleItemData>("scheduleItemData")
         var idx = scheduleItemData.idx
 
         tv_schedule_notice_toolbar.text = scheduleItemData.category+"공지" //툴바타이틀
-
-        /*if(scheduleItemData.startTime == "-1") scheduleItemData.startTime= "" //시간
-        if (scheduleItemData.endTime == "-1") scheduleItemData.endTime=""
-
-        if (scheduleItemData.startTime != "" || scheduleItemData.endTime != "")
-            tv_schedule_notice_time_content.text = scheduleItemData.startTime + " ~ " + scheduleItemData.endTime
-
-        if (scheduleItemData.startTime == "" && scheduleItemData.endTime == "")
-            tv_schedule_notice_time_content.text = "시간정보없음"
-
-        var scheduleDate = scheduleItemData.date.split("-")
-        tv_schedule_notice_date_content.text = scheduleDate[0]+"년 "+zeroCheck(scheduleDate[1])+"월 "+zeroCheck(scheduleDate[2])+"일" //날짜
-
-        tv_schedule_notice_title.text = scheduleItemData.content //제목
-
-        tv_schedule_notice_memo_content.text = scheduleItemData.memo //메모*/
 
         RetrofitService.service.getSpecificNotice(DataRepository.token, idx.toString())
             .enqueue(object : Callback<ResponseSpecificNotice> {
@@ -68,7 +51,6 @@ class ScheduleNoticeActivity : AppCompatActivity() {
                                 endTime = it.data.endTime,
                                 memo = it.data.content
                             )
-                            Log.d("가보자", "가보자")
 
                             if(item.startTime == "-1") item.startTime= "" //시간
                             if (item.endTime == "-1") item.endTime=""
@@ -103,16 +85,13 @@ class ScheduleNoticeActivity : AppCompatActivity() {
         }
 
         btn_delete.setOnClickListener(){
-            // TODO 삭제 통신
             DataRepository.deleteNoticeWithIdx(scheduleItemData.idx.toString(),
             onSuccess = {
                 Toast.makeText(this,"삭제되었습니다",Toast.LENGTH_SHORT).show()
                 finish()
             },
             onFailure = {
-
             })
-
         }
     }
 }

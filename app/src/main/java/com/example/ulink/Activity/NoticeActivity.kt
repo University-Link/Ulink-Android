@@ -28,17 +28,15 @@ class NoticeActivity : AppCompatActivity(){
     lateinit var className : String
     lateinit var idx : String
 
-    var refresh = true
-
     private val testData = mutableListOf<ScheduleItemData>()
     private val taskData = mutableListOf<ScheduleItemData>()
     private val classData = mutableListOf<ScheduleItemData>()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notice)
 
+        //intent로 받아와서 툴바에 적용
         className = intent.getStringExtra("class")
         idx = intent.getStringExtra("idx")
         if(className!="") tv_classname.text = className+" 공지"
@@ -56,6 +54,7 @@ class NoticeActivity : AppCompatActivity(){
         classNoticeAdapter.datas = classData
         rv_class_notice.adapter = classNoticeAdapter
 
+        //각 공지를 클릭하면 공지 상세보기 뷰로 이동
         testNoticeAdapter.setScheduleItemClickListener(object: ScheduleNoticeAdapter.ScheduleNoticeClickListener{
             override fun onClick(view: View, position:Int){
                 val intent = Intent(view.context, ScheduleNoticeActivity::class.java)
@@ -83,36 +82,43 @@ class NoticeActivity : AppCompatActivity(){
             }
         })
 
+        //뒤로이동
         btn_back.setOnClickListener {
             finish()
         }
 
+        //캘린더로이동
         btn_calendar.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("flag", true)
             startActivity(intent)
             finish()
         }
+
+        //공지추가뷰로이동
         btn_plus.setOnClickListener {
             val intent = Intent(this, NoticeAddActivity::class.java)
             intent.putExtra("idx", idx)
             intent.putExtra("class", className)
             intent.putExtra("addcheck", "add")
             startActivity(intent)
-            finish()
         }
+
+        //과제공지더보기
         tv_task_notice_more.setOnClickListener {
             val intent = Intent(this, NoticeMoreActivity::class.java)
             intent.putParcelableArrayListExtra("rvData", ArrayList(taskData))
             intent.putExtra("category", "과제")
             startActivity(intent)
         }
+        //시험공지더보기
         tv_test_notice_more.setOnClickListener {
             val intent = Intent(this, NoticeMoreActivity::class.java)
             intent.putParcelableArrayListExtra("rvData", ArrayList(testData))
             intent.putExtra("category", "시험")
             startActivity(intent)
         }
+        //수업공지더보기
         tv_class_notice_more.setOnClickListener {
             val intent = Intent(this, NoticeMoreActivity::class.java)
             intent.putParcelableArrayListExtra("rvData", ArrayList(classData))
@@ -134,8 +140,6 @@ class NoticeActivity : AppCompatActivity(){
                         testData.clear()
                         classData.clear()
 
-
-                        refresh = false
                         Log.d("rjq", idx)
                         Log.d("rjq", it.toString())
                         if (it.data.assignment.isNotEmpty()) {
@@ -206,33 +210,9 @@ class NoticeActivity : AppCompatActivity(){
             }
         })
 
+      // 공지가 없을 경우, '등록된 공지가 없습니다.' / recyclerView '더보기' invisible
       emptyCheck(taskData, tv_task_notice_empty, rv_task_notice, tv_task_notice_more)
       emptyCheck(testData, tv_test_notice_empty, rv_test_notice, tv_test_notice_more)
       emptyCheck(classData, tv_class_notice_empty, rv_class_notice, tv_class_notice_more)
-
     }
-
-    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 100 && data != null) {
-            if (resultCode == 200) {
-                taskNoticeAdapter.datas.add(data.getParcelableExtra("data"))
-                taskNoticeAdapter.notifyDataSetChanged()
-            }
-            if (resultCode == 300) {
-                testNoticeAdapter.datas.add(data.getParcelableExtra("data"))
-                testNoticeAdapter.notifyDataSetChanged()
-            }
-            if (resultCode == 400) {
-                classNoticeAdapter.datas.add(data.getParcelableExtra("data"))
-                classNoticeAdapter.notifyDataSetChanged()
-            }
-        }
-
-        // empty again check
-        emptyCheck(taskData, tv_task_notice_empty, rv_task_notice, tv_task_notice_more)
-        emptyCheck(testData, tv_test_notice_empty, rv_test_notice, tv_test_notice_more)
-        emptyCheck(classData, tv_class_notice_empty, rv_class_notice, tv_class_notice_more)
-    }*/
-
 }

@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.example.ulink.CalendarRecycler.*
 import com.example.ulink.R
 import com.example.ulink.Activity.ScheduleActivity
@@ -66,11 +65,11 @@ class CalendarFragment : Fragment() {
         }
 
         btn_today.setOnClickListener() {
-            nowCalendarData = calendarDataInit(tv_month) // today
+            nowCalendarData = calendarDataInit(tv_month) // today(현재 달로 이동)
             calendar_viewPager.adapter = CalendarAdapter(view.context, nowCalendarData, view)
         }
 
-        btn_schedule.setOnClickListener() {
+        btn_schedule.setOnClickListener() { // 일정 뷰 이동
             val intent = Intent(activity, ScheduleActivity::class.java)
             startActivity(intent)
         }
@@ -91,9 +90,5 @@ class CalendarFragment : Fragment() {
             var height = getResources().getDimensionPixelSize(R.dimen.popup_height)
             dialog.window?.setLayout(width, height)
         }
-    }
-
-    fun getYearMonth() : String{
-        return view?.findViewById<TextView>(R.id.tv_month)?.text.toString()
     }
 }

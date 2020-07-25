@@ -13,7 +13,7 @@ class SplashActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         lottie.setAnimation("io_ulink_splash_galaxy10.json")
-         lottie.addAnimatorListener (object :
+        lottie.addAnimatorListener (object :
              Animator.AnimatorListener {
              override fun onAnimationRepeat(animation: Animator?) {
              }
@@ -29,9 +29,7 @@ class SplashActivity : Activity() {
 
              override fun onAnimationStart(animation: Animator?) {
              }
-
          })
         lottie.playAnimation()
-
     }
 }
