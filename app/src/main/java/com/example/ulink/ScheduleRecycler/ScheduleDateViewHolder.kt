@@ -15,7 +15,7 @@ class ScheduleDateViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView
     val recyclerView = itemView.findViewById<RecyclerView>(R.id.rv_schedule_item)
 
     fun bind(data : MutableList<ScheduleItemData>){
-        scheduleday.text = data[0].day+"일"
+        scheduleday.text = data[0].date.split("-")[1]+"월 "+data[0].day+"일"
         scheduledate.text = " (" + data[0].dayindex + ") "
 
         if(data[0].dday.toInt() != 0)

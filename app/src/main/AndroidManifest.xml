@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ulink" >
+    package="com.example.ulink">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -13,36 +15,34 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.FilterNormalActivity"></activity>
-        <activity android:name=".Activity.FilterMajorActivity"></activity>
-        <activity android:name=".Activity.SplashActivity"
-            android:theme = "@android:style/Theme.NoTitleBar.Fullscreen">
-
+        <activity android:name=".register.RegisterActivity"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".Activity.FilterNormalActivity" />
+        <activity android:name=".Activity.FilterMajorActivity" />
+        <activity
+            android:name=".Activity.SplashActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.LoginActivity">
-        </activity>
-        <activity android:name=".Activity.EvaluationActivity">
-        </activity>
-        <activity android:name=".Activity.FilterSettingSearchActivity"></activity>
-        <activity android:name=".Activity.ScheduleNoticeActivity"></activity>
+        <activity android:name=".Activity.LoginActivity"></activity>
+        <activity android:name=".Activity.EvaluationActivity"></activity>
+        <activity android:name=".Activity.FilterSettingSearchActivity" />
+        <activity android:name=".Activity.ScheduleNoticeActivity" />
         <activity android:name=".timetable.TimeTableListActivity" />
         <activity android:name=".Activity.NotificationActivity" />
         <activity android:name=".Activity.ScheduleActivity" />
         <activity android:name=".timetable.TimeTableDirectEditActivity" />
         <activity android:name=".timetable.TimeTableDirectTypeActivity" />
         <activity android:name=".timetable.TimeTableEditActivity" />
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
         <activity android:name=".Activity.ChattingActivity" />
         <activity android:name=".Activity.NoticeActivity" />
         <activity android:name=".Activity.NoticeMoreActivity" />
-        <activity android:name=".Activity.NoticeAddActivity"/>
-
+        <activity android:name=".Activity.NoticeAddActivity" />
     </application>
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

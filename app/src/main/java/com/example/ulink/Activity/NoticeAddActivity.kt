@@ -154,7 +154,6 @@ class NoticeAddActivity : AppCompatActivity() {
                         ) {
                             response.body()?.let {
                                 if (it.status == 201) {
-                                    Log.d("가보자", "가보자")
                                 }
                             } ?: Log.d("실패1", response.message())
                         }

@@ -106,7 +106,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                                                     memo = "",
                                                     color = it.data[i].notice[j].color,
                                                     day = it.data[i].date.split("-")[2],
-                                                    dayindex = nowDateCheck(i),
+                                                    dayindex = "",
                                                     dday = ddaySchedule(it.data[i])
                                                 )
                                             )
@@ -244,7 +244,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                                                                 endTime = it.data[i].notice[j].endTime,
                                                                 memo = "",
                                                                 day = it.data[i].date.split("-")[2],
-                                                                dayindex = nowDateCheck(i),
+                                                                dayindex = "",
                                                                 dday = ddaySchedule(it.data[i])
                                                             )
                                                         )

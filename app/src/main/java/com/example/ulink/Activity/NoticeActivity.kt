@@ -59,6 +59,7 @@ class NoticeActivity : AppCompatActivity(){
             override fun onClick(view: View, position:Int){
                 val intent = Intent(view.context, ScheduleNoticeActivity::class.java)
                 intent.putExtra("scheduleItemData", testNoticeAdapter.datas[position])
+                intent.putExtra("noticeIdx", testNoticeAdapter.datas[position].idx)
                 startActivity(intent)
                 finish()
             }
@@ -68,6 +69,7 @@ class NoticeActivity : AppCompatActivity(){
             override fun onClick(view: View, position:Int){
                 val intent = Intent(view.context, ScheduleNoticeActivity::class.java)
                 intent.putExtra("scheduleItemData", taskNoticeAdapter.datas[position])
+                intent.putExtra("noticeIdx", taskNoticeAdapter.datas[position].idx)
                 startActivity(intent)
                 finish()
             }
@@ -77,6 +79,7 @@ class NoticeActivity : AppCompatActivity(){
             override fun onClick(view: View, position:Int){
                 val intent = Intent(view.context, ScheduleNoticeActivity::class.java)
                 intent.putExtra("scheduleItemData", classNoticeAdapter.datas[position])
+                intent.putExtra("noticeIdx", classNoticeAdapter.datas[position].idx)
                 startActivity(intent)
                 finish()
             }
@@ -140,8 +143,6 @@ class NoticeActivity : AppCompatActivity(){
                         testData.clear()
                         classData.clear()
 
-                        Log.d("rjq", idx)
-                        Log.d("rjq", it.toString())
                         if (it.data.assignment.isNotEmpty()) {
                             var size = it.data.assignment.size
                             for (i in 0 until size) {

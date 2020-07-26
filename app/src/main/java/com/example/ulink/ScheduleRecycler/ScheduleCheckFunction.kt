@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.ulink.CalendarRecycler.endDay
 import com.example.ulink.R
 import java.util.*
 
@@ -12,11 +13,10 @@ var nowDay = cal.get(Calendar.DATE)
 var nowYear = cal.get(Calendar.YEAR)
 var nowMonth = cal.get(Calendar.MONTH)+1
 
-fun nowDateCheck(i : Int) : String {
-
-    var tempDate = (cal.get(Calendar.DAY_OF_WEEK)+i)%7
-
-    var nowDate : String = ""
+fun nowDateCheck(date : Long) : String {
+    var date = date*-1
+    var tempDate = (date.toInt()+1)%7
+    var nowDate = ""
 
     when (tempDate) {
         1 -> nowDate = "일"
@@ -29,11 +29,6 @@ fun nowDateCheck(i : Int) : String {
     }
 
     return nowDate
-}
-
-fun ddayCheck(i : Int) : String {
-    return if(i==0) "day"
-    else i.toString()
 }
 
 fun categoryBackground(category : String, tv_category : TextView) {

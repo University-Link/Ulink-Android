@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.widget.TextView
 import com.example.ulink.MainActivity
 import com.example.ulink.R
+import com.example.ulink.register.RegisterActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -21,6 +22,12 @@ class LoginActivity : AppCompatActivity() {
 
         val sharedPref : SharedPreferences = getSharedPreferences("pref", Context.MODE_PRIVATE)
         et_id.setText(sharedPref.getString("id", ""))
+
+
+        tv_register.setOnClickListener(){
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
 
         btn_login.setOnClickListener {
             val sharedPref: SharedPreferences = getSharedPreferences("pref", Context.MODE_PRIVATE)
@@ -59,7 +66,6 @@ class LoginActivity : AppCompatActivity() {
 //            }*/
         }
     }
-
     fun loginPageDialog(){
         val builder = android.app.AlertDialog.Builder(this)
         val layout = LayoutInflater.from(this).inflate(R.layout.dialog_my_page_layout, null)
