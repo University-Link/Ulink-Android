@@ -25,6 +25,7 @@ class ScheduleNoticeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_class_notice)
 
 
+        //과목,시험,수업공지에서 넘어온 데이터
         var scheduleItemData = intent.getParcelableExtra<ScheduleItemData>("scheduleItemData")
         var idx = scheduleItemData.idx
 
@@ -46,10 +47,11 @@ class ScheduleNoticeActivity : AppCompatActivity() {
 
         tv_schedule_notice_memo_content.text = scheduleItemData.memo //메모*/
 
+        //공지 상세 조회
         RetrofitService.service.getSpecificNotice(DataRepository.token, idx.toString())
             .enqueue(object : Callback<ResponseSpecificNotice> {
                 override fun onFailure(call: Call<ResponseSpecificNotice>, t: Throwable) {
-                    Log.d("실패", "실패")
+                    Log.d("실패", t.message.toString())
                 }
 
                 override fun onResponse(
@@ -89,7 +91,7 @@ class ScheduleNoticeActivity : AppCompatActivity() {
         btn_back.setOnClickListener() {
             finish()
         }
-
+        //수정뷰로 넘어감
         btn_edit.setOnClickListener() {
             val intent = Intent(this, NoticeAddActivity::class.java)
             intent.putExtra("scheduleItemData", item)

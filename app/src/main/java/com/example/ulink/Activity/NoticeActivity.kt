@@ -19,14 +19,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class NoticeActivity : AppCompatActivity(){
+class NoticeActivity : AppCompatActivity() {
 
-    lateinit var testNoticeAdapter : ScheduleNoticeAdapter
-    lateinit var taskNoticeAdapter : ScheduleNoticeAdapter
-    lateinit var classNoticeAdapter : ScheduleNoticeAdapter
+    lateinit var testNoticeAdapter: ScheduleNoticeAdapter
+    lateinit var taskNoticeAdapter: ScheduleNoticeAdapter
+    lateinit var classNoticeAdapter: ScheduleNoticeAdapter
 
-    lateinit var className : String
-    lateinit var idx : String
+    lateinit var className: String
+    lateinit var idx: String
 
     var refresh = true
 
@@ -41,12 +41,14 @@ class NoticeActivity : AppCompatActivity(){
 
         className = intent.getStringExtra("class")
         idx = intent.getStringExtra("idx")
-        if(className!="") tv_classname.text = className+" 공지"
+        if (className != "") tv_classname.text = className + " 공지"
 
+        //과목,시험,수업공지 각각에 대한 어댑터
         testNoticeAdapter = ScheduleNoticeAdapter(this)
         taskNoticeAdapter = ScheduleNoticeAdapter(this)
         classNoticeAdapter = ScheduleNoticeAdapter(this)
 
+        //각 어댑터에 데이터 적용
         testNoticeAdapter.datas = testData
         rv_test_notice.adapter = testNoticeAdapter
 
@@ -56,8 +58,10 @@ class NoticeActivity : AppCompatActivity(){
         classNoticeAdapter.datas = classData
         rv_class_notice.adapter = classNoticeAdapter
 
-        testNoticeAdapter.setScheduleItemClickListener(object: ScheduleNoticeAdapter.ScheduleNoticeClickListener{
-            override fun onClick(view: View, position:Int){
+        //각 공지 클릭했을 때 수정 액티비티로 넘어감
+        testNoticeAdapter.setScheduleItemClickListener(object :
+            ScheduleNoticeAdapter.ScheduleNoticeClickListener {
+            override fun onClick(view: View, position: Int) {
                 val intent = Intent(view.context, ScheduleNoticeActivity::class.java)
                 intent.putExtra("scheduleItemData", testNoticeAdapter.datas[position])
                 startActivity(intent)
@@ -65,8 +69,9 @@ class NoticeActivity : AppCompatActivity(){
             }
         })
 
-        taskNoticeAdapter.setScheduleItemClickListener(object: ScheduleNoticeAdapter.ScheduleNoticeClickListener{
-            override fun onClick(view: View, position:Int){
+        taskNoticeAdapter.setScheduleItemClickListener(object :
+            ScheduleNoticeAdapter.ScheduleNoticeClickListener {
+            override fun onClick(view: View, position: Int) {
                 val intent = Intent(view.context, ScheduleNoticeActivity::class.java)
                 intent.putExtra("scheduleItemData", taskNoticeAdapter.datas[position])
                 startActivity(intent)
@@ -74,8 +79,9 @@ class NoticeActivity : AppCompatActivity(){
             }
         })
 
-        classNoticeAdapter.setScheduleItemClickListener(object: ScheduleNoticeAdapter.ScheduleNoticeClickListener{
-            override fun onClick(view: View, position:Int){
+        classNoticeAdapter.setScheduleItemClickListener(object :
+            ScheduleNoticeAdapter.ScheduleNoticeClickListener {
+            override fun onClick(view: View, position: Int) {
                 val intent = Intent(view.context, ScheduleNoticeActivity::class.java)
                 intent.putExtra("scheduleItemData", classNoticeAdapter.datas[position])
                 startActivity(intent)
@@ -87,12 +93,13 @@ class NoticeActivity : AppCompatActivity(){
             finish()
         }
 
-        btn_calendar.setOnClickListener{
+        btn_calendar.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("flag", true)
             startActivity(intent)
             finish()
         }
+        //공지 생성
         btn_plus.setOnClickListener {
             val intent = Intent(this, NoticeAddActivity::class.java)
             intent.putExtra("idx", idx)
@@ -101,6 +108,7 @@ class NoticeActivity : AppCompatActivity(){
             startActivity(intent)
             finish()
         }
+        //각 공지 더보기
         tv_task_notice_more.setOnClickListener {
             val intent = Intent(this, NoticeMoreActivity::class.java)
             intent.putParcelableArrayListExtra("rvData", ArrayList(taskData))
@@ -120,95 +128,113 @@ class NoticeActivity : AppCompatActivity(){
             startActivity(intent)
         }
 
-        RetrofitService.service.getClassNotice(DataRepository.token, idx).enqueue(object : Callback<ResponseGetClassNotice> {
-            override fun onFailure(call: Call<ResponseGetClassNotice>, t: Throwable) {
-            }
+        //특정과목 공지 가져오기
+        RetrofitService.service.getClassNotice(DataRepository.token, idx)
+            .enqueue(object : Callback<ResponseGetClassNotice> {
+                override fun onFailure(call: Call<ResponseGetClassNotice>, t: Throwable) {
+                }
 
-            override fun onResponse(
-                call: Call<ResponseGetClassNotice>,
-                response: Response<ResponseGetClassNotice>
-            ) {
-                response.body()?.let {
-                    if (it.status == 200) {
-                        taskData.clear()
-                        testData.clear()
-                        classData.clear()
+                override fun onResponse(
+                    call: Call<ResponseGetClassNotice>,
+                    response: Response<ResponseGetClassNotice>
+                ) {
+                    response.body()?.let {
+                        if (it.status == 200) {
+                            taskData.clear()
+                            testData.clear()
+                            classData.clear()
 
 
-                        refresh = false
-                        Log.d("rjq", idx)
-                        Log.d("rjq", it.toString())
-                        if (it.data.assignment.isNotEmpty()) {
-                            var size = it.data.assignment.size
-                            for (i in 0 until size) {
-                                taskData.apply {
-                                    add(
-                                        ScheduleItemData(
-                                            idx = it.data.assignment[i].noticeIdx,
-                                            date = it.data.assignment[i].date,
-                                            category = "과제",
-                                            classname = className,
-                                            content = it.data.assignment[i].title,
-                                            startTime = it.data.assignment[i].startTime,
-                                            endTime = it.data.assignment[i].endTime,
-                                            memo = ""
+                            refresh = false
+                            Log.d("rjq", idx)
+                            Log.d("rjq", it.toString())
+                            //공지가 비어있지 않으면 불러오기
+                            if (it.data.assignment.isNotEmpty()) {
+                                var size = it.data.assignment.size
+                                for (i in 0 until size) {
+                                    taskData.apply {
+                                        add(
+                                            ScheduleItemData(
+                                                idx = it.data.assignment[i].noticeIdx,
+                                                date = it.data.assignment[i].date,
+                                                category = "과제",
+                                                classname = className,
+                                                content = it.data.assignment[i].title,
+                                                startTime = it.data.assignment[i].startTime,
+                                                endTime = it.data.assignment[i].endTime,
+                                                memo = ""
+                                            )
                                         )
-                                    )
-                                }
-                                taskNoticeAdapter.notifyDataSetChanged()
-                                emptyCheck(taskData, tv_task_notice_empty, rv_task_notice, tv_task_notice_more)
-                            }
-                        }
-                        if (it.data.exam.isNotEmpty()) {
-                            var size = it.data.exam.size
-                            for (i in 0 until size) {
-                                testData.apply {
-                                    add(
-                                        ScheduleItemData(
-                                            idx = it.data.exam[i].noticeIdx,
-                                            date = it.data.exam[i].date,
-                                            category = "시험",
-                                            classname = className,
-                                            content = it.data.exam[i].title,
-                                            startTime = it.data.exam[i].startTime,
-                                            endTime = it.data.exam[i].endTime,
-                                            memo = ""
-                                        )
-                                    )
-                                }
-                                testNoticeAdapter.notifyDataSetChanged()
-                                emptyCheck(testData, tv_test_notice_empty, rv_test_notice, tv_test_notice_more)
-                            }
-                        }
-                        if (it.data.lecture.isNotEmpty()) {
-                            var size = it.data.lecture.size
-                            for (i in 0 until size) {
-                                classData.apply {
-                                    add(
-                                        ScheduleItemData(
-                                            idx = it.data.lecture[i].noticeIdx,
-                                            date = it.data.lecture[i].date,
-                                            category = "수업",
-                                            classname = className,
-                                            content = it.data.lecture[i].title,
-                                            startTime = it.data.lecture[i].startTime,
-                                            endTime = it.data.lecture[i].endTime,
-                                            memo = ""
-                                        )
+                                    }
+                                    taskNoticeAdapter.notifyDataSetChanged()
+                                    emptyCheck(
+                                        taskData,
+                                        tv_task_notice_empty,
+                                        rv_task_notice,
+                                        tv_task_notice_more
                                     )
                                 }
                             }
-                            classNoticeAdapter.notifyDataSetChanged()
-                            emptyCheck(classData, tv_class_notice_empty, rv_class_notice, tv_class_notice_more)
+                            if (it.data.exam.isNotEmpty()) {
+                                var size = it.data.exam.size
+                                for (i in 0 until size) {
+                                    testData.apply {
+                                        add(
+                                            ScheduleItemData(
+                                                idx = it.data.exam[i].noticeIdx,
+                                                date = it.data.exam[i].date,
+                                                category = "시험",
+                                                classname = className,
+                                                content = it.data.exam[i].title,
+                                                startTime = it.data.exam[i].startTime,
+                                                endTime = it.data.exam[i].endTime,
+                                                memo = ""
+                                            )
+                                        )
+                                    }
+                                    testNoticeAdapter.notifyDataSetChanged()
+                                    emptyCheck(
+                                        testData,
+                                        tv_test_notice_empty,
+                                        rv_test_notice,
+                                        tv_test_notice_more
+                                    )
+                                }
+                            }
+                            if (it.data.lecture.isNotEmpty()) {
+                                var size = it.data.lecture.size
+                                for (i in 0 until size) {
+                                    classData.apply {
+                                        add(
+                                            ScheduleItemData(
+                                                idx = it.data.lecture[i].noticeIdx,
+                                                date = it.data.lecture[i].date,
+                                                category = "수업",
+                                                classname = className,
+                                                content = it.data.lecture[i].title,
+                                                startTime = it.data.lecture[i].startTime,
+                                                endTime = it.data.lecture[i].endTime,
+                                                memo = ""
+                                            )
+                                        )
+                                    }
+                                }
+                                classNoticeAdapter.notifyDataSetChanged()
+                                emptyCheck(
+                                    classData,
+                                    tv_class_notice_empty,
+                                    rv_class_notice,
+                                    tv_class_notice_more
+                                )
+                            }
                         }
                     }
                 }
-            }
-        })
+            })
 
-      emptyCheck(taskData, tv_task_notice_empty, rv_task_notice, tv_task_notice_more)
-      emptyCheck(testData, tv_test_notice_empty, rv_test_notice, tv_test_notice_more)
-      emptyCheck(classData, tv_class_notice_empty, rv_class_notice, tv_class_notice_more)
+        emptyCheck(taskData, tv_task_notice_empty, rv_task_notice, tv_task_notice_more)
+        emptyCheck(testData, tv_test_notice_empty, rv_test_notice, tv_test_notice_more)
+        emptyCheck(classData, tv_class_notice_empty, rv_class_notice, tv_class_notice_more)
 
     }
 
@@ -234,87 +260,4 @@ class NoticeActivity : AppCompatActivity(){
         emptyCheck(testData, tv_test_notice_empty, rv_test_notice, tv_test_notice_more)
         emptyCheck(classData, tv_class_notice_empty, rv_class_notice, tv_class_notice_more)
     }*/
-
-    override fun onResume() {
-        super.onResume()
-        RetrofitService.service.getClassNotice(DataRepository.token, idx).enqueue(object : Callback<ResponseGetClassNotice> {
-            override fun onFailure(call: Call<ResponseGetClassNotice>, t: Throwable) {
-            }
-
-            override fun onResponse(
-                    call: Call<ResponseGetClassNotice>,
-                    response: Response<ResponseGetClassNotice>
-            ) {
-                response.body()?.let {
-                    if (it.status == 200) {
-                        Log.d("rjq", idx)
-                        Log.d("rjq", it.toString())
-                        if (it.data.assignment.isNotEmpty()) {
-                            var size = it.data.assignment.size
-                            for (i in 0 until size) {
-                                taskData.apply {
-                                    add(
-                                            ScheduleItemData(
-                                                    idx = it.data.assignment[i].noticeIdx,
-                                                    date = it.data.assignment[i].date,
-                                                    category = "과제",
-                                                    classname = className,
-                                                    content = it.data.assignment[i].title,
-                                                    startTime = it.data.assignment[i].startTime,
-                                                    endTime = it.data.assignment[i].endTime,
-                                                    memo = ""
-                                            )
-                                    )
-                                }
-                                taskNoticeAdapter.notifyDataSetChanged()
-                                emptyCheck(taskData, tv_task_notice_empty, rv_task_notice, tv_task_notice_more)
-                            }
-                        }
-                        if (it.data.exam.isNotEmpty()) {
-                            var size = it.data.exam.size
-                            for (i in 0 until size) {
-                                testData.apply {
-                                    add(
-                                            ScheduleItemData(
-                                                    idx = it.data.exam[i].noticeIdx,
-                                                    date = it.data.exam[i].date,
-                                                    category = "시험",
-                                                    classname = className,
-                                                    content = it.data.exam[i].title,
-                                                    startTime = it.data.exam[i].startTime,
-                                                    endTime = it.data.exam[i].endTime,
-                                                    memo = ""
-                                            )
-                                    )
-                                }
-                                testNoticeAdapter.notifyDataSetChanged()
-                                emptyCheck(testData, tv_test_notice_empty, rv_test_notice, tv_test_notice_more)
-                            }
-                        }
-                        if (it.data.lecture.isNotEmpty()) {
-                            var size = it.data.lecture.size
-                            for (i in 0 until size) {
-                                classData.apply {
-                                    add(
-                                            ScheduleItemData(
-                                                    idx = it.data.lecture[i].noticeIdx,
-                                                    date = it.data.lecture[i].date,
-                                                    category = "수업",
-                                                    classname = className,
-                                                    content = it.data.lecture[i].title,
-                                                    startTime = it.data.lecture[i].startTime,
-                                                    endTime = it.data.lecture[i].endTime,
-                                                    memo = ""
-                                            )
-                                    )
-                                }
-                            }
-                            classNoticeAdapter.notifyDataSetChanged()
-                            emptyCheck(classData, tv_class_notice_empty, rv_class_notice, tv_class_notice_more)
-                        }
-                    }
-                }
-            }
-        })
-    }
 }

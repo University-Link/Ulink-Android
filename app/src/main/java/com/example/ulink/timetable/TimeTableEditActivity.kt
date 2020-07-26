@@ -93,19 +93,19 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         }
 
         intent.getParcelableExtra<TimeTable>("timeTable")?.let { timeTable ->
+            Log.d("tag",timeTable.toString())
             DataRepository.getTimeTableBySemester(timeTable.semester,
-                    onSuccess = {
-                        for (table in it){
-                            timeTableList.add(deepCopy(table))
-                            setTimeTableAdd()
-                        }
-                    },
-                    onFailure = {
+                onSuccess = {
+                    for (table in it){
+                        timeTableList.add(deepCopy(table))
+                        setTimeTableAdd()
+                        Log.d("tag", table.toString())
+                    }
+                },
+                onFailure = {
 
                 } )
         }
-
-
 
 
 
@@ -123,6 +123,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
                     mAdapter.replaceAtList(vp_timetableadd.currentItem, deepCopy(timeTableAdded))
                     mAdapter.replaceAtSampleList(vp_timetableadd.currentItem, deepCopy(timeTableAdded))
                     mAdapter.reDrawFragment(vp_timetableadd.currentItem)
+                    Log.d("tag", "timetable replaced")
                 }
             }
         } else if(requestCode == REQUEST_DIRECT_TYPE_ACTIVITY){
@@ -204,6 +205,8 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
         var timeTable: TimeTable = mAdapter.timeTableSampleList.get(position)
 
+        Log.d("tag11111", timeTable.toString())
+
         timeTable.subjectList.add(subject)
         mAdapter.replaceAtSampleList(position, timeTable)
         mAdapter.reDrawFragment(position)
@@ -237,16 +240,17 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 //            TODO 여기서 DB로 저장하고 edit에 넣긴 해야함
 
             DataRepository.addTimeTable(timeTableList[0].semester, et.text.toString(),
-                    onSuccess = {
-                        val timeTable = TimeTable(it.data.idx.toInt(),timeTableList[0].semester , et.text.toString(), 0, "09:00", "18:00")
-                        mAdapter.addToList(deepCopy(timeTable))
-                        timeTableList.add(deepCopy(timeTable))
-                        moveToLastItem()
-                    },
-                    onFailure = {
-                        Toast.makeText(this, "오류가 발생하였습니다", Toast.LENGTH_SHORT).show();
-                        Log.d("error",it)
-                    }
+                onSuccess = {
+                    val timeTable = TimeTable(it.data.idx.toInt(),timeTableList[0].semester , et.text.toString(), 0, "09:00", "18:00")
+                    mAdapter.addToList(deepCopy(timeTable))
+                    timeTableList.add(deepCopy(timeTable))
+                    moveToLastItem()
+                    Log.d("debug","${it.data.idx} 시간표 생성")
+                },
+                onFailure = {
+                    Toast.makeText(this, "오류가 발생하였습니다", Toast.LENGTH_SHORT).show();
+                    Log.d("error",it)
+                }
             )
             dialog.dismiss()
         }
@@ -283,18 +287,18 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         mAdapter.timeTableAddListener = object : TimeTableAddListener {
             override fun onAdded(name: String) {
                 DataRepository.addTimeTable(timeTableList[0].semester, name,
-                        onSuccess = {
-                            val timeTable = TimeTable(it.data.idx.toInt(),timeTableList[0].semester ,name, 0, "09:00", "18:00")
-                            mAdapter.addToList(deepCopy(timeTable))
-                            timeTableList.add(deepCopy(timeTable))
-                            moveToLastItem()
-                            Log.d("debug","${it.data.idx} 시간표 생성")
+                    onSuccess = {
+                        val timeTable = TimeTable(it.data.idx.toInt(),timeTableList[0].semester ,name, 0, "09:00", "18:00")
+                        mAdapter.addToList(deepCopy(timeTable))
+                        timeTableList.add(deepCopy(timeTable))
+                        moveToLastItem()
+                        Log.d("debug","${it.data.idx} 시간표 생성")
 
-                        },
-                        onFailure = {
-                            Toast.makeText(this@TimeTableEditActivity, "오류가 발생하였습니다", Toast.LENGTH_SHORT).show();
-                            Log.d("error",it)
-                        }
+                    },
+                    onFailure = {
+                        Toast.makeText(this@TimeTableEditActivity, "오류가 발생하였습니다", Toast.LENGTH_SHORT).show();
+                        Log.d("error",it)
+                    }
                 )
             }
         }

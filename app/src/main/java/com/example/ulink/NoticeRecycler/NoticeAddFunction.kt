@@ -107,6 +107,7 @@ fun dataReturn(year : Int, month : Int, day : Int, category : String, classname 
     return item
 }
 
+//공지가 비어있는지 체크 -> 없다면 공지가 없습니다 뷰
 fun emptyCheck(datas : MutableList<ScheduleItemData>, notice_nothing : TextView, rv_notice : RecyclerView, notice_more : TextView){
 
     if(datas.isEmpty()){

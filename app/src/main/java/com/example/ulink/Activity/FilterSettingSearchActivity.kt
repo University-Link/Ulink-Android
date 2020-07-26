@@ -116,6 +116,7 @@ class FilterSettingSearchActivity : AppCompatActivity() {
                                             search_type = ""
                                         )
                                     )
+                                    Log.d("search_result",list[i].name)
                                 }
                             }
 //                                list.clear()

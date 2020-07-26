@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.ulink.repository.Subject
 
-class TimeTableEditorAdapter(fragmentActivity: FragmentActivity, val onGetPositionListener: onGetPositionListener, val fragmentList : MutableList<Fragment> = arrayListOf()) : FragmentStateAdapter(fragmentActivity){
+class TimeTableEditorAdapter(fragmentActivity: FragmentActivity, val fragmentList : MutableList<Fragment> = arrayListOf()) : FragmentStateAdapter(fragmentActivity){
 
 
     fun setFragments(){
@@ -18,10 +18,10 @@ class TimeTableEditorAdapter(fragmentActivity: FragmentActivity, val onGetPositi
 
     override fun getItemId(position: Int): Long {
         if(position==0){
-            onGetPositionListener.ongetPosition(0)
+           // onGetPositionListener.ongetPosition(0)
             Log.d("0바뀜","00")
         }else{
-            onGetPositionListener.ongetPosition(1)
+            //onGetPositionListener.ongetPosition(1)
             Log.d("1바뀜","11")
         }
 
