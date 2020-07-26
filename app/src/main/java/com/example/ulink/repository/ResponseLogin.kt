@@ -1,4 +1,4 @@
-package com.example.ulink.LoginNetwork
+package com.example.ulink.repository
 
 data class ResponseLogin(
     val status : Int,
@@ -8,6 +8,5 @@ data class ResponseLogin(
 )
 
 data class SomeData(
-    val jwt : String
-    //TODO uid, accessToken
+    val accessToken : String
 )

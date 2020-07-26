@@ -27,37 +27,28 @@ import kotlinx.android.synthetic.main.fragment_time_table.*
 const val REQUEST_TIMETABLE_LIST_ACTIVITY = 777
 const val REQUEST_TIMETABLE_EDIT_ACITYVITY = 111
 
+
+//메인 시간표
 class TimeTableFragment : Fragment(), onRefreshListener {
 
-
-
+    
     override fun onRefresh() {
         refreshLastTimeTable()
         refresh = false
     }
 
-    lateinit var mainTable: TimeTable
-
-
-    var lastTimeTableId = 0
-    var refresh = true
-
-    override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-
-        return inflater.inflate(R.layout.fragment_time_table, container, false)
-
-//        클릭시 좌표로 subject list에서 찾기! 몇시 과목인지로!
-    }
-
     interface subjectOnClick {
         fun onClick(subject: Subject)
     }
+    
+    lateinit var mainTable: TimeTable
 
     lateinit var timetableDrawer: TimeTableDrawer
+    
+    var lastTimeTableId = 0
+    var refresh = true
 
+//    과목 클릭 콜백
     val onClick = object : subjectOnClick {
         override fun onClick(subject: Subject) {
 
@@ -105,7 +96,7 @@ class TimeTableFragment : Fragment(), onRefreshListener {
                     }
                 })
                 fragmentManager?.let { it -> bottomsheet.show(it, bottomsheet.tag)
-                dialog.dismiss()}
+                    dialog.dismiss()}
             }
             if (subject.subject == true) {
                 layout.findViewById<TextView>(R.id.tv_tochat).setOnClickListener {
@@ -141,14 +132,23 @@ class TimeTableFragment : Fragment(), onRefreshListener {
         }
     }
 
+    override fun onCreateView(
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View? {
+
+        return inflater.inflate(R.layout.fragment_time_table, container, false)
+
+//        클릭시 좌표로 subject list에서 찾기! 몇시 과목인지로!
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 
         mainTable = TimeTable(0, "2020-1", "시간표1", 1, "09:00", "18:00")
-//        서버랑 통신해서 TimeTable가져옴
 
+//        서버랑 통신해서 TimeTable가져옴
         refreshMainTable()
 
         btn_plus.setOnClickListener {
@@ -172,6 +172,7 @@ class TimeTableFragment : Fragment(), onRefreshListener {
             fragmentManager?.let { it -> bottomsheet.show(it, bottomsheet.tag) }
         }
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

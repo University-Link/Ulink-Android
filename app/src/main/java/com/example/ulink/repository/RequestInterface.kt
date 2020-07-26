@@ -13,10 +13,10 @@ interface RequestInterface {
     //유저 로그인
 
 
-    //@POST("/user/signin")
-    //fun requestLogin(
-    //    @Body body : RequestLogin
-    //) : Call<ResponseLogin>
+    @POST("/user/signin")
+    fun requestLogin(
+        @Body body : RequestLogin
+    ) : Call<ResponseLogin>
 
     //Schedule
     //시간표 - 메인 시간표 조회
@@ -247,6 +247,12 @@ interface RequestInterface {
             @Header("token") token : String,
             @Query("name") name : String
     ) : Call<ResponsegetSubjectWithWord>
+
+    @GET("/subject/recommend")
+    fun getSubjectRecommendWithKeyword(
+            @Header("token") token: String,
+            @Query("name") name: String
+    ) : Call<ResponsegetSubjectWithKeyWord>
 
     @DELETE("/notice/{idx}")
     fun deleteNoticeWithIdx(

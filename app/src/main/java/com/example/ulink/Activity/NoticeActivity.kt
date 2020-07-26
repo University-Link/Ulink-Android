@@ -28,8 +28,6 @@ class NoticeActivity : AppCompatActivity(){
     lateinit var className : String
     lateinit var idx : String
 
-    var refresh = true
-
     private val testData = mutableListOf<ScheduleItemData>()
     private val taskData = mutableListOf<ScheduleItemData>()
     private val classData = mutableListOf<ScheduleItemData>()
@@ -134,8 +132,6 @@ class NoticeActivity : AppCompatActivity(){
                         testData.clear()
                         classData.clear()
 
-
-                        refresh = false
                         Log.d("rjq", idx)
                         Log.d("rjq", it.toString())
                         if (it.data.assignment.isNotEmpty()) {

@@ -85,10 +85,10 @@
         app:layout_constraintEnd_toEndOf="@id/et_id"/>
 
     <CheckBox
-        android:id="@+id/checkbox_id_save"
+        android:id="@+id/checkbox_autoLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="  ID 저장"
+        android:text="자동 로그인"
         android:textSize="13sp"
         android:textColor="@color/text2"
         android:layout_marginTop="14dp"
@@ -101,7 +101,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="49dp"
         android:background="@drawable/login_btn_login"
-        app:layout_constraintTop_toBottomOf="@id/checkbox_id_save"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_autoLogin"
         app:layout_constraintStart_toStartOf="@id/et_id"
         app:layout_constraintEnd_toEndOf="@id/et_id"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

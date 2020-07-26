@@ -59,17 +59,17 @@
         app:layout_constraintEnd_toEndOf="parent"
     />
 
-<!--    <TextView-->
-<!--        android:id="@+id/textView"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginLeft="21dp"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:text="최근검색"-->
-<!--        android:textColor="#404040"-->
-<!--        android:textSize="12sp"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/edit" />-->
+    <TextView
+        android:id="@+id/tv_recentSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="16dp"
+        android:text="최근검색"
+        android:textColor="#404040"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit" />
 
 <!--    <TextView-->
 <!--        android:layout_width="wrap_content"-->
