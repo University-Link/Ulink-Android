@@ -60,7 +60,8 @@
         app:layout_constraintStart_toEndOf="@+id/time_split"
         app:layout_constraintTop_toTopOf="@+id/tv_start_time" />
 
-    <ImageView
+    <ImageButton
+        android:id="@+id/btn_delete_person_plan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="7dp"

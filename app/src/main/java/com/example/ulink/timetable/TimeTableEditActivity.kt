@@ -369,6 +369,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         builder.setView(layout)
 
         val dialog = builder.create()
+        dialog.setCancelable(false)
 
         layout.findViewById<Button>(id.btn_grade1).setOnClickListener {
             it.setBackgroundColor(resources.getColor(color.black))

@@ -50,6 +50,10 @@ class SplashActivity : Activity() {
                                  finish()
                              }
                      )
+                 }else{
+                     val intent = Intent(this@SplashActivity, LoginActivity::class.java)
+                     startActivity(intent)
+                     finish()
                  }
              }
 

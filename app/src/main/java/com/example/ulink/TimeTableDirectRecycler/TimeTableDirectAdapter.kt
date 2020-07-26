@@ -55,6 +55,8 @@ class TimeTableDirectAdapter(private val context: Context, val onClickListener: 
             val tv_start_time = itemView.findViewById<TextView>(R.id.tv_start_time)
             val tv_end_time = itemView.findViewById<TextView>(R.id.tv_end_time)
 
+            val btn_delete_personal_plan = itemView.findViewById<ImageButton>(R.id.btn_delete_person_plan)
+
             spinner_days.setSelection(TimeTableDirectData.day)
 
 
@@ -72,6 +74,14 @@ class TimeTableDirectAdapter(private val context: Context, val onClickListener: 
                 datas[adapterPosition].day =  spinner_days.getSelectedItemPosition()
 
             }
+
+            btn_delete_personal_plan.setOnClickListener {
+                //TODO 드래그해서 추가일때, 삭제하고 돌아가면 잡힌 영역도 사라지도록 수정
+                datas.remove(datas[adapterPosition])
+                notifyItemRemoved(adapterPosition)
+                notifyItemRangeChanged(adapterPosition, datas.size)
+            }
+
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimeTalbeDirectViewHolder {

@@ -16,7 +16,6 @@ class TimeTableAddAdapter(fragmentActivity: FragmentActivity, val fragmentList :
 
     val timeTableList: MutableList<TimeTable> = arrayListOf()
     val timeTableSampleList: MutableList<TimeTable> = arrayListOf()
-
     var timeTableAddListener: TimeTableAddListener? = null
 
 

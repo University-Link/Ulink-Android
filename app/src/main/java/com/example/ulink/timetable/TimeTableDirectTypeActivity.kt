@@ -22,6 +22,7 @@ import com.example.ulink.repository.TimeTable
 import com.example.ulink.utils.deepCopy
 import kotlinx.android.synthetic.main.activity_direct_type_time_table.*
 import kotlinx.android.synthetic.main.toolbar_direct_time_table.*
+import kotlin.properties.Delegates
 
 //타임피커 커스
 const val DEFAULT_INTERVAL = 15
@@ -310,7 +311,6 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
             TimeTableDirectAdapter.notifyDataSetChanged()
         }
 
-
         //시간표 전부 추가 후 확인
         btn_check.setOnClickListener() {
             if (et_title.text.toString() == "") directAddPageDialog()
@@ -437,7 +437,6 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
         time_picker.visibility = View.VISIBLE
         btn_ok.visibility = View.VISIBLE
         time_picker.setIs24HourView(true)
-
         time_picker.setOnTimeChangedListener(OnTimeChangedListener { timePicker, hour, min ->
 
             if (!check) {
@@ -452,6 +451,8 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
                 TimeTableDirectAdapter.notifyDataSetChanged()
             }
         })
+
+
 
     }
 
@@ -468,3 +469,8 @@ interface onClickListener {
 
     )
 }
+
+interface deleteClickListener{
+
+}
+
