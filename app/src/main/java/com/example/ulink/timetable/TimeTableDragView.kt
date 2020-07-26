@@ -65,7 +65,6 @@ class TimeTableDragView(context: Context, root: View, val timecolumnWidth: Float
 
 
 
-
             Log.d("tag",xfix.toString())
 
             realstartx = realstartx - (realstartx - xbase) % xindex

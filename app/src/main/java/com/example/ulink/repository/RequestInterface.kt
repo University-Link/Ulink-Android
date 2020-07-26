@@ -11,6 +11,7 @@ interface RequestInterface {
 
     //User
     //유저 로그인
+
     @POST("/user/signin")
     fun requestLogin(
         @Body body : RequestLogin
@@ -249,6 +250,12 @@ interface RequestInterface {
             @Header("token") token : String,
             @Query("name") name : String
     ) : Call<ResponsegetSubjectWithWord>
+
+    @GET("/subject/recommend")
+    fun getSubjectRecommendWithKeyword(
+            @Header("token") token: String,
+            @Query("name") name: String
+    ) : Call<ResponsegetSubjectWithKeyWord>
 
     @DELETE("/notice/{idx}")
     fun deleteNoticeWithIdx(

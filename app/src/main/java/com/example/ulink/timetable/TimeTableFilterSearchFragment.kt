@@ -6,9 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.ulink.Activity.FilterMajorActivity
-import com.example.ulink.Activity.FilterNormalActivity
-import com.example.ulink.Activity.FilterSettingSearchActivity
+import com.example.ulink.Activity.*
 import com.example.ulink.R
 import com.example.ulink.repository.SearchedData
 import com.example.ulink.repository.Subject
@@ -19,7 +17,6 @@ class TimeTableFilterSearchFragment() : Fragment(), onCartAddClickListener {
     lateinit var mAdapter : TimeTableClassAdapter
     var subjectList: MutableList<Subject> = arrayListOf()
     var prevent = true
-
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -69,12 +66,11 @@ class TimeTableFilterSearchFragment() : Fragment(), onCartAddClickListener {
             et_class_name.setText(data?.getStringExtra("query"))
         }
 
-        if(resultCode==200){
-            val list = data?.getParcelableArrayListExtra<SearchedData>("list")
+        if(resultCode== RESULT_SEARCHED){
+            val list = data?.getParcelableArrayListExtra<SearchedData>("searchedData")
             val class_name = data?.getStringExtra("et_class_name")
             et_class_name.setText(class_name)
-            //Log.d("9999", list.toString())
-            //Log.d("9999", subjectList.toString())
+
             subjectList.clear()
             for(i in 0 until list!!.size) {
                 subjectList.add(Subject(
@@ -93,36 +89,36 @@ class TimeTableFilterSearchFragment() : Fragment(), onCartAddClickListener {
                     list[i].subjectCode,  //학수번호
                     list[i].subjectIdx.toInt()))
             }
+            mAdapter.notifyDataSetChanged()
 
-            //Log.d("9999", subjectList.toString())
         }
-        if(resultCode==300){
-            val item = data?.getParcelableExtra<SearchedData>("item")
+        if(resultCode== RESULT_CLICKED){
+            val list = data?.getParcelableArrayListExtra<SearchedData>("searchedData")
             val class_name = data?.getStringExtra("et_class_name")
             rv_classes.adapter = mAdapter
             et_class_name.setText(class_name)
-            //Log.d("9999", item.toString())
-            if(item!=null) {
+            if(list!=null) {
                 subjectList.clear()
-                subjectList.add(
-                    Subject(
-                        0,
-                        item.name,
-                        item.startTime,
-                        item.endTime,
-                        item.day,
-                        item.content,
-                        1,
-                        true,
-                        item.credit,
-                        item.professor,
-                        item.course,
-                        true,
-                        item.subjectCode, //학수번호
-                        item.subjectIdx.toInt()
-                    )
-                )
+                for(i in 0 until list!!.size) {
+                    subjectList.add(Subject(
+                            0,
+                            list[i].name,
+                            list[i].startTime,
+                            list[i].endTime,
+                            list[i].day,
+                            list[i].content,
+                            1,
+                            true,
+                            list[i].credit,
+                            list[i].professor,
+                            list[i].course,
+                            true,
+                            list[i].subjectCode,  //학수번호
+                            list[i].subjectIdx.toInt()))
+                }
+                mAdapter.notifyDataSetChanged()
             }
+
         }
 
     }
