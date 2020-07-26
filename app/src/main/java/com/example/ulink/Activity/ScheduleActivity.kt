@@ -3,7 +3,7 @@ package com.example.ulink.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.ulink.CalendarRecycler.tenday
+import com.example.ulink.CalendarRecycler.thirtyday
 import com.example.ulink.CalendarRecycler.today
 import com.example.ulink.NoticeRecycler.ddaySchedule
 import com.example.ulink.R
@@ -23,9 +23,6 @@ import retrofit2.Response
 class ScheduleActivity : AppCompatActivity() {
 
     lateinit var scheduleDateAdapter: ScheduleDateAdapter
-    val dateDatas = mutableListOf<ScheduleDateData>()
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +38,7 @@ class ScheduleActivity : AppCompatActivity() {
         scheduleDateAdapter = ScheduleDateAdapter(this, bigList)
         rv_schedule_date.adapter = scheduleDateAdapter
 
-        RetrofitService.service.getAllNotice(DataRepository.token, today(), tenday())
+        RetrofitService.service.getAllNotice(DataRepository.token, today(), thirtyday())
             .enqueue(object : Callback<ResponseCalendar> {
                 override fun onFailure(call: Call<ResponseCalendar>, t: Throwable) {
                 }
@@ -67,13 +64,13 @@ class ScheduleActivity : AppCompatActivity() {
                                             endTime = tenDayData[i].notice[j].endTime,
                                             memo = "",
                                             day = tenDayData[i].date.split("-")[2],
-                                            dayindex = nowDateCheck(i),
+                                            dayindex = nowDateCheck(ddaySchedule(tenDayData[i])),
                                             dday = ddaySchedule(tenDayData[i])
                                         )
                                     )
                                 }
-                                bigList.add(deepCopySchedule(innerList))
 
+                                bigList.add(innerList)
 
                                 scheduleDateAdapter.dateDatas = bigList
                                 scheduleDateAdapter.notifyDataSetChanged()

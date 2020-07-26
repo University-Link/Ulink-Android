@@ -16,5 +16,6 @@ class CalendarScheduleViewHolder(itemView : View) : RecyclerView.ViewHolder(item
         schedule.text = data.classname
         Log.d("tag",data.toString())
         itemView.setBackgroundResource(scheduleColorSelector(data.color))
+
     }
 }

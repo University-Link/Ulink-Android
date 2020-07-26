@@ -13,14 +13,9 @@ import com.example.ulink.repository.TimeTable
 import kotlinx.android.synthetic.main.fragment_time_table_add.*
 
 
-//      TODO Scrollview안에 textview있어서 height계산할때 까먹지말기!!
-//      여기로 subject받아서 draw subject랑 draw preview하기
-
 class TimeTableAddFragment : Fragment() {
 
-
     lateinit var timeTable: TimeTable
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

@@ -8,14 +8,13 @@ interface RequestInterface {
     // POST : add
     // PUT : update
     // DELETE : delete
+
     //User
-
     //유저 로그인
-
 
     @POST("/user/signin")
     fun requestLogin(
-            @Body body : RequestLogin
+        @Body body : RequestLogin
     ) : Call<ResponseLogin>
 
     //Schedule
@@ -24,6 +23,7 @@ interface RequestInterface {
     fun getMainTimeTable(
             @Header("token") token : String
     ) : Call<ResponseMainTimeTable>
+
     //시간표 만들기
     @POST("/schedule")
     fun addTimeTable(
@@ -45,13 +45,14 @@ interface RequestInterface {
             @Path("idx") idx : String,
             @Query("isSubject") isSubject : Boolean
     ) : Call<ResponseTimeTable>
+
     //시간표 - 메인 시간표 이름 수정(변경)
     @PUT("/schedule/main/{idx}")
     fun updateMainTimeTableName(
         @Header("token") token: String,
         @Path("idx") idx: String
-
     ) : Call<ResponseTimeTable>
+
     //시간표 - 일정 삭제(통합)
     @DELETE("/schedule/specific/{idx}")
     fun deleteNotice(
@@ -59,6 +60,7 @@ interface RequestInterface {
             @Path("idx") idx : String,
             @Query("isSubject") isSubject : Boolean // 학교 true, 개인 false
     ) : Call<ResponseTimeTable>
+
     //시간표 - 메인 시간표 수정(변경)
     @PUT("/schedule/main/{idx}")
     fun updateMainTimeTable(
@@ -94,7 +96,6 @@ interface RequestInterface {
             @Query ("semester") semester: String
     ) : Call<ResponseGetTimeTableList>
 
-
     //시간표 - 개인일정 만들기
     @POST("/schedule/personal")
     fun addPersonalPlan(
@@ -115,31 +116,34 @@ interface RequestInterface {
             @Header("token") token: String,
             @Path("idx") idx : String
     ) : Call<ResponseTimeTable>
+
     //특정 시간표 - 개인일정 수정
     @PUT("/schedule/personal/{idx}")
     fun updatePersonalPlan(
             @Header("token") token: String,
             @Path("idx") idx : String
     ) : Call<ResponseTimeTable>
+
     //특정 시간표 - 개인일정 삭제
     @DELETE("/schedule/personal/{idx}")
     fun deletePersonalPlan(
             @Header("token") token: String,
             @Path("idx") idx : String
     ) : Call<ResponseTimeTable>
+
     //특정 시간표 - 학교수업일정 상세정보 조회
     @GET("/schedule/school/{idx}")
     fun getSchoolPlan(
             @Header("token") token: String,
             @Path("idx") idx : String
     ) : Call<ResponseTimeTable>
+
     //특정 시간표 - 학교수업일정 삭제
     @DELETE("/schedule/school/{idx}")
     fun deleteSchoolPlan(
             @Header("token") token: String,
             @Path("idx") idx : String
     ) : Call<ResponseTimeTable>
-
 
     //일정 색상 변경
     @PUT("/schedule/specific/{idx}")
@@ -156,7 +160,6 @@ interface RequestInterface {
     fun getChatList(
             @Header("token") token : String
     ) : Call<ResponseChatting>
-
 
     //Notice
     //메인 스케줄의 모든 공지 가져오기
@@ -247,6 +250,12 @@ interface RequestInterface {
             @Header("token") token : String,
             @Query("name") name : String
     ) : Call<ResponsegetSubjectWithWord>
+
+    @GET("/subject/recommend")
+    fun getSubjectRecommendWithKeyword(
+            @Header("token") token: String,
+            @Query("name") name: String
+    ) : Call<ResponsegetSubjectWithKeyWord>
 
     @DELETE("/notice/{idx}")
     fun deleteNoticeWithIdx(

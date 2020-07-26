@@ -234,10 +234,10 @@ fun today() : String{
     return now_year.toString()+"-"+now_month.toString()+"-"+now_day.toString()
 }
 
-fun tenday() : String{
+fun thirtyday() : String{
     var year = now_year
     var month = now_month
-    var day = now_day+10
+    var day = now_day+30
 
     if(day > endDay[month+1]) {
         day = endDay[month + 1] - day

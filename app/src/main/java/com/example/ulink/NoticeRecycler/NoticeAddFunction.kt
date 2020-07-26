@@ -2,7 +2,6 @@ package com.example.ulink.NoticeRecycler
 
 import android.graphics.Color
 import android.text.Editable
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
@@ -119,18 +118,6 @@ fun emptyCheck(datas : MutableList<ScheduleItemData>, notice_nothing : TextView,
         rv_notice.visibility=View.VISIBLE
         notice_more.visibility = View.VISIBLE
     }
-}
-
-fun resultCode(category : String) : Int{
-    var code = 0
-
-    when (category) {
-        "과제" -> code = 200
-        "시험" -> code = 300
-        "수업" -> code = 400
-    }
-
-    return code
 }
 
 fun ddayBackground(category : String, dday : TextView) {

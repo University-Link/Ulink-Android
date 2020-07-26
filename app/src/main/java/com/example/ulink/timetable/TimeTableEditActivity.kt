@@ -164,6 +164,8 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
     fun addToTable(subject: Subject) {
 
+        Log.d("tag","subject add to table : ${subject.hashCode()}")
+
         val position = vp_timetableadd.currentItem
         if (position == mAdapter.itemCount - 1) {
             return
@@ -172,16 +174,25 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
         if (!checkIsOver(subject, timeTable)) {
 
-            subject.isSample = false
+//            Fixme 여기서 false로 변경되어 버려서 다시 눌렀을때 sample이 아닌듯
+//            subject.isSample = false
+//            이걸 왜 copy를 해야하지??
+
+
+            val subjectCopy = deepCopy(subject)
+            subjectCopy.isSample = false
+
+            Log.d("tag","subject : ${subjectCopy.hashCode()}")
+
 
             Log.d("tagfindnextcolor", findNextColor(timeTable).toString())
 
-            subject.color = findNextColor(timeTable)
+            subjectCopy.color = findNextColor(timeTable)
 
             DataRepository.addSchoolPlan(RequestAddSchoolPlan(
-                subject.id.toInt(), subject.color, timeTable.id
+                subjectCopy.id.toInt(), subjectCopy.color, timeTable.id
             ), onSuccess = {
-                timeTable.subjectList.add(subject)
+                timeTable.subjectList.add(subjectCopy)
                 mAdapter.replaceAtList(position, timeTable)
                 mAdapter.reDrawFragment(position)
                 vp_timetableadd.setCurrentItem(position, false)
@@ -204,8 +215,6 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         }
 
         var timeTable: TimeTable = mAdapter.timeTableSampleList.get(position)
-
-        Log.d("tag11111", timeTable.toString())
 
         timeTable.subjectList.add(subject)
         mAdapter.replaceAtSampleList(position, timeTable)
@@ -281,8 +290,8 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         return dp * ((metrics.densityDpi.toFloat()) / DisplayMetrics.DENSITY_DEFAULT)
     }
 
+//  위쪽 시간표 세팅
     fun setTimeTableAdd() {
-
         mAdapter.setList(timeTableList)
         mAdapter.timeTableAddListener = object : TimeTableAddListener {
             override fun onAdded(name: String) {
@@ -319,6 +328,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
     }
 
 
+//    아래쪽 과목 세팅
     fun setClassSearch() {
 
         mEditorAdapter.setFragments()
@@ -332,6 +342,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
                 var cartIcon = tablayout.findViewById<ImageView>(id.ic_tab)
                 var filterText = tablayout.findViewById<TextView>(id.tv_tab)
                 var cartText = tablayout.findViewById<TextView>(id.tv_tab)
+                // TODO 이거 셀렉터 말고 리스트로 해결
                 when (position) {
                     0 -> {
                         filterIcon.setBackgroundResource(drawable.timetableadd_ic_filter_selected)
@@ -347,6 +358,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         }).attach()
 
     }
+
 
 
 
@@ -433,6 +445,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         dialog.show()
     }
 
+//    학년 선택시 과목 검색
     override fun onClick(position: Int) {
         RetrofitService.service.getSubjectByGrade(DataRepository.token,position).enqueue(object : Callback<ResponseGetSubjectByGrade>{
             override fun onFailure(call: Call<ResponseGetSubjectByGrade>, t: Throwable) {

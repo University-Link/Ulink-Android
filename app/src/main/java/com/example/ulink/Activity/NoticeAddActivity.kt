@@ -105,7 +105,6 @@ class NoticeAddActivity : AppCompatActivity() {
             datePickerDay = Integer.parseInt(s[2].trim())
         }
 
-
         tv_date.setOnClickListener {
             DatePickerDialog(this, dateSetListener,
                 cal.get(Calendar.YEAR),
@@ -113,25 +112,9 @@ class NoticeAddActivity : AppCompatActivity() {
                 cal.get(Calendar.DAY_OF_MONTH)).show()
         }
 
-        // register
-        /*btn_check.setOnClickListener() {
-            when {
-                category == "" -> showToast("카테고리를 설정하세요.")
-                et_title.text.toString()=="" -> showToast("제목을 입력하세요.")
-                else -> {
-                    resultCode = resultCode(category)
-                    var item = dataReturn(datePickerYear, datePickerMonth, datePickerDay, category, intentClassName, et_title, et_memo, spinner_start, spinner_end)
-
-                    val intent = Intent(this, NoticeActivity::class.java)
-                    intent.putExtra("data", item)
-                    setResult(resultCode, intent) //서버랑통신할때수정이랑등록구분
-                    finish()
-                }
-            }
-        }*/
-
         btn_check.setOnClickListener() {
 
+            //정보를 가지고 item생성
             var item = dataReturn(
                 datePickerYear,
                 datePickerMonth,
@@ -144,6 +127,7 @@ class NoticeAddActivity : AppCompatActivity() {
                 spinner_end
             )
 
+            //item을 가지고 requestBody생성
             var body = RequestRegisterNotice(
                 category = item.category,
                 date = item.date,
@@ -153,8 +137,11 @@ class NoticeAddActivity : AppCompatActivity() {
                 content = item.memo
             )
 
+            //intent
             var check = intent.getStringExtra("addcheck")
             Log.d("check", check.toString())
+
+            //add = registerNotice
             if(check.equals("add")) {
                 RetrofitService.service.registerNotice(DataRepository.token, idx, body)
                     .enqueue(object : Callback<ResponseRegisterNotice> {
@@ -171,12 +158,14 @@ class NoticeAddActivity : AppCompatActivity() {
                             }
                         }
                     })
+                //success -> NoticeActivity
                 val intent = Intent(this, NoticeActivity::class.java)
                 intent.putExtra("idx", idx)
                 intent.putExtra("class", intentClassName)
                 startActivity(intent)
                 finish()
             }
+            //revise = updateNotice
             else if(check.equals("revise")){
                 idx = intent.getStringExtra("noticeIdx")
                 Log.d("check", idx.toString())
@@ -196,6 +185,7 @@ class NoticeAddActivity : AppCompatActivity() {
                             } ?: Log.d("수정실패1", response.message())
                         }
                     })
+                //success -> scheduleNoticeActivity
                 val intent = Intent(this, ScheduleNoticeActivity::class.java)
                 intent.putExtra("scheduleItemData", item)
                 intent.putExtra("idx", idx)
@@ -204,7 +194,6 @@ class NoticeAddActivity : AppCompatActivity() {
                 finish()
             }
         }
-
         btn_back.setOnClickListener {
             finish()
         }

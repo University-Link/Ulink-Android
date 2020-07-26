@@ -75,7 +75,6 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
 
             rvCalendar.adapter = rvAdapter
 
-            val schedule: MutableList<ScheduleItemData> = arrayListOf()
             var datass = mutableListOf<ScheduleItemData>()
 
             RetrofitService.service.getAllNotice(DataRepository.token, strFirstDay, strLastDay)
@@ -104,7 +103,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                                                     memo = "",
                                                     color = it.data[i].notice[j].color,
                                                     day = it.data[i].date.split("-")[2],
-                                                    dayindex = nowDateCheck(i),
+                                                    dayindex = "",
                                                     dday = ddaySchedule(it.data[i])
                                                 )
                                             )
@@ -123,12 +122,12 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
             rvAdapter.datas.apply {
                 //previous_month
                 var dateindex = 0
-                for (i in 0 until index) {
+                for (i in 0 until index) { // index(1일) 그 전까지 prev_month
                     add(
                         CalendarDayData(
                             day = prevEmptyIndex.toString(),
-                            check = false,
-                            date = dateindex,
+                            check = false, // !now_month
+                            date = dateindex, // if(dateindex % 7 == 0) then Sunday
                             today = false
                         )
                     )
@@ -136,14 +135,14 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                     prevEmptyIndex += 1
                 }
                 //month
-                for (i in 1..lastindex) {
+                for (i in 1..lastindex) { // 1일부터 endDay까지
                     if (calendarTodayCheck(i, data))
                         add(
                             CalendarDayData(
                                 day = i.toString(),
-                                check = true,
+                                check = true, // for setting now_month
                                 date = dateindex,
-                                today = true
+                                today = true // for setting today background
                             )
                         )
                     else
@@ -163,7 +162,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                         add(
                             CalendarDayData(
                                 day = lastEmptyIndex.toString(),
-                                check = false,
+                                check = false, // !now_month
                                 date = dateindex,
                                 today = false
                             )
@@ -175,6 +174,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                 }
                 rvAdapter.notifyDataSetChanged()
 
+
                 rvAdapter.setDayClickListener(
                     object : CalendarDayAdapter.DayClickListener {
                         override fun onClick(view: View, position: Int) {
@@ -183,7 +183,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                             val layout = LayoutInflater.from(context)
                                 .inflate(R.layout.calendar_popup_layout, null)
 
-                            //Popup
+                            //popup tv setting O월 O일
                             var popupMonth =
                                 popupMonthCheck(position, index, popupLastEmpty, data.month)
                             var popupDay =
@@ -198,9 +198,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                             var rv_popup = layout.findViewById<RecyclerView>(R.id.rv_popup_schedule_item)
                             rv_popup.adapter = rvPopupAdapter
 
-                            //ScheduleNotice
-                            //var itemMonth : String = zeroPlus(popupMonth.toString())
-                            //var itemDay : String = zeroPlus(rvAdapter.datas[position].day)
+                            //popupYear search
                             var itemYear: String = popupYearCheck(
                                 data.year,
                                 data.month,
@@ -209,19 +207,19 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                                 popupLastEmpty
                             ).toString()
 
+                            //oooo-oo-oo
                             var retrofitStr =
                                 itemYear + "-" + popupMonth.toString() + "-" + popupDay.toString() // request
 
                             val popupList: MutableList<ScheduleItemData> = arrayListOf()
 
+                            //startDay = endDay = retrofitStr(현재 위치에서의 날짜)
                             RetrofitService.service.getAllNotice(DataRepository.token, retrofitStr, retrofitStr)
                                 .enqueue(object : Callback<ResponseCalendar> {
                                     override fun onFailure(
                                         call: Call<ResponseCalendar>,
                                         t: Throwable
-                                    ) {
-                                    }
-
+                                    ) {}
                                     override fun onResponse(
                                         call: Call<ResponseCalendar>,
                                         response: Response<ResponseCalendar>
@@ -241,7 +239,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                                                                 endTime = it.data[i].notice[j].endTime,
                                                                 memo = "",
                                                                 day = it.data[i].date.split("-")[2],
-                                                                dayindex = nowDateCheck(i),
+                                                                dayindex = "",
                                                                 dday = ddaySchedule(it.data[i])
                                                             )
                                                         )
@@ -249,6 +247,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                                                     rvPopupAdapter.datas = popupList
                                                     rvPopupAdapter.notifyDataSetChanged()
 
+                                                    // 일정이 없을 경우 '일정이 없습니다.'
                                                     var tv_schedule_empty = layout.findViewById<TextView>(R.id.tv_schedule_empty)
 
                                                     if(rvPopupAdapter.datas.isEmpty()){
@@ -258,14 +257,13 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                                                         rv_popup.visibility = View.VISIBLE
                                                         tv_schedule_empty.visibility=View.GONE
                                                     }
-
                                                 }
                                             }
                                         } ?: Log.d("tag4", response.message())
                                     }
                                 })
 
-
+                            //공지 클릭 시 상세 공지 뷰로 이동
                             rvPopupAdapter.setScheduleItemClickListener(object :
                                 SchedulePopupAdapter.ScheduleItemClickListener {
                                 override fun onClick(view: View, position: Int) {
@@ -289,10 +287,9 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                             val width = view.resources.getDimensionPixelSize(R.dimen.calendar_popup_width)
                             val height = view.resources.getDimensionPixelSize(R.dimen.calendar_popup_height)
                             dialog.window?.setLayout(width, height)
-
                         }
-                })
+                    })
+                }
             }
         }
     }
-}

@@ -37,8 +37,6 @@ class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeT
 
     inner class VHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-
-
         fun getDay(day: Int): String {
             return when (day) {
                 0 -> "월"
@@ -73,6 +71,7 @@ class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeT
             itemView.findViewById<TextView>(R.id.tv_place).text = ""
 
 
+            //todo 같으면 안찍기
             for (i in 0 until subject.place.size) {
                 itemView.findViewById<TextView>(R.id.tv_place).text =  itemView.findViewById<TextView>(R.id.tv_place).text.toString() + subject.place[i]
                 if (subject.place.size>1 && i < subject.place.size-1){
@@ -194,37 +193,11 @@ class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeT
             toTable.setOnClickListener {
 //                등록되면 올리기
                 subject.subjectIdx
+                Log.d("tag","subject : ${subject.hashCode()}")
                 Log.d("tag","등록  ${subject.subjectIdx}")
                 (context as TimeTableEditActivity).addToTable(subject)
 
             }
-        }
-
-        fun setVisible(){
-            val assess = itemView.findViewById<Button>(R.id.btn_assess)
-            val cart = itemView.findViewById<Button>(R.id.btn_cart)
-            val toTable = itemView.findViewById<Button>(R.id.btn_totable)
-            assess.visibility = View.VISIBLE
-            cart.visibility = View.VISIBLE
-            toTable.visibility = View.VISIBLE
-        }
-        fun setInvisible(){
-            val assess = itemView.findViewById<Button>(R.id.btn_assess)
-            val cart = itemView.findViewById<Button>(R.id.btn_cart)
-            val toTable = itemView.findViewById<Button>(R.id.btn_totable)
-            assess.visibility = View.GONE
-            cart.visibility = View.GONE
-            toTable.visibility = View.GONE
-        }
-    }
-
-    fun redrawItemSelected(position : Int){
-        if (mSelectedItems.getOrDefault(position, false) == true){
-            mSelectedItems.remove(position)
-            notifyItemChanged(position)
-        } else {
-            mSelectedItems.put(position,true)
-            notifyItemChanged(position)
         }
     }
 
@@ -238,13 +211,6 @@ class TimeTableClassAdapter(val context: Context, val onItemClickListener: TimeT
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onBindViewHolder(holder: VHolder, position: Int) {
-//        if (mSelectedItems.getOrDefault(position, false)){
-//            holder.setInvisible()
-//            Log.d("tag", "visible")
-//        } else {
-//            holder.setVisible()
-//            Log.d("tag", "Invisible")
-//        }
         holder.setHolder(subjectList[position])
     }
 }

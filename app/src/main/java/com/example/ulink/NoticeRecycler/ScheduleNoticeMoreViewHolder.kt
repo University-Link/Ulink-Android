@@ -20,7 +20,6 @@ class ScheduleNoticeMoreViewHolder(itemView : View) : RecyclerView.ViewHolder(it
         // TODO 달바뀌는부분디데이계산
         ddayBackground(scheduleData.category, dday)
 
-
         var dayRemainder = ddayCheck(scheduleData)
 
         var dateIndex = scheduleData.date.split("-")

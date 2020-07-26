@@ -4,10 +4,9 @@ data class ResponseLogin(
     val status : Int,
     val success : Boolean,
     val message : String,
-    val data : LoginData?
+    val data : Login?
 )
 
-data class LoginData(
-    val uid : String,
+data class Login(
     val accessToken : String
 )

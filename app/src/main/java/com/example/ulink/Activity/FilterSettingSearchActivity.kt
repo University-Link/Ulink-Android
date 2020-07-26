@@ -1,5 +1,6 @@
 package com.example.ulink.Activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
@@ -13,27 +14,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ulink.R
 import com.example.ulink.TimeTable_Search_Recycler.SearchData
 import com.example.ulink.TimeTable_Search_Recycler.TimeTable_Search_Adapter
-import com.example.ulink.repository.DataRepository
-import com.example.ulink.repository.ResponsegetSubjectWithWord
-import com.example.ulink.repository.RetrofitService
-import com.example.ulink.repository.SearchedData
+import com.example.ulink.repository.*
 import com.example.ulink.textChangedListener
 import com.example.ulink.textResetButton
 import kotlinx.android.synthetic.main.activity_filtersetting_search.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.util.ArrayList
 
 
-class FilterSettingSearchActivity : AppCompatActivity() {
-    val datas : MutableList<SearchData> = mutableListOf<SearchData>()
-    lateinit var TimeTable_Search_Adapter : TimeTable_Search_Adapter
-    lateinit var filter_name :String
-    val list : MutableList<SearchedData> = arrayListOf()
+const val RESULT_SEARCHED = 200
+const val RESULT_CLICKED = 300
 
-    val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxLCJuYW1lIjoi6rmA67O067CwIiwic2Nob29sIjoi7ZWc7JaR64yA7ZWZ6rWQIiwibWFqb3IiOiLshoztlITtirjsm6jslrQiLCJpYXQiOjE1OTQ4MTY1NzQsImV4cCI6MTU5NjI1NjU3NCwiaXNzIjoiYm9iYWUifQ.JwRDELH1lA1Fb8W1ltTmhThpmgFrUTQZVocUTATv3so"
-//    TODO 아이템 클릭이나 검색버튼 클릭하면 setresult
+
+class FilterSettingSearchActivity : AppCompatActivity() {
+
+    lateinit var timetableSearchAdapter : TimeTable_Search_Adapter
+    lateinit var filterName :String
+
+    val datas : MutableList<SearchData> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,115 +44,105 @@ class FilterSettingSearchActivity : AppCompatActivity() {
 
         btn_reset.textResetButton(edit) //검색x버튼추가
 
-        TimeTable_Search_Adapter = TimeTable_Search_Adapter(this)
-        rv_search.adapter = TimeTable_Search_Adapter
+        timetableSearchAdapter = TimeTable_Search_Adapter(this)
+        rv_search.adapter = timetableSearchAdapter
 
         val lm = LinearLayoutManager(this)
         rv_search.layoutManager = lm
         rv_search.setHasFixedSize(true)
 
-        val pref = getSharedPreferences("recentSearch", 0)
-        val editor = pref.edit()
+        val sharedPreferences = getSharedPreferences("recentSearch", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
 
+//        TODO 나중에 recentSearch에도 단순히 name말고 옆에 type도 같이 저장할 경우 이거 사용
 //        val collectionType = object : TypeToken<ArrayList<String>>() {}.type
 //        val recentList = Gson().fromJson<ArrayList<String>>(pref.getString("recentSearch", ""), collectionType)
 
+        val recentList: MutableSet<String>?
+        recentList = sharedPreferences.getStringSet("recentSearch", mutableSetOf())
 
-        var recentList: MutableSet<String>? = HashSet()
-        recentList = pref.getStringSet("recentSearch", null)
         if (recentList != null) {
-            TimeTable_Search_Adapter.recentdatas.addAll(recentList)
+            val list = recentList.reversed()
+            timetableSearchAdapter.recentdatas.addAll(list)
+            timetableSearchAdapter.viewType = 0
+            timetableSearchAdapter.notifyDataSetChanged()
         }
-        //loadDatas()
+        Log.d("tag",recentList.toString())
 
-        TimeTable_Search_Adapter.itemClick = object : TimeTable_Search_Adapter.ItemClick{
-            override fun onClick(view: View, position: Int) {
+        timetableSearchAdapter.itemClick = object : TimeTable_Search_Adapter.ItemClick{
+            override fun onClick(className : String) {
                 //list[position]을 TimeTableFilterSearchFragment 에전달 후 띄워줘야함
-                val intent = Intent()
-                intent.putExtra("item",list[position])
-                setResult(300,intent)
-                intent.putExtra("et_class_name",edit.text.toString())
-                finish()
+                DataRepository.getSubjectWithword(className,
+                onSuccess = {
 
-               // finish()
+                    recentList?.add(className)
+                    editor.clear()
+                    editor.putStringSet("recentSearch", recentList)
+                    editor.apply()
+
+                    val intent = Intent()
+                    intent.putParcelableArrayListExtra("searchedData", it as ArrayList<out Parcelable>)
+                    intent.putExtra("et_class_name",edit.text.toString())
+                    setResult(RESULT_CLICKED,intent)
+                    finish()
+                },
+                onFailure = {
+
+                })
             }
-
         }
 
         btn_back.setOnClickListener {
             finish()
         }
 
-
         edit.textChangedListener {
-
-            RetrofitService.service.getSubjectWithWord(DataRepository.token,edit.text.toString()).enqueue(object : Callback<ResponsegetSubjectWithWord>{
-                override fun onFailure(call: Call<ResponsegetSubjectWithWord>, t: Throwable) {
-                    Log.d("검색실패",t.message.toString())
-                }
-
-                override fun onResponse(
-                    call: Call<ResponsegetSubjectWithWord>,
-                    response: Response<ResponsegetSubjectWithWord>
-                ) {
-                    response.body()?.let{
-                        if(it.status == 200){
-                            //Log.d("검색성공",it.toString())
-
-                            list.clear()
+            if (it.isNullOrBlank()){
+                timetableSearchAdapter.viewType = 0
+                timetableSearchAdapter.notifyDataSetChanged()
+                tv_recentSearch.visibility = View.VISIBLE
+            } else{
+                tv_recentSearch.visibility = View.INVISIBLE
+                DataRepository.getSubjectRecommendWithKeyword(edit.text.toString(),
+                        onSuccess = {
                             datas.clear()
-
-                            if(edit.text.toString()!=""){
-                                list.addAll(it.data)
+                            for (i in it){
+                                datas.add(SearchData(i,""))
                             }
-                            for (i in 0 until list.size) {
-                                datas.apply {
-                                    add(
-                                        SearchData(
-                                            search_result = list[i].name,
-                                            search_type = ""
-                                        )
-                                    )
-                                    Log.d("search_result",list[i].name)
-                                }
-                            }
-//                                list.clear()
 
-                            TimeTable_Search_Adapter.searchdatas = datas
-                            TimeTable_Search_Adapter.viewType = 1
-                            TimeTable_Search_Adapter.notifyDataSetChanged()
-                            editor.commit()
+                            timetableSearchAdapter.searchdatas = datas
+                            timetableSearchAdapter.viewType = 1
+                            timetableSearchAdapter.notifyDataSetChanged()
+                        },
+                        onFailure = {
 
-                        }else{
-                            Log.d("검색실패",it.toString())
-                        }
-                    }
-                }
-            })
+                        })
+            }
         }
 
         edit.setOnEditorActionListener { v, actionId, event ->
-
             if (actionId == EditorInfo.IME_ACTION_SEARCH){
 
-//                recentList?.add(v.text.toString())
-//                editor.putStringSet("recentSearch", recentList)
+                DataRepository.getSubjectWithword(edit.text.toString(),
+                onSuccess = {
 
-//                Log.d("search클릭","search")
-//                TimeTable_Search_Adapter.viewType = 1
-//                TimeTable_Search_Adapter.notifyDataSetChanged()
-//                editor.commit()
+                    recentList?.add(edit.text.toString())
+                    editor.clear()
+                    editor.putStringSet("recentSearch", recentList)
+                    editor.apply()
 
-                //datas 넘겨주기
-                val intent = Intent()
-                intent.putParcelableArrayListExtra("list",list as ArrayList<out Parcelable>)
-                setResult(200,intent)
-                intent.putExtra("et_class_name",edit.text.toString())
-                finish()
+                    val intent = Intent()
+                    intent.putParcelableArrayListExtra("searchedData",it as ArrayList<out Parcelable>)
+                    intent.putExtra("et_class_name",edit.text.toString())
+                    setResult(RESULT_SEARCHED,intent)
+                    finish()
+                },
+                onFailure = {
+//                  TODO 검색 실패시 검색결과 없음!!
+                    finish()
+                })
 
                 return@setOnEditorActionListener true
-
-
             }
 
             return@setOnEditorActionListener false
@@ -168,33 +155,21 @@ class FilterSettingSearchActivity : AppCompatActivity() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long){
-                TimeTable_Search_Adapter.viewType = 0
-                TimeTable_Search_Adapter.notifyDataSetChanged()
+                timetableSearchAdapter.viewType = 0
+                timetableSearchAdapter.notifyDataSetChanged()
                 when(position){
                     0 ->{
-                        filter_name ="과목명"
+                        filterName ="과목명"
                     }
                     1->{
-                        filter_name ="교수명"
+                        filterName ="교수명"
                     }
                     2->{
-                        filter_name ="학수번호"
+                        filterName ="학수번호"
                     }
                 }
             }
         }
     }
-    private fun loadDatas() {
-        datas.apply {
-            add(
-                SearchData(
-                    search_result = "전자기학",
-                    search_type = ""
-                )
-            )
 
-        }
-        TimeTable_Search_Adapter.searchdatas = datas
-        TimeTable_Search_Adapter.notifyDataSetChanged()
-    }
 }

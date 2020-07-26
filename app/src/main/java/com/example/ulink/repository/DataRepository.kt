@@ -15,8 +15,22 @@ object DataRepository {
 
     val retrofit = RetrofitService.service
 
-    var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjozNSwibmFtZSI6IuyGneuTseydtCIsInNjaG9vbCI6Iu2VnOyWkeuMgO2Vmeq1kCIsIm1ham9yIjoi7Jy17ZWp7KCE7J6Q6rO17ZWZ67aAIiwiaWF0IjoxNTk1MDU0NjkxLCJleHAiOjE1OTY0OTQ2OTEsImlzcyI6ImJvYmFlIn0.smlD2n6C1RmwuUp2YNvB5POKXH9ourR6oh1Of3dVzVc"
-   // const val token : String
+    lateinit var token : String
+
+    fun requestLogin(request : RequestLogin, onSuccess: (String) -> Unit, onFailure: (String) -> Unit){
+
+        retrofit.requestLogin(request).enqueue(object : Callback<ResponseLogin>{
+            override fun onFailure(call: Call<ResponseLogin>, t: Throwable) {
+                onFailure(t.localizedMessage)
+            }
+
+            override fun onResponse(call: Call<ResponseLogin>, response: Response<ResponseLogin>) {
+                response.body()?.let {
+                    onSuccess(it.data!!.accessToken)
+                } ?: onFailure(response.message())
+            }
+        })
+    }
 
     fun getMainTimeTable(onSuccess: (TimeTable) -> Unit, onFailure: (String) -> Unit) {
 
@@ -37,6 +51,7 @@ object DataRepository {
                         }
 
                         val timeTable = TimeTable(it.data.timeTable.id, it.data.timeTable.semester, it.data.timeTable.name, 1, startTime = it.data.minTime, endTime = it.data.maxTime, subjectList = subjectList)
+                        Log.d("tag",timeTable.toString())
                         onSuccess(timeTable)
                     } else {
                         onFailure(response.errorBody().toString())
@@ -106,6 +121,41 @@ object DataRepository {
         })
     }
 
+    fun getAllTimeTableList(onSuccess : (MutableList<MutableList<TimeTable>>) -> Unit, onFailure : (String) -> Unit){
+        retrofit.getAllTimeTableList(token).enqueue(object :Callback<ResponseGetAllTimeTableList>{
+            override fun onFailure(call: Call<ResponseGetAllTimeTableList>, t: Throwable) {
+                onFailure(t.localizedMessage)
+                Log.d("tag", t.localizedMessage)
+
+            }
+
+            override fun onResponse(call: Call<ResponseGetAllTimeTableList>, response: Response<ResponseGetAllTimeTableList>) {
+                response.body().let {
+                    val tableList : MutableList<TimeTable> = arrayListOf()
+                    val semesterList : MutableList<MutableList<TimeTable>> = arrayListOf()
+
+//                    TODO 나중에 비어있을때 어떻게 처리할까
+
+                    if (it != null && it.data.isNotEmpty()) {
+                        for (i in it.data.indices){
+                            if (it.data[i].timeTableList.isNotEmpty()){
+                                tableList.clear()
+                                for (a in it.data[i].timeTableList.indices){
+                                    tableList.add(TimeTable(it.data[i].timeTableList[a].id, it.data[i].semester, it.data[i].timeTableList[a].name,it.data[i].timeTableList[a].isMain))
+                                }
+//                              여기서 tablelist의 연결점을 끊어줘야함
+                                semesterList.add(deepCopyRetrofit(tableList))
+                            }
+                        }
+                    }
+                    onSuccess(semesterList)
+                } ?: onFailure(response.message())
+            }
+        })
+    }
+
+
+
     fun addTimeTable(semester : String, name : String, onSuccess : (ResponseAddTimeTable) -> Unit, onFailure :(String) -> Unit){
         retrofit.addTimeTable(token, RequestAddTimeTable(semester, name)).enqueue(object : Callback<ResponseAddTimeTable>{
             override fun onFailure(call: Call<ResponseAddTimeTable>, t: Throwable) {
@@ -149,40 +199,6 @@ object DataRepository {
         })
     }
 
-    fun getAllTimeTableList(onSuccess : (MutableList<MutableList<TimeTable>>) -> Unit, onFailure : (String) -> Unit){
-        retrofit.getAllTimeTableList(token).enqueue(object :Callback<ResponseGetAllTimeTableList>{
-            override fun onFailure(call: Call<ResponseGetAllTimeTableList>, t: Throwable) {
-                onFailure(t.localizedMessage)
-                Log.d("tag", t.localizedMessage)
-
-            }
-
-            override fun onResponse(call: Call<ResponseGetAllTimeTableList>, response: Response<ResponseGetAllTimeTableList>) {
-                response.body().let {
-                    val tableList : MutableList<TimeTable> = arrayListOf()
-                    val semesterList : MutableList<MutableList<TimeTable>> = arrayListOf()
-                    
-//                    TODO 나중에 비어있을때 어떻게 처리할까
-
-                    if (it != null && it.data.isNotEmpty()) {
-                        for (i in it.data.indices){
-                            if (it.data[i].timeTableList.isNotEmpty()){
-                                tableList.clear()
-                                for (a in it.data[i].timeTableList.indices){
-                                    tableList.add(TimeTable(it.data[i].timeTableList[a].id, it.data[i].semester, it.data[i].timeTableList[a].name,it.data[i].timeTableList[a].isMain))
-                                }
-//                              여기서 tablelist의 연결점을 끊어줘야함
-                                semesterList.add(deepCopyRetrofit(tableList))
-                            }
-                        }
-                    }
-                    onSuccess(semesterList)
-                } ?: onFailure(response.message())
-            }
-        })
-    }
-
-
     fun getAllNotice(start: String, end: String, onSuccess: (Map<String, List<ScheduleItemData>>) -> Unit, onFailure: (String) -> Unit) {
         retrofit.getAllNotice(token, start, end).enqueue(object : Callback<ResponseCalendar> {
             override fun onFailure(call: Call<ResponseCalendar>, t: Throwable) {
@@ -205,5 +221,32 @@ object DataRepository {
         })
     }
 
+    fun getSubjectRecommendWithKeyword(name : String, onSuccess: (List<String>) -> Unit, onFailure: (String) -> Unit){
+        retrofit.getSubjectRecommendWithKeyword(token, name).enqueue(object :Callback<ResponsegetSubjectWithKeyWord>{
+            override fun onFailure(call: Call<ResponsegetSubjectWithKeyWord>, t: Throwable) {
+                onFailure(t.localizedMessage)
+            }
+
+            override fun onResponse(call: Call<ResponsegetSubjectWithKeyWord>, response: Response<ResponsegetSubjectWithKeyWord>) {
+                response.body()?.let {
+                    onSuccess(it.data!!)
+                } ?: onFailure(response.message())
+            }
+        })
+    }
+
+    fun getSubjectWithword(name: String, onSuccess: (List<SearchedData>) -> Unit, onFailure: (String) -> Unit){
+        retrofit.getSubjectWithWord(token, name).enqueue(object : Callback<ResponsegetSubjectWithWord>{
+            override fun onFailure(call: Call<ResponsegetSubjectWithWord>, t: Throwable) {
+                onFailure(t.localizedMessage)
+            }
+
+            override fun onResponse(call: Call<ResponsegetSubjectWithWord>, response: Response<ResponsegetSubjectWithWord>) {
+                response.body()?.let {
+                    onSuccess(it.data)
+                } ?: onFailure(response.message())
+            }
+        })
+    }
 
 }
