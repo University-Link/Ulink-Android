@@ -10,13 +10,9 @@ import com.ulink.ulink.chatImgSelector
 
 class ClassViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
-    val img_class : ImageView = itemView.findViewById(R.id.img_class)
-    val tv_class : TextView = itemView.findViewById(R.id.tv_classname)
-    val tv_partition : TextView = itemView.findViewById(R.id.tv_partition)
+    val tv_class : TextView = itemView.findViewById(R.id.tv_class_name)
 
     fun bind(ClassData : ClassData) {
         tv_class.text = ClassData.name
-        tv_partition.setText("참여 (${ClassData.current}/${ClassData.total})")
-        img_class.setBackgroundResource(chatImgSelector(ClassData.color))
     }
 }

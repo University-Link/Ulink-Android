@@ -140,7 +140,6 @@
             android:hint="제목을 입력하세요"
             android:textSize="14sp"
             android:theme="@style/Cursor"
-
             app:layout_constraintTop_toBottomOf="@id/tv_title"
             app:layout_constraintStart_toStartOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,7 @@ class MainPagerAdapter (fm: FragmentManager):
     override fun getItem(position:Int): Fragment {
         return when(position){
             0-> TimeTableFragment()
-            1-> ClassFragment()
+            1-> UlinkFragment()
             2-> CalendarFragment()
             else-> MyFragment()
         }
