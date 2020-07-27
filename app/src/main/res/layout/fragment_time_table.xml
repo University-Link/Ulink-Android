@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/main_img_bg_under"
+    android:id="@+id/layout_timetablefragment"
     tools:context=".fragment.TimeTableFragment">
 
 
