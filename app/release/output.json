@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.example.ulink",
+  "applicationId": "com.ulink.ulink",
   "variantName": "release",
   "elements": [
     {
