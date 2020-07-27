@@ -28,8 +28,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.LoginActivity"></activity>
-        <activity android:name=".Activity.EvaluationActivity"></activity>
+        <activity android:name=".Activity.LoginActivity"/>
+        <activity android:name=".Activity.EvaluationActivity"/>
         <activity android:name=".Activity.FilterSettingSearchActivity" />
         <activity android:name=".Activity.ScheduleNoticeActivity" />
         <activity android:name=".timetable.TimeTableListActivity" />
