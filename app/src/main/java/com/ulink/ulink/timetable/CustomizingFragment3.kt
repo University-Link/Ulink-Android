@@ -32,40 +32,51 @@ class CustomizingFragment3(subject : Subject, val onRefreshListener: onRefreshLi
         layout_color17.setOnClickListener(){
             color = 16
             Toast.makeText(view.context, "자몽 오렌지", Toast.LENGTH_SHORT).show()
+            changeColor(color, subject)
         }
         layout_color18.setOnClickListener(){
             color = 17
             Toast.makeText(view.context, "감귤 오렌지", Toast.LENGTH_SHORT).show()
+            changeColor(color, subject)
         }
         layout_color19.setOnClickListener(){
             color = 18
             Toast.makeText(view.context, "망고 오렌지", Toast.LENGTH_SHORT).show()
+            changeColor(color, subject)
         }
         layout_color20.setOnClickListener(){
             color = 19
             Toast.makeText(view.context, "허니 옐로우", Toast.LENGTH_SHORT).show()
+            changeColor(color, subject)
         }
 
 
         btn_ok3.setOnClickListener(){
-            var body = RequestChangeColor(color=color)
-            RetrofitService.service.updateChangeColor(DataRepository.token, subject.id.toString(), subject.subject, body).enqueue(object : Callback<ResponseChangeColor> {
-                override fun onFailure(call: Call<ResponseChangeColor>, t: Throwable) {
-                    Log.d("tag", "1")
-                }
-
-                override fun onResponse(
-                    call: Call<ResponseChangeColor>,
-                    response: Response<ResponseChangeColor>
-                ) {
-                    response.body()?.let{
-                        if(it.status == 201){
-                            onRefreshListener.onRefresh()
-                        }
-                    } ?: Log.d("tag", response.message())
+            val bottomsheet = CustomizingBottomSheetFragment(subject, object : onRefreshListener {
+                override fun onRefresh() {
                 }
             })
+            bottomsheet.dismiss()
         }
+    }
+    fun changeColor(color : Int, subject : Subject){
+        var body = RequestChangeColor(color=color)
+        RetrofitService.service.updateChangeColor(DataRepository.token, subject.id.toString(), subject.subject, body).enqueue(object : Callback<ResponseChangeColor> {
+            override fun onFailure(call: Call<ResponseChangeColor>, t: Throwable) {
+                Log.d("tag", t.message.toString())
+            }
+
+            override fun onResponse(
+                call: Call<ResponseChangeColor>,
+                response: Response<ResponseChangeColor>
+            ) {
+                response.body()?.let{
+                    if(it.status == 201){
+                        onRefreshListener.onRefresh()
+                    }
+                } ?: Log.d("tag", response.message())
+            }
+        })
     }
 }
 
