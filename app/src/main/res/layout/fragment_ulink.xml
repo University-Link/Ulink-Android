@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".fragment.UlinkFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_logo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@+id/img_class_frag_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="12dp"
+            android:src="@drawable/io_main_ic_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="39dp"
+            android:layout_height="35dp"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/class_btn_search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/img_class_frag_logo"
+            app:layout_constraintBottom_toBottomOf="@id/img_class_frag_logo"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    class_ic_ulinkboard
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_ulink_board"
+        android:layout_width="0dp"
+        android:layout_height="109dp"
+        android:background="@drawable/class_btn_ulinkboard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_logo">
+        <ImageView
+            android:id="@+id/img_ic_ulinkboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/class_ic_ulinkboard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:text="Ulink 게시판"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/img_ic_ulinkboard"
+            app:layout_constraintTop_toTopOf="@id/img_ic_ulinkboard"
+            app:layout_constraintBottom_toBottomOf="@id/img_ic_ulinkboard"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="타 대학생들과 교류할 수 있는 자유공간, Ulink!"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="7dp"
+            app:layout_constraintStart_toStartOf="@id/img_ic_ulinkboard"
+            app:layout_constraintTop_toBottomOf="@id/img_ic_ulinkboard"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_university_board"
+        android:layout_width="0dp"
+        android:layout_height="109dp"
+        android:background="@drawable/class_btn_uniboard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_ulink_board">
+        <ImageView
+            android:id="@+id/img_ic_uniboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/class_ic_uniboard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:text="학교 게시판"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/img_ic_uniboard"
+            app:layout_constraintTop_toTopOf="@id/img_ic_uniboard"
+            app:layout_constraintBottom_toBottomOf="@id/img_ic_uniboard"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="우리 학교 학생들과 자유롭게 대화해보세요"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="7dp"
+            app:layout_constraintStart_toStartOf="@id/img_ic_uniboard"
+            app:layout_constraintTop_toBottomOf="@id/img_ic_uniboard"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_board_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_university_board">
+        <ImageView
+            android:id="@+id/img_class_board"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="21dp"
+            android:layout_marginBottom="12dp"
+            android:src="@drawable/class_ic_board"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="수업 게시판"
+            android:textSize="15sp"
+            android:textColor="@color/text1"
+            android:layout_marginLeft="7dp"
+            app:layout_constraintStart_toEndOf="@id/img_class_board"
+            app:layout_constraintTop_toTopOf="@id/img_class_board"
+            app:layout_constraintBottom_toBottomOf="@id/img_class_board"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_class"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/class_item"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_board_title" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/line"
+        app:layout_constraintTop_toBottomOf="@id/rv_class"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:522777487259:android:7712c2ea89adc65685633e",
         "android_client_info": {
-          "package_name": "com.example.ulink"
+          "package_name": "com.ulink.ulink"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "522777487259-ujvr1952t2aub54fd5k7etivsrtlqkbc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.ulink",
+            "package_name": "com.ulink.ulink",
             "certificate_hash": "f8dccc0db5f064135420ca6a0e642e0825e98e27"
           }
         },

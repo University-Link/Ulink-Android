@@ -10,7 +10,8 @@
     android:background="@drawable/bg_round_border_up"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".timetable.SaveToImageFragment">
+    tools:context=".timetable.SaveToImageFragment"
+    android:visibility="invisible">
 
     <LinearLayout
         android:id="@+id/layout_dayrow"

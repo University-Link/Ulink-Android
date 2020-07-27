@@ -1,268 +1,486 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.MyFragment"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/mypage_bg"
-    tools:context=".fragment.MyFragment">
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/io_main_ic_logo"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="17dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
-
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/my_layout1"
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
-        android:layout_marginHorizontal="20dp"
-        android:paddingBottom="30dp"
-        android:background="@drawable/my_white_background"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/mypage_bg"
+        android:backgroundTint="#ededed"
+        android:paddingBottom="146dp">
 
-        <ImageView
-            android:id="@+id/my_profile_picture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="29dp"
-            android:src="@drawable/mypage_ic_profile"
+        <TextView
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <Button
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/mypage_btn_camera"
-            app:layout_constraintBottom_toBottomOf="@id/my_profile_picture"
-            app:layout_constraintEnd_toEndOf="@id/my_profile_picture"/>
-
-        <TextView
-            android:id="@+id/my_name"
-            android:text="최상일"
-            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:id="@+id/tv_myinfo"
             android:textColor="@color/black"
-            android:layout_marginTop="13dp"
-            android:layout_width="wrap_content"
+            android:text="내 정보"
+            android:textSize="17sp"
+            android:gravity="center"
+            android:background="@color/white"/>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_profile"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/my_profile_picture"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:layout_marginTop="1dp"
+            android:background="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/tv_myinfo">
 
-        <TextView
-            android:id="@+id/my_nick_name"
-            android:text="차욕심없다"
-            android:textSize="14sp"
-            android:textColor="@color/text2"
-            android:layout_marginTop="8dp"
-            android:layout_width="wrap_content"
+            <Button
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/btn_profile_img_change"
+                app:layout_constraintBottom_toBottomOf="@id/my_profile_picture"
+                app:layout_constraintEnd_toEndOf="@id/my_profile_picture" />
+
+            <ImageView
+                android:id="@+id/my_profile_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:layout_marginBottom="12dp"
+                android:src="@drawable/mypage_img_profile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="닉네임"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/divider_1"
+                app:layout_constraintTop_toBottomOf="@id/my_profile_picture" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이름"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_nickname"
+                app:layout_constraintLeft_toRightOf="@id/divider_1"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_nickname" />
+
+            <TextView
+                android:id="@+id/tv_schoolmajor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="학교 과"
+                android:textColor="#676767"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="12dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_nickname"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <View
+                android:id="@+id/divider_1"
+                android:layout_width="1dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:background="@color/line"
+                app:layout_constraintBottom_toBottomOf="@id/tv_nickname"
+                app:layout_constraintLeft_toRightOf="@id/tv_nickname"
+                app:layout_constraintRight_toLeftOf="@id/tv_name"
+                app:layout_constraintTop_toTopOf="@id/tv_nickname" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_myarticle"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/layout_profile">
+
+            <ImageView
+                android:id="@+id/iv_writingmine"
+                android:layout_width="47dp"
+                android:layout_marginLeft="36dp"
+                android:layout_height="47dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/ic_writing_mine"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+            <TextView
+                android:id="@+id/tv_writingmine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:text="내가 쓴 글"
+                android:layout_marginTop="9dp"
+                android:layout_marginBottom="15dp"
+                app:layout_constraintTop_toBottomOf="@id/iv_writingmine"
+                app:layout_constraintLeft_toLeftOf="@id/iv_writingmine"
+                app:layout_constraintRight_toRightOf="@id/iv_writingmine"/>
+
+            <View
+                android:id="@+id/divider_2"
+                android:layout_width="1dp"
+                android:layout_height="60dp"
+                android:background="#ededed"
+                app:layout_constraintLeft_toRightOf="@id/iv_writingmine"
+                app:layout_constraintRight_toLeftOf="@id/iv_commentmine"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <ImageView
+                android:id="@+id/iv_commentmine"
+                android:layout_width="47dp"
+                android:layout_height="47dp"
+                android:background="@drawable/ic_comment_mine"
+                app:layout_constraintTop_toTopOf="@id/iv_writingmine"
+                app:layout_constraintLeft_toRightOf="@id/tv_writingmine"
+                app:layout_constraintRight_toLeftOf="@id/iv_writinglike"/>
+            <TextView
+                android:id="@+id/tv_commentmine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:text="댓글 단 글"
+                app:layout_constraintTop_toTopOf="@id/tv_writingmine"
+                app:layout_constraintLeft_toLeftOf="@id/iv_commentmine"
+                app:layout_constraintRight_toRightOf="@id/iv_commentmine"/>
+
+            <View
+                android:id="@+id/divider_3"
+                android:layout_width="1dp"
+                android:layout_height="60dp"
+                android:background="#ededed"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/iv_commentmine"
+                app:layout_constraintRight_toLeftOf="@id/iv_writinglike"/>
+
+            <ImageView
+                android:id="@+id/iv_writinglike"
+                android:layout_width="47dp"
+                android:layout_height="47dp"
+                android:layout_marginRight="36dp"
+                android:background="@drawable/ic_writing_like"
+                app:layout_constraintTop_toTopOf="@id/iv_writingmine"
+                app:layout_constraintRight_toRightOf="parent"/>
+            <TextView
+                android:id="@+id/tv_writinglike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:text="좋아요 누른 글"
+                app:layout_constraintTop_toTopOf="@id/tv_writingmine"
+                app:layout_constraintLeft_toLeftOf="@id/iv_writinglike"
+                app:layout_constraintRight_toRightOf="@id/iv_writinglike"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layout_change"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/my_name"/>
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/layout_myarticle"
+            android:background="@color/white"
+            >
 
-        <Button
-            android:id="@+id/btn_nickname_revise"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:layout_marginLeft="2dp"
-            app:layout_constraintStart_toEndOf="@id/my_nick_name"
-            app:layout_constraintTop_toTopOf="@id/my_nick_name"
-            app:layout_constraintBottom_toBottomOf="@id/my_nick_name"
-            android:background="@drawable/mypage_ic_pencil"/>
+            <Button
+                android:id="@+id/btn_school_certification"
+                android:text="학교 인증"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:drawableRight="@drawable/mypagr_btn_next"
+                android:paddingRight="6dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="22dp"
+                android:background="@drawable/btn_mypage"/>
 
-        <TextView
-            android:id="@+id/my_school"
-            android:text="숙명여자대학교"
-            android:textSize="14sp"
-            android:textColor="@color/text2"
-            android:layout_marginTop="8dp"
-            android:layout_width="wrap_content"
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"/>
+
+            <Button
+                android:id="@+id/btn_changemajor"
+                android:text="학과 변경"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:paddingRight="6dp"
+                android:layout_gravity="center"
+                android:drawableRight="@drawable/mypagr_btn_next"
+                android:gravity="center_vertical"
+                android:paddingLeft="22dp"
+                android:background="@drawable/btn_mypage"/>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@color/line"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp" />
+
+            <Button
+                android:id="@+id/btn_changepassword"
+                android:text="비밀번호 변경"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:paddingRight="6dp"
+                android:drawableRight="@drawable/mypagr_btn_next"
+                android:gravity="center_vertical"
+                android:paddingLeft="22dp"
+                android:background="@drawable/btn_mypage"/>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@color/line"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp" />
+
+            <Button
+                android:id="@+id/btn_changenickname"
+                android:text="닉네임 변경"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:paddingRight="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:drawableRight="@drawable/mypagr_btn_next"
+                android:gravity="center_vertical"
+                android:paddingLeft="22dp"
+                android:background="@drawable/btn_mypage"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_etc"
+            android:background="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/layout_change"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/my_nick_name"
-            />
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
 
-        <TextView
-            android:id="@+id/my_major"
-            android:text="식품영양학과 18학번"
-            android:textSize="14sp"
-            android:textColor="@color/text2"
-            android:layout_marginTop="8dp"
-            android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/btn_notice"
+                android:text="공지사항"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:paddingRight="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:drawableRight="@drawable/mypagr_btn_next"
+                android:gravity="center_vertical"
+                android:paddingLeft="22dp"
+                android:background="@drawable/btn_mypage"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"/>
+
+            <Button
+                android:id="@+id/btn_notifysetting"
+                android:text="알림 설정"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:paddingRight="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:drawableRight="@drawable/mypagr_btn_next"
+                android:gravity="center_vertical"
+                android:paddingLeft="22dp"
+                android:background="@drawable/btn_mypage"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"/>
+
+            <Button
+                android:id="@+id/btn_communityguide"
+                android:text="커뮤니티 이용수칙"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:paddingRight="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:drawableRight="@drawable/mypagr_btn_next"
+                android:gravity="center_vertical"
+                android:paddingLeft="22dp"
+                android:background="@drawable/btn_mypage"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"/>
+
+            <Button
+                android:id="@+id/btn_qna"
+                android:text="자주 묻는 질문"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:paddingRight="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:drawableRight="@drawable/mypagr_btn_next"
+                android:gravity="center_vertical"
+                android:paddingLeft="22dp"
+                android:background="@drawable/btn_mypage"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"/>
+
+            <Button
+                android:id="@+id/btn_license"
+                android:text="오픈소스 라이선스"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:paddingRight="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:drawableRight="@drawable/mypagr_btn_next"
+                android:gravity="center_vertical"
+                android:paddingLeft="22dp"
+                android:background="@drawable/btn_mypage"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"/>
+
+            <Button
+                android:id="@+id/btn_privacy"
+                android:text="개인정보 처리방침"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:paddingRight="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:drawableRight="@drawable/mypagr_btn_next"
+                android:gravity="center_vertical"
+                android:paddingLeft="22dp"
+                android:background="@drawable/btn_mypage"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"/>
+
+            <Button
+                android:id="@+id/btn_version"
+                android:text="앱 버전"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:paddingRight="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:drawableRight="@drawable/mypagr_btn_next"
+                android:gravity="center_vertical"
+                android:paddingLeft="22dp"
+                android:background="@drawable/btn_mypage"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_account"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/my_school"
-            />
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/layout_etc">
 
-        <TextView
-            android:id="@+id/point_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="내 포인트"
-            android:textSize="15sp"
-            android:textColor="@color/text1"
-            android:textStyle="bold"
-            android:layout_marginTop="38dp"
-            android:layout_marginLeft="69dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/my_major"
-            />
+            <Button
+                android:id="@+id/btn_logout"
+                android:text="로그아웃"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:paddingRight="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:drawableRight="@drawable/mypagr_btn_next"
+                android:gravity="center_vertical"
+                android:paddingLeft="22dp"
+                android:background="@drawable/btn_mypage"/>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"/>
 
-        <TextView
-            android:id="@+id/level_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="내 등급"
-            android:textSize="15sp"
-            android:textColor="@color/text1"
-            android:textStyle="bold"
-            android:layout_marginRight="74dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/point_title"
-            />
+            <Button
+                android:id="@+id/btn_withdrawal"
+                android:text="회원탈퇴"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:paddingRight="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:drawableRight="@drawable/mypagr_btn_next"
+                android:gravity="center_vertical"
+                android:paddingLeft="22dp"
+                android:background="@drawable/btn_mypage"/>
 
-        <TextView
-            android:id="@+id/my_point"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1,485P"
-            android:textSize="22sp"
-            android:textColor="@color/main"
-            android:layout_marginTop="12dp"
-            android:layout_marginRight="50dp"
-            app:layout_constraintStart_toStartOf="@id/point_title"
-            app:layout_constraintEnd_toEndOf="@+id/point_title"
-            app:layout_constraintTop_toBottomOf="@id/point_title"
-            />
-
-        <Button
-            android:id="@+id/btn_charge"
-            android:layout_width="43dp"
-            android:layout_height="18dp"
-            android:layout_marginLeft="13dp"
-            android:background="@drawable/mypage_btn_mypoint"
-            app:layout_constraintBottom_toBottomOf="@id/my_point"
-            app:layout_constraintStart_toEndOf="@id/my_point"
-            app:layout_constraintTop_toTopOf="@id/my_point" />
+        </LinearLayout>
 
 
-        <ImageView
-            android:id="@+id/img_level"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/mypage_ic_sprout"
-            android:layout_marginRight="50dp"
-            app:layout_constraintBottom_toBottomOf="@id/my_point"
-            app:layout_constraintEnd_toEndOf="@+id/level_title"
-            app:layout_constraintStart_toStartOf="@id/level_title"
-            app:layout_constraintTop_toTopOf="@id/my_point" />
-
-        <TextView
-            android:id="@+id/my_level"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="새싹"
-            android:textSize="23sp"
-            android:textColor="@color/main"
-            android:layout_marginLeft="6dp"
-            app:layout_constraintBottom_toBottomOf="@id/img_level"
-            app:layout_constraintStart_toEndOf="@id/img_level"
-            app:layout_constraintTop_toTopOf="@id/img_level"
-            />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="@+id/my_layout1"
-        app:layout_constraintStart_toStartOf="@+id/my_layout1"
-        app:layout_constraintTop_toBottomOf="@id/my_layout1">
-
-        <Button
-            android:id="@+id/btn_school_certification"
-            android:text="학교 인증"
-            android:textSize="15sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="7dp"
-            android:drawableRight="@drawable/mypagr_btn_next"
-            android:gravity="center_vertical"
-            android:paddingLeft="14dp"
-            android:background="@drawable/btn_mypage"/>
-
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:layout_marginBottom="7dp"
-            android:background="@color/line" />
-
-        <Button
-            android:id="@+id/btn_personal_information"
-            android:text="개인정보 관리"
-            android:textSize="15sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="7dp"
-            android:drawableRight="@drawable/mypagr_btn_next"
-            android:gravity="center_vertical"
-            android:paddingLeft="14dp"
-            android:background="@drawable/btn_mypage"/>
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:layout_marginBottom="7dp"
-            android:background="@color/line" />
-
-        <Button
-            android:id="@+id/btn_letter"
-            android:text="쪽지함"
-            android:textSize="15sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:drawableRight="@drawable/mypagr_btn_next"
-            android:gravity="center_vertical"
-            android:paddingLeft="14dp"
-            android:layout_marginBottom="7dp"
-            android:background="@drawable/btn_mypage"/>
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:background="@color/line" />
-
-        <Button
-            android:id="@+id/btn_inquiry"
-            android:text="문의하기"
-            android:textSize="15sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:drawableRight="@drawable/mypagr_btn_next"
-            android:gravity="center_vertical"
-            android:paddingLeft="14dp"
-            android:layout_marginBottom="7dp"
-            android:background="@drawable/btn_mypage"/>
-
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

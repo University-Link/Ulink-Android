@@ -15,12 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.ulink.ulink.register.RegisterActivity"
-            android:windowSoftInputMode="adjustResize"/>
-        <activity android:name="com.ulink.ulink.Activity.FilterNormalActivity" />
-        <activity android:name="com.ulink.ulink.Activity.FilterMajorActivity" />
+        <activity android:name=".Ulink.UlinkInsideActivity"></activity>
         <activity
-            android:name="com.ulink.ulink.Activity.SplashActivity"
+            android:name=".register.RegisterActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".Activity.FilterNormalActivity" />
+        <activity android:name=".Activity.FilterMajorActivity" />
+        <activity
+            android:name=".Activity.SplashActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,21 +30,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.ulink.ulink.Activity.LoginActivity"></activity>
-        <activity android:name="com.ulink.ulink.Activity.EvaluationActivity"></activity>
-        <activity android:name="com.ulink.ulink.Activity.FilterSettingSearchActivity" />
-        <activity android:name="com.ulink.ulink.Activity.ScheduleNoticeActivity" />
-        <activity android:name="com.ulink.ulink.timetable.TimeTableListActivity" />
-        <activity android:name="com.ulink.ulink.Activity.NotificationActivity" />
-        <activity android:name="com.ulink.ulink.Activity.ScheduleActivity" />
-        <activity android:name="com.ulink.ulink.timetable.TimeTableDirectEditActivity" />
-        <activity android:name="com.ulink.ulink.timetable.TimeTableDirectTypeActivity" />
-        <activity android:name="com.ulink.ulink.timetable.TimeTableEditActivity" />
-        <activity android:name="com.ulink.ulink.MainActivity" />
-        <activity android:name="com.ulink.ulink.Activity.ChattingActivity" />
-        <activity android:name="com.ulink.ulink.Activity.NoticeActivity" />
-        <activity android:name="com.ulink.ulink.Activity.NoticeMoreActivity" />
-        <activity android:name="com.ulink.ulink.Activity.NoticeAddActivity" />
+        <activity android:name=".Activity.LoginActivity" />
+        <activity android:name=".Activity.EvaluationActivity" />
+        <activity android:name=".Activity.FilterSettingSearchActivity" />
+        <activity android:name=".Activity.ScheduleNoticeActivity" />
+        <activity android:name=".timetable.TimeTableListActivity" />
+        <activity android:name=".Activity.NotificationActivity" />
+        <activity android:name=".Activity.ScheduleActivity" />
+        <activity android:name=".timetable.TimeTableDirectEditActivity" />
+        <activity android:name=".timetable.TimeTableDirectTypeActivity" />
+        <activity android:name=".timetable.TimeTableEditActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Activity.ChattingActivity" />
+        <activity android:name=".Activity.NoticeActivity" />
+        <activity android:name=".Activity.NoticeMoreActivity" />
+        <activity android:name=".Activity.NoticeAddActivity" />
     </application>
 
 </manifest>

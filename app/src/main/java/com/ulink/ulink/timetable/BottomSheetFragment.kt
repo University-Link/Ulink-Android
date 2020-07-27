@@ -113,40 +113,7 @@ class BottomSheetFragment(val mainTable : TimeTable, val onRefreshListener: onRe
 
             val a = object : fragmentListener{
                 override fun onGenerated(fragment : Fragment) {
-                    val sdf = SimpleDateFormat( "yyyyMMddHHmmss"); //년,월,일,시간 포멧 설정
-                    val time = Date(); //파일명 중복 방지를 위해 사용될 현재시간
-                    val fileName = sdf.format(time);
 
-                    val values = ContentValues().apply {
-                        put(MediaStore.Images.Media.DISPLAY_NAME, mainTable.name)
-                        put(MediaStore.Images.Media.MIME_TYPE, "image/*")
-                    }
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                        values.put(MediaStore.Images.Media.IS_PENDING, 1);
-                    }
-
-                    val collection = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
-                    val item = requireContext().contentResolver.insert(collection, values)!!
-
-                    requireContext().contentResolver.openFileDescriptor(item, "w", null).use {
-                        FileOutputStream(it!!.fileDescriptor).use { fos ->
-
-                            var bitmap = Bitmap.createBitmap(resources.displayMetrics.widthPixels,
-                                    resources.displayMetrics.heightPixels,
-                                    Bitmap.Config.ARGB_8888)
-                            var canvas = Canvas(bitmap)
-                            val bgDrawable: Drawable = fragment.view!!.background
-                            if (bgDrawable != null) bgDrawable.draw(canvas) else canvas.drawColor(Color.WHITE)
-
-                            fragment.view!!.draw(canvas)
-
-                            bitmap.compress(Bitmap.CompressFormat.PNG, 80, fos)
-                            fos.close()
-                        }
-                    }
-                    values.clear()
-                    values.put(MediaStore.Images.Media.IS_PENDING, 0)
-                    requireContext().contentResolver.update(item, values, null, null)
                 }
             }
             val fragment = SaveToImageFragment(a)
@@ -155,8 +122,6 @@ class BottomSheetFragment(val mainTable : TimeTable, val onRefreshListener: onRe
             fragment.arguments = bundle
 
             fragmentManager?.beginTransaction()?.add(R.id.layout_timetablefragment, fragment)?.addToBackStack(null)?.commit()
-
-
 
 
 

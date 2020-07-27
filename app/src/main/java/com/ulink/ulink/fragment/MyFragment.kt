@@ -22,57 +22,9 @@ class MyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        btn_school_certification.setOnClickListener(){
-            myPageDialog()
+        btn_school_certification.setOnClickListener {
+
         }
-        btn_personal_information.setOnClickListener(){
-            myPageDialog()
-        }
-        btn_letter.setOnClickListener(){
-            myPageDialog()
-        }
-        btn_inquiry.setOnClickListener(){
-            myPageDialog()
-        }
-        btn_charge.setOnClickListener(){
-            myPageDialog()
-        }
+
     }
-
-    fun myPageDialog(){
-        val builder = android.app.AlertDialog.Builder(context)
-        val layout = LayoutInflater.from(context).inflate(R.layout.dialog_my_page_layout, null)
-
-        builder.setView(layout)
-
-        var dialog = builder.create()
-
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-
-        var width = getResources().getDimensionPixelSize(R.dimen.my_popup_width)
-        var height = getResources().getDimensionPixelSize(R.dimen.my_popup_height)
-        dialog.window?.setLayout(width, height)
-
-        layout.findViewById<TextView>(R.id.tv_check).setOnClickListener {
-            dialog.dismiss()
-        }
-    }
-
-    fun myPencilDialog(){
-        val builder = android.app.AlertDialog.Builder(context)
-        val layout = LayoutInflater.from(context).inflate(R.layout.dialog_my_page_layout, null)
-
-        builder.setView(layout)
-
-        var dialog = builder.create()
-
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-
-        var width = getResources().getDimensionPixelSize(R.dimen.my_popup_width)
-        var height = getResources().getDimensionPixelSize(R.dimen.my_popup_height)
-        dialog.window?.setLayout(width, height)
-    }
-
 }
