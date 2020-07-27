@@ -102,6 +102,7 @@ class NoticeActivity : AppCompatActivity(){
         btn_plus.setOnClickListener {
             val intent = Intent(this, NoticeAddActivity::class.java)
             intent.putExtra("idx", idx)
+            intent.putExtra("noticeIdx", "0")
             intent.putExtra("class", className)
             intent.putExtra("addcheck", "add")
             startActivity(intent)
