@@ -7,14 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ulink.ulink.Activity.ChattingActivity
 import com.ulink.ulink.ClassRecycler.ClassAdapter
 import com.ulink.ulink.ClassRecycler.ClassData
 import com.ulink.ulink.R
+import com.ulink.ulink.Ulink.UlinkInsideActivity
 import com.ulink.ulink.repository.DataRepository
 import com.ulink.ulink.repository.ResponseChatting
 import com.ulink.ulink.repository.RetrofitService
-import kotlinx.android.synthetic.main.fragment_class.*
 import kotlinx.android.synthetic.main.fragment_class.rv_class
 import kotlinx.android.synthetic.main.fragment_ulink.*
 import retrofit2.Call
@@ -77,7 +76,7 @@ class UlinkFragment : Fragment() {
 
         classAdapter.setItemClickLIstener(object:ClassAdapter.ItemClickListener{
             override fun onClick(view:View, position:Int){
-                val intent = Intent(getActivity(), ChattingActivity::class.java)
+                val intent = Intent(getActivity(), UlinkInsideActivity::class.java)
                 intent.putExtra("class", datas[position].name) //과목명
                 intent.putExtra("idx", datas[position].subjectIdx.toString())
                 startActivity(intent)
