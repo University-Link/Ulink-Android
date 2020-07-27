@@ -36,13 +36,14 @@ class NoticeAddActivity : AppCompatActivity() {
         setContentView(R.layout.activity_notice_add)
 
         var idx = intent.getStringExtra("idx")
+        var noticeIdx = intent.getStringExtra("noticeIdx")
 
         // intent
         var scheduleItemData = intent.getParcelableExtra<ScheduleItemData>("scheduleItemData")
         var intentClassName = intent.getStringExtra("class")
 
         // date
-        tv_date.text = SimpleDateFormat("yyyy년 M월 dd일").format(System.currentTimeMillis())
+        tv_date.text = SimpleDateFormat("yyyy년 MM월 dd일").format(System.currentTimeMillis())
 
         //spinner
         spinner_start = findViewById(R.id.spinner_start)
@@ -57,10 +58,17 @@ class NoticeAddActivity : AppCompatActivity() {
             tv_classname.text = intentClassName+" 공지"
 
         // datainit
-        if (scheduleItemData != null)
-              category = intentNoticeAdd(
-                  scheduleItemData, btn_task_notice, btn_test_notice, btn_class_notice,
-                  tv_date, tv_classname, et_title, et_memo, spinner_start, spinner_end)
+        if (scheduleItemData != null) {
+            category = intentNoticeAdd(
+                scheduleItemData, btn_task_notice, btn_test_notice, btn_class_notice,
+                tv_date, tv_classname, et_title, et_memo, spinner_start, spinner_end
+            )
+
+            val strData = scheduleItemData.date.split("-")
+            datePickerYear = Integer.parseInt(strData[0].trim())
+            datePickerMonth = Integer.parseInt(strData[1].trim())
+            datePickerDay = Integer.parseInt(strData[2].trim())
+        }
 
         // category
         btn_task_notice.setOnClickListener(){
@@ -96,7 +104,7 @@ class NoticeAddActivity : AppCompatActivity() {
             cal.set(Calendar.MONTH, monthOfYear)
             cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-            val myFormat = "yyyy년 M월 dd일" // mention the format you need
+            val myFormat = "yyyy년 MM월 dd일" // mention the format you need
             val sdf = SimpleDateFormat(myFormat, Locale.US)
             tv_date.text = sdf.format(cal.time)
             val s = sdf.format(cal.time).split("년", "월", "일")
@@ -124,7 +132,8 @@ class NoticeAddActivity : AppCompatActivity() {
                 et_title,
                 et_memo,
                 spinner_start,
-                spinner_end
+                spinner_end,
+                noticeIdx
             )
 
             //item을 가지고 requestBody생성
@@ -167,9 +176,8 @@ class NoticeAddActivity : AppCompatActivity() {
             }
             //revise = updateNotice
             else if(check.equals("revise")){
-                idx = intent.getStringExtra("noticeIdx")
-                Log.d("check", idx.toString())
-                RetrofitService.service.updateNotice(DataRepository.token, idx, body)
+                Log.d("check", noticeIdx.toString())
+                RetrofitService.service.updateNotice(DataRepository.token, noticeIdx, body)
                     .enqueue(object : Callback<ResponseUpdateNotice> {
                         override fun onFailure(call: Call<ResponseUpdateNotice>, t: Throwable) {
                             Log.d("수정실패", "수정실패")
@@ -188,7 +196,6 @@ class NoticeAddActivity : AppCompatActivity() {
                 //success -> scheduleNoticeActivity
                 val intent = Intent(this, ScheduleNoticeActivity::class.java)
                 intent.putExtra("scheduleItemData", item)
-                intent.putExtra("idx", idx)
                 intent.putExtra("class", intentClassName)
                 startActivity(intent)
                 finish()

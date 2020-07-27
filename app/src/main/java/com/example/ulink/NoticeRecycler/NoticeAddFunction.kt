@@ -81,7 +81,7 @@ fun spinnerInit(spinner : Spinner, adapter : ArrayAdapter<CharSequence>){
 }
 
 fun dataReturn(year : Int, month : Int, day : Int, category : String, classname : String, et_title : EditText, et_memo : EditText,
-                spinner_start: Spinner, spinner_end: Spinner) : ScheduleItemData {
+                spinner_start: Spinner, spinner_end: Spinner, noticeIdx : String) : ScheduleItemData {
 
     var startTime : String
     var endTime : String
@@ -93,7 +93,7 @@ fun dataReturn(year : Int, month : Int, day : Int, category : String, classname 
 
     var item =
         ScheduleItemData(
-            idx = 0,
+            idx = noticeIdx.toInt(),
             date = "$year-$month-$day",
             category = category,
             classname = classname,

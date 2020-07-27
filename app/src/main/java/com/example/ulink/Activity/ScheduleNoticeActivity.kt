@@ -82,6 +82,7 @@ class ScheduleNoticeActivity : AppCompatActivity() {
             intent.putExtra("class", item.classname)
             intent.putExtra("noticeIdx", scheduleItemData.idx.toString())
             startActivity(intent)
+            finish()
         }
 
         btn_delete.setOnClickListener(){
