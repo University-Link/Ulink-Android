@@ -29,29 +29,22 @@ class CustomizingBottomSheetFragment(subject : Subject, val onRefreshListener: o
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-
         val fragment_list : MutableList<Fragment> = arrayListOf()
         fragment_list.addAll(listOf(CustomizingFragment1(subject, object : onRefreshListener{
             override fun onRefresh() {
                 onRefreshListener.onRefresh()
-                dismiss()
             }
         }),CustomizingFragment2(subject, object : onRefreshListener{
             override fun onRefresh() {
                 onRefreshListener.onRefresh()
-                dismiss()
             }
         }),CustomizingFragment3(subject, object : onRefreshListener{
             override fun onRefresh() {
                 onRefreshListener.onRefresh()
-                dismiss()
             }
         })))
         val adapter = CustomizingPagerAdapter(this, fragment_list)
         vp_custom.adapter = adapter
-
 
         TabLayoutMediator(tl_indicator, vp_custom) { v, p ->
             Unit

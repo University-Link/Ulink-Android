@@ -32,58 +32,71 @@ class CustomizingFragment2(subject : Subject, val onRefreshListener: onRefreshLi
         layout_color9.setOnClickListener(){
             color = 8
             Toast.makeText(view.context, "진 블루", Toast.LENGTH_SHORT).show()
+            changeColor(color, subject)
         }
         layout_color10.setOnClickListener(){
             color = 9
             Toast.makeText(view.context, "애쉬 퍼플", Toast.LENGTH_SHORT).show()
+            changeColor(color, subject)
         }
         layout_color11.setOnClickListener(){
             color = 10
             Toast.makeText(view.context, "문라이트 퍼플", Toast.LENGTH_SHORT).show()
+            changeColor(color, subject)
         }
         layout_color12.setOnClickListener(){
             color = 11
             Toast.makeText(view.context, "와인 퍼플", Toast.LENGTH_SHORT).show()
+            changeColor(color, subject)
         }
         layout_color13.setOnClickListener(){
             color = 12
             Toast.makeText(view.context, "라일락 퍼플", Toast.LENGTH_SHORT).show()
+            changeColor(color, subject)
         }
         layout_color14.setOnClickListener(){
             color = 13
             Toast.makeText(view.context, "베이비 핑크", Toast.LENGTH_SHORT).show()
+            changeColor(color, subject)
         }
         layout_color15.setOnClickListener(){
             color = 14
             Toast.makeText(view.context, "라즈베리 핑크", Toast.LENGTH_SHORT).show()
+            changeColor(color, subject)
         }
         layout_color16.setOnClickListener(){
             color = 15
             Toast.makeText(view.context, "코랄 핑크", Toast.LENGTH_SHORT).show()
+            changeColor(color, subject)
         }
 
 
         btn_ok2.setOnClickListener(){
-            var body = RequestChangeColor(color = color)
-
-            RetrofitService.service.updateChangeColor(DataRepository.token, subject.id.toString(), subject.subject, body).enqueue(object : Callback<ResponseChangeColor> {
-                override fun onFailure(call: Call<ResponseChangeColor>, t: Throwable) {
-                    Log.d("tag", "1")
-                }
-
-                override fun onResponse(
-                    call: Call<ResponseChangeColor>,
-                    response: Response<ResponseChangeColor>
-                ) {
-                    response.body()?.let{
-                        if(it.status == 201){
-                            onRefreshListener.onRefresh()
-                        }
-                    } ?: Log.d("tag", response.message())
+            val bottomsheet = CustomizingBottomSheetFragment(subject, object : onRefreshListener {
+                override fun onRefresh() {
                 }
             })
+            bottomsheet.dismiss()
         }
     }
+    fun changeColor(color : Int, subject : Subject){
+        var body = RequestChangeColor(color=color)
+        RetrofitService.service.updateChangeColor(DataRepository.token, subject.id.toString(), subject.subject, body).enqueue(object : Callback<ResponseChangeColor> {
+            override fun onFailure(call: Call<ResponseChangeColor>, t: Throwable) {
+                Log.d("tag", t.message.toString())
+            }
 
+            override fun onResponse(
+                call: Call<ResponseChangeColor>,
+                response: Response<ResponseChangeColor>
+            ) {
+                response.body()?.let{
+                    if(it.status == 201){
+                        onRefreshListener.onRefresh()
+                    }
+                } ?: Log.d("tag", response.message())
+            }
+        })
+    }
 }
 
