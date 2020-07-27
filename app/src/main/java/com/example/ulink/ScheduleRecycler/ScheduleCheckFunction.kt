@@ -13,19 +13,24 @@ var nowDay = cal.get(Calendar.DATE)
 var nowYear = cal.get(Calendar.YEAR)
 var nowMonth = cal.get(Calendar.MONTH)+1
 
-fun nowDateCheck(date : Long) : String {
-    var date = date*-1
-    var tempDate = (date.toInt()+1)%7
+fun nowDateCheck(date : String) : String {
+
+    var strDate = date.split("-")
+
+    cal.set(Calendar.YEAR, strDate[0].toInt())
+    cal.set(Calendar.MONTH, strDate[1].toInt()-1)
+    cal.set(Calendar.DATE, strDate[2].toInt())
+
     var nowDate = ""
 
-    when (tempDate) {
+    when (cal.get(Calendar.DAY_OF_WEEK)) {
         1 -> nowDate = "일"
         2 -> nowDate = "월"
         3 -> nowDate = "화"
         4 -> nowDate = "수"
         5 -> nowDate = "목"
         6 -> nowDate = "금"
-        0 -> nowDate = "토"
+        7 -> nowDate = "토"
     }
 
     return nowDate

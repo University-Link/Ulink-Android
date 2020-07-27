@@ -64,7 +64,7 @@ class ScheduleActivity : AppCompatActivity() {
                                             endTime = tenDayData[i].notice[j].endTime,
                                             memo = "",
                                             day = tenDayData[i].date.split("-")[2],
-                                            dayindex = nowDateCheck(ddaySchedule(tenDayData[i])),
+                                            dayindex = nowDateCheck(tenDayData[i].date),
                                             dday = ddaySchedule(tenDayData[i])
                                         )
                                     )
