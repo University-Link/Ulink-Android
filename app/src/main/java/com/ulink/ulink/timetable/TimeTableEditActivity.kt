@@ -12,6 +12,7 @@ import android.os.Handler
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -22,7 +23,9 @@ import com.ulink.ulink.repository.*
 import com.ulink.ulink.utils.deepCopy
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.ulink.ulink.R
 import kotlinx.android.synthetic.main.activity_time_table_edit.*
+import kotlinx.android.synthetic.main.tab_timetableeditor.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -331,6 +334,46 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         mEditorAdapter.setFragments()
         vp_timetableeditor.adapter = mEditorAdapter
 
+        tl_timetableeditor.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                var position = tab?.position
+                var icon = tab?.view?.findViewById<ImageView>(R.id.ic_tab)
+                var text = tab?.view?.findViewById<TextView>(R.id.tv_tab)
+
+                when (position) {
+                    0 -> {
+                        icon?.setBackgroundResource(drawable.timetableadd_ic_filter)
+                        text?.text = "필터 및 검색"
+                    }
+                    1 -> {
+                        icon?.setBackgroundResource(drawable.timetableadd_ic_cart)
+                        text?.text = "후보"
+                    }
+                }
+
+            }
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                var position = tab?.position
+                var icon = tab?.view?.findViewById<ImageView>(R.id.ic_tab)
+                var text = tab?.view?.findViewById<TextView>(R.id.tv_tab)
+
+                when (position) {
+                    0 -> {
+                        icon?.setBackgroundResource(drawable.timetableadd_ic_filter_selected)
+                        text?.text = "필터 및 검색"
+                    }
+                    1 -> {
+                        icon?.setBackgroundResource(drawable.timetableadd_ic_cart_selected)
+                        text?.text = "후보"
+                    }
+                }
+
+            }
+        })
 
         TabLayoutMediator(tl_timetableeditor, vp_timetableeditor, object : TabLayoutMediator.TabConfigurationStrategy {
             override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
@@ -340,15 +383,16 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
                 var filterText = tablayout.findViewById<TextView>(id.tv_tab)
                 var cartText = tablayout.findViewById<TextView>(id.tv_tab)
                 // TODO 이거 셀렉터 말고 리스트로 해결
+
                 when (position) {
                     0 -> {
                         filterIcon.setBackgroundResource(drawable.timetableadd_ic_filter_selected)
                         filterText.text = "필터 및 검색"
-                    }
+                        }
                     1 -> {
                         cartIcon.setBackgroundResource(drawable.timetableadd_ic_cart_selected)
                         cartText.text = "후보"
-                    }
+                        }
                 }
                 tab.customView = tablayout
             }
