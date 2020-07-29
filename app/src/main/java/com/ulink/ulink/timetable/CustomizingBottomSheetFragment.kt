@@ -34,15 +34,18 @@ class CustomizingBottomSheetFragment(subject : Subject, val onRefreshListener: o
             override fun onRefresh() {
                 onRefreshListener.onRefresh()
             }
-        }),CustomizingFragment2(subject, object : onRefreshListener{
+        }, onClick = {dismiss()}),
+            CustomizingFragment2(subject, object : onRefreshListener{
             override fun onRefresh() {
                 onRefreshListener.onRefresh()
             }
-        }),CustomizingFragment3(subject, object : onRefreshListener{
+        }, onClick = {dismiss()}),
+            CustomizingFragment3(subject, object : onRefreshListener{
             override fun onRefresh() {
                 onRefreshListener.onRefresh()
             }
-        })))
+        },onClick = {dismiss()})
+        ))
         val adapter = CustomizingPagerAdapter(this, fragment_list)
         vp_custom.adapter = adapter
 
@@ -57,5 +60,8 @@ class CustomizingBottomSheetFragment(subject : Subject, val onRefreshListener: o
             }
         })
     }
+
+
+
 }
 

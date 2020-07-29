@@ -102,7 +102,7 @@ class FilterSettingSearchActivity : AppCompatActivity() {
                 timetableSearchAdapter.notifyDataSetChanged()
                 tv_recentSearch.visibility = View.VISIBLE
             } else{
-                tv_recentSearch.visibility = View.INVISIBLE
+                tv_recentSearch.visibility = View.GONE
                 DataRepository.getSubjectRecommendWithKeyword(edit.text.toString(),
                         onSuccess = {
                             datas.clear()
