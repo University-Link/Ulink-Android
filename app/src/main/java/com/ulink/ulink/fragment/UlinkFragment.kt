@@ -10,7 +10,9 @@ import android.view.ViewGroup
 import com.ulink.ulink.ClassRecycler.ClassAdapter
 import com.ulink.ulink.ClassRecycler.ClassData
 import com.ulink.ulink.R
+import com.ulink.ulink.Ulink.UlinkUlinkBoardActivity
 import com.ulink.ulink.Ulink.UlinkInsideActivity
+import com.ulink.ulink.Ulink.UlinkUniversityBoardActivity
 import com.ulink.ulink.repository.DataRepository
 import com.ulink.ulink.repository.ResponseChatting
 import com.ulink.ulink.repository.RetrofitService
@@ -84,17 +86,17 @@ class UlinkFragment : Fragment() {
         })
 
         layout_ulink_board.setOnClickListener(){
-//            val intent = Intent(getActivity(), ChattingActivity::class.java)
-//            intent.putExtra("class", "Ulink")
-//            intent.putExtra("idx", "0")
-//            startActivity(intent)
+            val intent = Intent(getActivity(), UlinkUlinkBoardActivity::class.java)
+            intent.putExtra("class", "Ulink")
+            intent.putExtra("idx", "0")
+            startActivity(intent)
         }
 
         layout_university_board.setOnClickListener(){
-//            val intent = Intent(getActivity(), ChattingActivity::class.java)
-//            intent.putExtra("class", "우리학교")
-//            intent.putExtra("idx", "0")
-//            startActivity(intent)
+            val intent = Intent(getActivity(), UlinkUniversityBoardActivity::class.java)
+            intent.putExtra("class", "우리학교")
+            intent.putExtra("idx", "0")
+            startActivity(intent)
         }
     }
 }

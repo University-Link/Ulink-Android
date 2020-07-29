@@ -45,6 +45,8 @@
         <activity android:name=".Activity.NoticeActivity" />
         <activity android:name=".Activity.NoticeMoreActivity" />
         <activity android:name=".Activity.NoticeAddActivity" />
+        <activity android:name=".Ulink.UlinkUniversityBoardActivity"/>
+        <activity android:name=".Ulink.UlinkUlinkBoardActivity"/>
     </application>
 
 </manifest>

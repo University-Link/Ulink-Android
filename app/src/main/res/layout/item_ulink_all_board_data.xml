@@ -31,6 +31,16 @@
         app:layout_constraintStart_toEndOf="@+id/img_profile"
         app:layout_constraintTop_toTopOf="@+id/img_profile" />
 
+    <ImageView
+        android:id="@+id/img_uni_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:background="@drawable/ulinkboard_ic_unih"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_nickname"
+        app:layout_constraintStart_toEndOf="@+id/tv_nickname"
+        app:layout_constraintTop_toTopOf="@+id/tv_nickname" />
+
     <TextView
         android:id="@+id/tv_time"
         android:textSize="12sp"

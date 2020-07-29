@@ -1,33 +1,27 @@
 package com.ulink.ulink.Ulink
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.ulink.ulink.R
 import com.ulink.ulink.Ulink.UlinkBoardRecycler.UlinkBoardAdapter
 import com.ulink.ulink.Ulink.UlinkBoardRecycler.UlinkBoardData
 import kotlinx.android.synthetic.main.fragment_ulink_board.*
+import kotlinx.android.synthetic.main.toolbar_ulink_inside.*
+import kotlinx.android.synthetic.main.toolbar_ulink_inside.tv_classname
 
-
-class UlinkBoardFragment : Fragment() {
+class UlinkUniversityBoardActivity : AppCompatActivity() {
     lateinit var board_adapter : UlinkBoardAdapter
     val datas : MutableList<UlinkBoardData> = mutableListOf<UlinkBoardData>()
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ulink_board, container, false)
-    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_ulink_university_board)
+        tv_classname.text = "학교게시판"
+        btn_back.setOnClickListener {
+            finish()
+        }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        board_adapter = UlinkBoardAdapter(view.context)
-
+        board_adapter = UlinkBoardAdapter(this)
         rv_ulink_board.adapter = board_adapter
-
 
         datas.apply{
             add(
@@ -83,5 +77,4 @@ class UlinkBoardFragment : Fragment() {
             board_adapter.notifyDataSetChanged()
         }
     }
-
 }

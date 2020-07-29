@@ -1,4 +1,4 @@
-package com.ulink.ulink.Ulink
+package com.ulink.ulink.Ulink.ClassBoard
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,11 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ulink.ulink.R
-import com.ulink.ulink.Ulink.UlinkBoardRecycler.UlinkBoardAdapter
-import com.ulink.ulink.Ulink.UlinkBoardRecycler.UlinkBoardData
 import com.ulink.ulink.Ulink.UlinkNoticeRecycler.UlinkNoticeAdapter
 import com.ulink.ulink.Ulink.UlinkNoticeRecycler.UlinkNoticeData
-import kotlinx.android.synthetic.main.fragment_ulink_board.*
 import kotlinx.android.synthetic.main.fragment_ulink_notice.*
 
 class UlinkNoticeFragment : Fragment() {
@@ -27,7 +24,6 @@ class UlinkNoticeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         notice_adapter = UlinkNoticeAdapter(view.context)
-
         rv_ulink_notice.adapter = notice_adapter
 
         datas.apply{

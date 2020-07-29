@@ -3,6 +3,8 @@ package com.ulink.ulink.Ulink
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.ulink.ulink.Ulink.ClassBoard.UlinkBoardFragment
+import com.ulink.ulink.Ulink.ClassBoard.UlinkNoticeFragment
 
 class UlinkInsideAdapter (fm: FragmentManager) :
         FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT){
