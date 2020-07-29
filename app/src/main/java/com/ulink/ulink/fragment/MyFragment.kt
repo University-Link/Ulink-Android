@@ -1,5 +1,6 @@
 package com.ulink.ulink.fragment
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.ulink.ulink.Activity.SchoolCertificateActivity
 import com.ulink.ulink.R
 import kotlinx.android.synthetic.main.fragment_my.*
 
@@ -23,8 +25,10 @@ class MyFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         btn_school_certification.setOnClickListener {
-
+            val intent = Intent(context, SchoolCertificateActivity::class.java)
+            startActivity(intent)
         }
+
 
     }
 }
