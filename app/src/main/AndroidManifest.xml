@@ -2,11 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ulink.ulink">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_foreground"
@@ -15,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Ulink.UlinkInsideActivity"></activity>
+        <activity android:name=".Activity.SchoolCertificateActivity"></activity>
+        <activity android:name=".Ulink.UlinkInsideActivity" />
         <activity
             android:name=".register.RegisterActivity"
             android:windowSoftInputMode="adjustResize" />
@@ -48,5 +44,10 @@
         <activity android:name=".Ulink.UlinkUniversityBoardActivity"/>
         <activity android:name=".Ulink.UlinkUlinkBoardActivity"/>
     </application>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
