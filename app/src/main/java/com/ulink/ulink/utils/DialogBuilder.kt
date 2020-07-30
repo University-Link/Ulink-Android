@@ -15,12 +15,12 @@ import com.ulink.ulink.R
 class DialogBuilder {
 
     private lateinit var builder : AlertDialog.Builder
-    private lateinit var layout : View
+    lateinit var layout : View
     private lateinit var dialog : AlertDialog
 
     fun build(context : Context) : DialogBuilder{
         builder = AlertDialog.Builder(context)
-        layout = LayoutInflater.from(context).inflate(R.layout.dialog_base, null)
+        //layout = LayoutInflater.from(context).inflate(R.layout.dialog_base, null)
         builder.setView(layout)
         dialog = builder.create()
 
