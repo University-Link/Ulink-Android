@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.ulink.ulink.R
 import com.ulink.ulink.repository.TimeTable
@@ -21,7 +22,7 @@ import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
-class SaveToImageFragment(val fragmentListener: fragmentListener) : Fragment() {
+class SaveToImageFragment() : Fragment() {
 
     lateinit var mGlobalListner : ViewTreeObserver.OnGlobalLayoutListener
 
@@ -44,7 +45,7 @@ class SaveToImageFragment(val fragmentListener: fragmentListener) : Fragment() {
                 val fileName = sdf.format(time);
 
                 val values = ContentValues().apply {
-                    put(MediaStore.Images.Media.DISPLAY_NAME, it.name)
+                    put(MediaStore.Images.Media.DISPLAY_NAME, it.name + fileName)
                     put(MediaStore.Images.Media.MIME_TYPE, "image/*")
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -57,11 +58,11 @@ class SaveToImageFragment(val fragmentListener: fragmentListener) : Fragment() {
                 requireContext().contentResolver.openFileDescriptor(item, "w", null).use {
                     FileOutputStream(it!!.fileDescriptor).use { fos ->
 
-                        var bitmap = Bitmap.createBitmap(resources.displayMetrics.widthPixels,
-                                resources.displayMetrics.heightPixels,
+                        var bitmap = Bitmap.createBitmap(view.measuredWidth,
+                                view.measuredHeight,
                                 Bitmap.Config.ARGB_8888)
                         var canvas = Canvas(bitmap)
-                        val bgDrawable: Drawable = view.background
+                        val bgDrawable: Drawable? = view.background
                         if (bgDrawable != null) bgDrawable.draw(canvas) else canvas.drawColor(Color.WHITE)
 
                         view.draw(canvas)
@@ -73,6 +74,8 @@ class SaveToImageFragment(val fragmentListener: fragmentListener) : Fragment() {
                 values.clear()
                 values.put(MediaStore.Images.Media.IS_PENDING, 0)
                 requireContext().contentResolver.update(item, values, null, null)
+                fragmentManager?.beginTransaction()?.remove(this)?.commit()
+                Toast.makeText(context, "시간표가 저장되었습니다", Toast.LENGTH_SHORT).show();
             }
             layout_timetable.viewTreeObserver.addOnGlobalLayoutListener(mGlobalListner)
         }

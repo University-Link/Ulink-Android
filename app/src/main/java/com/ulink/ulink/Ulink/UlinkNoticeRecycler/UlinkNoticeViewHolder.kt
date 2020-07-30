@@ -11,7 +11,7 @@ class UlinkNoticeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
     val notice_date : TextView = itemView.findViewById(R.id.tv_notice_date)
     val notice_name : TextView = itemView.findViewById(R.id.tv_notice_name)
     val notice_time : TextView = itemView.findViewById(R.id.tv_notice_time)
-    val notice_new : ImageView = itemView.findViewById(R.id.img_notice_new)
+  //  val notice_new : ImageView = itemView.findViewById(R.id.img_notice_new)
 
 
     fun bind(UlinkNoticeData: UlinkNoticeData){

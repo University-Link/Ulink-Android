@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.ulink.ulink.Activity.ChattingActivity
 import com.ulink.ulink.Activity.NoticeActivity
@@ -165,8 +166,10 @@ class TimeTableFragment : Fragment(), onRefreshListener {
             startActivityForResult(Intent(context, TimeTableListActivity::class.java), REQUEST_TIMETABLE_LIST_ACTIVITY)
         }
 
+        val tableView = view.findViewById<ConstraintLayout>(R.id.layout_timetablefragment)
+
         btn_setting.setOnClickListener {
-            val bottomsheet = BottomSheetFragment(mainTable, this, view)
+            val bottomsheet = BottomSheetFragment(mainTable, this)
             fragmentManager?.let { it -> bottomsheet.show(it, bottomsheet.tag) }
         }
     }
