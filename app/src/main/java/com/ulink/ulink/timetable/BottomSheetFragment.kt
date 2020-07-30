@@ -30,7 +30,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class BottomSheetFragment(val mainTable : TimeTable, val onRefreshListener: onRefreshListener, val tableView : View) : BottomSheetDialogFragment() {
+class BottomSheetFragment(val mainTable : TimeTable, val onRefreshListener: onRefreshListener) : BottomSheetDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,25 +111,13 @@ class BottomSheetFragment(val mainTable : TimeTable, val onRefreshListener: onRe
         }
         view.findViewById<TextView>(R.id.tv_saveasimage).setOnClickListener {
 
-            val a = object : fragmentListener{
-                override fun onGenerated(fragment : Fragment) {
 
-                }
-            }
-            val fragment = SaveToImageFragment(a)
+            val fragment = SaveToImageFragment()
             val bundle = Bundle()
             bundle.putParcelable("timeTable", mainTable)
             fragment.arguments = bundle
 
-            fragmentManager?.beginTransaction()?.add(R.id.layout_timetablefragment, fragment)?.addToBackStack(null)?.commit()
-
-
-
-
-
-
-
-
+            fragmentManager?.beginTransaction()?.add(android.R.id.content, fragment)?.addToBackStack(null)?.commit()
 
 
 

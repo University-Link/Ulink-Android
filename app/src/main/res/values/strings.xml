@@ -12,6 +12,25 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
 
+
+    <string name="school_certificate_info">
+        <![CDATA[ <b><font color="#674fee">시간표 등록</font></b>과 <b><font color="#674fee">게시판 연동</font></b>을 위해 <b><font color="#674fee">최초 1회</font></b>
+        <br>학교 이메일 인증이 필요합니다.
+        ]]>
+    </string>
+
+    <string name="school_certificate_codesent">
+        해당 이메일로 인증코드를 발송했습니다. 인증코드를 받지 못했을 경우 입력하신 이메일 정보가 맞는지 확인해 주세요.
+    </string>
+
+    <string name="school_certificate_checkspam">
+        유링크가 발송한 이메일이 스팸 메일로 분류된 것은 아닌지 확인해 주세요. 스팸 메일함에도 메일이 없다면, 다시 한번 ‘인증 요청’을눌러 주세요.
+    </string>
+    <string name="school_certificate_wrongcode">
+        인증코드가 옳지 않습니다. <br/> 다시한번 확인해 주세요
+    </string>
+
+
     <string name="first_popup">"캘린더는 과목별 채팅방에 등록된 공지가\n 자동으로 추가되는 일정 관리 시스템입니다."</string>
     <string-array name="time">
         <item>시간정보없음</item>
