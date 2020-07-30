@@ -141,7 +141,7 @@
         android:layout_height="36dp"/>
 
     <TextView
-        android:id="@+id/codeerror"
+        android:id="@+id/tv_codeerror"
         android:text="인증코드를 받지 못하셨나요?"
         app:layout_constraintLeft_toLeftOf="@id/tv_emailcertificate"
         app:layout_constraintTop_toBottomOf="@id/et_code"
@@ -152,9 +152,9 @@
         android:layout_height="wrap_content" />
     <View
         android:background="#674fee"
-        app:layout_constraintLeft_toLeftOf="@id/codeerror"
-        app:layout_constraintRight_toRightOf="@id/codeerror"
-        app:layout_constraintTop_toBottomOf="@id/codeerror"
+        app:layout_constraintLeft_toLeftOf="@id/tv_codeerror"
+        app:layout_constraintRight_toRightOf="@id/tv_codeerror"
+        app:layout_constraintTop_toBottomOf="@id/tv_codeerror"
         android:layout_width="0dp"
         android:layout_height="1sp"/>
 
