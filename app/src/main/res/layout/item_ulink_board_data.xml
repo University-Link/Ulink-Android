@@ -30,6 +30,27 @@
         app:layout_constraintBottom_toBottomOf="@+id/img_profile"
         app:layout_constraintStart_toEndOf="@+id/img_profile"
         app:layout_constraintTop_toTopOf="@+id/img_profile" />
+    
+    <View
+        app:layout_constraintLeft_toRightOf="@id/tv_nickname"
+        app:layout_constraintTop_toTopOf="@id/tv_nickname"
+        app:layout_constraintBottom_toBottomOf="@id/tv_nickname"
+        android:id="@+id/divider_1"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_width="1dp"
+        android:layout_height="12dp"
+        android:background="#ededed"
+        android:visibility="gone"/>
+    
+    <TextView
+        android:id="@+id/tv_category"
+        app:layout_constraintLeft_toRightOf="@id/divider_1"
+        app:layout_constraintTop_toTopOf="@id/tv_nickname"
+        app:layout_constraintBottom_toBottomOf="@id/tv_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/tv_time"
