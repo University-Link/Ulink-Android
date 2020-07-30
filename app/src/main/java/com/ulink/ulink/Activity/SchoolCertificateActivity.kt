@@ -12,9 +12,12 @@ import kotlinx.android.synthetic.main.activity_school_certificate.*
 
 class SchoolCertificateActivity : AppCompatActivity() {
 
+    var requestSent = false
     var validate = false
     var activated1 = false
     var activated2 = false
+
+
 
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -38,7 +41,7 @@ class SchoolCertificateActivity : AppCompatActivity() {
         }
 
         et_code.setOnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
+            if (requestSent) {
                 btn_ok.setBackgroundResource(R.drawable.btn_request_active)
                 btn_ok.setTextColor(resources.getColor(R.color.white))
                 activated2 = true
@@ -58,25 +61,36 @@ class SchoolCertificateActivity : AppCompatActivity() {
                 }
 //                TODO 여기서 서버에 인증코드 요청!
                 startTimer()
+                requestSent = true
             }
         }
 
 
         btn_ok.setOnClickListener {
             if (activated2) {
-//              TODO 서버랑 코드 같으면
-                DialogBuilder().apply {
-                    build(this@SchoolCertificateActivity)
-                    setContent(getString(R.string.school_certificate_wrongcode))
-                    setClickListener {
-                        dismiss()
+//              TODO 서버랑 코드 같은지 확인
+                val serverPass = 123
+                if (et_code.text.toString() == serverPass.toString()){
+                    DialogBuilder().apply {
+                        build(this@SchoolCertificateActivity)
+                        setContent(getString(R.string.school_certificate_ok))
+                        setButtonText("홈으로 가기")
+                        setClickListener {
+                            dismiss()
+                            finish()
+                        }
+                        show()
                     }
-                    show()
+                } else{
+                    DialogBuilder().apply {
+                        build(this@SchoolCertificateActivity)
+                        setContent(getString(R.string.school_certificate_wrongcode))
+                        setClickListener {
+                            dismiss()
+                        }
+                        show()
+                    }
                 }
-
-
-
-
             }
         }
 
