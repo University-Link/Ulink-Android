@@ -172,7 +172,6 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                 }
                 rvAdapter.notifyDataSetChanged()
 
-
                 rvAdapter.setDayClickListener(
                     object : CalendarDayAdapter.DayClickListener {
                         override fun onClick(view: View, position: Int) {

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.ulink.ulink.Activity.LoginActivity
 import com.ulink.ulink.R
 import com.ulink.ulink.textChangedListener
+import com.ulink.ulink.textResetButton
 import kotlinx.android.synthetic.main.fragment_university.*
 
 class UniversityFragment : Fragment() {
@@ -34,5 +35,7 @@ class UniversityFragment : Fragment() {
         et_university_search.textChangedListener {
             buttonSelector(btn_search, et_university_search)
         }
+
+        btn_search.textResetButton(et_university_search)
     }
 }
