@@ -47,17 +47,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-    <EditText
-        android:id="@+id/et_university_search"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="7.5"
-        android:paddingLeft="40dp"
-        android:textSize="15sp"
-        android:hint="학교 검색"
-        android:background="@drawable/signup_btn_searchbox" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7.5">
 
-    <Button
+            <EditText
+                android:id="@+id/et_university_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="40dp"
+                android:textSize="15sp"
+                android:hint="학교 검색"
+                android:background="@drawable/signup_btn_searchbox"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <Button
+                android:id="@+id/btn_reset"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/class_search_btn_cancel_search"
+                app:layout_constraintEnd_toEndOf="@id/et_university_search"
+                app:layout_constraintTop_toTopOf="@id/et_university_search"
+                app:layout_constraintBottom_toBottomOf="@id/et_university_search"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
         android:id="@+id/btn_search"
         android:layout_width="0dp"
         android:layout_height="36dp"

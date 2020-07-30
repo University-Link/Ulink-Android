@@ -36,6 +36,6 @@ class UniversityFragment : Fragment() {
             buttonSelector(btn_search, et_university_search)
         }
 
-        btn_search.textResetButton(et_university_search)
+        btn_reset.textResetButton(et_university_search)
     }
 }

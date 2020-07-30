@@ -37,7 +37,6 @@
             app:layout_constraintTop_toTopOf="@id/img_class_frag_logo"
             app:layout_constraintBottom_toBottomOf="@id/img_class_frag_logo"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
-    class_ic_ulinkboard
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_ulink_board"
         android:layout_width="0dp"

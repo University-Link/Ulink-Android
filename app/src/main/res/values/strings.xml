@@ -22,7 +22,6 @@
     <string name="school_certificate_codesent">
         해당 이메일로 인증코드를 발송했습니다. 인증코드를 받지 못했을 경우 입력하신 이메일 정보가 맞는지 확인해 주세요.
     </string>
-    
 
 
     <string name="first_popup">"캘린더는 과목별 채팅방에 등록된 공지가\n 자동으로 추가되는 일정 관리 시스템입니다."</string>

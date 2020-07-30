@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".register.UniversityFragment">
+    tools:context=".register.YearFragment">
 
     <Button
         android:id="@+id/btn_back"
@@ -21,14 +21,14 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/signup_img_progressbar_2"
+        android:src="@drawable/signup_img_progressbar_3"
         app:layout_constraintTop_toTopOf="@id/btn_back"
         app:layout_constraintBottom_toBottomOf="@id/btn_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <LinearLayout
-        android:id="@+id/layout_tv_major"
+        android:id="@+id/layout_tv_year"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -39,7 +39,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="학과"
+            android:text="입학년도"
             android:textSize="18sp"
             android:textColor="@color/main"/>
         <TextView
@@ -50,55 +50,36 @@
             android:textColor="@color/text1" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_year"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="22dp"
-        android:weightSum="10"
-        app:layout_constraintTop_toBottomOf="@id/layout_tv_major"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_marginTop="36dp"
+        android:layout_marginLeft="28dp"
+        android:text="2020"
+        android:textSize="26sp"
+        android:textColor="#989898"
+        app:layout_constraintTop_toBottomOf="@id/layout_tv_year"
+        app:layout_constraintStart_toStartOf="@id/layout_tv_year" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="7.5">
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="3dp"
+        android:background="@color/line"
+        app:layout_constraintTop_toBottomOf="@id/tv_year"
+        app:layout_constraintStart_toStartOf="@id/tv_year"
+        app:layout_constraintEnd_toEndOf="@id/tv_year"/>
 
-            <EditText
-                android:id="@+id/et_major_search"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="40dp"
-                android:textSize="15sp"
-                android:hint="학과 검색"
-                android:background="@drawable/signup_btn_searchbox"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <Button
-                android:id="@+id/btn_reset"
-                android:layout_width="17dp"
-                android:layout_height="17dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/class_search_btn_cancel_search"
-                app:layout_constraintEnd_toEndOf="@id/et_major_search"
-                app:layout_constraintTop_toTopOf="@id/et_major_search"
-                app:layout_constraintBottom_toBottomOf="@id/et_major_search"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <Button
-            android:id="@+id/btn_search"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_weight="2.5"
-            android:text="검색"
-            android:textSize="15sp"
-            android:textColor="#989898"
-            android:background="@drawable/signup_btn_search_unactivated"
-            android:layout_marginLeft="4dp"/>
-
-    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="년도"
+        android:textSize="26sp"
+        android:textColor="@color/text1"
+        android:layout_marginLeft="28dp"
+        app:layout_constraintTop_toTopOf="@id/tv_year"
+        app:layout_constraintStart_toEndOf="@id/tv_year"/>
 
     <Button
         android:id="@+id/btn_next"
