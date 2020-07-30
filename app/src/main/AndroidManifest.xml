@@ -15,7 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".myActivity.MyActivityActivity"></activity>
+        <activity android:name=".Activity.ChangeNickNameActivity"></activity>
+        <activity android:name=".Activity.ChangeMajorActivity" />
+        <activity android:name=".myActivity.MyActivityActivity" />
         <activity android:name=".Activity.SchoolCertificateActivity" />
         <activity android:name=".Ulink.UlinkInsideActivity" />
         android:usesCleartextTraffic="true" >
@@ -67,5 +69,8 @@
         <activity android:name=".Ulink.UlinkUniversityBoardActivity"/>
         <activity android:name=".Ulink.UlinkUlinkBoardActivity"/>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
 </manifest>

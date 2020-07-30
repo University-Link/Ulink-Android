@@ -8,10 +8,13 @@ import android.widget.TextView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.ulink.ulink.R
+import com.ulink.ulink.Ulink.UlinkBoardRecycler.UlinkBoardData
 import kotlinx.android.synthetic.main.activity_my_activity.*
 import kotlinx.android.synthetic.main.activity_time_table_edit.*
 
 class MyActivityActivity : AppCompatActivity() {
+
+    val mAdapter = MyActivityAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +24,7 @@ class MyActivityActivity : AppCompatActivity() {
         val type = intent.getIntExtra("type", 0)
         setViewpager(type)
         setTab()
+
     }
 
 
@@ -45,7 +49,25 @@ class MyActivityActivity : AppCompatActivity() {
     }
 
     fun setViewpager(type : Int){
-        vp_myactivity.adapter = MyActivityAdapter(this)
+        vp_myactivity.adapter = mAdapter
         vp_myactivity.currentItem = type
+        vp_myactivity.offscreenPageLimit = 2
+
+//      TODO 여기서 서버랑 통신해서 각 탭에 데이터 넣기!
+        for (a in 0 until 3){
+            (mAdapter.fragmentList[a] as MyActivityFragment).setData(
+                    UlinkBoardData(
+                            img_profile = "",
+                            nickname = "조개탕수만",
+                            time = "방금",
+                            content = "ㅁㅇㄴㄹㅁㄴㅇㄹ",
+                            like = true,
+                            comment_count = "2",
+                            heart_count ="999+",
+                            category = "유링크 게시판"
+                    )
+            )
+        }
+
     }
 }
