@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.ulink.ulink.Activity.ChangeMajorActivity
 import com.ulink.ulink.Activity.ChangeNickNameActivity
+import com.ulink.ulink.Activity.ChangePasswordActivity
 import com.ulink.ulink.Activity.SchoolCertificateActivity
 import com.ulink.ulink.R
 import com.ulink.ulink.myActivity.MyActivityActivity
@@ -80,7 +81,8 @@ class MyFragment : Fragment() {
         }
 
         btn_changepassword.setOnClickListener {
-
+            val intent = Intent(context, ChangePasswordActivity::class.java)
+            startActivity(intent)
         }
     }
 }

@@ -20,7 +20,7 @@ class DialogBuilder {
 
     fun build(context : Context) : DialogBuilder{
         builder = AlertDialog.Builder(context)
-        //layout = LayoutInflater.from(context).inflate(R.layout.dialog_base, null)
+        layout = LayoutInflater.from(context).inflate(R.layout.dialog_base, null)
         builder.setView(layout)
         dialog = builder.create()
 

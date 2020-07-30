@@ -58,8 +58,6 @@ class TimeTableFragment : Fragment(), onRefreshListener {
                     LayoutInflater.from(context).inflate(R.layout.dialog_timetable_subject, null)
 
             layout.findViewById<TextView>(R.id.tv_class_name).text = subject.name
-//                TODO 이거 table받아와서 classname으로 일주일에 몇번 수업인지 알아서 표시하기 vs 어뜨카지
-
             builder.setView(layout)
             val dialog = builder.create()
 

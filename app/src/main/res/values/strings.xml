@@ -39,7 +39,13 @@
         학과를 입력해 주세요.
     </string>
     <string name="change_nickname_info">
-        최소 2자 ~ 최대 14자의 한글,영어,숫자 가능/n특수문자 및 공백 사용 불가
+        최소 2자 ~ 최대 14자의 한글,영어,숫자 가능\n특수문자 및 공백 사용 불가
+    </string>
+    <string name="change_nickname_available">
+        사용 가능한 닉네임입니다.
+    </string>
+    <string name="change_nickname_using">
+        사용 중인 닉네임입니다.
     </string>
 
 

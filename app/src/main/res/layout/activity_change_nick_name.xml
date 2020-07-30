@@ -64,6 +64,7 @@
         android:layout_height="wrap_content"
         android:text="새 닉네임"
         android:textSize="13sp"
+        android:layout_marginLeft="9dp"
         android:layout_marginTop="24dp"
         android:textColor="@color/black"
         app:layout_constraintLeft_toLeftOf="@id/btn_back"
@@ -80,6 +81,8 @@
         app:layout_constraintRight_toLeftOf="@id/btn_check"
         app:layout_constraintTop_toBottomOf="@id/tv_newnickname"
         android:layout_width="0dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginBottom="9dp"
         android:textSize="15sp"
         android:layout_height="36dp"
         android:gravity="center_vertical"/>
@@ -105,7 +108,21 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/et_nickname"
         app:layout_constraintLeft_toLeftOf="@id/tv_newnickname"
-        android:text="@string/change_nickname_info"/>
+        android:text="@string/change_nickname_info"
+        android:textSize="13sp"
+        android:textColor="#989898"/>
+
+    <Button
+        android:id="@+id/btn_change"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="변경"
+        android:textSize="18sp"
+        android:textColor="#989898"
+        android:background="@drawable/signup_btn_next_unactivated"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 
