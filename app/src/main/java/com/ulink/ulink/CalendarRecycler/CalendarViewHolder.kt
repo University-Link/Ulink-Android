@@ -1,6 +1,7 @@
 package com.ulink.ulink.CalendarRecycler
 
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ulink.ulink.R
@@ -11,7 +12,6 @@ class CalendarViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(dayData : CalendarDayData, rootView : View, datas : List<ScheduleItemData>){
 
-//        itemView.findViewById<LinearLayout>(R.id.rv_item_layout).requestDisallowInterceptTouchEvent(true)
         calendarDayColorCheck(dayData, itemView)
         calendarAlpha(dayData, itemView)
 

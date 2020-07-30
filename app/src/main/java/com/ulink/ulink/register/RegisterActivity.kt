@@ -17,9 +17,15 @@ class RegisterActivity : AppCompatActivity() {
 
     fun replaceFragment(fragment : Fragment){
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.enter_from_right)
+        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
         transaction.addToBackStack(null)
         transaction.replace(R.id.layout_register, fragment, "register").commit()
+    }
+
+    fun finishFragment(fragment : Fragment){
+        val fragmentManager = supportFragmentManager
+        fragmentManager.beginTransaction().remove(fragment).commit()
+        fragmentManager.popBackStack()
     }
 
 }

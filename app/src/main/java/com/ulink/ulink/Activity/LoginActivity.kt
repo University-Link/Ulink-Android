@@ -26,6 +26,13 @@ class LoginActivity : AppCompatActivity() {
         val sharedPref: SharedPreferences = getSharedPreferences("pref", Context.MODE_PRIVATE)
         val sharedEdit = sharedPref.edit()
 
+        var id = intent.getStringExtra("id")
+        var password = intent.getStringExtra("password")
+
+        if(id!=null && password!=null) {
+            et_id.setText(id)
+            et_pw.setText(password)
+        }
 
         tv_register.setOnClickListener(){
             val intent = Intent(this, RegisterActivity::class.java)

@@ -397,7 +397,6 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
                 tab.customView = tablayout
             }
         }).attach()
-
     }
 
 

@@ -18,6 +18,7 @@ import com.ulink.ulink.Activity.ChattingActivity
 import com.ulink.ulink.Activity.NoticeActivity
 import com.ulink.ulink.Activity.NotificationActivity
 import com.ulink.ulink.R
+import com.ulink.ulink.Ulink.UlinkInsideActivity
 import com.ulink.ulink.repository.DataRepository
 import com.ulink.ulink.repository.Subject
 import com.ulink.ulink.repository.TimeTable
@@ -99,7 +100,7 @@ class TimeTableFragment : Fragment(), onRefreshListener {
             if (subject.subject == true) {
                 layout.findViewById<TextView>(R.id.tv_tochat).setOnClickListener {
                     //val idx = subject.id.toString()
-                    val intent = Intent(view?.context, ChattingActivity::class.java) //과목명
+                    val intent = Intent(view?.context, UlinkInsideActivity::class.java)
                     intent.putExtra("class", subject.name)
                     intent.putExtra("idx", subject.subjectIdx.toString())
                     Log.d("idx", subject.subjectIdx.toString())

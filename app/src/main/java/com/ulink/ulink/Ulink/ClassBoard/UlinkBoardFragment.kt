@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.fragment_ulink_board.*
 class UlinkBoardFragment : Fragment() {
     lateinit var board_adapter : UlinkBoardAdapter
     val datas : MutableList<UlinkBoardData> = mutableListOf<UlinkBoardData>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -75,7 +76,6 @@ class UlinkBoardFragment : Fragment() {
                     like = true,
                     comment_count = "2",
                     heart_count ="999+"
-
                 )
             )
 

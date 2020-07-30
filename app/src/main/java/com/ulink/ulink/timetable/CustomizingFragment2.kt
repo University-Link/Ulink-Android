@@ -17,7 +17,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class CustomizingFragment2(subject : Subject, val onRefreshListener: onRefreshListener) :Fragment() {
+class CustomizingFragment2(subject : Subject, val onRefreshListener: onRefreshListener, val onClick : ()-> Unit) :Fragment() {
     val subject = subject
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.layout_timetable_bottomsheet_customize2, container, false)
@@ -70,13 +70,8 @@ class CustomizingFragment2(subject : Subject, val onRefreshListener: onRefreshLi
             changeColor(color, subject)
         }
 
-
         btn_ok2.setOnClickListener(){
-            val bottomsheet = CustomizingBottomSheetFragment(subject, object : onRefreshListener {
-                override fun onRefresh() {
-                }
-            })
-            bottomsheet.dismiss()
+            onClick()
         }
     }
     fun changeColor(color : Int, subject : Subject){

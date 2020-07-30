@@ -6,17 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ulink.ulink.R
-import kotlinx.android.synthetic.main.fragment_university.btn_next
+import com.ulink.ulink.textChangedListener
+import com.ulink.ulink.textResetButton
+import kotlinx.android.synthetic.main.fragment_major.*
+import kotlinx.android.synthetic.main.fragment_major.btn_back
+import kotlinx.android.synthetic.main.fragment_major.btn_next
+import kotlinx.android.synthetic.main.fragment_major.btn_reset
+import kotlinx.android.synthetic.main.fragment_major.btn_search
 
 private const val ARG_PARAM1 = "param1"
 
 class MajorFragment : Fragment() {
-    private var param1: String? = null
+    private var university: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
+            university = it.getString(ARG_PARAM1).toString()
         }
     }
 
@@ -31,9 +37,18 @@ class MajorFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         btn_next.setOnClickListener(){
-            (activity as RegisterActivity?)!!.replaceFragment(IdFragment.newInstance("string","string2"))
+            (activity as RegisterActivity?)!!.replaceFragment(YearFragment.newInstance(university, et_major_search.text.toString()))
         }
 
+        btn_back.setOnClickListener(){
+            (activity as RegisterActivity?)!!.finishFragment(this)
+        }
+
+        et_major_search.textChangedListener {
+            buttonSelector(btn_search, et_major_search)
+        }
+
+        btn_reset.textResetButton(et_major_search)
     }
 
     companion object {

@@ -2,6 +2,7 @@ package com.ulink.ulink.CalendarRecycler
 
 import android.util.Log
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ulink.ulink.R
@@ -15,6 +16,5 @@ class CalendarScheduleViewHolder(itemView : View) : RecyclerView.ViewHolder(item
         schedule.text = data.classname
         Log.d("tag",data.toString())
         itemView.setBackgroundResource(scheduleColorSelector(data.color))
-
     }
 }
