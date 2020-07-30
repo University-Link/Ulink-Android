@@ -23,6 +23,7 @@ class ChangeMajorActivity : AppCompatActivity() {
             btn_change.setTextColor(resources.getColor(R.color.white))
 //            TODO 클릭된 학과 임시로 담기 -> 변경누르면 그걸 전달!
             major = it
+            validate = true
         })
         rv_changemajor.adapter = mAdapter
 
@@ -36,14 +37,16 @@ class ChangeMajorActivity : AppCompatActivity() {
         }
 
         btn_change.setOnClickListener {
-            DialogBuilder().apply {
-                build(this@ChangeMajorActivity)
-                setContent(getString(R.string.major_change_changed))
-                setClickListener {
-                    dismiss()
-                    finish()
+            if (validate){
+                DialogBuilder().apply {
+                    build(this@ChangeMajorActivity)
+                    setContent(getString(R.string.major_change_changed))
+                    setClickListener {
+                        dismiss()
+                        finish()
+                    }
+                    show()
                 }
-                show()
             }
         }
     }
