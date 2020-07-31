@@ -310,7 +310,9 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
             TimeTableDirectAdapter.notifyDataSetChanged()
         }
 
-        //시간표 전부 추가 후 확인
+
+//        TODO 서버랑 합의후 개인 일정 추가 어떻게 할건지 확실히 정하기!
+//         여기 addable에서 추가한 요일 시간대 정보 다같이 넣어서 한번에 요청하기! 성공시 intent 200으로 editactivity에 전달하기
         btn_check.setOnClickListener() {
             if (et_title.text.toString() == "") directAddPageDialog()
             else {

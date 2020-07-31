@@ -52,6 +52,7 @@
         android:id="@+id/img_univ"
         android:layout_width="33dp"
         android:layout_height="17dp"
+        android:layout_marginLeft="4dp"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintTop_toTopOf="@id/tv_nickname"
         app:layout_constraintBottom_toBottomOf="@id/tv_nickname"
