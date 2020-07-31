@@ -18,7 +18,6 @@
         <activity android:name=".Activity.ChangePasswordActivity"></activity>
         <activity android:name=".Ulink.BoardDetailActivity" />
         <activity android:name=".Ulink.BoardSearchActivity"></activity>
-        <activity android:name=".Ulink.BoardDetailActivity" />
         <activity android:name=".myActivity.MyActivityActivity" />
         <activity android:name=".Activity.ChangeNickNameActivity"></activity>
         <activity android:name=".Activity.ChangeMajorActivity" />
