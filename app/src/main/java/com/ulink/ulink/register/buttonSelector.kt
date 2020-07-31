@@ -1,9 +1,11 @@
 package com.ulink.ulink.register
 
 import android.graphics.Color
+import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.ImageView
 import com.ulink.ulink.R
 import kotlinx.android.synthetic.main.fragment_agree.*
 
@@ -30,5 +32,12 @@ fun btnNextSelector(btn_information_agree: CheckBox, btn_policy_agree: CheckBox,
     else {
         btn_next.setBackgroundResource(R.drawable.signup_btn_next_unactivated)
         btn_next.setTextColor(Color.parseColor("#989898"))
+    }
+}
+
+fun checkSelector(btn : Button, et : EditText, img : ImageView){
+    if(et.text.isNotEmpty()) {
+        img.visibility= View.VISIBLE
+        btn.visibility=View.INVISIBLE
     }
 }

@@ -38,7 +38,7 @@ class MyActivityActivity : AppCompatActivity() {
                     text.text = "작성한 댓글"
                 }
                 2 -> {
-                    text.text = "내가 쓴 글"
+                    text.text = "좋아요한 글"
                 }
             }
             tab.customView = tablayout
@@ -47,7 +47,7 @@ class MyActivityActivity : AppCompatActivity() {
 
     fun setViewpager(type : Int){
         vp_myactivity.adapter = mAdapter
-        vp_myactivity.currentItem = type
+        vp_myactivity.setCurrentItem(type, false)
         vp_myactivity.offscreenPageLimit = 2
 
 //      TODO 여기서 서버랑 통신해서 각 탭에 데이터 넣기!

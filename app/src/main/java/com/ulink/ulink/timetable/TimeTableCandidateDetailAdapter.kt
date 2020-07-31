@@ -24,6 +24,8 @@ class TimeTableCandidateDetailAdapter(val context: Context, val onDeleteCartClic
 
     val mSelectedItems: HashMap<Int, Boolean> = HashMap()
 
+    var added = false
+
     val preClickList: MutableList<View> = arrayListOf()
 
 
@@ -108,15 +110,6 @@ class TimeTableCandidateDetailAdapter(val context: Context, val onDeleteCartClic
                 layout.setBackgroundColor(Color.parseColor("#ffffff"))
 
             }
-
-//            if (!selector) {
-//                layout.setBackgroundResource(R.drawable.candidate_suject_bg_selected)
-//                selector = true
-//            } else {
-//                layout.setBackgroundColor(Color.parseColor("#ffffff"))
-//                selector = false
-//            }
-
 
             itemView.setOnClickListener {
                 if (mSelectedItems.getOrDefault(adapterPosition, false)) {
@@ -223,6 +216,7 @@ class TimeTableCandidateDetailAdapter(val context: Context, val onDeleteCartClic
                         }
                     }
                 })
+                (context as TimeTableEditActivity).rollBack()
             }
 
             val color = findNextColor(onAddtoTableClickListener.onClicked())

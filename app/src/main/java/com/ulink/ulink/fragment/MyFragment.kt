@@ -1,14 +1,15 @@
 package com.ulink.ulink.fragment
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ulink.ulink.Activity.ChangeMajorActivity
-import com.ulink.ulink.Activity.ChangeNickNameActivity
-import com.ulink.ulink.Activity.SchoolCertificateActivity
+import com.ulink.ulink.Activity.*
+import com.ulink.ulink.MainActivity
 import com.ulink.ulink.R
 import com.ulink.ulink.myActivity.MyActivityActivity
 import kotlinx.android.synthetic.main.fragment_my.*
@@ -80,7 +81,19 @@ class MyFragment : Fragment() {
         }
 
         btn_changepassword.setOnClickListener {
+            val intent = Intent(context, ChangePasswordActivity::class.java)
+            startActivity(intent)
+        }
+        btn_logout.setOnClickListener {
+            val sharedPref: SharedPreferences = requireContext().getSharedPreferences("pref", Context.MODE_PRIVATE)
+            val sharedEdit = sharedPref.edit()
+            sharedEdit.putBoolean("autoLogin", false)
+            sharedEdit.commit()
 
+            val intent = Intent(context, LoginActivity::class.java)
+            startActivity(intent)
+
+            (context as MainActivity).finish()
         }
     }
 }

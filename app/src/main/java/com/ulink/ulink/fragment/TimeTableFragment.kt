@@ -53,37 +53,51 @@ class TimeTableFragment : Fragment(), onRefreshListener {
 //    과목 클릭 콜백
     val onClick = object : subjectOnClick {
         override fun onClick(subject: Subject) {
+
             val builder = AlertDialog.Builder(context)
             val layout =
                     LayoutInflater.from(context).inflate(R.layout.dialog_timetable_subject, null)
 
             layout.findViewById<TextView>(R.id.tv_class_name).text = subject.name
-//                TODO 이거 table받아와서 classname으로 일주일에 몇번 수업인지 알아서 표시하기 vs 어뜨카지
-
             builder.setView(layout)
             val dialog = builder.create()
 
-            for (i in 0 until subject.startTime.size) {
-                layout.findViewById<TextView>(R.id.tv_time).text =
-                        layout.findViewById<TextView>(R.id.tv_time).text.toString() + getDay(subject.day[i]) + " " + subject.startTime[i] + " - " + subject.endTime[i]
-                if (subject.startTime.size > 1 && i < subject.startTime.size - 1) {
-                    var text = layout.findViewById<TextView>(R.id.tv_time).text
-                    val text2 = "$text, " + getDay(subject.day[i])
-                    layout.findViewById<TextView>(R.id.tv_time).text = text2
+//            TODO 이 과목 이름으로 tabelist에서 찾아서 같은 시간 다 표시!!
+//               장소가 같은경우, 다른경우
+
+            for(i in mainTable.subjectList){
+                if (subject.id == i.id){
+//                 같은게 있는 경우
+
+
+                } else {
+                    for (i in 0 until subject.startTime.size) {
+                        layout.findViewById<TextView>(R.id.tv_time).text =
+                                layout.findViewById<TextView>(R.id.tv_time).text.toString() + getDay(subject.day[i]) + " " + subject.startTime[i] + " - " + subject.endTime[i]
+                        if (subject.startTime.size > 1 && i < subject.startTime.size - 1) {
+                            var text = layout.findViewById<TextView>(R.id.tv_time).text
+                            val text2 = "$text, " + getDay(subject.day[i])
+                            layout.findViewById<TextView>(R.id.tv_time).text = text2
+                        }
+                    }
+
+
+                    for (i in 0 until subject.place.size) {
+                        layout.findViewById<TextView>(R.id.tv_place).text =
+                                layout.findViewById<TextView>(R.id.tv_place).text.toString() + subject.place[i]
+
+                        if (subject.place.size > 1 && i < subject.place.size - 1) {
+                            var text = layout.findViewById<TextView>(R.id.tv_place).text
+                            val text2 = "$text, "
+                            layout.findViewById<TextView>(R.id.tv_place).text = text2
+                        }
+                    }
+                    
+                    
                 }
             }
 
-
-            for (i in 0 until subject.place.size) {
-                layout.findViewById<TextView>(R.id.tv_place).text =
-                        layout.findViewById<TextView>(R.id.tv_place).text.toString() + subject.place[i]
-
-                if (subject.place.size > 1 && i < subject.place.size - 1) {
-                    var text = layout.findViewById<TextView>(R.id.tv_place).text
-                    val text2 = "$text, "
-                    layout.findViewById<TextView>(R.id.tv_place).text = text2
-                }
-            }
+           
 
             layout.findViewById<ImageView>(R.id.ic_color).setBackgroundResource(getColors(subject.color))
 
@@ -201,7 +215,6 @@ class TimeTableFragment : Fragment(), onRefreshListener {
 
             if (data != null) {
                 val table: TimeTable = deepCopy(data.getParcelableExtra("timeTable"))
-
                 Log.d("tag", table.toString())
                 lastTimeTableId = table.id
                 refreshLastTimeTable()

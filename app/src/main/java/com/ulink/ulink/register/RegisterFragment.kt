@@ -1,16 +1,16 @@
 package com.ulink.ulink.register
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.ulink.ulink.R
 import com.ulink.ulink.textChangedListener
 import kotlinx.android.synthetic.main.fragment_register.*
-import kotlinx.android.synthetic.main.fragment_register.btn_back
-import kotlinx.android.synthetic.main.fragment_register.btn_next
-import kotlinx.android.synthetic.main.fragment_university.*
+import java.util.regex.Pattern
+
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -64,12 +64,32 @@ class RegisterFragment : Fragment() {
             (activity as RegisterActivity?)!!.finishFragment(this)
         }
 
+        et_id.setFilters("^[a-zA-Z0-9]+$")
+        et_password.setFilters("^[a-zA-Z0-9!@#\$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?~`]+$")
+        et_password_check.setFilters("^[a-zA-Z0-9!@#\$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?~`]+$")
+        et_nickname.setFilters("^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]+$")
+
         et_id.textChangedListener {
-            buttonSelector(btn_id_same_check, et_id)
+            if(et_id.text.toString().length>=8)
+                buttonSelector(btn_id_same_check, et_id)
+            else
+                buttonSelector(btn_id_same_check, et_id)
         }
 
         et_nickname.textChangedListener {
-            buttonSelector(btn_nickname_same_check, et_nickname)
+            if(et_nickname.text.toString().length>=2)
+                buttonSelector(btn_nickname_same_check, et_nickname)
+            else
+                buttonSelector(btn_nickname_same_check, et_nickname)
+        }
+
+        btn_id_same_check.setOnClickListener{
+            //TODO 서버 통신(중복확인 성공) 후에 적용시키기(글자 수 설정)
+            checkSelector(btn_id_same_check, et_id, img_id_success)
+        }
+
+        btn_nickname_same_check.setOnClickListener{
+            checkSelector(btn_nickname_same_check, et_nickname, img_nickname_success)
         }
 
         et_password_check.textChangedListener {
@@ -78,6 +98,8 @@ class RegisterFragment : Fragment() {
             else
                 tv_password_different.visibility=View.GONE
         }
+
+
     }
 
     companion object {
@@ -97,3 +119,4 @@ class RegisterFragment : Fragment() {
             }
     }
 }
+

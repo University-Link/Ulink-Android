@@ -23,10 +23,11 @@ class ChangeMajorActivity : AppCompatActivity() {
             btn_change.setTextColor(resources.getColor(R.color.white))
 //            TODO 클릭된 학과 임시로 담기 -> 변경누르면 그걸 전달!
             major = it
+            validate = true
         })
         rv_changemajor.adapter = mAdapter
 
-//        TODO 여기서 editext 기반으로 서버에 검색 요청 없으면 해당 검색어 입력 하나 띄우고 et에 있는걸로 변경
+//        TODO 여기서 editext 기반으로 서버에 검색 요청 없으면 해당 검색어 입력 하나 띄우고 et에 있는걸로 변경 밑에는 임시!
         mAdapter.addData("컴퓨터공학과")
         mAdapter.notifyItemInserted(0)
 
@@ -36,16 +37,19 @@ class ChangeMajorActivity : AppCompatActivity() {
         }
 
         btn_change.setOnClickListener {
-            DialogBuilder().apply {
-                build(this@ChangeMajorActivity)
-                setContent(getString(R.string.major_change_changed))
-                setClickListener {
-                    dismiss()
-                    finish()
+            if (validate){
+                DialogBuilder().apply {
+                    build(this@ChangeMajorActivity)
+                    setContent(getString(R.string.major_change_changed))
+                    setClickListener {
+                        dismiss()
+                        finish()
+                    }
+                    show()
                 }
-                show()
             }
         }
+        btn_back.setOnClickListener { finish() }
     }
 
 }

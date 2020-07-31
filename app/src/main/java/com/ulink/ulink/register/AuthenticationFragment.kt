@@ -1,6 +1,8 @@
 package com.ulink.ulink.register
 
+import android.graphics.Color
 import android.os.Bundle
+import android.text.InputFilter
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +11,7 @@ import android.view.WindowManager
 import com.ulink.ulink.R
 import com.ulink.ulink.textChangedListener
 import kotlinx.android.synthetic.main.fragment_authentication.*
+import java.util.regex.Pattern
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -39,6 +42,7 @@ class AuthenticationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity!!.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         return inflater.inflate(R.layout.fragment_authentication, container, false)
     }
 
@@ -46,6 +50,8 @@ class AuthenticationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         var gender = ""
+        var authentication = false
+
         btn_next.setOnClickListener{
             (activity as RegisterActivity?)!!.replaceFragment(RegisterFragment.newInstance(university, major, year, advertisement, referral, et_name.text.toString(), gender, et_number.text.toString()))
         }
@@ -54,12 +60,24 @@ class AuthenticationFragment : Fragment() {
             (activity as RegisterActivity?)!!.finishFragment(this)
         }
 
+        et_name.setFilters("^[a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣]+$")
+
         et_number.textChangedListener {
             buttonSelector(btn_send, et_number)
         }
 
         et_authentication_number.textChangedListener {
             buttonSelector(btn_authentication_check, et_authentication_number)
+        }
+
+        btn_send.setOnClickListener {
+            if (et_number.text.toString() != "") {
+                tv_will_send.visibility = View.VISIBLE
+                tv_authentication_time.visibility = View.VISIBLE
+                btn_send.setBackgroundResource(R.drawable.signup_btn_next_unactivated)
+                btn_send.setTextColor(Color.parseColor("#989898"))
+                et_authentication_number.requestFocus()
+            }
         }
 
         btn_female.setOnClickListener{
@@ -82,7 +100,7 @@ class AuthenticationFragment : Fragment() {
 
     }
 
-        companion object {
+    companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String, param3: String, param4: String, param5: String) =
             AuthenticationFragment().apply {
@@ -92,7 +110,7 @@ class AuthenticationFragment : Fragment() {
                     putString(ARG_PARAM3, param3)
                     putString(ARG_PARAM4, param4)
                     putString(ARG_PARAM5, param5)
-                }
             }
+        }
     }
 }

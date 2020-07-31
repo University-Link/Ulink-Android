@@ -14,10 +14,10 @@ import com.ulink.ulink.R
 import com.ulink.ulink.register.RegisterActivity
 import com.ulink.ulink.repository.DataRepository
 import com.ulink.ulink.repository.RequestLogin
+import com.ulink.ulink.utils.DialogBuilder
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,24 +75,14 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun loginPageDialog() {
-        val builder = android.app.AlertDialog.Builder(this)
-        val layout = LayoutInflater.from(this).inflate(R.layout.dialog_my_page_layout, null)
-
-        builder.setView(layout)
-
-        var dialog = builder.create()
-
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-
-        var width = getResources().getDimensionPixelSize(R.dimen.my_popup_width)
-        var height = getResources().getDimensionPixelSize(R.dimen.my_popup_height)
-        dialog.window?.setLayout(width, height)
-
-        layout.findViewById<TextView>(R.id.tv_my_dialog).text = "아이디와 비밀번호를 확인해주세요."
-        layout.findViewById<TextView>(R.id.tv_check).setOnClickListener {
-            dialog.dismiss()
+    private fun loginPageDialog() {
+        DialogBuilder().apply {
+            build(this@LoginActivity)
+            setContent(getString(R.string.login_popup))
+            setClickListener {
+                dismiss()
+            }
+            show()
         }
     }
 }

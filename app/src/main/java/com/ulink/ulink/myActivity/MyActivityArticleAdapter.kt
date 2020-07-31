@@ -25,6 +25,7 @@ class MyActivityArticleAdapter (private val context: Context) : RecyclerView.Ada
         val btn_heart : ImageButton = itemView.findViewById(R.id.btn_heart)
         val tvCommentCount : TextView = itemView.findViewById(R.id.tv_comment_count)
         val tvHeartCount : TextView = itemView.findViewById(R.id.tv_heart_count)
+        val tvCategory = itemView.findViewById<TextView>(R.id.tv_category)
 
         fun setHolder(item : UlinkBoardData){
             itemView.findViewById<TextView>(R.id.tv_category).visibility = View.VISIBLE
@@ -36,6 +37,7 @@ class MyActivityArticleAdapter (private val context: Context) : RecyclerView.Ada
             tvContent.text = item.content
             tvCommentCount.text = item.comment_count
             tvHeartCount.text = item.heart_count
+            tvCategory.text = item.category
 
         }
     }
