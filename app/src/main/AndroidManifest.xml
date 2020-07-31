@@ -15,7 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".myActivity.MyActivityActivity"></activity>
+        <activity android:name=".Activity.ChangePasswordActivity"></activity>
+        <activity android:name=".Ulink.BoardDetailActivity" />
+        <activity android:name=".myActivity.MyActivityActivity" />
+        <activity android:name=".Activity.ChangeNickNameActivity" />
+        <activity android:name=".Activity.ChangeMajorActivity" />
         <activity android:name=".Activity.SchoolCertificateActivity" />
         <activity android:name=".Ulink.UlinkInsideActivity" />
         <receiver android:name=".NewAppWidget" >
@@ -28,7 +32,7 @@
                 android:resource="@xml/new_app_widget_info" />
         </receiver>
 
-        <activity android:name=".NewAppWidgetConfigureActivity" >
+        <activity android:name=".NewAppWidgetConfigureActivity">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>

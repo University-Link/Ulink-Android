@@ -15,7 +15,7 @@ import com.ulink.ulink.R
 class DialogBuilder {
 
     private lateinit var builder : AlertDialog.Builder
-    private lateinit var layout : View
+    lateinit var layout : View
     private lateinit var dialog : AlertDialog
 
     fun build(context : Context) : DialogBuilder{
@@ -32,10 +32,15 @@ class DialogBuilder {
         return this
     }
 
-    fun setClickListener(onClick : () -> Unit){
-        layout.findViewById<Button>(R.id.btn_ok).setOnClickListener {
+    fun setClickListener(onClick : () -> Unit): DialogBuilder {
+        layout.findViewById<TextView>(R.id.btn_ok).setOnClickListener {
             onClick()
         }
+        return this
+    }
+    fun setButtonText(text: String) : DialogBuilder{
+        layout.findViewById<TextView>(R.id.btn_ok).text = text
+        return this
     }
 
     fun show(){

@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.ulink.ulink.Activity.ChangeMajorActivity
+import com.ulink.ulink.Activity.ChangeNickNameActivity
+import com.ulink.ulink.Activity.ChangePasswordActivity
 import com.ulink.ulink.Activity.SchoolCertificateActivity
 import com.ulink.ulink.R
 import com.ulink.ulink.myActivity.MyActivityActivity
@@ -64,6 +67,21 @@ class MyFragment : Fragment() {
         tv_writinglike.setOnClickListener {
             val intent = Intent(context, MyActivityActivity::class.java)
             intent.putExtra("type",2)
+            startActivity(intent)
+        }
+
+        btn_changemajor.setOnClickListener {
+            val intent = Intent(context, ChangeMajorActivity::class.java)
+            startActivity(intent)
+        }
+
+        btn_changenickname.setOnClickListener {
+            val intent = Intent(context, ChangeNickNameActivity::class.java)
+            startActivity(intent)
+        }
+
+        btn_changepassword.setOnClickListener {
+            val intent = Intent(context, ChangePasswordActivity::class.java)
             startActivity(intent)
         }
     }

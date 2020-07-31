@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_round_border"
+    >
+
+    <TextView
+        android:id="@+id/tv_insertname"
+        android:layout_width="wrap_content"
+        android:text="신고 사유 선택"
+        android:textSize="18sp"
+        android:layout_marginTop="19dp"
+        android:layout_marginLeft="22dp"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tv_choice1"
+        android:layout_width="wrap_content"
+        android:text="욕설 또는 비하하는 글"
+        android:textSize="15sp"
+        android:textColor="@color/text1"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintLeft_toLeftOf="@id/tv_insertname"
+        app:layout_constraintTop_toBottomOf="@id/tv_insertname"
+        />
+    <TextView
+        android:id="@+id/tv_choice2"
+        android:layout_width="wrap_content"
+        android:text="음란물 또는 불건전한 대화"
+        android:textSize="15sp"
+        android:textColor="@color/text1"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintLeft_toLeftOf="@id/tv_choice1"
+        app:layout_constraintTop_toBottomOf="@id/tv_choice1"
+        />
+    <TextView
+        android:id="@+id/tv_choice3"
+        android:layout_width="wrap_content"
+        android:text="상업적인 광고 및 판매글"
+        android:textSize="15sp"
+        android:textColor="@color/text1"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintLeft_toLeftOf="@id/tv_choice2"
+        app:layout_constraintTop_toBottomOf="@id/tv_choice2"
+        />
+    <TextView
+        android:id="@+id/tv_choice4"
+        android:layout_width="wrap_content"
+        android:text="특정 정당,정치인 비하 혹은 선거운동"
+        android:textSize="15sp"
+        android:textColor="@color/text1"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintLeft_toLeftOf="@id/tv_choice3"
+        app:layout_constraintTop_toBottomOf="@id/tv_choice3"
+        />
+    <TextView
+        android:id="@+id/tv_choice5"
+        android:layout_width="wrap_content"
+        android:text="사칭 혹은 사기가 의심되는 글 "
+        android:textSize="15sp"
+        android:textColor="@color/text1"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintLeft_toLeftOf="@id/tv_choice4"
+        app:layout_constraintTop_toBottomOf="@id/tv_choice4"
+        />
+
+    <TextView
+        android:id="@+id/tv_choice6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="20dp"
+        android:text="기타 사유"
+        android:textColor="@color/text1"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/tv_choice5"
+        app:layout_constraintTop_toBottomOf="@id/tv_choice5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

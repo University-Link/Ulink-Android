@@ -7,7 +7,7 @@
     android:background="@drawable/white_background">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_direct_time_table"
+        android:id="@+id/txoolbar_direct_time_table"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent">

@@ -1,11 +1,13 @@
 package com.ulink.ulink.Ulink.ClassBoard
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ulink.ulink.R
+import com.ulink.ulink.Ulink.BoardDetailActivity
 import com.ulink.ulink.Ulink.UlinkBoardRecycler.UlinkBoardAdapter
 import com.ulink.ulink.Ulink.UlinkBoardRecycler.UlinkBoardData
 import kotlinx.android.synthetic.main.fragment_ulink_board.*
@@ -82,6 +84,17 @@ class UlinkBoardFragment : Fragment() {
             board_adapter.datas = datas
             board_adapter.notifyDataSetChanged()
         }
+
+        board_adapter.setItemClickLIstener(object: UlinkBoardAdapter.ItemClickListener{
+            override fun onClick(view:View, position:Int){
+                val intent = Intent(getActivity(), BoardDetailActivity::class.java)
+                //intent.putExtra("idx", datas[position].subjectIdx.toString())
+                startActivity(intent)
+            }
+        })
+
     }
+
+
 
 }
