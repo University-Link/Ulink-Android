@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import com.ulink.ulink.ClassRecycler.ClassAdapter
 import com.ulink.ulink.ClassRecycler.ClassData
 import com.ulink.ulink.R
+import com.ulink.ulink.Ulink.BoardSearchActivity
 import com.ulink.ulink.Ulink.UlinkUlinkBoardActivity
 import com.ulink.ulink.Ulink.UlinkInsideActivity
 import com.ulink.ulink.Ulink.UlinkUniversityBoardActivity
@@ -97,6 +98,12 @@ class UlinkFragment : Fragment() {
             intent.putExtra("class", "우리학교")
             intent.putExtra("idx", "0")
             startActivity(intent)
+        }
+
+        btn_search.setOnClickListener {
+            val intent = Intent(getActivity(), BoardSearchActivity::class.java)
+            startActivity(intent)
+
         }
     }
 }

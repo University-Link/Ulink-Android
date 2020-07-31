@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ulink.ulink.ClassRecycler.ClassAdapter
 import com.ulink.ulink.R
 import com.ulink.ulink.Ulink.UlinkBoardRecycler.UlinkBoardData
 

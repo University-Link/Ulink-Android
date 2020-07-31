@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#fff"
+    android:layout_marginBottom="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/img_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="22dp"
+        android:background="@drawable/class_ic_profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="9dp"
+        android:textSize="14sp"
+        android:textColor="#363636"
+        android:textStyle="bold"
+        android:text="조개탕수만"
+        app:layout_constraintBottom_toBottomOf="@+id/img_profile"
+        app:layout_constraintStart_toEndOf="@+id/img_profile"
+        app:layout_constraintTop_toTopOf="@+id/img_profile" />
+
+    <TextView
+        android:id="@+id/tv_board_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text='Ulink게시판'
+        android:layout_marginLeft="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_nickname"
+        app:layout_constraintStart_toEndOf="@+id/divider_1"
+        app:layout_constraintTop_toTopOf="@+id/tv_nickname" />
+
+    <View
+        app:layout_constraintLeft_toRightOf="@id/tv_nickname"
+        app:layout_constraintTop_toTopOf="@id/tv_nickname"
+        app:layout_constraintBottom_toBottomOf="@id/tv_nickname"
+        android:id="@+id/divider_1"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_width="1dp"
+        android:layout_height="12dp"
+        android:background="#ededed"
+        android:visibility="gone"/>
+    
+    <TextView
+        android:id="@+id/tv_category"
+        app:layout_constraintLeft_toRightOf="@id/divider_1"
+        app:layout_constraintTop_toTopOf="@id/tv_nickname"
+        app:layout_constraintBottom_toBottomOf="@id/tv_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:textSize="12sp"
+        android:textColor="#989898"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="방금"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="22dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:textSize="14sp"
+        android:textColor="#363636"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="22dp"
+        android:layout_marginTop="13dp"
+        android:text="..혹시 과제 다 한사람? 정말 하기 싫네요.."
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_profile" />
+
+    <ImageButton
+        android:id="@+id/btn_heart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="22dp"
+        android:layout_marginBottom="13dp"
+        android:layout_marginTop="9dp"
+        android:background="@drawable/class_board_ic_heart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content" />
+
+    <TextView
+        android:id="@+id/tv_heart_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="#727272"
+        android:text="1"
+        android:layout_marginLeft="3dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_heart"
+        app:layout_constraintStart_toEndOf="@+id/btn_heart"
+        app:layout_constraintTop_toTopOf="@+id/btn_heart" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/class_board_ic_reply"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_heart_count"
+        app:layout_constraintStart_toEndOf="@+id/tv_heart_count"
+        app:layout_constraintTop_toTopOf="@+id/tv_heart_count" />
+
+    <TextView
+        android:id="@+id/tv_comment_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:textSize="12sp"
+        android:textColor="#727272"
+        android:text="2"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton2"
+        app:layout_constraintStart_toEndOf="@+id/imageButton2"
+        app:layout_constraintTop_toTopOf="@+id/imageButton2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

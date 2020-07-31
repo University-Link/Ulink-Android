@@ -24,18 +24,20 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="23dp"
         android:layout_marginRight="4dp"
-        android:paddingLeft="12dp"
-        android:lines="1"
+        android:background="@drawable/main_filtersetting_search_bg"
+        android:drawableLeft="@drawable/filtersetting_ic_search"
+        android:drawablePadding="8dp"
         android:imeOptions="actionSearch"
         android:inputType="text"
+        android:lines="1"
+        android:paddingLeft="12dp"
         android:textSize="15sp"
-        android:drawablePadding="8dp"
-        android:drawableLeft="@drawable/filtersetting_ic_search"
-        android:background="@drawable/main_filtersetting_search_bg"
-        app:layout_constraintStart_toEndOf="@id/btn_back"
         app:layout_constraintBottom_toBottomOf="@+id/btn_back"
         app:layout_constraintEnd_toStartOf="@+id/spinner_filter_setting"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/btn_back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.555" />
 
     <Button
         android:id="@+id/btn_reset"
