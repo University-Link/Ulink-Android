@@ -211,7 +211,7 @@ class TimeTableDragView(context: Context, root: View, val timecolumnWidth: Float
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onDown(e: MotionEvent?): Boolean {
-        visible = false
+//        visible = false
         islongpressed = false
         return true
     }

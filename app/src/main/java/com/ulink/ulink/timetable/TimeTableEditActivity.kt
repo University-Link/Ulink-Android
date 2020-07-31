@@ -130,6 +130,7 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
             if (resultCode == 200){
                 val subjectList = data?.getParcelableArrayListExtra<Subject>("subjects")
 //                TODO 여기 어떻게 등록할지?
+
             }
         }
 

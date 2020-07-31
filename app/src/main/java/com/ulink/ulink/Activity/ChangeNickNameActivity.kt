@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.ulink.ulink.R
 import com.ulink.ulink.utils.DialogBuilder
 import kotlinx.android.synthetic.main.activity_change_major.btn_change
@@ -16,6 +17,10 @@ class ChangeNickNameActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_nick_name)
+
+        //        FIXME 이거 임시 지우기
+        tv_nickname.text = "영희조아"
+        Glide.with(this).load(R.drawable.ulinkboard_ic_unih).into(img_univ)
 
 
         et_nickname.setOnFocusChangeListener { v, hasFocus ->

@@ -110,6 +110,8 @@ class SchoolCertificateActivity : AppCompatActivity() {
         validate = true
         object : CountDownTimer(180 * 1000, 1000) {
             override fun onFinish() {
+
+//              TODO 인증시간이 지난경우 어떻게 할지?
                 validate = false
             }
 
