@@ -1,16 +1,15 @@
 package com.ulink.ulink.register
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ulink.ulink.R
+import com.ulink.ulink.utils.DialogBuilder
 import kotlinx.android.synthetic.main.fragment_agree.*
 import kotlinx.android.synthetic.main.fragment_agree.btn_back
 import kotlinx.android.synthetic.main.fragment_agree.btn_next
-import kotlinx.android.synthetic.main.fragment_major.*
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -44,6 +43,16 @@ class AgreeFragment : Fragment() {
         btn_next.setOnClickListener{
             if(btn_policy_agree.isChecked && btn_information_agree.isChecked)
                 (activity as RegisterActivity?)!!.replaceFragment(AuthenticationFragment.newInstance(university, major, year, btn_advertise_agree.isChecked.toString(), btn_referral_agree.isChecked.toString()))
+            else{
+                DialogBuilder().apply {
+                    build(view.context)
+                    setContent(getString(R.string.agree_popup))
+                    setClickListener {
+                        dismiss()
+                    }
+                    show()
+                }
+            }
         }
 
         btn_back.setOnClickListener() {
@@ -56,12 +65,14 @@ class AgreeFragment : Fragment() {
                 btn_information_agree.isChecked=true
                 btn_advertise_agree.isChecked=true
                 btn_referral_agree.isChecked=true
+                btnNextSelector(btn_information_agree, btn_policy_agree, btn_next)
             }
             else{
                 btn_policy_agree.isChecked=false
                 btn_information_agree.isChecked=false
                 btn_advertise_agree.isChecked=false
                 btn_referral_agree.isChecked=false
+                btnNextSelector(btn_information_agree, btn_policy_agree, btn_next)
             }
         }
 

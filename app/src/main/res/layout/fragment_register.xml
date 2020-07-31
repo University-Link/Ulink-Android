@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="42dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="34dp"
         android:text="아이디"
         android:textSize="13sp"
         android:textColor="@color/text1"
@@ -69,17 +69,17 @@
         android:layout_marginHorizontal="39dp"
         android:textSize="17sp"
         android:hint="아이디를 입력해주세요."
-        android:inputType="text"
+        android:maxLength="20"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_id" />
     
     <Button
         android:id="@+id/btn_id_same_check"
-        android:layout_width="56dp"
-        android:layout_height="27dp"
-        android:layout_marginBottom="6dp"
-        android:layout_marginRight="3dp"
+        android:layout_width="64dp"
+        android:layout_height="31dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="5dp"
         android:text="중복확인"
         android:textSize="12sp"
         android:textColor="#989898"
@@ -88,16 +88,48 @@
         app:layout_constraintTop_toTopOf="@id/et_id"
         app:layout_constraintBottom_toBottomOf="@id/et_id"/>
 
+    <ImageView
+        android:id="@+id/img_id_success"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/signup_img_check"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@id/btn_id_same_check"
+        app:layout_constraintEnd_toEndOf="@id/btn_id_same_check"
+        app:layout_constraintTop_toTopOf="@id/btn_id_same_check"
+        app:layout_constraintBottom_toBottomOf="@id/btn_id_same_check"/>
+
+    <TextView
+        android:id="@+id/id_warning1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="최소 8자~최대 20자의 영어, 숫자 가능"
+        android:textSize="13sp"
+        android:textColor="#989898"
+        app:layout_constraintStart_toStartOf="@id/tv_id"
+        app:layout_constraintTop_toBottomOf="@id/et_id" />
+
+    <TextView
+        android:id="@+id/id_warning2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="특수문자 및 공백 사용 불가"
+        android:textSize="13sp"
+        android:textColor="#989898"
+        app:layout_constraintStart_toStartOf="@id/tv_id"
+        app:layout_constraintTop_toBottomOf="@id/id_warning1" />
+
     <TextView
         android:id="@+id/tv_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         android:text="비밀번호"
         android:textSize="13sp"
         android:textColor="@color/text1"
         app:layout_constraintStart_toStartOf="@id/tv_id"
-        app:layout_constraintTop_toBottomOf="@id/et_id"/>
+        app:layout_constraintTop_toBottomOf="@id/id_warning2"/>
 
     <EditText
         android:id="@+id/et_password"
@@ -106,6 +138,7 @@
         android:layout_marginHorizontal="39dp"
         android:textSize="17sp"
         android:hint="비밀번호를 입력해주세요."
+        android:maxLength="20"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -115,7 +148,6 @@
         android:id="@+id/tv_password_warning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
         android:text="최소 8자~최대 20자의 영어, 숫자, 특수문자 가능"
         android:textSize="13sp"
         android:textColor="#989898"
@@ -140,6 +172,7 @@
         android:layout_marginHorizontal="39dp"
         android:textSize="17sp"
         android:hint="비밀번호를 다시 입력해주세요."
+        android:maxLength="20"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -175,6 +208,7 @@
         android:layout_marginHorizontal="39dp"
         android:textSize="17sp"
         android:hint="닉네임을 입력해주세요."
+        android:maxLength="14"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -182,10 +216,10 @@
 
     <Button
         android:id="@+id/btn_nickname_same_check"
-        android:layout_width="56dp"
-        android:layout_height="27dp"
-        android:layout_marginBottom="6dp"
-        android:layout_marginRight="6dp"
+        android:layout_width="64dp"
+        android:layout_height="31dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="5dp"
         android:text="중복확인"
         android:textSize="12sp"
         android:textColor="#989898"
@@ -194,15 +228,37 @@
         app:layout_constraintTop_toTopOf="@id/et_nickname"
         app:layout_constraintBottom_toBottomOf="@id/et_nickname"/>
 
-    <TextView
+    <ImageView
+        android:id="@+id/img_nickname_success"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
+        android:src="@drawable/signup_img_check"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@id/btn_nickname_same_check"
+        app:layout_constraintEnd_toEndOf="@id/btn_nickname_same_check"
+        app:layout_constraintTop_toTopOf="@id/btn_nickname_same_check"
+        app:layout_constraintBottom_toBottomOf="@id/btn_nickname_same_check"/>
+
+    <TextView
+        android:id="@+id/nickname_warning1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="최소 2자~최대 14자의 한글, 영어, 숫자 가능"
         android:textSize="13sp"
         android:textColor="#989898"
         app:layout_constraintStart_toStartOf="@id/tv_nickname"
         app:layout_constraintTop_toBottomOf="@id/et_nickname" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="특수문자 및 공백 사용 불가"
+        android:textSize="13sp"
+        android:textColor="#989898"
+        app:layout_constraintStart_toStartOf="@id/tv_nickname"
+        app:layout_constraintTop_toBottomOf="@id/nickname_warning1" />
+
 
     <Button
         android:id="@+id/btn_next"

@@ -34,4 +34,9 @@
         <item name="colorControlActivated">#674fee</item>
         <item name="colorControlNormal">#363636</item>
     </style>
+
+    <style name="yearPickerCustom">
+        <item name="android:textSize">19sp</item>
+        <item name="android:textColor">@color/text1</item>
+    </style>
 </resources>

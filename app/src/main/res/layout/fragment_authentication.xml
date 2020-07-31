@@ -67,11 +67,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="42dp"
+        android:layout_marginHorizontal="39dp"
         android:textSize="17sp"
+        android:textColor="@color/text1"
         android:hint="이름을 입력해주세요."
         android:inputType="text"
-        app:layout_constraintStart_toStartOf="@id/tv_name"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_name" />
 
@@ -137,32 +138,52 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_female"/>
 
-    <EditText
-        android:id="@+id/et_number"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/layout_number"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginHorizontal="39dp"
-        android:textSize="17sp"
-        android:hint="01012345678"
-        android:inputType="number"
+        android:layout_marginHorizontal="42dp"
+        android:weightSum="10"
+        app:layout_constraintTop_toBottomOf="@id/tv_phone_number"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_phone_number" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <Button
-        android:id="@+id/btn_send"
-        android:layout_width="56dp"
-        android:layout_height="27dp"
-        android:layout_marginBottom="6dp"
-        android:layout_marginRight="3dp"
-        android:text="전송"
-        android:textSize="12sp"
-        android:textColor="#989898"
-        android:background="@drawable/signup_btn_same_unactivated"
-        app:layout_constraintEnd_toEndOf="@id/et_number"
-        app:layout_constraintTop_toTopOf="@id/et_number"
-        app:layout_constraintBottom_toBottomOf="@id/et_number"/>
+        <EditText
+            android:id="@+id/et_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7.5"
+            android:textSize="17sp"
+            android:textColor="@color/text1"
+            android:hint="01012345678"
+            android:paddingLeft="10dp"
+            android:background="@drawable/signup_btn_writingbox"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/btn_send"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="2.5"
+            android:layout_marginLeft="4dp"
+            android:text="전송"
+            android:textSize="15sp"
+            android:textColor="#989898"
+            android:background="@drawable/signup_btn_same_unactivated" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_will_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:text="SMS 인증코드를 전송하겠습니다."
+        android:textSize="13sp"
+        android:textColor="@color/text1"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/tv_phone_number"
+        app:layout_constraintTop_toBottomOf="@id/layout_number"/>
 
     <TextView
         android:id="@+id/tv_authentication_number"
@@ -174,34 +195,64 @@
         android:textSize="13sp"
         android:textColor="@color/text1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_number"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_will_send"/>
 
-    <EditText
-        android:id="@+id/et_authentication_number"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/layout_authentication_number"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginHorizontal="39dp"
-        android:textSize="17sp"
-        android:hint="인증번호를 입력해주세요."
-        android:inputType="number"
+        android:layout_marginHorizontal="42dp"
+        android:weightSum="10"
+        app:layout_constraintTop_toBottomOf="@id/tv_authentication_number"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_authentication_number" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <Button
-        android:id="@+id/btn_authentication_check"
-        android:layout_width="56dp"
-        android:layout_height="27dp"
-        android:layout_marginBottom="6dp"
-        android:layout_marginRight="3dp"
-        android:text="확인"
-        android:textSize="12sp"
-        android:textColor="#989898"
-        android:background="@drawable/signup_btn_same_unactivated"
-        app:layout_constraintEnd_toEndOf="@id/et_authentication_number"
-        app:layout_constraintTop_toTopOf="@id/et_authentication_number"
-        app:layout_constraintBottom_toBottomOf="@id/et_authentication_number"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7.5">
+
+        <EditText
+            android:id="@+id/et_authentication_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:textColor="@color/text1"
+            android:hint="인증번호를 입력해주세요."
+            android:paddingLeft="10dp"
+            android:background="@drawable/signup_btn_writingbox"
+            android:inputType="number"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_authentication_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="9dp"
+            android:text="3:00"
+            android:textColor="#989898"
+            android:textSize="15sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@id/et_authentication_number"
+            app:layout_constraintTop_toTopOf="@id/et_authentication_number"
+            app:layout_constraintBottom_toBottomOf="@id/et_authentication_number"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/btn_authentication_check"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="2.5"
+            android:layout_marginLeft="4dp"
+            android:text="확인"
+            android:textSize="15sp"
+            android:textColor="#989898"
+            android:background="@drawable/signup_btn_same_unactivated" />
+
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/btn_next"
