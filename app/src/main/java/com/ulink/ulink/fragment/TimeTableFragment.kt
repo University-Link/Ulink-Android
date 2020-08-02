@@ -65,35 +65,40 @@ class TimeTableFragment : Fragment(), onRefreshListener {
 //            TODO 이 과목 이름으로 tabelist에서 찾아서 같은 시간 다 표시!!
 //               장소가 같은경우와 다른경우 나누기
 
-            for(i in mainTable.subjectList){
-                if (subject.id == i.id){
+            Log.d("tag", mainTable.toString())
+
+
+            var count = mainTable.subjectList.count { it.id == subject.id }
+            var i = 0
+            var placeList : MutableList<String> = arrayListOf()
+
+            for(x in mainTable.subjectList){
+                if (subject.id == x.id){
 //                 같은게 있는 경우
-                    Log.d("tag",i.toString())
-
-                } else {
-                    for (i in 0 until subject.startTime.size) {
-                        layout.findViewById<TextView>(R.id.tv_time).text =
-                                layout.findViewById<TextView>(R.id.tv_time).text.toString() + getDay(subject.day[i]) + " " + subject.startTime[i] + " - " + subject.endTime[i]
-                        if (subject.startTime.size > 1 && i < subject.startTime.size - 1) {
-                            var text = layout.findViewById<TextView>(R.id.tv_time).text
-                            val text2 = "$text, " + getDay(subject.day[i])
-                            layout.findViewById<TextView>(R.id.tv_time).text = text2
-                        }
+                    i += 1
+                    layout.findViewById<TextView>(R.id.tv_time).text =
+                            layout.findViewById<TextView>(R.id.tv_time).text.toString() + getDay(x.day[0]) + " " + x.startTime[0] + " - " +x.endTime[0]
+                    if (i < count){
+                        var text = layout.findViewById<TextView>(R.id.tv_time).text
+                        val text2 = "$text, "
+                        layout.findViewById<TextView>(R.id.tv_time).text = text2
                     }
 
-
-                    for (i in 0 until subject.place.size) {
-                        layout.findViewById<TextView>(R.id.tv_place).text =
-                                layout.findViewById<TextView>(R.id.tv_place).text.toString() + subject.place[i]
-
-                        if (subject.place.size > 1 && i < subject.place.size - 1) {
-                            var text = layout.findViewById<TextView>(R.id.tv_place).text
-                            val text2 = "$text, "
-                            layout.findViewById<TextView>(R.id.tv_place).text = text2
-                        }
+                    if (placeList.contains(x.place[0]) || placeList.contains(" " + x.place[0])){
+                        layout.findViewById<TextView>(R.id.tv_place).text = layout.findViewById<TextView>(R.id.tv_place).text.dropLast(2)
+                        continue
                     }
-                    
-                    
+
+                    placeList.add(x.place[0])
+
+                    layout.findViewById<TextView>(R.id.tv_place).text =
+                            layout.findViewById<TextView>(R.id.tv_place).text.toString() + x.place[0]
+
+                    if (i < count){
+                        var text3 = layout.findViewById<TextView>(R.id.tv_place).text
+                        val text4 = "$text3, "
+                        layout.findViewById<TextView>(R.id.tv_place).text = text4
+                    }
                 }
             }
 
