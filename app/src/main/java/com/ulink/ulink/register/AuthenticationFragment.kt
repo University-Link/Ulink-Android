@@ -67,11 +67,11 @@ class AuthenticationFragment : Fragment() {
         et_name.setFilters("^[a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣]+$")
 
         et_number.textChangedListener {
-            buttonSelector(btn_send, et_number)
+            btnCheckSelector(btn_send, et_number)
         }
 
         et_authentication_number.textChangedListener {
-            buttonSelector(btn_authentication_check, et_authentication_number)
+            btnCheckSelector(btn_authentication_check, et_authentication_number)
         }
 
         layout_missing_code.setOnClickListener{

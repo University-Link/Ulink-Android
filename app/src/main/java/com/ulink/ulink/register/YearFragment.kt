@@ -87,8 +87,7 @@ class YearFragment : Fragment() {
                 yearChecked = true
                 tv_year.text = yearPicker.value.toString()
                 tv_year.setTextColor(Color.parseColor("#363636"))
-                btn_next.setBackgroundResource(R.drawable.signup_btn_next_activated)
-                btn_next.setTextColor(Color.parseColor("#ffffff"))
+                btn_next.btnNextSelector()
                 dialog.dismiss()
             }
 

@@ -65,23 +65,23 @@ class AgreeFragment : Fragment() {
                 btn_information_agree.isChecked=true
                 btn_advertise_agree.isChecked=true
                 btn_referral_agree.isChecked=true
-                btnNextSelector(btn_information_agree, btn_policy_agree, btn_next)
+                btnAgreeSelector(btn_information_agree, btn_policy_agree, btn_next)
             }
             else{
                 btn_policy_agree.isChecked=false
                 btn_information_agree.isChecked=false
                 btn_advertise_agree.isChecked=false
                 btn_referral_agree.isChecked=false
-                btnNextSelector(btn_information_agree, btn_policy_agree, btn_next)
+                btnAgreeSelector(btn_information_agree, btn_policy_agree, btn_next)
             }
         }
 
         btn_policy_agree.setOnClickListener {
-            btnNextSelector(btn_information_agree, btn_policy_agree, btn_next)
+            btnAgreeSelector(btn_information_agree, btn_policy_agree, btn_next)
             allAgree(btn_policy_agree, btn_information_agree, btn_advertise_agree, btn_referral_agree, btn_all_agree)
         }
         btn_information_agree.setOnClickListener{
-            btnNextSelector(btn_information_agree, btn_policy_agree, btn_next)
+            btnAgreeSelector(btn_information_agree, btn_policy_agree, btn_next)
             allAgree(btn_policy_agree, btn_information_agree, btn_advertise_agree, btn_referral_agree, btn_all_agree)
         }
 

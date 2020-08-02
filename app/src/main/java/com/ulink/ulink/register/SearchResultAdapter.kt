@@ -6,10 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.ulink.ulink.CalendarRecycler.CalendarDayAdapter
 import com.ulink.ulink.R
 
 class SearchResultAdapter(private val context : Context) : RecyclerView.Adapter<SearchResultAdapter.VHolder>() {
     var datas = mutableListOf<String>()
+
+    private lateinit var resultClickListener : ResultClickListener
+
+    interface ResultClickListener {
+        fun onClick(view: View, position:Int)
+    }
+
+    fun setResultClickListener(resultClickListener : ResultClickListener){
+        this.resultClickListener = resultClickListener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_search_result, parent, false)
@@ -22,6 +33,7 @@ class SearchResultAdapter(private val context : Context) : RecyclerView.Adapter<
 
     override fun onBindViewHolder(holder: VHolder, position: Int) {
         holder.bind(datas[position])
+        holder.itemView.setOnClickListener{ resultClickListener.onClick(it,position) }
     }
 
     class VHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
