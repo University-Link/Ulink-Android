@@ -2,6 +2,7 @@ package com.ulink.ulink.register
 
 import android.graphics.Color
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.InputFilter
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,7 +11,9 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import com.ulink.ulink.R
 import com.ulink.ulink.textChangedListener
+import kotlinx.android.synthetic.main.activity_school_certificate.*
 import kotlinx.android.synthetic.main.fragment_authentication.*
+import kotlinx.android.synthetic.main.fragment_authentication.btn_back
 import java.util.regex.Pattern
 
 private const val ARG_PARAM1 = "param1"
@@ -77,6 +80,7 @@ class AuthenticationFragment : Fragment() {
                 btn_send.setBackgroundResource(R.drawable.signup_btn_next_unactivated)
                 btn_send.setTextColor(Color.parseColor("#989898"))
                 et_authentication_number.requestFocus()
+                startTimer()
             }
         }
 
@@ -112,5 +116,23 @@ class AuthenticationFragment : Fragment() {
                     putString(ARG_PARAM5, param5)
             }
         }
+    }
+
+    fun startTimer() {
+        var validate = true
+        object : CountDownTimer(180 * 1000, 1000) {
+            override fun onFinish() {
+                validate = false
+            }
+
+            override fun onTick(millisUntilFinished: Long) {
+                val count = millisUntilFinished / 1000
+                if (count - count / 60 * 60 >= 10) {
+                    tv_authentication_time.text = (count / 60).toString() + ":" + (count - count / 60 * 60)
+                } else {
+                    tv_authentication_time.text = (count / 60).toString() + ":0" + (count - count / 60 * 60)
+                }
+            }
+        }.start()
     }
 }

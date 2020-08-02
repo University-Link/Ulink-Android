@@ -47,15 +47,7 @@
     <string name="change_nickname_using">
         사용 중인 닉네임입니다.
     </string>
-    <string name="school_certificate_ok">
-        인증이 완료되었습니다.
-    </string>
-    <string name="major_change_changed">
-        변경되었습니다.
-    </string>
-    <string name="major_change_empty">
-        학과를 입력해 주세요.
-    </string>
+
     <string name="appwidget_text">ulink</string>
 
     <string name="first_popup">"캘린더는 과목별 채팅방에 등록된 공지가\n 자동으로 추가되는 일정 관리 시스템입니다."</string>
