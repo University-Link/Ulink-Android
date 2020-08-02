@@ -31,14 +31,11 @@ class CalendarViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         }
 
         for (i in datas){
-            if (currentposdate == i.date){
+            if (currentposdate == i.date && dayData.check){
                 adapter.datas.add(i)
             }
             rvSmallSchedule.adapter = adapter
             adapter.notifyDataSetChanged()
         }
-
-//        TODO 전달 다음달은 index로 나중에 해결하기 currentposition과 비교해ㅓㅅ!
-
     }
 }
