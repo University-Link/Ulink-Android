@@ -41,18 +41,21 @@ class SplashActivity : Activity() {
                                  val intent = Intent(this@SplashActivity, MainActivity::class.java)
                                  startActivity(intent)
                                  finish()
+                                 overridePendingTransition(0,0)
                              },
                              onFailure = {
                                  val intent = Intent(this@SplashActivity, LoginActivity::class.java)
                                  startActivity(intent)
                                  finish()
+                                 overridePendingTransition(0,0)
                              }
                      )
                  }else{
-
                      val intent = Intent(this@SplashActivity, LoginActivity::class.java)
                      startActivity(intent)
                      finish()
+                     overridePendingTransition(0,0)
+
                  }
              }
 

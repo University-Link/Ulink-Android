@@ -1,6 +1,7 @@
 package com.ulink.ulink.timetable
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -67,15 +68,19 @@ class TimeTableAddFragment : Fragment() {
 
 //        TODO 이런거 삼항연산자
 
+
         if ((formatToFloat(timeTable.startTime)).toInt() < 9) {
             starthour = (formatToFloat(timeTable.startTime)).toInt()
         }
 
         if ((formatToFloat(timeTable.endTime)).toInt() > 18) {
-            endhour = (formatToFloat(timeTable.endTime)).toInt()
+            endhour = (formatToFloat(timeTable.endTime)).toInt() + 1
         }
 
-        var gap: Float = 0f
+        Log.d("tag", starthour.toString())
+        Log.d("tag", endhour.toString())
+
+        var gap = 0f
 
         scrollView?.let { sv ->
             if (sv.height > sv.getChildAt(0)?.measuredHeight?.times((formatToFloat(subject.endTime[0]) - formatToFloat(subject.startTime[0])) / (endhour - starthour))!!)

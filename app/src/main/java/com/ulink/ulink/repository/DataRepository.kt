@@ -110,7 +110,7 @@ object DataRepository {
                             addAll(it.data[i].subjects.fri)
                         }
 
-                        val timeTable = TimeTable(it.data[i].timeTable.id, it.data[i].timeTable.semester, it.data[i].timeTable.name, 0, startTime = "09:00", endTime = "18:00", subjectList = subjectList)
+                        val timeTable = TimeTable(it.data[i].timeTable.id, it.data[i].timeTable.semester, it.data[i].timeTable.name, 0, startTime = it.data[i].minTime , endTime = it.data[i].maxTime, subjectList = subjectList)
                         tableList.add(deepCopy(timeTable))
                     }
 

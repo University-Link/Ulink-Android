@@ -66,8 +66,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toRightOf="@id/ic_place"
         app:layout_constraintTop_toTopOf="@id/ic_place"
-        app:layout_constraintStart_toStartOf="@id/tv_time"
-        app:layout_constraintBottom_toBottomOf="@id/ic_place"/>
+        app:layout_constraintStart_toStartOf="@id/tv_time"/>
 
     <TextView
         android:id="@+id/tv_professor_name"
