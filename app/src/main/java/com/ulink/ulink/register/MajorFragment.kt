@@ -12,11 +12,6 @@ import com.ulink.ulink.R
 import com.ulink.ulink.textChangedListener
 import com.ulink.ulink.textResetButton
 import kotlinx.android.synthetic.main.fragment_major.*
-import kotlinx.android.synthetic.main.fragment_major.btn_back
-import kotlinx.android.synthetic.main.fragment_major.btn_next
-import kotlinx.android.synthetic.main.fragment_major.btn_reset
-import kotlinx.android.synthetic.main.fragment_major.btn_search
-import kotlinx.android.synthetic.main.fragment_university.*
 
 private const val ARG_PARAM1 = "param1"
 
@@ -56,14 +51,14 @@ class MajorFragment : Fragment() {
             object : SearchResultAdapter.ResultClickListener {
                 override fun onClick(view: View, position: Int) {
                     searchCheck = true
-                    et_university_search.setText(searchAdapter.datas[position])
-                    rv_university_search.visibility=View.INVISIBLE
+                    et_major_search.setText(searchAdapter.datas[position])
+                    rv_major_search.visibility=View.INVISIBLE
                     btn_next.btnNextSelector()
                 }
             })
 
         btn_search.setOnClickListener {
-            imm.hideSoftInputFromWindow(et_university_search.windowToken, 0)
+            imm.hideSoftInputFromWindow(et_major_search.windowToken, 0)
         }
 
         btn_next.setOnClickListener(){
