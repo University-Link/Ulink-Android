@@ -15,6 +15,8 @@ class ChangePasswordActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_password)
 
+
+
         setOnClick()
 
         et_password_check.textChangedListener {

@@ -8,13 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.ulink.ulink.R
 import com.ulink.ulink.Ulink.BoardDetailActivity
-import com.ulink.ulink.Ulink.UlinkBoardRecycler.UlinkBoardAdapter
+import com.ulink.ulink.Ulink.UlinkBoardRecycler.BoardSearchAdapter
 import com.ulink.ulink.Ulink.UlinkBoardRecycler.UlinkBoardData
 import kotlinx.android.synthetic.main.fragment_ulink_board.*
 
 
 class UlinkBoardFragment : Fragment() {
-    lateinit var board_adapter : UlinkBoardAdapter
+    lateinit var board_adapter : BoardSearchAdapter
     val datas : MutableList<UlinkBoardData> = mutableListOf<UlinkBoardData>()
 
     override fun onCreateView(
@@ -27,7 +27,7 @@ class UlinkBoardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        board_adapter = UlinkBoardAdapter(view.context)
+        board_adapter = BoardSearchAdapter(view.context)
 
         rv_ulink_board.adapter = board_adapter
 
@@ -85,7 +85,7 @@ class UlinkBoardFragment : Fragment() {
             board_adapter.notifyDataSetChanged()
         }
 
-        board_adapter.setItemClickLIstener(object: UlinkBoardAdapter.ItemClickListener{
+        board_adapter.setItemClickLIstener(object: BoardSearchAdapter.ItemClickListener{
             override fun onClick(view:View, position:Int){
                 val intent = Intent(getActivity(), BoardDetailActivity::class.java)
                 //intent.putExtra("idx", datas[position].subjectIdx.toString())

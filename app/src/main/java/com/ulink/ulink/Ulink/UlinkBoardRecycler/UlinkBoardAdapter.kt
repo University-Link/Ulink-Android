@@ -5,20 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ulink.ulink.ClassRecycler.ClassAdapter
 import com.ulink.ulink.R
 
-class UlinkBoardAdapter (private val context: Context) : RecyclerView.Adapter<UlinkBoardViewHolder>() {
+class UlinkBoardAdapter (private val context: Context) : RecyclerView.Adapter<UlinkBoardSearchViewHolder>() {
     var datas:MutableList<UlinkBoardData> = mutableListOf<UlinkBoardData>()
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UlinkBoardViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UlinkBoardSearchViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_ulink_board_data,parent,false)
-        return UlinkBoardViewHolder(view)
+        return UlinkBoardSearchViewHolder(view)
     }
-    private lateinit var itemClickListener : UlinkBoardAdapter.ItemClickListener
+    private lateinit var itemClickListener : BoardSearchAdapter.ItemClickListener
     interface ItemClickListener {
         fun onClick(view: View, position:Int)
     }
-    fun setItemClickLIstener(itemClickListener: UlinkBoardAdapter.ItemClickListener){
+    fun setItemClickLIstener(itemClickListener: BoardSearchAdapter.ItemClickListener){
         this.itemClickListener = itemClickListener
     }
     override fun getItemCount(): Int {
@@ -26,7 +25,7 @@ class UlinkBoardAdapter (private val context: Context) : RecyclerView.Adapter<Ul
 
     }
 
-    override fun onBindViewHolder(holder: UlinkBoardViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: UlinkBoardSearchViewHolder, position: Int) {
         holder.bind(datas[position])
         holder.itemView.setOnClickListener {
             itemClickListener.onClick(it, position)

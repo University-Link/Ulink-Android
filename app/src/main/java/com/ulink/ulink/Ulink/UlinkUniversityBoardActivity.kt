@@ -1,16 +1,17 @@
 package com.ulink.ulink.Ulink
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.ulink.ulink.R
-import com.ulink.ulink.Ulink.UlinkBoardRecycler.UlinkBoardAdapter
+import com.ulink.ulink.Ulink.UlinkBoardRecycler.BoardSearchAdapter
 import com.ulink.ulink.Ulink.UlinkBoardRecycler.UlinkBoardData
-import kotlinx.android.synthetic.main.fragment_ulink_board.*
+import kotlinx.android.synthetic.main.activity_ulink_university_board.*
 import kotlinx.android.synthetic.main.toolbar_ulink_inside.*
-import kotlinx.android.synthetic.main.toolbar_ulink_inside.tv_classname
+
 
 class UlinkUniversityBoardActivity : AppCompatActivity() {
-    lateinit var board_adapter : UlinkBoardAdapter
+    lateinit var board_adapter : BoardSearchAdapter
     val datas : MutableList<UlinkBoardData> = mutableListOf<UlinkBoardData>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,8 +20,13 @@ class UlinkUniversityBoardActivity : AppCompatActivity() {
         btn_back.setOnClickListener {
             finish()
         }
+        btn_search.setOnClickListener {
+            val intent = Intent(this, BoardSearchActivity::class.java)
+            startActivity(intent)
 
-        board_adapter = UlinkBoardAdapter(this)
+        }
+
+        board_adapter = BoardSearchAdapter(this)
         rv_ulink_board.adapter = board_adapter
 
         datas.apply{

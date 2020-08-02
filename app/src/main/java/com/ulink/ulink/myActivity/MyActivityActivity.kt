@@ -3,14 +3,11 @@ package com.ulink.ulink.myActivity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.widget.ImageView
 import android.widget.TextView
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.ulink.ulink.R
 import com.ulink.ulink.Ulink.UlinkBoardRecycler.UlinkBoardData
 import kotlinx.android.synthetic.main.activity_my_activity.*
-import kotlinx.android.synthetic.main.activity_time_table_edit.*
 
 class MyActivityActivity : AppCompatActivity() {
 
@@ -50,13 +47,13 @@ class MyActivityActivity : AppCompatActivity() {
 
     fun setViewpager(type : Int){
         vp_myactivity.adapter = mAdapter
-        vp_myactivity.currentItem = type
+        vp_myactivity.setCurrentItem(type, false)
         vp_myactivity.offscreenPageLimit = 2
 
 //      TODO 여기서 서버랑 통신해서 각 탭에 데이터 넣기!
         for (a in 0 until 3){
             (mAdapter.fragmentList[a] as MyActivityFragment).setData(
-                    UlinkBoardData(
+                UlinkBoardData(
                             img_profile = "",
                             nickname = "조개탕수만",
                             time = "방금",

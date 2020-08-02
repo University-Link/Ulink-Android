@@ -10,5 +10,6 @@ data class UlinkBoardData(
     val like : Boolean,
     val comment_count : String,
     val heart_count : String,
-    val category : String = ""
+    val category : String = "",
+    val board_category : String =""
 )
