@@ -63,12 +63,12 @@ class TimeTableFragment : Fragment(), onRefreshListener {
             val dialog = builder.create()
 
 //            TODO 이 과목 이름으로 tabelist에서 찾아서 같은 시간 다 표시!!
-//               장소가 같은경우, 다른경우
+//               장소가 같은경우와 다른경우 나누기
 
             for(i in mainTable.subjectList){
                 if (subject.id == i.id){
 //                 같은게 있는 경우
-
+                    Log.d("tag",i.toString())
 
                 } else {
                     for (i in 0 until subject.startTime.size) {
