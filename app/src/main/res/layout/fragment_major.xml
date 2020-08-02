@@ -51,6 +51,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/layout_major_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -99,6 +100,19 @@
             android:layout_marginLeft="4dp"/>
 
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_major_search"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:paddingVertical="6dp"
+        android:background="@drawable/search_result_background"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/layout_major_search"
+        app:layout_constraintStart_toStartOf="@id/layout_major_search"
+        app:layout_constraintEnd_toEndOf="@id/layout_major_search"
+        tools:listitem="@layout/item_search_result"/>
 
     <Button
         android:id="@+id/btn_next"

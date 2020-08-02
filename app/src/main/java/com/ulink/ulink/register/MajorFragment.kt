@@ -38,6 +38,13 @@ class MajorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var searchResult = mutableListOf<String>()
+        var searchAdapter = SearchResultAdapter(view.context)
+        searchAdapter.datas = searchResult
+        rv_major_search.adapter = searchAdapter
+        searchResult.add("해당 검색어 입력")
+        searchAdapter.notifyDataSetChanged()
+
         btn_next.setOnClickListener(){
             (activity as RegisterActivity?)!!.replaceFragment(YearFragment.newInstance(university, et_major_search.text.toString()))
         }

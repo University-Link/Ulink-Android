@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import com.ulink.ulink.R
 import com.ulink.ulink.textChangedListener
+import com.ulink.ulink.utils.DialogBuilder
 import kotlinx.android.synthetic.main.activity_school_certificate.*
 import kotlinx.android.synthetic.main.fragment_authentication.*
 import kotlinx.android.synthetic.main.fragment_authentication.btn_back
@@ -71,6 +72,17 @@ class AuthenticationFragment : Fragment() {
 
         et_authentication_number.textChangedListener {
             buttonSelector(btn_authentication_check, et_authentication_number)
+        }
+
+        layout_missing_code.setOnClickListener{
+            DialogBuilder().apply {
+                build(view.context)
+                setContent(getString(R.string.missing_cord))
+                setClickListener {
+                    dismiss()
+                }
+                show()
+            }
         }
 
         btn_send.setOnClickListener {

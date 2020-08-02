@@ -22,8 +22,16 @@ class UniversityFragment : Fragment() {
         activity!!.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         return inflater.inflate(R.layout.fragment_university, container, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        var searchResult = mutableListOf<String>()
+        var searchAdapter = SearchResultAdapter(view.context)
+        searchAdapter.datas = searchResult
+        rv_university_search.adapter = searchAdapter
+        searchResult.add("해당 검색어 입력")
+        searchAdapter.notifyDataSetChanged()
 
         btn_next.setOnClickListener(){
             (activity as RegisterActivity?)!!.replaceFragment(MajorFragment.newInstance(et_university_search.text.toString()))
