@@ -6,15 +6,19 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.view.inputmethod.InputMethodManager
 import com.ulink.ulink.R
-import com.ulink.ulink.repository.Major
-import com.ulink.ulink.repository.University
+import com.ulink.ulink.repository.*
 import com.ulink.ulink.textChangedListener
 import com.ulink.ulink.textResetButton
+import com.ulink.ulink.utils.DialogBuilder
 import kotlinx.android.synthetic.main.fragment_major.*
 import kotlinx.android.synthetic.main.fragment_major.btn_back
 import kotlinx.android.synthetic.main.fragment_major.btn_next
 import kotlinx.android.synthetic.main.fragment_major.btn_reset
 import kotlinx.android.synthetic.main.fragment_major.btn_search
+import kotlinx.android.synthetic.main.fragment_university.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 private const val ARG_PARAM1 = "param1"
 
@@ -42,13 +46,12 @@ class MajorFragment : Fragment() {
         val imm = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
         var searchCheck = false
+        var majorIdx = 0
 
         var searchResult = mutableListOf<Major>()
         var searchAdapter = MajorSearchAdapter(view.context)
         searchAdapter.datas = searchResult
         rv_major_search.adapter = searchAdapter
-        searchResult.add(Major(majorIdx = 1, name = "해당 검색어 입력"))
-        searchAdapter.notifyDataSetChanged()
 
         searchAdapter.setResultClickListener(
             object : MajorSearchAdapter.ResultClickListener {
@@ -56,6 +59,7 @@ class MajorFragment : Fragment() {
                     searchCheck = true
                     et_major_search.setText(searchAdapter.datas[position].name)
                     et_major_search.clearFocus()
+                    majorIdx = searchAdapter.datas[position].majorIdx
                     rv_major_search.visibility=View.INVISIBLE
                     btn_next.btnNextSelector()
                 }
@@ -63,13 +67,50 @@ class MajorFragment : Fragment() {
 
         btn_search.setOnClickListener {
             imm.hideSoftInputFromWindow(et_major_search.windowToken, 0)
-            rv_major_search.visibility=View.VISIBLE
+            searchAdapter.datas.clear()
+            RetrofitService.service.getMajor(universityIdx.toInt(), et_major_search.text.toString()).enqueue(object :
+                Callback<ResponseMajor> {
+                override fun onFailure(call: Call<ResponseMajor>, t: Throwable) {
+                }
+
+                override fun onResponse(
+                    call: Call<ResponseMajor>,
+                    response: Response<ResponseMajor>
+                ) {
+                    response.body()?.let {
+                        if (it.status == 200) {
+                            for (i in it.data.indices) {
+                                searchResult.apply {
+                                    add(
+                                        Major(
+                                            majorIdx = it.data[i].majorIdx,
+                                            name = it.data[i].name
+                                        )
+                                    )
+                                }
+                            }
+                            searchAdapter.notifyDataSetChanged()
+                            rv_major_search.visibility = View.VISIBLE
+                        }
+                    } ?: let{
+                        rv_major_search.visibility = View.INVISIBLE
+                        DialogBuilder().apply {
+                            build(view.context)
+                            setContent(getString(R.string.search_fail))
+                            setClickListener {
+                                dismiss()
+                            }
+                            show()
+                        }
+                    }
+                }
+            })
             searchCheck = false
         }
 
         btn_next.setOnClickListener {
             if(searchCheck)
-                (activity as RegisterActivity?)!!.replaceFragment(YearFragment.newInstance(et_major_search.text.toString()))
+                (activity as RegisterActivity?)!!.replaceFragment(YearFragment.newInstance(majorIdx.toString()))
         }
 
         btn_back.setOnClickListener {

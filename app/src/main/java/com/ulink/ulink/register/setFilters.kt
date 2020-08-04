@@ -43,6 +43,19 @@ fun EditText.warningCheck(regex : String, warning : TextView, warning2 : TextVie
     }
 }
 
+fun EditText.warningPasswordCheck(regex : String, warning : TextView) : Boolean {
+    if(this.filterCheck(regex))
+    {
+        warning.setTextColor(Color.parseColor("#989898"))
+        return true
+    }
+    else
+    {
+        warning.setTextColor(Color.parseColor("#fd4165"))
+        return false
+    }
+}
+
 fun EditText.passwordNextCheck(min : Int) : Boolean {
     var regex = "^[a-zA-Z0-9!@#\$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?~`]+$"
     var result = this.filterCheck(regex) && this.text.toString().length>=min

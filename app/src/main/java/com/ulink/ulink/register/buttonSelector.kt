@@ -21,14 +21,16 @@ fun btnCheckSelector(btn : Button, et : EditText){
     }
 }
 
-fun btnFilterSelector(btn : Button, et : EditText, regex : String, min : Int) {
+fun btnFilterSelector(btn : Button, et : EditText, regex : String, min : Int) : Boolean {
     if (et.filterCheck(regex) && et.text.toString().length>=min) {
         btn.setBackgroundResource(R.drawable.signup_btn_search_activated)
         btn.setTextColor(Color.parseColor("#ffffff"))
+        return true
     }
     else {
         btn.setBackgroundResource(R.drawable.signup_btn_next_unactivated)
         btn.setTextColor(Color.parseColor("#989898"))
+        return false
     }
 }
 
@@ -67,7 +69,9 @@ fun Button.btnNextReset(){
     this.setTextColor(Color.parseColor("#989898"))
 }
 
-fun checkSelector(btn : Button, img : ImageView){
-    img.visibility= View.VISIBLE
-    btn.visibility=View.INVISIBLE
+fun checkSelector(btn : Button, img : ImageView, check : Boolean) {
+    if (check){
+        img.visibility = View.VISIBLE
+        btn.visibility = View.INVISIBLE
+    }
 }

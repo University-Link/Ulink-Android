@@ -10,11 +10,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import com.ulink.ulink.R
+import com.ulink.ulink.repository.RequestPhoneAuthentication
+import com.ulink.ulink.repository.ResponsePhoneAuthentication
+import com.ulink.ulink.repository.RetrofitService
 import com.ulink.ulink.textChangedListener
 import com.ulink.ulink.utils.DialogBuilder
 import kotlinx.android.synthetic.main.activity_school_certificate.*
 import kotlinx.android.synthetic.main.fragment_authentication.*
 import kotlinx.android.synthetic.main.fragment_authentication.btn_back
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.regex.Pattern
 
 private const val ARG_PARAM1 = "param1"
@@ -51,10 +57,12 @@ class AuthenticationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         var gender = ""
+        var authenticationCode = 0
         var authentication = false
 
         btn_next.setOnClickListener{
-            (activity as RegisterActivity?)!!.replaceFragment(RegisterFragment.newInstance(majorIdx, studentNumber, agreeAd, agreeThird, et_name.text.toString(), gender, et_number.text.toString()))
+            if(et_name.text.toString() != "" && gender != "")
+                (activity as RegisterActivity?)!!.replaceFragment(RegisterFragment.newInstance(majorIdx, studentNumber, agreeAd, agreeThird, et_name.text.toString(), gender, et_number.text.toString()))
         }
 
         btn_back.setOnClickListener{
@@ -84,12 +92,56 @@ class AuthenticationFragment : Fragment() {
 
         btn_send.setOnClickListener {
             if (et_number.text.toString() != "") {
-                tv_will_send.visibility = View.VISIBLE
-                tv_authentication_time.visibility = View.VISIBLE
-                btn_send.setBackgroundResource(R.drawable.signup_btn_next_unactivated)
-                btn_send.setTextColor(Color.parseColor("#989898"))
-                et_authentication_number.requestFocus()
-                startTimer()
+                val body = RequestPhoneAuthentication(phoneNumber = et_number.text.toString())
+                RetrofitService.service.phoneNumberAuthentication(body).
+                    enqueue(object : Callback<ResponsePhoneAuthentication>{
+                        override fun onFailure(call: Call<ResponsePhoneAuthentication>, t: Throwable) {
+                        }
+                        override fun onResponse(
+                            call: Call<ResponsePhoneAuthentication>,
+                            response: Response<ResponsePhoneAuthentication>
+                        ) {
+                            response.body()?.let {
+                                if (it.status == 200) {
+                                    tv_will_send.visibility = View.VISIBLE
+                                    tv_authentication_time.visibility = View.VISIBLE
+                                    btn_send.setBackgroundResource(R.drawable.signup_btn_next_unactivated)
+                                    btn_send.setTextColor(Color.parseColor("#989898"))
+                                    et_authentication_number.requestFocus()
+                                    startTimer()
+                                    authenticationCode = it.data
+                                }
+                            }
+                        }
+                    })
+                }
+            }
+
+        btn_authentication_check.setOnClickListener {
+            if(authenticationCode!=0 && tv_authentication_time.visibility==View.VISIBLE) {
+                if (authenticationCode.toString() == et_authentication_number.text.toString()) {
+                    DialogBuilder().apply {
+                        build(view.context)
+                        setContent(getString(R.string.authentication))
+                        setClickListener {
+                            dismiss()
+                        }
+                        show()
+                    }
+                    tv_authentication_time.visibility = View.INVISIBLE
+                    authentication = true
+                }
+                else {
+                    DialogBuilder().apply {
+                        build(view.context)
+                        setContent(getString(R.string.authentication_fail))
+                        setClickListener {
+                            dismiss()
+                        }
+                        show()
+                    }
+                    authentication = false
+                }
             }
         }
 
@@ -128,7 +180,7 @@ class AuthenticationFragment : Fragment() {
 
     fun startTimer() {
         var validate = true
-        object : CountDownTimer(180 * 1000, 1000) {
+        object : CountDownTimer(60 * 1000, 1000) {
             override fun onFinish() {
                 validate = false
             }
