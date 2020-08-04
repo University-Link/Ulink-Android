@@ -91,8 +91,8 @@ class RegisterFragment : Fragment() {
                         agreeAd = agreeAd,
                         agreeThird = agreeThird
                     )
-                Log.d("check", requestRegister.toString())
-                RetrofitService.service.register(requestRegister).enqueue(object : Callback<ResponseRegister>{
+                RetrofitService.service.register(requestRegister).
+                enqueue(object : Callback<ResponseRegister> {
                     override fun onFailure(call: Call<ResponseRegister>, t: Throwable) {
                     }
 
@@ -101,11 +101,10 @@ class RegisterFragment : Fragment() {
                         response: Response<ResponseRegister>
                     ) {
                         response.body()?.let {
-                            Log.d("check", it.toString())
                             if (it.status == 201) {
                                 (activity as RegisterActivity?)!!.replaceFragment(FinishFragment.newInstance(et_id.text.toString(), et_password.text.toString()))
                             }
-                        } ?: Log.d("check", response.message())
+                        }
                     }
                 })
             }

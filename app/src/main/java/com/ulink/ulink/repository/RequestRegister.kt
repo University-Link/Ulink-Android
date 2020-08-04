@@ -17,7 +17,7 @@ data class ResponseRegister(
     val status : Int,
     val success: Boolean,
     val message : String,
-    val data : List<UserId>
+    val data : UserId
 )
 
 data class UserId(

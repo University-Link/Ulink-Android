@@ -33,6 +33,7 @@ class AuthenticationFragment : Fragment() {
     private var studentNumber: String = ""
     private var agreeAd: String = ""
     private var agreeThird: String = ""
+    var timer : CountDownTimer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +43,6 @@ class AuthenticationFragment : Fragment() {
             agreeAd = it.getString(ARG_PARAM3).toString()
             agreeThird = it.getString(ARG_PARAM4).toString()
         }
-
     }
 
     override fun onCreateView(
@@ -59,9 +59,10 @@ class AuthenticationFragment : Fragment() {
         var gender = ""
         var authenticationCode = 0
         var authentication = false
+        var nextCheck = false
 
         btn_next.setOnClickListener{
-            if(et_name.text.toString() != "" && gender != "")
+            if(nextCheck)
                 (activity as RegisterActivity?)!!.replaceFragment(RegisterFragment.newInstance(majorIdx, studentNumber, agreeAd, agreeThird, et_name.text.toString(), gender, et_number.text.toString()))
         }
 
@@ -73,10 +74,12 @@ class AuthenticationFragment : Fragment() {
 
         et_number.textChangedListener {
             btnCheckSelector(btn_send, et_number)
+            nextCheck = btn_next.authenticatioBtnNextSelector(et_name, gender, authentication)
         }
 
         et_authentication_number.textChangedListener {
             btnCheckSelector(btn_authentication_check, et_authentication_number)
+            nextCheck = btn_next.authenticatioBtnNextSelector(et_name, gender, authentication)
         }
 
         layout_missing_code.setOnClickListener{
@@ -91,7 +94,7 @@ class AuthenticationFragment : Fragment() {
         }
 
         btn_send.setOnClickListener {
-            if (et_number.text.toString() != "") {
+            if (et_number.text.toString() != "" && !authentication) {
                 val body = RequestPhoneAuthentication(phoneNumber = et_number.text.toString())
                 RetrofitService.service.phoneNumberAuthentication(body).
                     enqueue(object : Callback<ResponsePhoneAuthentication>{
@@ -124,7 +127,9 @@ class AuthenticationFragment : Fragment() {
                         build(view.context)
                         setContent(getString(R.string.authentication))
                         setClickListener {
+                            timer?.cancel()
                             dismiss()
+                            nextCheck = btn_next.authenticatioBtnNextSelector(et_name, gender, authentication)
                         }
                         show()
                     }
@@ -136,10 +141,12 @@ class AuthenticationFragment : Fragment() {
                         build(view.context)
                         setContent(getString(R.string.authentication_fail))
                         setClickListener {
+                            timer?.cancel()
                             dismiss()
                         }
                         show()
                     }
+                    tv_authentication_time.visibility = View.INVISIBLE
                     authentication = false
                 }
             }
@@ -149,18 +156,21 @@ class AuthenticationFragment : Fragment() {
             btn_male.isChecked=false
             btn_gender_nothing.isChecked=false
             gender = "f"
+            nextCheck = btn_next.authenticatioBtnNextSelector(et_name, gender, authentication)
         }
 
         btn_male.setOnClickListener{
             btn_female.isChecked=false
             btn_gender_nothing.isChecked=false
             gender = "m"
+            nextCheck = btn_next.authenticatioBtnNextSelector(et_name, gender, authentication)
         }
 
         btn_gender_nothing.setOnClickListener{
             btn_female.isChecked=false
             btn_male.isChecked=false
             gender = "x"
+            nextCheck = btn_next.authenticatioBtnNextSelector(et_name, gender, authentication)
         }
 
     }
@@ -179,10 +189,11 @@ class AuthenticationFragment : Fragment() {
     }
 
     fun startTimer() {
-        var validate = true
-        object : CountDownTimer(60 * 1000, 1000) {
+
+        timer?.cancel()
+
+        timer = object : CountDownTimer(60 * 1000, 1000) {
             override fun onFinish() {
-                validate = false
             }
 
             override fun onTick(millisUntilFinished: Long) {
