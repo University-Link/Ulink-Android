@@ -114,7 +114,9 @@ class TimeTableFragment : Fragment(), onRefreshListener {
                     }
                 })
                 fragmentManager?.let { it -> bottomsheet.show(it, bottomsheet.tag)
-                    dialog.dismiss()}
+                    dialog.dismiss()
+
+                }
             }
             if (subject.subject == true) {
                 layout.findViewById<TextView>(R.id.tv_tochat).setOnClickListener {

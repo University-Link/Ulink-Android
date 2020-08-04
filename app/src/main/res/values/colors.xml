@@ -7,6 +7,9 @@
     <color name="black">#000000</color>
     <color name="main">#5F5DE9</color>
     <color name="gray">#b4b4b4</color>
+    <color name="graybase">#ededed</color>
+
+
 
     <color name="mainButton">#674FEE</color>
     <color name="line">#E6E6E6</color>

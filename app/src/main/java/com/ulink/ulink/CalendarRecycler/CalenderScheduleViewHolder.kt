@@ -14,7 +14,9 @@ class CalendarScheduleViewHolder(itemView : View) : RecyclerView.ViewHolder(item
 
     fun bind(data : ScheduleItemData) {
         schedule.text = data.classname
-        Log.d("tag",data.toString())
         itemView.setBackgroundResource(scheduleColorSelector(data.color))
+        itemView.setOnTouchListener { v, event ->
+            return@setOnTouchListener false
+        }
     }
 }

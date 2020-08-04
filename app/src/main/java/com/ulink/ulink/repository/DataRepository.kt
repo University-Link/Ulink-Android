@@ -32,6 +32,20 @@ object DataRepository {
         })
     }
 
+    fun getProfile(onSuccess : (ResponseGetProfile) -> Unit, onFailure: (String) -> Unit){
+        retrofit.getProfile(token).enqueue(object : Callback<ResponseGetProfile>{
+            override fun onFailure(call: Call<ResponseGetProfile>, t: Throwable) {
+                onFailure(t.localizedMessage)
+            }
+
+            override fun onResponse(call: Call<ResponseGetProfile>, response: Response<ResponseGetProfile>) {
+                response.body()?.let {
+                    onSuccess(it)
+                } ?: onFailure(response.message())
+            }
+        })
+    }
+
     fun getMainTimeTable(onSuccess: (TimeTable) -> Unit, onFailure: (String) -> Unit) {
 
         retrofit.getMainTimeTable(token).enqueue(object : Callback<ResponseMainTimeTable> {

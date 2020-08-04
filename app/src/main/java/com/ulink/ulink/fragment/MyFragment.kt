@@ -12,6 +12,7 @@ import com.ulink.ulink.Activity.*
 import com.ulink.ulink.MainActivity
 import com.ulink.ulink.R
 import com.ulink.ulink.myActivity.MyActivityActivity
+import com.ulink.ulink.repository.DataRepository
 import kotlinx.android.synthetic.main.fragment_my.*
 
 class MyFragment : Fragment() {
@@ -25,7 +26,23 @@ class MyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        loadProfile()
+
         setOnClick()
+
+    }
+
+    fun loadProfile(){
+//        TODO 여기 서버 연결해서 getProfile
+//        DataRepository.getProfile(
+//                onSuccess = {
+//
+//                },
+//                onFailure = {
+//
+//                }
+//        )
 
     }
 

@@ -16,6 +16,8 @@ class CalendarViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         calendarAlpha(dayData, itemView)
 
         val rvSmallSchedule = itemView.findViewById<RecyclerView>(R.id.rv_small_schedule)
+
+
         val adapter = CalendarScheduleAdapter()
 
         val day : TextView = itemView.findViewById(R.id.day)
