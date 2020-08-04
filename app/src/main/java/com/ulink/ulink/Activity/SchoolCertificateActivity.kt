@@ -79,6 +79,7 @@ class SchoolCertificateActivity : AppCompatActivity() {
                         setButtonText("홈으로 가기")
                         setClickListener {
                             dismiss()
+                            timer?.cancel()
                             finish()
                         }
                         show()
@@ -115,7 +116,6 @@ class SchoolCertificateActivity : AppCompatActivity() {
 
         timer = object : CountDownTimer(180 * 1000, 1000) {
             override fun onFinish() {
-
 //              TODO 인증시간이 지난경우 어떻게 할지?
                 validate = false
             }

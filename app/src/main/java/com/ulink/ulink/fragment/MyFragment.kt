@@ -112,5 +112,9 @@ class MyFragment : Fragment() {
 
             (context as MainActivity).finish()
         }
+        btn_withdrawal.setOnClickListener {
+            val intent = Intent(context, WithdrawalActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
