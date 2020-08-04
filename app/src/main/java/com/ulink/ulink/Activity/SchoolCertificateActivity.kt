@@ -17,6 +17,8 @@ class SchoolCertificateActivity : AppCompatActivity() {
     var activated1 = false
     var activated2 = false
 
+    var timer : CountDownTimer? = null
+
 
 
 
@@ -108,7 +110,10 @@ class SchoolCertificateActivity : AppCompatActivity() {
 
     fun startTimer() {
         validate = true
-        object : CountDownTimer(180 * 1000, 1000) {
+
+        timer?.cancel()
+
+        timer = object : CountDownTimer(180 * 1000, 1000) {
             override fun onFinish() {
 
 //              TODO 인증시간이 지난경우 어떻게 할지?

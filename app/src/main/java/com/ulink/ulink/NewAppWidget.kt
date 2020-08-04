@@ -53,9 +53,12 @@ internal fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManage
     val views = RemoteViews(context.packageName, R.layout.new_app_widget)
     //views.setTextViewText(R.id.appwidget_text, widgetText)
 
-    val timeTable =  TimeTable(id=185, semester="2020-1", name="hfh", isMain=1, startTime="09:00",endTime="20:30", subjectList= mutableListOf(Subject(id=293, name="스터디", startTime= listOf("18:15"), endTime= listOf("20:30"), day= listOf(0), place= listOf(), color=4, subject=false, credit=0.0f, professor="", course="", isSample=false, number="", subjectIdx=0)))
+    val timeTable =  TimeTable(id=185, semester="2020-1", name="hfh", isMain=1, startTime="09:00",endTime="20:30", subjectList= mutableListOf(Subject(id=293, name="스터디", startTime= listOf("09:00"), endTime= listOf("10:00"), day= listOf(0), place= listOf(""), color=4, subject=false, credit=0.0f, professor="", course="", isSample=false, number="", subjectIdx=0),
+            Subject(id=293, name="스터디", startTime= listOf("11:00"), endTime= listOf("15:00"), day= listOf(0), place= listOf(""), color=4, subject=false, credit=0.0f, professor="", course="", isSample=false, number="", subjectIdx=0)))
+
 
     val drawer = TimeTableDrawerWidget(context, LayoutInflater.from(context),timeTable)
+    drawer.setMinMax()
     drawer.drawForWidget(views)
 
     //위젯 누르면 시간표로 이

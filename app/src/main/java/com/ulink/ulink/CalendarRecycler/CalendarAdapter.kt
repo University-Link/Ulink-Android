@@ -48,7 +48,7 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
 
             var datas = mutableListOf<ScheduleItemData>()
 
-            val rvAdapter = CalendarDayAdapter(context, rootView, datas)
+            val rvAdapter = CalendarDayAdapter(context, rootView, datas )
 
             //LeapYear
             endDay[1] = calendarLeapYearCheck(data)

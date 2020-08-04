@@ -380,7 +380,6 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 //        TODO 여기 온클릭
             celllayout.setOnClickListener {
                 onClick?.onClick(subject)
-
             }
 
             linearLayout.addView(celllayout)
@@ -406,9 +405,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 //        TODO 여기 온클릭
             celllayout.setOnClickListener {
                 onClick?.onClick(subject)
-                Log.d("tag", subjectListForOnClick.toString())
-                val sub = timeTable.subjectList.filter { it.id == subject.id }
-                onClick?.onClick(sub[0])
+//
             }
 
             linearLayout.addView(celllayout)

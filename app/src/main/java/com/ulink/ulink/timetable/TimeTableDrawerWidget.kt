@@ -77,11 +77,18 @@ class TimeTableDrawerWidget(val context: Context, val layoutInflater: LayoutInfl
         val rvIndex = RemoteViews(context.packageName, R.layout.cell_top_left_index_widget)
         remoteViews.addView(R.id.layout_dayrow, rvIndex)
 
+        val rvBottomLine = RemoteViews(context.packageName, R.layout.timetable_horizontalline)
+        rvBottomLine.setInt(R.id.layout_timetable_horizontalline, "setBackgroundColor", R.color.graybase )
+
+
         for (i in 0 until dayOfWeek) {
             val rvDay = RemoteViews(context.packageName, R.layout.cell_day_widget)
             rvDay.setTextViewText(R.id.tv_cellday, daylist[i])
-            rvDay.setInt(R.id.tv_cellday, "setBackgroundResource", R.drawable.bottom_line)
+            rvDay.setTextViewTextSize(R.id.tv_cellday, 1, 12.0f)
 
+//            rvDay.setInt(R.id.tv_cellday, "setBackgroundResource", R.drawable.bottom_line)
+//              rvDay.setInt(R.id.tv_cellday, "setBackgroundColor", R.color.white)
+            rvDay.addView(R.id.tv_cellday, rvBottomLine)
             remoteViews.addView(R.id.layout_dayrow, rvDay)
         }
 
@@ -116,6 +123,7 @@ class TimeTableDrawerWidget(val context: Context, val layoutInflater: LayoutInfl
             val rvTimeColumnEa = RemoteViews(context.packageName, R.layout.cell_timeindex_widget)
             rvTimeColumnEa.setInt(R.id.layout_tv_cell_widget, "setGravity", Gravity.CENTER)
             instance.set(Calendar.HOUR_OF_DAY, i)
+            rvTimeColumnEa.setTextViewTextSize(R.id.tv_cell_widget, 1, 12.0f)
             rvTimeColumnEa.setTextViewText(R.id.tv_cell_widget, simpleDateFormat.format(instance.time))
             rvTimeColumn.addView(R.id.day_column_root, rvTimeColumnEa)
         }
@@ -132,6 +140,7 @@ class TimeTableDrawerWidget(val context: Context, val layoutInflater: LayoutInfl
             val rvLinearLayout = RemoteViews(context.packageName, R.layout.day_column_widget)
 
             rvLinearLayout.setFloat(R.id.day_column_root, "setWeightSum", 4 * (endhour - starthour).toFloat())
+
             drawColumn(rvLinearLayout, i)
 
             remoteViews.addView(R.id.timetable_root, rvLinearLayout)
@@ -154,7 +163,6 @@ class TimeTableDrawerWidget(val context: Context, val layoutInflater: LayoutInfl
                     val b = Subject(k.id,k.name, listOf(k.startTime[m]), listOf(k.endTime[m]), listOf(k.day[m]), listOf(k.place[m]), k.color,k.subject,k.credit,k.professor,k.course,k.isSample,"",k.subjectIdx)
                     subjectList.add(b)
                 }
-
             }
         }
 
@@ -172,16 +180,19 @@ class TimeTableDrawerWidget(val context: Context, val layoutInflater: LayoutInfl
             DrawDummy(remoteViews, subjectstarttime - presubjectendtimeortablestarttime)
             DrawSubject(remoteViews, subjectList[a])
         }
-
     }
 
-
     private fun DrawDummy(remoteViews: RemoteViews, i: Float) {
-//        if (i > 0) {
-//            val view = layoutInflater.inflate(R.layout.cell_subject_widget, linearLayout, false) as LinearLayout
-//            view.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, i)
-//            linearLayout.addView(view)
-//        }
+        if (i > 0) {
+
+            val rvDummy = RemoteViews(context.packageName, R.layout.cell_subject_widget)
+            val view = rvDummy.apply(context, null)
+            view.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, i)
+
+            rvDummy.reapply(context, view)
+            remoteViews.addView(R.id.day_column_root, rvDummy)
+
+        }
     }
 
     private fun devideSubjects(remoteViews: RemoteViews) {
@@ -189,36 +200,28 @@ class TimeTableDrawerWidget(val context: Context, val layoutInflater: LayoutInfl
         val rvView = RemoteViews(context.packageName, R.layout.cell_subject_widget)
         val view = remoteViews.apply(context, null)
 
-        Log.d("tag", view.toString())
+        Log.d("tag widget", view.toString())
 
-        val cell = view.findViewById<TextView>(R.id.tv_cell_subject)
-        cell.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 0.25.toFloat())
-
-
-
-        remoteViews.addView(R.id.timetable_root, rvView)
-
+//        val cell = view.findViewById<TextView>(R.id.tv_cell_subject)
+//        cell.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 0.25.toFloat())
+//        remoteViews.addView(R.id.timetable_root, rvView)
     }
 
     fun DrawSubject(remoteViews: RemoteViews, subject: Subject) {
 
-//        devideSubjects(remoteViews)
-////        cell = 0일때 오류
+        devideSubjects(remoteViews)
 //        val rvCellLayout = RemoteViews(context.packageName, R.layout.cell_subject_widget)
+//        val view = rvCellLayout.apply(context, null)
+//        val cellLayout = view.findViewById<LinearLayout>(R.id.tv_cell)
 //
+//        cellLayout.layoutParams  = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
+//        4 * (formatToFloat(subject.endTime[0]) - formatToFloat(subject.startTime[0])) - 0.5f)
+//        rvCellLayout.setInt(R.id.tv_cell, "setBackgroundResource", getColors(subject.color))
+//        rvCellLayout.setTextViewText(R.id.tv_cell_subject, subject.name)
+//        rvCellLayout.setTextViewText(R.id.tv_cell_custom, subject.place[0])
 //
-//        val celllayout = layoutInflater.inflate(R.layout.cell_subject, linearLayout, false) as LinearLayout
-//        celllayout.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
-//                4 * (formatToFloat(subject.endTime[0]) - formatToFloat(subject.startTime[0])) - 0.5f)
-//
-//        celllayout.setBackgroundResource(getColors(subject.color))
-//        celllayout.findViewById<TextView>(R.id.tv_cell_subject).text = subject.name
-//        celllayout.findViewById<TextView>(R.id.tv_cell_custom).apply {
-//            text = subject.place[0]
-//        }
-//
-//        remoteViews.addView(celllayout)
-//        devideSubjects(linearLayout)
+//        remoteViews.addView(R.id.day_column_root, rvCellLayout)
+//        devideSubjects(remoteViews)
     }
 
 
@@ -227,9 +230,7 @@ class TimeTableDrawerWidget(val context: Context, val layoutInflater: LayoutInfl
         val rvVerticalLines = RemoteViews(context.packageName, R.layout.timetable_verticallayout)
         rvVerticalLines.setFloat(R.id.layout_line_vertical, "setWeightSum", 4 * (endhour - starthour).toFloat())
 
-
         for (i in starthour..endhour) {
-
             val rvVerticalLine = RemoteViews(context.packageName, R.layout.cell_timeindex)
             rvVerticalLine.setInt(R.id.tv_cell, "setBackgroundResource", R.drawable.bg_vertical_bottom_line)
 

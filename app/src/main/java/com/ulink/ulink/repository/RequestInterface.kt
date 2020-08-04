@@ -16,6 +16,11 @@ interface RequestInterface {
         @Body body : RequestLogin
     ) : Call<ResponseLogin>
 
+    @GET("/user/profile")
+    fun getProfile(
+            @Header("token") token : String
+    ) : Call<ResponseGetProfile>
+
     //회원가입
     //학교검색
     @GET("/university")

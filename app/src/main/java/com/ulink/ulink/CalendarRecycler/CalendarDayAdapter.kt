@@ -33,5 +33,6 @@ class CalendarDayAdapter(private val context : Context, val rootView : View, val
     override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) {
         holder.bind(datas[position],rootView, scheduleDatas)
         holder.itemView.setOnClickListener{ dayClickListener.onClick(it,position)}
+        
     }
 }
