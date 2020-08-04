@@ -9,7 +9,7 @@ import android.widget.ImageView
 import com.ulink.ulink.R
 import kotlinx.android.synthetic.main.fragment_agree.*
 
-fun buttonSelector(btn : Button, et : EditText){
+fun btnCheckSelector(btn : Button, et : EditText){
     if (et.text.isNotEmpty()) {
         btn.setBackgroundResource(R.drawable.signup_btn_search_activated)
         btn.setTextColor(Color.parseColor("#ffffff"))
@@ -24,7 +24,7 @@ fun allAgree(btn_policy_agree: CheckBox, btn_information_agree:CheckBox, btn_adv
     btn_all_agree.isChecked = btn_policy_agree.isChecked && btn_information_agree.isChecked && btn_advertise_agree.isChecked && btn_referral_agree.isChecked
 }
 
-fun btnNextSelector(btn_information_agree: CheckBox, btn_policy_agree: CheckBox, btn_next: Button){
+fun btnAgreeSelector(btn_information_agree: CheckBox, btn_policy_agree: CheckBox, btn_next: Button){
     if(btn_information_agree.isChecked && btn_policy_agree.isChecked) {
         btn_next.setBackgroundResource(R.drawable.signup_btn_next_activated)
         btn_next.setTextColor(Color.parseColor("#ffffff"))
@@ -33,6 +33,11 @@ fun btnNextSelector(btn_information_agree: CheckBox, btn_policy_agree: CheckBox,
         btn_next.setBackgroundResource(R.drawable.signup_btn_next_unactivated)
         btn_next.setTextColor(Color.parseColor("#989898"))
     }
+}
+
+fun Button.btnNextSelector(){
+    this.setBackgroundResource(R.drawable.signup_btn_next_activated)
+    this.setTextColor(Color.parseColor("#ffffff"))
 }
 
 fun checkSelector(btn : Button, et : EditText, img : ImageView){

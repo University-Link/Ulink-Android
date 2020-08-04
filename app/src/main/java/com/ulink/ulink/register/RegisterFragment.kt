@@ -71,16 +71,16 @@ class RegisterFragment : Fragment() {
 
         et_id.textChangedListener {
             if(et_id.text.toString().length>=8)
-                buttonSelector(btn_id_same_check, et_id)
+                btnCheckSelector(btn_id_same_check, et_id)
             else
-                buttonSelector(btn_id_same_check, et_id)
+                btnCheckSelector(btn_id_same_check, et_id)
         }
 
         et_nickname.textChangedListener {
             if(et_nickname.text.toString().length>=2)
-                buttonSelector(btn_nickname_same_check, et_nickname)
+                btnCheckSelector(btn_nickname_same_check, et_nickname)
             else
-                buttonSelector(btn_nickname_same_check, et_nickname)
+                btnCheckSelector(btn_nickname_same_check, et_nickname)
         }
 
         btn_id_same_check.setOnClickListener{

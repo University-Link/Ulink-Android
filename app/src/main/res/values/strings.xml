@@ -47,15 +47,7 @@
     <string name="change_nickname_using">
         사용 중인 닉네임입니다.
     </string>
-    <string name="school_certificate_ok">
-        인증이 완료되었습니다.
-    </string>
-    <string name="major_change_changed">
-        변경되었습니다.
-    </string>
-    <string name="major_change_empty">
-        학과를 입력해 주세요.
-    </string>
+
     <string name="appwidget_text">ulink</string>
 
     <string name="first_popup">"캘린더는 과목별 채팅방에 등록된 공지가\n 자동으로 추가되는 일정 관리 시스템입니다."</string>
@@ -67,6 +59,7 @@
     <string name="agree_popup">"필수 이용약관에 동의해 주세요."</string>
     <string name="id">"사용가능한 아이디입니다."</string>
     <string name="nickname">"사용가능한 닉네임입니다."</string>
+    <string name="missing_cord">"휴대폰 번호를 정확하게 입력했는지 다시 확인해 주세요. 인증번호가 수신되지 않는다면 휴대폰 내 차단 설정을 확인해 주세요. 휴대폰 스팸 차단을 해제한 수 다시 시도해 주세요."</string>
     <string name="authentication">"인증이 완료되었습니다."</string>
     <string name="year_fail">"입학년도를 선택해주세요."</string>
     <string name="id_fail">"중복된 아이디입니다."</string>
