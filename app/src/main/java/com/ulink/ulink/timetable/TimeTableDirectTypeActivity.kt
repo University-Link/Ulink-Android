@@ -21,6 +21,10 @@ import com.ulink.ulink.repository.TimeTable
 import com.ulink.ulink.utils.deepCopy
 import kotlinx.android.synthetic.main.activity_direct_type_time_table.*
 import kotlinx.android.synthetic.main.toolbar_direct_time_table.*
+import java.text.Format
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.properties.Delegates
 
 //타임피커 커스
@@ -67,11 +71,16 @@ class TimeTableDirectTypeActivity : AppCompatActivity(), onClickListener {
             findViewById<LinearLayout>(R.id.layout_time_plus).visibility = View.GONE
         }
 
-
         for (i in 0 until subjectList.size) {
-            datas.add(TimeTableDirectData(subjectList[i].day[0], subjectList[i].startTime[0], subjectList[i].endTime[0]))
+            val timeFormat = SimpleDateFormat("HH:mm", Locale.US)
+            var strStartTime = subjectList[i].startTime[0]
+            var strEndTime = subjectList[i].endTime[0]
+            var objStartTime = timeFormat.parse(strStartTime)
+            var objEndTime = timeFormat.parse(strEndTime)
+            var startTime = timeFormat.format(objStartTime)
+            var endTime = timeFormat.format(objEndTime)
+            datas.add(TimeTableDirectData(subjectList[i].day[0], startTime, endTime))
         }
-
 
         TimeTableDirectAdapter = TimeTableDirectAdapter(this, this)
         TimeTableDirectAdapter.datas = datas

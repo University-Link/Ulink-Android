@@ -379,20 +379,17 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         TabLayoutMediator(tl_timetableeditor, vp_timetableeditor, object : TabLayoutMediator.TabConfigurationStrategy {
             override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
                 val tablayout = LayoutInflater.from(applicationContext).inflate(layout.tab_timetableeditor, null)
-                var filterIcon = tablayout.findViewById<ImageView>(id.ic_tab)
-                var cartIcon = tablayout.findViewById<ImageView>(id.ic_tab)
-                var filterText = tablayout.findViewById<TextView>(id.tv_tab)
-                var cartText = tablayout.findViewById<TextView>(id.tv_tab)
-                // TODO 이거 셀렉터 말고 리스트로 해결
+                var tabIcon = tablayout.findViewById<ImageView>(id.ic_tab)
+                var tabText = tablayout.findViewById<TextView>(id.tv_tab)
 
                 when (position) {
                     0 -> {
-                        filterIcon.setBackgroundResource(drawable.timetableadd_ic_filter_selected)
-                        filterText.text = "필터 및 검색"
+                        tabIcon.setBackgroundResource(drawable.timetableadd_ic_filter)
+                        tabText.text = "필터 및 검색"
                         }
                     1 -> {
-                        cartIcon.setBackgroundResource(drawable.timetableadd_ic_cart_selected)
-                        cartText.text = "후보"
+                        tabIcon.setBackgroundResource(drawable.timetableadd_ic_cart)
+                        tabText.text = "후보"
                         }
                 }
                 tab.customView = tablayout

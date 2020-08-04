@@ -35,12 +35,11 @@ fun calendarDayColorCheck(dayData: CalendarDayData, itemView : View) {
 
     val sundayColor = "#674FEE"
     val monthColor = "#363636"
-    //var otherColor = "#888888"
     val todayColor = "#ffffff"
 
-    if(dayData.check) day.setTextColor(Color.parseColor(monthColor)) // now_month
-    //else day.setTextColor(Color.parseColor(otherColor)) // prev, next month
-    if(dayData.date % 7 == 0 && dayData.check) day.setTextColor(Color.parseColor(sundayColor)) //sunday
+    if(dayData.date % 7 == 0) day.setTextColor(Color.parseColor(sundayColor)) //sunday
+    else day.setTextColor(Color.parseColor(monthColor)) // now_month
+
     if(dayData.today)
     {
         day.setBackgroundResource(R.drawable.calendar_img_bg_today)
