@@ -2,11 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ulink.ulink">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_foreground"
@@ -15,30 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.ChangePasswordActivity"></activity>
+        <activity android:name=".Activity.WithdrawalActivity"></activity>
+        <activity android:name=".Activity.ChangePasswordActivity" />
         <activity android:name=".Ulink.BoardDetailActivity" />
-        <activity android:name=".Ulink.BoardSearchActivity"></activity>
+        <activity android:name=".Ulink.BoardSearchActivity" />
         <activity android:name=".myActivity.MyActivityActivity" />
-        <activity android:name=".Activity.ChangeNickNameActivity"></activity>
+        <activity android:name=".Activity.ChangeNickNameActivity" />
         <activity android:name=".Activity.ChangeMajorActivity" />
         <activity android:name=".Activity.SchoolCertificateActivity" />
         <activity android:name=".Ulink.UlinkInsideActivity" />
 
-        <receiver android:name=".NewAppWidget">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/new_app_widget_info" />
-        </receiver>
-
-        <activity android:name=".NewAppWidgetConfigureActivity" >
+        <activity android:name=".NewAppWidgetConfigureActivity">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
+
         <activity android:name=".register.RegisterActivity" />
         <activity android:name=".Activity.FilterNormalActivity" />
         <activity android:name=".Activity.FilterMajorActivity" />
@@ -68,6 +55,20 @@
         <activity android:name=".Activity.NoticeAddActivity" />
         <activity android:name=".Ulink.UlinkUniversityBoardActivity" />
         <activity android:name=".Ulink.UlinkUlinkBoardActivity" />
+        <receiver android:name=".NewAppWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/new_app_widget_info" />
+        </receiver>
     </application>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
