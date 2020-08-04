@@ -11,11 +11,24 @@ interface RequestInterface {
 
     //User
     //유저 로그인
-
     @POST("/user/signin")
     fun requestLogin(
         @Body body : RequestLogin
     ) : Call<ResponseLogin>
+
+    //회원가입
+    //학교검색
+    @GET("/university")
+    fun getUniversity(
+        @Query("univ") univ : String
+    ) : Call<ResponseUniversity>
+
+    //학과검색
+    @GET("/university/major")
+    fun getMajor(
+        @Query("univ") univ : String,
+        @Query("major") major : String
+    ) : Call<ResponseMajor>
 
     //Schedule
     //시간표 - 메인 시간표 조회
