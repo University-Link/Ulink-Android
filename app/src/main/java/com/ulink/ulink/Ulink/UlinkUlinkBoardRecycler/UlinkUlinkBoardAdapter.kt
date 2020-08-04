@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ulink.ulink.R
-import com.ulink.ulink.Ulink.UlinkBoardRecycler.UlinkBoardData
+import com.ulink.ulink.Ulink.UlinkBoardData
 
 class UlinkUlinkBoardAdapter (private val context: Context) : RecyclerView.Adapter<UlinkUlinkBoardViewHolder>() {
     var datas:MutableList<UlinkBoardData> = mutableListOf<UlinkBoardData>()

@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ulink.ulink.R
-import com.ulink.ulink.Ulink.UlinkBoardRecycler.UlinkBoardData
+import com.ulink.ulink.Ulink.UlinkBoardData
 import kotlinx.android.synthetic.main.fragment_my_activity.*
 
 class MyActivityFragment : Fragment() {

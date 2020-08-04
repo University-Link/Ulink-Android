@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.ulink.ulink.R
 import com.ulink.ulink.Ulink.UlinkBoardRecycler.BoardSearchAdapter
-import com.ulink.ulink.Ulink.UlinkBoardRecycler.UlinkBoardData
 import kotlinx.android.synthetic.main.activity_ulink_university_board.*
 import kotlinx.android.synthetic.main.toolbar_ulink_inside.*
 
@@ -38,7 +37,7 @@ class UlinkUniversityBoardActivity : AppCompatActivity() {
                     content = "ㅁㅇㄴㄹㅁㄴㅇㄹ",
                     like = true,
                     comment_count = "2",
-                    heart_count ="999+"
+                    heart_count = "999+"
 
                 )
             )
@@ -50,7 +49,7 @@ class UlinkUniversityBoardActivity : AppCompatActivity() {
                     content = "ㅁㅇㄴㄹㅁㄴㅇㄹ",
                     like = true,
                     comment_count = "2",
-                    heart_count ="999+"
+                    heart_count = "999+"
 
                 )
             )
@@ -62,7 +61,7 @@ class UlinkUniversityBoardActivity : AppCompatActivity() {
                     content = "ㅁㅇㄴㄹㅁㄴㅇㄹ",
                     like = true,
                     comment_count = "2",
-                    heart_count ="999+"
+                    heart_count = "999+"
 
                 )
             )
@@ -74,7 +73,7 @@ class UlinkUniversityBoardActivity : AppCompatActivity() {
                     content = "ㅁㅇㄴㄹㅁㄴㅇㄹ",
                     like = true,
                     comment_count = "2",
-                    heart_count ="999+"
+                    heart_count = "999+"
 
                 )
             )

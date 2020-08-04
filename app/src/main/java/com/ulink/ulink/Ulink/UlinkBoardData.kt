@@ -1,4 +1,4 @@
-package com.ulink.ulink.Ulink.UlinkBoardRecycler
+package com.ulink.ulink.Ulink
 
 
 // TODO 대학 데이터 추가하기

@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.ulink.ulink.R
 import com.ulink.ulink.Ulink.BoardDetailActivity
 import com.ulink.ulink.Ulink.UlinkBoardRecycler.BoardSearchAdapter
-import com.ulink.ulink.Ulink.UlinkBoardRecycler.UlinkBoardData
+import com.ulink.ulink.Ulink.UlinkBoardData
 import kotlinx.android.synthetic.main.fragment_ulink_board.*
 
 
@@ -41,7 +41,7 @@ class UlinkBoardFragment : Fragment() {
                     content = "ㅁㅇㄴㄹㅁㄴㅇㄹ",
                     like = true,
                     comment_count = "2",
-                    heart_count ="999+"
+                    heart_count = "999+"
 
                 )
             )
@@ -53,7 +53,7 @@ class UlinkBoardFragment : Fragment() {
                     content = "ㅁㅇㄴㄹㅁㄴㅇㄹ",
                     like = true,
                     comment_count = "2",
-                    heart_count ="999+"
+                    heart_count = "999+"
 
                 )
             )
@@ -65,7 +65,7 @@ class UlinkBoardFragment : Fragment() {
                     content = "ㅁㅇㄴㄹㅁㄴㅇㄹ",
                     like = true,
                     comment_count = "2",
-                    heart_count ="999+"
+                    heart_count = "999+"
 
                 )
             )
@@ -77,7 +77,7 @@ class UlinkBoardFragment : Fragment() {
                     content = "ㅁㅇㄴㄹㅁㄴㅇㄹ",
                     like = true,
                     comment_count = "2",
-                    heart_count ="999+"
+                    heart_count = "999+"
                 )
             )
 

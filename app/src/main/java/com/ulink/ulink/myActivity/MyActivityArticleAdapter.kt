@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ulink.ulink.R
-import com.ulink.ulink.Ulink.UlinkBoardRecycler.UlinkBoardData
+import com.ulink.ulink.Ulink.UlinkBoardData
 
 class MyActivityArticleAdapter (private val context: Context) : RecyclerView.Adapter<MyActivityArticleAdapter.VHolder>() {
 

@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ulink.ulink.R
-import com.ulink.ulink.Ulink.UlinkBoardRecycler.UlinkBoardData
+import com.ulink.ulink.Ulink.UlinkBoardData
 
 class UlinkUlinkBoardViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
     val img_profile : ImageView = itemView.findViewById(R.id.img_profile)

@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ulink.ulink.R
-import com.ulink.ulink.Ulink.UlinkBoardRecycler.UlinkBoardData
+import com.ulink.ulink.Ulink.UlinkBoardData
 
 class UlinkBoardCommentAdapter (private val context: Context) : RecyclerView.Adapter<UlinkBoardCommentViewHolder>() {
     var datas:MutableList<UlinkBoardData> = mutableListOf<UlinkBoardData>()

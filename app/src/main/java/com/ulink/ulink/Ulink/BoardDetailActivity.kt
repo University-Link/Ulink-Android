@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.widget.TextView
 import com.ulink.ulink.R
 import com.ulink.ulink.Ulink.BoardCommentRecycler.UlinkBoardCommentAdapter
-import com.ulink.ulink.Ulink.UlinkBoardRecycler.UlinkBoardData
 import com.ulink.ulink.utils.DialogBuilder
 import kotlinx.android.synthetic.main.activity_board_comment.*
 import kotlinx.android.synthetic.main.toolbar_board_comment.*
