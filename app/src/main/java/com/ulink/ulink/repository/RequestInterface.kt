@@ -311,4 +311,11 @@ interface RequestInterface {
             @Path("idx") idx : String,
             @Query("isSubject") isSubject: Boolean
     )
+
+    @POST("/university/auth")
+    fun requestUniversityAtuh(
+            @Header("token") token : String,
+            @Body body : RequestUniversityAuth
+    ) : Call<ResponseUniversityAuth>
+
 }

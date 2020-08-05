@@ -15,6 +15,7 @@ import com.ulink.ulink.adapter.FAQExpandableAdapter
 import com.ulink.ulink.myActivity.MyActivityActivity
 import com.ulink.ulink.register.CollectAgreeActivity
 import com.ulink.ulink.repository.DataRepository
+import com.ulink.ulink.utils.DialogBuilder
 import com.ulink.ulink.withdrawal.WithdrawalActivity
 import kotlinx.android.synthetic.main.fragment_my.*
 
@@ -38,14 +39,15 @@ class MyFragment : Fragment() {
 
     fun loadProfile(){
 //        TODO 여기 서버 연결해서 getProfile
-//        DataRepository.getProfile(
-//                onSuccess = {
-//
-//                },
-//                onFailure = {
-//
-//                }
-//        )
+        DataRepository.getProfile(
+                onSuccess = {
+                    tv_nickname.text = it.data.nickname
+                    tv_name.text = it.data.name
+                },
+                onFailure = {
+
+                }
+        )
 
     }
 
@@ -105,21 +107,34 @@ class MyFragment : Fragment() {
             startActivity(intent)
         }
 
+        btn_communityguide.setOnClickListener {
+            val intent = Intent(context, CommunityGuideActivity::class.java)
+            startActivity(intent)
+        }
+
         btn_faq.setOnClickListener {
             val intent = Intent(context, FAQActivity::class.java)
             startActivity(intent)
         }
 
         btn_logout.setOnClickListener {
-            val sharedPref: SharedPreferences = requireContext().getSharedPreferences("pref", Context.MODE_PRIVATE)
-            val sharedEdit = sharedPref.edit()
-            sharedEdit.putBoolean("autoLogin", false)
-            sharedEdit.commit()
+            DialogBuilder().apply {
+                build(requireContext())
+                setContent("로그아웃 되었습니다.")
+                setClickListener {
+                    dismiss()
+                    val sharedPref: SharedPreferences = requireContext().getSharedPreferences("pref", Context.MODE_PRIVATE)
+                    val sharedEdit = sharedPref.edit()
+                    sharedEdit.putBoolean("autoLogin", false)
+                    sharedEdit.commit()
 
-            val intent = Intent(context, LoginActivity::class.java)
-            startActivity(intent)
+                    val intent = Intent(context, LoginActivity::class.java)
+                    startActivity(intent)
+                    (context as MainActivity).finish()
+                }
+                show()
+            }
 
-            (context as MainActivity).finish()
         }
         btn_withdrawal.setOnClickListener {
             val intent = Intent(context, WithdrawalActivity::class.java)
