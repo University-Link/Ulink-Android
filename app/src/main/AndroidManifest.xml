@@ -15,17 +15,14 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".register.CollectAgreeActivity"></activity>
         <activity android:name=".register.ServiceAgreeActivity" />
-        <activity android:name=".Activity.WithdrawalActivity" />
+        <activity android:name=".withdrawal.WithdrawalActivity"/>
         <activity android:name=".Activity.FAQActivity"></activity>
         <activity android:name=".Activity.ChangePasswordActivity" />
-        <activity android:name=".Ulink.BoardDetailActivity" />
         <activity android:name=".Ulink.BoardSearchActivity" />
         <activity android:name=".Ulink.UlinkBoardWriteActivity">
             android:windowSoftInputMode="adjustResize"
         </activity>
-        <activity android:name=".Activity.ChangePasswordActivity" />
         <activity android:name=".Ulink.BoardCommentRecycler.BoardDetailActivity" />
-        <activity android:name=".Ulink.BoardSearchActivity" />
         <activity android:name=".myActivity.MyActivityActivity" />
         <activity android:name=".Activity.ChangeNickNameActivity" />
         <activity android:name=".Activity.ChangeMajorActivity" />
