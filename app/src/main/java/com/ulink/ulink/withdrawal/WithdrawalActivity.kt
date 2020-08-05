@@ -1,15 +1,11 @@
-package com.ulink.ulink.Activity
+package com.ulink.ulink.withdrawal
 
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import com.ulink.ulink.R
-import com.ulink.ulink.textChangedListener
-import kotlinx.android.synthetic.main.activity_change_major.*
 import kotlinx.android.synthetic.main.activity_withdrawal.*
 
 class WithdrawalActivity : AppCompatActivity() {
@@ -30,14 +26,22 @@ class WithdrawalActivity : AppCompatActivity() {
         btn_ok.setOnClickListener {
             if (!et_id.text.isNullOrBlank()&&!et_password.text.isNullOrBlank()){
 //           TODO 서버와 연결해서 회원탈퇴
-                ActivityCompat.finishAffinity(this)
-                val sharedPref: SharedPreferences = getSharedPreferences("pref", Context.MODE_PRIVATE)
-                val sharedEdit = sharedPref.edit()
-                sharedEdit.putBoolean("autoLogin", false)
-                sharedEdit.commit()
 
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
+//                TODO 비밀번호가 틀릴경우 Dialog
+//                DialogBuilder().apply {
+//                    build(this@WithdrawalActivity)
+//                    setContent("비밀번호를 확인해 주세요.")
+//                    setClickListener {
+//                        dismiss()
+//                    }
+//                    show()
+//                }
+
+
+//                btn_ok.setOnClickListener(null)
+                supportFragmentManager.beginTransaction().add(R.id.layout_container, WithdrawalFragment()).commit()
+                Log.d("tag","1")
+                btn_ok.visibility = View.GONE
 
             } else {
                 Toast.makeText(this, "아이디와 비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();

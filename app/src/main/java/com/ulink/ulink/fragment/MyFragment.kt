@@ -11,8 +11,10 @@ import android.view.ViewGroup
 import com.ulink.ulink.Activity.*
 import com.ulink.ulink.MainActivity
 import com.ulink.ulink.R
+import com.ulink.ulink.adapter.FAQExpandableAdapter
 import com.ulink.ulink.myActivity.MyActivityActivity
 import com.ulink.ulink.repository.DataRepository
+import com.ulink.ulink.withdrawal.WithdrawalActivity
 import kotlinx.android.synthetic.main.fragment_my.*
 
 class MyFragment : Fragment() {
@@ -101,6 +103,12 @@ class MyFragment : Fragment() {
             val intent = Intent(context, ChangePasswordActivity::class.java)
             startActivity(intent)
         }
+
+        btn_faq.setOnClickListener {
+            val intent = Intent(context, FAQActivity::class.java)
+            startActivity(intent)
+        }
+
         btn_logout.setOnClickListener {
             val sharedPref: SharedPreferences = requireContext().getSharedPreferences("pref", Context.MODE_PRIVATE)
             val sharedEdit = sharedPref.edit()
