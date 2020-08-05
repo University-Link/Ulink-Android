@@ -28,6 +28,7 @@ class UlinkFragment : Fragment() {
     lateinit var classAdapter : ClassAdapter
     val datas : MutableList<ClassData> = mutableListOf<ClassData>()
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

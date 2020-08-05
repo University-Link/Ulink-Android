@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ulink.ulink">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_foreground"
@@ -13,14 +16,20 @@
         <activity android:name=".Activity.CommunityGuideActivity"></activity>
         <activity android:name=".Activity.FAQActivity" />
         <activity android:name=".withdrawal.WithdrawalActivity" />
+        <activity android:name=".register.CollectAgreeActivity"></activity>
+        <activity android:name=".register.ServiceAgreeActivity" />
         <activity android:name=".Activity.ChangePasswordActivity" />
-        <activity android:name=".Ulink.BoardDetailActivity" />
+        <activity android:name=".Ulink.UlinkBoardWriteActivity">
+            android:windowSoftInputMode="adjustResize"
+        </activity>
+        <activity android:name=".Ulink.BoardCommentRecycler.BoardDetailActivity" />
         <activity android:name=".Ulink.BoardSearchActivity" />
         <activity android:name=".myActivity.MyActivityActivity" />
         <activity android:name=".Activity.ChangeNickNameActivity" />
         <activity android:name=".Activity.ChangeMajorActivity" />
         <activity android:name=".Activity.SchoolCertificateActivity" />
         <activity android:name=".Ulink.UlinkInsideActivity" />
+
         <activity android:name=".NewAppWidgetConfigureActivity">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
@@ -55,7 +64,6 @@
         <activity android:name=".Activity.NoticeAddActivity" />
         <activity android:name=".Ulink.UlinkUniversityBoardActivity" />
         <activity android:name=".Ulink.UlinkUlinkBoardActivity" />
-
         <receiver android:name=".NewAppWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -67,9 +75,6 @@
         </receiver>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-
     <uses-permission android:name="android.permission.VIBRATE" />
 
 </manifest>

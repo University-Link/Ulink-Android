@@ -13,6 +13,7 @@ import com.ulink.ulink.MainActivity
 import com.ulink.ulink.R
 import com.ulink.ulink.adapter.FAQExpandableAdapter
 import com.ulink.ulink.myActivity.MyActivityActivity
+import com.ulink.ulink.register.CollectAgreeActivity
 import com.ulink.ulink.repository.DataRepository
 import com.ulink.ulink.utils.DialogBuilder
 import com.ulink.ulink.withdrawal.WithdrawalActivity
@@ -136,6 +137,11 @@ class MyFragment : Fragment() {
         }
         btn_withdrawal.setOnClickListener {
             val intent = Intent(context, WithdrawalActivity::class.java)
+            startActivity(intent)
+        }
+        btn_privacy.setOnClickListener{
+            val intent = Intent(context, CollectAgreeActivity::class.java)
+            intent.putExtra("prevView", "myPage")
             startActivity(intent)
         }
     }

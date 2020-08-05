@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.widget.TextView
 import com.google.android.material.tabs.TabLayoutMediator
 import com.ulink.ulink.R
-import com.ulink.ulink.Ulink.UlinkBoardRecycler.UlinkBoardData
+import com.ulink.ulink.Ulink.UlinkBoardData
 import kotlinx.android.synthetic.main.activity_my_activity.*
 
 class MyActivityActivity : AppCompatActivity() {
@@ -54,15 +54,15 @@ class MyActivityActivity : AppCompatActivity() {
         for (a in 0 until 3){
             (mAdapter.fragmentList[a] as MyActivityFragment).setData(
                 UlinkBoardData(
-                            img_profile = "",
-                            nickname = "조개탕수만",
-                            time = "방금",
-                            content = "ㅁㅇㄴㄹㅁㄴㅇㄹ",
-                            like = true,
-                            comment_count = "2",
-                            heart_count ="999+",
-                            category = "유링크 게시판"
-                    )
+                    img_profile = "",
+                    nickname = "조개탕수만",
+                    time = "방금",
+                    content = "ㅁㅇㄴㄹㅁㄴㅇㄹ",
+                    like = true,
+                    comment_count = "2",
+                    heart_count = "999+",
+                    category = "유링크 게시판"
+                )
             )
         }
 

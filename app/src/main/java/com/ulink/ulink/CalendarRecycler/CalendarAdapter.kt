@@ -121,22 +121,42 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                 //previous_month
                 var dateindex = 0
                 for (i in 0 until index) { // index(1일) 그 전까지 prev_month
-                    add(
-                        CalendarDayData(
-                            day = prevEmptyIndex.toString(),
-                            check = false, // !now_month
-                            date = dateindex, // if(dateindex % 7 == 0) then Sunday
-                            today = false
+                    if(data.month==1) {
+                        add(
+                            CalendarDayData(
+                                year = data.year-1,
+                                month = 12,
+                                day = prevEmptyIndex.toString(),
+                                check = false, // !now_month
+                                date = dateindex, // if(dateindex % 7 == 0) then Sunday
+                                today = false
+                            )
                         )
-                    )
-                    dateindex += 1
-                    prevEmptyIndex += 1
+                        dateindex += 1
+                        prevEmptyIndex += 1
+                    }
+                    else {
+                        add(
+                            CalendarDayData(
+                                year = data.year,
+                                month = data.month-1,
+                                day = prevEmptyIndex.toString(),
+                                check = false, // !now_month
+                                date = dateindex, // if(dateindex % 7 == 0) then Sunday
+                                today = false
+                            )
+                        )
+                        dateindex += 1
+                        prevEmptyIndex += 1
+                    }
                 }
                 //month
                 for (i in 1..lastindex) { // 1일부터 endDay까지
                     if (calendarTodayCheck(i, data))
                         add(
                             CalendarDayData(
+                                year = data.year,
+                                month = data.month,
                                 day = i.toString(),
                                 check = true, // for setting now_month
                                 date = dateindex,
@@ -146,6 +166,8 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                     else
                         add(
                             CalendarDayData(
+                                year = data.year,
+                                month = data.month,
                                 day = i.toString(),
                                 check = true,
                                 date = dateindex,
@@ -155,20 +177,43 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                     dateindex += 1
                 }
                 //next_month
-                while (true) {
-                    if (lastEmpty % 7 != 0) {
-                        add(
-                            CalendarDayData(
-                                day = lastEmptyIndex.toString(),
-                                check = false, // !now_month
-                                date = dateindex,
-                                today = false
+                if(data.month==12) {
+                    while (true) {
+                        if (lastEmpty % 7 != 0) {
+                            add(
+                                CalendarDayData(
+                                    year = data.year+1,
+                                    month = 1,
+                                    day = lastEmptyIndex.toString(),
+                                    check = false, // !now_month
+                                    date = dateindex,
+                                    today = false
+                                )
                             )
-                        )
-                        lastEmptyIndex += 1
-                        lastEmpty += 1
-                        dateindex += 1
-                    } else break;
+                            lastEmptyIndex += 1
+                            lastEmpty += 1
+                            dateindex += 1
+                        } else break;
+                    }
+                }
+                else{
+                    while (true) {
+                        if (lastEmpty % 7 != 0) {
+                            add(
+                                CalendarDayData(
+                                    year = data.year,
+                                    month = data.month + 1,
+                                    day = lastEmptyIndex.toString(),
+                                    check = false, // !now_month
+                                    date = dateindex,
+                                    today = false
+                                )
+                            )
+                            lastEmptyIndex += 1
+                            lastEmpty += 1
+                            dateindex += 1
+                        } else break;
+                    }
                 }
                 rvAdapter.notifyDataSetChanged()
 
@@ -181,32 +226,20 @@ class CalendarAdapter(private val context : Context, data : CalendarData, val ro
                                 .inflate(R.layout.calendar_popup_layout, null)
 
                             //popup tv setting O월 O일
-                            var popupMonth =
-                                popupMonthCheck(position, index, popupLastEmpty, data.month)
-                            var popupDay =
-                                popupDayCheck(position, index, popupLastEmpty, popupEmptyIndex)
+                            var popupYear = rvAdapter.datas[position].year.toString()
+                            var popupMonth = rvAdapter.datas[position].month.toString()
+                            var popupDay = rvAdapter.datas[position].day
 
                             layout.findViewById<TextView>(R.id.tv_calendar_popup_date).text =
-                                popupMonth.toString() + "월 " + popupDay.toString() + "일 " + popupDateCheck(
-                                    position
-                                )
+                                popupMonth + "월 " + popupDay + "일 " + popupDateCheck(position)
 
                             val rvPopupAdapter = SchedulePopupAdapter(context)
                             var rv_popup = layout.findViewById<RecyclerView>(R.id.rv_popup_schedule_item)
                             rv_popup.adapter = rvPopupAdapter
 
-                            //popupYear search
-                            var itemYear: String = popupYearCheck(
-                                data.year,
-                                data.month,
-                                position,
-                                index,
-                                popupLastEmpty
-                            ).toString()
-
                             //oooo-oo-oo
                             var retrofitStr =
-                                itemYear + "-" + popupMonth.toString() + "-" + popupDay.toString() // request
+                                popupYear + "-" + popupMonth + "-" + popupDay// request
 
                             val popupList: MutableList<ScheduleItemData> = arrayListOf()
 
