@@ -250,6 +250,7 @@
         app:layout_constraintTop_toBottomOf="@id/et_nickname" />
 
     <TextView
+        android:id="@+id/nickname_warning2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -258,7 +259,6 @@
         android:textColor="#989898"
         app:layout_constraintStart_toStartOf="@id/tv_nickname"
         app:layout_constraintTop_toBottomOf="@id/nickname_warning1" />
-
 
     <Button
         android:id="@+id/btn_next"

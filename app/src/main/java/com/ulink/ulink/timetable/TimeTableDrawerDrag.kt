@@ -56,6 +56,21 @@ class TimeTableDrawerDrag(val context: Context, val layoutInflater: LayoutInflat
     lateinit var testview: TimeTableDragView
     lateinit var onDrawListener: onDrawListener
 
+    fun setMinMax() {
+        for (sub in timeTable.subjectList) {
+            for (i in sub.startTime) {
+                if (formatToFloat(i) < starthour) {
+                    starthour = formatToFloat(i).toInt()
+                }
+            }
+            for (k in sub.endTime) {
+                if (formatToFloat(k) > endhour) {
+                    endhour = formatToFloat(k).toInt() + 1
+                }
+            }
+        }
+    }
+
     fun draw(frameLayout: FrameLayout) {
         val root = frameLayout.findViewById<LinearLayout>(R.id.timetable_root)
 

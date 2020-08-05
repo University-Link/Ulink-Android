@@ -60,6 +60,7 @@
                 android:paddingLeft="40dp"
                 android:textSize="15sp"
                 android:hint="학교 검색"
+                android:singleLine="true"
                 android:background="@drawable/signup_btn_searchbox"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -104,6 +105,7 @@
             android:layout_height="wrap_content"
             android:paddingVertical="6dp"
             android:background="@drawable/search_result_background"
+            android:visibility="invisible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"

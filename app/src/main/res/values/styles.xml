@@ -29,8 +29,6 @@
     </style>
     
     <style name="EditTextTheme" parent = "Theme.AppCompat.Light.NoActionBar">
-
-
         <item name="colorControlActivated">#674fee</item>
         <item name="colorControlNormal">#363636</item>
     </style>

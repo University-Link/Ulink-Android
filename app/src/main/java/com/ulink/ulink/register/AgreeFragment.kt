@@ -1,6 +1,8 @@
 package com.ulink.ulink.register
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,19 +15,16 @@ import kotlinx.android.synthetic.main.fragment_agree.btn_next
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-private const val ARG_PARAM3 = "param3"
 
 class AgreeFragment : Fragment() {
-    private var university: String = ""
-    private var major: String = ""
-    private var year: String = ""
+    private var majorIdx: String = ""
+    private var studentNumber: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            university = it.getString(ARG_PARAM1).toString()
-            major = it.getString(ARG_PARAM2).toString()
-            year = it.getString(ARG_PARAM3).toString()
+            majorIdx = it.getString(ARG_PARAM1).toString()
+            studentNumber = it.getString(ARG_PARAM2).toString()
         }
     }
 
@@ -42,7 +41,7 @@ class AgreeFragment : Fragment() {
 
         btn_next.setOnClickListener{
             if(btn_policy_agree.isChecked && btn_information_agree.isChecked)
-                (activity as RegisterActivity?)!!.replaceFragment(AuthenticationFragment.newInstance(university, major, year, btn_advertise_agree.isChecked.toString(), btn_referral_agree.isChecked.toString()))
+                (activity as RegisterActivity?)!!.replaceFragment(AuthenticationFragment.newInstance(majorIdx, studentNumber, btn_advertise_agree.isChecked.toString(), btn_referral_agree.isChecked.toString()))
             else{
                 DialogBuilder().apply {
                     build(view.context)
@@ -55,7 +54,7 @@ class AgreeFragment : Fragment() {
             }
         }
 
-        btn_back.setOnClickListener() {
+        btn_back.setOnClickListener {
             (activity as RegisterActivity?)!!.finishFragment(this)
         }
 
@@ -77,6 +76,7 @@ class AgreeFragment : Fragment() {
         }
 
         btn_policy_agree.setOnClickListener {
+            Log.d("check", majorIdx+" "+studentNumber)
             btnAgreeSelector(btn_information_agree, btn_policy_agree, btn_next)
             allAgree(btn_policy_agree, btn_information_agree, btn_advertise_agree, btn_referral_agree, btn_all_agree)
         }
@@ -92,16 +92,35 @@ class AgreeFragment : Fragment() {
         btn_referral_agree.setOnClickListener{
             allAgree(btn_policy_agree, btn_information_agree, btn_advertise_agree, btn_referral_agree, btn_all_agree)
         }
+
+        btn_policy_more.setOnClickListener{
+            val intent = Intent(view.context, ServiceAgreeActivity::class.java)
+            startActivity(intent)
+        }
+
+        btn_information_more.setOnClickListener{
+            val intent = Intent(view.context, CollectAgreeActivity::class.java)
+            startActivity(intent)
+        }
+
+        btn_advertise_more.setOnClickListener{
+            val intent = Intent(view.context, ServiceAgreeActivity::class.java)
+            startActivity(intent)
+        }
+
+        btn_referral_more.setOnClickListener{
+            val intent = Intent(view.context, ServiceAgreeActivity::class.java)
+            startActivity(intent)
+        }
     }
 
         companion object {
         @JvmStatic
-        fun newInstance(param1: String, param2: String, param3: String) =
+        fun newInstance(param1: String, param2: String) =
             AgreeFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
-                    putString(ARG_PARAM2, param3)
                 }
             }
     }

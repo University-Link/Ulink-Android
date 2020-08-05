@@ -74,4 +74,5 @@ class TimeTableExpandableAdapter(val context : Context) : BaseExpandableListAdap
         return this.majorNameList.size
     }
 
+
 }

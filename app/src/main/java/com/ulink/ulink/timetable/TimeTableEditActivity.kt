@@ -106,11 +106,6 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
                 } )
         }
-
-
-
-
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -129,8 +124,37 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
         } else if(requestCode == REQUEST_DIRECT_TYPE_ACTIVITY){
             if (resultCode == 200){
                 val subjectList = data?.getParcelableArrayListExtra<Subject>("subjects")
-//                TODO 여기 어떻게 등록할지?
+                val timeTable = data?.getParcelableExtra<TimeTable>("timeTable")
 
+                val scheduleList = mutableListOf<RequestAddPersonalPlan.Schedule>()
+                subjectList?.let {
+                    for (i in 0 until subjectList.size){
+                        if(checkIsOver(subjectList[i], timeTable!!)){
+                            Toast.makeText(this, "중복된 과목이 있습니다", Toast.LENGTH_SHORT).show()
+                            return@let
+                        }
+                        timeTable.subjectList.add(subjectList[i])
+
+                        scheduleList.add(RequestAddPersonalPlan.Schedule(subjectList[i].name,
+                                subjectList[i].startTime[0],
+                                subjectList[i].endTime[0],
+                                subjectList[i].day[0],
+                                subjectList[i].place[0],
+                                subjectList[i].color,
+                                timeTable.id))
+
+                        if (subjectList.size == scheduleList.size){
+                            DataRepository.addPersonalPlan(RequestAddPersonalPlan(scheduleList),
+                                    onSuccess = {
+                                        intent.putExtra("timeTable", timeTable)
+                                        setResult(200, intent)
+                                        finish()
+                                    }, onFailure = {
+                                Toast.makeText(this, "서버 오류가 발생하였습니다", Toast.LENGTH_SHORT).show();
+                            })
+                        }
+                    }
+                }
             }
         }
 
@@ -267,7 +291,6 @@ class TimeTableEditActivity : AppCompatActivity(),getGradeClickListener {
 
         layout.findViewById<TextView>(id.tv_cancel).setOnClickListener {
             dialog.dismiss()
-            onBackPressed()
         }
 
         val back = ColorDrawable(Color.TRANSPARENT)

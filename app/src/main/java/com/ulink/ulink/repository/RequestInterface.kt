@@ -11,11 +11,53 @@ interface RequestInterface {
 
     //User
     //유저 로그인
-
     @POST("/user/signin")
     fun requestLogin(
         @Body body : RequestLogin
     ) : Call<ResponseLogin>
+
+    @GET("/user/profile")
+    fun getProfile(
+            @Header("token") token : String
+    ) : Call<ResponseGetProfile>
+
+    //회원가입
+    //학교검색
+    @GET("/university")
+    fun getUniversity(
+        @Query("univ") univ : String
+    ) : Call<ResponseUniversity>
+
+    //학과검색
+    @GET("/university/major")
+    fun getMajor(
+        @Query("univ") univ : Int,
+        @Query("major") major : String
+    ) : Call<ResponseMajor>
+
+    //번호인증
+    @POST("user/phone")
+    fun phoneNumberAuthentication(
+        @Body body : RequestPhoneAuthentication
+    ) : Call<ResponsePhoneAuthentication>
+
+    //아이디중복체크
+    @GET("/user/{id}")
+    fun getIdSameCheck(
+        @Path("id") id : String
+    ) : Call<ResponseIdCheck>
+
+    //닉네임중복체크
+    @POST("/user/nickname/")
+    fun getNicknameSameCheck(
+        @Body body : RequestNicknameCheck
+    ) : Call<ResponseNicknameCheck>
+
+    //회원가입
+    @POST("/user/signup/")
+    fun register(
+        @Body body : RequestRegister
+    ) : Call<ResponseRegister>
 
     //Schedule
     //시간표 - 메인 시간표 조회

@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.ulink.ulink.CalendarRecycler.CalendarDayAdapter
 import com.ulink.ulink.R
+import com.ulink.ulink.repository.University
 
-class SearchResultAdapter(private val context : Context) : RecyclerView.Adapter<SearchResultAdapter.VHolder>() {
-    var datas = mutableListOf<String>()
+class UniversitySearchAdapter(private val context : Context) : RecyclerView.Adapter<UniversitySearchAdapter.VHolder>() {
+    var datas = mutableListOf<University>()
 
     private lateinit var resultClickListener : ResultClickListener
 
@@ -38,8 +38,8 @@ class SearchResultAdapter(private val context : Context) : RecyclerView.Adapter<
 
     class VHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tvSearchResult = itemView.findViewById<TextView>(R.id.tv_search_result)
-        fun bind(result : String){
-            tvSearchResult.text = result
+        fun bind(result : University){
+            tvSearchResult.text = result.name
         }
     }
 }

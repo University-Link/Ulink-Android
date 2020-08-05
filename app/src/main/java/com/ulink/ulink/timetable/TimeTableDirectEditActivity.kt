@@ -80,10 +80,10 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
 //  DirectEdit의 DragDrawer결과를 type으로 넘기는거 다시 받는거 취소한거 롤백한거 생각하기
 
 //            TODO 잘 들어갔으면! 등록!!
-            var requestnum = 0
             if (timeTableDrawerDrag.getAddedTable() == null) {
                 Toast.makeText(this, "중복된 과목이 있습니다", Toast.LENGTH_SHORT).show()
             } else {
+                val scheduleList = mutableListOf<RequestAddPersonalPlan.Schedule>()
                 for (i in 0 until subjectAddedList.size) {
                     if (checkIsOver(subjectAddedList[i], timeTable)) {
                         Toast.makeText(this, "중복된 과목이 있습니다", Toast.LENGTH_SHORT).show()
@@ -91,39 +91,24 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
                     }
                     timeTable.subjectList.add(subjectAddedList[i])
 
-                    Log.d("tag 등록 신청한 과목", RequestAddPersonalPlan.Schedule(subjectAddedList[i].name,
+                    scheduleList.add(RequestAddPersonalPlan.Schedule(subjectAddedList[i].name,
                             subjectAddedList[i].startTime[0],
                             subjectAddedList[i].endTime[0],
                             subjectAddedList[i].day[0],
                             subjectAddedList[i].place[0],
                             subjectAddedList[i].color,
-                            timeTable.id).toString()
-                    )
+                            timeTable.id))
 
-                    DataRepository.addPersonalPlan(RequestAddPersonalPlan(
-                            scheduleList = listOf<RequestAddPersonalPlan.Schedule>(
-                                    RequestAddPersonalPlan.Schedule(subjectAddedList[i].name,
-                                            subjectAddedList[i].startTime[0],
-                                            subjectAddedList[i].endTime[0],
-                                            subjectAddedList[i].day[0],
-                                            subjectAddedList[i].place[0],
-                                            subjectAddedList[i].color,
-                                            timeTable.id)
-                            )
-                    ), onSuccess = {
-                        requestnum += 1
-                        Log.d("tag", requestnum.toString())
-                        Log.d("tag", subjectAddedList.size.toString())
-                        if (requestnum == subjectAddedList.size) {
+                    if (subjectAddedList.size == scheduleList.size){
+                        DataRepository.addPersonalPlan(RequestAddPersonalPlan(scheduleList),
+                            onSuccess = {
                             intent.putExtra("timeTable", timeTableDrawerDrag.timeTable)
                             setResult(200, intent)
                             finish()
-                        }
-                        Log.d("tag", "requested")
-                    }, onFailure = {
-                        Log.d("tag", it)
-                        Toast.makeText(this, "서버 오류가 발생하였습니다", Toast.LENGTH_SHORT).show();
-                    })
+                        }, onFailure = {
+                            Toast.makeText(this, "서버 오류가 발생하였습니다", Toast.LENGTH_SHORT).show();
+                        })
+                    }
                 }
             }
 
@@ -169,6 +154,7 @@ class TimeTableDirectEditActivity : AppCompatActivity(), onDrawListener {
                     timeTableDrawerDrag.timeTable = deepCopy(tt)
                 }
 
+                timeTableDrawerDrag.setMinMax()
                 timeTableDrawerDrag.draw(findViewById<FrameLayout>(R.id.layout_timetable))
             } else{
 

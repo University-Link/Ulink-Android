@@ -7,7 +7,10 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageView
 import com.ulink.ulink.R
+import com.ulink.ulink.repository.RequestPhoneAuthentication
 import kotlinx.android.synthetic.main.fragment_agree.*
+import kotlinx.android.synthetic.main.fragment_authentication.*
+import kotlinx.android.synthetic.main.fragment_register.*
 
 fun btnCheckSelector(btn : Button, et : EditText){
     if (et.text.isNotEmpty()) {
@@ -17,6 +20,19 @@ fun btnCheckSelector(btn : Button, et : EditText){
     else {
         btn.setBackgroundResource(R.drawable.signup_btn_next_unactivated)
         btn.setTextColor(Color.parseColor("#989898"))
+    }
+}
+
+fun btnFilterSelector(btn : Button, et : EditText, regex : String, min : Int) : Boolean {
+    if (et.filterCheck(regex) && et.text.toString().length>=min) {
+        btn.setBackgroundResource(R.drawable.signup_btn_search_activated)
+        btn.setTextColor(Color.parseColor("#ffffff"))
+        return true
+    }
+    else {
+        btn.setBackgroundResource(R.drawable.signup_btn_next_unactivated)
+        btn.setTextColor(Color.parseColor("#989898"))
+        return false
     }
 }
 
@@ -35,14 +51,41 @@ fun btnAgreeSelector(btn_information_agree: CheckBox, btn_policy_agree: CheckBox
     }
 }
 
+fun btnRegisterSelector(idCheck : ImageView, nicknameCheck : ImageView, et_pw : EditText, et_pw_check : EditText, btn_next : Button) : Boolean{
+    if(idCheck.visibility==View.VISIBLE && nicknameCheck.visibility==View.VISIBLE &&
+        et_pw.passwordNextCheck(8) && et_pw.text.toString() == et_pw_check.text.toString()){
+        btn_next.btnNextSelector()
+        return true
+    }
+    else
+        return false
+}
+
 fun Button.btnNextSelector(){
     this.setBackgroundResource(R.drawable.signup_btn_next_activated)
     this.setTextColor(Color.parseColor("#ffffff"))
 }
 
-fun checkSelector(btn : Button, et : EditText, img : ImageView){
-    if(et.text.isNotEmpty()) {
-        img.visibility= View.VISIBLE
-        btn.visibility=View.INVISIBLE
+fun Button.btnNextReset(){
+    this.setBackgroundResource(R.drawable.signup_btn_next_unactivated)
+    this.setTextColor(Color.parseColor("#989898"))
+}
+
+fun checkSelector(btn : Button, img : ImageView, check : Boolean) {
+    if (check){
+        img.visibility = View.VISIBLE
+        btn.visibility = View.INVISIBLE
+    }
+}
+
+fun Button.authenticatioBtnNextSelector(et_name : EditText, gender : String, authentication : Boolean) : Boolean {
+
+    if(et_name.text.toString() != "" && gender != "" && authentication) {
+        this.btnNextSelector()
+        return true
+    }
+    else {
+        this.btnNextReset()
+        return false
     }
 }

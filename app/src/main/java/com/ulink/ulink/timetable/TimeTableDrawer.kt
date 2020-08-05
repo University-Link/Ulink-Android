@@ -26,6 +26,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
         this.onClick = onClick
     }
 
+
     constructor(context: Context, layoutInflater: LayoutInflater, timeTable: TimeTable) : this(context, layoutInflater) {
         this.timeTable = timeTable
     }
@@ -49,19 +50,18 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 
     var minHeight = 60.0f
 
-    var subjectListForOnClick : MutableList<Subject> = arrayListOf()
+    var subjectListForOnClick: MutableList<Subject> = arrayListOf()
 
 
-
-    fun setMinMax(){
-        for (sub in timeTable.subjectList){
-            for(i in sub.startTime){
-                if ( formatToFloat(i) < starthour) {
+    fun setMinMax() {
+        for (sub in timeTable.subjectList) {
+            for (i in sub.startTime) {
+                if (formatToFloat(i) < starthour) {
                     starthour = formatToFloat(i).toInt()
                 }
             }
-            for (k in sub.endTime){
-                if ( formatToFloat(k) > endhour){
+            for (k in sub.endTime) {
+                if (formatToFloat(k) > endhour) {
                     endhour = formatToFloat(k).toInt() + 1
                 }
             }
@@ -80,7 +80,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
         }
 
         if ((formatToFloat(timeTable.endTime)).toInt() > 18) {
-            endhour = (formatToFloat(timeTable.endTime)).toInt() +1
+            endhour = (formatToFloat(timeTable.endTime)).toInt() + 1
             Log.d("tag", "changed to ${endhour}")
         }
 
@@ -96,7 +96,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
         drawColums(root)
     }
 
-    fun drawForSaveToImage(frameLayout: FrameLayout){
+    fun drawForSaveToImage(frameLayout: FrameLayout) {
         val root = frameLayout.findViewById<LinearLayout>(R.id.timetable_root)
 
 //        시간 9.0 9.25 이런식!
@@ -108,7 +108,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
         }
 
         if ((formatToFloat(timeTable.endTime)).toInt() > 18) {
-            endhour = (formatToFloat(timeTable.endTime)).toInt() +1
+            endhour = (formatToFloat(timeTable.endTime)).toInt() + 1
             Log.d("tag", "changed to ${endhour}")
         }
 
@@ -277,13 +277,13 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
         var subjectstarttime = 0f
         var presubjectendtimeortablestarttime = 0f
 
-        var subjectList : MutableList<Subject> = arrayListOf()
+        var subjectList: MutableList<Subject> = arrayListOf()
 
 
-        for (k in timeTable.subjectList){
-            for(m in 0 until k.day.size){
-                if (k.day[m] == i){
-                    val b = Subject(k.id,k.name, listOf(k.startTime[m]), listOf(k.endTime[m]), listOf(k.day[m]), listOf(k.place[m]), k.color,k.subject,k.credit,k.professor,k.course,k.isSample,"",k.subjectIdx)
+        for (k in timeTable.subjectList) {
+            for (m in 0 until k.day.size) {
+                if (k.day[m] == i) {
+                    val b = Subject(k.id, k.name, listOf(k.startTime[m]), listOf(k.endTime[m]), listOf(k.day[m]), listOf(k.place[m]), k.color, k.subject, k.credit, k.professor, k.course, k.isSample, "", k.subjectIdx)
                     subjectList.add(b)
                 }
 
@@ -296,7 +296,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 
 
         subjectList.retainAll { !it.isSample }
-        subjectList.sortBy {formatToFloat(it.startTime[0])}
+        subjectList.sortBy { formatToFloat(it.startTime[0]) }
         for (a in 0 until subjectList.size) {
             if (a == 0) {
                 subjectstarttime = formatToFloat(subjectList[a].startTime[0]) * 4
@@ -321,21 +321,21 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
         var presubjectendtimeortablestarttime = 0f
 
 
-        var subjectList : MutableList<Subject> = arrayListOf()
+        var subjectList: MutableList<Subject> = arrayListOf()
 
 
 
-        for (k in timeTable.subjectList){
-            for(m in 0 until k.day.size){
-                if (k.day[m] == i){
-                    val b = Subject(k.id,k.name, listOf(k.startTime[m]), listOf(k.endTime[m]), listOf(k.day[m]), listOf(k.place[m]), k.color,k.subject,k.credit,k.professor,k.course,k.isSample,k.number,k.subjectIdx)
+        for (k in timeTable.subjectList) {
+            for (m in 0 until k.day.size) {
+                if (k.day[m] == i) {
+                    val b = Subject(k.id, k.name, listOf(k.startTime[m]), listOf(k.endTime[m]), listOf(k.day[m]), listOf(k.place[m]), k.color, k.subject, k.credit, k.professor, k.course, k.isSample, k.number, k.subjectIdx)
                     subjectList.add(b)
                 }
             }
         }
 
         subjectList.retainAll { it.isSample }
-        subjectList.sortBy {formatToFloat(it.startTime[0])}
+        subjectList.sortBy { formatToFloat(it.startTime[0]) }
         for (a in 0 until subjectList.size) {
             if (a == 0) {
                 subjectstarttime = formatToFloat(subjectList[a].startTime[0]) * 4
@@ -380,7 +380,6 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 //        TODO 여기 온클릭
             celllayout.setOnClickListener {
                 onClick?.onClick(subject)
-
             }
 
             linearLayout.addView(celllayout)
@@ -406,9 +405,7 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 //        TODO 여기 온클릭
             celllayout.setOnClickListener {
                 onClick?.onClick(subject)
-                Log.d("tag",subjectListForOnClick.toString())
-                val sub = timeTable.subjectList.filter {it.id == subject.id}
-                onClick?.onClick(sub[0])
+//
             }
 
             linearLayout.addView(celllayout)
@@ -424,7 +421,8 @@ class TimeTableDrawer(val context: Context, val layoutInflater: LayoutInflater) 
 
 //      가로줄 투명하게 끊어서!
 //      위에만 따로 없애주기!! 지금 vertical로 그대로 쌓는데 지금 matchparent에서 dayheight만큼 짤라서 적용!
-        layoutInflater.inflate(R.layout.timetable_verticalline_index, verticallines, true)
+
+//        layoutInflater.inflate(R.layout.timetable_verticalline_index, verticallines, true)
 
         for (i in starthour..endhour) {
             val verticalline = layoutInflater.inflate(R.layout.cell_timeindex, verticallines, false) as TextView
