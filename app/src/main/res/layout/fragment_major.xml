@@ -132,8 +132,6 @@
         android:text="다음"
         android:textSize="18sp"
         android:textColor="#989898"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="16dp"
         android:background="@drawable/signup_btn_next_unactivated"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -7,7 +7,9 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageView
 import com.ulink.ulink.R
+import com.ulink.ulink.repository.RequestPhoneAuthentication
 import kotlinx.android.synthetic.main.fragment_agree.*
+import kotlinx.android.synthetic.main.fragment_authentication.*
 import kotlinx.android.synthetic.main.fragment_register.*
 
 fun btnCheckSelector(btn : Button, et : EditText){
@@ -73,5 +75,17 @@ fun checkSelector(btn : Button, img : ImageView, check : Boolean) {
     if (check){
         img.visibility = View.VISIBLE
         btn.visibility = View.INVISIBLE
+    }
+}
+
+fun Button.authenticatioBtnNextSelector(et_name : EditText, gender : String, authentication : Boolean) : Boolean {
+
+    if(et_name.text.toString() != "" && gender != "" && authentication) {
+        this.btnNextSelector()
+        return true
+    }
+    else {
+        this.btnNextReset()
+        return false
     }
 }
