@@ -12,8 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/mypage_bg"
-        android:backgroundTint="#ededed"
-        android:paddingBottom="146dp">
+        android:backgroundTint="#ededed">
 
         <TextView
             app:layout_constraintTop_toTopOf="parent"
@@ -365,7 +364,7 @@
 
             <Button
                 android:id="@+id/btn_communityguide"
-                android:text="커뮤니티 이용수칙"
+                android:text="이용 약관"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:paddingRight="6dp"
@@ -385,7 +384,7 @@
                 android:layout_marginRight="12dp"/>
 
             <Button
-                android:id="@+id/btn_qna"
+                android:id="@+id/btn_faq"
                 android:text="자주 묻는 질문"
                 android:textColor="@color/black"
                 android:textSize="15sp"
