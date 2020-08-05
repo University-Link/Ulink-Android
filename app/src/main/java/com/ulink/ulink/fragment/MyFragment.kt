@@ -12,6 +12,7 @@ import com.ulink.ulink.Activity.*
 import com.ulink.ulink.MainActivity
 import com.ulink.ulink.R
 import com.ulink.ulink.myActivity.MyActivityActivity
+import com.ulink.ulink.register.CollectAgreeActivity
 import com.ulink.ulink.repository.DataRepository
 import kotlinx.android.synthetic.main.fragment_my.*
 
@@ -114,6 +115,11 @@ class MyFragment : Fragment() {
         }
         btn_withdrawal.setOnClickListener {
             val intent = Intent(context, WithdrawalActivity::class.java)
+            startActivity(intent)
+        }
+        btn_privacy.setOnClickListener{
+            val intent = Intent(context, CollectAgreeActivity::class.java)
+            intent.putExtra("prevView", "myPage")
             startActivity(intent)
         }
     }

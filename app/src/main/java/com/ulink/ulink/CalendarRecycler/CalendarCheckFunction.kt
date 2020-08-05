@@ -133,51 +133,6 @@ fun popupDateCheck(position : Int) : String {
     return nowDate
 }
 
-fun popupDayCheck(position : Int, index : Int, last_empty : Int, prev_empty_index : Int) : Int {
-    var popupDay = 0
-
-    if(position < index)
-        popupDay = prev_empty_index + position
-
-    else if (position in index until last_empty)
-        popupDay = (position - index) + 1
-
-    else if (position >= last_empty)
-        popupDay = (position - last_empty + 1)
-
-    return popupDay
-}
-
-fun popupMonthCheck(position : Int, index : Int, last_empty : Int, data_month : Int) : Int {
-    var popupMonth = data_month
-
-    if(position < index){
-        if(popupMonth != 1)
-            popupMonth -= 1
-        else
-            popupMonth = 12
-    }
-
-    else if (position >= last_empty) {
-        if(popupMonth <12)
-            popupMonth +=1
-        else
-            popupMonth = 1
-    }
-
-    return popupMonth
-}
-
-fun popupYearCheck(data_year : Int, data_month : Int, position : Int, index : Int, last_empty : Int) : Int{
-    var popupYear = data_year
-
-    if(data_month == 1 && position < index) popupYear-=1
-
-    if(data_month == 12 && position >= last_empty) popupYear +=1
-
-    return popupYear
-}
-
 fun strFirstDay(prevEmptyIndex : Int, data : CalendarData) : String{
 
     var month = data.month

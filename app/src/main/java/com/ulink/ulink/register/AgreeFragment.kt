@@ -1,5 +1,6 @@
 package com.ulink.ulink.register
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -75,6 +76,7 @@ class AgreeFragment : Fragment() {
         }
 
         btn_policy_agree.setOnClickListener {
+            Log.d("check", majorIdx+" "+studentNumber)
             btnAgreeSelector(btn_information_agree, btn_policy_agree, btn_next)
             allAgree(btn_policy_agree, btn_information_agree, btn_advertise_agree, btn_referral_agree, btn_all_agree)
         }
@@ -89,6 +91,26 @@ class AgreeFragment : Fragment() {
 
         btn_referral_agree.setOnClickListener{
             allAgree(btn_policy_agree, btn_information_agree, btn_advertise_agree, btn_referral_agree, btn_all_agree)
+        }
+
+        btn_policy_more.setOnClickListener{
+            val intent = Intent(view.context, ServiceAgreeActivity::class.java)
+            startActivity(intent)
+        }
+
+        btn_information_more.setOnClickListener{
+            val intent = Intent(view.context, CollectAgreeActivity::class.java)
+            startActivity(intent)
+        }
+
+        btn_advertise_more.setOnClickListener{
+            val intent = Intent(view.context, ServiceAgreeActivity::class.java)
+            startActivity(intent)
+        }
+
+        btn_referral_more.setOnClickListener{
+            val intent = Intent(view.context, ServiceAgreeActivity::class.java)
+            startActivity(intent)
         }
     }
 
