@@ -19,8 +19,8 @@
         <activity android:name=".Activity.FAQActivity"></activity>
         <activity android:name=".Activity.ChangePasswordActivity" />
         <activity android:name=".Ulink.BoardSearchActivity" />
-        <activity android:name=".Ulink.UlinkBoardWriteActivity">
-            android:windowSoftInputMode="adjustResize"
+        <activity android:name=".Ulink.UlinkBoardWriteActivity"
+            android:windowSoftInputMode="adjustResize">
         </activity>
         <activity android:name=".Ulink.BoardCommentRecycler.BoardDetailActivity" />
         <activity android:name=".myActivity.MyActivityActivity" />
