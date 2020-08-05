@@ -21,6 +21,10 @@ class FAQActivity : AppCompatActivity() {
         val width = size.x
         ev_faq.setIndicatorBoundsRelative(width-dptopx(60).toInt() ,width)
 
+        btn_back.setOnClickListener {
+            finish()
+        }
+
     }
 
     fun dptopx(dp: Int): Float {

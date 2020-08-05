@@ -86,7 +86,7 @@ class TimeTableDrawerWidget(val context: Context, val layoutInflater: LayoutInfl
             rvDay.setTextViewText(R.id.tv_cellday, daylist[i])
             rvDay.setTextViewTextSize(R.id.tv_cellday, 1, 12.0f)
 
-//            rvDay.setInt(R.id.tv_cellday, "setBackgroundResource", R.drawable.bottom_line)
+            rvDay.setInt(R.id.tv_cellday, "setBackgroundResource", R.drawable.bottom_line)
 //              rvDay.setInt(R.id.tv_cellday, "setBackgroundColor", R.color.white)
             rvDay.addView(R.id.tv_cellday, rvBottomLine)
             remoteViews.addView(R.id.layout_dayrow, rvDay)

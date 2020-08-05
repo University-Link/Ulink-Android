@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="22dp"
+        tools:context=".Activity.CommunityGuideActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="58dp">
+
+            <Button
+                android:id="@+id/btn_back"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/signup_btn_back"
+                android:layout_marginTop="13dp"
+                android:layout_marginLeft="13dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                app:layout_constraintTop_toTopOf="@id/btn_back"
+                app:layout_constraintBottom_toBottomOf="@id/btn_back"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:textColor="#363636"
+                android:lineSpacingExtra="4sp"
+                android:text="비밀번호 변경"/>
+
+            <View
+                android:id="@+id/divider_1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ededed"
+                app:layout_constraintTop_toBottomOf="@id/btn_back"
+                android:layout_marginTop="9dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_1"
+            android:layout_marginTop="15dp"
+            android:textSize="13sp"
+            android:lineHeight="22dp"
+            android:textColor="@color/text1"
+            android:text="유링크에 오신 것을 환영합니다!\n본 약관은 회원님의 유링크 이용에 적용되며 회원님이 유링크 계정을 만들거나 유링크를 이용하면 회원님은 본 약관에 동의하는 것입니다."
+            />
+
+        <TextView
+            android:id="@+id/tv_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:layout_marginTop="30dp"
+            android:textStyle="bold"
+            android:text="회원님의 약속"
+            android:textColor="@color/text1"/>
+
+        <TextView
+            android:id="@+id/tv_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_marginTop="15dp"
+            android:lineHeight="22dp"
+            android:textColor="@color/text1"
+            android:text="유링크를 이용할 수 있는 주체.\n\n※ 대학생이어야 합니다.
+\n※ 당사가 관련 법률에 따라 유링크 서비스를 받는 것이 일부라도 금지된 사람이 아니어야 합니다.
+\n※ 당사가 과거에 회원님의 계정을 법률 또는 유링크 정책 위반을 이유로 하여 비활성화하지 않았어야 합니다.
+\n※ 당사가 유죄가 확정된 성범죄자가 아니어야 합니다."/>
+
+
+        <TextView
+            android:id="@+id/tv_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:layout_marginTop="50dp"
+            android:textStyle="bold"
+            android:text="유링크를 사용할 시 금지 사항"
+            android:textColor="@color/text1"/>
+
+        <TextView
+            android:id="@+id/tv_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_marginTop="15dp"
+            android:lineHeight="22dp"
+            android:textColor="@color/text1"
+            android:text="다른 사람을 사칭하거나 부정확한 정보를 제공하면 안 됩니다.유링크에서 회원님의 신원을 전체 공개할 필요는 없지만 정확한 최신 정보를 제공해야 합니다. 또한 본인이 아닌 다른 사람을 사칭해서는 안 되며, 다른 사람의 명시적인 허락 없이 다른 사람의 이름으로 계정을 만들면 안 됩니다.\n
+
+\n※ 불법적이거나, 오해의 소지가 있거나, 사기적인 행위 또는 불법적이거나 허가받지 않은 목적을 위한 어떠한 행위도 하면 안 됩니다.
+\n※ 본 약관 또는 저희 정책을 위반하거나 다른 사람들이 위반하도록 돕거나 조장해서는 안 됩니다.
+\n※ 유링크 서비스의 정상적인 운영을 방해하거나 지장을 주는 어떠한 일도 해서는 안 됩니다.
+\n※ 허가받지 않은 방법으로 계정을 만들거나 정보에 접근하거나 정보를 수집하려 해서는 안 됩니다.여기에는 당사의 명시적 허락 없이 자동화된 방법으로 계정을 만들거나 정보를 수집하는 것이 포함됩니다.
+\n※ 회원님의 계정 일부(사용자 이름 포함)를 구입, 판매 또는 양도하거나, 다른 사용자의 로그인 정보 또는 배지를 요청, 수집 또는 사용하려고 시도해서는 안 됩니다.
+\n※ 개인 정보 또는 기밀 정보를 게시하거나 지적 재산을 포함한 타인의 권리를 침해하는 어떠한 행위도 해서는 안 됩니다.
+\n※ 당사의 사전 서면 동의 없이 회원님의 사용자 이름에 도메인 이름이나 URL을 사용하면 안 됩니다.
+\n※ 회원님은 당사가 회원님의 기기에 유링크 서비스 업데이트를 다운로드하고 설치할 수 있다는 것에 동의합니다. "/>
+
+        <TextView
+            android:id="@+id/tv_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:layout_marginTop="50dp"
+            android:textStyle="bold"
+            android:text="유출방지"
+            android:textColor="@color/text1"/>
+
+        <TextView
+            android:id="@+id/tv_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_marginTop="15dp"
+            android:lineHeight="22dp"
+            android:textColor="@color/text1"
+            android:text="※ 게시물을 스크린샷, 복사 등을 통해 외부로 유출해서는 안 됩니다. 유출방지 시스템을 통해 게시물 유출이 적발될 경우, 5년의 전체 서비스 접근제한이 가해집니다. 만약 게시물 유출을 발견하셨을 경우, 카카오 플러스 친구 ‘유링크’에 문의해주시기 바랍니다.
+\n※ 이용자는 게시물 유출 행위로 인해 발생한 모든 피해에 대한 민형사상 책임과 손해를 배상할 책임이 있습니다."/>
+
+        <TextView
+            android:id="@+id/tv_8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:layout_marginTop="50dp"
+            android:textStyle="bold"
+            android:text="신고처리 시스템"
+            android:textColor="@color/text1"/>
+
+        <TextView
+            android:id="@+id/tv_9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_marginTop="15dp"
+            android:lineHeight="22dp"
+            android:textColor="@color/text1"
+            android:text="1. 유링크 이용규칙에 어긋나거나, 허위사실 및 명예훼손, 기타 권리 침해를 하는 내용을 작성해서는 안됩니다. 다른 이용자에게 신고 받을 수가 있으며 신고 누적으로 인해 발생한 피해는 어떠한 경우에도 책임을 지지 않습니다.
+\n2. 모든 게시물은 이용자의 신고를 기반으로 하는 신고처리 시스템을 통해 처리됩니다. 유링크 이용규칙에 어긋난다고 판단되는 글, 공지, 댓글, 답글을 발견하셨을 경우, 신고 버튼을 눌러 신고해주시기 바랍니다.
+\n3. 유링크 이용규칙을 위반하거나 신고가 3회 이상 누적된 이용자는 작성한 게시물이 삭제될 수있으며  모든 활동이 실명으로 진행 됩니다. 닉네임 대신 실명으로 활동을 해야 합니다. 최대 3년까지의 글 작성 제한, 접근 제한 등의 제재가 가해집니다.
+\n4. 신고 시, 처리를 위해 신고 받은 글, 공지, 댓글, 답글이 일시적으로 저장될 수 있습니다."/>
+
+        <TextView
+            android:id="@+id/tv_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:layout_marginTop="50dp"
+            android:textStyle="bold"
+            android:text="소통 공간 금지 사항"
+            android:textColor="@color/text1"/>
+
+        <TextView
+            android:id="@+id/tv_11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_marginTop="15dp"
+            android:lineHeight="22dp"
+            android:textColor="@color/text1"
+            android:text="다음 목록에 해당하는 행위들을 유링크에서 금지하고 있습니다.\n
+\n1. 음란물, 음담패설, 신체사진 등 청소년 유해 매체물 게시
+\n2. 유흥 관련 정보 공유
+\n3. 혐오를 불러일으키는 행위
+\n4. 타인 또는 특정 단체에 대한 비하, 욕설
+\n5. 과도한 정치 및 종교 행위
+\n6. 공직선거법에 반하는 행위
+\n7. 광고·홍보·판매 관련 게시물
+\n8. 금품 제공, 지시, 권유하는 행위
+\n9. 의료·약사법에 반하는 거래
+\n10. 서비스 내 비정상적 정보 기재
+\n11. 도배글, 내용 없는 글 등 비정상적 게시글 작성 행위
+\n12. 허위사실 및 명예훼손, 기타 권리 침해를 하는 행위
+\n13. 다른 사람을 사치하거나 부정확한 정보를 제공하는 행위
+\n14. 유링크 서비스 운영에 있어서 방해가 되는 행위"/>
+
+
+        <TextView
+            android:id="@+id/tv_12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:layout_marginTop="50dp"
+            android:textStyle="bold"
+            android:text="유링크의 권한"
+            android:textColor="@color/text1"/>
+
+        <TextView
+            android:id="@+id/tv_13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="81dp"
+            android:lineHeight="22dp"
+            android:textColor="@color/text1"
+            android:text="회원님이 서비스에서 공유하는 콘텐츠나 정보가 본 약관, 유링크 정책에 위배된다고 판단되거나 법에따라 삭제해야 할 경우 삭제될 수 있습니다. 유링크는 유저들과 다른 유저들의 말을 통제하지 않으며, 그들의 (또는 귀하의) 행동 또는 콘테츠에 대해 책임을지지 않습니다. 또한 다른 사람이나 회사에서 제공하는 서비스 및 기능은 귀하가 서비스를 통해 액세스하더라도 그에 대해 책임을 지지 않습니다."/>
+    </LinearLayout>
+
+</ScrollView>

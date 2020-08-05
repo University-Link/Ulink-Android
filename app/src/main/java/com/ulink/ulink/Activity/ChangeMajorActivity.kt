@@ -1,7 +1,9 @@
 package com.ulink.ulink.Activity
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import com.ulink.ulink.R
 import com.ulink.ulink.adapter.ChangeMajorRecyclerAdapter
 import com.ulink.ulink.utils.DialogBuilder
@@ -27,17 +29,37 @@ class ChangeMajorActivity : AppCompatActivity() {
         })
         rv_changemajor.adapter = mAdapter
 
-//        TODO 여기서 editext 기반으로 서버에 검색 요청 없으면 해당 검색어 입력 하나 띄우고 et에 있는걸로 변경 밑에는 임시!
-        mAdapter.addData("컴퓨터공학과")
-        mAdapter.notifyItemInserted(0)
+
+
+        btn_search.setOnClickListener {
+            if (et_major_search.text.isNullOrBlank()) {
+                DialogBuilder().apply {
+                    build(this@ChangeMajorActivity)
+                    setContent("학과를 입력해 주세요.")
+                    setClickListener {
+                        dismiss()
+                    }
+                    show()
+                }
+            } else{
+                //        TODO 여기서 editext 기반으로 서버에 검색 요청 없으면 해당 검색어 입력 하나 띄우고 et에 있는걸로 변경 밑에는 임시!
+                mAdapter.addData("컴퓨터공학과")
+                mAdapter.notifyItemInserted(0)
+
+            }
+        }
 
         et_major_search.setOnFocusChangeListener { v, hasFocus ->
+
             btn_search.setBackgroundResource(R.drawable.btn_request_active)
             btn_search.setTextColor(resources.getColor(R.color.white))
         }
 
         btn_change.setOnClickListener {
-            if (validate){
+            if (validate) {
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(et_major_search.windowToken, 0)
+
                 DialogBuilder().apply {
                     build(this@ChangeMajorActivity)
                     setContent(getString(R.string.major_change_changed))

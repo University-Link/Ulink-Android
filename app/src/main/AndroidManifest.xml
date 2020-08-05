@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.FAQActivity"></activity>
+        <activity android:name=".Activity.CommunityGuideActivity"></activity>
+        <activity android:name=".Activity.FAQActivity" />
         <activity android:name=".withdrawal.WithdrawalActivity" />
         <activity android:name=".Activity.ChangePasswordActivity" />
         <activity android:name=".Ulink.BoardDetailActivity" />
@@ -65,9 +66,9 @@
                 android:resource="@xml/new_app_widget_info" />
         </receiver>
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-permission android:name="android.permission.VIBRATE" />
 
