@@ -1,7 +1,5 @@
 package com.ulink.ulink.Ulink
 
-
-// TODO 대학 데이터 추가하기
 data class UlinkBoardData(
     val img_profile : String,
     val nickname : String,

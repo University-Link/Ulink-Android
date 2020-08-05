@@ -1,18 +1,15 @@
 package com.ulink.ulink.Ulink
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.ulink.ulink.R
-import com.ulink.ulink.Ulink.UlinkBoardRecycler.BoardSearchAdapter
+import com.ulink.ulink.Ulink.UlinkClassBoardRecycler.BoardSearchAdapter
 import com.ulink.ulink.textResetButton
 import kotlinx.android.synthetic.main.activity_board_search.*
-import kotlinx.android.synthetic.main.activity_board_search.btn_back
-import kotlinx.android.synthetic.main.activity_board_search.btn_reset
-import kotlinx.android.synthetic.main.activity_board_search.edit
 
 class BoardSearchActivity : AppCompatActivity() {
     lateinit var board_search_adapter : BoardSearchAdapter
-    val datas : MutableList<UlinkBoardData> = mutableListOf<UlinkBoardData>()
+    val datas : MutableList<BoardData> = mutableListOf<BoardData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,16 +27,18 @@ class BoardSearchActivity : AppCompatActivity() {
 
         datas.apply{
             add(
-                UlinkBoardData(
-                    img_profile = "",
-                    nickname = "조개탕수만",
-                    time = "방금",
-                    content = "교필 비판적사고 수강신청하기가 1학년 아니면 많이 힘들까?",
-                    like = true,
-                    comment_count = "2",
-                    heart_count = "1",
-                    board_category = "Ulink게시판"
-
+                BoardData(
+                    board_idx = 0,
+                    title = "님들 점심 추천",
+                    initial = "",
+                    nickname = "유링크좋아요",
+                    content = "김찌랑 된찌랑 둘중에 고민이에",
+                    likeCount = 0,
+                    commentCount = 0,
+                    userIdx = 0,
+                    createdAt = "방금",
+                    updatedAt = "",
+                    isLike = false
                 )
             )
 

@@ -25,11 +25,11 @@ class MyActivityArticleAdapter (private val context: Context) : RecyclerView.Ada
         val btn_heart : ImageButton = itemView.findViewById(R.id.btn_heart)
         val tvCommentCount : TextView = itemView.findViewById(R.id.tv_comment_count)
         val tvHeartCount : TextView = itemView.findViewById(R.id.tv_heart_count)
-        val tvCategory = itemView.findViewById<TextView>(R.id.tv_category)
+       // val tvCategory = itemView.findViewById<TextView>(R.id.tv_category)
 
         fun setHolder(item : UlinkBoardData){
-            itemView.findViewById<TextView>(R.id.tv_category).visibility = View.VISIBLE
-            itemView.findViewById<View>(R.id.divider_1).visibility = View.VISIBLE
+//            itemView.findViewById<TextView>(R.id.tv_category).visibility = View.VISIBLE
+//            itemView.findViewById<View>(R.id.divider_1).visibility = View.VISIBLE
 
             Glide.with(itemView).load(item.img_profile).into(imgProfile)
             tvNickname.text = item.nickname
@@ -37,7 +37,7 @@ class MyActivityArticleAdapter (private val context: Context) : RecyclerView.Ada
             tvContent.text = item.content
             tvCommentCount.text = item.comment_count
             tvHeartCount.text = item.heart_count
-            tvCategory.text = item.category
+            //tvCategory.text = item.category
 
         }
     }
@@ -47,7 +47,7 @@ class MyActivityArticleAdapter (private val context: Context) : RecyclerView.Ada
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VHolder {
-        return VHolder(LayoutInflater.from(context).inflate(R.layout.item_ulink_board_data, parent, false))
+        return VHolder(LayoutInflater.from(context).inflate(R.layout.item_ulink_board_class_data, parent, false))
     }
 
     override fun onBindViewHolder(holder: VHolder, position: Int) {

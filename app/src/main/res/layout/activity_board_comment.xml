@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Ulink.BoardDetailActivity">
+    tools:context=".Ulink.BoardCommentRecycler.BoardDetailActivity">
+
 
     <include
         android:id="@+id/toolbar_board_comment"
@@ -15,24 +16,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <include
-        android:id="@+id/include2"
-        layout="@layout/item_ulink_board_data"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_ulink_board"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_board_comment" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_board_comment"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_board_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_board_comment"
+        tools:listitem="@layout/item_class_board_comment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include2" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_ulink_board" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

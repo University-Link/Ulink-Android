@@ -8,38 +8,48 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/img_profile"
+
+    <TextView
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginLeft="22dp"
-        android:background="@drawable/class_ic_profile"
+        android:text="[문과대학]이달의 문대인 8월호"
+        android:textColor="#363636"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="16sp"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_nickname"
+    <LinearLayout
+        android:id="@+id/layout_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="9dp"
-        android:textSize="14sp"
-        android:textColor="#363636"
-        android:textStyle="bold"
-        android:text="조개탕수만"
-        app:layout_constraintBottom_toBottomOf="@+id/img_profile"
-        app:layout_constraintStart_toEndOf="@+id/img_profile"
-        app:layout_constraintTop_toTopOf="@+id/img_profile" />
+        android:layout_marginTop="11dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content"
+        app:layout_constraintStart_toStartOf="@id/tv_content">
 
-    <ImageView
-        android:id="@+id/img_uni_tag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:background="@drawable/ulinkboard_ic_unih"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_nickname"
-        app:layout_constraintStart_toEndOf="@+id/tv_nickname"
-        app:layout_constraintTop_toTopOf="@+id/tv_nickname" />
+        <ImageView
+            android:id="@+id/img_uni_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/ulinkboard_ic_unih" />
+
+        <TextView
+            android:id="@+id/tv_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="유링크좋아"
+            android:textColor="#727272"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/img_uni_tag"
+            app:layout_constraintTop_toBottomOf="@+id/tv_content" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_time"
@@ -63,7 +73,7 @@
         android:layout_marginTop="13dp"
         android:text="..혹시 과제 다 한사람? 정말 하기 싫네요.."
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_profile" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
     <View
         android:id="@+id/view8"
@@ -72,7 +82,7 @@
         android:layout_marginTop="10dp"
         android:background="#e6e6e6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_content" />
+        app:layout_constraintTop_toBottomOf="@+id/layout_nickname" />
 
     <ImageButton
         android:id="@+id/btn_heart"

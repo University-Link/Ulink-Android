@@ -1,12 +1,12 @@
 package com.ulink.ulink.Ulink.BoardCommentRecycler
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.ulink.ulink.R
-import com.ulink.ulink.Ulink.UlinkBoardData
+import com.ulink.ulink.Ulink.BoardData
 
 class UlinkBoardCommentViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
     val img_profile : ImageView = itemView.findViewById(R.id.img_profile)
@@ -17,12 +17,27 @@ class UlinkBoardCommentViewHolder(itemView: View): RecyclerView.ViewHolder(itemV
     //val tv_comment_count : TextView = itemView.findViewById(R.id.tv_comment_count)
     val tv_heart_count : TextView = itemView.findViewById(R.id.tv_heart_count)
 
-    fun bind(BoardData: UlinkBoardData){
-        Glide.with(itemView).load(BoardData.img_profile).into(img_profile)
+    fun bind(BoardData: BoardData,tag:Int){
+        when(tag){
+            0->{
+                //TODO 대학교받아와서 대학교별로 태그 바꾸기
+                Log.d("viewtype2 ","00")
+                img_profile.setBackgroundResource(R.drawable.ulinkboard_ic_unis)
+            }
+            1->{
+                Log.d("viewtype2 ","11")
+                img_profile.visibility = View.GONE
+            }
+            else->{
+                Log.d("viewtype2 ","22")
+                img_profile.setBackgroundResource(R.drawable.class_board_detail_reply_ic_replyprofile)
+            }
+        }
+        //TODO tag 보이고 안보이고 (언급?태그여부 판별)
         tv_nickname.text = BoardData.nickname
-        tv_time.text = BoardData.time
+        tv_time.text = BoardData.createdAt
         tv_content.text = BoardData.content
-        tv_heart_count.text = BoardData.heart_count
+        tv_heart_count.text = BoardData.likeCount.toString()
     }
 
 }
