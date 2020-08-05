@@ -19,7 +19,7 @@ class FAQActivity : AppCompatActivity() {
         val size = Point()
         windowManager.defaultDisplay.getSize(size)
         val width = size.x
-        ev_faq.setIndicatorBoundsRelative(width-dptopx(50).toInt() ,width)
+        ev_faq.setIndicatorBoundsRelative(width-dptopx(60).toInt() ,width)
 
     }
 

@@ -37,10 +37,14 @@
         app:layout_constraintTop_toBottomOf="@id/btn_back"
         android:layout_marginTop="9dp"/>
 
+
+
     <ExpandableListView
         android:id="@+id/ev_faq"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:divider="@drawable/divider_group"
+        android:dividerHeight="1dp"
         android:groupIndicator="@drawable/selector_groupindicator"
         app:layout_constraintTop_toBottomOf="@id/divider_1"
         app:layout_constraintBottom_toBottomOf="parent"/>

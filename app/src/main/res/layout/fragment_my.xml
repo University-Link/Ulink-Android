@@ -364,7 +364,7 @@
 
             <Button
                 android:id="@+id/btn_communityguide"
-                android:text="커뮤니티 이용수칙"
+                android:text="이용 약관"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:paddingRight="6dp"
