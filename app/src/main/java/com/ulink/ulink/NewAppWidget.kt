@@ -61,6 +61,7 @@ internal fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManage
     drawer.setMinMax()
     drawer.drawForWidget(views)
 
+
     //위젯 누르면 시간표로 이
     val intent = Intent(Intent.ACTION_VIEW)
     //intent.addCategory(Intent.CATEGORY_LAUNCHER)

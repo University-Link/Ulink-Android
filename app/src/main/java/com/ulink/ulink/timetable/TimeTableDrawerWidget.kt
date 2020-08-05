@@ -86,7 +86,7 @@ class TimeTableDrawerWidget(val context: Context, val layoutInflater: LayoutInfl
             rvDay.setTextViewText(R.id.tv_cellday, daylist[i])
             rvDay.setTextViewTextSize(R.id.tv_cellday, 1, 12.0f)
 
-//            rvDay.setInt(R.id.tv_cellday, "setBackgroundResource", R.drawable.bottom_line)
+            rvDay.setInt(R.id.tv_cellday, "setBackgroundResource", R.drawable.bottom_line)
 //              rvDay.setInt(R.id.tv_cellday, "setBackgroundColor", R.color.white)
             rvDay.addView(R.id.tv_cellday, rvBottomLine)
             remoteViews.addView(R.id.layout_dayrow, rvDay)
@@ -210,18 +210,18 @@ class TimeTableDrawerWidget(val context: Context, val layoutInflater: LayoutInfl
     fun DrawSubject(remoteViews: RemoteViews, subject: Subject) {
 
         devideSubjects(remoteViews)
-//        val rvCellLayout = RemoteViews(context.packageName, R.layout.cell_subject_widget)
-//        val view = rvCellLayout.apply(context, null)
-//        val cellLayout = view.findViewById<LinearLayout>(R.id.tv_cell)
-//
-//        cellLayout.layoutParams  = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
-//        4 * (formatToFloat(subject.endTime[0]) - formatToFloat(subject.startTime[0])) - 0.5f)
-//        rvCellLayout.setInt(R.id.tv_cell, "setBackgroundResource", getColors(subject.color))
-//        rvCellLayout.setTextViewText(R.id.tv_cell_subject, subject.name)
-//        rvCellLayout.setTextViewText(R.id.tv_cell_custom, subject.place[0])
-//
-//        remoteViews.addView(R.id.day_column_root, rvCellLayout)
-//        devideSubjects(remoteViews)
+        val rvCellLayout = RemoteViews(context.packageName, R.layout.cell_subject_widget)
+        val view = rvCellLayout.apply(context, null)
+        val cellLayout = view.findViewById<LinearLayout>(R.id.tv_cell)
+
+        cellLayout.layoutParams  = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
+        4 * (formatToFloat(subject.endTime[0]) - formatToFloat(subject.startTime[0])) - 0.5f)
+        rvCellLayout.setInt(R.id.tv_cell, "setBackgroundResource", getColors(subject.color))
+        rvCellLayout.setTextViewText(R.id.tv_cell_subject, subject.name)
+        rvCellLayout.setTextViewText(R.id.tv_cell_custom, subject.place[0])
+
+        remoteViews.addView(R.id.day_column_root, rvCellLayout)
+        devideSubjects(remoteViews)
     }
 
 
