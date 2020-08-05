@@ -39,14 +39,15 @@ class MyFragment : Fragment() {
 
     fun loadProfile(){
 //        TODO 여기 서버 연결해서 getProfile
-//        DataRepository.getProfile(
-//                onSuccess = {
-//
-//                },
-//                onFailure = {
-//
-//                }
-//        )
+        DataRepository.getProfile(
+                onSuccess = {
+                    tv_nickname.text = it.data.nickname
+                    tv_name.text = it.data.name
+                },
+                onFailure = {
+
+                }
+        )
 
     }
 
