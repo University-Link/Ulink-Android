@@ -20,14 +20,15 @@ class AllBottomBoardAdapter (private val context: Context, val viewtype:Int) : R
             else ->  return AllBoardClassViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ulink_board_class_data,parent,false))
         }
     }
-    private lateinit var itemClickListener : ItemClickListener
 
-    interface ItemClickListener {
-        fun onClick(view: View, position:Int)
-    }
-    fun setItemClickLIstener(itemClickListener: ItemClickListener){
-        this.itemClickListener = itemClickListener
-    }
+//    private lateinit var itemClickListener : ItemClickListener
+//
+//    interface ItemClickListener {
+//        fun onClick(view: View, position:Int)
+//    }
+//    fun setItemClickLIstener(itemClickListener: ItemClickListener){
+//        this.itemClickListener = itemClickListener
+//    }
     override fun getItemCount(): Int {
         when (viewtype) {
             0 -> return  datas_ulink.size
@@ -44,9 +45,9 @@ class AllBottomBoardAdapter (private val context: Context, val viewtype:Int) : R
             else ->  (holder as AllBoardClassViewHolder).bind(datas_class[position])
 
         }
-        holder.itemView.setOnClickListener {
-            itemClickListener.onClick(it, position)
-        }
+//        holder.itemView.setOnClickListener {
+//            itemClickListener.onClick(it, position)
+//        }
     }
 
 

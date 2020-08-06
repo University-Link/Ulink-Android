@@ -196,12 +196,12 @@ interface RequestInterface {
         @Body body : RequestChangeColor
     ) : Call<ResponseChangeColor>
 
-    //Chatting
-    //채팅방 리스트 조회
-    @GET("/chat")
-    fun getChatList(
-            @Header("token") token : String
-    ) : Call<ResponseChatting>
+    //Board
+    //게시판 리스트 조회
+    @GET("/boardList")
+    fun getBoardList(
+        @Header("token") token : String
+    ) : Call<ResponseBoardList>
 
     //Notice
     //메인 스케줄의 모든 공지 가져오기

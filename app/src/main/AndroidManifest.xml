@@ -19,7 +19,7 @@
         <activity android:name=".register.CollectAgreeActivity"></activity>
         <activity android:name=".register.ServiceAgreeActivity" />
         <activity android:name=".Activity.ChangePasswordActivity" />
-        <activity android:name=".Ulink.BoardSearchActivity" />
+        <activity android:name=".Ulink.BoardSearchRecycler.BoardSearchActivity" />
         <activity android:name=".Ulink.UlinkBoardWriteActivity"
             android:windowSoftInputMode="adjustResize">
         </activity>

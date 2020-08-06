@@ -1,21 +1,16 @@
 package com.ulink.ulink.repository
 
-data class ResponseChatting(
+data class ResponseBoardList(
     val status : Int,
     val success : Boolean,
     val message : String,
-    val data : ChatData
+    val data : BoardList
 )
-
-data class ChatData(
+data class BoardList(
     val semester : String,
-    val     chat : List<Chat>
+    val list : List<BoardSubject>
 )
-
-data class Chat(
+data class BoardSubject(
     val subjectIdx : Int,
-    val name : String,
-    val color : Int,
-    val total : Int,
-    val current : Int
+    val name : String
 )

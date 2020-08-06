@@ -20,6 +20,30 @@
         android:textColor="#363636"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="7dp"
+        android:visibility="invisible"
+        android:background="@drawable/img_line"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_title"
+        app:layout_constraintStart_toEndOf="@+id/tv_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_title" />
+
+    <TextView
+        android:id="@+id/tv_board_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ulink게시판"
+        android:visibility="invisible"
+        android:layout_marginLeft="6dp"
+        android:textColor="#727272"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_line"
+        app:layout_constraintStart_toEndOf="@+id/img_line"
+        app:layout_constraintTop_toTopOf="@+id/img_line" />
     <View
         app:layout_constraintLeft_toRightOf="@id/tv_nickname"
         app:layout_constraintTop_toTopOf="@id/tv_nickname"

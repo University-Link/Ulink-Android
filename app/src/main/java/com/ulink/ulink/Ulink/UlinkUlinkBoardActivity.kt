@@ -1,14 +1,13 @@
 package com.ulink.ulink.Ulink
 
-import android.app.PendingIntent.getActivity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.ulink.ulink.R
 import com.ulink.ulink.Ulink.AllBoardRecycler.AllBoardAdapter
 import com.ulink.ulink.Ulink.BoardCommentRecycler.BoardDetailActivity
+import com.ulink.ulink.Ulink.BoardSearchRecycler.BoardSearchActivity
 import kotlinx.android.synthetic.main.activity_ulink_all_board.*
 import kotlinx.android.synthetic.main.toolbar_ulink_inside.*
 
@@ -25,7 +24,9 @@ class UlinkUlinkBoardActivity : AppCompatActivity() {
         }
 
         btn_search.setOnClickListener {
+            //TODO 유링크 검색
             val intent = Intent(this, BoardSearchActivity::class.java)
+            intent.putExtra("boardCategory",0)
             startActivity(intent)
 
         }
@@ -34,7 +35,7 @@ class UlinkUlinkBoardActivity : AppCompatActivity() {
             startActivity(intent)
         }
         board_adapter =
-            AllBoardAdapter(this,0)
+            AllBoardAdapter(this,0,false)
         rv_ulink_board.adapter = board_adapter
 
 

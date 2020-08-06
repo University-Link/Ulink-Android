@@ -32,16 +32,6 @@
                 android:textColor="#674fee"
                 android:textSize="13sp" />
 
-            <EditText
-                android:id="@+id/editText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_board_category"
-                android:layout_marginHorizontal="22dp"
-                android:layout_marginTop="13dp"
-                android:background="@null"
-                android:hint="제목을 입력하세요"
-               />
 
             <EditText
                 android:layout_width="match_parent"
@@ -50,6 +40,7 @@
                 android:layout_marginHorizontal="22dp"
                 android:layout_marginBottom="400dp"
                 android:layout_marginTop="13dp"
+                android:textSize="16sp"
                 android:hint="눌러서 내용을 입력해 주세요"
                 />
         </LinearLayout>

@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ulink.ulink.R
+import com.ulink.ulink.repository.BoardSubject
+
 class ClassAdapter(private val context: Context) :RecyclerView.Adapter<ClassViewHolder>(){
-  var datas : MutableList<ClassData> = mutableListOf<ClassData>()
+  var datas : MutableList<BoardSubject> = mutableListOf<BoardSubject>()
+
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassViewHolder {
     val view = LayoutInflater.from(context).inflate(R.layout.class_item,parent,false)
     return ClassViewHolder(view)
@@ -24,8 +27,6 @@ class ClassAdapter(private val context: Context) :RecyclerView.Adapter<ClassView
   }
   override fun onBindViewHolder(holder: ClassViewHolder, position: Int) {
     holder.bind(datas[position])
-    holder.itemView.setOnClickListener {
-      itemClickListener.onClick(it, position)
-    }
+    holder.itemView.setOnClickListener { itemClickListener.onClick(it, position) }
   }
 }
