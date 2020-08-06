@@ -1,5 +1,7 @@
 package com.ulink.ulink.repository
 
+import com.ulink.ulink.Ulink.UlinkNotice.ResponseDetailNotice
+import com.ulink.ulink.Ulink.UlinkNotice.ResponseUlinkNotice
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -196,12 +198,12 @@ interface RequestInterface {
         @Body body : RequestChangeColor
     ) : Call<ResponseChangeColor>
 
-    //Chatting
-    //채팅방 리스트 조회
-    @GET("/chat")
-    fun getChatList(
-            @Header("token") token : String
-    ) : Call<ResponseChatting>
+    //Board
+    //게시판 리스트 조회
+    @GET("/boardList")
+    fun getBoardList(
+        @Header("token") token : String
+    ) : Call<ResponseBoardList>
 
     //Notice
     //메인 스케줄의 모든 공지 가져오기
@@ -213,6 +215,12 @@ interface RequestInterface {
     ) : Call<ResponseCalendar>
 
     //특정 과목의 공지 가져오기
+    @GET("/notice/subject/{idx}")
+    fun getSubjectNotice(
+        @Header("token") token : String,
+        @Path("idx") idx : String
+    ) : Call<ResponseUlinkNotice>
+
     @GET("/notice/subject/{idx}")
     fun getClassNotice(
             @Header("token") token : String,
@@ -233,6 +241,12 @@ interface RequestInterface {
             @Header("token") token : String,
             @Path("idx") idx : String
     ) : Call<ResponseSpecificNotice>
+
+    @GET("/notice/{idx}")
+    fun getDetailNotice(
+        @Header("token") token : String,
+        @Path("idx") idx : Int
+    ) : Call<ResponseDetailNotice>
 
     //공지 수정(업데이트)
     @PUT("/notice/{idx}")

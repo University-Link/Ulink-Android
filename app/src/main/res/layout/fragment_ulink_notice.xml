@@ -7,12 +7,17 @@
     tools:context=".Ulink.ClassBoard.UlinkNoticeFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_ulink_notice"
+        android:id="@+id/rv_subject_notice"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_ulink_notice_data"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"/>
 
-    </androidx.recyclerview.widget.RecyclerView>
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/line"
+        app:layout_constraintTop_toTopOf="@id/rv_subject_notice"
+        app:layout_constraintStart_toStartOf="@id/rv_subject_notice"/>
 
 </FrameLayout>

@@ -6,12 +6,15 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.ulink.ulink.Ulink.ClassBoard.UlinkBoardFragment
 import com.ulink.ulink.Ulink.ClassBoard.UlinkNoticeFragment
 
-class UlinkInsideAdapter (fm: FragmentManager) :
+class UlinkInsideAdapter (fm: FragmentManager, className : String, classIdx : String) :
         FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT){
+    var className = className
+    var classIdx = classIdx
+
     override fun getItem(position: Int): Fragment {
         return when(position){
             0 -> UlinkBoardFragment()
-            else -> UlinkNoticeFragment()
+            else -> UlinkNoticeFragment(className, classIdx)
         }
     }
 

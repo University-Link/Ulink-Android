@@ -18,10 +18,13 @@ class UlinkUniversityBoardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ulink_university_board)
+
         tv_classname.text = "학교게시판"
+
         btn_back.setOnClickListener {
             finish()
         }
+
         btn_search.setOnClickListener {
             val intent = Intent(this, BoardSearchActivity::class.java)
             startActivity(intent)
@@ -32,6 +35,7 @@ class UlinkUniversityBoardActivity : AppCompatActivity() {
             val intent = Intent(this, UlinkBoardWriteActivity::class.java)
             startActivity(intent)
         }
+
         board_adapter = AllBoardAdapter(this,1)
         rv_ulink_board.adapter = board_adapter
 

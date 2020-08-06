@@ -14,9 +14,7 @@ import com.ulink.ulink.Ulink.BoardSearchActivity
 import com.ulink.ulink.Ulink.UlinkUlinkBoardActivity
 import com.ulink.ulink.Ulink.UlinkInsideActivity
 import com.ulink.ulink.Ulink.UlinkUniversityBoardActivity
-import com.ulink.ulink.repository.DataRepository
-import com.ulink.ulink.repository.ResponseChatting
-import com.ulink.ulink.repository.RetrofitService
+import com.ulink.ulink.repository.*
 import kotlinx.android.synthetic.main.fragment_class.rv_class
 import kotlinx.android.synthetic.main.fragment_ulink.*
 import retrofit2.Call
@@ -26,7 +24,7 @@ import retrofit2.Response
 
 class UlinkFragment : Fragment() {
     lateinit var classAdapter : ClassAdapter
-    val datas : MutableList<ClassData> = mutableListOf<ClassData>()
+    val datas : MutableList<BoardSubject> = mutableListOf<BoardSubject>()
 
 
     override fun onCreateView(
@@ -43,35 +41,29 @@ class UlinkFragment : Fragment() {
         classAdapter = ClassAdapter(view.context)
         rv_class.adapter = classAdapter
 
-        RetrofitService.service.getChatList(DataRepository.token).
-        enqueue(object : Callback<ResponseChatting> {
-            override fun onFailure(call: Call<ResponseChatting>, t: Throwable) {
+        RetrofitService.service.getBoardList(DataRepository.token).
+        enqueue(object : Callback<ResponseBoardList> {
+            override fun onFailure(call: Call<ResponseBoardList>, t: Throwable) {
                 Log.d("tag", t.localizedMessage)
             }
 
             override fun onResponse(
-                call: Call<ResponseChatting>,
-                response: Response<ResponseChatting>
+                call: Call<ResponseBoardList>,
+                response: Response<ResponseBoardList>
             ) {
                 response.body()?.let{
                     if(it.status == 200){
-                        if(it.data.chat.isNotEmpty()) {
-                            var size = it.data.chat.size
-                            for(i in 0 until size)
-                            { datas.apply{
-                                    add(
-                                        ClassData(
-                                            subjectIdx = it.data.chat[i].subjectIdx,
-                                            name = it.data.chat[i].name,
-                                            color = it.data.chat[i].color,
-                                            total = it.data.chat[i].total,
-                                            current = it.data.chat[i].current
-                                        )
+                        for(i in 0 until it.data.list.size) {
+                            datas.apply{
+                                add(
+                                    BoardSubject(
+                                        subjectIdx = it.data.list[i].subjectIdx,
+                                        name = it.data.list[i].name
                                     )
-                                }
-                                classAdapter.datas = datas
-                                classAdapter.notifyDataSetChanged()
+                                )
                             }
+                            classAdapter.datas = datas
+                            classAdapter.notifyDataSetChanged()
                         }
                     }
                 } ?: Log.d("tag", response.message())

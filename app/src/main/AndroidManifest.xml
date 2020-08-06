@@ -13,15 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.CommunityGuideActivity"></activity>
+        <activity android:name=".Ulink.UlinkNotice.NoticeDetailActivity"></activity>
+        <activity android:name=".register.ThirdAgreeActivity" />
+        <activity android:name=".register.AdAgreeActivity" />
+        <activity android:name=".Activity.CommunityGuideActivity" />
         <activity android:name=".Activity.FAQActivity" />
         <activity android:name=".withdrawal.WithdrawalActivity" />
-        <activity android:name=".register.CollectAgreeActivity"></activity>
+        <activity android:name=".register.CollectAgreeActivity" />
         <activity android:name=".register.ServiceAgreeActivity" />
         <activity android:name=".Activity.ChangePasswordActivity" />
-        <activity android:name=".Ulink.UlinkBoardWriteActivity">
-            android:windowSoftInputMode="adjustResize"
-        </activity>
+        <activity
+            android:name=".Ulink.UlinkBoardWriteActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".Ulink.BoardCommentRecycler.BoardDetailActivity" />
         <activity android:name=".Ulink.BoardSearchActivity" />
         <activity android:name=".myActivity.MyActivityActivity" />
@@ -29,7 +32,6 @@
         <activity android:name=".Activity.ChangeMajorActivity" />
         <activity android:name=".Activity.SchoolCertificateActivity" />
         <activity android:name=".Ulink.UlinkInsideActivity" />
-
         <activity android:name=".NewAppWidgetConfigureActivity">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
@@ -64,6 +66,7 @@
         <activity android:name=".Activity.NoticeAddActivity" />
         <activity android:name=".Ulink.UlinkUniversityBoardActivity" />
         <activity android:name=".Ulink.UlinkUlinkBoardActivity" />
+
         <receiver android:name=".NewAppWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
