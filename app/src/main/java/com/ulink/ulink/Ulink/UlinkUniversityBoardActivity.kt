@@ -3,11 +3,11 @@ package com.ulink.ulink.Ulink
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.ulink.ulink.R
 import com.ulink.ulink.Ulink.AllBoardRecycler.AllBoardAdapter
 import com.ulink.ulink.Ulink.BoardCommentRecycler.BoardDetailActivity
+import com.ulink.ulink.Ulink.BoardSearchRecycler.BoardSearchActivity
 import kotlinx.android.synthetic.main.activity_ulink_university_board.*
 import kotlinx.android.synthetic.main.toolbar_ulink_inside.*
 
@@ -24,6 +24,7 @@ class UlinkUniversityBoardActivity : AppCompatActivity() {
         }
         btn_search.setOnClickListener {
             val intent = Intent(this, BoardSearchActivity::class.java)
+            intent.putExtra("boardCategory",1)
             startActivity(intent)
 
         }
@@ -32,7 +33,7 @@ class UlinkUniversityBoardActivity : AppCompatActivity() {
             val intent = Intent(this, UlinkBoardWriteActivity::class.java)
             startActivity(intent)
         }
-        board_adapter = AllBoardAdapter(this,1)
+        board_adapter = AllBoardAdapter(this,1,false)
         rv_ulink_board.adapter = board_adapter
 
         datas.apply{

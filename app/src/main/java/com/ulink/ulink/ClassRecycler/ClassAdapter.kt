@@ -8,6 +8,7 @@ import com.ulink.ulink.R
 import com.ulink.ulink.repository.BoardSubject
 class ClassAdapter(private val context: Context) :RecyclerView.Adapter<ClassViewHolder>(){
   var datas : MutableList<BoardSubject> = mutableListOf<BoardSubject>()
+
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassViewHolder {
     val view = LayoutInflater.from(context).inflate(R.layout.class_item,parent,false)
     return ClassViewHolder(view)

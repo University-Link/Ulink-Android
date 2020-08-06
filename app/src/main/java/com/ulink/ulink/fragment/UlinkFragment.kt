@@ -7,9 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ulink.ulink.ClassRecycler.ClassAdapter
-import com.ulink.ulink.ClassRecycler.ClassData
 import com.ulink.ulink.R
-import com.ulink.ulink.Ulink.BoardSearchActivity
+import com.ulink.ulink.Ulink.BoardSearchRecycler.BoardSearchActivity
 import com.ulink.ulink.Ulink.UlinkUlinkBoardActivity
 import com.ulink.ulink.Ulink.UlinkInsideActivity
 import com.ulink.ulink.Ulink.UlinkUniversityBoardActivity
@@ -19,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_ulink.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 class UlinkFragment : Fragment() {
     lateinit var classAdapter : ClassAdapter
     val datas : MutableList<BoardSubject> = mutableListOf<BoardSubject>()
@@ -41,6 +41,7 @@ class UlinkFragment : Fragment() {
             override fun onResponse(
                     call: Call<ResponseBoardList>,
                     response: Response<ResponseBoardList>
+
             ) {
                 response.body()?.let{
                     if(it.status == 200){
@@ -82,6 +83,7 @@ class UlinkFragment : Fragment() {
         }
         btn_search.setOnClickListener {
             val intent = Intent(getActivity(), BoardSearchActivity::class.java)
+            intent.putExtra("boardCategory",3)
             startActivity(intent)
         }
     }

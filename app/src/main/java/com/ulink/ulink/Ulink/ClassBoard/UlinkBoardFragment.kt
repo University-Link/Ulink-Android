@@ -41,7 +41,7 @@ class UlinkBoardFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        board_adapter = AllBoardAdapter(view.context,2)
+        board_adapter = AllBoardAdapter(view.context,2,false)
         rv_ulink_board.adapter = board_adapter
 
         datas.apply{
@@ -82,7 +82,9 @@ class UlinkBoardFragment() : Fragment() {
         board_adapter.setItemClickLIstener(object: AllBoardAdapter.ItemClickListener{
             override fun onClick(view:View, position:Int){
                 val intent = Intent(getActivity(), BoardDetailActivity::class.java)
+                //TODO 수업별 게시판 검색
                 intent.putExtra("viewtype",2)
+                intent.putExtra("board_category",3)
                 //intent.putExtra("class",class_name)
                 //intent.putExtra("idx",class_id)
                 startActivity(intent)
