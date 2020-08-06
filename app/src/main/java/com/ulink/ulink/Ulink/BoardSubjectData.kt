@@ -1,7 +1,7 @@
 package com.ulink.ulink.Ulink
 
-data class BoardData(
-    val board_idx : Int = 0,
+data class BoardSubjectData(
+    val boardSubjectIdx : Int = 0,
     val title : String,
     val initial : String,
     val nickname : String,
@@ -11,6 +11,8 @@ data class BoardData(
     val userIdx : Int = 0,
     val createdAt : String = "",
     val updatedAt : String = "",
-    val isLike : Boolean
+    val isLike : Boolean,
+    val isNotice : Int,
+    val subjectIdx : Int
 )
 

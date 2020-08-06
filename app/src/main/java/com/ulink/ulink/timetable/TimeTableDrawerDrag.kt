@@ -813,22 +813,6 @@ class TimeTableDrawerDrag(val context: Context, val layoutInflater: LayoutInflat
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //
 //    fun drawDayRow(linearLayout: LinearLayout) {
 //        val dayOfWeek = 5

@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.toolbar_ulink_inside.*
 
 class UlinkUniversityBoardActivity : AppCompatActivity() {
     lateinit var board_adapter : AllBoardAdapter
-    val datas : MutableList<BoardData> = mutableListOf<BoardData>()
+    val data : MutableList<BoardUniversityData> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ulink_university_board)
@@ -36,10 +36,10 @@ class UlinkUniversityBoardActivity : AppCompatActivity() {
         board_adapter = AllBoardAdapter(this,1,false)
         rv_ulink_board.adapter = board_adapter
 
-        datas.apply{
+        data.apply{
             add(
-                BoardData(
-                    board_idx = 0,
+                BoardUniversityData(
+                    boardUniversityIdx = 0,
                     title = "총장직선제 개선촉구 시위 마지막 공지",
                     initial = "",
                     nickname = "형광펜포스트잇23",
@@ -49,12 +49,13 @@ class UlinkUniversityBoardActivity : AppCompatActivity() {
                     userIdx = 0,
                     createdAt = "5분",
                     updatedAt = "",
-                    isLike = false
+                    isLike = false,
+                    universityIdx = 0
                 )
             )
             add(
-                BoardData(
-                    board_idx = 0,
+                BoardUniversityData(
+                    boardUniversityIdx = 0,
                     title = "총장직선제 개선촉구 시위 마지막 공지",
                     initial = "",
                     nickname = "형광펜포스트잇23",
@@ -64,18 +65,18 @@ class UlinkUniversityBoardActivity : AppCompatActivity() {
                     userIdx = 0,
                     createdAt = "5분",
                     updatedAt = "",
-                    isLike = false
+                    isLike = false,
+                        universityIdx = 0
                 )
             )
-
-            board_adapter.datas_university = datas
+            board_adapter.datas_university = data
             board_adapter.notifyDataSetChanged()
         }
 
         board_adapter.setItemClickLIstener(object : AllBoardAdapter.ItemClickListener{
             override fun onClick(view: View, position: Int) {
                 val intent = Intent(this@UlinkUniversityBoardActivity, BoardDetailActivity::class.java)
-                intent.putExtra("viewtype", 1)
+                intent.putExtra("boardType", 1)
                 startActivity(intent)
             }
 
