@@ -7,6 +7,8 @@ import android.text.Html
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.ulink.ulink.R
+import com.ulink.ulink.repository.DataRepository
+import com.ulink.ulink.repository.RequestUniversityAuth
 import com.ulink.ulink.utils.DialogBuilder
 import kotlinx.android.synthetic.main.activity_school_certificate.*
 
@@ -19,7 +21,7 @@ class SchoolCertificateActivity : AppCompatActivity() {
 
     var timer : CountDownTimer? = null
 
-
+    var authNum : String? = null
 
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -53,26 +55,30 @@ class SchoolCertificateActivity : AppCompatActivity() {
 
         btn_request.setOnClickListener {
             if (activated1) {
-                DialogBuilder().apply {
-                    build(this@SchoolCertificateActivity)
-                    setContent(getString(R.string.school_certificate_codesent))
-                    setClickListener {
-                        dismiss()
+                DataRepository.requestUniversityAuth(RequestUniversityAuth(et_email.text.toString()),
+                onSuccess = {
+                    authNum = it
+                    DialogBuilder().apply {
+                        build(this@SchoolCertificateActivity)
+                        setContent(getString(R.string.school_certificate_codesent))
+                        setClickListener {
+                            dismiss()
+                        }
+                        show()
                     }
-                    show()
-                }
-//                TODO 여기서 서버에 인증코드 요청!
-                startTimer()
-                requestSent = true
+                    startTimer()
+                    requestSent = true
+                },
+                onFailure = {})
             }
         }
 
-
         btn_ok.setOnClickListener {
-            if (activated2) {
+            if (activated2 && authNum!=null) {
 //              TODO 서버랑 코드 같은지 확인
-                val serverPass = 123
-                if (et_code.text.toString() == serverPass.toString()){
+//               authNum이랑 비교 해서 맞으면 등록요청!
+
+                if (et_code.text.toString() == authNum){
                     DialogBuilder().apply {
                         build(this@SchoolCertificateActivity)
                         setContent(getString(R.string.school_certificate_ok))

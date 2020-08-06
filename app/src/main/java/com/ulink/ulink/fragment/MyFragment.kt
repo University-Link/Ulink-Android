@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.ulink.ulink.Activity.*
 import com.ulink.ulink.MainActivity
 import com.ulink.ulink.R
@@ -20,6 +21,11 @@ import com.ulink.ulink.withdrawal.WithdrawalActivity
 import kotlinx.android.synthetic.main.fragment_my.*
 
 class MyFragment : Fragment() {
+
+    lateinit var nickName : String
+    lateinit var university : String
+    var majorIdx = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,12 +35,12 @@ class MyFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
         loadProfile()
+    }
 
-        setOnClick()
-
+    override fun onResume() {
+        super.onResume()
+        loadProfile()
     }
 
     fun loadProfile(){
@@ -43,20 +49,43 @@ class MyFragment : Fragment() {
                 onSuccess = {
                     tv_nickname.text = it.data.nickname
                     tv_name.text = it.data.name
+                    tv_schoolmajor.text = it.data.university +  " " + it.data.major
+                    Glide.with(this).load(it.data.profileImage).circleCrop()
+                            .error(R.drawable.mypage_img_profile).fallback(R.drawable.mypage_img_profile).into(my_profile_picture)
+
+                    if (it.data.emailCheck == 0) {
+                        btn_school_certification.setOnClickListener {
+                            val intent = Intent(context, SchoolCertificateActivity::class.java)
+                            startActivity(intent)
+                        }
+                    } else {
+                        btn_school_certification.setOnClickListener {
+                            DialogBuilder().apply {
+                                build(requireContext())
+                                setContent("이미 학교인증을 하였습니다.")
+                                setClickListener {
+                                    dismiss()
+                                }
+                                show()
+                            }
+                        }
+                    }
+
+
+                    nickName = it.data.nickname
+                    university = it.data.university
+                    majorIdx = it.data.majorIdx
+
+                    setOnClick(true)
                 },
                 onFailure = {
-
+                    setOnClick(false)
                 }
         )
 
     }
 
-    fun setOnClick(){
-
-        btn_school_certification.setOnClickListener {
-            val intent = Intent(context, SchoolCertificateActivity::class.java)
-            startActivity(intent)
-        }
+    fun setOnClick(success : Boolean){
 
         layout_writingmine.setOnClickListener {
             val intent = Intent(context, MyActivityActivity::class.java)
@@ -92,20 +121,39 @@ class MyFragment : Fragment() {
             startActivity(intent)
         }
 
-        btn_changemajor.setOnClickListener {
-            val intent = Intent(context, ChangeMajorActivity::class.java)
-            startActivity(intent)
+        if (success){
+            btn_changemajor.setOnClickListener {
+                val intent = Intent(context, ChangeMajorActivity::class.java)
+                startActivity(intent)
+            }
+
+            btn_changenickname.setOnClickListener {
+                val intent = Intent(context, ChangeNickNameActivity::class.java)
+                intent.putExtra("nickName", nickName)
+                intent.putExtra("university", university)
+                intent.putExtra("majorIdx", majorIdx)
+                startActivity(intent)
+            }
+
+            btn_changepassword.setOnClickListener {
+                val intent = Intent(context, ChangePasswordActivity::class.java)
+                startActivity(intent)
+            }
+        } else{
+            btn_changemajor.setOnClickListener {
+                setServerErrorDialog()
+            }
+
+            btn_changenickname.setOnClickListener {
+                setServerErrorDialog()
+            }
+
+            btn_changepassword.setOnClickListener {
+                setServerErrorDialog()
+            }
+
         }
 
-        btn_changenickname.setOnClickListener {
-            val intent = Intent(context, ChangeNickNameActivity::class.java)
-            startActivity(intent)
-        }
-
-        btn_changepassword.setOnClickListener {
-            val intent = Intent(context, ChangePasswordActivity::class.java)
-            startActivity(intent)
-        }
 
         btn_communityguide.setOnClickListener {
             val intent = Intent(context, CommunityGuideActivity::class.java)
@@ -144,6 +192,28 @@ class MyFragment : Fragment() {
             val intent = Intent(context, CollectAgreeActivity::class.java)
             intent.putExtra("prevView", "myPage")
             startActivity(intent)
+        }
+
+        btn_notifysetting.setOnClickListener {
+            DialogBuilder().apply {
+                build(requireContext())
+                setContent("준비 중입니다.")
+                setClickListener {
+                    dismiss()
+                }
+                show()
+            }
+        }
+    }
+
+    fun setServerErrorDialog(){
+        DialogBuilder().apply {
+            build(requireContext())
+            setContent("서버 연결을 확인해주세요")
+            setClickListener {
+                dismiss()
+            }
+            show()
         }
     }
 }

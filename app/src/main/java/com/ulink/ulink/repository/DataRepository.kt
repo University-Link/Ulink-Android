@@ -46,8 +46,50 @@ object DataRepository {
         })
     }
 
-    fun getMainTimeTable(onSuccess: (TimeTable) -> Unit, onFailure: (String) -> Unit) {
+    fun updateNickname(nickName : String, onSuccess: () -> Unit, onFailure: (String) -> Unit){
+        retrofit.updateNickname(token, RequestUpdateNickname(nickName)).enqueue(object : Callback<ResponseUpdateNickname>{
+            override fun onFailure(call: Call<ResponseUpdateNickname>, t: Throwable) {
+                onFailure(t.localizedMessage)
+            }
 
+            override fun onResponse(call: Call<ResponseUpdateNickname>, response: Response<ResponseUpdateNickname>) {
+                response.body()?.let {
+                    onSuccess()
+                } ?: onFailure(response.message())
+            }
+        })
+    }
+
+    fun getNicknameSameCheck(nickName: String, majorIdx : Int, onSuccess: () -> Unit, onFailure: (String) -> Unit){
+        retrofit.getNicknameSameCheck(RequestNicknameCheck(nickName,majorIdx)).enqueue(object : Callback<ResponseNicknameCheck>{
+            override fun onFailure(call: Call<ResponseNicknameCheck>, t: Throwable) {
+                onFailure(t.localizedMessage)
+
+            }
+
+            override fun onResponse(call: Call<ResponseNicknameCheck>, response: Response<ResponseNicknameCheck>) {
+                response.body()?.let {
+                    onSuccess()
+                } ?: onFailure(response.message())
+            }
+        })
+    }
+
+    fun updatePassword(password : String, newPassword : String, onSuccess: () -> Unit, onFailure: (String) -> Unit){
+        retrofit.updatePassword(token, RequestUpdatePassword(password, newPassword)).enqueue(object : Callback<BaseResponse>{
+            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
+                onFailure(t.localizedMessage)
+            }
+
+            override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
+                response.body()?.let {
+                    onSuccess()
+                } ?: onFailure(response.message())
+            }
+        })
+    }
+
+    fun getMainTimeTable(onSuccess: (TimeTable) -> Unit, onFailure: (String) -> Unit) {
         retrofit.getMainTimeTable(token).enqueue(object : Callback<ResponseMainTimeTable> {
             override fun onFailure(call: Call<ResponseMainTimeTable>, t: Throwable) {
                 Log.d("tag", t.localizedMessage)
@@ -258,6 +300,34 @@ object DataRepository {
             override fun onResponse(call: Call<ResponsegetSubjectWithWord>, response: Response<ResponsegetSubjectWithWord>) {
                 response.body()?.let {
                     onSuccess(it.data)
+                } ?: onFailure(response.message())
+            }
+        })
+    }
+
+    fun requestUniversityAuth(requestUniversityAuth: RequestUniversityAuth, onSuccess: (String) -> Unit, onFailure: (String) -> Unit){
+        retrofit.requestUniversityAuth(token,requestUniversityAuth).enqueue(object : Callback<ResponseUniversityAuth>{
+            override fun onFailure(call: Call<ResponseUniversityAuth>, t: Throwable) {
+                onFailure(t.localizedMessage)
+            }
+
+            override fun onResponse(call: Call<ResponseUniversityAuth>, response: Response<ResponseUniversityAuth>) {
+                response.body()?.let {
+                    onSuccess(it.data.authNum)
+                } ?: onFailure(response.message())
+            }
+        })
+    }
+
+    fun requestWithdraw(password : String, onSuccess: () -> Unit, onFailure: (String) -> Unit){
+        retrofit.withdraw(token,RequestWithdraw(password)).enqueue(object : Callback<Response<Void>>{
+            override fun onFailure(call: Call<Response<Void>>, t: Throwable) {
+                onFailure(t.localizedMessage)
+            }
+
+            override fun onResponse(call: Call<Response<Void>>, response: Response<Response<Void>>) {
+                response.body()?.let {
+                    onSuccess()
                 } ?: onFailure(response.message())
             }
         })

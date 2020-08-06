@@ -52,7 +52,6 @@ class LoginActivity : AppCompatActivity() {
 //                          DataRepository 안쓰는 경우 이거 토큰 쓰시면 됩니다
                             if (checkbox_autoLogin.isChecked) {
                                 sharedEdit.putBoolean("autoLogin", true)
-                                sharedEdit.putString("id", et_id.text.toString())
                                 sharedEdit.putString("passWord", et_pw.text.toString())
                                 sharedEdit.commit()
                             } else {
@@ -60,6 +59,7 @@ class LoginActivity : AppCompatActivity() {
                                 sharedEdit.commit()
                             }
 
+                            sharedEdit.putString("id", et_id.text.toString())
                             sharedEdit.putString("accessToken", it)
                             sharedEdit.commit()
                             DataRepository.token = it

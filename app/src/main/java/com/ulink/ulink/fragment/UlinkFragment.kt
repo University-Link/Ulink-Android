@@ -1,5 +1,4 @@
 package com.ulink.ulink.fragment
-
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -24,8 +23,8 @@ class UlinkFragment : Fragment() {
     lateinit var classAdapter : ClassAdapter
     val datas : MutableList<BoardSubject> = mutableListOf<BoardSubject>()
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_ulink, container, false)
@@ -42,6 +41,7 @@ class UlinkFragment : Fragment() {
             override fun onResponse(
                 call: Call<ResponseBoardList>,
                 response: Response<ResponseBoardList>
+
             ) {
                 response.body()?.let{
                     if(it.status == 200){
@@ -61,6 +61,7 @@ class UlinkFragment : Fragment() {
                 } ?: Log.d("tag", response.message())
             }
         })
+
         classAdapter.setItemClickLIstener(object:ClassAdapter.ItemClickListener{
             override fun onClick(view:View, position:Int){
                 val intent = Intent(getActivity(), UlinkInsideActivity::class.java)
