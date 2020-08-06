@@ -15,7 +15,8 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".Activity.CommunityGuideActivity"></activity>
         <activity android:name=".Activity.FAQActivity" />
-        <activity android:name=".withdrawal.WithdrawalActivity" />
+        <activity android:name=".withdrawal.WithdrawalActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".register.CollectAgreeActivity"></activity>
         <activity android:name=".register.ServiceAgreeActivity" />
         <activity android:name=".Activity.ChangePasswordActivity" />

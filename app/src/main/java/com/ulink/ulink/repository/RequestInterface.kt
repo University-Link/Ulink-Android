@@ -1,6 +1,7 @@
 package com.ulink.ulink.repository
 
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 interface RequestInterface {
@@ -53,11 +54,29 @@ interface RequestInterface {
         @Body body : RequestNicknameCheck
     ) : Call<ResponseNicknameCheck>
 
+    @PUT("/user/nickname")
+    fun updateNickname(
+            @Header("token") token: String,
+            @Body body : RequestUpdateNickname
+    ) : Call<ResponseUpdateNickname>
+
+    @PUT("/user/password")
+    fun updatePassword(
+            @Header("token") token: String,
+            @Body body : RequestUpdatePassword
+    ) : Call<BaseResponse>
+
     //회원가입
     @POST("/user/signup/")
     fun register(
         @Body body : RequestRegister
     ) : Call<ResponseRegister>
+
+    @PUT("/user/quit")
+    fun withdraw(
+            @Header("token") token : String,
+            @Body body : RequestWithdraw
+    ) : Call<Response<Void>>
 
     //Schedule
     //시간표 - 메인 시간표 조회
@@ -198,10 +217,10 @@ interface RequestInterface {
 
     //Chatting
     //채팅방 리스트 조회
-    @GET("/chat")
-    fun getChatList(
+    @GET("/boardList")
+    fun getBoardList(
             @Header("token") token : String
-    ) : Call<ResponseChatting>
+    ) : Call<ResponseBoardList>
 
     //Notice
     //메인 스케줄의 모든 공지 가져오기
@@ -313,7 +332,7 @@ interface RequestInterface {
     )
 
     @POST("/university/auth")
-    fun requestUniversityAtuh(
+    fun requestUniversityAuth(
             @Header("token") token : String,
             @Body body : RequestUniversityAuth
     ) : Call<ResponseUniversityAuth>

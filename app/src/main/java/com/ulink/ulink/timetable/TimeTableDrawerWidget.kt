@@ -11,6 +11,7 @@ import com.ulink.ulink.fragment.TimeTableFragment
 import com.ulink.ulink.getColors
 import com.ulink.ulink.repository.Subject
 import com.ulink.ulink.repository.TimeTable
+import kotlinx.android.synthetic.main.cell_subject.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -198,24 +199,16 @@ class TimeTableDrawerWidget(val context: Context, val layoutInflater: LayoutInfl
     private fun devideSubjects(remoteViews: RemoteViews) {
 
         val rvView = RemoteViews(context.packageName, R.layout.cell_subject_widget)
-        val view = remoteViews.apply(context, null)
 
-        Log.d("tag widget", view.toString())
-
-//        val cell = view.findViewById<TextView>(R.id.tv_cell_subject)
-//        cell.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 0.25.toFloat())
-//        remoteViews.addView(R.id.timetable_root, rvView)
+        remoteViews.addView(R.id.timetable_root, rvView)
     }
 
     fun DrawSubject(remoteViews: RemoteViews, subject: Subject) {
 
+//        TODO 이방식으로 가자 처음 rvcellayout만 subject end - start해서 레이아웃 가져오고 ㅠ
         devideSubjects(remoteViews)
         val rvCellLayout = RemoteViews(context.packageName, R.layout.cell_subject_widget)
-        val view = rvCellLayout.apply(context, null)
-        val cellLayout = view.findViewById<LinearLayout>(R.id.tv_cell)
 
-        cellLayout.layoutParams  = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0,
-        4 * (formatToFloat(subject.endTime[0]) - formatToFloat(subject.startTime[0])) - 0.5f)
         rvCellLayout.setInt(R.id.tv_cell, "setBackgroundResource", getColors(subject.color))
         rvCellLayout.setTextViewText(R.id.tv_cell_subject, subject.name)
         rvCellLayout.setTextViewText(R.id.tv_cell_custom, subject.place[0])
