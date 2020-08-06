@@ -39,9 +39,8 @@ class UlinkFragment : Fragment() {
                 Log.d("tag", t.localizedMessage)
             }
             override fun onResponse(
-                call: Call<ResponseBoardList>,
-                response: Response<ResponseBoardList>
-
+                    call: Call<ResponseBoardList>,
+                    response: Response<ResponseBoardList>
             ) {
                 response.body()?.let{
                     if(it.status == 200){

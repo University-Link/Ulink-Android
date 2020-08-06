@@ -220,7 +220,6 @@ interface RequestInterface {
     @GET("/boardList")
     fun getBoardList(
         @Header("token") token : String
-
     ) : Call<ResponseBoardList>
 
     //Notice

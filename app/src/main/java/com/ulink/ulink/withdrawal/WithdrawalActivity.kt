@@ -57,10 +57,11 @@ class WithdrawalActivity : AppCompatActivity() {
             setFilter(it)
 
         }
+
         btn_5.setOnClickListener {
             setFilter(it)
-
         }
+
         btn_6.setOnClickListener {
             setFilter(it)
             if (it.isSelected){
@@ -74,9 +75,11 @@ class WithdrawalActivity : AppCompatActivity() {
             }
         }
 
+
+
         btn_ok.setOnClickListener {
             Log.d("tag", "11")
-            supportFragmentManager.beginTransaction().add(R.id.layout_container, WithdrawalFragment()).addToBackStack(null).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.layout_container, WithdrawalFragment()).addToBackStack(null).commit()
 //            btn_ok.visibility = View.GONE
         }
     }
