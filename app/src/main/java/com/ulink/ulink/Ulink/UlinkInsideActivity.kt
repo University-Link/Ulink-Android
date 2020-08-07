@@ -16,21 +16,21 @@ class UlinkInsideActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ulink_inside)
 
-        val class_name = intent.getStringExtra("class")
-        val class_id = intent.getStringExtra("id")
+        val className = intent.getStringExtra("class")
+        val classIdx = intent.getStringExtra("idx")
 
-        Log.d("UIActivity",""+class_name)
+        Log.d("UIActivity",""+className)
 
         val bundle =  Bundle()
-        bundle.putString("class",class_name)
-        bundle.putString("idx",class_id)
+        bundle.putString("class",className)
+        bundle.putString("idx",classIdx)
         val ulink_board_fragment = UlinkBoardFragment()
         ulink_board_fragment.setArguments(bundle)
 
-        tv_classname.setText(class_name)
+        if(className!="")
+            tv_classname.setText(className)
 
-        val ulinkInsideAdapter =
-            UlinkInsideAdapter(supportFragmentManager)
+        val ulinkInsideAdapter = UlinkInsideAdapter(supportFragmentManager, className, classIdx)
         vp_ulink_inside.adapter = ulinkInsideAdapter
         tablayout_ulink_inside.setupWithViewPager(vp_ulink_inside)
 
@@ -38,12 +38,13 @@ class UlinkInsideActivity : AppCompatActivity() {
             val intent = Intent(this, BoardSearchActivity::class.java)
             intent.putExtra("boardCategory",2)
             startActivity(intent)
-
         }
+
         btn_plus.setOnClickListener {
             val intent = Intent(this, ClassBoardWriteActivity::class.java)
             startActivity(intent)
         }
+
         btn_back.setOnClickListener {
             finish()
         }

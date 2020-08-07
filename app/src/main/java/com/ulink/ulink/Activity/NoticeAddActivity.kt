@@ -104,7 +104,7 @@ class NoticeAddActivity : AppCompatActivity() {
             cal.set(Calendar.MONTH, monthOfYear)
             cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-            val myFormat = "yyyy년 MM월 dd일" // mention the format you need
+            val myFormat = "yyyy년 M월 d일"
             val sdf = SimpleDateFormat(myFormat, Locale.US)
             tv_date.text = sdf.format(cal.time)
             val s = sdf.format(cal.time).split("년", "월", "일")

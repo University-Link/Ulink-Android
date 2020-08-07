@@ -104,12 +104,12 @@ class AgreeFragment : Fragment() {
         }
 
         btn_advertise_more.setOnClickListener{
-            val intent = Intent(view.context, ServiceAgreeActivity::class.java)
+            val intent = Intent(view.context, AdAgreeActivity::class.java)
             startActivity(intent)
         }
 
         btn_referral_more.setOnClickListener{
-            val intent = Intent(view.context, ServiceAgreeActivity::class.java)
+            val intent = Intent(view.context, ThirdAgreeActivity::class.java)
             startActivity(intent)
         }
     }

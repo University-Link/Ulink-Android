@@ -17,13 +17,16 @@ class ClassAdapter(private val context: Context) :RecyclerView.Adapter<ClassView
   override fun getItemCount(): Int {
     return datas.size
   }
+
   private lateinit var itemClickListener : ItemClickListener
   interface ItemClickListener {
     fun onClick(view: View, position:Int)
   }
+
   fun setItemClickLIstener(itemClickListener: ItemClickListener){
     this.itemClickListener = itemClickListener
   }
+
   override fun onBindViewHolder(holder: ClassViewHolder, position: Int) {
     holder.bind(datas[position])
     holder.itemView.setOnClickListener { itemClickListener.onClick(it, position) }

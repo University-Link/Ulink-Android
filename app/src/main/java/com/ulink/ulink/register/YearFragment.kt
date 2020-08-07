@@ -89,8 +89,8 @@ class YearFragment : Fragment() {
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.show()
 
-            var width = resources.getDimensionPixelSize(R.dimen.yearPicker_width)
-            var height = resources.getDimensionPixelSize(R.dimen.yearPicker_height)
+            var width = resources.getDimensionPixelSize(R.dimen.picker_width)
+            var height = resources.getDimensionPixelSize(R.dimen.picker_height)
             dialog.window?.setLayout(width, height)
         }
     }

@@ -13,7 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.CommunityGuideActivity"></activity>
+        <activity android:name=".Ulink.ulinknotice.NoticeWriteActivity"></activity>
+        <activity android:name=".Ulink.ulinknotice.NoticeUpdateRequestActivity" />
+        <activity android:name=".Ulink.ulinknotice.NoticeDetailActivity" />
+        <activity android:name=".register.ThirdAgreeActivity" />
+        <activity android:name=".register.AdAgreeActivity" />
+        <activity android:name=".Activity.CommunityGuideActivity" />
         <activity android:name=".Activity.FAQActivity" />
         <activity android:name=".withdrawal.WithdrawalActivity"/>
         <activity android:name=".register.CollectAgreeActivity"></activity>
@@ -24,6 +29,7 @@
             android:windowSoftInputMode="adjustResize">
         </activity>
         <activity android:name=".Ulink.BoardCommentRecycler.BoardDetailActivity" />
+        <activity android:name=".Ulink.BoardSearchActivity" />
         <activity android:name=".myActivity.MyActivityActivity" />
         <activity android:name=".Activity.ChangeNickNameActivity" />
         <activity android:name=".Activity.ChangeMajorActivity" />
@@ -75,4 +81,5 @@
                 android:resource="@xml/new_app_widget_info" />
         </receiver>
     </application>
+
 </manifest>

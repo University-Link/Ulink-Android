@@ -1,5 +1,7 @@
 package com.ulink.ulink.repository
 
+import com.ulink.ulink.Ulink.ulinknotice.ResponseDetailNotice
+import com.ulink.ulink.Ulink.ulinknotice.ResponseUlinkNotice
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
@@ -233,6 +235,12 @@ interface RequestInterface {
 
     //특정 과목의 공지 가져오기
     @GET("/notice/subject/{idx}")
+    fun getSubjectNotice(
+        @Header("token") token : String,
+        @Path("idx") idx : String
+    ) : Call<ResponseUlinkNotice>
+
+    @GET("/notice/subject/{idx}")
     fun getClassNotice(
             @Header("token") token : String,
             @Path("idx") idx : String
@@ -252,6 +260,12 @@ interface RequestInterface {
             @Header("token") token : String,
             @Path("idx") idx : String
     ) : Call<ResponseSpecificNotice>
+
+    @GET("/notice/{idx}")
+    fun getDetailNotice(
+        @Header("token") token : String,
+        @Path("idx") idx : Int
+    ) : Call<ResponseDetailNotice>
 
     //공지 수정(업데이트)
     @PUT("/notice/{idx}")
