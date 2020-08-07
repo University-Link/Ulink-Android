@@ -84,7 +84,8 @@ class ChangePasswordActivity : AppCompatActivity() {
 
             //          TODO 서버랑 통신하여 현재 비밀번호가 맞는지 확인 맞다면 비밀번호 변경 시도
 //                           success는 현재 비밀번호가 맞을 경우
-            var success = false
+            var success = true
+
             if (et_currentpassword.text.toString() == "0420"){
                 success = true
             }

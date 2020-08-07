@@ -1,11 +1,13 @@
 package com.ulink.ulink.withdrawal
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
@@ -16,7 +18,9 @@ import com.ulink.ulink.Activity.LoginActivity
 import com.ulink.ulink.R
 import com.ulink.ulink.repository.DataRepository
 import com.ulink.ulink.utils.DialogBuilder
+import kotlinx.android.synthetic.main.activity_withdrawal.*
 import kotlinx.android.synthetic.main.fragment_withdrawal.*
+import kotlinx.android.synthetic.main.fragment_withdrawal.btn_back
 
 
 class WithdrawalFragment : Fragment() {
@@ -41,18 +45,22 @@ class WithdrawalFragment : Fragment() {
         setOnClick()
     }
 
+
+
     fun setOnClick() {
 
-        layout_withdrawalFragment.setOnTouchListener { v, event ->
-            return@setOnTouchListener true
+        et_password.setOnFocusChangeListener { v, hasFocus ->
+            btn_ok2.setBackgroundColor(resources.getColor(R.color.mainButton))
+            btn_ok2.setTextColor(resources.getColor(R.color.white))
         }
 
+        layout_withdrawalFragment.setOnTouchListener { v, event -> true }
+
         btn_back.setOnClickListener {
-            fragmentManager?.beginTransaction()?.remove(this)?.commit()
+            (context as WithdrawalActivity).removeFragment(this)
         }
 
         btn_ok2.setOnClickListener {
-            Log.d("tag", "22")
             if (!et_password.text.isNullOrBlank()) {
                 DataRepository.requestWithdraw(et_password.text.toString(),
                         onSuccess = {
@@ -62,7 +70,6 @@ class WithdrawalFragment : Fragment() {
                                 setClickListener {
                                     dismiss()
                                     activity?.let { it1 ->
-
                                         ActivityCompat.finishAffinity(it1)
                                         val sharedPref: SharedPreferences = requireContext().getSharedPreferences("pref", Context.MODE_PRIVATE)
                                         val sharedEdit = sharedPref.edit()
@@ -79,6 +86,7 @@ class WithdrawalFragment : Fragment() {
 
                         },
                         onFailure = {
+                            Log.d("tag", it)
                             DialogBuilder().apply {
                                 build(requireContext())
                                 setContent("비밀번호를 확인해 주세요.")

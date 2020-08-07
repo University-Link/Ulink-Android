@@ -263,13 +263,14 @@ class BoardDetailActivity : AppCompatActivity(), onClickMore {
                         title = "111님들 점심 추천",
                         initial = "",
                         nickname = "유링크좋아요",
+                        profileImage = null,
                         content = "김찌랑 된찌랑 둘중에 고민이에",
                         likeCount = 0,
                         commentCount = 0,
                         userIdx = 0,
                         createdAt = "방금",
-                        updatedAt = "",
-                        isLike = false
+                        isLike = false,
+                        isMine = false
                 )
 
                 val tv_title: TextView = itemView.findViewById(R.id.tv_title)
@@ -298,14 +299,15 @@ class BoardDetailActivity : AppCompatActivity(), onClickMore {
                         title = "111총장직선제 개선촉구 시위 마지막 공지",
                         initial = "",
                         nickname = "형광펜포스트잇23",
+                        profileImage = null,
                         content = "안녕하세요 시위 TF팀입니다. 한달 지난 시점에 죄송합니다.",
                         likeCount = 0,
                         commentCount = 0,
                         userIdx = 0,
                         createdAt = "5분",
-                        updatedAt = "",
                         isLike = false,
-                        universityIdx = 0
+                        universityIdx = 0,
+                        isMine = false
                 )
 
                 val tv_title: TextView = itemView.findViewById(R.id.tv_title)
@@ -335,15 +337,18 @@ class BoardDetailActivity : AppCompatActivity(), onClickMore {
                         title = "님들 점심 추천",
                         initial = "",
                         nickname = "유링크좋아요",
+                        profileImage = null,
                         content = "111김찌랑 된찌랑 둘중에 고민이에",
                         likeCount = 0,
                         commentCount = 0,
                         userIdx = 0,
                         createdAt = "",
-                        updatedAt = "",
                         isLike = false,
                         subjectIdx = 0,
-                        isNotice = 0
+                        isNotice = 0,
+                        isMine = false,
+                        noticeIdx = 0,
+                        category = 0
                 )
 
 

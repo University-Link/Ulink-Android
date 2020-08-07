@@ -337,4 +337,21 @@ interface RequestInterface {
             @Body body : RequestUniversityAuth
     ) : Call<ResponseUniversityAuth>
 
+    @GET("/board/public/{page}")
+    fun getPublicBoard(
+            @Header("token") token: String,
+            @Path("page") page : Int
+    ) : Call<ResponseGetPublicBoard>
+
+    @GET("/board/school/{page}")
+    fun getUniversityBoard(
+            @Header("token") token: String,
+            @Path("page") page : Int
+    ) : Call<ResponseGetUniversityBoard>
+
+    @GET("/board/subject/1000/{page}")
+    fun getSubjectBoard(
+            @Header("token") token: String,
+            @Path("page") page : Int
+    ) : Call<ResponseGetSubjectBoard>
 }

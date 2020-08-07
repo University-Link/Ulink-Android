@@ -1,4 +1,4 @@
-package com.ulink.ulink.Ulink.AllBoardRecycler
+package com.ulink.ulink.Ulink.BoardRecycler
 
 import android.view.View
 import android.widget.ImageView
@@ -16,9 +16,6 @@ class BoardClassViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
     //val img_tag : ImageView = itemView.findViewById(R.id.img_uni_tag)
     //val btn_heart : ImageButton = itemView.findViewById(R.id.btn_heart)
 
-    val img_line : ImageView = itemView.findViewById(R.id.img_line)
-    val tv_boardCategory : TextView = itemView.findViewById(R.id.tv_board_category)
-
 
     fun bind(boardData: BoardSubjectData, showBoardName : Boolean){
         tv_nickname.text = boardData.nickname
@@ -28,15 +25,13 @@ class BoardClassViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         tv_heart_count.text = boardData.likeCount.toString()
 
         if (showBoardName){
-            img_line.visibility = View.VISIBLE
-            tv_boardCategory.visibility =View.VISIBLE
-            tv_boardCategory.text = "과목이름"
-        } else{
+            val img_line : ImageView = itemView.findViewById(R.id.img_line)
+            val tv_boardCategory : TextView = itemView.findViewById(R.id.tv_board_category)
+
             img_line.visibility = View.VISIBLE
             tv_boardCategory.visibility =View.VISIBLE
             tv_boardCategory.text = "과목이름"
         }
-
     }
 
 }
