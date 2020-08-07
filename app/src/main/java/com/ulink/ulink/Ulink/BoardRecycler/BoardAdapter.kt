@@ -1,4 +1,4 @@
-package com.ulink.ulink.Ulink.AllBoardRecycler
+package com.ulink.ulink.Ulink.BoardRecycler
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -27,6 +27,35 @@ class AllBoardAdapter(private val context: Context, val searchType: Int, val sea
     fun setListener(onClickLike: onClickLike){
         mListener = onClickLike
     }
+    fun setUlinkData(list : List<BoardUlinkData>){
+        datas_ulink.clear()
+        datas_ulink.addAll(list)
+        notifyDataSetChanged()
+    }
+    fun addUlinkData(list : List<BoardUlinkData>){
+        datas_ulink.addAll(list)
+        notifyDataSetChanged()
+    }
+    fun addUnivData(list : List<BoardUniversityData>){
+        datas_university.addAll(list)
+        notifyDataSetChanged()
+    }
+    fun addSubjectData(list : List<BoardSubjectData>){
+        datas_class.addAll(list)
+        notifyDataSetChanged()
+    }
+
+    fun setUnivData(list : List<BoardUniversityData>){
+        datas_university.clear()
+        datas_university.addAll(list)
+        notifyDataSetChanged()
+    }
+    fun setSubjectData(list : List<BoardSubjectData>){
+        datas_class.clear()
+        datas_class.addAll(list)
+        notifyDataSetChanged()
+    }
+
     fun setAllDataSearch(list : MutableList<Any>){
         dataSearchAllBoard.clear()
         dataSearchAllBoard.addAll(list)

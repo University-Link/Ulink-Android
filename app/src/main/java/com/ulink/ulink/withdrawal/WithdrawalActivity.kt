@@ -1,13 +1,23 @@
 package com.ulink.ulink.withdrawal
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
+import com.ulink.ulink.Activity.LoginActivity
 import com.ulink.ulink.R
+import com.ulink.ulink.repository.DataRepository
+import com.ulink.ulink.utils.DialogBuilder
 import kotlinx.android.synthetic.main.activity_withdrawal.*
+import kotlinx.android.synthetic.main.fragment_withdrawal.*
 
 class WithdrawalActivity : AppCompatActivity() {
 
@@ -58,7 +68,7 @@ class WithdrawalActivity : AppCompatActivity() {
             if (it.isSelected){
                 et_etc.visibility = View.VISIBLE
                 tv_etc_count.visibility = View.VISIBLE
-
+                tv_etc_count.text = "(${et_etc.text.toString().length}/100)"
             } else{
                 et_etc.visibility = View.INVISIBLE
                 tv_etc_count.visibility = View.INVISIBLE
@@ -69,10 +79,14 @@ class WithdrawalActivity : AppCompatActivity() {
 
 
         btn_ok.setOnClickListener {
-            Log.d("tag", "11")
             supportFragmentManager.beginTransaction().replace(R.id.layout_container, WithdrawalFragment()).addToBackStack(null).commit()
-//            btn_ok.visibility = View.GONE
+            btn_ok.visibility = View.GONE
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        btn_ok.visibility = View.VISIBLE
     }
 
     fun setFilter(it : View){
@@ -91,5 +105,10 @@ class WithdrawalActivity : AppCompatActivity() {
             btn_ok.setBackgroundResource(R.drawable.mypage_withdrawal_unactivated_img_textbox)
             btn_ok.setTextColor(resources.getColor(R.color.btnIcon3))
         }
+    }
+
+    fun removeFragment(fragment : Fragment){
+        supportFragmentManager.beginTransaction().remove(fragment).commit()
+        btn_ok.visibility = View.VISIBLE
     }
 }

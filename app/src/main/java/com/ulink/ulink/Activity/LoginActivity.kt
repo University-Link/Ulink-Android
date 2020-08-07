@@ -22,6 +22,7 @@ class LoginActivity : AppCompatActivity() {
         val sharedPref: SharedPreferences = getSharedPreferences("pref", Context.MODE_PRIVATE)
         val sharedEdit = sharedPref.edit()
 
+
         var id = intent.getStringExtra("id")
         var password = intent.getStringExtra("password")
 
@@ -45,18 +46,12 @@ class LoginActivity : AppCompatActivity() {
                                 password = et_pw.text.toString()
                         ),
                         onSuccess = {
-//                          DataRepository 안쓰는 경우 이거 토큰 쓰시면 됩니다
-                            if (checkbox_autoLogin.isChecked) {
-                                sharedEdit.putBoolean("autoLogin", true)
-                                sharedEdit.putString("passWord", et_pw.text.toString())
-                                sharedEdit.commit()
-                            } else {
-                                sharedEdit.clear()
-                                sharedEdit.commit()
-                            }
 
+                            sharedEdit.putBoolean("autoLogin", true)
+                            sharedEdit.putString("passWord", et_pw.text.toString())
                             sharedEdit.putString("id", et_id.text.toString())
                             sharedEdit.putString("accessToken", it)
+
                             sharedEdit.commit()
                             DataRepository.token = it
                             val intent = Intent(this, MainActivity::class.java)

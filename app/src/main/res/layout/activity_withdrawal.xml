@@ -239,7 +239,7 @@
         android:layout_height="60dp"
         android:text="다음"
         android:textSize="18sp"
-        android:textColor="@color/white"
+        android:textColor="@color/btnIcon3"
         android:background="@drawable/signup_btn_next_unactivated"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

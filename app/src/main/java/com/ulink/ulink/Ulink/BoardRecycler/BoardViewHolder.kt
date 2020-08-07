@@ -1,4 +1,4 @@
-package com.ulink.ulink.Ulink.AllBoardRecycler
+package com.ulink.ulink.Ulink.BoardRecycler
 
 import android.view.View
 import android.widget.ImageButton
@@ -19,8 +19,6 @@ class BoardViewHolder(itemView: View,val mListener: onClickLike?) : RecyclerView
     val tv_heart_count: TextView = itemView.findViewById(R.id.tv_heart_count)
     val img_tag: ImageView = itemView.findViewById(R.id.img_uni_tag)
     val btn_heart : ImageButton = itemView.findViewById(R.id.btn_heart)
-    val img_line : ImageView = itemView.findViewById(R.id.img_line)
-    val tv_boardCategory : TextView = itemView.findViewById(R.id.tv_board_category)
 
     fun bind(boardData: Any, showBoardName : Boolean) {
 
@@ -37,18 +35,18 @@ class BoardViewHolder(itemView: View,val mListener: onClickLike?) : RecyclerView
             tv_heart_count.text = boardData.likeCount.toString()
 
             if (showBoardName){
+                val img_line : ImageView = itemView.findViewById(R.id.img_line)
+                val tv_boardCategory : TextView = itemView.findViewById(R.id.tv_board_category)
+
                 img_line.visibility = View.VISIBLE
                 tv_boardCategory.visibility =View.VISIBLE
                 tv_boardCategory.text = "Ulink 게시판"
-            } else{
-                img_line.visibility = View.INVISIBLE
-                tv_boardCategory.visibility =View.INVISIBLE
-                tv_boardCategory.text = "Ulink 게시판"
             }
-
 
         } else {
             boardData as BoardUniversityData
+
+            img_tag.visibility = View.GONE
             tv_title.text = boardData.title
             tv_nickname.text = boardData.nickname
             tv_time.text = boardData.createdAt
@@ -57,15 +55,13 @@ class BoardViewHolder(itemView: View,val mListener: onClickLike?) : RecyclerView
             tv_heart_count.text = boardData.likeCount.toString()
 
             if (showBoardName){
+                val img_line : ImageView = itemView.findViewById(R.id.img_line)
+                val tv_boardCategory : TextView = itemView.findViewById(R.id.tv_board_category)
+
                 img_line.visibility = View.VISIBLE
                 tv_boardCategory.visibility =View.VISIBLE
                 tv_boardCategory.text = "학교게시판"
-            } else{
-                img_line.visibility = View.INVISIBLE
-                tv_boardCategory.visibility =View.INVISIBLE
-                tv_boardCategory.text = "학교게시판"
             }
-
         }
     }
 

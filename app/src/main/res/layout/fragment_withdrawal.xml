@@ -122,16 +122,15 @@
 
     <Button
         android:id="@+id/btn_ok2"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:text="회원탈퇴"
         android:textSize="18sp"
+        android:clickable="true"
         android:textColor="#989898"
         android:background="@drawable/signup_btn_next_unactivated"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

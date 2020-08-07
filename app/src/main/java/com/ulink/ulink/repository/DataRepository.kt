@@ -2,6 +2,9 @@ package com.ulink.ulink.repository
 
 import android.util.Log
 import com.ulink.ulink.ScheduleRecycler.ScheduleItemData
+import com.ulink.ulink.Ulink.BoardSubjectData
+import com.ulink.ulink.Ulink.BoardUlinkData
+import com.ulink.ulink.Ulink.BoardUniversityData
 import com.ulink.ulink.utils.deepCopy
 import com.ulink.ulink.utils.deepCopyRetrofit
 import retrofit2.Call
@@ -9,17 +12,15 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-
-
 object DataRepository {
 
     val retrofit = RetrofitService.service
 
-    lateinit var token : String
+    lateinit var token: String
 
-    fun requestLogin(request : RequestLogin, onSuccess: (String) -> Unit, onFailure: (String) -> Unit){
+    fun requestLogin(request: RequestLogin, onSuccess: (String) -> Unit, onFailure: (String) -> Unit) {
 
-        retrofit.requestLogin(request).enqueue(object : Callback<ResponseLogin>{
+        retrofit.requestLogin(request).enqueue(object : Callback<ResponseLogin> {
             override fun onFailure(call: Call<ResponseLogin>, t: Throwable) {
                 onFailure(t.localizedMessage)
             }
@@ -32,8 +33,8 @@ object DataRepository {
         })
     }
 
-    fun getProfile(onSuccess : (ResponseGetProfile) -> Unit, onFailure: (String) -> Unit){
-        retrofit.getProfile(token).enqueue(object : Callback<ResponseGetProfile>{
+    fun getProfile(onSuccess: (ResponseGetProfile) -> Unit, onFailure: (String) -> Unit) {
+        retrofit.getProfile(token).enqueue(object : Callback<ResponseGetProfile> {
             override fun onFailure(call: Call<ResponseGetProfile>, t: Throwable) {
                 onFailure(t.localizedMessage)
             }
@@ -46,8 +47,8 @@ object DataRepository {
         })
     }
 
-    fun updateNickname(nickName : String, onSuccess: () -> Unit, onFailure: (String) -> Unit){
-        retrofit.updateNickname(token, RequestUpdateNickname(nickName)).enqueue(object : Callback<ResponseUpdateNickname>{
+    fun updateNickname(nickName: String, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
+        retrofit.updateNickname(token, RequestUpdateNickname(nickName)).enqueue(object : Callback<ResponseUpdateNickname> {
             override fun onFailure(call: Call<ResponseUpdateNickname>, t: Throwable) {
                 onFailure(t.localizedMessage)
             }
@@ -60,8 +61,8 @@ object DataRepository {
         })
     }
 
-    fun getNicknameSameCheck(nickName: String, majorIdx : Int, onSuccess: () -> Unit, onFailure: (String) -> Unit){
-        retrofit.getNicknameSameCheck(RequestNicknameCheck(nickName,majorIdx)).enqueue(object : Callback<ResponseNicknameCheck>{
+    fun getNicknameSameCheck(nickName: String, majorIdx: Int, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
+        retrofit.getNicknameSameCheck(RequestNicknameCheck(nickName, majorIdx)).enqueue(object : Callback<ResponseNicknameCheck> {
             override fun onFailure(call: Call<ResponseNicknameCheck>, t: Throwable) {
                 onFailure(t.localizedMessage)
 
@@ -75,8 +76,8 @@ object DataRepository {
         })
     }
 
-    fun updatePassword(password : String, newPassword : String, onSuccess: () -> Unit, onFailure: (String) -> Unit){
-        retrofit.updatePassword(token, RequestUpdatePassword(password, newPassword)).enqueue(object : Callback<BaseResponse>{
+    fun updatePassword(password: String, newPassword: String, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
+        retrofit.updatePassword(token, RequestUpdatePassword(password, newPassword)).enqueue(object : Callback<BaseResponse> {
             override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
                 onFailure(t.localizedMessage)
             }
@@ -94,6 +95,7 @@ object DataRepository {
             override fun onFailure(call: Call<ResponseMainTimeTable>, t: Throwable) {
                 Log.d("tag", t.localizedMessage)
             }
+
             override fun onResponse(call: Call<ResponseMainTimeTable>, response: Response<ResponseMainTimeTable>) {
                 response.body()?.let {
                     if (it.status == 200) {
@@ -107,7 +109,7 @@ object DataRepository {
                         }
 
                         val timeTable = TimeTable(it.data.timeTable.id, it.data.timeTable.semester, it.data.timeTable.name, 1, startTime = it.data.minTime, endTime = it.data.maxTime, subjectList = subjectList)
-                        Log.d("tag",timeTable.toString())
+                        Log.d("tag", timeTable.toString())
                         onSuccess(timeTable)
                     } else {
                         onFailure(response.errorBody().toString())
@@ -117,8 +119,8 @@ object DataRepository {
         })
     }
 
-    fun getTimeTableWithId(id : Int, onSuccess : (TimeTable)-> Unit, onFailure : (String) -> Unit){
-        retrofit.getTimeTableWithId(token, id).enqueue(object : Callback<ResponseGetTimeTableWithId>{
+    fun getTimeTableWithId(id: Int, onSuccess: (TimeTable) -> Unit, onFailure: (String) -> Unit) {
+        retrofit.getTimeTableWithId(token, id).enqueue(object : Callback<ResponseGetTimeTableWithId> {
             override fun onFailure(call: Call<ResponseGetTimeTableWithId>, t: Throwable) {
                 onFailure(t.localizedMessage)
             }
@@ -145,18 +147,18 @@ object DataRepository {
         })
     }
 
-    fun getTimeTableBySemester(semester : String, onSuccess : (List<TimeTable>) -> Unit, onFailure: (String) -> Unit){
-        retrofit.getTimeTableList(token, semester).enqueue(object : Callback<ResponseGetTimeTableList>{
+    fun getTimeTableBySemester(semester: String, onSuccess: (List<TimeTable>) -> Unit, onFailure: (String) -> Unit) {
+        retrofit.getTimeTableList(token, semester).enqueue(object : Callback<ResponseGetTimeTableList> {
             override fun onFailure(call: Call<ResponseGetTimeTableList>, t: Throwable) {
                 onFailure(t.localizedMessage)
             }
 
             override fun onResponse(call: Call<ResponseGetTimeTableList>, response: Response<ResponseGetTimeTableList>) {
                 response.body()?.let {
-                    val tableList : MutableList<TimeTable> = arrayListOf()
-                    Log.d("tag",it.data.toString())
+                    val tableList: MutableList<TimeTable> = arrayListOf()
+                    Log.d("tag", it.data.toString())
 
-                    for(i in 0 until it.data.size){
+                    for (i in 0 until it.data.size) {
                         val subjectList: MutableList<Subject> = arrayListOf()
                         subjectList.apply {
                             addAll(it.data[i].subjects.mon)
@@ -166,7 +168,7 @@ object DataRepository {
                             addAll(it.data[i].subjects.fri)
                         }
 
-                        val timeTable = TimeTable(it.data[i].timeTable.id, it.data[i].timeTable.semester, it.data[i].timeTable.name, 0, startTime = it.data[i].minTime , endTime = it.data[i].maxTime, subjectList = subjectList)
+                        val timeTable = TimeTable(it.data[i].timeTable.id, it.data[i].timeTable.semester, it.data[i].timeTable.name, 0, startTime = it.data[i].minTime, endTime = it.data[i].maxTime, subjectList = subjectList)
                         tableList.add(deepCopy(timeTable))
                     }
 
@@ -177,8 +179,8 @@ object DataRepository {
         })
     }
 
-    fun getAllTimeTableList(onSuccess : (MutableList<MutableList<TimeTable>>) -> Unit, onFailure : (String) -> Unit){
-        retrofit.getAllTimeTableList(token).enqueue(object :Callback<ResponseGetAllTimeTableList>{
+    fun getAllTimeTableList(onSuccess: (MutableList<MutableList<TimeTable>>) -> Unit, onFailure: (String) -> Unit) {
+        retrofit.getAllTimeTableList(token).enqueue(object : Callback<ResponseGetAllTimeTableList> {
             override fun onFailure(call: Call<ResponseGetAllTimeTableList>, t: Throwable) {
                 onFailure(t.localizedMessage)
                 Log.d("tag", t.localizedMessage)
@@ -187,17 +189,17 @@ object DataRepository {
 
             override fun onResponse(call: Call<ResponseGetAllTimeTableList>, response: Response<ResponseGetAllTimeTableList>) {
                 response.body().let {
-                    val tableList : MutableList<TimeTable> = arrayListOf()
-                    val semesterList : MutableList<MutableList<TimeTable>> = arrayListOf()
+                    val tableList: MutableList<TimeTable> = arrayListOf()
+                    val semesterList: MutableList<MutableList<TimeTable>> = arrayListOf()
 
 //                    TODO 나중에 비어있을때 어떻게 처리할까
 
                     if (it != null && it.data.isNotEmpty()) {
-                        for (i in it.data.indices){
-                            if (it.data[i].timeTableList.isNotEmpty()){
+                        for (i in it.data.indices) {
+                            if (it.data[i].timeTableList.isNotEmpty()) {
                                 tableList.clear()
-                                for (a in it.data[i].timeTableList.indices){
-                                    tableList.add(TimeTable(it.data[i].timeTableList[a].id, it.data[i].semester, it.data[i].timeTableList[a].name,it.data[i].timeTableList[a].isMain))
+                                for (a in it.data[i].timeTableList.indices) {
+                                    tableList.add(TimeTable(it.data[i].timeTableList[a].id, it.data[i].semester, it.data[i].timeTableList[a].name, it.data[i].timeTableList[a].isMain))
                                 }
 //                              여기서 tablelist의 연결점을 끊어줘야함
                                 semesterList.add(deepCopyRetrofit(tableList))
@@ -211,9 +213,8 @@ object DataRepository {
     }
 
 
-
-    fun addTimeTable(semester : String, name : String, onSuccess : (ResponseAddTimeTable) -> Unit, onFailure :(String) -> Unit){
-        retrofit.addTimeTable(token, RequestAddTimeTable(semester, name)).enqueue(object : Callback<ResponseAddTimeTable>{
+    fun addTimeTable(semester: String, name: String, onSuccess: (ResponseAddTimeTable) -> Unit, onFailure: (String) -> Unit) {
+        retrofit.addTimeTable(token, RequestAddTimeTable(semester, name)).enqueue(object : Callback<ResponseAddTimeTable> {
             override fun onFailure(call: Call<ResponseAddTimeTable>, t: Throwable) {
                 Log.d("tag", t.localizedMessage)
                 onFailure(t.localizedMessage)
@@ -227,11 +228,12 @@ object DataRepository {
         })
     }
 
-    fun addSchoolPlan(request : RequestAddSchoolPlan, onSuccess: () -> Unit, onFailure: (String) -> Unit){
-        retrofit.addSchoolPlan(token, request).enqueue(object : Callback<ResponseAddSchoolPlan>{
+    fun addSchoolPlan(request: RequestAddSchoolPlan, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
+        retrofit.addSchoolPlan(token, request).enqueue(object : Callback<ResponseAddSchoolPlan> {
             override fun onFailure(call: Call<ResponseAddSchoolPlan>, t: Throwable) {
                 onFailure(t.localizedMessage)
             }
+
             override fun onResponse(call: Call<ResponseAddSchoolPlan>, response: Response<ResponseAddSchoolPlan>) {
                 response.body()?.let {
                     onSuccess()
@@ -240,8 +242,8 @@ object DataRepository {
         })
     }
 
-    fun addPersonalPlan(request : RequestAddPersonalPlan, onSuccess : () ->Unit, onFailure : (String) -> Unit){
-        retrofit.addPersonalPlan(token,request).enqueue(object : Callback<ResponseAddPersonalPlan>{
+    fun addPersonalPlan(request: RequestAddPersonalPlan, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
+        retrofit.addPersonalPlan(token, request).enqueue(object : Callback<ResponseAddPersonalPlan> {
             override fun onFailure(call: Call<ResponseAddPersonalPlan>, t: Throwable) {
                 Log.d("tag", t.localizedMessage)
                 onFailure(t.localizedMessage)
@@ -260,13 +262,14 @@ object DataRepository {
             override fun onFailure(call: Call<ResponseCalendar>, t: Throwable) {
                 Log.d("tag", t.localizedMessage)
             }
+
             override fun onResponse(call: Call<ResponseCalendar>, response: Response<ResponseCalendar>) {
             }
         })
     }
 
-    fun deleteNoticeWithIdx(idx : String, onSuccess: () -> Unit, onFailure: (String) -> Unit){
-        retrofit.deleteNoticeWithIdx(token, idx).enqueue(object  : Callback<ResponseDeleteNoticeWithIdx>{
+    fun deleteNoticeWithIdx(idx: String, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
+        retrofit.deleteNoticeWithIdx(token, idx).enqueue(object : Callback<ResponseDeleteNoticeWithIdx> {
             override fun onFailure(call: Call<ResponseDeleteNoticeWithIdx>, t: Throwable) {
                 onFailure(t.localizedMessage)
             }
@@ -277,8 +280,8 @@ object DataRepository {
         })
     }
 
-    fun getSubjectRecommendWithKeyword(name : String, onSuccess: (List<String>) -> Unit, onFailure: (String) -> Unit){
-        retrofit.getSubjectRecommendWithKeyword(token, name).enqueue(object :Callback<ResponsegetSubjectWithKeyWord>{
+    fun getSubjectRecommendWithKeyword(name: String, onSuccess: (List<String>) -> Unit, onFailure: (String) -> Unit) {
+        retrofit.getSubjectRecommendWithKeyword(token, name).enqueue(object : Callback<ResponsegetSubjectWithKeyWord> {
             override fun onFailure(call: Call<ResponsegetSubjectWithKeyWord>, t: Throwable) {
                 onFailure(t.localizedMessage)
             }
@@ -291,8 +294,8 @@ object DataRepository {
         })
     }
 
-    fun getSubjectWithword(name: String, onSuccess: (List<SearchedData>) -> Unit, onFailure: (String) -> Unit){
-        retrofit.getSubjectWithWord(token, name).enqueue(object : Callback<ResponsegetSubjectWithWord>{
+    fun getSubjectWithword(name: String, onSuccess: (List<SearchedData>) -> Unit, onFailure: (String) -> Unit) {
+        retrofit.getSubjectWithWord(token, name).enqueue(object : Callback<ResponsegetSubjectWithWord> {
             override fun onFailure(call: Call<ResponsegetSubjectWithWord>, t: Throwable) {
                 onFailure(t.localizedMessage)
             }
@@ -305,8 +308,8 @@ object DataRepository {
         })
     }
 
-    fun requestUniversityAuth(requestUniversityAuth: RequestUniversityAuth, onSuccess: (String) -> Unit, onFailure: (String) -> Unit){
-        retrofit.requestUniversityAuth(token,requestUniversityAuth).enqueue(object : Callback<ResponseUniversityAuth>{
+    fun requestUniversityAuth(requestUniversityAuth: RequestUniversityAuth, onSuccess: (String) -> Unit, onFailure: (String) -> Unit) {
+        retrofit.requestUniversityAuth(token, requestUniversityAuth).enqueue(object : Callback<ResponseUniversityAuth> {
             override fun onFailure(call: Call<ResponseUniversityAuth>, t: Throwable) {
                 onFailure(t.localizedMessage)
             }
@@ -319,18 +322,87 @@ object DataRepository {
         })
     }
 
-    fun requestWithdraw(password : String, onSuccess: () -> Unit, onFailure: (String) -> Unit){
-        retrofit.withdraw(token,RequestWithdraw(password)).enqueue(object : Callback<Response<Void>>{
+    fun requestWithdraw(password: String, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
+        retrofit.withdraw(token, RequestWithdraw(password)).enqueue(object : Callback<Response<Void>> {
             override fun onFailure(call: Call<Response<Void>>, t: Throwable) {
                 onFailure(t.localizedMessage)
             }
 
             override fun onResponse(call: Call<Response<Void>>, response: Response<Response<Void>>) {
-                response.body()?.let {
+                if (response.isSuccessful) {
                     onSuccess()
+                } else {
+                    onFailure(response.message())
+                }
+            }
+        })
+    }
+
+    fun getPublicBoard(page : Int = 0,onSuccess: (List<BoardUlinkData>, Int) -> Unit, onFailure: (String) -> Unit) {
+        retrofit.getPublicBoard(token, page).enqueue(object : Callback<ResponseGetPublicBoard> {
+            override fun onFailure(call: Call<ResponseGetPublicBoard>, t: Throwable) {
+                onFailure(t.localizedMessage)
+
+            }
+
+            override fun onResponse(call: Call<ResponseGetPublicBoard>, response: Response<ResponseGetPublicBoard>) {
+                response.body()?.let {
+
+                    val list: MutableList<BoardUlinkData> = mutableListOf()
+                    for (i in it.data.board) {
+                        list.add(
+                                BoardUlinkData(i.boardPublicIdx, i.title, i.initial, i.nickname, null, i.content, i.likeCount, i.commentCount, i.userIdx, i.createdAt, i.isLike, i.isMine)
+                        )
+                    }
+
+                    onSuccess(list, it.data.nextPage)
                 } ?: onFailure(response.message())
             }
         })
     }
 
+    fun getUniveristyBoard(page : Int = 0, onSuccess: (List<BoardUniversityData>, Int) -> Unit, onFailure: (String) -> Unit) {
+        retrofit.getUniversityBoard(token, page).enqueue(object : Callback<ResponseGetUniversityBoard> {
+            override fun onFailure(call: Call<ResponseGetUniversityBoard>, t: Throwable) {
+                onFailure(t.localizedMessage)
+
+            }
+
+            override fun onResponse(call: Call<ResponseGetUniversityBoard>, response: Response<ResponseGetUniversityBoard>) {
+                response.body()?.let {
+                    val list: MutableList<BoardUniversityData> = mutableListOf()
+                    for (i in it.data.board) {
+                        list.add(
+                                BoardUniversityData(i.boardUniversityIdx, i.title, i.initial, i.nickname,null,  i.content, i.likeCount, i.commentCount, i.userIdx, i.createdAt, i.isLike, i.universityIdx, i.isMine)
+                        )
+                    }
+
+                    onSuccess(list, it.data.nextPage)
+                } ?: onFailure(response.message())
+            }
+        })
+    }
+
+    fun getSubjectBoard(page : Int = 0,onSuccess: (List<BoardSubjectData>, Int) -> Unit, onFailure: (String) -> Unit) {
+        retrofit.getSubjectBoard(token,page).enqueue(object : Callback<ResponseGetSubjectBoard> {
+            override fun onFailure(call: Call<ResponseGetSubjectBoard>, t: Throwable) {
+                onFailure(t.localizedMessage)
+
+            }
+
+            override fun onResponse(call: Call<ResponseGetSubjectBoard>, response: Response<ResponseGetSubjectBoard>) {
+                response.body()?.let {
+
+                    val list: MutableList<BoardSubjectData> = mutableListOf()
+                    for (i in it.data.board) {
+                        list.add(
+                                BoardSubjectData(i.boardSubjectIdx, i.title, i.initial, i.nickname, null, i.content, i.likeCount, i.commentCount, i.userIdx, i.createdAt, i.isLike, i.noticeIdx, i.subjectIdx,i.isMine, i.noticeIdx, i.category)
+                        )
+                    }
+
+                    onSuccess(list, it.data.nextPage)
+                } ?: onFailure(response.message())
+            }
+        })
+    }
 }
