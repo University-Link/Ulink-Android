@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,10 +17,7 @@ import kotlinx.android.synthetic.main.activity_ulink_all_board.*
 import kotlinx.android.synthetic.main.toolbar_ulink_inside.*
 
 
-
-class UlinkUlinkBoardActivity : AppCompatActivity() {
-
-
+class UlinkUlinkBoardActivity : AppCompatActivity() ,onClickLike{
     lateinit var board_adapter: AllBoardAdapter
     var loading = false
     var nextPage = 0
@@ -46,6 +44,7 @@ class UlinkUlinkBoardActivity : AppCompatActivity() {
         board_adapter =
                 AllBoardAdapter(this, 0, false)
         rv_ulink_board.adapter = board_adapter
+        board_adapter.setListener(this)
 
 
 //        TODO 유링크 보드 조회 nextpage 이용하기!
@@ -98,4 +97,14 @@ class UlinkUlinkBoardActivity : AppCompatActivity() {
 
         })
     }
+
+    override fun onClick() {
+        //TODO 좋아요 클릭했을때
+        Toast.makeText(this,"좋아요클릭",Toast.LENGTH_SHORT).show()
+    }
+}
+interface onClickLike {
+    fun onClick(
+
+    )
 }

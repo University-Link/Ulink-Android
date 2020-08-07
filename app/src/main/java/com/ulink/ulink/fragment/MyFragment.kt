@@ -12,7 +12,6 @@ import com.bumptech.glide.Glide
 import com.ulink.ulink.Activity.*
 import com.ulink.ulink.MainActivity
 import com.ulink.ulink.R
-import com.ulink.ulink.adapter.FAQExpandableAdapter
 import com.ulink.ulink.myActivity.MyActivityActivity
 import com.ulink.ulink.register.CollectAgreeActivity
 import com.ulink.ulink.repository.DataRepository

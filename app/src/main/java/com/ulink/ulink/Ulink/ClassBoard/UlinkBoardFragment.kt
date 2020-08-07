@@ -5,20 +5,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ulink.ulink.R
 import com.ulink.ulink.Ulink.BoardRecycler.AllBoardAdapter
 import com.ulink.ulink.Ulink.BoardCommentRecycler.BoardDetailActivity
+import com.ulink.ulink.Ulink.BoardCommentRecycler.onClickMore
 import com.ulink.ulink.Ulink.BoardSubjectData
+import com.ulink.ulink.Ulink.onClickLike
 import com.ulink.ulink.repository.DataRepository
 import kotlinx.android.synthetic.main.activity_ulink_university_board.*
 import kotlinx.android.synthetic.main.fragment_ulink_board.*
 import kotlinx.android.synthetic.main.fragment_ulink_board.rv_ulink_board
 
 
-class UlinkBoardFragment() : Fragment() {
+class UlinkBoardFragment() : Fragment() ,onClickLike{
     lateinit var board_adapter: AllBoardAdapter
     val datas: MutableList<BoardSubjectData> = mutableListOf()
     lateinit var class_name: String
@@ -48,6 +51,8 @@ class UlinkBoardFragment() : Fragment() {
 
         board_adapter = AllBoardAdapter(view.context, 2, false)
         rv_ulink_board.adapter = board_adapter
+
+        board_adapter.setListener(this)
 
         DataRepository.getSubjectBoard(
                 onSuccess = {list, nextPage->
@@ -103,4 +108,10 @@ class UlinkBoardFragment() : Fragment() {
 
     }
 
+    override fun onClick() {
+        Toast.makeText(context,"좋아요클릭", Toast.LENGTH_SHORT).show()
+
+    }
+
 }
+

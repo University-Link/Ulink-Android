@@ -41,7 +41,7 @@ class UlinkInsideActivity : AppCompatActivity() {
         }
 
         btn_plus.setOnClickListener {
-            val intent = Intent(this, UlinkBoardWriteActivity::class.java)
+            val intent = Intent(this, ClassBoardWriteActivity::class.java)
             startActivity(intent)
         }
 

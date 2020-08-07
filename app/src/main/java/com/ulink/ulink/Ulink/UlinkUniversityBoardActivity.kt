@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,17 +19,16 @@ import kotlinx.android.synthetic.main.activity_ulink_university_board.rv_ulink_b
 import kotlinx.android.synthetic.main.toolbar_ulink_inside.*
 
 
-class UlinkUniversityBoardActivity : AppCompatActivity() {
-
+class UlinkUniversityBoardActivity : AppCompatActivity(),onClickLike {
 
     lateinit var board_adapter: AllBoardAdapter
     var loading = false
     var nextPage = 0
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ulink_university_board)
+
         tv_classname.text = "학교게시판"
         btn_back.setOnClickListener {
             finish()
@@ -46,16 +46,17 @@ class UlinkUniversityBoardActivity : AppCompatActivity() {
         }
         board_adapter = AllBoardAdapter(this, 1, false)
         rv_ulink_board.adapter = board_adapter
+        board_adapter.setListener(this)
 
         DataRepository.getUniveristyBoard(
-                onSuccess = {list, nextPage->
-                    board_adapter.setUnivData(list)
-                    this.nextPage = nextPage
-                    loading = true
-                },
-                onFailure = {
+            onSuccess = { list, nextPage ->
+                board_adapter.setUnivData(list)
+                this.nextPage = nextPage
+                loading = true
+            },
+            onFailure = {
 
-                }
+            }
         )
 
         val layoutManager = LinearLayoutManager(this)
@@ -63,20 +64,20 @@ class UlinkUniversityBoardActivity : AppCompatActivity() {
 
         rv_ulink_board.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if (dy>0){
-                    if(loading){
-                        if (layoutManager.childCount + layoutManager.findFirstVisibleItemPosition() >= layoutManager.itemCount){
+                if (dy > 0) {
+                    if (loading) {
+                        if (layoutManager.childCount + layoutManager.findFirstVisibleItemPosition() >= layoutManager.itemCount) {
                             loading = false
                             DataRepository.getUniveristyBoard(
-                                    this@UlinkUniversityBoardActivity.nextPage,
-                                    onSuccess = {list, nextPage->
-                                        loading = list.isNotEmpty()
-                                        if (loading){
-                                            this@UlinkUniversityBoardActivity.nextPage = nextPage
-                                            board_adapter.addUnivData(list)
-                                        }
-                                    },
-                                    onFailure = {}
+                                this@UlinkUniversityBoardActivity.nextPage,
+                                onSuccess = { list, nextPage ->
+                                    loading = list.isNotEmpty()
+                                    if (loading) {
+                                        this@UlinkUniversityBoardActivity.nextPage = nextPage
+                                        board_adapter.addUnivData(list)
+                                    }
+                                },
+                                onFailure = {}
                             )
 
                         }
@@ -89,11 +90,18 @@ class UlinkUniversityBoardActivity : AppCompatActivity() {
 
         board_adapter.setItemClickLIstener(object : AllBoardAdapter.ItemClickListener {
             override fun onClick(view: View, position: Int) {
-                val intent = Intent(this@UlinkUniversityBoardActivity, BoardDetailActivity::class.java)
+                val intent =
+                    Intent(this@UlinkUniversityBoardActivity, BoardDetailActivity::class.java)
                 intent.putExtra("boardType", 1)
                 startActivity(intent)
             }
 
         })
+
+    }
+
+    override fun onClick() {
+        Toast.makeText(this,"좋아요클릭",Toast.LENGTH_SHORT).show()
     }
 }
+

@@ -9,6 +9,7 @@ import com.ulink.ulink.R
 import com.ulink.ulink.Ulink.BoardSubjectData
 import com.ulink.ulink.Ulink.BoardUlinkData
 import com.ulink.ulink.Ulink.BoardUniversityData
+import com.ulink.ulink.Ulink.onClickLike
 
 const val VIEWTYPE_ULINK = 0
 const val VIEWTYPE_UNIV = 1
@@ -22,6 +23,10 @@ class AllBoardAdapter(private val context: Context, val searchType: Int, val sea
 
     private var dataSearchAllBoard: MutableList<Any> = mutableListOf()
 
+    var mListener : onClickLike? = null
+    fun setListener(onClickLike: onClickLike){
+        mListener = onClickLike
+    }
     fun setUlinkData(list : List<BoardUlinkData>){
         datas_ulink.clear()
         datas_ulink.addAll(list)
@@ -112,6 +117,7 @@ class AllBoardAdapter(private val context: Context, val searchType: Int, val sea
                         }
                     }
                 }
+
             }
 
         } else {
@@ -131,15 +137,15 @@ class AllBoardAdapter(private val context: Context, val searchType: Int, val sea
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (search) {
             return when (searchType) {
-                0, 1 -> BoardViewHolder(LayoutInflater.from(context).inflate(R.layout.item_searched_ulink_board_ulink_data, parent, false))
-                2 -> BoardClassViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ulink_board_class_data, parent, false))
+                0, 1 -> BoardViewHolder(LayoutInflater.from(context).inflate(R.layout.item_searched_ulink_board_ulink_data, parent, false),mListener)
+                2 -> BoardClassViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ulink_board_class_data, parent, false),mListener)
                 else -> {
                     when(viewType){
-                        VIEWTYPE_ULINK, VIEWTYPE_UNIV -> BoardViewHolder(LayoutInflater.from(context).inflate(R.layout.item_searched_ulink_board_ulink_data, parent, false))
-                        VIEWTYPE_SUBJECT -> BoardClassViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ulink_board_class_data, parent, false))
+                        VIEWTYPE_ULINK, VIEWTYPE_UNIV -> BoardViewHolder(LayoutInflater.from(context).inflate(R.layout.item_searched_ulink_board_ulink_data, parent, false),mListener)
+                        VIEWTYPE_SUBJECT -> BoardClassViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ulink_board_class_data, parent, false),mListener)
                         //                      FIXME 여기 공지 뷰 추가하기!!
                         //  VIEWTYPE_NOTICE -> return
-                        else -> BoardClassViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ulink_board_class_data, parent, false))
+                        else -> BoardClassViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ulink_board_class_data, parent, false),mListener)
 
                     }
 
@@ -147,8 +153,8 @@ class AllBoardAdapter(private val context: Context, val searchType: Int, val sea
             }
         } else {
             return when (searchType) {
-                0, 1 -> BoardViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ulink_board_ulink_data, parent, false))
-                else -> BoardClassViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ulink_board_class_data, parent, false))
+                0, 1 -> BoardViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ulink_board_ulink_data, parent, false),mListener)
+                else -> BoardClassViewHolder(LayoutInflater.from(context).inflate(R.layout.item_ulink_board_class_data, parent, false),mListener)
             }
         }
 
