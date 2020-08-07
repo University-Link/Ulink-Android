@@ -2,29 +2,34 @@ package com.ulink.ulink.Ulink.ClassBoard
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ulink.ulink.R
-import com.ulink.ulink.Ulink.AllBoardRecycler.AllBoardAdapter
+import com.ulink.ulink.Ulink.BoardRecycler.AllBoardAdapter
 import com.ulink.ulink.Ulink.BoardCommentRecycler.BoardDetailActivity
-import com.ulink.ulink.Ulink.BoardData
+import com.ulink.ulink.Ulink.BoardSubjectData
+import com.ulink.ulink.repository.DataRepository
+import kotlinx.android.synthetic.main.activity_ulink_university_board.*
 import kotlinx.android.synthetic.main.fragment_ulink_board.*
-import kotlinx.android.synthetic.main.toolbar_board_comment.*
+import kotlinx.android.synthetic.main.fragment_ulink_board.rv_ulink_board
 
 
 class UlinkBoardFragment() : Fragment() {
-    lateinit var board_adapter : AllBoardAdapter
-    val datas : MutableList<BoardData> = mutableListOf<BoardData>()
-    lateinit var  class_name : String
-    lateinit var class_id : String
+    lateinit var board_adapter: AllBoardAdapter
+    val datas: MutableList<BoardSubjectData> = mutableListOf()
+    lateinit var class_name: String
+    lateinit var class_id: String
+
+    var loading = false
+    var nextPage = 0
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_ulink_board, container, false)
@@ -41,48 +46,55 @@ class UlinkBoardFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        board_adapter = AllBoardAdapter(view.context,2)
+        board_adapter = AllBoardAdapter(view.context, 2, false)
         rv_ulink_board.adapter = board_adapter
 
-        datas.apply{
-            add(
-                BoardData(
-                    board_idx = 0,
-                    title = "님들 점심 추천",
-                    initial = "",
-                    nickname = "유링크좋아요",
-                    content = "김찌랑 된찌랑 둘중에 고민이에",
-                    likeCount = 0,
-                    commentCount =0,
-                    userIdx = 0,
-                    createdAt = "",
-                    updatedAt = "",
-                    isLike = false
-                )
-            )
-            add(
-                BoardData(
-                    board_idx = 0,
-                    title = "님들 점심 추천",
-                    initial = "",
-                    nickname = "유링크좋아요",
-                    content = "김찌랑 된찌랑 둘중에 고민이에",
-                    likeCount = 0,
-                    commentCount =0,
-                    userIdx = 0,
-                    createdAt = "",
-                    updatedAt = "",
-                    isLike = false
-                )
-            )
-            board_adapter.datas_class = datas
-            board_adapter.notifyDataSetChanged()
-        }
+        DataRepository.getSubjectBoard(
+                onSuccess = {list, nextPage->
+                    board_adapter.setSubjectData(list)
+                    this.nextPage = nextPage
+                    loading = true
+                },
+                onFailure = {
 
-        board_adapter.setItemClickLIstener(object: AllBoardAdapter.ItemClickListener{
-            override fun onClick(view:View, position:Int){
+                }
+        )
+
+        val layoutManager = LinearLayoutManager(requireContext())
+        rv_ulink_board.layoutManager = layoutManager
+
+        rv_ulink_board.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy>0){
+                    if(loading){
+                        if (layoutManager.childCount + layoutManager.findFirstVisibleItemPosition() >= layoutManager.itemCount){
+                            loading = false
+                            DataRepository.getSubjectBoard(
+                                    this@UlinkBoardFragment.nextPage,
+                                    onSuccess = {list, nextPage->
+                                        loading = list.isNotEmpty()
+                                        if (loading){
+                                            this@UlinkBoardFragment.nextPage = nextPage
+                                            board_adapter.addSubjectData(list)
+                                        }
+                                    },
+                                    onFailure = {}
+                            )
+
+                        }
+                    }
+
+                }
+            }
+
+        })
+
+
+        board_adapter.setItemClickLIstener(object : AllBoardAdapter.ItemClickListener {
+            override fun onClick(view: View, position: Int) {
                 val intent = Intent(getActivity(), BoardDetailActivity::class.java)
-                intent.putExtra("viewtype",2)
+                //TODO 수업별 게시판 검색
+                intent.putExtra("boardType", 2)
                 //intent.putExtra("class",class_name)
                 //intent.putExtra("idx",class_id)
                 startActivity(intent)

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.ulink.ulink.R
+import com.ulink.ulink.Ulink.BoardSearchRecycler.BoardSearchActivity
 import com.ulink.ulink.Ulink.ClassBoard.UlinkBoardFragment
 import kotlinx.android.synthetic.main.activity_ulink_inside.*
 import kotlinx.android.synthetic.main.toolbar_ulink_inside.*
@@ -35,6 +36,7 @@ class UlinkInsideActivity : AppCompatActivity() {
 
         btn_search.setOnClickListener {
             val intent = Intent(this, BoardSearchActivity::class.java)
+            intent.putExtra("boardCategory",2)
             startActivity(intent)
         }
 

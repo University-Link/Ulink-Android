@@ -1,5 +1,6 @@
 package com.ulink.ulink.repository
 
+
 data class ResponseGetProfile(
         val status : Int,
         val success : Boolean,
@@ -12,6 +13,9 @@ data class ResponseGetProfile(
             val email : String?,
             val nickname : String,
             val majorIdx : Int,
+            val universityIdx : Int,
+            val major : String,
+            val university : String,
             val emailCheck : Int,
             val profileImage : String
     )

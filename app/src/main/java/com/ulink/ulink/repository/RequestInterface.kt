@@ -3,6 +3,7 @@ package com.ulink.ulink.repository
 import com.ulink.ulink.Ulink.ulinknotice.ResponseDetailNotice
 import com.ulink.ulink.Ulink.ulinknotice.ResponseUlinkNotice
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 interface RequestInterface {
@@ -55,11 +56,29 @@ interface RequestInterface {
         @Body body : RequestNicknameCheck
     ) : Call<ResponseNicknameCheck>
 
+    @PUT("/user/nickname")
+    fun updateNickname(
+            @Header("token") token: String,
+            @Body body : RequestUpdateNickname
+    ) : Call<ResponseUpdateNickname>
+
+    @PUT("/user/password")
+    fun updatePassword(
+            @Header("token") token: String,
+            @Body body : RequestUpdatePassword
+    ) : Call<BaseResponse>
+
     //회원가입
     @POST("/user/signup/")
     fun register(
         @Body body : RequestRegister
     ) : Call<ResponseRegister>
+
+    @PUT("/user/quit")
+    fun withdraw(
+            @Header("token") token : String,
+            @Body body : RequestWithdraw
+    ) : Call<Response<Void>>
 
     //Schedule
     //시간표 - 메인 시간표 조회
@@ -325,4 +344,28 @@ interface RequestInterface {
             @Path("idx") idx : String,
             @Query("isSubject") isSubject: Boolean
     )
+
+    @POST("/university/auth")
+    fun requestUniversityAuth(
+            @Header("token") token : String,
+            @Body body : RequestUniversityAuth
+    ) : Call<ResponseUniversityAuth>
+
+    @GET("/board/public/{page}")
+    fun getPublicBoard(
+            @Header("token") token: String,
+            @Path("page") page : Int
+    ) : Call<ResponseGetPublicBoard>
+
+    @GET("/board/school/{page}")
+    fun getUniversityBoard(
+            @Header("token") token: String,
+            @Path("page") page : Int
+    ) : Call<ResponseGetUniversityBoard>
+
+    @GET("/board/subject/1000/{page}")
+    fun getSubjectBoard(
+            @Header("token") token: String,
+            @Path("page") page : Int
+    ) : Call<ResponseGetSubjectBoard>
 }

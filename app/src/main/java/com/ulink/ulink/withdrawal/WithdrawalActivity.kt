@@ -1,14 +1,28 @@
 package com.ulink.ulink.withdrawal
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
+import com.ulink.ulink.Activity.LoginActivity
 import com.ulink.ulink.R
+import com.ulink.ulink.repository.DataRepository
+import com.ulink.ulink.utils.DialogBuilder
 import kotlinx.android.synthetic.main.activity_withdrawal.*
+import kotlinx.android.synthetic.main.fragment_withdrawal.*
 
 class WithdrawalActivity : AppCompatActivity() {
+
+    var count = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_withdrawal)
@@ -16,36 +30,85 @@ class WithdrawalActivity : AppCompatActivity() {
         setOnClick()
     }
 
-    fun setOnClick(){
 
-        et_id.setOnFocusChangeListener { v, hasFocus ->
-            btn_ok.setBackgroundColor(resources.getColor(R.color.mainButton))
-            btn_ok.setTextColor(resources.getColor(R.color.white))
+    fun setOnClick(){
+        et_etc.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                tv_etc_count.text = "(${et_etc.text.toString().length}/100)"
+            }
+        })
+
+        btn_1.setOnClickListener {
+            setFilter(it)
+        }
+        btn_2.setOnClickListener {
+            setFilter(it)
+        }
+        btn_3.setOnClickListener {
+            setFilter(it)
+
+        }
+        btn_4.setOnClickListener {
+            setFilter(it)
+
         }
 
-        btn_ok.setOnClickListener {
-            if (!et_id.text.isNullOrBlank()&&!et_password.text.isNullOrBlank()){
-//           TODO 서버와 연결해서 회원탈퇴
+        btn_5.setOnClickListener {
+            setFilter(it)
+        }
 
-//                TODO 비밀번호가 틀릴경우 Dialog
-//                DialogBuilder().apply {
-//                    build(this@WithdrawalActivity)
-//                    setContent("비밀번호를 확인해 주세요.")
-//                    setClickListener {
-//                        dismiss()
-//                    }
-//                    show()
-//                }
+        btn_6.setOnClickListener {
+            setFilter(it)
+            if (it.isSelected){
+                et_etc.visibility = View.VISIBLE
+                tv_etc_count.visibility = View.VISIBLE
+                tv_etc_count.text = "(${et_etc.text.toString().length}/100)"
+            } else{
+                et_etc.visibility = View.INVISIBLE
+                tv_etc_count.visibility = View.INVISIBLE
 
-
-//                btn_ok.setOnClickListener(null)
-                supportFragmentManager.beginTransaction().add(R.id.layout_container, WithdrawalFragment()).commit()
-                Log.d("tag","1")
-                btn_ok.visibility = View.GONE
-
-            } else {
-                Toast.makeText(this, "아이디와 비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();
             }
         }
+
+
+
+        btn_ok.setOnClickListener {
+            supportFragmentManager.beginTransaction().replace(R.id.layout_container, WithdrawalFragment()).addToBackStack(null).commit()
+            btn_ok.visibility = View.GONE
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        btn_ok.visibility = View.VISIBLE
+    }
+
+    fun setFilter(it : View){
+        it.isSelected = !it.isSelected
+
+        if (it.isSelected){
+            count +=1
+        } else {
+            count -= 1
+        }
+
+        btn_ok.setBackgroundColor(resources.getColor(R.color.mainButton))
+        btn_ok.setTextColor(resources.getColor(R.color.white))
+
+        if (count == 0){
+            btn_ok.setBackgroundResource(R.drawable.mypage_withdrawal_unactivated_img_textbox)
+            btn_ok.setTextColor(resources.getColor(R.color.btnIcon3))
+        }
+    }
+
+    fun removeFragment(fragment : Fragment){
+        supportFragmentManager.beginTransaction().remove(fragment).commit()
+        btn_ok.visibility = View.VISIBLE
     }
 }
