@@ -1,4 +1,4 @@
-package com.ulink.ulink.Ulink.UlinkNotice
+package com.ulink.ulink.Ulink.ulinknotice
 
 import android.content.Context
 import android.view.LayoutInflater

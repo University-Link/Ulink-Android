@@ -57,6 +57,7 @@ class AuthenticationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         var gender = ""
+
         var authenticationCode = 0
         var authentication = false
         var nextCheck = false
@@ -141,12 +142,10 @@ class AuthenticationFragment : Fragment() {
                         build(view.context)
                         setContent(getString(R.string.authentication_fail))
                         setClickListener {
-                            timer?.cancel()
                             dismiss()
                         }
                         show()
                     }
-                    tv_authentication_time.visibility = View.INVISIBLE
                     authentication = false
                 }
             }
@@ -194,6 +193,7 @@ class AuthenticationFragment : Fragment() {
 
         timer = object : CountDownTimer(60 * 1000, 1000) {
             override fun onFinish() {
+                btnCheckSelector(btn_send, et_number)
             }
 
             override fun onTick(millisUntilFinished: Long) {

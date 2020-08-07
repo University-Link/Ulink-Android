@@ -1,11 +1,11 @@
-package com.ulink.ulink.Ulink.UlinkNotice
+package com.ulink.ulink.Ulink.ulinknotice
 
 import android.graphics.Color
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import com.ulink.ulink.CalendarRecycler.today
 import com.ulink.ulink.R
 import com.ulink.ulink.ScheduleRecycler.zeroCheck
+import kotlinx.android.synthetic.main.activity_notice_update_request.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -72,12 +72,12 @@ fun timeTextView2(startTime : String, endTime : String, category : String, tvTim
     if (endTime == "-1") end = ""
 
     if (startTime != "-1" || endTime != "-1")
-        tvTime.text = startTime + " ~ " + endTime
+        tvTime.text = start + " ~ " + end
 
     if (startTime == "-1" && endTime == "-1")
         tvTime.text = "시간정보없음"
 
-    if (category=="과제" && endTime != "") tvTime.text = "~ "+endTime
+    if (category=="과제" && endTime != "") tvTime.text = "~ "+end
 }
 
 fun noticeDateCompare(date: String) : Boolean{
@@ -99,4 +99,17 @@ fun noticeDetailDate(date : String) : String{
     if(splitDate[2].toInt()<10) splitDate[2].replace("0", "")
 
     return splitDate[0]+"년 "+splitDate[1]+"월 "+splitDate[2]+"일"
+}
+
+fun editTextFocus(btn: CheckBox, et: EditText){
+    if (btn.isChecked) {
+        et.isFocusable = true
+        et.isFocusableInTouchMode = true
+        et.requestFocus()
+    }
+    else{
+        et.isFocusable = false
+        et.isFocusableInTouchMode = false
+        et.clearFocus()
+    }
 }

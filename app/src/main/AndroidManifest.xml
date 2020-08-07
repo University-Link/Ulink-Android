@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Ulink.UlinkNotice.NoticeDetailActivity"></activity>
+        <activity android:name=".Ulink.ulinknotice.NoticeWriteActivity"></activity>
+        <activity android:name=".Ulink.ulinknotice.NoticeUpdateRequestActivity" />
+        <activity android:name=".Ulink.ulinknotice.NoticeDetailActivity" />
         <activity android:name=".register.ThirdAgreeActivity" />
         <activity android:name=".register.AdAgreeActivity" />
         <activity android:name=".Activity.CommunityGuideActivity" />

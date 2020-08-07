@@ -1,4 +1,4 @@
-package com.ulink.ulink.Ulink.UlinkNotice
+package com.ulink.ulink.Ulink.ulinknotice
 
 data class ResponseUlinkNotice(
     val status : Int,
@@ -28,5 +28,6 @@ data class DetailNotice(
     val startTime : String,
     val endTime : String,
     val title : String,
-    val content : String
+    val content : String,
+    val nickname : String
 )

@@ -7,23 +7,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ulink.ulink.CalendarRecycler.today
 import com.ulink.ulink.R
-import com.ulink.ulink.Ulink.UlinkNotice.*
+import com.ulink.ulink.Ulink.ulinknotice.*
 import com.ulink.ulink.repository.DataRepository
 import com.ulink.ulink.repository.RetrofitService
 import kotlinx.android.synthetic.main.fragment_ulink_notice.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.text.SimpleDateFormat
-import java.util.*
 
-class UlinkNoticeFragment(className : String, classIdx : String) : Fragment() {
+class UlinkNoticeFragment(subjectName : String, subjectIdx : String) : Fragment() {
     lateinit var noticeAdapter : UlinkNoticeAdapter
     val noticeDatas : MutableList<UlinkNoticeData> = mutableListOf<UlinkNoticeData>()
-    var className = className
-    var classIdx = classIdx
+    var subjectName = subjectName
+    var subjectIdx = subjectIdx
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,9 +36,9 @@ class UlinkNoticeFragment(className : String, classIdx : String) : Fragment() {
         noticeAdapter.datas = noticeDatas
         rv_subject_notice.adapter = noticeAdapter
 
-        Log.d("subject", className+" "+classIdx)
+        Log.d("subject", subjectName+" "+subjectIdx)
 
-        RetrofitService.service.getSubjectNotice(DataRepository.token, classIdx).enqueue(object :
+        RetrofitService.service.getSubjectNotice(DataRepository.token, subjectIdx).enqueue(object :
             Callback<ResponseUlinkNotice> {
             override fun onFailure(call: Call<ResponseUlinkNotice>, t: Throwable) {
             }
@@ -93,7 +90,7 @@ class UlinkNoticeFragment(className : String, classIdx : String) : Fragment() {
         noticeAdapter.setNoticeClickListener(object : UlinkNoticeAdapter.NoticeClickListener{
             override fun onClick(view : View, position : Int){
                 val intent = Intent(view.context, NoticeDetailActivity::class.java)
-                intent.putExtra("className", className)
+                intent.putExtra("subjectName", subjectName)
                 intent.putExtra("noticeIdx", noticeAdapter.datas[position].noticeIdx)
                 startActivity(intent)
             }

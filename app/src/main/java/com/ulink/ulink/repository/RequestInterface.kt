@@ -1,7 +1,7 @@
 package com.ulink.ulink.repository
 
-import com.ulink.ulink.Ulink.UlinkNotice.ResponseDetailNotice
-import com.ulink.ulink.Ulink.UlinkNotice.ResponseUlinkNotice
+import com.ulink.ulink.Ulink.ulinknotice.ResponseDetailNotice
+import com.ulink.ulink.Ulink.ulinknotice.ResponseUlinkNotice
 import retrofit2.Call
 import retrofit2.http.*
 
