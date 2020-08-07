@@ -13,6 +13,8 @@ data class BoardSubjectData(
     val updatedAt : String = "",
     val isLike : Boolean,
     val isNotice : Int,
-    val subjectIdx : Int
+    val subjectIdx : Int,
+    val isMine : Boolean
+
 )
 

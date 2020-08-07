@@ -3,7 +3,6 @@ package com.ulink.ulink.register
 import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.text.InputFilter
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,13 +14,11 @@ import com.ulink.ulink.repository.ResponsePhoneAuthentication
 import com.ulink.ulink.repository.RetrofitService
 import com.ulink.ulink.textChangedListener
 import com.ulink.ulink.utils.DialogBuilder
-import kotlinx.android.synthetic.main.activity_school_certificate.*
 import kotlinx.android.synthetic.main.fragment_authentication.*
 import kotlinx.android.synthetic.main.fragment_authentication.btn_back
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.regex.Pattern
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"

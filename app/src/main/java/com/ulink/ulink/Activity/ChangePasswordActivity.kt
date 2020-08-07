@@ -16,8 +16,6 @@ import kotlinx.android.synthetic.main.activity_change_password.btn_back
 import kotlinx.android.synthetic.main.activity_change_password.btn_ok
 import kotlinx.android.synthetic.main.activity_change_password.et_password
 import kotlinx.android.synthetic.main.activity_change_password.et_password_check
-import kotlinx.android.synthetic.main.activity_withdrawal.*
-import kotlinx.android.synthetic.main.fragment_register.*
 
 class ChangePasswordActivity : AppCompatActivity() {
 

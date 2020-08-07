@@ -1,14 +1,16 @@
 package com.ulink.ulink.Ulink.AllBoardRecycler
 
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ulink.ulink.R
 import com.ulink.ulink.Ulink.BoardUniversityData
 import com.ulink.ulink.Ulink.BoardUlinkData
+import com.ulink.ulink.Ulink.onClickLike
 
-class BoardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class BoardViewHolder(itemView: View,val mListener: onClickLike?) : RecyclerView.ViewHolder(itemView) {
     val tv_title: TextView = itemView.findViewById(R.id.tv_title)
     val tv_nickname: TextView = itemView.findViewById(R.id.tv_nickname)
     val tv_time: TextView = itemView.findViewById(R.id.tv_time)
@@ -16,12 +18,15 @@ class BoardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val tv_comment_count: TextView = itemView.findViewById(R.id.tv_comment_count)
     val tv_heart_count: TextView = itemView.findViewById(R.id.tv_heart_count)
     val img_tag: ImageView = itemView.findViewById(R.id.img_uni_tag)
-    //val btn_heart : ImageButton = itemView.findViewById(R.id.btn_heart)
+    val btn_heart : ImageButton = itemView.findViewById(R.id.btn_heart)
     val img_line : ImageView = itemView.findViewById(R.id.img_line)
     val tv_boardCategory : TextView = itemView.findViewById(R.id.tv_board_category)
 
     fun bind(boardData: Any, showBoardName : Boolean) {
 
+        btn_heart.setOnClickListener{
+            mListener?.onClick()
+        }
         if (boardData is BoardUlinkData) {
             img_tag.visibility = View.VISIBLE
             tv_title.text = boardData.title

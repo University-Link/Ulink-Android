@@ -2,14 +2,12 @@ package com.ulink.ulink.register
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import com.ulink.ulink.R
 import com.ulink.ulink.repository.*
 import com.ulink.ulink.textChangedListener
 import com.ulink.ulink.utils.DialogBuilder
-import kotlinx.android.synthetic.main.activity_change_password.*
 import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.android.synthetic.main.fragment_register.btn_back
 import kotlinx.android.synthetic.main.fragment_register.et_id

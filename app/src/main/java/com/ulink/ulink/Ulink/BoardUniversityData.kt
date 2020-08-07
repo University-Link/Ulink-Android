@@ -16,6 +16,7 @@ data class BoardUniversityData(
         val createdAt : String = "",
         val updatedAt : String = "",
         val isLike : Boolean,
-        val universityIdx : Int
+        val universityIdx : Int,
+        val isMine : Boolean
 )
 

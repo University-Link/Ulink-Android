@@ -5,15 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.ulink.ulink.R
 import com.ulink.ulink.Ulink.AllBoardRecycler.AllBoardAdapter
 import com.ulink.ulink.Ulink.BoardCommentRecycler.BoardDetailActivity
+import com.ulink.ulink.Ulink.BoardCommentRecycler.onClickMore
 import com.ulink.ulink.Ulink.BoardSubjectData
+import com.ulink.ulink.Ulink.onClickLike
 import kotlinx.android.synthetic.main.fragment_ulink_board.*
 
 
-class UlinkBoardFragment() : Fragment() {
+class UlinkBoardFragment() : Fragment() ,onClickLike{
     lateinit var board_adapter: AllBoardAdapter
     val datas: MutableList<BoardSubjectData> = mutableListOf()
     lateinit var class_name: String
@@ -41,6 +44,8 @@ class UlinkBoardFragment() : Fragment() {
         board_adapter = AllBoardAdapter(view.context, 2, false)
         rv_ulink_board.adapter = board_adapter
 
+        board_adapter.setListener(this)
+
         datas.apply {
             add(
                     BoardSubjectData(
@@ -56,7 +61,8 @@ class UlinkBoardFragment() : Fragment() {
                             updatedAt = "",
                             isLike = false,
                             isNotice = 0,
-                            subjectIdx = 0
+                            subjectIdx = 0,
+                            isMine = false
                     )
             )
             add(
@@ -73,7 +79,9 @@ class UlinkBoardFragment() : Fragment() {
                             updatedAt = "",
                             isLike = false,
                             isNotice = 0,
-                            subjectIdx = 0
+                            subjectIdx = 0,
+                        isMine = false
+
                     )
             )
             board_adapter.datas_class = datas
@@ -93,4 +101,10 @@ class UlinkBoardFragment() : Fragment() {
 
     }
 
+    override fun onClick() {
+        Toast.makeText(context,"좋아요클릭", Toast.LENGTH_SHORT).show()
+
+    }
+
 }
+

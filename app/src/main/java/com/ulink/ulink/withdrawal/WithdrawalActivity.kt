@@ -1,22 +1,13 @@
 package com.ulink.ulink.withdrawal
 
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import com.ulink.ulink.Activity.LoginActivity
 import com.ulink.ulink.R
-import com.ulink.ulink.repository.DataRepository
-import com.ulink.ulink.utils.DialogBuilder
 import kotlinx.android.synthetic.main.activity_withdrawal.*
-import kotlinx.android.synthetic.main.fragment_withdrawal.*
 
 class WithdrawalActivity : AppCompatActivity() {
 

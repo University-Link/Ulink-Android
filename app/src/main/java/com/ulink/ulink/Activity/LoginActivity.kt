@@ -3,11 +3,7 @@ package com.ulink.ulink.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.ulink.ulink.MainActivity
 import com.ulink.ulink.R

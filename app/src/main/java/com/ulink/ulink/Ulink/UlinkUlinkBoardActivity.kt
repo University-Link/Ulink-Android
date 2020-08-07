@@ -3,6 +3,7 @@ package com.ulink.ulink.Ulink
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.ulink.ulink.R
 import com.ulink.ulink.Ulink.AllBoardRecycler.AllBoardAdapter
@@ -12,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_ulink_all_board.*
 import kotlinx.android.synthetic.main.toolbar_ulink_inside.*
 
 
-class UlinkUlinkBoardActivity : AppCompatActivity() {
+class UlinkUlinkBoardActivity : AppCompatActivity() ,onClickLike{
     lateinit var board_adapter: AllBoardAdapter
     val datas: MutableList<BoardUlinkData> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +39,7 @@ class UlinkUlinkBoardActivity : AppCompatActivity() {
                 AllBoardAdapter(this, 0, false)
         rv_ulink_board.adapter = board_adapter
 
-
+        board_adapter.setListener(this)
 
         datas.apply {
             add(
@@ -53,7 +54,8 @@ class UlinkUlinkBoardActivity : AppCompatActivity() {
                             userIdx = 0,
                             createdAt = "방금",
                             updatedAt = "",
-                            isLike = false
+                            isLike = false,
+                            isMine = false
                     )
             )
             add(
@@ -68,7 +70,8 @@ class UlinkUlinkBoardActivity : AppCompatActivity() {
                             userIdx = 0,
                             createdAt = "방금",
                             updatedAt = "",
-                            isLike = false
+                            isLike = false,
+                            isMine = false
                     )
             )
 
@@ -85,4 +88,14 @@ class UlinkUlinkBoardActivity : AppCompatActivity() {
 
         })
     }
+
+    override fun onClick() {
+        //TODO 좋아요 클릭했을때
+        Toast.makeText(this,"좋아요클릭",Toast.LENGTH_SHORT).show()
+    }
+}
+interface onClickLike {
+    fun onClick(
+
+    )
 }

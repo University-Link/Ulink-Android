@@ -3,6 +3,7 @@ package com.ulink.ulink.Ulink
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.ulink.ulink.R
 import com.ulink.ulink.Ulink.AllBoardRecycler.AllBoardAdapter
@@ -12,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_ulink_university_board.*
 import kotlinx.android.synthetic.main.toolbar_ulink_inside.*
 
 
-class UlinkUniversityBoardActivity : AppCompatActivity() {
+class UlinkUniversityBoardActivity : AppCompatActivity() ,onClickLike{
     lateinit var board_adapter : AllBoardAdapter
     val data : MutableList<BoardUniversityData> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +36,7 @@ class UlinkUniversityBoardActivity : AppCompatActivity() {
         }
         board_adapter = AllBoardAdapter(this,1,false)
         rv_ulink_board.adapter = board_adapter
+        board_adapter.setListener(this)
 
         data.apply{
             add(
@@ -50,7 +52,9 @@ class UlinkUniversityBoardActivity : AppCompatActivity() {
                     createdAt = "5분",
                     updatedAt = "",
                     isLike = false,
-                    universityIdx = 0
+                    universityIdx = 0,
+                    isMine = false
+
                 )
             )
             add(
@@ -66,7 +70,9 @@ class UlinkUniversityBoardActivity : AppCompatActivity() {
                     createdAt = "5분",
                     updatedAt = "",
                     isLike = false,
-                        universityIdx = 0
+                    universityIdx = 0,
+                    isMine = false
+
                 )
             )
             board_adapter.datas_university = data
@@ -82,4 +88,10 @@ class UlinkUniversityBoardActivity : AppCompatActivity() {
 
         })
     }
+
+    override fun onClick() {
+        Toast.makeText(this,"좋아요클릭", Toast.LENGTH_SHORT).show()
+    }
 }
+
+

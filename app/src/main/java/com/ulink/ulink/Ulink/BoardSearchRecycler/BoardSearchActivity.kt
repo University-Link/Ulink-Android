@@ -50,7 +50,8 @@ class BoardSearchActivity : AppCompatActivity() {
                         userIdx = 0,
                         createdAt = "방금",
                         updatedAt = "",
-                        isLike = false
+                        isLike = false,
+                        isMine = false
                 ), BoardUniversityData(
                         boardUniversityIdx = 0,
                         title = "총장직선제 개선촉구 시위 마지막 공지",
@@ -63,7 +64,9 @@ class BoardSearchActivity : AppCompatActivity() {
                         createdAt = "5분",
                         updatedAt = "",
                         isLike = false,
-                        universityIdx = 0
+                        universityIdx = 0,
+                        isMine = false
+
                 ),  BoardSubjectData(
                         boardSubjectIdx = 0,
                         title = "님들 점심 추천",
@@ -77,7 +80,8 @@ class BoardSearchActivity : AppCompatActivity() {
                         updatedAt = "",
                         isLike = false,
                         isNotice = 0,
-                        subjectIdx = 0
+                        subjectIdx = 0,
+                        isMine = false
                 )
                 )
                 boardAdapter.setAllDataSearch(list)

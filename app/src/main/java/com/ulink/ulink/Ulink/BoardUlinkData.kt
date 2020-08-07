@@ -11,5 +11,9 @@ data class BoardUlinkData(
     val userIdx : Int = 0,
     val createdAt : String = "",
     val updatedAt : String = "",
-    val isLike : Boolean)
+    val isLike : Boolean,
+    val isMine : Boolean
+
+)
+
 
