@@ -15,6 +15,7 @@ import com.ulink.ulink.R
 import com.ulink.ulink.Ulink.BoardSubjectData
 import com.ulink.ulink.Ulink.BoardUlinkData
 import com.ulink.ulink.Ulink.BoardUniversityData
+import com.ulink.ulink.Ulink.MakeReportDialog
 import com.ulink.ulink.utils.DialogBuilder
 import kotlinx.android.synthetic.main.activity_board_comment.*
 import kotlinx.android.synthetic.main.toolbar_board_comment.*
