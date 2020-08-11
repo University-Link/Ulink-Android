@@ -394,7 +394,8 @@ object DataRepository {
                     val list: MutableList<BoardData> = mutableListOf()
                     for (i in it.data.board) {
                         list.add(
-                            BoardData(i.boardIdx, i.title, i.initial, i.profileImage, i.nickname, i.content, i.likeCount, i.commentCount, i.universityIdx,i.subjectIdx,i.isNotice,i.userIdx,i.createdAt, i.category,i.isLike, i.isMine,i.noticeIdx,i.noticeType)
+                            BoardData(i.boardIdx, i.title, i.nickname, i.profileImage, i.nickname, i.content, i.likeCount, i.commentCount, 0,i.subjectIdx,i.isNotice,i.userIdx,i.createdAt, i.category,i.isLike, i.isMine,i.noticeIdx,i.noticeType)
+
                         )
                     }
 

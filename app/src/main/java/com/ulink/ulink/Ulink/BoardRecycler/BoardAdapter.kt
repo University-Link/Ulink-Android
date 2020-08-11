@@ -113,7 +113,7 @@ class AllBoardAdapter(private val context: Context, val searchType: Int, val sea
                     when(getItemViewType(position)){
                         0 -> (holder as BoardViewHolder).bind(dataSearchAllBoard[position], true) //태그있는
                         1 -> (holder as BoardViewHolder).bind(dataSearchAllBoard[position], true) //태그없는
-                        2 ->  (holder as BoardClassViewHolder).bind(dataSearchAllBoard[position] as BoardData, true)
+                        2 ->  (holder as BoardClassViewHolder).bind(dataSearchAllBoard[position], true)
                         else -> {
                         }
                     }

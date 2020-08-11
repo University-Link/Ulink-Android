@@ -11,6 +11,7 @@ import com.ulink.ulink.ClassRecycler.ClassAdapter
 import com.ulink.ulink.ClassRecycler.ClassData
 import com.ulink.ulink.R
 import com.ulink.ulink.Ulink.BoardSearchRecycler.BoardSearchActivity
+import com.ulink.ulink.Ulink.ClassBoard.UlinkBoardFragment
 import com.ulink.ulink.Ulink.UlinkUlinkBoardActivity
 import com.ulink.ulink.Ulink.UlinkInsideActivity
 import com.ulink.ulink.Ulink.UlinkUniversityBoardActivity
