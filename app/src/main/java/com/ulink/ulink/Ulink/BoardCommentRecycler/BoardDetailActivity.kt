@@ -16,11 +16,12 @@ import com.ulink.ulink.R
 import com.ulink.ulink.Ulink.BoardData
 import com.ulink.ulink.Ulink.BoardDetailData
 import com.ulink.ulink.Ulink.CommentData
-import com.ulink.ulink.Ulink.MakeReportDialog
+import com.ulink.ulink.Ulink.reportBoardDialog
 import com.ulink.ulink.Ulink.ulinknotice.ResponseDetailNotice
 import com.ulink.ulink.repository.DataRepository
 import com.ulink.ulink.repository.ResponsegetUlinkBoardList
 import com.ulink.ulink.repository.RetrofitService
+import com.ulink.ulink.repository.idx
 import com.ulink.ulink.utils.DialogBuilder
 import kotlinx.android.synthetic.main.activity_board_comment.*
 import kotlinx.android.synthetic.main.toolbar_board_comment.*
@@ -105,8 +106,9 @@ class BoardDetailActivity : AppCompatActivity(), onClickMore {
                     Toast.makeText(this, "쪽지보내기", Toast.LENGTH_SHORT).show()
 
                 }
+                //TODO boardIdx 넘기기 !
                 layoutNotMine.findViewById<TextView>(R.id.btn_assert).setOnClickListener {
-                    reportBoardDialog(it, idx, boardType)
+                    reportBoardDialog(it, 0, boardType)
                 }
             }
 

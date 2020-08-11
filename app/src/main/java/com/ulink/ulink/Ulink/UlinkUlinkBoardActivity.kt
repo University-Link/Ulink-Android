@@ -96,7 +96,7 @@ class UlinkUlinkBoardActivity : AppCompatActivity() ,onClickLike{
         board_adapter.setItemClickLIstener(object : AllBoardAdapter.ItemClickListener {
             override fun onClick(view: View, position: Int) {
                 val intent = Intent(this@UlinkUlinkBoardActivity, BoardDetailActivity::class.java)
-                intent.putExtra("boardIdx", board_adapter.datas_ulink[position].boardPublicIdx)
+                intent.putExtra("boardIdx", board_adapter.datas_ulink[position].boardIdx)
                 intent.putExtra("boardType", 0)
                 intent.putExtra("ulinkDetailBoard",board_adapter.datas_ulink.get(position))
                 startActivity(intent)

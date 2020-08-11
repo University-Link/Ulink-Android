@@ -16,7 +16,7 @@ import com.ulink.ulink.Ulink.BoardCommentRecycler.BoardDetailActivity
 import com.ulink.ulink.Ulink.BoardData
 import com.ulink.ulink.Ulink.onClickLike
 import com.ulink.ulink.repository.DataRepository
-import kotlinx.android.synthetic.main.fragment_ulink_board.rv_ulink_board
+import kotlinx.android.synthetic.main.fragment_ulink_board.*
 
 
 class UlinkBoardFragment() : Fragment() ,onClickLike{
