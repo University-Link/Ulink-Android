@@ -225,6 +225,7 @@
                 android:paddingLeft="10dp"
                 android:background="@drawable/signup_btn_writingbox"
                 android:inputType="number"
+                android:focusable="false"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 

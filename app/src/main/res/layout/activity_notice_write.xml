@@ -132,7 +132,7 @@
             android:layout_height="wrap_content"
             android:text="날짜표시"
             android:textSize="16sp"
-            android:textColor="@color/text1"
+            android:textColor="@color/text2"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -175,16 +175,17 @@
             android:textSize="16sp"
             android:textColor="@color/text1"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toStartOf="@id/tv_split"/>
 
         <TextView
+            android:id="@+id/tv_split"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="-"
+            android:text=" - "
             android:textSize="16sp"
             android:textColor="@color/text1"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toStartOf="@id/tv_end_time"/>
 
         <TextView
             android:id="@+id/tv_end_time"
@@ -193,8 +194,8 @@
             android:text="종료시간"
             android:textSize="16sp"
             android:textColor="@color/text1"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -219,11 +220,12 @@
         app:layout_constraintEnd_toEndOf="@id/layout_category">
 
         <EditText
+            android:id="@+id/et_notice_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:hint="제목을 입력해 주세요."
-            android:textSize="16sp"
+            android:textSize="17sp"
             android:textColor="@color/text1"
             android:background="@color/white"
             app:layout_constraintStart_toStartOf="parent"
@@ -252,12 +254,13 @@
         app:layout_constraintEnd_toEndOf="@id/layout_category">
 
         <EditText
+            android:id="@+id/et_notice_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="내용을 입력해 주세요."
-            android:lines="8"
+            android:maxLines="8"
             android:gravity="top"
-            android:textSize="16sp"
+            android:textSize="17sp"
             android:textColor="@color/text1"
             android:background="@color/white"
             app:layout_constraintStart_toStartOf="parent"

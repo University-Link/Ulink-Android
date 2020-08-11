@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".idPw.PwSuccessFragment">
+
+    <ImageView
+        android:id="@+id/img_pw_success"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="22dp"
+        android:src="@drawable/id_ic_pw"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_pw_set"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="새 비밀번호를 설정해 주세요"
+        android:textColor="@color/main"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/img_pw_success"
+        app:layout_constraintStart_toStartOf="@id/img_pw_success" />
+
+    <TextView
+        android:id="@+id/tv_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="비밀번호"
+        android:textSize="13sp"
+        android:textColor="@color/text1"
+        app:layout_constraintStart_toStartOf="@id/img_pw_success"
+        app:layout_constraintTop_toBottomOf="@id/tv_pw_set"/>
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="17sp"
+        android:hint="비밀번호를 입력해주세요."
+        android:maxLength="20"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_password" />
+
+    <TextView
+        android:id="@+id/tv_password_warning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="최소 8자~최대 20자의 영어, 숫자, 특수문자 가능"
+        android:textSize="13sp"
+        android:textColor="#989898"
+        app:layout_constraintStart_toStartOf="@id/tv_password"
+        app:layout_constraintTop_toBottomOf="@id/et_password" />
+
+    <TextView
+        android:id="@+id/tv_password_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:text="비밀번호 재입력"
+        android:textSize="13sp"
+        android:textColor="@color/text1"
+        app:layout_constraintStart_toStartOf="@id/img_pw_success"
+        app:layout_constraintTop_toBottomOf="@id/tv_password_warning"/>
+
+    <EditText
+        android:id="@+id/et_password_check"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="17sp"
+        android:hint="비밀번호를 다시 입력해주세요."
+        android:maxLength="20"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_password_check" />
+
+    <TextView
+        android:id="@+id/tv_password_different"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:text="비밀번호를 다시 확인해주세요"
+        android:textSize="13sp"
+        android:textColor="#fd4165"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/img_pw_success"
+        app:layout_constraintTop_toBottomOf="@id/et_password_check"/>
+
+
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="확인"
+        android:textSize="18sp"
+        android:textColor="#989898"
+        android:textStyle="bold"
+        android:background="@drawable/signup_btn_next_unactivated"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

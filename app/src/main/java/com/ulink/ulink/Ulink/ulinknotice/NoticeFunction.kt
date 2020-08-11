@@ -4,8 +4,6 @@ import android.graphics.Color
 import android.widget.*
 import com.ulink.ulink.CalendarRecycler.today
 import com.ulink.ulink.R
-import com.ulink.ulink.ScheduleRecycler.zeroCheck
-import kotlinx.android.synthetic.main.activity_notice_update_request.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -95,10 +93,7 @@ fun noticeDateCompare(date: String) : Boolean{
 fun noticeDetailDate(date : String) : String{
     var splitDate = date.split("-")
 
-    if(splitDate[1].toInt()<10) splitDate[1].replace("0", "")
-    if(splitDate[2].toInt()<10) splitDate[2].replace("0", "")
-
-    return splitDate[0]+"년 "+splitDate[1]+"월 "+splitDate[2]+"일"
+    return splitDate[0]+"년 "+zeroCheck(splitDate[1])+"월 "+zeroCheck(splitDate[2])+"일"
 }
 
 fun editTextFocus(btn: CheckBox, et: EditText){
@@ -112,4 +107,30 @@ fun editTextFocus(btn: CheckBox, et: EditText){
         et.isFocusableInTouchMode = false
         et.clearFocus()
     }
+}
+
+fun intentNoticeAdd(item : RequestNoticeAdd,
+                    tv_category : TextView, tv_date : TextView,
+                    tv_startTime : TextView, tv_endTime : TextView,
+                    et_title : EditText, et_content : EditText) : String {
+    var category = item.category
+    tv_category.text = category
+
+    val intentDate= item.date.split("-")
+    tv_date.text = intentDate[0]+"년 " + zeroCheck(intentDate[1])+"월 " + zeroCheck(intentDate[2])+"일"
+    tv_date.setTextColor(Color.parseColor("#363636"))
+
+    if(item.startTime != "-1")
+        tv_startTime.text = item.startTime
+    else
+        tv_startTime.text = "시간정보없음"
+
+    if(item.endTime != "-1")
+        tv_endTime.text = item.endTime
+    else
+        tv_endTime.text = "시간정보없음"
+
+    et_title.setText(item.title)
+    et_content.setText(item.content)
+    return category
 }

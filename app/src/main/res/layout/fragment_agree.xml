@@ -108,7 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@drawable/btn_register_agree_selector"
-            android:text="(필수) 이용약관 동의"
+            android:text="(필수) 서비스 이용약관 동의"
             android:textSize="15sp"
             android:textColor="@color/black"
             android:paddingLeft="8dp"

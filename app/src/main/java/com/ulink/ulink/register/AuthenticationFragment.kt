@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.EditText
 import com.ulink.ulink.R
 import com.ulink.ulink.repository.RequestPhoneAuthentication
 import com.ulink.ulink.repository.ResponsePhoneAuthentication
@@ -92,7 +93,7 @@ class AuthenticationFragment : Fragment() {
         }
 
         btn_send.setOnClickListener {
-            if (et_number.text.toString() != "" && !authentication) {
+            if (et_number.text.toString() != "" && !authentication && tv_authentication_time.visibility==View.INVISIBLE) {
                 val body = RequestPhoneAuthentication(phoneNumber = et_number.text.toString())
                 RetrofitService.service.phoneNumberAuthentication(body).
                     enqueue(object : Callback<ResponsePhoneAuthentication>{
@@ -108,7 +109,7 @@ class AuthenticationFragment : Fragment() {
                                     tv_authentication_time.visibility = View.VISIBLE
                                     btn_send.setBackgroundResource(R.drawable.signup_btn_next_unactivated)
                                     btn_send.setTextColor(Color.parseColor("#989898"))
-                                    et_authentication_number.requestFocus()
+                                    editTextFocus(et_number, et_authentication_number)
                                     startTimer()
                                     authenticationCode = it.data
                                 }
@@ -191,6 +192,9 @@ class AuthenticationFragment : Fragment() {
         timer = object : CountDownTimer(60 * 1000, 1000) {
             override fun onFinish() {
                 btnCheckSelector(btn_send, et_number)
+                et_authentication_number.setText("")
+                editTextFocus(et_authentication_number, et_number)
+                tv_authentication_time.visibility = View.INVISIBLE
             }
 
             override fun onTick(millisUntilFinished: Long) {
@@ -202,5 +206,14 @@ class AuthenticationFragment : Fragment() {
                 }
             }
         }.start()
+    }
+
+    fun editTextFocus(et : EditText, et2 : EditText){
+        et.isFocusable = false
+        et.isFocusableInTouchMode = false
+        et_number.clearFocus()
+        et2.isFocusable = true
+        et2.isFocusableInTouchMode = true
+        et2.requestFocus()
     }
 }

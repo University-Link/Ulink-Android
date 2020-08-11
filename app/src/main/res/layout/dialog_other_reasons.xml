@@ -8,50 +8,58 @@
     android:background="@drawable/bg_round_border"
     >
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="9dp"
-        android:background="@drawable/class_board_detail_btn_siren"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_insertname"
+    <LinearLayout
+        android:id="@+id/layout_report_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="기타 사유"
-        android:textColor="@color/black"
-        android:textSize="18sp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="11dp"
+        android:layout_marginTop="11dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/class_board_detail_btn_siren" />
+
+        <TextView
+            android:id="@+id/tv_insertname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="기타 사유"
+            android:textColor="@color/text1"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_reason"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:layout_marginLeft="11dp"
         android:text="기타 신고 사유를 입력해주세요."
-        android:textColor="#363636"
-        app:layout_constraintStart_toStartOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/tv_insertname"
-        />
-    <EditText
-        android:id="@+id/tv_content"
-        android:layout_width="match_parent"
-        android:layout_marginHorizontal="30dp"
-        android:layout_height="195dp"
-        android:layout_marginTop="12dp"
         android:textColor="@color/text1"
+        app:layout_constraintStart_toStartOf="@+id/layout_report_title"
+        app:layout_constraintTop_toBottomOf="@+id/layout_report_title" />
+
+    <EditText
+        android:id="@+id/et_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:padding="7dp"
         android:gravity="top"
         android:textSize="15sp"
+        android:textColor="@color/text1"
+        android:maxLength="200"
+        android:background="@drawable/class_board_detail_report_textbox"
         app:layout_constraintStart_toStartOf="@+id/tv_reason"
-        app:layout_constraintTop_toBottomOf="@+id/tv_reason"
-        />
+        app:layout_constraintTop_toBottomOf="@id/tv_reason"
+        app:layout_constraintBottom_toTopOf="@id/tv_cancel"/>
 
     <TextView
         android:id="@+id/tv_word_count"
@@ -60,8 +68,8 @@
         android:textSize="13sp"
         android:textColor="#b4b4b4"
         android:text="0/200"
-        app:layout_constraintStart_toStartOf="@+id/tv_content"
-        app:layout_constraintTop_toBottomOf="@+id/tv_content" />
+        app:layout_constraintTop_toBottomOf="@id/et_content"
+        app:layout_constraintStart_toStartOf="@id/et_content" />
 
     <TextView
         android:id="@+id/tv_cancel"
@@ -74,19 +82,18 @@
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@id/tv_accuse"
         app:layout_constraintRight_toLeftOf="@id/tv_accuse"
-        app:layout_constraintTop_toBottomOf="@+id/tv_content" />
+        app:layout_constraintTop_toBottomOf="@id/et_content" />
 
     <TextView
         android:id="@+id/tv_accuse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="신고"
         android:layout_marginBottom="18dp"
         android:layout_marginRight="31dp"
         android:textColor="#fd4165"
         android:textSize="15sp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

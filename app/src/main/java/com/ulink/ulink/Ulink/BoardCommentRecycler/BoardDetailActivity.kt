@@ -12,10 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.ulink.ulink.R
-import com.ulink.ulink.Ulink.BoardSubjectData
-import com.ulink.ulink.Ulink.BoardUlinkData
-import com.ulink.ulink.Ulink.BoardUniversityData
-import com.ulink.ulink.Ulink.MakeReportDialog
+import com.ulink.ulink.Ulink.*
 import com.ulink.ulink.utils.DialogBuilder
 import kotlinx.android.synthetic.main.activity_board_comment.*
 import kotlinx.android.synthetic.main.toolbar_board_comment.*
@@ -40,13 +37,10 @@ class BoardDetailActivity : AppCompatActivity(), onClickMore {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board_comment)
 
-        val isMine = false
-
-        val class_name = intent.getStringExtra("class")
-        val class_id = intent.getStringExtra("idx")
-
-        var boardType = 0
-        boardType = intent.getIntExtra("boardType", 0)
+        var isMine = false
+        val className = intent.getStringExtra("class")
+        val idx = intent.getIntExtra("boardIdx", 0)
+        val boardType = intent.getIntExtra("boardType", 0)
 
         btn_board_more.setOnClickListener {
             //TODO 게시글 mine notmine 판단해서 다이얼로그 띄우기
@@ -54,9 +48,8 @@ class BoardDetailActivity : AppCompatActivity(), onClickMore {
 
             //사용자가 나일때
             if(isMine) {
-             val layout_mine = LayoutInflater.from(this).inflate(R.layout.dialog_board_mine, null)
-             builder.setView(layout_mine)
-
+             val layoutMine = LayoutInflater.from(this).inflate(R.layout.dialog_board_mine, null)
+             builder.setView(layoutMine)
                 dialog = builder.create()
                 dialog.window?.setBackgroundDrawable(
                     InsetDrawable(
@@ -65,22 +58,22 @@ class BoardDetailActivity : AppCompatActivity(), onClickMore {
                     )
                 )
                 dialog.show()
-             layout_mine.findViewById<TextView>(R.id.btn_update).setOnClickListener{
+             layoutMine.findViewById<TextView>(R.id.btn_update).setOnClickListener{
                  //TODO 수정
                  Toast.makeText(this,"수정",Toast.LENGTH_SHORT).show()
              }
-            layout_mine.findViewById<TextView>(R.id.btn_delete).setOnClickListener{
+            layoutMine.findViewById<TextView>(R.id.btn_delete).setOnClickListener{
                 //TODO 삭제
-                Toast.makeText(this,"삭",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"삭제",Toast.LENGTH_SHORT).show()
 
             }
             }else {
 
                 //사용자 내가 아닐때
-                val layout_notmine =
+                val layoutNotMine =
                     LayoutInflater.from(this).inflate(R.layout.dialog_board_notmine, null)
 
-                builder.setView(layout_notmine)
+                builder.setView(layoutNotMine)
 
                 dialog = builder.create()
                 dialog.window?.setBackgroundDrawable(
@@ -91,16 +84,13 @@ class BoardDetailActivity : AppCompatActivity(), onClickMore {
                 )
                 dialog.show()
 
-                layout_notmine.findViewById<TextView>(R.id.btn_send_message).setOnClickListener {
+                layoutNotMine.findViewById<TextView>(R.id.btn_send_message).setOnClickListener {
                     //TODO 쪽지 보내기
                     Toast.makeText(this, "쪽지보내기", Toast.LENGTH_SHORT).show()
 
                 }
-                layout_notmine.findViewById<TextView>(R.id.btn_assert).setOnClickListener {
-                    //TODO 신고
-                    MakeReportDialog(it)
-
-
+                layoutNotMine.findViewById<TextView>(R.id.btn_assert).setOnClickListener {
+                    reportBoardDialog(it, idx, boardType)
                 }
             }
 

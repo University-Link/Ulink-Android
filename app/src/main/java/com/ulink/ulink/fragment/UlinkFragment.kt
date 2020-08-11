@@ -53,7 +53,7 @@ class UlinkFragment : Fragment() {
             ) {
                 response.body()?.let{
                     if(it.status == 200){
-                        for(i in 0 until it.data.list.size) {
+                        for(i in it.data.list.indices) {
                             datas.apply{
                                 add(
                                     BoardSubject(
@@ -72,30 +72,32 @@ class UlinkFragment : Fragment() {
 
         classAdapter.setItemClickLIstener(object:ClassAdapter.ItemClickListener{
             override fun onClick(view:View, position:Int){
-                val intent = Intent(getActivity(), UlinkInsideActivity::class.java)
+                val intent = Intent(activity, UlinkInsideActivity::class.java)
                 intent.putExtra("class", datas[position].name) //과목명
                 intent.putExtra("idx", datas[position].subjectIdx.toString())
                 startActivity(intent)
             }
         })
 
-        layout_ulink_board.setOnClickListener(){
-            val intent = Intent(getActivity(), UlinkUlinkBoardActivity::class.java)
+        layout_ulink_board.setOnClickListener {
+            val intent = Intent(activity, UlinkUlinkBoardActivity::class.java)
             intent.putExtra("class", "Ulink")
             intent.putExtra("idx", "0")
             startActivity(intent)
         }
 
-        layout_university_board.setOnClickListener(){
-            val intent = Intent(getActivity(), UlinkUniversityBoardActivity::class.java)
+        layout_university_board.setOnClickListener {
+            val intent = Intent(activity, UlinkUniversityBoardActivity::class.java)
             intent.putExtra("class", "우리학교")
             intent.putExtra("idx", "0")
             startActivity(intent)
         }
 
         btn_search.setOnClickListener {
-            val intent = Intent(getActivity(), BoardSearchActivity::class.java)
+            val intent = Intent(activity, BoardSearchActivity::class.java)
+            intent.putExtra("boardCategory",3)
             startActivity(intent)
+
         }
     }
 

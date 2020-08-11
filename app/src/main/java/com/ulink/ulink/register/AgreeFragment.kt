@@ -124,4 +124,10 @@ class AgreeFragment : Fragment() {
                 }
             }
     }
+
+    override fun onResume() {
+        super.onResume()
+        if(btn_policy_agree.isChecked && btn_information_agree.isChecked)
+            btnAgreeSelector(btn_information_agree, btn_policy_agree, btn_next)
+    }
 }

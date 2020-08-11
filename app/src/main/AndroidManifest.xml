@@ -13,29 +13,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Ulink.ulinknotice.NoticeWriteActivity"></activity>
+        <activity android:name=".idPw.FindSuccessActivity" />
+        <activity android:name=".idPw.FindIdPwActivity" />
+        <activity android:name=".Ulink.ulinknotice.NoticeWriteActivity" />
         <activity android:name=".Ulink.ulinknotice.NoticeUpdateRequestActivity" />
         <activity android:name=".Ulink.ulinknotice.NoticeDetailActivity" />
         <activity android:name=".register.ThirdAgreeActivity" />
         <activity android:name=".register.AdAgreeActivity" />
         <activity android:name=".Activity.CommunityGuideActivity" />
         <activity android:name=".Activity.FAQActivity" />
-        <activity android:name=".withdrawal.WithdrawalActivity"/>
-        <activity android:name=".register.CollectAgreeActivity"></activity>
+        <activity android:name=".withdrawal.WithdrawalActivity" />
+        <activity android:name=".register.CollectAgreeActivity" />
         <activity android:name=".register.ServiceAgreeActivity" />
         <activity android:name=".Activity.ChangePasswordActivity" />
         <activity android:name=".Ulink.BoardSearchRecycler.BoardSearchActivity" />
-        <activity android:name=".Ulink.UlinkBoardWriteActivity"
-            android:windowSoftInputMode="adjustResize">
-        </activity>
+        <activity
+            android:name=".Ulink.UlinkBoardWriteActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".Ulink.BoardCommentRecycler.BoardDetailActivity" />
-        <activity android:name=".Ulink.BoardSearchActivity" />
         <activity android:name=".myActivity.MyActivityActivity" />
         <activity android:name=".Activity.ChangeNickNameActivity" />
         <activity android:name=".Activity.ChangeMajorActivity" />
         <activity android:name=".Activity.SchoolCertificateActivity" />
         <activity android:name=".Ulink.UlinkInsideActivity" />
-
         <activity android:name=".NewAppWidgetConfigureActivity">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
@@ -70,7 +70,8 @@
         <activity android:name=".Activity.NoticeAddActivity" />
         <activity android:name=".Ulink.UlinkUniversityBoardActivity" />
         <activity android:name=".Ulink.UlinkUlinkBoardActivity" />
-        <activity android:name=".Ulink.ClassBoardWriteActivity"/>
+        <activity android:name=".Ulink.ClassBoardWriteActivity" />
+
         <receiver android:name=".NewAppWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

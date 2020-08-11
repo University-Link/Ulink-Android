@@ -20,7 +20,6 @@ class DialogBuilder2 {
 
     fun build(context : Context) : DialogBuilder2{
         builder = AlertDialog.Builder(context)
-        //layout = LayoutInflater.from(context).inflate(R.layout.dialog_board_accuse, null)
         builder.setView(layout)
         dialog = builder.create()
 
@@ -46,7 +45,7 @@ class DialogBuilder2 {
     fun show(){
         // 양옆 마진 조절
         val back = ColorDrawable(Color.TRANSPARENT)
-        val inset = InsetDrawable(back, 70)
+        val inset = InsetDrawable(back, 90)
 
         dialog.window?.setBackgroundDrawable(inset)
         dialog.show()

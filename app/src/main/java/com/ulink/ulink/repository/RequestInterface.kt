@@ -1,7 +1,6 @@
 package com.ulink.ulink.repository
 
-import com.ulink.ulink.Ulink.ulinknotice.ResponseDetailNotice
-import com.ulink.ulink.Ulink.ulinknotice.ResponseUlinkNotice
+import com.ulink.ulink.Ulink.ulinknotice.*
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
@@ -254,6 +253,36 @@ interface RequestInterface {
             @Body body : RequestRegisterNotice
     ) : Call<ResponseRegisterNotice>
 
+    //공지 생성
+    @POST("notice/{idx}")
+    fun addNotice(
+        @Header("token") token : String,
+        @Path("idx") idx : String,
+        @Body body : RequestNoticeAdd
+    ) : Call<ResponseNotice>
+
+    //공지 수정
+    @PUT("/notice/{idx}")
+    fun updateNotice(
+        @Header("token") token : String,
+        @Path("idx") idx : Int,
+        @Body body : RequestNoticeAdd
+    ) : Call<ResponseNotice>
+
+    //공지 삭제
+    @DELETE("/notice/{idx}")
+    fun deleteNotice(
+        @Header("token") token : String,
+        @Path("idx") idx : Int
+    ) : Call<ResponseNotice>
+
+    //공지 신고
+    @POST("/report/notice")
+    fun reportNotice(
+        @Header("token") token : String,
+        @Body body : RequestNoticeReport
+    ) : Call<ResponseNotice>
+
     //공지 상세조회
     @GET("/notice/{idx}")
     fun getSpecificNotice(
@@ -368,4 +397,26 @@ interface RequestInterface {
             @Header("token") token: String,
             @Path("page") page : Int
     ) : Call<ResponseGetSubjectBoard>
+
+    //유링크 게시글 신고
+    @POST("/report/public")
+    fun reportUlinkBoard(
+        @Header("token") token : String,
+        @Body body : RequestBoardReport
+    ) : Call<ResponseBoardReport>
+
+    //학교 게시글 신고
+    @POST("/report/school")
+    fun reportSchoolBoard(
+        @Header("token") token : String,
+        @Body body : RequestBoardReport
+    ) : Call<ResponseBoardReport>
+
+    //과목 게시글 신고
+    @POST("/report/subject")
+    fun reportSubjectBoard(
+        @Header("token") token : String,
+        @Body body : RequestBoardReport
+    ) : Call<ResponseBoardReport>
+
 }

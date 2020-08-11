@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.fragment_major.btn_back
 import kotlinx.android.synthetic.main.fragment_major.btn_next
 import kotlinx.android.synthetic.main.fragment_major.btn_reset
 import kotlinx.android.synthetic.main.fragment_major.btn_search
+import kotlinx.android.synthetic.main.fragment_university.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -145,5 +146,10 @@ class MajorFragment : Fragment() {
                     putString(ARG_PARAM1, param1)
                 }
             }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        et_major_search.setText("")
     }
 }

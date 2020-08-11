@@ -130,4 +130,9 @@ class UniversityFragment : Fragment() {
             searchCheck = false
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        et_university_search.setText("")
+    }
 }

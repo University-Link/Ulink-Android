@@ -13,5 +13,6 @@ data class ResponseGetTimeTableList(
             val subjects: Subjects
 
     )
+
 }
 

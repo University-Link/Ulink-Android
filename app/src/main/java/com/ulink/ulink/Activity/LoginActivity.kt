@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.ulink.ulink.MainActivity
 import com.ulink.ulink.R
+import com.ulink.ulink.idPw.FindIdPwActivity
 import com.ulink.ulink.register.RegisterActivity
 import com.ulink.ulink.repository.DataRepository
 import com.ulink.ulink.repository.RequestLogin
@@ -31,8 +32,13 @@ class LoginActivity : AppCompatActivity() {
             et_pw.setText(password)
         }
 
-        tv_register.setOnClickListener(){
+        tv_register.setOnClickListener{
             val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
+        tv_find_id_pw.setOnClickListener{
+            val intent = Intent(this, FindIdPwActivity::class.java)
             startActivity(intent)
         }
 
