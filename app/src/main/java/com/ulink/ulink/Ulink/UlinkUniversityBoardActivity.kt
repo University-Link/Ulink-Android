@@ -100,7 +100,8 @@ class UlinkUniversityBoardActivity : AppCompatActivity(),onClickLike {
 
     }
 
-    override fun onClick() {
+
+    override fun onClick(position: Int) {
         Toast.makeText(this,"좋아요클릭",Toast.LENGTH_SHORT).show()
     }
 }

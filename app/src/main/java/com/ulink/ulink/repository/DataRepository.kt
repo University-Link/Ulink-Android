@@ -2,9 +2,7 @@ package com.ulink.ulink.repository
 
 import android.util.Log
 import com.ulink.ulink.ScheduleRecycler.ScheduleItemData
-import com.ulink.ulink.Ulink.BoardSubjectData
-import com.ulink.ulink.Ulink.BoardUlinkData
-import com.ulink.ulink.Ulink.BoardUniversityData
+import com.ulink.ulink.Ulink.BoardData
 import com.ulink.ulink.utils.deepCopy
 import com.ulink.ulink.utils.deepCopyRetrofit
 import retrofit2.Call
@@ -338,7 +336,7 @@ object DataRepository {
         })
     }
 
-    fun getPublicBoard(page : Int = 0,onSuccess: (List<BoardUlinkData>, Int) -> Unit, onFailure: (String) -> Unit) {
+    fun getPublicBoard(page : Int = 0, onSuccess: (List<BoardData>, Int) -> Unit, onFailure: (String) -> Unit) {
         retrofit.getPublicBoard(token, page).enqueue(object : Callback<ResponseGetPublicBoard> {
             override fun onFailure(call: Call<ResponseGetPublicBoard>, t: Throwable) {
                 onFailure(t.localizedMessage)
@@ -348,10 +346,10 @@ object DataRepository {
             override fun onResponse(call: Call<ResponseGetPublicBoard>, response: Response<ResponseGetPublicBoard>) {
                 response.body()?.let {
 
-                    val list: MutableList<BoardUlinkData> = mutableListOf()
+                    val list: MutableList<BoardData> = mutableListOf()
                     for (i in it.data.board) {
                         list.add(
-                                BoardUlinkData(i.boardPublicIdx, i.title, i.initial, i.nickname, null, i.content, i.likeCount, i.commentCount, i.userIdx, i.createdAt, i.isLike, i.isMine)
+                                BoardData(i.boardIdx, i.title, i.initial, i.profileImage, i.nickname, i.content, i.likeCount, i.commentCount, 0,0,0,i.userIdx,i.createdAt, i.category,i.isLike, i.isMine,0,0)
                         )
                     }
 
@@ -361,7 +359,7 @@ object DataRepository {
         })
     }
 
-    fun getUniveristyBoard(page : Int = 0, onSuccess: (List<BoardUniversityData>, Int) -> Unit, onFailure: (String) -> Unit) {
+    fun getUniveristyBoard(page : Int = 0, onSuccess: (List<BoardData>, Int) -> Unit, onFailure: (String) -> Unit) {
         retrofit.getUniversityBoard(token, page).enqueue(object : Callback<ResponseGetUniversityBoard> {
             override fun onFailure(call: Call<ResponseGetUniversityBoard>, t: Throwable) {
                 onFailure(t.localizedMessage)
@@ -370,10 +368,10 @@ object DataRepository {
 
             override fun onResponse(call: Call<ResponseGetUniversityBoard>, response: Response<ResponseGetUniversityBoard>) {
                 response.body()?.let {
-                    val list: MutableList<BoardUniversityData> = mutableListOf()
+                    val list: MutableList<BoardData> = mutableListOf()
                     for (i in it.data.board) {
                         list.add(
-                                BoardUniversityData(i.boardUniversityIdx, i.title, i.initial, i.nickname,null,  i.content, i.likeCount, i.commentCount, i.userIdx, i.createdAt, i.isLike, i.universityIdx, i.isMine)
+                            BoardData(i.boardIdx, i.title, i.initial, i.profileImage, i.nickname, i.content, i.likeCount, i.commentCount, i.universityIdx,0,0,i.userIdx,i.createdAt, i.category,i.isLike, i.isMine,0,0)
                         )
                     }
 
@@ -383,7 +381,7 @@ object DataRepository {
         })
     }
 
-    fun getSubjectBoard(page : Int = 0,onSuccess: (List<BoardSubjectData>, Int) -> Unit, onFailure: (String) -> Unit) {
+    fun getSubjectBoard(page : Int = 0,onSuccess: (List<BoardData>, Int) -> Unit, onFailure: (String) -> Unit) {
         retrofit.getSubjectBoard(token,page).enqueue(object : Callback<ResponseGetSubjectBoard> {
             override fun onFailure(call: Call<ResponseGetSubjectBoard>, t: Throwable) {
                 onFailure(t.localizedMessage)
@@ -393,10 +391,10 @@ object DataRepository {
             override fun onResponse(call: Call<ResponseGetSubjectBoard>, response: Response<ResponseGetSubjectBoard>) {
                 response.body()?.let {
 
-                    val list: MutableList<BoardSubjectData> = mutableListOf()
+                    val list: MutableList<BoardData> = mutableListOf()
                     for (i in it.data.board) {
                         list.add(
-                                BoardSubjectData(i.boardSubjectIdx, i.title, i.initial, i.nickname, null, i.content, i.likeCount, i.commentCount, i.userIdx, i.createdAt, i.isLike, i.noticeIdx, i.subjectIdx,i.isMine, i.noticeIdx, i.category)
+                            BoardData(i.boardIdx, i.title, i.initial, i.profileImage, i.nickname, i.content, i.likeCount, i.commentCount, i.universityIdx,i.subjectIdx,i.isNotice,i.userIdx,i.createdAt, i.category,i.isLike, i.isMine,i.noticeIdx,i.noticeType)
                         )
                     }
 

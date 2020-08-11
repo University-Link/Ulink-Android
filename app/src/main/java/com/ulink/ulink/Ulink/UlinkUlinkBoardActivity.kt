@@ -12,16 +12,19 @@ import com.ulink.ulink.R
 import com.ulink.ulink.Ulink.BoardRecycler.AllBoardAdapter
 import com.ulink.ulink.Ulink.BoardCommentRecycler.BoardDetailActivity
 import com.ulink.ulink.Ulink.BoardSearchRecycler.BoardSearchActivity
-import com.ulink.ulink.repository.DataRepository
+import com.ulink.ulink.repository.*
 import kotlinx.android.synthetic.main.activity_ulink_all_board.*
 import kotlinx.android.synthetic.main.toolbar_ulink_inside.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class UlinkUlinkBoardActivity : AppCompatActivity() ,onClickLike{
     lateinit var board_adapter: AllBoardAdapter
     var loading = false
     var nextPage = 0
-
+    var position = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ulink_all_board)
@@ -92,19 +95,71 @@ class UlinkUlinkBoardActivity : AppCompatActivity() ,onClickLike{
             override fun onClick(view: View, position: Int) {
                 val intent = Intent(this@UlinkUlinkBoardActivity, BoardDetailActivity::class.java)
                 intent.putExtra("boardType", 0)
+                intent.putExtra("ulinkDetailBoard",board_adapter.datas_ulink.get(position))
                 startActivity(intent)
             }
 
         })
     }
 
-    override fun onClick() {
-        //TODO 좋아요 클릭했을때
-        Toast.makeText(this,"좋아요클릭",Toast.LENGTH_SHORT).show()
-    }
-}
-interface onClickLike {
-    fun onClick(
+    override fun onClick(position:Int) {
+        Toast.makeText(this,"좋아요클릭"+position,Toast.LENGTH_SHORT).show()
 
-    )
+        Log.d("좋아요 boolean 값",board_adapter.datas_ulink.get(position).isLike.toString())
+        if(board_adapter.datas_ulink.get(position).isLike){ //좋아요 취소
+            RetrofitService.service.cancelUlinkBoardLike(DataRepository.token,board_adapter.datas_ulink.get(position).boardIdx).enqueue(object: Callback<ResponseCancelLikeUlinkBoard>{
+                override fun onFailure(call: Call<ResponseCancelLikeUlinkBoard>, t: Throwable) {
+                    TODO("Not yet implemented")
+                    Log.d("좋아요 취소 실패",t.message)
+                }
+
+                override fun onResponse(
+                    call: Call<ResponseCancelLikeUlinkBoard>,
+                    response: Response<ResponseCancelLikeUlinkBoard>
+                ) {
+                    response.body()?.let{
+
+                        if(it.status==200){
+                            board_adapter.datas_ulink.get(position).isLike=false
+                            board_adapter.notifyItemChanged(position)
+                            Log.d("좋아요 취소 성공","좋아요 취소 성공")
+                        }
+
+                    }?: Log.d("좋아요 취소 실패2", response.message())
+                }
+
+            })
+
+        }else{
+            RetrofitService.service.clickUlinkBoardLike(DataRepository.token, RequestClickLikeUlinkBoard(board_adapter.datas_ulink.get(position).boardIdx)).enqueue(object : Callback<ResponseClickLikeUlinkBoard>{
+                override fun onFailure(call: Call<ResponseClickLikeUlinkBoard>, t: Throwable) {
+                    Log.d("좋아요 실패",t.message)
+                }
+
+                override fun onResponse(
+                    call: Call<ResponseClickLikeUlinkBoard>,
+                    response: Response<ResponseClickLikeUlinkBoard>
+                ) {
+                    response.body()?.let{
+
+                        if(it.status==200){
+                            board_adapter.datas_ulink.get(position).isLike=true
+                            board_adapter.notifyItemChanged(position)
+                            Log.d("좋아요 성공 ","좋아요 성")
+
+                        }
+                    }?:Log.d("좋아요 실패",response.message())
+
+
+                }
+
+            })
+
+        }
+
+        }
+    }
+
+interface onClickLike {
+    fun onClick(position:Int)
 }

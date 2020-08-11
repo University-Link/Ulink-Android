@@ -6,7 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ulink.ulink.R
-import com.ulink.ulink.Ulink.BoardSubjectData
+import com.ulink.ulink.Ulink.BoardData
 import com.ulink.ulink.Ulink.onClickLike
 
 class BoardClassViewHolder(itemView: View,val mListener: onClickLike?): RecyclerView.ViewHolder(itemView){
@@ -19,7 +19,7 @@ class BoardClassViewHolder(itemView: View,val mListener: onClickLike?): Recycler
     val btn_heart : ImageButton = itemView.findViewById(R.id.btn_heart)
 
 
-    fun bind(boardData: BoardSubjectData, showBoardName : Boolean){
+    fun bind(boardData: BoardData, showBoardName: Boolean){
         tv_nickname.text = boardData.nickname
         tv_time.text = boardData.createdAt
         tv_content.text = boardData.content
@@ -27,7 +27,7 @@ class BoardClassViewHolder(itemView: View,val mListener: onClickLike?): Recycler
         tv_heart_count.text = boardData.likeCount.toString()
 
         btn_heart.setOnClickListener{
-            mListener?.onClick()
+            mListener?.onClick(adapterPosition)
         }
         if (showBoardName){
             val img_line : ImageView = itemView.findViewById(R.id.img_line)

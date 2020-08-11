@@ -1,6 +1,6 @@
 package com.ulink.ulink.repository
 
-import com.ulink.ulink.Ulink.BoardUlinkData
+import com.ulink.ulink.Ulink.BoardData
 
 data class ResponseGetPublicBoard(
         val status : Int,
@@ -9,7 +9,7 @@ data class ResponseGetPublicBoard(
         val data : Data
 ){
     data class Data(
-            val board : List<BoardUlinkData>,
-            val nextPage : Int
+        val board : List<BoardData>,
+        val nextPage : Int
     )
 }

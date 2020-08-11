@@ -4,9 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.ulink.ulink.R
 import com.ulink.ulink.Ulink.BoardRecycler.AllBoardAdapter
-import com.ulink.ulink.Ulink.BoardSubjectData
-import com.ulink.ulink.Ulink.BoardUlinkData
-import com.ulink.ulink.Ulink.BoardUniversityData
+import com.ulink.ulink.Ulink.BoardData
 import com.ulink.ulink.textResetButton
 import kotlinx.android.synthetic.main.activity_board_search.*
 
@@ -42,8 +40,8 @@ class BoardSearchActivity : AppCompatActivity() {
 
 //                TODO 여기서 서버랑 통신해서 data 섞인거 가져오기!
 //                  검색누르면 이런식으로 나온다~
-                val list: MutableList<Any> = mutableListOf(BoardUlinkData(
-                        boardPublicIdx = 0,
+                val list: MutableList<BoardData> = mutableListOf(BoardData(
+                        boardIdx = 0,
                         title = "님들 점심 추천",
                         initial = "",
                         nickname = "유링크좋아요",
@@ -52,11 +50,12 @@ class BoardSearchActivity : AppCompatActivity() {
                         likeCount = 0,
                         commentCount = 0,
                         userIdx = 0,
+                        category = 0,
                         createdAt = "방금",
                         isLike = false,
                         isMine = false
-                ), BoardUniversityData(
-                        boardUniversityIdx = 0,
+                ), BoardData(
+                        boardIdx = 0,
                         title = "총장직선제 개선촉구 시위 마지막 공지",
                         initial = "",
                         nickname = "형광펜포스트잇23",
@@ -65,12 +64,13 @@ class BoardSearchActivity : AppCompatActivity() {
                         likeCount = 0,
                         commentCount = 0,
                         userIdx = 0,
+                        category = 1,
                         createdAt = "5분",
                         isLike = false,
                         universityIdx = 0,
                         isMine = false
-                ),  BoardSubjectData(
-                        boardSubjectIdx = 0,
+                ),  BoardData(
+                        boardIdx = 0,
                         title = "님들 점심 추천",
                         initial = "",
                         nickname = "유링크좋아요",
@@ -80,12 +80,12 @@ class BoardSearchActivity : AppCompatActivity() {
                         commentCount = 0,
                         userIdx = 0,
                         createdAt = "",
+                        category = 2,
                         isLike = false,
                         isNotice = 0,
                         subjectIdx = 0,
                         isMine = false,
-                        noticeIdx = 0,
-                        category = 0
+                        noticeIdx = 0
                 )
                 )
                 boardAdapter.setAllDataSearch(list)

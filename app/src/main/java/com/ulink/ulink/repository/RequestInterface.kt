@@ -224,6 +224,26 @@ interface RequestInterface {
         @Header("token") token : String
     ) : Call<ResponseBoardList>
 
+    //유링크 게시판 상세조회
+    @GET("/board/public/specific/{boardIdx}")
+    fun getSpecificUlinkBoardList(
+        @Header("token")token : String,
+        @Path("boardIdx") idx : Int
+    ): Call<ResponsegetUlinkBoardList>
+
+    //유링크 게시판 좋아요
+    @POST("/like/public")
+    fun clickUlinkBoardLike(
+        @Header("token") token : String,
+        @Body boardIdx : RequestClickLikeUlinkBoard
+    ): Call<ResponseClickLikeUlinkBoard>
+
+    //유링크 게시판 좋아요 취소
+    @DELETE("/like/public/{boardIdx}")
+    fun cancelUlinkBoardLike(
+        @Header("token") token : String,
+        @Path("boardIdx") boardIdx : Int
+    ): Call<ResponseCancelLikeUlinkBoard>
     //Notice
     //메인 스케줄의 모든 공지 가져오기
     @GET("/notice")

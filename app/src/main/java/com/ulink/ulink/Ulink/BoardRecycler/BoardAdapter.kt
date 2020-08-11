@@ -6,9 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ulink.ulink.R
-import com.ulink.ulink.Ulink.BoardSubjectData
-import com.ulink.ulink.Ulink.BoardUlinkData
-import com.ulink.ulink.Ulink.BoardUniversityData
+import com.ulink.ulink.Ulink.BoardData
 import com.ulink.ulink.Ulink.onClickLike
 
 const val VIEWTYPE_ULINK = 0
@@ -17,46 +15,48 @@ const val VIEWTYPE_SUBJECT = 2
 const val VIEWTYPE_NOTICE = 3
 
 class AllBoardAdapter(private val context: Context, val searchType: Int, val search: Boolean) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var datas_ulink: MutableList<BoardUlinkData> = mutableListOf()
-    var datas_university: MutableList<BoardUniversityData> = mutableListOf()
-    var datas_class: MutableList<BoardSubjectData> = mutableListOf()
+    var datas_ulink: MutableList<BoardData> = mutableListOf()
+    var datas_university: MutableList<BoardData> = mutableListOf()
+    var datas_class: MutableList<BoardData> = mutableListOf()
 
-    private var dataSearchAllBoard: MutableList<Any> = mutableListOf()
+
+    private var dataSearchAllBoard: MutableList<BoardData> = mutableListOf()
 
     var mListener : onClickLike? = null
     fun setListener(onClickLike: onClickLike){
         mListener = onClickLike
+
     }
-    fun setUlinkData(list : List<BoardUlinkData>){
+    fun setUlinkData(list : List<BoardData>){
         datas_ulink.clear()
         datas_ulink.addAll(list)
         notifyDataSetChanged()
     }
-    fun addUlinkData(list : List<BoardUlinkData>){
+    fun addUlinkData(list : List<BoardData>){
         datas_ulink.addAll(list)
         notifyDataSetChanged()
     }
-    fun addUnivData(list : List<BoardUniversityData>){
+    fun addUnivData(list : List<BoardData>){
         datas_university.addAll(list)
         notifyDataSetChanged()
     }
-    fun addSubjectData(list : List<BoardSubjectData>){
+    fun addSubjectData(list : List<BoardData>){
         datas_class.addAll(list)
         notifyDataSetChanged()
     }
 
-    fun setUnivData(list : List<BoardUniversityData>){
+    fun setUnivData(list : List<BoardData>){
         datas_university.clear()
         datas_university.addAll(list)
         notifyDataSetChanged()
     }
-    fun setSubjectData(list : List<BoardSubjectData>){
+    fun setSubjectData(list : List<BoardData>){
         datas_class.clear()
         datas_class.addAll(list)
         notifyDataSetChanged()
     }
 
-    fun setAllDataSearch(list : MutableList<Any>){
+    fun setAllDataSearch(list : MutableList<BoardData>){
         dataSearchAllBoard.clear()
         dataSearchAllBoard.addAll(list)
         notifyDataSetChanged()
@@ -70,10 +70,11 @@ class AllBoardAdapter(private val context: Context, val searchType: Int, val sea
                 1 -> super.getItemViewType(position)
                 2 -> super.getItemViewType(position)
                 else -> {
-                    when (dataSearchAllBoard[position]) {
-                        is BoardUlinkData -> VIEWTYPE_ULINK
-                        is BoardUniversityData -> VIEWTYPE_UNIV
-                        is BoardSubjectData -> VIEWTYPE_SUBJECT
+                    when (dataSearchAllBoard[position].category) {
+
+                        0-> VIEWTYPE_ULINK
+                        1 -> VIEWTYPE_UNIV
+                        2 -> VIEWTYPE_SUBJECT
                         else -> VIEWTYPE_NOTICE
                     }
                 }
@@ -112,7 +113,7 @@ class AllBoardAdapter(private val context: Context, val searchType: Int, val sea
                     when(getItemViewType(position)){
                         0 -> (holder as BoardViewHolder).bind(dataSearchAllBoard[position], true) //태그있는
                         1 -> (holder as BoardViewHolder).bind(dataSearchAllBoard[position], true) //태그없는
-                        2 ->  (holder as BoardClassViewHolder).bind(dataSearchAllBoard[position] as BoardSubjectData, true)
+                        2 ->  (holder as BoardClassViewHolder).bind(dataSearchAllBoard[position] as BoardData, true)
                         else -> {
                         }
                     }

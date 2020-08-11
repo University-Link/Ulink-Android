@@ -7,6 +7,7 @@ import android.util.Log
 import com.ulink.ulink.R
 import com.ulink.ulink.Ulink.BoardSearchRecycler.BoardSearchActivity
 import com.ulink.ulink.Ulink.ClassBoard.UlinkBoardFragment
+import com.ulink.ulink.Ulink.ulinknotice.NoticeWriteActivity
 import kotlinx.android.synthetic.main.activity_ulink_inside.*
 import kotlinx.android.synthetic.main.toolbar_ulink_inside.*
 
@@ -16,21 +17,21 @@ class UlinkInsideActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ulink_inside)
 
-        val className = intent.getStringExtra("class")
-        val classIdx = intent.getStringExtra("idx")
+        val subjectName = intent.getStringExtra("class")
+        val subjectIdx = intent.getStringExtra("idx")
 
-        Log.d("UIActivity",""+className)
+        Log.d("UIActivity",""+subjectName)
 
         val bundle =  Bundle()
-        bundle.putString("class",className)
-        bundle.putString("idx",classIdx)
+        bundle.putString("class",subjectName)
+        bundle.putString("idx",subjectIdx)
         val ulink_board_fragment = UlinkBoardFragment()
         ulink_board_fragment.setArguments(bundle)
 
-        if(className!="")
-            tv_classname.setText(className)
+        if(subjectName!="")
+            tv_classname.setText(subjectName)
 
-        val ulinkInsideAdapter = UlinkInsideAdapter(supportFragmentManager, className, classIdx)
+        val ulinkInsideAdapter = UlinkInsideAdapter(supportFragmentManager, subjectName, subjectIdx)
         vp_ulink_inside.adapter = ulinkInsideAdapter
         tablayout_ulink_inside.setupWithViewPager(vp_ulink_inside)
 
@@ -41,8 +42,17 @@ class UlinkInsideActivity : AppCompatActivity() {
         }
 
         btn_plus.setOnClickListener {
-            val intent = Intent(this, ClassBoardWriteActivity::class.java)
-            startActivity(intent)
+            if(vp_ulink_inside.currentItem == 0){
+                val intent = Intent(this, ClassBoardWriteActivity::class.java)
+                startActivity(intent)
+            }
+            else {
+                val intent = Intent(this, NoticeWriteActivity::class.java)
+                intent.putExtra("subjectName", subjectName)
+                intent.putExtra("subjectIdx", subjectIdx)
+                intent.putExtra("mode", "add")
+                startActivity(intent)
+            }
         }
 
         btn_back.setOnClickListener {

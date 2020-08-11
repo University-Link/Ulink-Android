@@ -9,14 +9,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ulink.ulink.R
-import com.ulink.ulink.Ulink.BoardSubjectData
-import com.ulink.ulink.Ulink.BoardUlinkData
-import com.ulink.ulink.Ulink.BoardUniversityData
+import com.ulink.ulink.Ulink.BoardData
 
 class UlinkBoardCommentAdapter (private val context: Context,val viewtype : Int, val onClickListener: onClickMore) : RecyclerView.Adapter<UlinkBoardCommentAdapter.UlinkBoardCommentViewHolder>() {
-    var data_ulink:MutableList<BoardUlinkData> = mutableListOf()
-    var data_university:MutableList<BoardUniversityData> = mutableListOf()
-    var data_class:MutableList<BoardSubjectData> = mutableListOf()
+    var data_:MutableList<BoardData> = mutableListOf()
+    var data_university:MutableList<BoardData> = mutableListOf()
+    var data_class:MutableList<BoardData> = mutableListOf()
 
 
     inner class UlinkBoardCommentViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
@@ -49,7 +47,7 @@ class UlinkBoardCommentAdapter (private val context: Context,val viewtype : Int,
 
 
 //          FIXME 이거 type 별로 표시하기!! commenttype
-            boardData as BoardUlinkData
+            boardData as BoardData
 
             tv_nickname.text = boardData.nickname
             tv_time.text = boardData.createdAt
@@ -72,7 +70,7 @@ class UlinkBoardCommentAdapter (private val context: Context,val viewtype : Int,
 //    }
     override fun getItemCount(): Int {
         when(viewtype){
-            0->return data_ulink.size
+            0->return data_.size
             1-> return data_university.size
             else -> return data_class.size
         }
@@ -80,7 +78,7 @@ class UlinkBoardCommentAdapter (private val context: Context,val viewtype : Int,
 
     override fun onBindViewHolder(holder: UlinkBoardCommentViewHolder, position: Int) {
         when(viewtype){
-            0-> holder.bind(data_ulink[position],0)
+            0-> holder.bind(data_[position],0)
             1-> holder.bind(data_university[position],1)
             else-> holder.bind(data_class[position],2)
 

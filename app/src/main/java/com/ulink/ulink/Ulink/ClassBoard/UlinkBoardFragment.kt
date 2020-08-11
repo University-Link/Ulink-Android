@@ -12,18 +12,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ulink.ulink.R
 import com.ulink.ulink.Ulink.BoardRecycler.AllBoardAdapter
 import com.ulink.ulink.Ulink.BoardCommentRecycler.BoardDetailActivity
-import com.ulink.ulink.Ulink.BoardCommentRecycler.onClickMore
-import com.ulink.ulink.Ulink.BoardSubjectData
+import com.ulink.ulink.Ulink.BoardData
 import com.ulink.ulink.Ulink.onClickLike
 import com.ulink.ulink.repository.DataRepository
-import kotlinx.android.synthetic.main.activity_ulink_university_board.*
-import kotlinx.android.synthetic.main.fragment_ulink_board.*
 import kotlinx.android.synthetic.main.fragment_ulink_board.rv_ulink_board
 
 
 class UlinkBoardFragment() : Fragment() ,onClickLike{
     lateinit var board_adapter: AllBoardAdapter
-    val datas: MutableList<BoardSubjectData> = mutableListOf()
+    val datas: MutableList<BoardData> = mutableListOf()
     lateinit var class_name: String
     lateinit var class_id: String
 
@@ -108,9 +105,10 @@ class UlinkBoardFragment() : Fragment() ,onClickLike{
 
     }
 
-    override fun onClick() {
-        Toast.makeText(context,"좋아요클릭", Toast.LENGTH_SHORT).show()
+   
 
+    override fun onClick(position: Int) {
+        Toast.makeText(context,"좋아요클릭", Toast.LENGTH_SHORT).show()
     }
 
 }

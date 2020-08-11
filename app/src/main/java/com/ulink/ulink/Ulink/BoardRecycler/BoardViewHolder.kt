@@ -1,13 +1,13 @@
 package com.ulink.ulink.Ulink.BoardRecycler
 
+import android.util.Log
 import android.view.View
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.ulink.ulink.R
-import com.ulink.ulink.Ulink.BoardUniversityData
-import com.ulink.ulink.Ulink.BoardUlinkData
+import com.ulink.ulink.Ulink.BoardData
 import com.ulink.ulink.Ulink.onClickLike
 
 class BoardViewHolder(itemView: View,val mListener: onClickLike?) : RecyclerView.ViewHolder(itemView) {
@@ -18,14 +18,24 @@ class BoardViewHolder(itemView: View,val mListener: onClickLike?) : RecyclerView
     val tv_comment_count: TextView = itemView.findViewById(R.id.tv_comment_count)
     val tv_heart_count: TextView = itemView.findViewById(R.id.tv_heart_count)
     val img_tag: ImageView = itemView.findViewById(R.id.img_uni_tag)
-    val btn_heart : ImageButton = itemView.findViewById(R.id.btn_heart)
+    val btn_heart : ImageView = itemView.findViewById(R.id.btn_heart)
 
-    fun bind(boardData: Any, showBoardName : Boolean) {
+
+    fun bind(boardData: BoardData, showBoardName : Boolean) {
+
+        Glide.with(itemView).load(R.drawable.class_board_detail_ic_heart_unactivated).into(btn_heart)
 
         btn_heart.setOnClickListener{
-            mListener?.onClick()
+            mListener?.onClick(adapterPosition)
+            if(boardData.isLike){
+                btn_heart.setImageResource(R.drawable.class_board_ic_heart)
+            }else{
+                btn_heart.setImageResource(R.drawable.class_board_detail_ic_heart_unactivated)
+            }
         }
-        if (boardData is BoardUlinkData) {
+
+
+        if (boardData.category==0) {
             img_tag.visibility = View.VISIBLE
             tv_title.text = boardData.title
             tv_nickname.text = boardData.nickname
@@ -40,12 +50,19 @@ class BoardViewHolder(itemView: View,val mListener: onClickLike?) : RecyclerView
 
                 img_line.visibility = View.VISIBLE
                 tv_boardCategory.visibility =View.VISIBLE
-                tv_boardCategory.text = "Ulink 게시판"
+                tv_boardCategory.text = "Ulink 게시판???"
+
+
             }
 
-        } else {
-            boardData as BoardUniversityData
+            if(boardData.isLike){
+                btn_heart.setImageResource(R.drawable.class_board_ic_heart)
+            }else{
+                btn_heart.setImageResource(R.drawable.class_board_detail_ic_heart_unactivated)
+            }
+        } else if(boardData.category==1){
 
+            Log.d("좋아요 이미지",boardData.isLike.toString())
             img_tag.visibility = View.GONE
             tv_title.text = boardData.title
             tv_nickname.text = boardData.nickname
@@ -61,6 +78,18 @@ class BoardViewHolder(itemView: View,val mListener: onClickLike?) : RecyclerView
                 img_line.visibility = View.VISIBLE
                 tv_boardCategory.visibility =View.VISIBLE
                 tv_boardCategory.text = "학교게시판"
+
+
+                if(boardData.isLike){
+                    btn_heart.setImageResource(R.drawable.class_board_ic_heart)
+                }else{
+                    btn_heart.setImageResource(R.drawable.class_board_detail_ic_heart_unactivated)
+                }
+            }
+            if(boardData.isLike){
+                btn_heart.setImageResource(R.drawable.class_board_ic_heart)
+            }else{
+                btn_heart.setImageResource(R.drawable.class_board_detail_ic_heart_unactivated)
             }
         }
     }

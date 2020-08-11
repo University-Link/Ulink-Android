@@ -109,7 +109,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_nickname" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/btn_heart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

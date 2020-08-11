@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.InsetDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -12,26 +13,35 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.ulink.ulink.R
-import com.ulink.ulink.Ulink.BoardSubjectData
-import com.ulink.ulink.Ulink.BoardUlinkData
-import com.ulink.ulink.Ulink.BoardUniversityData
+import com.ulink.ulink.Ulink.BoardData
+import com.ulink.ulink.Ulink.BoardDetailData
+import com.ulink.ulink.Ulink.CommentData
 import com.ulink.ulink.Ulink.MakeReportDialog
+import com.ulink.ulink.Ulink.ulinknotice.ResponseDetailNotice
+import com.ulink.ulink.repository.DataRepository
+import com.ulink.ulink.repository.ResponsegetUlinkBoardList
+import com.ulink.ulink.repository.RetrofitService
 import com.ulink.ulink.utils.DialogBuilder
 import kotlinx.android.synthetic.main.activity_board_comment.*
 import kotlinx.android.synthetic.main.toolbar_board_comment.*
 import kotlinx.android.synthetic.main.toolbar_ulink_inside.btn_back
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class BoardDetailActivity : AppCompatActivity(), onClickMore {
 
     lateinit var comment_adapter: UlinkBoardCommentAdapter
 
-    val datas: MutableList<BoardUlinkData> = mutableListOf()
-    val datas1: MutableList<BoardUniversityData> = mutableListOf()
-    val datas2: MutableList<BoardSubjectData> = mutableListOf()
+    val data: MutableList<BoardData> = mutableListOf()
+    val datas1: MutableList<BoardData> = mutableListOf()
+    val datas2: MutableList<BoardData> = mutableListOf()
 
+    val commentList : List<CommentData> = listOf()
 //    val comment_datas: MutableList<BoardUlinkData> = mutableListOf()
 //    val comment_datas1: MutableList<BoardUniversityData> = mutableListOf()
 //    val comment_datas2: MutableList<BoardSubjectData> = mutableListOf()
+
 
 
     private lateinit var dialog: AlertDialog
@@ -44,6 +54,7 @@ class BoardDetailActivity : AppCompatActivity(), onClickMore {
 
         val class_name = intent.getStringExtra("class")
         val class_id = intent.getStringExtra("idx")
+        val ulinkBoard = intent.getParcelableExtra<BoardData>("ulinkDetailBoard")
 
         var boardType = 0
         boardType = intent.getIntExtra("boardType", 0)
@@ -198,45 +209,68 @@ class BoardDetailActivity : AppCompatActivity(), onClickMore {
         when (boardType) {
             0 ->{
                 val itemView = LayoutInflater.from(this).inflate(R.layout.item_searched_ulink_board_ulink_data, layout_board, false)
+                RetrofitService.service.getSpecificUlinkBoardList(DataRepository.token,ulinkBoard.boardIdx).enqueue(object: Callback<ResponsegetUlinkBoardList>{
+                    override fun onFailure(call: Call<ResponsegetUlinkBoardList>, t: Throwable) {
+                        TODO("Not yet implemented")
+                    }
 
-                val boardData =  BoardUlinkData(
-                        boardPublicIdx = 0,
-                        title = "111님들 점심 추천",
-                        initial = "",
-                        nickname = "유링크좋아요",
-                        profileImage = null,
-                        content = "김찌랑 된찌랑 둘중에 고민이에",
-                        likeCount = 0,
-                        commentCount = 0,
-                        userIdx = 0,
-                        createdAt = "방금",
-                        isLike = false,
-                        isMine = false
-                )
+                    override fun onResponse(
+                        call: Call<ResponsegetUlinkBoardList>,
+                        response: Response<ResponsegetUlinkBoardList>
+                    ) {
+                        response.body()?.let{
 
-                val tv_title: TextView = itemView.findViewById(R.id.tv_title)
-                val tv_nickname: TextView = itemView.findViewById(R.id.tv_nickname)
-                val tv_time: TextView = itemView.findViewById(R.id.tv_time)
-                val tv_content: TextView = itemView.findViewById(R.id.tv_content)
-                val tv_comment_count: TextView = itemView.findViewById(R.id.tv_comment_count)
-                val tv_heart_count: TextView = itemView.findViewById(R.id.tv_heart_count)
-                val img_tag: ImageView = itemView.findViewById(R.id.img_uni_tag)
+                            if(it.status==200){
+                                Log.d("유링크상세조회",it.data.get(0).title)
+                                val boardDetailData =  BoardDetailData(
+                                    boardIdx = it.data.get(0).boardIdx,
+                                    title = it.data.get(0).title,
+                                    initial = it.data.get(0).initial,
+                                    profileImage =it.data.get(0).profileImage,
+                                    nickname = it.data.get(0).nickname,
+                                    content = it.data.get(0).content,
+                                    likeCount = it.data.get(0).likeCount,
+                                    commentCount = it.data.get(0).commentCount,
+                                    userIdx = it.data.get(0).userIdx,
+                                    createdAt = it.data.get(0).createdAt,
+                                    category = it.data.get(0).category,
+                                    isLike = it.data.get(0).isLike,
+                                    isMine = it.data.get(0).isMine,
+                                    comment =  commentList
+                                )
 
-                img_tag.visibility = View.VISIBLE
-                tv_title.text = boardData.title
-                tv_nickname.text = boardData.nickname
-                tv_time.text = boardData.createdAt
-                tv_content.text = boardData.content
-                tv_comment_count.text = "댓글 " + boardData.commentCount
-                tv_heart_count.text = boardData.likeCount.toString()
+                                val tv_title: TextView = itemView.findViewById(R.id.tv_title)
+                                val tv_nickname: TextView = itemView.findViewById(R.id.tv_nickname)
+                                val tv_time: TextView = itemView.findViewById(R.id.tv_time)
+                                val tv_content: TextView = itemView.findViewById(R.id.tv_content)
+                                val tv_comment_count: TextView = itemView.findViewById(R.id.tv_comment_count)
+                                val tv_heart_count: TextView = itemView.findViewById(R.id.tv_heart_count)
+                                val img_tag: ImageView = itemView.findViewById(R.id.img_uni_tag)
 
-                layout_board.addView(itemView)
+                                img_tag.visibility = View.VISIBLE
+                                tv_title.text = boardDetailData.title
+                                tv_nickname.text = boardDetailData.nickname
+                                tv_time.text = boardDetailData.createdAt
+                                tv_content.text = boardDetailData.content
+                                tv_comment_count.text = "댓글 " + boardDetailData.commentCount
+                                tv_heart_count.text = boardDetailData.likeCount.toString()
+
+                                layout_board.addView(itemView)
+
+                            }
+
+                        }?: Log.d("유링크상세조회실패2", response.message())                    }
+
+                })
+
+
+
             }
             1 ->{
                 val itemView = LayoutInflater.from(this).inflate(R.layout.item_searched_ulink_board_ulink_data, layout_board, false)
 
-                val boardData =   BoardUniversityData(
-                        boardUniversityIdx = 0,
+                val boardData =   BoardData(
+                        boardIdx = 0,
                         title = "111총장직선제 개선촉구 시위 마지막 공지",
                         initial = "",
                         nickname = "형광펜포스트잇23",
@@ -246,6 +280,7 @@ class BoardDetailActivity : AppCompatActivity(), onClickMore {
                         commentCount = 0,
                         userIdx = 0,
                         createdAt = "5분",
+                        category = 0,
                         isLike = false,
                         universityIdx = 0,
                         isMine = false
@@ -273,8 +308,8 @@ class BoardDetailActivity : AppCompatActivity(), onClickMore {
 
                 val itemView = LayoutInflater.from(this).inflate(R.layout.item_ulink_board_class_data, layout_board, false)
 
-                val boardData = BoardSubjectData(
-                        boardSubjectIdx = 0,
+                val boardData = BoardData(
+                        boardIdx = 0,
                         title = "님들 점심 추천",
                         initial = "",
                         nickname = "유링크좋아요",
@@ -282,14 +317,15 @@ class BoardDetailActivity : AppCompatActivity(), onClickMore {
                         content = "111김찌랑 된찌랑 둘중에 고민이에",
                         likeCount = 0,
                         commentCount = 0,
-                        userIdx = 0,
-                        createdAt = "",
-                        isLike = false,
-                        subjectIdx = 0,
                         isNotice = 0,
+                        userIdx = 0,
+                        subjectIdx = 0,
+                        createdAt = "",
+                        category = 2,
+                        isLike = false,
                         isMine = false,
                         noticeIdx = 0,
-                        category = 0
+                        noticeType = 0
                 )
 
 
