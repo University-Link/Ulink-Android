@@ -35,11 +35,8 @@ class BoardSearchActivity : AppCompatActivity() {
 
             }
             3 -> {//전체 게시판 검색
-
-
                 boardAdapter = AllBoardAdapter(this, 3, true)
                 rv_board_search.adapter = boardAdapter
-
 //                TODO 여기서 서버랑 통신해서 data 섞인거 가져오기!
 //                  검색누르면 이런식으로 나온다~
                 val list: MutableList<Any> = mutableListOf(BoardUlinkData(

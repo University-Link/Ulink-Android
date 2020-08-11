@@ -47,7 +47,6 @@ class UlinkUlinkBoardActivity : AppCompatActivity() ,onClickLike{
         board_adapter.setListener(this)
 
 
-//        TODO 유링크 보드 조회 nextpage 이용하기!
         DataRepository.getPublicBoard(
                 onSuccess = {list, nextPage->
                     board_adapter.setUlinkData(list)
@@ -88,6 +87,8 @@ class UlinkUlinkBoardActivity : AppCompatActivity() ,onClickLike{
 
         })
 
+
+//        TODO 이때 포지션도 같이 넘겨줘서 onactivityresult에서 좋아요 댓글 수 갱신해주기!
         board_adapter.setItemClickLIstener(object : AllBoardAdapter.ItemClickListener {
             override fun onClick(view: View, position: Int) {
                 val intent = Intent(this@UlinkUlinkBoardActivity, BoardDetailActivity::class.java)

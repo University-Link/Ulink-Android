@@ -95,8 +95,8 @@ class UlinkFragment : Fragment() {
 
         btn_search.setOnClickListener {
             val intent = Intent(getActivity(), BoardSearchActivity::class.java)
+            intent.putExtra("boardCategory",3)
             startActivity(intent)
-
         }
     }
 
