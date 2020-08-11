@@ -21,6 +21,6 @@ data class BoardData(
     val category : Int = 0,
     var isLike : Boolean,
     val isMine : Boolean,
-    val noticeIdx : Int = 0,
-    val noticeType : Int = 0
+    val noticeIdx : Int = -1,
+    val noticeType : Int = -1
 ) :Parcelable
