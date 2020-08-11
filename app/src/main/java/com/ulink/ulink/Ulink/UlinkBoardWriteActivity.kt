@@ -17,6 +17,7 @@ class UlinkBoardWriteActivity : AppCompatActivity() {
         btn_check.setOnClickListener {
             //TODO 새 게시판 추가하기
             finish()
+            
         }
     }
 }

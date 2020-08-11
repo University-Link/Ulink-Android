@@ -242,36 +242,92 @@
     <string name="third_agree2">"2. 개인정보의 제 3자 제공 및 처리위탁"</string>
     <string name="third_agree2_1">"유링크는 \'정보통신망 이용촉진 및 정보보호 등에 관한 법률\' 제25조 제1항에 따라 회원의 개인정보를 외부 업체에 처리 혹은 위탁하는 경우, 수탁자와 개인정보 처리 위탁을 하는 업무의 내용을 알리고 이용자의 동의를 구할 수 있습니다. 이때 회사는 정보통신서비스의 제공에 관한 계약을 이행하고 회원의 편의 증진 등을 위하여 추가적인 처리 위탁이 필요한 경우에는 고지 및 동의절차를 거치지 않을수 있습니다."</string>
 
+    <string name="find_id_success">"님의\n아이디 찾기가 완료되었습니다."</string>
+    <string name="notice_nothing">"아직 올라온 공지가 없어요.\n\n학우들을 위해 공지를 작성해보세요!"</string>
+    <string name="board_nothing">"아직 올라온 글이 없어요.\n\n게시글을 올려 학우들과 소통해보세요!"</string>
+
     <string name="notice_update_reason">"사유를 입력해 주세요."</string>
     <string name="notice_delete">"삭제 하시겠습니까?"</string>
 
+    <string name="category_empty">카테고리를 선택해 주세요.</string>
+    <string name="date_empty">날짜를 선택해 주세요.</string>
+    <string name="time_empty">시간을 선택해 주세요.</string>
+    <string name="time_fail">시간을 확인해 주세요.</string>
+    <string name="title_empty">제목을 입력해 주세요.</string>
+    <string name="content_empty">내용을 입력해 주세요.</string>
+    <string name="notice_add_success">공지를 등록하였습니다.</string>
+    <string name="notice_update_success">공지를 수정하였습니다.</string>
+
+    <string name="delete_check">삭제 하시겠습니까?</string>
+    <string name="delete_success">삭제 되었습니다.</string>
+
+    <string name="report_success">신고가 접수되었습니다.\n불편을 드려 죄송합니다.</string>
+    <string name="report_fail">이미 신고한 공지입니다.</string>
+
+    <string name="category0">과제</string>
+    <string name="category1">수업</string>
+    <string name="category2">시험</string>
+
+    <string-array name="category">
+        <item>@string/category0</item>
+        <item>@string/category1</item>
+        <item>@string/category2</item>
+    </string-array>
+
+    <string name="time_nothing">시간정보없음</string>
+    <string name="time0">00:00</string>
+    <string name="time1">01:00</string>
+    <string name="time2">02:00</string>
+    <string name="time3">03:00</string>
+    <string name="time4">04:00</string>
+    <string name="time5">05:00</string>
+    <string name="time6">06:00</string>
+    <string name="time7">07:00</string>
+    <string name="time8">08:00</string>
+    <string name="time9">09:00</string>
+    <string name="time10">10:00</string>
+    <string name="time11">11:00</string>
+    <string name="time12">12:00</string>
+    <string name="time13">13:00</string>
+    <string name="time14">14:00</string>
+    <string name="time15">15:00</string>
+    <string name="time16">16:00</string>
+    <string name="time17">17:00</string>
+    <string name="time18">18:00</string>
+    <string name="time19">19:00</string>
+    <string name="time20">20:00</string>
+    <string name="time21">21:00</string>
+    <string name="time22">22:00</string>
+    <string name="time23">23:00</string>
+    <string name="time24">24:00</string>
+
     <string-array name="time">
-        <item>시간정보없음</item>
-        <item>00:00</item>
-        <item>01:00</item>
-        <item>02:00</item>
-        <item>03:00</item>
-        <item>04:00</item>
-        <item>05:00</item>
-        <item>06:00</item>
-        <item>07:00</item>
-        <item>08:00</item>
-        <item>09:00</item>
-        <item>10:00</item>
-        <item>11:00</item>
-        <item>12:00</item>
-        <item>13:00</item>
-        <item>14:00</item>
-        <item>15:00</item>
-        <item>16:00</item>
-        <item>17:00</item>
-        <item>18:00</item>
-        <item>19:00</item>
-        <item>20:00</item>
-        <item>21:00</item>
-        <item>22:00</item>
-        <item>23:00</item>
-        <item>24:00</item>
+        <item>@string/time_nothing</item>
+        <item>@string/time0</item>
+        <item>@string/time1</item>
+        <item>@string/time2</item>
+        <item>@string/time3</item>
+        <item>@string/time4</item>
+        <item>@string/time5</item>
+        <item>@string/time6</item>
+        <item>@string/time7</item>
+        <item>@string/time8</item>
+        <item>@string/time9</item>
+        <item>@string/time10</item>
+        <item>@string/time11</item>
+        <item>@string/time12</item>
+        <item>@string/time13</item>
+        <item>@string/time14</item>
+        <item>@string/time15</item>
+        <item>@string/time16</item>
+        <item>@string/time17</item>
+        <item>@string/time18</item>
+        <item>@string/time19</item>
+        <item>@string/time20</item>
+        <item>@string/time21</item>
+        <item>@string/time22</item>
+        <item>@string/time23</item>
+        <item>@string/time24</item>
     </string-array>
 
     <string-array name="filter_setting">

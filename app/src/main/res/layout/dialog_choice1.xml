@@ -7,27 +7,32 @@
     android:background="@drawable/bg_round_border"
     >
 
+    <LinearLayout
+        android:id="@+id/layout_report_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="11dp"
+        android:layout_marginTop="11dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="9dp"
-        android:background="@drawable/class_board_detail_btn_siren"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:src="@drawable/class_board_detail_btn_siren" />
 
     <TextView
         android:id="@+id/tv_insertname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="욕설 또는 비하하는 글"
-        android:textColor="@color/black"
+        android:textColor="@color/text1"
         android:textSize="18sp"
-
-        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+        android:textStyle="bold"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_content"
@@ -35,12 +40,11 @@
         android:layout_height="wrap_content"
         android:text="특정 개인, 혹은 불특정 다수에 대한 비하/ \n모욕을 하는 게시물로 신고하시겠습니까?\n\n신고 접수까지 일정 시간이 소요됩니다. "
         android:layout_marginTop="12dp"
-        android:layout_marginLeft="12dp"
+        android:layout_marginLeft="11dp"
         android:textColor="@color/text1"
         android:textSize="15sp"
-
-        app:layout_constraintStart_toStartOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/tv_insertname" />
+        app:layout_constraintStart_toStartOf="@+id/layout_report_title"
+        app:layout_constraintTop_toBottomOf="@+id/layout_report_title" />
 
     <TextView
         android:id="@+id/tv_cancel"

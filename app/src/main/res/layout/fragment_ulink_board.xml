@@ -6,13 +6,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Ulink.ClassBoard.UlinkBoardFragment">
 
+    <TextView
+        android:id="@+id/tv_board_nothing"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="#f4f4f4"
+        android:text="@string/board_nothing"
+        android:textSize="16sp"
+        android:textColor="#b4b4b4" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_ulink_board"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_ulink_board_class_data"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 
 </FrameLayout>

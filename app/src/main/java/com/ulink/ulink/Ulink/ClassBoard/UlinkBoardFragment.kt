@@ -57,11 +57,21 @@ class UlinkBoardFragment() : Fragment() ,onClickLike{
                     board_adapter.setSubjectData(list)
                     this.nextPage = nextPage
                     loading = true
+
+                    if(list.isEmpty()){
+                        tv_board_nothing.visibility=View.VISIBLE
+                        rv_ulink_board.visibility=View.GONE
+                    }
+                    else{
+                        tv_board_nothing.visibility=View.GONE
+                        rv_ulink_board.visibility=View.VISIBLE
+                    }
                 },
                 onFailure = {
 
                 }
         )
+
 
         val layoutManager = LinearLayoutManager(requireContext())
         rv_ulink_board.layoutManager = layoutManager

@@ -61,9 +61,10 @@ class YearFragment : Fragment() {
 
         tv_year.setOnClickListener{
             val builder = android.app.AlertDialog.Builder(context)
-            val layout = LayoutInflater.from(context).inflate(R.layout.custom_year_picker, null)
+            val layout = LayoutInflater.from(context).inflate(R.layout.custom_picker, null)
 
-            val yearPicker = layout.findViewById<NumberPicker>(R.id.year_picker)
+            layout.findViewById<TextView>(R.id.tv_picker_title).text = "입학년도"
+            val yearPicker = layout.findViewById<NumberPicker>(R.id.picker)
             yearPicker.minValue=2000
             yearPicker.maxValue=cal.get(Calendar.YEAR)
             yearPicker.value=cal.get(Calendar.YEAR)
@@ -74,11 +75,11 @@ class YearFragment : Fragment() {
 
             var dialog = builder.create()
 
-            layout.findViewById<TextView>(R.id.tv_year_cancel).setOnClickListener {
+            layout.findViewById<TextView>(R.id.tv_picker_cancel).setOnClickListener {
                 dialog.dismiss()
             }
 
-            layout.findViewById<TextView>(R.id.tv_year_confirm).setOnClickListener {
+            layout.findViewById<TextView>(R.id.tv_picker_confirm).setOnClickListener {
                 yearChecked = true
                 tv_year.text = yearPicker.value.toString()
                 tv_year.setTextColor(Color.parseColor("#363636"))

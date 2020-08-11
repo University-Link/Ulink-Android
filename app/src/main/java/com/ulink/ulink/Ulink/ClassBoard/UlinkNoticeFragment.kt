@@ -22,6 +22,66 @@ class UlinkNoticeFragment(subjectName : String, subjectIdx : String) : Fragment(
     var subjectName = subjectName
     var subjectIdx = subjectIdx
 
+    override fun onResume() {
+        super.onResume()
+        RetrofitService.service.getSubjectNotice(DataRepository.token, subjectIdx).enqueue(object :
+            Callback<ResponseUlinkNotice> {
+            override fun onFailure(call: Call<ResponseUlinkNotice>, t: Throwable) {
+            }
+
+            override fun onResponse(
+                call: Call<ResponseUlinkNotice>,
+                response: Response<ResponseUlinkNotice>
+            ) {
+                response.body()?.let {
+                    if(it.status==200){
+                        noticeDatas.clear()
+                        for (i in 0 until it.data.size){
+                            noticeDatas.apply {
+                                if(noticeDateCompare(it.data[i].date))
+                                    add(
+                                        UlinkNoticeData(
+                                            noticeIdx = it.data[i].noticeIdx,
+                                            category = it.data[i].category,
+                                            title = it.data[i].title,
+                                            startTime = it.data[i].startTime,
+                                            endTime = it.data[i].endTime,
+                                            date = it.data[i].date
+                                        )
+                                    )
+                            }
+                        }
+                        noticeAdapter.notifyDataSetChanged()
+                        for(i in 0 until it.data.size){
+                            noticeDatas.apply {
+                                if(!noticeDateCompare(it.data[i].date))
+                                    add(
+                                        UlinkNoticeData(
+                                            noticeIdx = it.data[i].noticeIdx,
+                                            category = it.data[i].category,
+                                            title = it.data[i].title,
+                                            startTime = it.data[i].startTime,
+                                            endTime = it.data[i].endTime,
+                                            date = it.data[i].date
+                                        )
+                                    )
+                            }
+                        }
+                        noticeAdapter.notifyDataSetChanged()
+                        if(noticeAdapter.datas.size==0){
+                            tv_notice_nothing.visibility=View.VISIBLE
+                            rv_subject_notice.visibility=View.GONE
+                        }
+                        else{
+                            tv_notice_nothing.visibility=View.GONE
+                            rv_subject_notice.visibility=View.VISIBLE
+                        }
+                    }
+                }
+            }
+        })
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -82,6 +142,14 @@ class UlinkNoticeFragment(subjectName : String, subjectIdx : String) : Fragment(
                             }
                         }
                         noticeAdapter.notifyDataSetChanged()
+                        if(noticeAdapter.datas.size==0){
+                            tv_notice_nothing.visibility=View.VISIBLE
+                            rv_subject_notice.visibility=View.GONE
+                        }
+                        else{
+                            tv_notice_nothing.visibility=View.GONE
+                            rv_subject_notice.visibility=View.VISIBLE
+                        }
                     }
                 }
             }
@@ -92,6 +160,7 @@ class UlinkNoticeFragment(subjectName : String, subjectIdx : String) : Fragment(
                 val intent = Intent(view.context, NoticeDetailActivity::class.java)
                 intent.putExtra("subjectName", subjectName)
                 intent.putExtra("noticeIdx", noticeAdapter.datas[position].noticeIdx)
+                intent.putExtra("subjectIdx", subjectIdx)
                 startActivity(intent)
             }
         })
